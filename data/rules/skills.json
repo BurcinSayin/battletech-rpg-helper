@@ -1,0 +1,554 @@
+[
+  {
+    "name": "Acrobatics/Free-Fall",
+    "attributes": "RFL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Acrobatics/Gymnastics",
+    "attributes": "RFL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Acting",
+    "attributes": "CHA",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Administration",
+    "attributes": "INT+WIL",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Animal Handling/Herding",
+    "attributes": "WIL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Animal Handling/Riding",
+    "attributes": "WIL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Animal Handling/Training",
+    "attributes": "WIL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Appraisal",
+    "attributes": "INT",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Archery",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Art",
+    "attributes": "DEX",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Artillery",
+    "attributes": "INT+WIL",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Career",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Climbing",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Communications/Black Box",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Communications/Conventional EM",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Communications/Hyperpulse Generator",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Computers",
+    "attributes": "INT",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Cryptography",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Demolitions",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Disguise",
+    "attributes": "CHA",
+    "cost": 7,
+    "category": "CB"
+  },
+  {
+    "name": "Driving/Ground Vehicles",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Driving/Rail Vehicles",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Driving/Sea Vehicles",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Escape Artist",
+    "attributes": "STR+DEX",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Forgery",
+    "attributes": "DEX+INT",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Aerospace",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Air Vehicle",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Battlesuit",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Ground Vehicle",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/'Mech",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/ProtoMech",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Sea Vehicle",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Spacecraft",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Gunnery/Turret",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Interests",
+    "attributes": "INT",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Interrogation",
+    "attributes": "WIL+CHA",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Investigation",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Language",
+    "attributes": "INT+CHA",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Leadership",
+    "attributes": "WIL+CHA",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Martial Arts",
+    "attributes": "RFL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "MedTech/General",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "MedTech/Veterinary",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Melee Weapons",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Navigation/Air",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Navigation/Ground",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Navigation/K-F Jump",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Navigation/Sea",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Navigation/Space",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Negotiation",
+    "attributes": "CHA",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Perception",
+    "attributes": "INT",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Piloting/Aerospace",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Piloting/Air Vehicle",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Piloting/Battlesuit",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Piloting/'Mech",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Piloting/ProtoMech",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Piloting/Spacecraft",
+    "attributes": "RFL+DEX",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Prestidigitation/Pick Pocket",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Prestidigitation/Quickdraw",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Prestidigitation/Sleight of Hand",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Protocol",
+    "attributes": "WIL+CHA",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Running",
+    "attributes": "RFL",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Science",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Security Systems/Electronic",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Security Systems/Mechanical",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Sensor Operations",
+    "attributes": "INT+WIL",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Small Arms",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Stealth",
+    "attributes": "RFL+INT",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Strategy",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Streetwise",
+    "attributes": "CHA",
+    "cost": 8,
+    "category": "CB"
+  },
+  {
+    "name": "Support Weapons",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Surgery",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Survival",
+    "attributes": "BOD+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Swimming",
+    "attributes": "STR",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Tactics/Infantry",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Tactics/Land",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Tactics/Sea",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Tactics/Air",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Tactics/Space",
+    "attributes": "INT+WIL",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Aeronautics",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Cybernetics",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Electronic",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Jets",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Mechanical",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Myomer",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Nuclear",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Technician/Weapons",
+    "attributes": "DEX+INT",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Thrown Weapons/Blades",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Thrown Weapons/Blunt Weapons",
+    "attributes": "DEX",
+    "cost": 7,
+    "category": "SB"
+  },
+  {
+    "name": "Tracking/Urban",
+    "attributes": "INT+WIL",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Tracking/Wilds",
+    "attributes": "INT+WIL",
+    "cost": 8,
+    "category": "SA"
+  },
+  {
+    "name": "Training",
+    "attributes": "INT+CHA",
+    "cost": 9,
+    "category": "CA"
+  },
+  {
+    "name": "Zero-G Operations",
+    "attributes": "RFL",
+    "cost": 7,
+    "category": "SB"
+  }
+]
