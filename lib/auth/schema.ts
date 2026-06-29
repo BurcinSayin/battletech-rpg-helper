@@ -16,8 +16,7 @@ export const signUpSchema = z.object({
     .string()
     .trim()
     .max(60, "Display name is too long")
-    .optional()
-    .or(z.literal("")),
+    .optional(),
 });
 
 export type SignInValues = z.infer<typeof signInSchema>;
