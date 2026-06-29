@@ -1,7 +1,33 @@
-// Server Supabase client factory (RLS-gated, cookie-bound).
-//
-// TODO(step #2 — auth): implement with `createServerClient` from
-// `@supabase/ssr`, wiring Next's `cookies()` for session read/write.
-export function createClient(): never {
-  throw new Error("Supabase server client not implemented yet (step #2).");
+import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { cookies } from "next/headers";
+
+type CookieToSet = { name: string; value: string; options: CookieOptions };
+
+// Server Supabase client factory (RLS-gated, cookie-bound). Call per-request in
+// Server Components, Route Handlers, and Server Actions — never cache it.
+export async function createClient() {
+  const cookieStore = await cookies();
+
+  return createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() {
+          return cookieStore.getAll();
+        },
+        setAll(cookiesToSet: CookieToSet[]) {
+          try {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              cookieStore.set(name, value, options),
+            );
+          } catch {
+            // `setAll` was called from a Server Component, where cookies are
+            // read-only. The session is refreshed in middleware instead, so
+            // this can be safely ignored.
+          }
+        },
+      },
+    },
+  );
 }

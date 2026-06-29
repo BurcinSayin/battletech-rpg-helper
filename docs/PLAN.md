@@ -95,7 +95,7 @@ Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsT
 ## Build order
 1. Bootstrap: Next + TS + Tailwind + shadcn + Supabase clients + env wiring.
 2. Auth: email/password, profiles signup trigger, middleware session refresh, route guard.
-3. Schema + RLS + RPCs + generated TS types (`supabase/migrations/0001_init.sql`).
+3. Schema + RLS + RPCs + generated TS types (`supabase/migrations/20260629150000_init.sql`).
 4. Rules ingestion: `scripts/convert-dat.ts` → `data/rules/*.json` + zod schemas.
 5. Character CRUD + editor + version-guarded save (single user).
 6. `.btcc` import/export + golden round-trip test against `lisa.btcc`.
@@ -104,7 +104,7 @@ Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsT
 9. Vercel deploy + conflict UX polish.
 
 ## Critical files to create
-- `supabase/migrations/0001_init.sql` — tables, RLS, helper functions, `update_character` RPC.
+- `supabase/migrations/20260629150000_init.sql` — tables, RLS, helper functions, `update_character` RPC.
 - `lib/btcc/parse.ts`, `lib/btcc/serialize.ts` — `.btcc` round-trip.
 - `app/(app)/characters/[id]/editor-client.tsx` — character editor.
 - `scripts/convert-dat.ts` — `.dat` → JSON rules.

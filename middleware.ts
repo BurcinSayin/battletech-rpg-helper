@@ -1,11 +1,10 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
-// TODO(step #2 — auth): once `updateSession` refreshes the session cookie,
-// return its NextResponse here so auth stays fresh across requests.
+// Refresh the Supabase session cookie on every matched request and return the
+// response carrying it, so auth stays fresh across navigations.
 export async function middleware(request: NextRequest) {
-  await updateSession(request);
-  return NextResponse.next();
+  return await updateSession(request);
 }
 
 export const config = {
