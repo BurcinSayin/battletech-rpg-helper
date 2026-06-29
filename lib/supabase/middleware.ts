@@ -1,7 +1,6 @@
-import { createServerClient, type CookieOptions } from "@supabase/ssr";
+import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
-
-type CookieToSet = { name: string; value: string; options: CookieOptions };
+import { type CookieToSet } from "./types";
 
 // Session-refresh helper used by the root middleware. Rebuilds the Supabase
 // session cookie on each request and returns the response carrying it. Route
