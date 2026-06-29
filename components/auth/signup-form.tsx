@@ -7,9 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/app/(auth)/actions";
 import { signUpSchema, type SignUpValues } from "@/lib/auth/schema";
 import { cn } from "@/lib/utils";
-
-const fieldClass =
-  "w-full rounded-md border border-foreground/20 bg-transparent px-3 py-2 text-sm outline-none focus:border-foreground/60";
+import { Field } from "./field";
 
 export function SignupForm() {
   const [serverError, setServerError] = useState<string | null>(null);
@@ -30,53 +28,35 @@ export function SignupForm() {
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
-      <div className="flex flex-col gap-1">
-        <label htmlFor="displayName" className="text-sm font-medium">
-          Display name <span className="text-foreground/50">(optional)</span>
-        </label>
-        <input
-          id="displayName"
-          type="text"
-          autoComplete="nickname"
-          className={fieldClass}
-          {...register("displayName")}
-        />
-        {errors.displayName && (
-          <p className="text-sm text-red-600">{errors.displayName.message}</p>
-        )}
-      </div>
+      <Field
+        id="displayName"
+        label={
+          <>
+            Display name <span className="text-foreground/50">(optional)</span>
+          </>
+        }
+        autoComplete="nickname"
+        registration={register("displayName")}
+        error={errors.displayName?.message}
+      />
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="email" className="text-sm font-medium">
-          Email
-        </label>
-        <input
-          id="email"
-          type="email"
-          autoComplete="email"
-          className={fieldClass}
-          {...register("email")}
-        />
-        {errors.email && (
-          <p className="text-sm text-red-600">{errors.email.message}</p>
-        )}
-      </div>
+      <Field
+        id="email"
+        label="Email"
+        type="email"
+        autoComplete="email"
+        registration={register("email")}
+        error={errors.email?.message}
+      />
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor="password" className="text-sm font-medium">
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          autoComplete="new-password"
-          className={fieldClass}
-          {...register("password")}
-        />
-        {errors.password && (
-          <p className="text-sm text-red-600">{errors.password.message}</p>
-        )}
-      </div>
+      <Field
+        id="password"
+        label="Password"
+        type="password"
+        autoComplete="new-password"
+        registration={register("password")}
+        error={errors.password?.message}
+      />
 
       {serverError && <p className="text-sm text-red-600">{serverError}</p>}
 
