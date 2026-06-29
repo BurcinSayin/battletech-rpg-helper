@@ -19,14 +19,16 @@ export async function signIn(values: unknown): Promise<AuthResult | void> {
   redirect("/dashboard");
 }
 
-// Sign up with email/password. Email confirmations are disabled locally, so a
-// session is established immediately and we redirect to the dashboard.
+// Sign up with email/password. Locally email confirmations are disabled, so a
+// session is established immediately and we redirect to the dashboard. When
+// confirmations are enabled (the Supabase default elsewhere), signUp returns no
+// session, so we route to /login with a "check your email" notice instead.
 export async function signUp(values: unknown): Promise<AuthResult | void> {
   const parsed = signUpSchema.safeParse(values);
   if (!parsed.success) return { error: "Please check your details and try again." };
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signUp({
+  const { data, error } = await supabase.auth.signUp({
     email: parsed.data.email,
     password: parsed.data.password,
     options: {
@@ -34,6 +36,11 @@ export async function signUp(values: unknown): Promise<AuthResult | void> {
     },
   });
   if (error) return { error: error.message };
+
+  if (!data.session) {
+    // Account created but email confirmation required → no session cookie yet.
+    redirect("/login?notice=check-email");
+  }
 
   redirect("/dashboard");
 }
