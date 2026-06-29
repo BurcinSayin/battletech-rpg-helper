@@ -1,10 +1,27 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import type { AuthError } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { signInSchema, signUpSchema } from "@/lib/auth/schema";
 
 export type AuthResult = { error: string };
+
+// Map a Supabase AuthError to a safe, user-facing message. Most errors collapse
+// to the caller's generic `fallback` so we never leak account-existence details
+// (e.g. "User already registered" / "Invalid login credentials"), which would
+// allow account enumeration. Only a few non-enumerating codes get specific text.
+function authErrorMessage(error: AuthError, fallback: string): string {
+  switch (error.code) {
+    case "over_email_send_rate_limit":
+    case "over_request_rate_limit":
+      return "Too many attempts. Please try again later.";
+    case "weak_password":
+      return "Please choose a stronger password.";
+    default:
+      return fallback;
+  }
+}
 
 // Sign in with email/password. Returns an error for the form to render, or
 // redirects to the dashboard on success.
@@ -14,7 +31,10 @@ export async function signIn(values: unknown): Promise<AuthResult | void> {
 
   const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword(parsed.data);
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[auth] signIn failed:", error.code, error.message);
+    return { error: authErrorMessage(error, "Invalid email or password.") };
+  }
 
   redirect("/dashboard");
 }
@@ -35,7 +55,12 @@ export async function signUp(values: unknown): Promise<AuthResult | void> {
       data: { display_name: parsed.data.displayName || undefined },
     },
   });
-  if (error) return { error: error.message };
+  if (error) {
+    console.error("[auth] signUp failed:", error.code, error.message);
+    return {
+      error: authErrorMessage(error, "Could not create your account. Please try again."),
+    };
+  }
 
   if (!data.session) {
     // Account created but email confirmation required → no session cookie yet.
