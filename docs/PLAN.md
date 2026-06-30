@@ -109,15 +109,16 @@ Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsT
 **Serwist (`@serwist/next`)** for PWA; `iconv-lite` (dev script only); Vitest + Playwright for tests.
 
 ## Build order
-1. Bootstrap: Next + TS + Tailwind + shadcn + Supabase clients + env wiring.
-2. Auth: email/password, profiles signup trigger, middleware session refresh, route guard.
-3. Schema + RLS + RPCs + generated TS types (`supabase/migrations/20260629150000_init.sql`).
-4. Rules ingestion: `scripts/convert-dat.ts` → `data/rules/*.json` + zod schemas.
-5. Character CRUD + editor + version-guarded save (single user).
-6. `.btcc` import/export + golden round-trip test against `lisa.btcc`.
-7. Campaigns + GM edit + realtime subscription.
-8. PWA: Serwist + manifest + offline shell + responsive/mobile polish.
-9. Vercel deploy + conflict UX polish.
+(Live status is tracked in `CLAUDE.md` → "Build-order status".)
+1. ✅ Bootstrap: Next + TS + Tailwind + shadcn + Supabase clients + env wiring.
+2. ✅ Auth: email/password, profiles signup trigger, middleware session refresh, route guard.
+3. ✅ Schema + RLS + RPCs + generated TS types (`supabase/migrations/20260629150000_init.sql`).
+4. ✅ Rules ingestion: `scripts/convert-dat.ts` → `data/rules/*.json` + zod schemas.
+5. ✅ Character CRUD + editor + version-guarded save (single user).
+6. ✅ `.btcc` import/export + golden round-trip test against `lisa.btcc`.
+7. ⬜ Campaigns + GM edit + realtime subscription.
+8. ⬜ PWA: Serwist + manifest + offline shell + responsive/mobile polish.
+9. ⬜ Vercel deploy + conflict UX polish.
 
 ## Critical files to create
 - `supabase/migrations/20260629150000_init.sql` — tables, RLS, helper functions, `update_character` RPC.
