@@ -12,7 +12,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "rules:ingest": "tsx scripts/convert-dat.ts",
-    "supabase:types": "supabase gen types typescript --local > lib/supabase/database.types.ts"
+    "supabase:types": "supabase gen types typescript --local > lib/supabase/database.types.ts",
+    "seed:generate": "tsx scripts/generate-seed.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
