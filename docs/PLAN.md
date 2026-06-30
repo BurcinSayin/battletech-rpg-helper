@@ -32,6 +32,8 @@ The target repo `battletech-rpg-helper` is currently empty. The desktop app is *
 
 - **Frontend/Backend:** Next.js App Router (server components fetch RLS-gated data; client components for the editor).
 - **Data/Auth/Realtime:** Supabase. Authorization enforced **only** by Row-Level Security; UI just hides affordances.
+  *One documented exception (decided in step #3):* character **writes** go through a `SECURITY DEFINER` RPC that carries
+  the same authorization in its `WHERE` clause — clients have no direct `UPDATE` on `characters` (see Optimistic concurrency).
 - **Roles are per-campaign:** create a campaign → you're its GM; join via invite code → you're a player. No global admin in MVP.
 - **Mobile:** responsive Tailwind layout + Serwist PWA (installable, offline app shell).
 
@@ -51,14 +53,28 @@ Tables:
 
 **Optimistic concurrency:** all character writes go through an RPC `update_character(p_id, p_expected_version, p_payload)`
 that does `UPDATE … SET version = version + 1 WHERE id = $1 AND version = $expected`; `rowCount = 0` → raise a conflict
-error. RLS + version check run atomically server-side. `updated_at` maintained by trigger.
+error. `updated_at` maintained by trigger.
+- The RPC is **`SECURITY DEFINER`** and `authenticated` is **not** granted table `UPDATE` — so this RPC is the *only*
+  character write path (a direct `PATCH /characters` would otherwise bypass the version check and let a client write
+  `version`/`owner_id`). Because DEFINER bypasses RLS, the RPC repeats the row authorization in its `WHERE`:
+  `owner_id = auth.uid() OR is_campaign_gm(campaign_id)`. Wrong id / not-permitted / stale version all collapse to
+  `not found` → conflict.
+- **Custom SQLSTATEs** map server errors to client UX: `PT409` version conflict (reload dialog), `PT403` attach to a
+  campaign you're not a member of, `PT404` invalid invite code. `campaign_id` uses a present-vs-absent (`payload ?
+  'campaign_id'`) check so it can be cleared (set to null), and INSERT/attach require membership in the target campaign.
+- Whitelisted payload columns only — `owner_id`, `version`, timestamps are never client-writable, so `owner_id` is immutable.
 
 ## RLS policies (plain English; enabled on every table)
 - **profiles** — read own + profiles sharing a campaign; write only own row.
 - **campaigns** — read if GM or member; insert by any authed user (force `gm_id = auth.uid()`); update/delete only GM.
 - **campaign_members** — read if GM of campaign or the member; GM inserts members (or self-join via invite RPC); delete by GM or self.
-- **characters** — SELECT/UPDATE/DELETE if `owner_id = auth.uid()` OR `is_campaign_gm(campaign_id)`; INSERT only own.
-- Use **SECURITY DEFINER helper functions** (`is_campaign_gm`, `is_campaign_member`) to avoid policy recursion.
+- **characters** — SELECT/DELETE if `owner_id = auth.uid()` OR `is_campaign_gm(campaign_id)`. INSERT requires
+  `owner_id = auth.uid()` **and** `campaign_id` is null or one the owner belongs to (`is_campaign_member`/`is_campaign_gm`),
+  so nobody can inject a character into a campaign they're not in. **No `UPDATE` policy** — updates go through the
+  `update_character` DEFINER RPC (above), and `authenticated` has no table `UPDATE` grant.
+- Use **SECURITY DEFINER helper functions** (`is_campaign_gm`, `is_campaign_member`, `shares_campaign`) to avoid policy
+  recursion. Tables created by `postgres` only grant `Dxtm` to `authenticated` by default, so the migration also issues
+  explicit DML grants per table (and `anon` is left with no DML).
 
 ## Rules data ingestion
 
@@ -123,7 +139,10 @@ Reference (read-only): `…/Battletech-Character-Creator/chardata.h`, `lisa.btcc
 
 ## Riskiest decisions to watch
 1. **RLS recursion + GM cross-user write** — `campaign_members`/`characters` policies can recurse or leak; mitigate with
-   SECURITY DEFINER helpers and the RLS test matrix before any UI. Highest risk.
+   SECURITY DEFINER helpers and the RLS test matrix before any UI. Highest risk. *Resolved in step #3:* helpers avoid
+   recursion; a code review then found that granting table `UPDATE` (needed for an INVOKER RPC) exposed a direct-`PATCH`
+   path bypassing the version/owner guards — fixed by making `update_character` `SECURITY DEFINER`, dropping the `UPDATE`
+   grant, and validating `campaign_id` against membership. The pgTAP matrix now covers these write-path cases.
 2. **.btcc fidelity** — desktop folds affiliation/module XP into wizard-recomputed state and the `<notes>` block rather than
    persisting every number; decide (fixture-driven) what is canonical vs. preserved verbatim before locking the `info` JSONB shape.
 3. **Concurrency UX** — version column prevents lost writes; MVP keeps merge simple (explicit Save + conflict dialog +
