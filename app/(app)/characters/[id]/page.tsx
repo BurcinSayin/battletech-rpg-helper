@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { rowToDraft } from "@/lib/characters";
+import { PageContainer } from "@/components/layout/page-container";
 import { CharacterEditor } from "./editor-client";
 
 // Server shell: fetch the RLS-gated character row, map it to a BtccDraft, and hand
@@ -22,8 +23,14 @@ export default async function CharacterPage({
   if (error || !row) notFound();
 
   return (
-    <div className="mx-auto max-w-2xl rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
-      <CharacterEditor id={row.id} version={row.version} draft={rowToDraft(row)} />
-    </div>
+    <PageContainer width="content">
+      <div className="rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
+        <CharacterEditor
+          id={row.id}
+          version={row.version}
+          draft={rowToDraft(row)}
+        />
+      </div>
+    </PageContainer>
   );
 }
