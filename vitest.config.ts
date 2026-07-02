@@ -13,7 +13,11 @@ export default defineConfig({
   test: {
     environment: "node",
     globals: true,
-    include: ["lib/**/*.test.ts", "app/**/*.test.ts"],
+    include: [
+      "lib/**/*.test.ts",
+      "app/**/*.test.ts",
+      "components/**/*.test.tsx",
+    ],
     coverage: {
       provider: "v8",
       reporter: ["text", "html", "json-summary", "lcov"],
