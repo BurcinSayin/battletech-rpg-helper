@@ -14,5 +14,17 @@ export default defineConfig({
     environment: "node",
     globals: true,
     include: ["lib/**/*.test.ts", "app/**/*.test.ts"],
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "html", "json-summary", "lcov"],
+      include: ["lib/**", "app/**", "components/**"],
+      exclude: [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "**/*.d.ts",
+        "e2e/**",
+        "lib/supabase/database.types.ts",
+      ],
+    },
   },
 });
