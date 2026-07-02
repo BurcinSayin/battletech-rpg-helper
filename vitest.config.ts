@@ -23,8 +23,8 @@ export default defineConfig({
       reporter: ["text", "html", "json-summary", "lcov"],
       include: ["lib/**", "app/**", "components/**"],
       exclude: [
-        "**/*.test.ts",
-        "**/*.spec.ts",
+        "**/*.test.*",
+        "**/*.spec.*",
         "**/*.d.ts",
         "e2e/**",
         "lib/supabase/database.types.ts",
