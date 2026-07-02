@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
 import { ATTRIBUTE_KEYS } from "@/lib/characters";
@@ -23,9 +26,12 @@ export function CharacterSheet({
   onEdit: () => void;
 }) {
   const { scalars } = draft;
+  const [showAllSkills, setShowAllSkills] = useState(false);
   const sortedSkills = [...draft.skills].sort((a, b) => b.xp - a.xp);
-  const topSkills = sortedSkills.slice(0, TOP_SKILLS);
-  const moreSkills = sortedSkills.length - topSkills.length;
+  const visibleSkills = showAllSkills
+    ? sortedSkills
+    : sortedSkills.slice(0, TOP_SKILLS);
+  const hiddenCount = sortedSkills.length - TOP_SKILLS;
   const sortedTraits = [...draft.traits].sort((a, b) => b.xp - a.xp);
   const spentPct =
     xp.budget > 0
@@ -103,11 +109,11 @@ export function CharacterSheet({
 
         <div className="flex flex-col gap-4">
           <Panel title="Skills" count={`${draft.skills.length} total`}>
-            {topSkills.length === 0 ? (
+            {visibleSkills.length === 0 ? (
               <p className="text-sm text-hud-muted">No skills yet.</p>
             ) : (
               <ul className="flex flex-col gap-1.5">
-                {topSkills.map((row, i) => (
+                {visibleSkills.map((row, i) => (
                   <li
                     key={`${row.name}-${i}`}
                     className="flex items-center justify-between font-mono text-sm"
@@ -116,9 +122,16 @@ export function CharacterSheet({
                     <span className="text-hud-muted">{row.xp}</span>
                   </li>
                 ))}
-                {moreSkills > 0 && (
-                  <li className="pt-1 text-xs text-hud-amber">
-                    + {moreSkills} more skills
+                {hiddenCount > 0 && (
+                  <li className="pt-1">
+                    <button
+                      type="button"
+                      aria-expanded={showAllSkills}
+                      onClick={() => setShowAllSkills((v) => !v)}
+                      className="text-xs text-hud-amber transition hover:brightness-110"
+                    >
+                      {showAllSkills ? "Show less" : `+ ${hiddenCount} more skills`}
+                    </button>
                   </li>
                 )}
               </ul>
