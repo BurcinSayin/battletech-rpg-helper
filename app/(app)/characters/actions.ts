@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { emptyDraft } from "@/lib/btcc";
+import { emptyDraft, parseBtcc } from "@/lib/btcc";
 import {
   ATTRIBUTE_BASE,
   ATTRIBUTE_KEYS,
@@ -12,6 +12,7 @@ import {
   draftToInsert,
   draftToPayload,
   formToDraft,
+  prepareImport,
   rowToDraft,
 } from "@/lib/characters";
 
@@ -21,6 +22,11 @@ export type SaveResult =
   | { ok: true; version: number }
   | { ok: false; kind: "conflict" }
   | { ok: false; kind: "forbidden" | "error"; message: string };
+
+// Result of an import. On success the action redirects into the new character
+// (throws NEXT_REDIRECT and never returns), so only failures come back — the
+// import client renders `message` inline and keeps the dropzone for a retry.
+export type ImportResult = { ok: false; kind: "invalid" | "error"; message: string };
 
 /**
  * Create a blank character owned by the current user and open it. Usable directly
@@ -47,6 +53,44 @@ export async function createCharacter(): Promise<void> {
   if (error || !data) {
     console.error("[characters] create failed:", error?.code, error?.message);
     redirect("/dashboard?error=create");
+  }
+
+  revalidatePath("/dashboard");
+  redirect(`/characters/${data.id}`);
+}
+
+/**
+ * Import a `.btcc` file as a new character owned by the current user. The raw
+ * file text is re-parsed server-side (the client's parse is only for the
+ * preview), guarded, then inserted via the same RLS-gated path as
+ * `createCharacter`. On success we redirect into the editor; expected failures
+ * return an `ImportResult` for the import client to render.
+ */
+export async function importCharacter(text: string): Promise<ImportResult> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const prepared = prepareImport(parseBtcc(text));
+  if (!prepared.ok) {
+    return {
+      ok: false,
+      kind: "invalid",
+      message: "That file doesn't look like a BattleTech character.",
+    };
+  }
+
+  const { data, error } = await supabase
+    .from("characters")
+    .insert(draftToInsert(prepared.draft, user.id))
+    .select("id")
+    .single();
+
+  if (error || !data) {
+    console.error("[characters] import failed:", error?.code, error?.message);
+    return { ok: false, kind: "error", message: "Could not import. Please try again." };
   }
 
   revalidatePath("/dashboard");

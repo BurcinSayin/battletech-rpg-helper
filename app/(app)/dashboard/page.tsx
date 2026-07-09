@@ -31,11 +31,19 @@ export default async function DashboardPage() {
       <div className="rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
         <div className="flex items-center justify-between gap-2">
           <h1 className="text-xl font-semibold">Your characters</h1>
-          <form action={createCharacter}>
-            <HudButton type="submit" variant="primary">
-              + New character
-            </HudButton>
-          </form>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/characters/import"
+              className="rounded-md border border-hud-line px-3 py-2 text-xs font-medium uppercase tracking-wider text-hud-text transition hover:border-hud-muted"
+            >
+              Import .btcc
+            </Link>
+            <form action={createCharacter}>
+              <HudButton type="submit" variant="primary">
+                + New character
+              </HudButton>
+            </form>
+          </div>
         </div>
 
         {characters.length === 0 ? (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
 import { ATTRIBUTE_KEYS } from "@/lib/characters";
@@ -13,17 +13,23 @@ function signed(xp: number): string {
   return xp >= 0 ? `+${xp}` : `${xp}`;
 }
 
-/** Read-only character sheet, mirroring section 02 of the design wireframe. */
+/**
+ * Read-only character sheet, mirroring section 02 of the design wireframe.
+ * The header action defaults to an Edit button (`onEdit`), but callers can pass
+ * `actions` to swap it out — e.g. the import preview renders Import/Cancel.
+ */
 export function CharacterSheet({
   draft,
   xp,
   warnings,
   onEdit,
+  actions,
 }: {
   draft: BtccDraft;
   xp: XpSummary;
   warnings: CatalogWarnings;
-  onEdit: () => void;
+  onEdit?: () => void;
+  actions?: ReactNode;
 }) {
   const { scalars } = draft;
   const [showAllSkills, setShowAllSkills] = useState(false);
@@ -50,9 +56,11 @@ export function CharacterSheet({
               "No affiliation"}
           </p>
         </div>
-        <HudButton variant="primary" onClick={onEdit}>
-          Edit
-        </HudButton>
+        {actions ?? (
+          <HudButton variant="primary" onClick={onEdit}>
+            Edit
+          </HudButton>
+        )}
       </header>
 
       <CatalogWarningBanner warnings={warnings} />

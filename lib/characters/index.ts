@@ -28,3 +28,11 @@ export {
   type CatalogWarnings,
 } from "./schema";
 export { classifyUpdateError, type UpdateErrorKind, type RpcErrorLike } from "./errors";
+export {
+  prepareImport,
+  looksLikeCharacter,
+  normalizeImportName,
+  IMPORT_FALLBACK_NAME,
+  NAME_MAX_LENGTH,
+  type PrepareImportResult,
+} from "./import";
