@@ -87,7 +87,7 @@ revoke execute on function public.update_character(uuid, integer, jsonb) from pu
 ```
 
 Revoking from `anon` does **not** remove the implicit `PUBLIC` grant that `anon` also inherits, so
-`join_campaign` remains executable by unauthenticated callers at the grant level. It is not currently
+`join_campaign` remains executable by unauthenticated callers at the grant level. It is not
 exploitable — the function opens with an `auth.uid() is null` guard that raises `42501`, which the
 migration comment describes as deliberate defense — but the intended narrowing is not actually in
 place. If you touch this area, `revoke execute … from public` is the correct form for both. Add a

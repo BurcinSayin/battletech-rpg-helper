@@ -44,7 +44,8 @@ completeness, uniqueness, or order, so dropping or duplicating a key still compi
 exhaustiveness guard; the golden round-trip test is what actually catches such a mistake.
 
 `NUMERIC_SCALAR_KEYS` (`age`, `height`, `weight`, `gmxpmod`, `cbillmod`) is the set treated as
-integers.
+integers. `gmxpmod` carries the wizard's derived XP residual, not a GM fudge factor —
+`docs/RULES.md` §2.5.
 
 **Provenance.** The ground truth is the desktop source `mainwindow.cpp`: `prepSaveFile`
 (serialization) around lines 2285-2431, and `openFile` (parsing) around lines 2037-2259. Those

@@ -4,29 +4,33 @@
 # docs
 
 ## Purpose
-Design and planning documents. `PLAN.md` is the project's authoritative record of build order and
-design rationale — consult it before adding a feature, and trust it over the README.
+Design and planning documents. `PLAN.md` is the intended design and build order, not a progress
+record — consult it before adding a feature, and trust it over the README.
 
 ## Key Files
 | File | Description |
 |------|-------------|
-| `PLAN.md` | 150 lines. The **source of truth for build-order status** and the reasoning behind the riskiest decisions. |
+| `PLAN.md` | Intended design and build order, plus the reasoning behind the riskiest decisions. Not a progress record. |
+| `RULES.md` | The desktop application's character-generation rules, every claim cited to `Battletech-Character-Creator@a1d8009`. |
 | `design/BattleTech-Wireframes.html` | ~360 KB self-contained static wireframe reference for the HUD UI. |
+
+## Documentation Map
+- `docs/PLAN.md` — intended design and build order. Not a progress record.
+- `docs/RULES.md` — the desktop application's character-generation rules, every claim cited to `Battletech-Character-Creator@a1d8009`.
+- `CLAUDE.md` — commands, architecture, and conventions for this repository.
+- `AGENTS.md` — directory-local context, one file per directory.
+- Build status — answered by `git log` and GitHub issues, not by any document.
 
 ## For AI Agents
 
 ### Working In This Directory
-- **`PLAN.md` outranks the README.** The README contains aspirational marketing language describing
-  features that do not exist yet; `PLAN.md` and the code are accurate. Its sections are: Context,
-  Grounding facts (verified from source), Architecture, Postgres schema, RLS policies, Rules data
-  ingestion, Character editor, `.btcc` import/export, Project structure, Key libraries, Build order,
-  Critical files to create, Verification, and Riskiest decisions to watch.
-- Current status per that build order: **steps 1-6 are complete** (bootstrap, auth, schema/RLS/RPCs,
-  rules ingestion, character CRUD + editor, `.btcc` import/export round-trip). **Steps 7-9 are
-  pending**: campaigns + GM edit + realtime, PWA/offline via Serwist, and Vercel deploy + polish.
-  The clearest in-code marker of this is `app/(app)/campaigns/[id]/page.tsx`, a nine-line TODO stub.
-- If you complete a build step, update `PLAN.md` in the same change. A stale plan is worse than none,
-  because everything else defers to it.
+- **`PLAN.md` outranks the README.** `README.md` is marketing copy; `docs/PLAN.md` and the code
+  describe the system. Its sections are: Context, Grounding facts (verified from source),
+  Architecture, Postgres schema, RLS policies, Rules data ingestion, Character editor, `.btcc`
+  import/export, Project structure, Key libraries, Build order, Known rules defects, Critical
+  files to create, Verification, and Riskiest decisions to watch.
+- `PLAN.md` records intended design and order, not progress. Do not add status marks to it;
+  build status is answered by `git log` and GitHub issues.
 - `design/BattleTech-Wireframes.html` is a **reference artifact, not a build input** — nothing
   imports it and no build step reads it. `components/characters/character-sheet.tsx` mirrors its
   section 02. Open it in a browser to check intended layout before redesigning editor UI. It gets no

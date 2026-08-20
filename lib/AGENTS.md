@@ -30,7 +30,7 @@ Supabase client factories. Route handlers and components stay thin by delegating
 - **Import through the barrels.** `btcc/index.ts` and `characters/index.ts` are the intended public
   surface; prefer `from "@/lib/characters"` over reaching into `characters/mapping.ts`. The one
   routine exception is type-only imports of `BtccDraft` from `@/lib/btcc/types`.
-- Respect the dependency direction — it is currently acyclic and worth keeping that way:
+- The dependency direction is acyclic. Keep it that way:
 
   ```
   validation/  <-  rules/  <-  characters/  ->  btcc/

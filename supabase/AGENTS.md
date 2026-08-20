@@ -20,7 +20,7 @@ boundary actually lives — the UI only hides affordances.
 |-----------|---------|
 | `migrations/` | The two ordered SQL migrations — tables, RLS, and the write RPCs (see `migrations/AGENTS.md`) |
 | `tests/` | pgTAP RLS + concurrency matrix (see `tests/AGENTS.md`) |
-| `snippets/` | Empty placeholder — no files yet. |
+| `snippets/` | Empty. |
 
 ## For AI Agents
 

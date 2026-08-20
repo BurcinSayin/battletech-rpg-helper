@@ -21,7 +21,7 @@ parentheses are organizational — they do not appear in URLs, so `(auth)/login/
 |-----------|---------|
 | `(app)/` | Authed route group: dashboard, characters, campaigns (see `(app)/AGENTS.md`) |
 | `(auth)/` | Guest route group: login, signup, auth server actions (see `(auth)/AGENTS.md`) |
-| `style-guide/` | Empty placeholder — planned, no files yet. No AGENTS.md until it has content. |
+| `style-guide/` | Empty. No `AGENTS.md` until it has content. |
 
 ## For AI Agents
 

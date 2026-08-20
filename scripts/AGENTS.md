@@ -27,6 +27,8 @@ upstream rules data actually changes.
   `alltraits.dat` is `name;pageref`, and `subskill.dat` is `parent;sub`; the remaining catalogs are
   plain one-value-per-line lists. Parsing provenance is `loadresurce.cpp` and `stage1_resurce.cpp`
   (`CreateSubSkillList` is what builds composite `"parent/sub"` names).
+- In `allskills.dat` the `cost` field is the **Target Number**, not an XP cost —
+  `docs/RULES.md` §2.3; rename in step 10.
 - **Upstream filenames contain typos — preserve them.** The affiliations source is
   `affilations.dat` (missing the second `i`), and `career.dat` is singular while the output is
   `careers.json`. Do not "fix" these read paths.

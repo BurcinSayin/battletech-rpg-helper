@@ -33,7 +33,7 @@ in `types.ts`):
 | `info` (JSONB) | `scalars` **plus** `equip`, `equipLoc`, `weapons`, `chrWeapons` — verbatim |
 | `attributes` (JSONB) | the draft's `attrs` |
 | `skills`, `traits` (JSONB) | `BtccRow[]` |
-| `pre_snapshot` (JSONB) | `preAttrs`, `preSkills`, `preTraits` |
+| `pre_snapshot` (JSONB) | `preAttrs`, `preSkills`, `preTraits` — **prerequisites**, not a baseline snapshot: attr/skill/trait minimums max-merged across the 5 wizard stages (`wizard.cpp:277-388`), checked by `CheckPrereq` (`mainwindow.cpp:3295-3427`), stored ×100. The name is a misnomer, scheduled for rename in step 10. `docs/RULES.md` §1.2. |
 
 The equip/weapons/`pre*` sections ride along untouched even though the MVP editor never edits them.
 That is the whole reason a `.btcc` file survives a database round-trip.
@@ -65,12 +65,22 @@ warnings to validation errors. The name sets are lazily memoized in module-level
 the helpers repeatedly is cheap; `catalogSkillNames`/`catalogTraitNames` return sorted lists for the
 editor's `<datalist>` autocomplete.
 
-**`xp.ts` mirrors the desktop, including its quirks.** Eight attributes; each starts at
-`ATTRIBUTE_BASE = 100` for free and only increases above that cost XP; the budget is
-`CHARACTER_START_XP = 5000`; negative skill/trait XP **refunds** into the pool (e.g.
-`trait:Unlucky=-50`). `gmxpmod` is persisted but **display-only** — it is deliberately not folded
-into the budget, because the desktop math ignores it. Provenance is cited in the header
+**`xp.ts` implements the port's XP model, which diverges from the desktop's.** Eight
+attributes; each starts at `ATTRIBUTE_BASE = 100` for free and only increases above that cost
+XP; the budget is `CHARACTER_START_XP = 5000`; negative skill/trait XP **refunds** into the
+pool (e.g. `trait:Unlucky=-50`). `gmxpmod` is persisted but **display-only** — it is
+deliberately not folded into the budget. Provenance is cited in the header
 (`s2flexxpdialog.cpp:106-109`, `chardata.cpp:7`, `chardata.cpp:13-20`).
+
+That attribute rule diverges from the desktop, which charges the full attribute value
+(`mainwindow.cpp:830-833`) — an ~800 XP discrepancy per character. The header's
+`s2flexxpdialog.cpp:106-109` citation points at the flex-XP dialog's allowance formula, a
+different system. See `docs/RULES.md` §2.2; tracked as `docs/PLAN.md` step 10.
+
+`gmxpmod` is display-only *here*. In the desktop it is load-bearing and derived
+(`mainwindow.cpp:397-401`): `wizardMod = XP - wz->chr_dat->xp` when the wizard finishes
+(`:401`, with `XP = xpMain - xpProg` at `:400`), and `0` for hand-built characters.
+`docs/RULES.md` §2.5; step 10.
 
 **`errors.ts`** checks the code on `PostgrestError.code` and *also* falls back to substring-matching
 the message, defensively, in case a transport only carries it there. `PT409` → `"conflict"` (show

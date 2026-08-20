@@ -18,8 +18,8 @@ palette (`hud.*` tokens from `tailwind.config.ts`), while the auth screens use t
 | `characters/` | HUD-themed editor kit: panels, steppers, sheet, conflict dialog, warnings (see `characters/AGENTS.md`) |
 | `auth/` | Login and signup forms plus a shared field wrapper (see `auth/AGENTS.md`) |
 | `layout/` | App shell header and the single page-width primitive (see `layout/AGENTS.md`) |
-| `ui/` | Contains only `.gitkeep`. The shadcn/ui output directory configured by `components.json` — currently unused; no components have been generated into it. |
-| `app-shell/` | Empty placeholder — planned, no files yet. |
+| `ui/` | Contains only `.gitkeep`. It is the shadcn/ui output directory configured by `components.json`. |
+| `app-shell/` | Empty. |
 
 ## For AI Agents
 
@@ -36,7 +36,7 @@ palette (`hud.*` tokens from `tailwind.config.ts`), while the auth screens use t
 ### Testing Requirements
 - Component tests are colocated `*.test.tsx` files using `@testing-library/react`, and **each one
   needs `// @vitest-environment jsdom`** at the top — the project default is `node`.
-- Only `characters/` currently has tests (`character-sheet`, `ui`, `warnings`).
+- `characters/` is the only subdirectory with colocated tests (`character-sheet`, `ui`, `warnings`).
 - Vitest picks up `components/**/*.test.tsx`; `.tsx` test files are excluded from coverage.
 
 ### Common Patterns

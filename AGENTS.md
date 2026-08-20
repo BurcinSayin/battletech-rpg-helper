@@ -20,10 +20,7 @@
 - `PT409` means version conflict; `PT403` means forbidden campaign attach/save; classification lives in `lib/characters/errors.ts`.
 - Character JSONB ordering matters for desktop `.btcc` fidelity. Preserve pass-through sections such as equip/weapons/pre* unless intentionally changing round-trip behavior.
 - `.btcc` parse/serialize fidelity is guarded by the golden round-trip tests in `lib/btcc/`.
-
-## Current Status
-- Trust `docs/PLAN.md`/code over README marketing language: campaigns/GM realtime, PWA/Serwist, and deploy polish are still pending.
-- `app/(app)/campaigns/[id]/page.tsx` is currently a TODO stub.
+- `README.md` is marketing copy — it advertises an installable PWA, real-time sync, and GM live editing. `docs/PLAN.md` and the code describe the system; prefer them over the README.
 
 ## Style And Tests
 - `@/*` maps to repo root.
@@ -41,6 +38,13 @@
 | `data/` | Generated rules catalogs, bundled at build time (see `data/AGENTS.md`) |
 | `scripts/` | Generators for the rules JSON and `seed.sql` (see `scripts/AGENTS.md`) |
 | `e2e/` | Playwright end-to-end specs (see `e2e/AGENTS.md`) |
-| `docs/` | `PLAN.md` build-order source of truth + design wireframes (see `docs/AGENTS.md`) |
+| `docs/` | `PLAN.md` (design + intended build order), `RULES.md` (desktop rules, cited to source), design wireframes (see `docs/AGENTS.md`) |
+
+## Documentation Map
+- `docs/PLAN.md` — intended design and build order. Not a progress record.
+- `docs/RULES.md` — the desktop application's character-generation rules, every claim cited to `Battletech-Character-Creator@a1d8009`.
+- `CLAUDE.md` — commands, architecture, and conventions for this repository.
+- `AGENTS.md` — directory-local context, one file per directory.
+- Build status — answered by `git log` and GitHub issues, not by any document.
 
 <!-- MANUAL: Notes added below this line are preserved on regeneration -->

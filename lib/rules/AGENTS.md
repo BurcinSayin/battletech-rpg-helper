@@ -20,7 +20,7 @@ Typed read access to the *A Time of War* rules catalogs. The data itself is gene
 
 **The catalogs are `import`ed, not fetched.** This is a deliberate architectural choice: static
 imports mean the data is bundled at build time, so the rules are available offline with no database
-round-trip and no loading state — which matters for the planned PWA work (`docs/PLAN.md` step #8).
+round-trip and no loading state — which is what `docs/PLAN.md` step 8 (offline/PWA) depends on.
 Do not convert these to `fetch`, dynamic `import()`, or a database table.
 
 Exports: `skills`, `traits`, `subskills`, `affiliations`, `careers`, `eyeColors`, `hairColors`,

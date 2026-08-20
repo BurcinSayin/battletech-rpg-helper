@@ -11,7 +11,7 @@ builds and runs without the desktop checkout, and so the catalog is available of
 ## Key Files
 | File | Shape | Notes |
 |------|-------|-------|
-| `skills.json` | `{ name, attributes, cost, category }[]` | Largest catalog (~10 KB). `attributes` is a code like `RFL`; `category` like `SB`. |
+| `skills.json` | `{ name, attributes, cost, category }[]` | Largest catalog (~10 KB). `attributes` is a code like `RFL`. `cost` is the skill's **Target Number**, not an XP cost — `allskills.dat` is `Name;LINK,TN/CAT` (`scripts/convert-dat.ts:57-69`). `category` (`SB`/`CB`/`SA`/`CA`) has **no pricing effect**. Rename is step 10. `docs/RULES.md` §2.3. |
 | `traits.json` | `{ name, page }[]` | `page` is the rulebook reference. |
 | `subskills.json` | `Record<string, string[]>` | Parent skill to ordered sub-skill names; expanded into composite `"Parent/Sub"` names. |
 | `affiliations.json` | `string[]` | |
@@ -33,8 +33,7 @@ provides the typed accessors and derived helpers such as `compositeSkillNames()`
 JSON bypasses the type annotations that turn a shape drift into a compile error.
 
 They are **statically imported**, so the data is bundled at build time — no fetch, no database, no
-loading state. That is deliberate and supports the planned offline/PWA work; do not convert it to a
-runtime fetch.
+loading state. That is deliberate; do not convert it to a runtime fetch.
 
 `data/rules/**` is **lint-ignored** in `eslint.config.mjs`, so lint failures will never flag problems
 here. The real guard is `lib/rules/catalog.test.ts`, which validates every catalog against the Zod

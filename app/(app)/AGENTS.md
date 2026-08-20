@@ -5,7 +5,7 @@
 
 ## Purpose
 The authenticated route group: dashboard, character CRUD and editor, `.btcc` import, and the
-(not-yet-built) campaign view. The parenthesized name is a Next.js route group — it organizes files
+campaign view. The parenthesized name is a Next.js route group — it organizes files
 without appearing in URLs, so `dashboard/page.tsx` serves `/dashboard`.
 
 ## Key Files
@@ -20,7 +20,7 @@ without appearing in URLs, so `dashboard/page.tsx` serves `/dashboard`.
 | `/dashboard` | `dashboard/page.tsx` | Server component listing the user's characters with create/open/delete. |
 | `/characters/[id]` | `characters/[id]/page.tsx` + `editor-client.tsx` | Server shell fetches and maps the row; the 381-line client component is the editor. |
 | `/characters/import` | `characters/import/page.tsx` + `import-client.tsx` | Drop-zone, parse, preview, commit. |
-| `/campaigns/[id]` | `campaigns/[id]/page.tsx` | **A nine-line TODO stub for `docs/PLAN.md` step #7.** Renders placeholder text; no data fetching yet. |
+| `/campaigns/[id]` | `campaigns/[id]/page.tsx` | Nine lines. Returns `<div>Campaign {id} (TODO step #7)</div>`; no data fetching. The design is `docs/PLAN.md` step 7. |
 
 ## For AI Agents
 
