@@ -1,0 +1,11 @@
+# `.btcc` files are a byte-exact interchange format, not ordinary text.
+#
+# `serializeBtcc` always emits LF (see lib/btcc/AGENTS.md and docs/RULES.md §1.1),
+# and `lib/btcc/roundtrip.test.ts` asserts `serialize(parse(fixture)) === fixture`
+# byte-for-byte against the file as read from disk. Git stores these fixtures with
+# LF, but `core.autocrlf=true` rewrites them to CRLF on checkout, which breaks
+# byte-equality and fails the golden tests on a correct working tree.
+#
+# `-text` disables all line-ending conversion for these paths in both directions,
+# so the working copy matches what is stored.
+*.btcc -text
