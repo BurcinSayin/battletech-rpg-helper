@@ -157,7 +157,7 @@ The skill catalogue is `resource/allskills.dat`, 92 entries, parsed by `LoadResu
 
 The numeric part of that payload is a **Target Number**, not a price. `MainWindow::PrintSkillsTable()` splits the payload on `,` (`mainwindow.cpp:995`, `mainwindow.cpp:1014`) and puts `linkPart[0]` — the linked attributes — into the sheet's Link column (`mainwindow.cpp:1000-1003`, `mainwindow.cpp:1021-1024`) and `linkPart[1]` — the `TN/CAT` half — into the **TC** column (`mainwindow.cpp:1005-1008`, `mainwindow.cpp:1026-1029`). The character's own XP is a different column (`mainwindow.cpp:1041-1042`), and the catalogue value is never read into any XP arithmetic. `AdvTried()` (`mainwindow.cpp:1055`) may substitute a different link/TN pair once a skill reaches an advanced level, which is meaningful only for a TN.
 
-> **Port divergence (step 10).** `data/rules/skills.json` names this field `cost`, and `lib/validation/catalog.ts` types it as such. Nothing in the app consumes it, so the blast radius is documentation only; the rename to `targetNumber` is step 10.
+> **Port alignment (step 10, resolved).** `data/rules/skills.json` and `lib/validation/catalog.ts` originally named this field `cost`. It is now `targetNumber` in the generated JSON, the Zod shape, and `scripts/convert-dat.ts`. No XP arithmetic changed, because nothing in the port ever read the field as a price.
 
 ### 2.4 Trait XP
 

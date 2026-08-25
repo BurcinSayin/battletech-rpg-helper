@@ -49,12 +49,12 @@ describe("rules catalog", () => {
     expect(gunnery).toEqual({
       name: "Gunnery/'Mech",
       attributes: "RFL+DEX",
-      cost: 8,
+      targetNumber: 8,
       category: "SA",
     });
     // The one row with a stray space ("INT, 8/CB") trims cleanly.
     const appraisal = skills.find((s) => s.name === "Appraisal");
-    expect(appraisal?.cost).toBe(8);
+    expect(appraisal?.targetNumber).toBe(8);
     expect(appraisal?.attributes).toBe("INT");
   });
 
