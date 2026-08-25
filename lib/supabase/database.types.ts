@@ -97,7 +97,7 @@ export type Database = {
           name: string
           notes: string
           owner_id: string
-          pre_snapshot: Json
+          prerequisites: Json
           skills: Json
           traits: Json
           updated_at: string
@@ -112,7 +112,7 @@ export type Database = {
           name: string
           notes?: string
           owner_id: string
-          pre_snapshot?: Json
+          prerequisites?: Json
           skills?: Json
           traits?: Json
           updated_at?: string
@@ -127,7 +127,7 @@ export type Database = {
           name?: string
           notes?: string
           owner_id?: string
-          pre_snapshot?: Json
+          prerequisites?: Json
           skills?: Json
           traits?: Json
           updated_at?: string
@@ -197,7 +197,7 @@ export type Database = {
           name: string
           notes: string
           owner_id: string
-          pre_snapshot: Json
+          prerequisites: Json
           skills: Json
           traits: Json
           updated_at: string

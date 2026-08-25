@@ -1,7 +1,7 @@
 // Lossless mapping between a `characters` DB row and a `BtccDraft`. The column
 // layout is defined by the migration (20260629150000_init.sql:47-50):
 //   info = scalars + equip/equipLoc/weapons/chrWeapons, attributes = attrs,
-//   skills/traits = BtccRow[], pre_snapshot = pre* sections, name/notes = columns.
+//   skills/traits = BtccRow[], prerequisites = pre* sections, name/notes = columns.
 //
 // Reads (rowToDraft) are tolerant of malformed JSONB; writes (draftToColumns)
 // always produce well-formed shapes. We control every write through these helpers
@@ -83,7 +83,7 @@ function coerceScalars(infoScalars: Json | undefined, name: string): BtccScalars
 export function rowToDraft(row: CharacterRow): BtccDraft {
   const draft = emptyDraft();
   const info = asObject(row.info);
-  const pre = asObject(row.pre_snapshot);
+  const pre = asObject(row.prerequisites);
 
   draft.scalars = coerceScalars(info.scalars, row.name);
   draft.attrs = asNumberRecord(row.attributes);
@@ -127,7 +127,7 @@ export function draftToColumns(draft: BtccDraft): CharacterColumns {
     attributes: draft.attrs,
     skills: draft.skills,
     traits: draft.traits,
-    pre_snapshot: draftToPreSnapshot(draft),
+    prerequisites: draftToPreSnapshot(draft),
     notes: draft.notes,
   };
 }
@@ -153,7 +153,7 @@ export function draftToInsert(draft: BtccDraft, ownerId: string): CharacterInser
     attributes: cols.attributes as unknown as Json,
     skills: cols.skills as unknown as Json,
     traits: cols.traits as unknown as Json,
-    pre_snapshot: cols.pre_snapshot as unknown as Json,
+    prerequisites: cols.prerequisites as unknown as Json,
     notes: cols.notes,
   };
 }

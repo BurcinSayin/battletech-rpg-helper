@@ -40,7 +40,7 @@ on conflict do nothing;
 -- 3) Character owned by the seed user (lisa.btcc). RLS is bypassed here (seed
 --    runs as the superuser); columns follow the migration JSONB contract.
 insert into public.characters (
-  id, owner_id, campaign_id, name, info, attributes, skills, traits, pre_snapshot, notes
+  id, owner_id, campaign_id, name, info, attributes, skills, traits, prerequisites, notes
 ) values (
   '22222222-2222-2222-2222-222222222222',
   '11111111-1111-1111-1111-111111111111',

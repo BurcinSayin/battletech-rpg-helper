@@ -11,7 +11,7 @@ export interface CharacterColumns {
   attributes: Record<string, number>;
   skills: BtccRow[];
   traits: BtccRow[];
-  pre_snapshot: PreSnapshot;
+  prerequisites: PreSnapshot;
   notes: string;
 }
 
@@ -29,7 +29,7 @@ export interface CharacterInfo {
   chrWeapons: string[];
 }
 
-/** The `pre_snapshot` JSONB column — the desktop wizard's pre-stage baseline. */
+/** The `prerequisites` JSONB column — attribute/skill/trait minimums stored ×100. */
 export interface PreSnapshot {
   preAttrs: Record<string, number>;
   preSkills: BtccRow[];

@@ -33,7 +33,7 @@ in `types.ts`):
 | `info` (JSONB) | `scalars` **plus** `equip`, `equipLoc`, `weapons`, `chrWeapons` — verbatim |
 | `attributes` (JSONB) | the draft's `attrs` |
 | `skills`, `traits` (JSONB) | `BtccRow[]` |
-| `pre_snapshot` (JSONB) | `preAttrs`, `preSkills`, `preTraits` — **prerequisites**, not a baseline snapshot: attr/skill/trait minimums max-merged across the 5 wizard stages (`wizard.cpp:277-388`), checked by `CheckPrereq` (`mainwindow.cpp:3295-3427`), stored ×100. The name is a misnomer, scheduled for rename in step 10. `docs/RULES.md` §1.2. |
+| `prerequisites` (JSONB) | `preAttrs`, `preSkills`, `preTraits` — attr/skill/trait minimums max-merged across the 5 wizard stages (`wizard.cpp:277-388`), checked by `CheckPrereq` (`mainwindow.cpp:3295-3427`), stored ×100. `docs/RULES.md` §1.2. |
 
 The equip/weapons/`pre*` sections ride along untouched even though the MVP editor never edits them.
 That is the whole reason a `.btcc` file survives a database round-trip.

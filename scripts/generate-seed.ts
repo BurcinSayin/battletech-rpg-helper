@@ -65,7 +65,7 @@ on conflict do nothing;
 -- 3) Character owned by the seed user (lisa.btcc). RLS is bypassed here (seed
 --    runs as the superuser); columns follow the migration JSONB contract.
 insert into public.characters (
-  id, owner_id, campaign_id, name, info, attributes, skills, traits, pre_snapshot, notes
+  id, owner_id, campaign_id, name, info, attributes, skills, traits, prerequisites, notes
 ) values (
   '${CHARACTER_ID}',
   '${USER_ID}',
@@ -75,7 +75,7 @@ insert into public.characters (
   ${jq("attrs", cols.attributes)}::jsonb,
   ${jq("skills", cols.skills)}::jsonb,
   ${jq("traits", cols.traits)}::jsonb,
-  ${jq("pre", cols.pre_snapshot)}::jsonb,
+  ${jq("pre", cols.prerequisites)}::jsonb,
   ${jq("notes", cols.notes)}
 )
 on conflict do nothing;
