@@ -50,7 +50,7 @@ Supabase client factories. Route handlers and components stay thin by delegating
 ### Testing Requirements
 - Unit tests are colocated `*.test.ts` files and run in the `node` environment — no pragma needed.
 - `npm run test -- lib/characters/xp.test.ts` runs a single file; `npm run test` runs all 14 unit
-  test files (88 cases across `lib/`, `app/`, and `components/`).
+  test files (89 cases across `lib/`, `app/`, and `components/`).
 - `lib/btcc/roundtrip.test.ts` is a **golden test**: it asserts `parse → serialize` reproduces the
   fixture byte-for-byte. Treat a failure there as a fidelity regression, not a test to relax.
 

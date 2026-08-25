@@ -26,7 +26,7 @@ Never cited, even though they exist and would resolve: the Qt resource blob `qrc
 
 **Transcribed vs. cited by shape.** The desktop's bulk data — 154 dispatch blocks across four stage files, a 51-entry trait clamp table, the equipment and weapon catalogues — is **not** reproduced here. [§8](#8-bulk-table-index) gives the enumeration command, the count, and the span for each, so any of it can be regenerated on demand. Exactly one module block is reproduced verbatim, in [§7.4](#74-module-anatomy--shape-plus-one-worked-example), as the worked example that fixes the shape.
 
-**Port divergences.** Where the TypeScript port already implements something differently, this document states the desktop behaviour and names the port file *without* a line number (port files are not in the cited revision). Those divergences are tracked as `docs/PLAN.md` step 10.
+**Port divergences.** Where the TypeScript port implements something differently, this document states the desktop behaviour and names the port file *without* a line number (port files are not in the cited revision). The four divergences catalogued in `docs/PLAN.md` → *Known rules defects* were corrected in step 10; the notes that flagged them are retained as **resolved** markers, so a reader can see what the port once did and why it changed.
 
 #### Subsystem → section map
 
@@ -99,7 +99,7 @@ The whole character lives in one object, `CharData` (`chardata.h:8-69`), owned b
 
 They are persisted as `preattr:` / `preskill:` / `pretrait:` (`mainwindow.cpp:2384`, `:2391`, `:2396`) and read back at `openFile()`. `MainWindow::CheckPrereq()` (`mainwindow.cpp:3295-3427`) compares them against the *current* character and reports the shortfall.
 
-> **Port note.** The web port stores this column as `pre_snapshot`, a name that asserts the opposite of what the data is. Nothing reads it as a snapshot, so the defect is a naming error rather than a behavioural one; the rename is `docs/PLAN.md` step 10.
+> **Port note (step 10, resolved).** The web port originally stored this column as `pre_snapshot`, a name that asserted the opposite of what the data is. It is now `prerequisites` (`supabase/migrations/20260825110642_rename_pre_snapshot.sql`). The defect was a naming error rather than a behavioural one — nothing ever read the column as a snapshot.
 
 **Attribute prerequisites are stored ×100.** `s1PreAttr["STR"] = 400` means **STR 4+**, matching the tooltip text in the same block (`stage1_resurce.cpp:343-345` against the tooltip at `:309`). Skill and trait prerequisites are stored in raw XP, on the same scale as the character's own skill and trait XP, so they compare directly (`mainwindow.cpp:3340`, `:3357`).
 
@@ -147,9 +147,9 @@ The consequence is arithmetic. All eight attributes start at **100** (`chardata.
 
 `scoreStattoStatvalue()` (`mainwindow.cpp:574-583`) enforces the floor from the other direction, returning 1 for any value below 100, and `on_STRSpinBoxMain_valueChanged()` snaps a below-100 entry back to 100 (`mainwindow.cpp:692-694`; the other seven spin boxes follow the same shape).
 
-> **Port divergence (tracked as `docs/PLAN.md` step 10).** `lib/characters/xp.ts` charges `max(0, value - 100)` — the excess over the baseline, not the **full** value. Against an all-100 character the desktop charges **800** and the port charges **0**, so every character in the port has ~800 XP more to spend than the desktop would allow. The port's `ATTRIBUTE_BASE = 100` correctly describes the *starting* value (`chardata.cpp:13-20`); it is not a discount in the desktop's model.
+> **Port alignment (step 10, resolved).** `lib/characters/xp.ts` originally charged `max(0, value - 100)` — the excess over the baseline, not the **full** value — giving every character ~800 XP more than the desktop would allow. It now charges the full value, and `lib/characters/xp.test.ts` asserts an all-100 character consumes 800. The port's `ATTRIBUTE_BASE = 100` describes the *starting* value (`chardata.cpp:13-20`) and is not a discount in the desktop's model.
 
-### 2.3 Skill XP, and the `.dat` `cost` field is a Target Number
+### 2.3 Skill XP, and the `.dat`'s numeric skill field is a Target Number
 
 A skill's XP is its cost: `charSkillsMain[i].second` is raw XP, summed unweighted by `SumSkillsXP()` (`mainwindow.cpp:959-967`) and printed in the sheet's XP column (`mainwindow.cpp:1041-1042`). XP → level is §5.3.
 
@@ -191,7 +191,7 @@ It is tempting to gloss `wizardMod` as *the module costs the wizard charged, les
 
 Port `gmxpmod` as *the number the source computes at `mainwindow.cpp:401`*, not as a reconstruction of it.
 
-> **Port divergence (step 10).** `lib/characters/xp.ts` persists `gmxpmod` but does not read it in the remaining-XP calculation, so the port's figure differs from the desktop's for every wizard-built character. In the desktop it is a load-bearing term, not a display field.
+> **Port alignment (step 10, resolved).** `lib/characters/xp.ts` originally persisted `gmxpmod` without reading it in the remaining-XP calculation, so the port's figure differed from the desktop's for every wizard-built character. It is now a term in the budget — `remaining = budget - spent - gmxpmod` — and `lib/characters/xp.test.ts` asserts a non-zero `gmxpmod` moves `remaining`.
 
 ### 2.6 Aging — direct `charAttr` mutation, and why it lands in Part II
 

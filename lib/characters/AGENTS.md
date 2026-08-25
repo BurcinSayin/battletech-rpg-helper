@@ -65,22 +65,25 @@ warnings to validation errors. The name sets are lazily memoized in module-level
 the helpers repeatedly is cheap; `catalogSkillNames`/`catalogTraitNames` return sorted lists for the
 editor's `<datalist>` autocomplete.
 
-**`xp.ts` implements the port's XP model, which diverges from the desktop's.** Eight
-attributes; each starts at `ATTRIBUTE_BASE = 100` for free and only increases above that cost
-XP; the budget is `CHARACTER_START_XP = 5000`; negative skill/trait XP **refunds** into the
-pool (e.g. `trait:Unlucky=-50`). `gmxpmod` is persisted but **display-only** — it is
-deliberately not folded into the budget. Provenance is cited in the header
-(`s2flexxpdialog.cpp:106-109`, `chardata.cpp:7`, `chardata.cpp:13-20`).
+**`xp.ts` implements the desktop's XP model.** Eight attributes, each charged at **full face
+value** (`mainwindow.cpp:830-833`); the budget is `CHARACTER_START_XP = 5000`
+(`chardata.cpp:7`); negative skill/trait XP **refunds** into the pool
+(e.g. `trait:Unlucky=-50`); and `gmxpmod` is a **term in the budget**
+(`remaining = budget - spent - gmxpmod`).
 
-That attribute rule diverges from the desktop, which charges the full attribute value
-(`mainwindow.cpp:830-833`) — an ~800 XP discrepancy per character. The header's
-`s2flexxpdialog.cpp:106-109` citation points at the flex-XP dialog's allowance formula, a
-different system. See `docs/RULES.md` §2.2; tracked as `docs/PLAN.md` step 10.
+`ATTRIBUTE_BASE = 100` is the desktop's *starting* value (`chardata.cpp:13-20`) and serves only
+as the fallback for an attribute missing from the draft. It is **not** a discount — an all-100
+character consumes 800 XP. `gmxpmod` mirrors the desktop's `wizardMod`, which it derives as
+`wizardMod = XP - wz->chr_dat->xp` when the wizard finishes (`mainwindow.cpp:397-401`; `XP =
+xpMain - xpProg` at `:400`, the assignment at `:401`) and leaves at `0` for hand-built
+characters. `docs/RULES.md` §2.2, §2.5.
 
-`gmxpmod` is display-only *here*. In the desktop it is load-bearing and derived
-(`mainwindow.cpp:397-401`): `wizardMod = XP - wz->chr_dat->xp` when the wizard finishes
-(`:401`, with `XP = xpMain - xpProg` at `:400`), and `0` for hand-built characters.
-`docs/RULES.md` §2.5; step 10.
+**Do not "fix" either rule back.** Charging only the excess over 100, and treating `gmxpmod` as
+display-only, were the two XP defects corrected in step 10 — worth ~800 XP per character and a
+mis-costed wizard character respectively. Note also that the header's
+`s2flexxpdialog.cpp:106-109` citation is the flex-XP dialog's *per-dialog allowance*, whose
+spinboxes are deltas added to the current value (`s2flexxpdialog.cpp:115`); it is a different
+system and must not be used to model the character budget.
 
 **`errors.ts`** checks the code on `PostgrestError.code` and *also* falls back to substring-matching
 the message, defensively, in case a transport only carries it there. `PT409` → `"conflict"` (show
@@ -92,7 +95,7 @@ non-blank name or at least one attr/skill/trait; `normalizeImportName` trims, fa
 `char_length(name) between 1 and 100`.
 
 ### Testing Requirements
-- Five colocated `*.test.ts` files, node environment, 28 cases:
+- Five colocated `*.test.ts` files, node environment, 29 cases:
   `npm run test -- lib/characters/`.
 - When changing the column contract, update `mapping.test.ts` **and** verify the `.btcc` golden test
   still passes (`npm run test -- lib/btcc/roundtrip.test.ts`) — the two are coupled through the
