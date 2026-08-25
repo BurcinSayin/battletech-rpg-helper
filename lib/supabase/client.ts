@@ -10,7 +10,7 @@ import { type Database } from "./database.types";
 // typed `.from()`/`.rpc()` calls (the runtime client is identical).
 export function createClient(): SupabaseClient<Database> {
   return createBrowserClient<Database>(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    process.env.BT_CHARGEN_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY!,
   ) as unknown as SupabaseClient<Database>;
 }

@@ -63,8 +63,10 @@ excluded from coverage in `vitest.config.ts`.
 ### Common Patterns
 - Environment variables are read inline with non-null assertions (`process.env.X!`) at call time,
   not module load, so builds do not fail when they are absent.
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` is public by design; RLS is what protects data.
-  `SUPABASE_SERVICE_ROLE_KEY` is server-only and must never reach a client bundle.
+- `NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY` is public by design; RLS is what protects data.
+  `BT_CHARGEN_SUPABASE_SERVICE_ROLE_KEY` is server-only and must never reach a client bundle.
+- `BT_CHARGEN_SUPABASE_URL` has no `NEXT_PUBLIC_` prefix, so `next.config.ts` lists it under `env` to
+  inline it into the client bundle. Renaming it means editing both places.
 
 ## Dependencies
 
