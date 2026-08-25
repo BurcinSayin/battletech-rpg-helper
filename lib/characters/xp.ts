@@ -3,11 +3,13 @@
 //
 // The "free XP" formula in stage 2 (s2flexxpdialog.cpp:106-109) is:
 //   spent = Σ(trait xp) + Σ(skill xp) + Σ(attribute spinbox increases)
-// where each attribute starts at a free base of 100 (chardata.cpp:13-20) and the
-// spinbox stores the increase above that base. Negative skill/trait XP refund into
-// the pool (e.g. trait:Unlucky=-50). The default budget is startXP = 5000
-// (chardata.cpp:7). `gmxpmod` is persisted but unused by the desktop math, so it is
-// display-only and intentionally NOT folded into the budget here.
+// where each attribute starts at a free base of 100 (chardata.cpp:13-20).
+// However, the desktop's main window (mainwindow.cpp:820-822) computes remaining XP as:
+//   xpProg = Σ(attributes at full value) + Σ(skill xp) + Σ(trait xp)
+//   XP = xpMain - xpProg - wizardMod
+// The `wizardMod` is persisted in `.btcc` files as `gmxpmod`.
+// Negative skill/trait XP refund into the pool (e.g. trait:Unlucky=-50). 
+// The default budget is startXP = 5000 (chardata.cpp:7).
 
 import type { BtccDraft, BtccRow } from "@/lib/btcc/types";
 
@@ -43,11 +45,11 @@ export function sumRows(rows: BtccRow[]): number {
   return rows.reduce((total, row) => total + row.xp, 0);
 }
 
-/** XP spent on attributes = Σ max(0, value − 100) over the 8 attributes. */
+/** XP spent on attributes = Σ value over the 8 attributes. */
 export function attributeXp(attrs: Record<string, number>): number {
   return ATTRIBUTE_KEYS.reduce((total, key) => {
     const value = attrs[key] ?? ATTRIBUTE_BASE;
-    return total + Math.max(0, value - ATTRIBUTE_BASE);
+    return total + value;
   }, 0);
 }
 
@@ -62,6 +64,6 @@ export function computeXp(draft: BtccDraft): XpSummary {
     spent,
     byCategory: { attributes, skills, traits },
     budget,
-    remaining: budget - spent,
+    remaining: budget - spent - draft.scalars.gmxpmod,
   };
 }
