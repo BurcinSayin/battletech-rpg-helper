@@ -16,11 +16,11 @@ types used throughout the app.
 ## For AI Agents
 
 ### Working In This Directory
-- Shapes: a skill is `{ name, attributes, cost: int, category }`; a trait is `{ name, page }`;
+- Shapes: a skill is `{ name, attributes, targetNumber: int, category }`; a trait is `{ name, page }`;
   `subskills.json` is a record of parent skill → ordered sub-skill names; every other catalog
   (affiliations, careers, colors, phenotypes, planets) is a plain non-empty string list.
-- In the skill shape, `cost` is the **Target Number**, not an XP cost — `docs/RULES.md` §2.3;
-  rename in step 10.
+- `targetNumber` is the skill's **Target Number**, never an XP price — `docs/RULES.md` §2.3. Do not
+  use it in XP arithmetic.
 - **Types flow outward from here.** `Skill`, `Trait`, and `Subskills` are inferred from the schemas
   and re-exported by `lib/rules/types.ts`, which is what most code imports. Change a schema and the
   type changes everywhere — that is the intent.

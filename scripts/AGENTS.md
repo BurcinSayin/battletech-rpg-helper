@@ -23,12 +23,12 @@ elsewhere with the `BTCC_SOURCE_DIR` environment variable. Without that checkout
 run — but `data/rules/*.json` is committed, so the app builds fine without it. Only re-run when the
 upstream rules data actually changes.
 
-- The catalog `.dat` files are ASCII, read as `latin1`. `allskills.dat` is `name;ATTRS,cost/category`,
+- The catalog `.dat` files are ASCII, read as `latin1`. `allskills.dat` is `name;ATTRS,TN/category`,
   `alltraits.dat` is `name;pageref`, and `subskill.dat` is `parent;sub`; the remaining catalogs are
   plain one-value-per-line lists. Parsing provenance is `loadresurce.cpp` and `stage1_resurce.cpp`
   (`CreateSubSkillList` is what builds composite `"parent/sub"` names).
-- In `allskills.dat` the `cost` field is the **Target Number**, not an XP cost —
-  `docs/RULES.md` §2.3; rename in step 10.
+- In `allskills.dat` the numeric field is the **Target Number**, not an XP cost, so the generator
+  emits it as `targetNumber` — `docs/RULES.md` §2.3.
 - **Upstream filenames contain typos — preserve them.** The affiliations source is
   `affilations.dat` (missing the second `i`), and `career.dat` is singular while the output is
   `careers.json`. Do not "fix" these read paths.

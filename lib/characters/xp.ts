@@ -1,15 +1,22 @@
 // XP math, faithful to the desktop reference app (read-only source of truth at
 // ../Battletech-Character-Creator).
 //
-// The "free XP" formula in stage 2 (s2flexxpdialog.cpp:106-109) is:
-//   spent = Σ(trait xp) + Σ(skill xp) + Σ(attribute spinbox increases)
-// where each attribute starts at a free base of 100 (chardata.cpp:13-20).
-// However, the desktop's main window (mainwindow.cpp:820-822) computes remaining XP as:
-//   xpProg = Σ(attributes at full value) + Σ(skill xp) + Σ(trait xp)
-//   XP = xpMain - xpProg - wizardMod
-// The `wizardMod` is persisted in `.btcc` files as `gmxpmod`.
-// Negative skill/trait XP refund into the pool (e.g. trait:Unlucky=-50). 
+// The model is the desktop main window's (mainwindow.cpp:830-833):
+//   xpProg    = Σ(attributes at FULL value) + Σ(skill xp) + Σ(trait xp)
+//   remaining = xpMain - xpProg - wizardMod
+// Attributes are charged at face value, NOT as the excess over their starting
+// 100 (chardata.cpp:13-20), so an all-100 character consumes 800.
+// `wizardMod` is persisted in `.btcc` as `gmxpmod` and is a term in the budget,
+// not a display field; the desktop derives it as `XP - wz->chr_dat->xp` when the
+// wizard finishes (mainwindow.cpp:397-401) and leaves it 0 for hand-built
+// characters. RULES.md §2.2, §2.5.
+// Negative skill/trait XP refund into the pool (e.g. trait:Unlucky=-50).
 // The default budget is startXP = 5000 (chardata.cpp:7).
+//
+// Not this: stage 2's flex-XP dialog (s2flexxpdialog.cpp:106-109) subtracts
+// spinbox values that are deltas added to the current attribute
+// (s2flexxpdialog.cpp:115), so it charges only the increase. That is a
+// per-dialog allowance, a different system from the character budget.
 
 import type { BtccDraft, BtccRow } from "@/lib/btcc/types";
 
@@ -27,7 +34,8 @@ export const ATTRIBUTE_KEYS = [
 
 export type AttributeKey = (typeof ATTRIBUTE_KEYS)[number];
 
-/** Each attribute's free starting value; only increases above it cost XP. */
+/** Each attribute's desktop starting value (chardata.cpp:13-20). Used as the
+ *  fallback for an attribute absent from the draft — never as a discount. */
 export const ATTRIBUTE_BASE = 100;
 
 /** Default A Time of War creation budget (desktop `startXP`). */

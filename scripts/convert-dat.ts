@@ -48,22 +48,26 @@ interface Skill {
   name: string;
   /** Linked attribute(s), e.g. "RFL" or "RFL+DEX". */
   attributes: string;
-  /** Target number / complexity cost. */
-  cost: number;
-  /** Category code, e.g. "SB", "CB", "SA", "CA". */
+  /**
+   * The skill's Target Number, NOT an XP price: printed in the desktop sheet's
+   * `TN/C` column (`mainwindow.cpp:1005`) and re-substituted past level 3 by
+   * `AdvTried()` (`mainwindow.cpp:1055`). RULES.md §2.3.
+   */
+  targetNumber: number;
+  /** Complexity code, e.g. "SB", "CB", "SA", "CA". */
   category: string;
 }
 
-/** allskills.dat: `name;ATTRS,cost/category` (note: one row has a stray space). */
+/** allskills.dat: `name;ATTRS,TN/category` (note: one row has a stray space). */
 function parseSkills(): Skill[] {
   return readLines("allskills.dat").map((line) => {
     const [name, meta] = line.split(";");
-    const [attrs, costCat] = meta.split(",");
-    const [cost, category] = costCat.split("/");
+    const [attrs, tnCat] = meta.split(",");
+    const [targetNumber, category] = tnCat.split("/");
     return {
       name: name.trim(),
       attributes: attrs.trim(),
-      cost: parseInt(cost.trim(), 10),
+      targetNumber: parseInt(targetNumber.trim(), 10),
       category: category.trim(),
     };
   });

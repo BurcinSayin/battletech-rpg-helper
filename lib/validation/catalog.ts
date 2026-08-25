@@ -7,7 +7,7 @@ import { z } from "zod";
 export const skillSchema = z.object({
   name: z.string().min(1),
   attributes: z.string().min(1),
-  cost: z.number().int(),
+  targetNumber: z.number().int(),
   category: z.string().min(1),
 });
 
