@@ -13,7 +13,11 @@ parentheses are organizational — they do not appear in URLs, so `(auth)/login/
 | File | Description |
 |------|-------------|
 | `layout.tsx` | Root layout — bare `<html>`/`<body>` shell plus the `Metadata` export. Deliberately carries no auth logic. |
-| `page.tsx` | Public landing page at `/`. Static copy pointing at `docs/PLAN.md`; the only page outside both route groups. |
+| `page.tsx` | Redirects `/` to `/dashboard`; the `(app)` guard sends signed-out visitors on to `/login`. One of two routes outside both route groups. |
+| `offline/page.tsx` | Offline fallback, precached and served by the service worker for any failed navigation. Outside both route groups on purpose: no layout guard, so no `getUser()` network call. Its retry control is a plain `<a>`, not `<Link>` — see CLAUDE.md. |
+| `manifest.ts` | Web app manifest. Icons point at the `icons/*` route handlers. |
+| `sw.ts` | Service worker entry. Two lines; all policy lives in `lib/sw/config.ts`. |
+| `icon.tsx` / `apple-icon.tsx` / `icons/*/route.tsx` | Icons rendered from code via `ImageResponse` (`lib/branding/icon.tsx`) — no binary assets in `public/`. |
 | `globals.css` | Tailwind entry point and global theme layer. |
 
 ## Subdirectories
