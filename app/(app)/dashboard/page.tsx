@@ -9,9 +9,10 @@ import {
 import { HudButton } from "@/components/characters/ui";
 import { PageContainer } from "@/components/layout/page-container";
 
-// Dashboard: the signed-in user's characters with create / open / delete. RLS also
-// exposes characters from campaigns the user GMs; the explicit owner filter keeps
-// this list to "my characters" for the single-user MVP (campaigns land in step #7).
+// Dashboard: the signed-in user's characters with create / open / delete, plus a
+// compact read-only list of their campaigns. RLS also exposes characters from
+// campaigns the user GMs; the explicit owner filter keeps this list to "my
+// characters" — a GM sees members' characters on the campaign page instead.
 export default async function DashboardPage() {
   const supabase = await createClient();
   const {
@@ -25,6 +26,15 @@ export default async function DashboardPage() {
     .eq("owner_id", user.id)
     .order("updated_at", { ascending: false });
   const characters = rows ?? [];
+
+  // Same shape as the /campaigns index; RLS gates both sides of the embed.
+  const { data: memberRows } = await supabase
+    .from("campaign_members")
+    .select("role, campaigns(id, name)")
+    .eq("user_id", user.id);
+  const campaigns = (memberRows ?? [])
+    .flatMap((row) => (row.campaigns ? [{ role: row.role, ...row.campaigns }] : []))
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <PageContainer width="wide">
@@ -91,6 +101,42 @@ export default async function DashboardPage() {
                 </li>
               );
             })}
+          </ul>
+        )}
+      </div>
+
+      {/* Read-only: create / join / leave all live on /campaigns and the detail
+          page. Deliberately no second "+ New character" button here. */}
+      <div className="mt-4 rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
+        <div className="flex items-center justify-between gap-2">
+          <h2 className="text-lg font-semibold">Campaigns</h2>
+          <Link
+            href="/campaigns"
+            className="rounded-md border border-hud-line px-3 py-2 text-xs font-medium uppercase tracking-wider text-hud-text transition hover:border-hud-muted"
+          >
+            Manage
+          </Link>
+        </div>
+
+        {campaigns.length === 0 ? (
+          <p className="mt-3 text-sm text-hud-muted">
+            Not in any campaigns yet.
+          </p>
+        ) : (
+          <ul className="mt-3 flex flex-col gap-2">
+            {campaigns.map((campaign) => (
+              <li key={campaign.id}>
+                <Link
+                  href={`/campaigns/${campaign.id}`}
+                  className="flex items-center justify-between gap-3 rounded-lg border border-hud-line bg-hud-panel px-4 py-2 transition hover:border-hud-muted"
+                >
+                  <span className="min-w-0 truncate text-hud-text">{campaign.name}</span>
+                  <span className="shrink-0 text-xs uppercase tracking-wider text-hud-muted">
+                    {campaign.role}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         )}
       </div>

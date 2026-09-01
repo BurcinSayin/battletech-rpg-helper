@@ -12,7 +12,9 @@ without appearing in URLs, so `dashboard/page.tsx` serves `/dashboard`.
 | File | Description |
 |------|-------------|
 | `layout.tsx` | The auth guard for everything below: `getUser()` then redirect to `/login`, followed by the `AppHeader`. |
-| `characters/actions.ts` | All character server actions: `createCharacter`, `importCharacter`, `saveCharacter`, `deleteCharacter`. |
+| `characters/actions.ts` | All character server actions: `createCharacter`, `importCharacter`, `saveCharacter`, `deleteCharacter`. `saveCharacter` takes an optional 4th positional `campaign` argument — see the note below. |
+| `campaigns/actions.ts` | Campaign server actions: `createCampaign`, `joinCampaign`, `deleteCampaign`, `leaveCampaign`. |
+| `characters/[id]/use-character-realtime.ts` | `postgres_changes` subscription for one character. Authenticates the socket before subscribing. |
 
 ## Routes
 | Path | Files | Notes |
@@ -20,7 +22,22 @@ without appearing in URLs, so `dashboard/page.tsx` serves `/dashboard`.
 | `/dashboard` | `dashboard/page.tsx` | Server component listing the user's characters with create/open/delete. |
 | `/characters/[id]` | `characters/[id]/page.tsx` + `editor-client.tsx` | Server shell fetches and maps the row; the 381-line client component is the editor. |
 | `/characters/import` | `characters/import/page.tsx` + `import-client.tsx` | Drop-zone, parse, preview, commit. |
-| `/campaigns/[id]` | `campaigns/[id]/page.tsx` | Nine lines. Returns `<div>Campaign {id} (TODO step #7)</div>`; no data fetching. The design is `docs/PLAN.md` step 7. |
+| `/campaigns` | `campaigns/page.tsx` + `campaign-forms.tsx` | The user's campaigns, plus create and join-by-invite-code forms. |
+| `/campaigns/[id]` | `campaigns/[id]/page.tsx` + `campaign-controls.tsx` | Members' characters grouped by owner. GM sees the invite code and Delete; a player sees Leave. A non-member gets `notFound()`. |
+
+### Two things that look like style choices but are not
+
+**`saveCharacter`'s `campaign` argument is positional and presence-tested.** It mirrors the RPC's
+`p_payload ? 'campaign_id'` check: omitted leaves the attachment alone, `{ id: null }` detaches.
+Do not refactor it into an options object — `tsconfig.json` sets `strict` without
+`exactOptionalPropertyTypes`, so `{ campaignId: undefined }` has the key *present*, an `in` test
+would be true, and the character would be silently detached.
+
+**`leaveCampaign` detaches characters before dropping the membership row, and verifies.** Deleting
+a `campaign_members` row does not touch `characters.campaign_id` (`on delete set null` fires only
+when the *campaign* is deleted), so the reverse order would leave a GM holding write access to a
+departed player's character. The count gate is written `count !== 0`, never `if (count)`:
+PostgREST types `count` as `number | null` and a null would fall through to the delete.
 
 ## For AI Agents
 

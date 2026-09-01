@@ -15,6 +15,7 @@ import via an actual file input.
 | `auth.spec.ts` | Anonymous `/dashboard` redirects to `/login`, then sign up → dashboard → sign out. |
 | `character-editor.spec.ts` | Create blank character → edit → save → reload and confirm persistence. |
 | `character-import.spec.ts` | Upload `lib/btcc/__fixtures__/lisa.btcc` → preview → persist. |
+| `campaign-realtime.spec.ts` | Two tests, both multi-context. (1) GM creates a campaign, player joins by invite code and attaches a character, GM edits it, and the player's untouched page syncs via realtime. (2) A non-member gets a **404** for a campaign URL, not a 403. |
 
 ## For AI Agents
 
@@ -30,6 +31,15 @@ import via an actual file input.
 - Specs self-provision their user with a unique address, `e2e+${Date.now()}@example.com`, so they
   are independent and safely parallel (`fullyParallel: true`). Do not introduce a shared fixture
   user; that reintroduces ordering coupling.
+- **`campaign-realtime.spec.ts` is the one spec that drives two contexts**, because its whole claim
+  is that one user's save reaches a *different* user's already-open page. Its two signups use
+  distinct prefixes (`e2e+gm-…`, `e2e+player-…`) — the shared `Date.now()` suffix has millisecond
+  resolution and would collide across two signups inside one test. It also sets
+  `test.setTimeout(90_000)` locally rather than raising the global default, which would slow the
+  other four specs.
+- The final assertion in that spec must stay interaction-free: no `reload()`, no click, no
+  `waitForTimeout` before it. Its own polling is the only thing allowed to run, or it stops testing
+  realtime and starts testing navigation.
 - Chromium only, `retries: 2` in CI and `0` locally, `trace: "on-first-retry"`.
 
 ### Testing Requirements

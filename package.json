@@ -12,6 +12,7 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
+    "test:db": "supabase test db",
     "rules:ingest": "tsx scripts/convert-dat.ts",
     "supabase:types": "supabase gen types typescript --local > lib/supabase/database.types.ts",
     "supabase:start": "supabase stop --all && supabase start",

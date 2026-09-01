@@ -15,10 +15,12 @@ npm run lint             # next lint
 npm run test             # Vitest, run once
 npm run test:watch       # Vitest, watch mode
 npm run test:e2e         # Playwright (auto-starts the dev server)
+npm run test:db          # pgTAP RLS matrix (needs the local Supabase stack up)
 ```
 
 - **Single unit test:** `npm run test -- lib/path/to/x.test.ts`. Unit tests live in `lib/**/*.test.ts` and `app/**/*.test.ts`.
 - **Single e2e test:** `npm run test:e2e -- e2e/x.spec.ts`. E2E specs live in `e2e/`.
+- **Database tests:** `npm run test:db` runs `supabase/tests/*.sql` through pgTAP. Requires `npx supabase start` and all migrations applied.
 
 ### Data / Supabase commands
 
@@ -30,7 +32,9 @@ npm run rules:ingest     # Convert desktop .dat files to data/rules/*.json (see 
 
 ## Environment & local stack
 
-Copy `.env.example` → `.env.local` and set: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (server-only), `DB_PASS`.
+Copy `.env.example` → `.env.local` and set: `BT_CHARGEN_SUPABASE_URL`, `NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY`, `BT_CHARGEN_SUPABASE_SERVICE_ROLE_KEY` (server-only), `DB_PASS`.
+
+The `BT_CHARGEN_` prefix is what the Vercel Supabase integration provisions, and it is what the code actually reads (`lib/supabase/client.ts`, `lib/supabase/middleware.ts`). The project URL arrives **without** a `NEXT_PUBLIC_` prefix, so `next.config.ts` bridges it into the client bundle via its `env` key — keep the two in sync if it is ever renamed. Getting these names wrong fails loudly: `createBrowserClient` throws when the URL or key is falsy.
 
 Local Supabase runs via the CLI, installed as a devDependency and invoked with `npx supabase` (or from npm scripts, where `supabase` resolves to the local binary). `npx supabase start` brings up the stack: Studio on :54323, API on :54321, Postgres on :54322. Migrations are in `supabase/migrations/`; `npx supabase db reset` re-applies all migrations plus `supabase/seed.sql`. After changing the schema, run `npm run supabase:types` to keep the generated types in sync.
 

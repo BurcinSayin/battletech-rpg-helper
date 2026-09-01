@@ -14,6 +14,9 @@ export function AppHeader({ email }: { email?: string }) {
           BattleTech RPG Helper
         </Link>
         <div className="flex items-center gap-3 text-sm">
+          <Link href="/campaigns" className="underline">
+            Campaigns
+          </Link>
           {email && (
             <span className="hidden text-foreground/70 sm:inline">{email}</span>
           )}

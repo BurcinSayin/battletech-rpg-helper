@@ -11,7 +11,7 @@ database level, rather than relying on the UI to behave.
 ## Key Files
 | File | Description |
 |------|-------------|
-| `rls_matrix_test.sql` | 19 assertions (`plan(19)`) covering read/write isolation between owner, GM, and non-member, plus the version-conflict path. |
+| `rls_matrix_test.sql` | 31 assertions (`plan(31)`) covering read/write isolation between owner, GM, and non-member, the version-conflict path, the campaign lifecycle (leave detaches then revokes; campaign delete detaches), the owner-scoped campaign guard, and the realtime publication. |
 
 ## For AI Agents
 

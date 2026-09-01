@@ -13,6 +13,8 @@ highest-risk file in the project and is heavily commented — read it before cha
 |------|-------------|
 | `20260629145000_profiles.sql` | Step #2: `profiles` (1:1 with `auth.users`) plus the `handle_new_user` signup trigger. |
 | `20260629150000_init.sql` | Step #3: campaigns, members, characters, all RLS, and the write RPCs. |
+| `20260901120000_realtime_characters.sql` | Adds `public.characters` to the `supabase_realtime` publication so the editor can subscribe to `postgres_changes`. Default replica identity is deliberate. |
+| `20260901120100_update_character_owner_campaign_guard.sql` | Makes `update_character`'s campaign guard validate the **owner's** membership, not the caller's, so a GM cannot relocate a member's character into a campaign the owner never joined. |
 
 ## For AI Agents
 

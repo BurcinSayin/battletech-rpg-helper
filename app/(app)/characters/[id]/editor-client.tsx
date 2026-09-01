@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
@@ -19,7 +26,9 @@ import {
 } from "@/lib/characters";
 import { saveCharacter } from "@/app/(app)/characters/actions";
 import { CharacterSheet } from "@/components/characters/character-sheet";
+import { useCharacterRealtime } from "./use-character-realtime";
 import { ConflictDialog } from "@/components/characters/conflict-dialog";
+import { RemoteChangeBanner } from "@/components/characters/remote-change-banner";
 import { CatalogWarningBanner } from "@/components/characters/warnings";
 import {
   HudButton,
@@ -32,16 +41,56 @@ export function CharacterEditor({
   id,
   version,
   draft,
+  campaigns,
+  campaignId,
+  isOwner,
 }: {
   id: string;
   version: number;
   draft: BtccDraft;
+  campaigns: { id: string; name: string }[];
+  campaignId: string | null;
+  isOwner: boolean;
 }) {
   const router = useRouter();
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
+  const [remoteVersion, setRemoteVersion] = useState<number | null>(null);
+  const [selectedCampaign, setSelectedCampaign] = useState<string | null>(campaignId);
+
+  // The version this client actually knows about. The `version` prop stays stale for
+  // the whole save round trip (the server refresh lands later), so echo-suppressing
+  // against it would let the user's own save raise a "changed elsewhere" banner at
+  // them. Advanced from the value saveCharacter returns.
+  const [knownVersion, setKnownVersion] = useState(version);
+  useEffect(() => {
+    setKnownVersion(version);
+  }, [version]);
+
+  // A layout effect, not a passive one: a passive effect can be deferred past a
+  // later task, so a websocket message could read a stale `false` and refresh the
+  // page mid-edit.
+  const isEditingRef = useRef(isEditing);
+  useLayoutEffect(() => {
+    isEditingRef.current = isEditing;
+  }, [isEditing]);
+
+  useCharacterRealtime({
+    id,
+    version: knownVersion,
+    onRemoteVersion: (next) => {
+      if (isEditingRef.current) setRemoteVersion(next);
+      else router.refresh();
+    },
+  });
+
+  // The character sits in a campaign this user can no longer see: offer no way to
+  // change it, and send no campaign argument on save.
+  const campaignUnreadable =
+    campaignId !== null && !campaigns.some((c) => c.id === campaignId);
+  const campaignLocked = !isOwner || campaignUnreadable;
 
   const skillOptions = useMemo(() => catalogSkillNames(), []);
   const traitOptions = useMemo(() => catalogTraitNames(), []);
@@ -62,7 +111,8 @@ export function CharacterEditor({
   // Re-sync the form whenever the server hands us a new row (after save/reload).
   useEffect(() => {
     reset(draftToForm(draft));
-  }, [draft, reset]);
+    setSelectedCampaign(campaignId);
+  }, [draft, campaignId, reset]);
 
   const skills = useFieldArray({ control, name: "skills" });
   const traits = useFieldArray({ control, name: "traits" });
@@ -74,8 +124,12 @@ export function CharacterEditor({
   const onSubmit = handleSubmit((values) => {
     setServerError(null);
     startTransition(async () => {
-      const result = await saveCharacter(id, version, values);
+      const result = campaignLocked
+        ? await saveCharacter(id, knownVersion, values)
+        : await saveCharacter(id, knownVersion, values, { id: selectedCampaign });
       if (result.ok) {
+        setKnownVersion(result.version);
+        setRemoteVersion(null);
         setIsEditing(false);
         router.refresh();
       } else if (result.kind === "conflict") {
@@ -88,6 +142,7 @@ export function CharacterEditor({
 
   function cancelEdit() {
     reset(draftToForm(draft));
+    setSelectedCampaign(campaignId);
     setServerError(null);
     setIsEditing(false);
   }
@@ -110,6 +165,16 @@ export function CharacterEditor({
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
+      {remoteVersion !== null && remoteVersion > knownVersion && (
+        <RemoteChangeBanner
+          onReload={() => {
+            setRemoteVersion(null);
+            setIsEditing(false);
+            router.refresh();
+          }}
+          onDismiss={() => setRemoteVersion(null)}
+        />
+      )}
       <header className="flex items-center justify-between gap-2">
         <h1 className="text-xl font-semibold text-hud-text">Edit character</h1>
         <div className="flex gap-2">
@@ -166,6 +231,32 @@ export function CharacterEditor({
               </Labeled>
               <Labeled label="Sex">
                 <input className={hudInput} {...register("scalars.sex")} />
+              </Labeled>
+              <Labeled label="Campaign">
+                <select
+                  aria-label="Campaign"
+                  className={hudInput}
+                  disabled={campaignLocked}
+                  value={selectedCampaign ?? ""}
+                  onChange={(e) => setSelectedCampaign(e.target.value || null)}
+                >
+                  <option value="">No campaign</option>
+                  {campaigns.map((campaign) => (
+                    <option key={campaign.id} value={campaign.id}>
+                      {campaign.name}
+                    </option>
+                  ))}
+                </select>
+                {!isOwner && (
+                  <p className="mt-1 text-xs text-hud-muted">
+                    Only the character&rsquo;s owner can change its campaign.
+                  </p>
+                )}
+                {isOwner && campaignUnreadable && (
+                  <p className="mt-1 text-xs text-hud-muted">
+                    You&rsquo;re no longer in this character&rsquo;s campaign.
+                  </p>
+                )}
               </Labeled>
             </div>
           </Panel>

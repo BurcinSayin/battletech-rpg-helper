@@ -13,7 +13,7 @@ begin;
 create extension if not exists pgtap with schema extensions;
 set search_path to public, extensions, pg_temp;
 
-select plan(19);
+select plan(31);
 
 -- ---------------------------------------------------------------------------
 -- Fixtures (as the privileged role; bypasses RLS):
@@ -216,6 +216,170 @@ do $$ begin
 end $$;
 reset role;
 
+
+-- ===========================================================================
+-- Build step #7 (GitHub issue #20) — campaign lifecycle + owner-scoped guard.
+--
+-- A fresh fixture set with its own UUIDs (the a1..a7 block: 1111-/2222- collide
+-- with supabase/seed.sql, which seeds a user and a character). It deliberately
+-- does NOT reuse charA
+-- or charB for the lifecycle cases: the blocks above already mutate charA's
+-- campaign attachment (it is left detached at line 186-192), so entangling with
+-- it would make these assertions order-dependent.
+--
+--   gm2 owns camp2, camp3 and camp4.  playerC is a member of camp2 and camp3,
+--   and deliberately NOT of camp4 — camp4 exists only to prove AC 30.
+--   charC: owner C, in camp2.   charC2: owner C, in camp3.
+-- ===========================================================================
+insert into auth.users (id, email) values
+  ('a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1', 'gm2@test.local'),
+  ('a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2', 'c@test.local');
+
+insert into public.campaigns (id, gm_id, name, invite_code) values
+  ('a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3',
+   'a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1', 'Camp2', 'TESTLV01'),
+  ('a5a5a5a5-a5a5-a5a5-a5a5-a5a5a5a5a5a5',
+   'a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1', 'Camp3', 'TESTDEL1'),
+  ('a7a7a7a7-a7a7-a7a7-a7a7-a7a7a7a7a7a7',
+   'a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1', 'Camp4', 'TESTREL1');
+
+-- C joins camp2 and camp3 only. camp4 gets no C membership on purpose.
+insert into public.campaign_members (campaign_id, user_id, role) values
+  ('a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3',
+   'a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2', 'player'),
+  ('a5a5a5a5-a5a5-a5a5-a5a5-a5a5a5a5a5a5',
+   'a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2', 'player');
+
+insert into public.characters (id, owner_id, campaign_id, name) values
+  ('a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4',
+   'a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2',
+   'a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3', 'CharC'),
+  ('a6a6a6a6-a6a6-a6a6-a6a6-a6a6a6a6a6a6',
+   'a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2',
+   'a5a5a5a5-a5a5-a5a5-a5a5-a5a5a5a5a5a5', 'CharC2');
+
+-- AC 24: GM2 can write a member's character. This establishes the access that
+-- the leave sequence below then proves is revoked.
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"}';
+insert into cap_n select 'gm2_update_returns_version', version
+  from public.update_character('a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4', 1,
+    '{"name":"GM2 edit"}'::jsonb);
+reset role;
+
+-- AC 30: GM2 relocating a member's character into camp4 — a campaign GM2 belongs
+-- to but the OWNER does not — must be refused. Under the old caller-scoped guard
+-- this SUCCEEDED, because is_campaign_member(camp4) was true for the caller.
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"}';
+do $$ begin
+  begin
+    perform public.update_character('a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4', 2,
+      '{"campaign_id":"a7a7a7a7-a7a7-a7a7-a7a7-a7a7a7a7a7a7"}'::jsonb);
+    insert into cap_e values ('gm2_relocate_charC', 'NOERROR');
+  exception when others then
+    insert into cap_e values ('gm2_relocate_charC', sqlstate);
+  end;
+end $$;
+reset role;
+
+-- The refusal must be total: neither column moved (privileged reads).
+insert into cap_n values ('charC_campaign_after_reject',
+  (select (campaign_id = 'a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3')::int::bigint
+     from public.characters where id = 'a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4'));
+insert into cap_n values ('charC_version_after_reject',
+  (select version from public.characters
+    where id = 'a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4'));
+
+-- AC 30 / finding N1: no membership oracle. GM2 probes charB — owner B, still
+-- campaign-less (the only attach attempt above was refused), so GM2 cannot read
+-- it. GM2 *is* in camp4 and B is not. The answer must be PT409 ("no row you may
+-- write"), NOT PT403 ("that owner isn't in camp4") — the latter would leak B's
+-- non-membership of a campaign GM2 can see.
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"}';
+do $$ begin
+  begin
+    perform public.update_character('ffffffff-ffff-ffff-ffff-ffffffffffff', 1,
+      '{"campaign_id":"a7a7a7a7-a7a7-a7a7-a7a7-a7a7a7a7a7a7"}'::jsonb);
+    insert into cap_e values ('gm2_probe_charB', 'NOERROR');
+  exception when others then
+    insert into cap_e values ('gm2_probe_charB', sqlstate);
+  end;
+end $$;
+reset role;
+
+-- AC 25: leaveCampaign's two steps, in the server action's order — detach the
+-- leaver's characters first, then drop the membership row.
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2"}';
+-- Wrapped like every other RPC call in this file: if an upstream regression has
+-- already moved charC (see the relocation case above), this must fail the
+-- assertions below rather than abort the whole run with an unhandled PT409.
+do $$ begin
+  begin
+    perform public.update_character('a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4', 2,
+      '{"campaign_id":null}'::jsonb);
+    insert into cap_e values ('c_detach_charC', 'NOERROR');
+  exception when others then
+    insert into cap_e values ('c_detach_charC', sqlstate);
+  end;
+end $$;
+delete from public.campaign_members
+  where campaign_id = 'a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3'
+    and user_id     = 'a2a2a2a2-a2a2-a2a2-a2a2-a2a2a2a2a2a2';
+reset role;
+
+insert into cap_n values ('charC_detached_after_leave',
+  (select (campaign_id is null)::int::bigint from public.characters
+    where id = 'a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4'));
+
+-- GM2's access is gone: the character is now invisible, and a write at the
+-- CORRECT version (3) still fails — so this is revocation, not staleness.
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"}';
+insert into cap_n values ('gm2_reads_charC_after_leave',
+  (select count(*) from public.characters
+    where id = 'a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4'));
+do $$ begin
+  begin
+    perform public.update_character('a4a4a4a4-a4a4-a4a4-a4a4-a4a4a4a4a4a4', 3,
+      '{"name":"hax"}'::jsonb);
+    insert into cap_e values ('gm2_write_after_leave', 'NOERROR');
+  exception when others then
+    insert into cap_e values ('gm2_write_after_leave', sqlstate);
+  end;
+end $$;
+reset role;
+
+-- AC 26: deleting a campaign detaches its members' characters rather than
+-- deleting them (characters.campaign_id is ON DELETE SET NULL, init.sql:54).
+set local role authenticated;
+set local request.jwt.claims = '{"sub":"a1a1a1a1-a1a1-a1a1-a1a1-a1a1a1a1a1a1"}';
+delete from public.campaigns where id = 'a5a5a5a5-a5a5-a5a5-a5a5-a5a5a5a5a5a5';
+reset role;
+
+insert into cap_n values ('charC2_survives_campaign_delete',
+  (select count(*) from public.characters
+    where id = 'a6a6a6a6-a6a6-a6a6-a6a6-a6a6a6a6a6a6'));
+insert into cap_n values ('charC2_detached_by_campaign_delete',
+  (select (campaign_id is null)::int::bigint from public.characters
+    where id = 'a6a6a6a6-a6a6-a6a6-a6a6-a6a6a6a6a6a6'));
+-- Realtime publication (AC 17). Not an RLS check, but it belongs with them: the
+-- editor's postgres_changes subscription is inert without it, and nothing else in
+-- the suite would notice if a later migration dropped the table from the
+-- publication.
+insert into cap_n values ('characters_published',
+  (select count(*) from pg_publication_tables
+    where pubname = 'supabase_realtime'
+      and schemaname = 'public' and tablename = 'characters'));
+
+-- 'd' = default (primary key). Deliberately NOT 'f' (full): the client filters on
+-- the primary key and reads only `new.version`, so FULL would inflate every WAL
+-- record with an OLD tuple no consumer reads.
+insert into cap_e values ('characters_replica_identity',
+  (select relreplident::text from pg_class where oid = 'public.characters'::regclass));
+
 -- ---------------------------------------------------------------------------
 -- Assertions (privileged role reads the captures)
 -- ---------------------------------------------------------------------------
@@ -239,6 +403,22 @@ select is((select code from cap_e where label = 'a_direct_update'),    '42501', 
 select is((select code from cap_e where label = 'b_insert_into_camp'), '42501',   'characters: non-member INSERT into a campaign is denied');
 select is((select code from cap_e where label = 'b_attach_foreign'),   'PT403',   'update_character: attaching to a non-member campaign → PT403');
 select is((select n from cap_n where label = 'charA_campaign_cleared'), 1::bigint, 'update_character: campaign_id can be cleared to null');
+
+-- campaign lifecycle + owner-scoped campaign guard (GitHub issue #20)
+select is((select n from cap_n where label = 'gm2_update_returns_version'),         2::bigint, 'update_character: GM write on a member''s character returns version 2');
+select is((select code from cap_e where label = 'gm2_relocate_charC'),              'PT403',   'update_character: GM relocating a member''s character to a campaign the owner isn''t in → PT403');
+select is((select n from cap_n where label = 'charC_campaign_after_reject'),        1::bigint, 'update_character: rejected relocation leaves campaign_id unchanged');
+select is((select n from cap_n where label = 'charC_version_after_reject'),         2::bigint, 'update_character: rejected relocation leaves version unchanged');
+select is((select code from cap_e where label = 'gm2_probe_charB'),                 'PT409',   'update_character: relocating an unreadable character → PT409, not PT403 (no membership oracle)');
+select is((select n from cap_n where label = 'charC_detached_after_leave'),         1::bigint, 'leave: leaver''s character has campaign_id null');
+select is((select n from cap_n where label = 'gm2_reads_charC_after_leave'),        0::bigint, 'leave: GM select returns zero rows for the leaver''s character');
+select is((select code from cap_e where label = 'gm2_write_after_leave'),           'PT409',   'leave: GM write on the leaver''s character → PT409');
+select is((select n from cap_n where label = 'charC2_survives_campaign_delete'),    1::bigint, 'campaign delete: member''s character still exists');
+select is((select n from cap_n where label = 'charC2_detached_by_campaign_delete'), 1::bigint, 'campaign delete: member''s character has campaign_id null');
+
+-- realtime publication (issue #20, AC 17)
+select is((select n from cap_n where label = 'characters_published'),          1::bigint, 'realtime: public.characters is in the supabase_realtime publication');
+select is((select code from cap_e where label = 'characters_replica_identity'), 'd',      'realtime: characters uses default replica identity, not FULL');
 
 select * from finish();
 rollback;
