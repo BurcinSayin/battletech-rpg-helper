@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { emptyDraft, parseBtcc } from "@/lib/btcc";
 import {
@@ -107,10 +108,22 @@ export async function saveCharacter(
   id: string,
   expectedVersion: number,
   values: unknown,
+  campaign?: { id: string | null },
 ): Promise<SaveResult> {
   const parsed = characterFormSchema.safeParse(values);
   if (!parsed.success) {
     return { ok: false, kind: "error", message: "Some fields are invalid." };
+  }
+
+  // Validate before it reaches Postgres: `(p_payload->>'campaign_id')::uuid` on a
+  // malformed value raises 22P02, which classifyUpdateError maps to "unknown" — a
+  // generic "Could not save" with no diagnosis. `campaign !== undefined` is the
+  // single presence test in this path; there is deliberately no `??` anywhere.
+  if (campaign !== undefined) {
+    const parsedCampaign = z.object({ id: z.string().uuid().nullable() }).safeParse(campaign);
+    if (!parsedCampaign.success) {
+      return { ok: false, kind: "error", message: "Invalid campaign selection." };
+    }
   }
 
   const supabase = await createClient();
@@ -128,7 +141,7 @@ export async function saveCharacter(
   const { data, error } = await supabase.rpc("update_character", {
     p_id: id,
     p_expected_version: expectedVersion,
-    p_payload: draftToPayload(draft),
+    p_payload: draftToPayload(draft, campaign),
   });
 
   if (error) {
@@ -143,6 +156,8 @@ export async function saveCharacter(
 
   revalidatePath(`/characters/${id}`);
   revalidatePath("/dashboard");
+  // A newly attached (or detached) character changes the campaign roster.
+  revalidatePath("/campaigns", "layout");
   return { ok: true, version: data?.version ?? expectedVersion + 1 };
 }
 

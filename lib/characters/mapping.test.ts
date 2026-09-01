@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { parseBtcc } from "@/lib/btcc";
+import { emptyDraft, parseBtcc } from "@/lib/btcc";
 import type { BtccDraft } from "@/lib/btcc/types";
 import { FIXTURE_NAMES, readFixture } from "@/lib/btcc/test-fixtures";
-import { draftToColumns, rowToDraft } from "./mapping";
+import { draftToColumns, draftToPayload, rowToDraft } from "./mapping";
 import type { CharacterRow } from "./types";
 
 /** Wrap the writable columns in a full row, as the DB would store them. */
@@ -60,5 +60,32 @@ describe("row <-> draft mapping", () => {
     expect(draft.scalars.name).toBe("Blank");
     expect(draft.skills).toEqual([]);
     expect(draft.attrs).toEqual({});
+  });
+});
+
+describe("draftToPayload — campaign presence contract (AC 16, R15)", () => {
+  const draft = emptyDraft();
+
+  it("omits campaign_id entirely when no campaign argument is given", () => {
+    expect("campaign_id" in (draftToPayload(draft) as object)).toBe(false);
+  });
+
+  it("omits campaign_id when the argument is explicitly undefined", () => {
+    // The serialization-safety case: React preserves `undefined` object properties
+    // across the action boundary, so an options-object + `in` test would wrongly
+    // see a present key here and silently detach the character.
+    expect("campaign_id" in (draftToPayload(draft, undefined) as object)).toBe(false);
+  });
+
+  it("sets campaign_id to null when detaching", () => {
+    const payload = draftToPayload(draft, { id: null }) as Record<string, unknown>;
+    expect("campaign_id" in payload).toBe(true);
+    expect(payload.campaign_id).toBeNull();
+  });
+
+  it("sets campaign_id to the uuid when attaching", () => {
+    const id = "a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3";
+    const payload = draftToPayload(draft, { id }) as Record<string, unknown>;
+    expect(payload.campaign_id).toBe(id);
   });
 });

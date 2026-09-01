@@ -14,6 +14,7 @@ but computes nothing — XP math, catalog checks, and mapping all come from `lib
 | `ui.tsx` | Shared primitives: `Panel`, `HudButton`, `Stepper`, and the `hudInput` class string. |
 | `character-sheet.tsx` | Read-only character sheet with a swappable header action slot. |
 | `conflict-dialog.tsx` | Modal shown when a save hits `PT409`. |
+| `remote-change-banner.tsx` | Non-modal `role="status"` notice that the character changed elsewhere, with Reload / Dismiss. Deliberately *not* `conflict-dialog.tsx`: realtime is an early warning, `PT409` remains the backstop. |
 | `warnings.tsx` | `CatalogWarningBanner` — non-blocking notice for off-catalog names. |
 | `ui.test.tsx` | 7 cases. |
 | `character-sheet.test.tsx` | 5 cases. |

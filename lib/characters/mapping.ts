@@ -133,12 +133,25 @@ export function draftToColumns(draft: BtccDraft): CharacterColumns {
 }
 
 /**
- * The whitelisted `update_character` `p_payload`. `campaign_id` is intentionally
- * omitted so the RPC's present-vs-absent check leaves it untouched; `owner_id` and
- * `version` are never client-writable.
+ * The whitelisted `update_character` `p_payload`. `owner_id` and `version` are never
+ * client-writable.
+ *
+ * `campaign_id` is included **iff `campaign !== undefined`**, mirroring the RPC's
+ * `p_payload ? 'campaign_id'` present-vs-absent test: omitted leaves the attachment
+ * untouched, `{ id: null }` detaches, `{ id: uuid }` attaches.
+ *
+ * It is a trailing *positional* parameter on purpose. An options object with an
+ * optional property would be tested with `in`, and `tsconfig.json` sets `"strict"`
+ * without `exactOptionalPropertyTypes` — so `{ campaignId: undefined }` is
+ * assignable and *has the key present*. React's server-action serialization
+ * preserves such properties, so `in` would be true and the character would be
+ * silently detached. `draftToPayload(draft)` and `draftToPayload(draft, undefined)`
+ * both correctly leave the key absent.
  */
-export function draftToPayload(draft: BtccDraft): Json {
-  return draftToColumns(draft) as unknown as Json;
+export function draftToPayload(draft: BtccDraft, campaign?: { id: string | null }): Json {
+  const columns = draftToColumns(draft) as unknown as Record<string, unknown>;
+  if (campaign !== undefined) columns.campaign_id = campaign.id;
+  return columns as Json;
 }
 
 type CharacterInsert = Database["public"]["Tables"]["characters"]["Insert"];
