@@ -28,6 +28,7 @@ export default defineConfig({
         "**/*.spec.*",
         "**/*.d.ts",
         "e2e/**",
+        "e2e-pwa/**",
         "lib/supabase/database.types.ts",
       ],
     },

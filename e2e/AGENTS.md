@@ -40,7 +40,12 @@ import via an actual file input.
 - The final assertion in that spec must stay interaction-free: no `reload()`, no click, no
   `waitForTimeout` before it. Its own polling is the only thing allowed to run, or it stops testing
   realtime and starts testing navigation.
-- Chromium only, `retries: 2` in CI and `0` locally, `trace: "on-first-retry"`.
+- Chromium by default. A `pixel5` project exists but is **env-gated** — it only appears in the
+  project list when `PW_MOBILE` is set, so it does not double every run:
+  `PW_MOBILE=1 npx playwright test --project=pixel5`. `retries: 2` in CI and `0` locally,
+  `trace: "on-first-retry"`.
+- **PWA specs do not live here.** They need a production build (the service worker does not exist
+  under `next dev`) and run from `e2e-pwa/` via `npm run test:e2e:pwa` on port 3100.
 
 ### Testing Requirements
 - All specs: `npm run test:e2e`. One spec: `npm run test:e2e -- e2e/character-editor.spec.ts`.

@@ -30,7 +30,7 @@ public/sw.js.map
 public/workbox-*.js
 public/fallback-*.js
 public/swe-worker-*.js
-tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 # Testing
 /test-results/

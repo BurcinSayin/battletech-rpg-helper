@@ -1,4 +1,9 @@
+import withSerwistInit from "@serwist/next";
 import type { NextConfig } from "next";
+
+// Relative, not "@/lib/...": next.config.ts is loaded outside webpack, so the
+// `@/*` alias cannot resolve here. See CLAUDE.md before "fixing" this.
+import { serwistOptions } from "./lib/sw/next-options";
 
 const nextConfig: NextConfig = {
   // Strict mode helps surface effects/double-render issues early.
@@ -17,7 +22,12 @@ const nextConfig: NextConfig = {
   },
 };
 
-// TODO(step #8 — PWA): wrap with `withSerwist({ swSrc, swDest })` from
-// `@serwist/next` to ship the installable offline app shell. Deferred for now.
+// PWA (step #8). Options live in lib/sw/next-options.ts so they can be asserted by
+// lib/sw/config.test.ts — withSerwistInit closes over its argument and never
+// surfaces it on the returned config.
+//
+// Do not add `--turbopack` to the dev/build scripts: @serwist/next does not support
+// Turbopack and silently produces no service worker under it.
+const withSerwist = withSerwistInit(serwistOptions);
 
-export default nextConfig;
+export default withSerwist(nextConfig);
