@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, RefAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 /** Shared input styling for the dark HUD editor (mirrors auth's `fieldClass`). */
@@ -52,7 +52,8 @@ export function HudButton({
   className,
   children,
   ...props
-}: ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant }) {
+}: ButtonHTMLAttributes<HTMLButtonElement> &
+  RefAttributes<HTMLButtonElement> & { variant?: Variant }) {
   return (
     <button
       className={cn(
