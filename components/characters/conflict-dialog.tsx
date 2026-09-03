@@ -1,9 +1,17 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { HudButton } from "./ui";
 
 /**
  * Shown when a save hits PT409 (someone else — e.g. the GM — saved a newer
  * version). Non-destructive: the user chooses to reload the remote version or keep
  * editing. No field-level merge in the MVP (PLAN.md "Concurrency UX").
+ *
+ * The buttons are `type="button"` because the dialog renders inside the editor
+ * `<form>` — a default submit button here would fire another stale save (which
+ * conflicts again). Focus and Escape both land on "Keep editing" so a stray
+ * keypress can never discard unsaved edits.
  */
 export function ConflictDialog({
   onReload,
@@ -12,6 +20,20 @@ export function ConflictDialog({
   onReload: () => void;
   onKeepEditing: () => void;
 }) {
+  const keepEditingRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    keepEditingRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onKeepEditing();
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onKeepEditing]);
+
   return (
     <div
       role="dialog"
@@ -24,15 +46,21 @@ export function ConflictDialog({
           Remote changes
         </h2>
         <p className="mt-2 text-sm text-hud-muted">
-          This character was updated elsewhere since you opened it. Reload the latest
-          version (your unsaved edits will be discarded) or keep editing to copy them
-          over first.
+          This character was updated elsewhere since you opened it. Reloading
+          discards your unsaved edits and shows the saved version. Keeping editing
+          preserves them, but saving will keep conflicting with the newer version
+          until you reload.
         </p>
         <div className="mt-4 flex justify-end gap-2">
-          <HudButton variant="ghost" onClick={onKeepEditing}>
+          <HudButton
+            ref={keepEditingRef}
+            type="button"
+            variant="ghost"
+            onClick={onKeepEditing}
+          >
             Keep editing
           </HudButton>
-          <HudButton variant="primary" onClick={onReload}>
+          <HudButton type="button" variant="primary" onClick={onReload}>
             Reload
           </HudButton>
         </div>
