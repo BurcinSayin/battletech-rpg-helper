@@ -27,9 +27,10 @@ palette (`hud.*` tokens from `tailwind.config.ts`), while the auth screens use t
 - Check `characters/ui.tsx` before writing a new primitive; `Panel`, `HudButton`, `Stepper`, and
   the `hudInput` class string already cover most editor needs.
 - Server Components are the default here too. `character-sheet.tsx`, the two auth forms, and
-  anything using hooks are `"use client"`; `conflict-dialog.tsx`, `warnings.tsx`, `field.tsx`,
+  anything using hooks are `"use client"`; `warnings.tsx`, `field.tsx`,
   `page-container.tsx`, and `app-header.tsx` are not — do not add the directive unless a
-  component actually needs client-side state.
+  component actually needs client-side state. (`conflict-dialog.tsx` now uses hooks for
+  focus/Escape handling, so it carries the directive too.)
 - Compose class names with `cn()` from `lib/utils.ts` (clsx + tailwind-merge) so conflicting
   Tailwind utilities resolve predictably.
 

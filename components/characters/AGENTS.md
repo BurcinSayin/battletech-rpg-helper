@@ -50,9 +50,9 @@ variant that splits skills from traits; both convey the same "kept as-is" messag
 `hud-raised`, `hud-line`, `hud-text`, `hud-muted`, `hud-amber`, `hud-green`, `hud-red`). Do not mix in the `foreground/*`
 tokens used by the auth screens.
 
-`character-sheet.tsx` is a client component because it holds local expand/collapse state;
-`conflict-dialog.tsx`, `warnings.tsx`, and `ui.tsx` are server components. Do not add the directive
-without a reason.
+`character-sheet.tsx` and `conflict-dialog.tsx` are client components (local expand/collapse state
+and focus/Escape effects respectively); `warnings.tsx` and `ui.tsx` are server components. Do not
+add the directive without a reason.
 
 ### Testing Requirements
 - **Every test file here needs the jsdom environment pragma on its first lines** — the Vitest
