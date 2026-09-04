@@ -10,6 +10,7 @@
 - After schema changes, run `npm run supabase:types` and commit `lib/supabase/database.types.ts`.
 - Regenerate `supabase/seed.sql` with `npm run seed:generate`; it is generated from the `.btcc` fixture.
 - Regenerate rules JSON with `npm run rules:ingest`; source defaults to sibling `../Battletech-Character-Creator/resource`, override with `BTCC_SOURCE_DIR`.
+- Regenerate `data/rules/modules.json` (lifepath modules, build step #11) with `npm run rules:extract`; same checkout, override with `BTCC_SOURCE_DIR`.
 
 ## Architecture Gotchas
 - Auth guards belong in `app/(app)/layout.tsx` and `app/(auth)/layout.tsx`; `middleware.ts` only refreshes Supabase cookies through `getUser()`.

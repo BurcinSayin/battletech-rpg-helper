@@ -16,6 +16,7 @@
     "test:e2e:pwa": "playwright test --config playwright.pwa.config.ts",
     "test:db": "supabase test db",
     "rules:ingest": "tsx scripts/convert-dat.ts",
+    "rules:extract": "tsx scripts/extract-rules.ts",
     "supabase:types": "supabase gen types typescript --local > lib/supabase/database.types.ts",
     "supabase:start": "supabase stop --all && supabase start",
     "seed:generate": "tsx scripts/generate-seed.ts"

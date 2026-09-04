@@ -10,7 +10,7 @@ Typed read access to the *A Time of War* rules catalogs. The data itself is gene
 ## Key Files
 | File | Description |
 |------|-------------|
-| `load.ts` | Static imports of all nine catalogs, re-exported as typed arrays, plus `compositeSkillNames()`. |
+| `load.ts` | Static imports of all nine `.dat`-derived catalogs, re-exported as typed arrays, plus `compositeSkillNames()`. `data/rules/modules.json` is deliberately **not** imported here — it is not `.dat`-derived, and its consumer (the step-#12 wizard) will wire it up itself. |
 | `types.ts` | Re-exports `Skill`/`Trait`/`Subskills` from `lib/validation/catalog.ts` and defines `composeSkillName()`. |
 | `catalog.test.ts` | Validates the generated JSON against the Zod schemas (6 cases). |
 
@@ -48,7 +48,8 @@ check the composites too — `lib/characters/schema.ts` unions both sets for exa
 ## Dependencies
 
 ### Internal
-- `data/rules/*.json` — the nine generated catalogs
+- `data/rules/*.json` — the nine `.dat`-derived catalogs (`modules.json` is the tenth catalog in
+  `data/rules/` but is consumed by the wizard, not this module)
 - `lib/validation/catalog.ts` — the type definitions
 
 ### External

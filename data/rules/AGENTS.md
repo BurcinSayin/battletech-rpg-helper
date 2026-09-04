@@ -4,9 +4,11 @@
 # rules
 
 ## Purpose
-The *A Time of War* rules catalogs as typed JSON. **Every file here is generated** by
-`npm run rules:ingest` from the desktop app's `resource/*.dat` tables. They are committed so the app
-builds and runs without the desktop checkout, and so the catalog is available offline.
+The *A Time of War* rules catalogs as typed JSON. **Every file here is generated**: the `.dat`-derived
+catalogs by `npm run rules:ingest` from the desktop app's `resource/*.dat` tables, and
+`modules.json` by `npm run rules:extract` from the desktop's C++ stage tables (build step #11).
+They are committed so the app builds and runs without the desktop checkout, and so the catalog is
+available offline.
 
 ## Key Files
 | File | Shape | Notes |
@@ -20,13 +22,15 @@ builds and runs without the desktop checkout, and so the catalog is available of
 | `hairColors.json` | `string[]` | |
 | `phenotypes.json` | `string[]` | |
 | `planets.json` | `string[]` | |
+| `modules.json` | `{ meta, modules[], gating[] }` | Lifepath modules (115 across stages 1–4) + gating/branch entries + availability resolved to affiliation names. From the C++ stage tables — `npm run rules:extract`, **not** `rules:ingest`. Consumed by the wizard (PLAN.md step #12); deliberately not imported by `lib/rules/load.ts` yet. |
 
 ## For AI Agents
 
 ### Working In This Directory
 
-**Never hand-edit these files.** The next `npm run rules:ingest` overwrites them. To change the data,
-change `scripts/convert-dat.ts` or the upstream `.dat` source, then regenerate.
+**Never hand-edit these files.** The next `npm run rules:ingest` overwrites the `.dat`-derived
+catalogs and `npm run rules:extract` overwrites `modules.json`. To change the data, change
+`scripts/convert-dat.ts` / `scripts/extract-rules.ts` or the upstream source, then regenerate.
 
 **Do not reach for these JSON files directly from app code.** Import from `lib/rules/load.ts`, which
 provides the typed accessors and derived helpers such as `compositeSkillNames()`. Consuming the raw
@@ -47,7 +51,8 @@ as a *warning*, never a rejection. Do not "fix" a `.btcc` file to match this dat
 this catalog as a validation whitelist.
 
 ### Testing Requirements
-- After any regeneration: `npm run test -- lib/rules/catalog.test.ts`, then review `git diff` to
+- After any regeneration: `npm run test -- lib/rules/catalog.test.ts` (`.dat`-derived catalogs) and
+  `npm run test -- scripts/extract-rules.test.ts` (`modules.json`), then review `git diff` to
   confirm the change is intentional and scoped.
 
 ### Common Patterns
@@ -56,8 +61,10 @@ this catalog as a validation whitelist.
 ## Dependencies
 
 ### Internal
-- Produced by `scripts/convert-dat.ts`
-- Consumed by `lib/rules/load.ts`; validated by `lib/validation/catalog.ts`
+- Produced by `scripts/convert-dat.ts` (`.dat` catalogs) and `scripts/extract-rules.ts`
+  (`modules.json`)
+- Consumed by `lib/rules/load.ts`; validated by `lib/validation/catalog.ts` (`modules.json` gets
+  its schema when the step-#12 wizard starts consuming it)
 
 ### External
 - The desktop `Battletech-Character-Creator/resource` checkout — needed only to regenerate

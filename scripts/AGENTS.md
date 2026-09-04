@@ -4,13 +4,14 @@
 # scripts
 
 ## Purpose
-Two `tsx`-executed generators. Both write **committed** artifacts, so running them produces a diff
+Three `tsx`-executed generators. All write **committed** artifacts, so running them produces a diff
 that must be reviewed and checked in — they are not throwaway tooling.
 
 ## Key Files
 | File | Description |
 |------|-------------|
 | `convert-dat.ts` | `npm run rules:ingest` — converts the desktop app's `resource/*.dat` tables into the typed JSON under `data/rules/`. |
+| `extract-rules.ts` | `npm run rules:extract` — parses the desktop app's C++ stage tables into `data/rules/modules.json` (lifepath modules + gating). Parsing core lives in `extract-rules-lib.ts`. |
 | `generate-seed.ts` | `npm run seed:generate` — regenerates `supabase/seed.sql` from the `lisa.btcc` fixture. |
 
 ## For AI Agents
@@ -37,6 +38,24 @@ upstream rules data actually changes.
 - Emits nine files: `skills`, `traits`, `subskills`, `affiliations`, `careers`, `eyeColors`,
   `hairColors`, `phenotypes`, `planets`.
 
+**`extract-rules.ts`** (build step #11, `docs/PLAN.md`) also reads the desktop checkout, but parses
+imperative C++ instead of `.dat` tables: the four stage files `stage1_resurce.cpp` …
+`stage4_resurce.cpp` live in the checkout **root** (one level above `resource/`), and
+`resource/affilations.dat` supplies the affiliation-index → name join. Output is
+`data/rules/modules.json`: lifepath `modules` plus a separate `gating` array, with availability
+resolved to affiliation names.
+
+- Ground truth is `docs/RULES.md` §6.1 (gating), §7.4 (module anatomy) and §8 (Table M/G counts);
+  the generator cross-checks its own block counts against those numbers and throws on drift.
+- The statement parser is a **strict allowlist**: any unrecognized live C++ statement inside a
+  parsed block throws. That is deliberate — desktop changes must fail loudly, never silently drop
+  data. Extend the allowlist in `extract-rules-lib.ts` when upstream changes.
+- Output is deterministic; re-running must be byte-identical (a test asserts it).
+- `text_resurce.cpp` is deliberately NOT read: the Stage-0 affiliation effects
+  (`Text_Resurce::rSubAff`) belong to build step #12.
+- The desktop checkout must sit at the pinned revision `a1d8009` — the `docs/RULES.md` citations
+  and the §8 counts assume it.
+
 **`generate-seed.ts`** deliberately routes the fixture through the *application's own* code path —
 `parseBtcc` → `draftToColumns` — rather than hand-writing SQL. That is what keeps the seed
 byte-faithful to `lisa.btcc`; keep it that way, and never hand-edit `supabase/seed.sql`.
@@ -49,15 +68,22 @@ byte-faithful to `lisa.btcc`; keep it that way, and never hand-edit `supabase/se
   touches a deployed database.
 
 ### Testing Requirements
-- Neither script has unit tests; they are verified by their output.
+- `convert-dat.ts` and `generate-seed.ts` have no unit tests; they are verified by their output.
+  `extract-rules.ts` has a vitest suite (`scripts/extract-rules.test.ts`, 20 cases) that reads the
+  §8 counts from `docs/RULES.md` and pins the §7.4 worked example, determinism, and availability
+  semantics — it needs the desktop checkout, like the generators themselves.
 - After `npm run rules:ingest`: run `npm run test -- lib/rules/catalog.test.ts`, which validates the
   regenerated JSON against the Zod schemas in `lib/validation/catalog.ts`, then review `git diff`.
+- After `npm run rules:extract`: run `npm run test -- scripts/extract-rules.test.ts` and review
+  `git diff` (output must be byte-identical unless the desktop source changed).
 - After `npm run seed:generate`: run `npx supabase db reset` and confirm the stack comes up with the
   seeded character present.
 
 ### Common Patterns
-- Both resolve paths from `import.meta.url` via `fileURLToPath`, so they work regardless of cwd.
-- Both prepend a `-- GENERATED …` / do-not-edit-by-hand banner to their output.
+- All three resolve paths from `import.meta.url` via `fileURLToPath`, so they work regardless of cwd.
+- Only `generate-seed.ts` prepends a `-- GENERATED …` / do-not-edit-by-hand banner (to its SQL
+  output). The JSON catalogs under `data/rules/` are bannerless — their provenance lives in the
+  generating scripts and in the AGENTS.md docs. Do not add banners to the JSON outputs.
 
 ## Dependencies
 
@@ -67,7 +93,7 @@ byte-faithful to `lisa.btcc`; keep it that way, and never hand-edit `supabase/se
 
 ### External
 - `tsx` — the runner (devDependency)
-- Node built-ins only (`node:fs`, `node:path`, `node:url`); no third-party parsing libraries
-- An external checkout of `Battletech-Character-Creator` for `convert-dat.ts`
+- Node built-ins only (`node:fs`, `node:path`, `node:url`, `node:child_process`); no third-party parsing libraries
+- An external checkout of `Battletech-Character-Creator` for `convert-dat.ts` and `extract-rules.ts`
 
 <!-- MANUAL: Notes added below this line are preserved on regeneration -->
