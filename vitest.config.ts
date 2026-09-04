@@ -18,6 +18,7 @@ export default defineConfig({
       "app/**/*.test.ts",
       "app/**/*.test.tsx",
       "components/**/*.test.tsx",
+      "scripts/**/*.test.ts",
     ],
     coverage: {
       provider: "v8",
