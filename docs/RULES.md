@@ -24,7 +24,7 @@ This document exists so that the web port can be built without opening the C++. 
 
 Never cited, even though they exist and would resolve: the Qt resource blob `qrc_resurce_btnchrcr.cpp` (156,351 lines of compiled-in byte arrays, stamped “WARNING! All changes made in this file will be lost!”), anything under `debug/`, any generated `ui_*.h` header, and the misspelled `resurce/` directory that sits beside the real `resource/`. Note the trap: the stage files are *named* `stageN_resurce.cpp` with the same misspelling, and those **are** real hand-written sources.
 
-**Transcribed vs. cited by shape.** The desktop's bulk data — 154 dispatch blocks across four stage files, a 51-entry trait clamp table, the equipment and weapon catalogues — is **not** reproduced here. [§8](#8-bulk-table-index) gives the enumeration command, the count, and the span for each, so any of it can be regenerated on demand. Exactly one module block is reproduced verbatim, in [§7.4](#74-module-anatomy--shape-plus-one-worked-example), as the worked example that fixes the shape.
+**Transcribed vs. cited by shape.** The desktop's bulk data — 154 matching source lines across four stage files, a 51-entry trait clamp table, the equipment and weapon catalogues — is **not** reproduced here. [§8](#8-bulk-table-index) gives the enumeration command, the count, and the span for each, so any of it can be regenerated on demand. Exactly one module block is reproduced verbatim, in [§7.4](#74-module-anatomy--shape-plus-one-worked-example), as the worked example that fixes the shape.
 
 **Port divergences.** Where the TypeScript port implements something differently, this document states the desktop behaviour and names the port file *without* a line number (port files are not in the cited revision). The four divergences catalogued in `docs/PLAN.md` → *Known rules defects* were corrected in step 10; the notes that flagged them are retained as **resolved** markers, so a reader can see what the port once did and why it changed.
 
@@ -693,13 +693,13 @@ Cancelling instead runs `CancelWizard()` (`mainwindow.cpp:470`), wired at `mainw
 
 ### 8. Bulk table index
 
-The desktop's rules data is 154 dispatch blocks plus a 51-entry clamp table. None of it is transcribed here. What follows is the **enumeration command, the count it returns at `a1d8009`, and the span**, so any of it can be regenerated on demand. Commands are run from the root of the checkout.
+The desktop's rules data is indexed by 154 matching source lines plus a 51-entry clamp table. None of it is transcribed here. What follows is the **enumeration command, the count it returns at `a1d8009`, and the span**, so any of it can be regenerated on demand. Commands are run from the root of the checkout.
 
-The eight enumeration rows split into two classes, because they are not the same kind of thing. **Class M** rows are one block per selectable lifepath module. **Class G** rows *select among* or *modify* modules and are not themselves modules. An extractor that merges the two will emit sibko attribute picks and school-change branches as if they were lifepath modules.
+The eight enumeration rows split into two classes, because they are not the same kind of thing. **Class M** rows count source lines dispatching on module names; repeated handlers and commented-out matches mean these are not necessarily distinct selectable modules. **Class G** rows *select among* or *modify* modules and are not themselves modules. An extractor that merges the two will emit sibko attribute picks and school-change branches as if they were lifepath modules.
 
 #### Table M — module blocks
 
-One row per stage file. Each command counts the `if (<parameter> == "<name>")` lines that open a module block — the shape reproduced in §7.4 (`stage1_resurce.cpp:308-346`).
+One row per stage file. Each command counts raw lines matching a module-name comparison — the shape reproduced in §7.4 (`stage1_resurce.cpp:308-346`). These grep counts include comments and repeated handlers; Table M totals 127 matching lines, not 127 selectable entries.
 
 | File | Command | Lines | What |
 |---|---|---|---|
@@ -734,7 +734,21 @@ Stage 3's 78 needs the same care in the other direction:
 | `grep -o 'nameElem == "[^"]*"' stage3_resurce.cpp \| wc -l` | **78** occurrences |
 | `grep -o 'nameElem == "[^"]*"' stage3_resurce.cpp \| sort -u \| wc -l` | **66** distinct |
 
-The nine school names declared in `S3SChoolList` (`stage3_resurce.cpp:9-10`) each appear on **two** `nameElem` lines, accounting for 18 of the 78 and 9 of the 66. The remaining **57 distinct names over 60 lines** are field modules. Occurrences and distinct counts must be reported separately; conflating them yields the wrong module inventory.
+Stage 3 has **56 field modules** in `S3FieldChange()` (`stage3_resurce.cpp:478-797`) and **10 schools** with effects in `S3SchoolChange()` (`stage3_resurce.cpp:67-463`). The nine school names declared in `S3SChoolList` (`stage3_resurce.cpp:9-10`) each appear on two `nameElem` lines, accounting for 18 matches. The tenth school, "Officer Candidate School", appears on four more: one in `S3SchoolEnter()` (`stage3_resurce.cpp:827`), one commented out (`stage3_resurce.cpp:843`), and two in `S3SetSchool()` (`stage3_resurce.cpp:875`, `stage3_resurce.cpp:891`). Thus 56 + 18 + 4 = **78 matching lines**, while 56 + 10 = **66 distinct selectable entries**. Occurrences and distinct counts must be reported separately.
+
+#### Selectable module inventory
+
+Counts below describe the emitted inventory by stage and kind. Stages 1, 2 and 4 have one entry per Table M line; stage 3 uses the field/school decomposition above. School effects come from the Table G school-change handlers, but those handlers do not create additional selectable entries.
+
+| Stage | Kind | Entries |
+|---|---|---|
+| 1 | `module` | **11** |
+| 2 | `module` | **13** |
+| 3 | `field` | **56** |
+| 3 | `school` | **10** |
+| 4 | `module` | **25** |
+
+Total: **115 distinct selectable entries**, versus Table M's **127 matching source lines**.
 
 #### Spans and exceptions
 

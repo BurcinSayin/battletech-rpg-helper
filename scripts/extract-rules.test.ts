@@ -51,6 +51,29 @@ const byStage = (stage: number): ModuleEntry[] => file.modules.filter((m) => m.s
 const byName = (name: string, stage?: number): ModuleEntry =>
   file.modules.find((m) => m.name === name && (stage === undefined || m.stage === stage))!;
 
+function inventoryFromDoc() {
+  const section =
+    rulesDoc.split("#### Selectable module inventory")[1]?.split("#### ")[0] ??
+    "";
+  const rows = [
+    ...section.matchAll(
+      /^\| ([1-4]) \| `(module|field|school)` \| \*\*(\d+)\*\* \|/gm,
+    ),
+  ];
+  expect(rows.map((row) => row[1] + ":" + row[2])).toEqual([
+    "1:module",
+    "2:module",
+    "3:field",
+    "3:school",
+    "4:module",
+  ]);
+  return rows.map((row) => ({
+    stage: Number(row[1]),
+    kind: row[2],
+    count: Number(row[3]),
+  }));
+}
+
 describe("§8 Table M agreement", () => {
   it("reports the published per-stage block counts", () => {
     const doc = tableMFromDoc();
@@ -256,11 +279,26 @@ describe("module entry shape", () => {
     }
   });
 
-  it("counts 115 distinct selectable entries across the four stages", () => {
-    expect(file.modules.length).toBe(115);
-    expect(byStage(1).length).toBe(11);
-    expect(byStage(2).length).toBe(13);
-    expect(byStage(3).length).toBe(66);
-    expect(byStage(4).length).toBe(25);
+  it("matches the documented inventory by stage and in total", () => {
+    const inventory = inventoryFromDoc();
+    for (const stage of [1, 2, 3, 4]) {
+      const count = inventory
+        .filter((row) => row.stage === stage)
+        .reduce((sum, row) => sum + row.count, 0);
+      expect(byStage(stage)).toHaveLength(count);
+      expect(file.meta.tableM["stage" + stage].distinct).toBe(count);
+    }
+    expect(file.modules).toHaveLength(
+      inventory.reduce((sum, row) => sum + row.count, 0),
+    );
+  });
+
+  it("matches the documented stage-3 field and school breakdown", () => {
+    for (const row of inventoryFromDoc().filter((row) => row.stage === 3)) {
+      expect(
+        byStage(3).filter((module) => module.kind === row.kind),
+      ).toHaveLength(row.count);
+    }
+    expect(byName("Officer Candidate School", 3).kind).toBe("school");
   });
 });

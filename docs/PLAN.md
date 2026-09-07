@@ -196,10 +196,11 @@ The extraction targets are enumerated in `RULES.md` §8. Those eight commands an
 | G | `stage3_resurce.cpp` | `grep -c 'school == "'` | 10 | school-change branches |
 | G | `stage3_resurce.cpp` | `grep -c 'affVar == "'` | 4 | affiliation gating |
 
-Table M (selectable lifepath modules) totals **127**; Table G (gating and branch blocks) totals **27**; all eight
-rows together total **154**. Table G blocks *select among* or *modify* modules and are not themselves modules — a
+Table M (module-name source matches) totals **127**; Table G (gating and branch blocks) totals **27**; all eight
+rows together total **154 matching source lines**. Table G blocks *select among* or *modify* modules and are not themselves modules — a
 distinction the extractor must honour. Occurrence counts are also not name counts: stage 3's 78 `nameElem` lines
-carry **66 distinct** names, being 9 schools at two lines apiece plus 57 field modules.
+carry **66 distinct** names: 56 fields and 10 schools. The school matches include repeated handlers and one
+commented-out line (`RULES.md` §8). The four stages contain **115 distinct selectable entries** in total.
 
 Three complications rule out a single-regex extractor: (i) each stage names its dispatch parameter differently —
 `nameChild`, `nameLChild`, `nameElem`, `nameClan` — so no one pattern covers all four files; (ii) availability
@@ -207,9 +208,10 @@ gating is by **numeric affiliation index**, not by name (`stage1_resurce.cpp:88-
 `resource/affilations.dat` to resolve indices; and (iii) module blocks write into member state that a preamble
 clears, so a block's meaning depends on that reset — a purely textual extractor will miss defaults.
 
-- `scripts/extract-rules.ts` emits `data/rules/modules.json` whose per-stage entry counts **equal the Table M counts
-  published in `RULES.md` §8** (not a number hard-coded here); a test in `scripts/extract-rules.test.ts` reads §8's
-  counts and asserts agreement.
+- `scripts/extract-rules.ts` emits `data/rules/modules.json` whose per-stage `meta.tableM.blocks` counts equal
+  the raw Table M line counts in `RULES.md` §8. Module inventory and `meta.tableM.distinct` counts instead match
+  §8's selectable module inventory, including the stage-3 field/school breakdown. Tests in
+  `scripts/extract-rules.test.ts` read the expected counts from §8 rather than hard-coding them.
 - Table G's gating and branch blocks are emitted **separately** from module entries in `data/rules/modules.json` —
   sibko attribute picks and school-change branches are not modules (`RULES.md` §6.1, §8).
 - Each module entry carries: stage, name, XP cost, attribute deltas (raw XP), signed trait grants, skill grants,
