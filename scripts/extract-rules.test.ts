@@ -13,6 +13,7 @@
 import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
 
 import { buildModulesFile, type ModuleEntry } from "./extract-rules";
 
@@ -45,6 +46,38 @@ function stage3DistinctFromDoc(): number {
   expect(m).not.toBeNull();
   return parseInt(m![1], 10);
 }
+
+function tableGFromDoc(): Record<string, number> {
+  const section = rulesDoc.split("#### Table G")[1]?.split("#### ")[0] ?? "";
+  const rows = [
+    ...section.matchAll(
+      /^\| `stage([23])_resurce\.cpp` \| `grep -c '(nameAttr|nameClan|school|affVar) ==[^`]*` \| \*\*(\d+)\*\*/gm,
+    ),
+  ];
+  const counts = Object.fromEntries(
+    rows.map((row) => ["stage" + row[1] + "_" + row[2], Number(row[3])]),
+  );
+  expect(Object.keys(counts).sort()).toEqual([
+    "stage2_nameAttr",
+    "stage2_nameClan",
+    "stage3_affVar",
+    "stage3_school",
+  ]);
+  return counts;
+}
+
+const resourceDir =
+  process.env.BTCC_SOURCE_DIR ??
+  fileURLToPath(
+    new URL("../../Battletech-Character-Creator/resource/", import.meta.url),
+  );
+const sourceAffiliations = readFileSync(
+  resolve(resourceDir, "affilations.dat"),
+  "latin1",
+)
+  .split(/\r?\n/)
+  .map((name) => name.trim())
+  .filter(Boolean);
 
 const file = buildModulesFile();
 const byStage = (stage: number): ModuleEntry[] => file.modules.filter((m) => m.stage === stage);
@@ -88,12 +121,7 @@ describe("§8 Table M agreement", () => {
   });
 
   it("reports the Table G counts", () => {
-    expect(file.meta.tableG).toEqual({
-      stage2_nameAttr: 11,
-      stage2_nameClan: 2,
-      stage3_school: 10,
-      stage3_affVar: 4,
-    });
+    expect(file.meta.tableG).toEqual(tableGFromDoc());
   });
 });
 
@@ -300,5 +328,153 @@ describe("module entry shape", () => {
       ).toHaveLength(row.count);
     }
     expect(byName("Officer Candidate School", 3).kind).toBe("school");
+  });
+});
+
+describe("Table G output coverage", () => {
+  it("covers documented handlers without adding branch modules", () => {
+    const counts = tableGFromDoc();
+    expect(file.gating.filter((g) => g.kind === "sibkoBranch")).toHaveLength(
+      counts.stage2_nameAttr,
+    );
+    expect(byStage(3).filter((m) => m.kind === "school")).toHaveLength(
+      counts.stage3_school,
+    );
+    expect(
+      file.gating.filter(
+        (g) => g.kind === "schoolListGate" || g.kind === "schoolFieldBranch",
+      ),
+    ).toHaveLength(counts.stage3_affVar);
+  });
+
+  it("preserves all three outcomes of the two Trueborn clan predicates", () => {
+    const picker = file.gating.find(
+      (g) => g.kind === "sibkoPicker" && g.appliesTo === "Trueborn Sibko",
+    );
+    expect(picker?.branches).toEqual([
+      {
+        condition: '(nameClan == "Ghost Bear" || nameClan == "Hell\'s Horses")',
+        offered: [
+          "Aerospace",
+          "Elemental",
+          "Elemental (Advanced)",
+          "ProtoMech",
+          "MechWarrior",
+        ],
+      },
+      {
+        condition:
+          '!(nameClan == "Ghost Bear" || nameClan == "Hell\'s Horses") && nameClan == "Blood Spirit"',
+        offered: [
+          "Aerospace",
+          "Elemental",
+          "ProtoMech",
+          "ProtoMech (Advanced)",
+          "MechWarrior",
+        ],
+      },
+      {
+        condition:
+          '!(nameClan == "Ghost Bear" || nameClan == "Hell\'s Horses") && !(nameClan == "Blood Spirit")',
+        offered: ["Aerospace", "Elemental", "ProtoMech", "MechWarrior"],
+      },
+    ]);
+  });
+
+  it("preserves the Franklin Fiefs school override", () => {
+    expect(
+      file.gating.find(
+        (g) => g.kind === "schoolListGate" && g.name === "Franklin Fiefs",
+      )?.schools,
+    ).toEqual([
+      "Technical College",
+      "Trade School",
+      "Solaris Internship",
+      "Police Academy",
+      "Intelligence Operative Training",
+      "Military Enlistment",
+      "Family Training",
+    ]);
+  });
+
+  it.each([
+    [
+      "Trade School",
+      [
+        "Analysis",
+        "Anthropologist",
+        "Archaeologist",
+        "Cartographer",
+        "Communications",
+        "Journalist",
+        "Manager",
+        "Medical Assistant",
+        "Merchant Marine",
+      ],
+    ],
+    [
+      "University",
+      [
+        "Analysis",
+        "Anthropologist",
+        "Archaeologist",
+        "Detective",
+        "Engineer",
+        "Planetary Surveyor",
+        "Medical Assistant",
+        "Politician",
+        "Technician - Mech",
+        "Technician - Military",
+      ],
+    ],
+  ])("preserves both affiliation outcomes for %s", (name, nonClanFields) => {
+    const condition = 'affVar == "Invading Clan" || affVar == "Homeworld Clan"';
+    const school = file.modules.find(
+      (m) => m.stage === 3 && m.kind === "school" && m.name === name,
+    );
+    const branch = school?.conditionals.find((c) => c.condition === condition);
+    const clanFields = [
+      ...nonClanFields.slice(0, 5),
+      "HPG Technician",
+      ...nonClanFields.slice(5),
+    ];
+    expect(branch?.effects.fields?.advanced?.skills).toEqual(clanFields);
+    expect(branch?.elseEffects?.fields?.advanced?.skills).toEqual(
+      nonClanFields,
+    );
+    expect(
+      file.gating.find(
+        (g) => g.kind === "schoolFieldBranch" && g.name === name,
+      ),
+    ).toMatchObject({
+      condition,
+      effects: { fields: { advanced: { skills: clanFields } } },
+    });
+  });
+});
+
+describe("affiliation source agreement", () => {
+  it("joins metadata and every emitted affiliation name to the desktop catalog", () => {
+    expect(file.meta.affiliations).toEqual(sourceAffiliations);
+    const lists = [
+      ...file.modules.map((m) => m.availability),
+      ...file.gating.flatMap((g) =>
+        g.affiliations === undefined ? [] : [g.affiliations],
+      ),
+    ];
+    for (const names of lists) {
+      for (const name of names) {
+        expect(typeof name).toBe("string");
+        expect(Number.isNaN(Number(name))).toBe(true);
+        expect(sourceAffiliations).toContain(name);
+      }
+    }
+  });
+
+  it("preserves unrestricted affiliation unions from the desktop offerings", () => {
+    expect(byName("Ne'er-Do-Well", 4).availability).toEqual(sourceAffiliations);
+    expect(byName("Covert Operations", 3).availability).toEqual(
+      sourceAffiliations,
+    );
   });
 });

@@ -212,12 +212,17 @@ clears, so a block's meaning depends on that reset — a purely textual extracto
   the raw Table M line counts in `RULES.md` §8. Module inventory and `meta.tableM.distinct` counts instead match
   §8's selectable module inventory, including the stage-3 field/school breakdown. Tests in
   `scripts/extract-rules.test.ts` read the expected counts from §8 rather than hard-coding them.
-- Table G's gating and branch blocks are emitted **separately** from module entries in `data/rules/modules.json` —
-  sibko attribute picks and school-change branches are not modules (`RULES.md` §6.1, §8).
+- Table G counts source handlers, not the length of `gating`. Sibko branch choices and school restrictions
+  are emitted in `gating`, without creating additional modules. School-change effects populate the existing
+  selectable `school` entries, including both conditional outcomes; their affiliation-conditioned field
+  branches are also indexed in `gating` (`RULES.md` §6.1, §8). Tests verify each Table G category
+  against §8 and preserve the clan branch outcomes.
 - Each module entry carries: stage, name, XP cost, attribute deltas (raw XP), signed trait grants, skill grants,
   deferred `"…/Any"` picks, and prerequisites **in ×100 form**, matching `RULES.md` §7.4.
 - Availability gating is emitted as **resolved affiliation names**, not numeric indices — the extractor joins
-  `resource/affilations.dat` (`RULES.md` §6.1); a test asserts no entry carries a bare integer in `availability`.
+  `resource/affilations.dat` (`RULES.md` §6.1). Tests independently read that file and check its ordered names
+  against metadata, module `availability`, and any gating `affiliations` arrays. Availability is an
+  affiliation-level union; finer sub-affiliation, caste, trait and school conditions remain in branch data.
 - The "Born Mercenary Brat" entry in `data/rules/modules.json` equals, field for field, the worked example in
   `RULES.md` §7.4; and running `scripts/extract-rules.ts` twice produces byte-identical output.
 

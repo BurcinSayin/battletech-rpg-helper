@@ -465,6 +465,8 @@ Three behaviours are worth calling out, each as an instance of the shape rather 
 - **A trait can be the gate.** `S1HardElem` (`stage1_resurce.cpp:141-160`) scans the character's traits for `Citizenship/Inner Sphere` or `Citizenship/Clan` (`stage1_resurce.cpp:148`) and, if neither is present, restricts the entire Stage-1 list to `"Slave"` (`stage1_resurce.cpp:156`). It is reached only from `affVar == 7, subAffVar == 3` (`stage1_resurce.cpp:99-100`).
 - **Stage 3 gates by name, not index.** `S3ClearAffilation` compares `affVar` against the literal strings `"Franklin Fiefs"` and `"JarnFolk"` (`stage3_resurce.cpp:46`, `stage3_resurce.cpp:51`), the second of which cuts the school list to a single entry (`stage3_resurce.cpp:53`). Stage 3 also branches on `"Invading Clan"` / `"Homeworld Clan"` by name (`stage3_resurce.cpp:168`, `stage3_resurce.cpp:219`). The parameter is a `QString` here and an `int` in stages 1, 2 and 4 — the same concept, two representations.
 
+The extracted module `availability` is the union of affiliations over reachable offering branches, not a complete eligibility decision. Numeric indices are joined to `resource/affilations.dat`; sub-affiliation, caste, trait and school restrictions remain in branch data. Any emitted gating `affiliations` arrays use the same resolved names. For example, `Covert Operations` is offered without an affiliation condition by Police Academy and Intelligence Operative Training (`stage3_resurce.cpp:299`, `stage3_resurce.cpp:332`), so its affiliation-level union contains every affiliation.
+
 Affiliation, sub-affiliation and caste **effects** (as opposed to gating) live in `text_resurce.cpp`: `Text_Resurce::rSubAff(int affStrNum)` (`text_resurce.cpp:26-388`) is a `switch` over the affiliation index that sets the sub-affiliation list, languages, the module's XP cost `xpCostModule`, attribute/trait/skill grants and the Stage-0 prerequisites, all after a reset preamble at `text_resurce.cpp:29-68`. `Text_Resurce::subAffAttr(int primPos, int secPos)` (`text_resurce.cpp:511`) applies the sub-affiliation layer, `Text_Resurce::clanCaste(QString nameCaste)` (`text_resurce.cpp:2516`) the caste layer, and `comstarAttr` / `comstarSub` / `WoBSub` (`text_resurce.cpp:424`, `text_resurce.cpp:456`, `text_resurce.cpp:480`) the ComStar and Word of Blake special cases toggled by `CharData::comChk` / `wobChk` (`chardata.h:50-51`).
 
 ### 6.2 Prerequisites — max-merge across stages, `CheckPrereq`, ×100 storage
@@ -722,6 +724,15 @@ Same form, different meaning: these blocks choose among or modify modules rather
 | | **subtotal** | **27** | |
 
 **Grand total, all eight rows: 154.**
+
+Table G measures source handlers, not emitted `gating` records. The output representation is:
+
+- The 11 `nameAttr` handlers become separate `sibkoBranch` records, linked to their Freeborn or Trueborn Sibko module (`stage2_resurce.cpp:862-1092`). Their branch names are not additional Stage-2 modules.
+- The two `nameClan` predicates are nested in the Trueborn picker (`stage2_resurce.cpp:848-857`), yielding three option lists: Ghost Bear/Hell's Horses, Blood Spirit, and the fallback. They do not count the two Freeborn/Trueborn picker records.
+- The ten `school ==` handlers supply effects for the existing selectable `school` entries (`stage3_resurce.cpp:67-463`). Both conditional outcomes remain on those entries; school-change handlers do not create another set of modules.
+- The four `affVar ==` lines map to two `schoolListGate` records for Franklin Fiefs/JarnFolk (`stage3_resurce.cpp:46-53`) and two `schoolFieldBranch` records indexing the clan field variants of Trade School/University (`stage3_resurce.cpp:168-172`, `stage3_resurce.cpp:219-223`). The latter records carry the positive branch; the school entry retains the complete conditional, including its else effects.
+
+Other gating functions listed in §6.1 also contribute records. Consequently the total `gating` length is not Table G's subtotal.
 
 #### Occurrences are not distinct names
 
