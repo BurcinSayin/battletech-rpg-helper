@@ -11,6 +11,14 @@ export type {
   Stage0Source,
   Stage0SubAffiliation,
 } from "./stage0-contract";
+export type {
+  ChildhoodCatalog,
+  ChildhoodModule,
+  ChildhoodGate,
+  FlexPolicy,
+  SibkoBranch,
+  SibkoPool,
+} from "./childhood-contract";
 
 /** Compose a desktop-style composite skill name, e.g. "Animal Handling/Riding". */
 export function composeSkillName(parent: string, sub: string): string {

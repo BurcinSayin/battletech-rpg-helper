@@ -23,9 +23,15 @@ import modulesJson from "../data/rules/modules.json";
 stage0Cases(() => buildModulesFile().stage0);
 import "./stage0-source.cases";
 
-const rulesDoc = readFileSync(fileURLToPath(new URL("../docs/RULES.md", import.meta.url)), "utf8");
+const rulesDoc = readFileSync(
+  fileURLToPath(new URL("../docs/RULES.md", import.meta.url)),
+  "utf8",
+);
 const subskills = JSON.parse(
-  readFileSync(fileURLToPath(new URL("../data/rules/subskills.json", import.meta.url)), "utf8"),
+  readFileSync(
+    fileURLToPath(new URL("../data/rules/subskills.json", import.meta.url)),
+    "utf8",
+  ),
 ) as Record<string, string[]>;
 
 /** The exact list `CreateSubSkillList(family)` produces at runtime (§7.4). */
@@ -38,7 +44,9 @@ function tableMFromDoc(): Record<number, number> {
   const section = rulesDoc.split("#### Table M")[1]!.split("#### ")[0]!;
   const counts: Record<number, number> = {};
   for (const row of section.split("\n")) {
-    const m = /^\| `stage(\d)_resurce\.cpp` \| `[^`]+` \| \*\*(\d+)\*\*/.exec(row.trim());
+    const m = /^\| `stage(\d)_resurce\.cpp` \| `[^`]+` \| \*\*(\d+)\*\*/.exec(
+      row.trim(),
+    );
     if (m) counts[parseInt(m[1], 10)] = parseInt(m[2], 10);
   }
   expect(Object.keys(counts).sort()).toEqual(["1", "2", "3", "4"]);
@@ -47,7 +55,9 @@ function tableMFromDoc(): Record<number, number> {
 
 /** Stage 3's distinct-name count from §8's "Occurrences are not distinct names". */
 function stage3DistinctFromDoc(): number {
-  const section = rulesDoc.split("#### Occurrences are not distinct names")[1]!.split("#### ")[0]!;
+  const section = rulesDoc
+    .split("#### Occurrences are not distinct names")[1]!
+    .split("#### ")[0]!;
   const m = /\| \*\*(\d+)\*\* distinct \|/.exec(section);
   expect(m).not.toBeNull();
   return parseInt(m![1], 10);
@@ -86,9 +96,12 @@ const sourceAffiliations = readFileSync(
   .filter(Boolean);
 
 const file = buildModulesFile();
-const byStage = (stage: number): ModuleEntry[] => file.modules.filter((m) => m.stage === stage);
+const byStage = (stage: number): ModuleEntry[] =>
+  file.modules.filter((m) => m.stage === stage);
 const byName = (name: string, stage?: number): ModuleEntry =>
-  file.modules.find((m) => m.name === name && (stage === undefined || m.stage === stage))!;
+  file.modules.find(
+    (m) => m.name === name && (stage === undefined || m.stage === stage),
+  )!;
 
 function inventoryFromDoc() {
   const section =
@@ -174,6 +187,7 @@ describe("§7.4 worked example — Born Mercenary Brat", () => {
   it("carries the two deferred …/Any picks with resolved candidates", () => {
     expect(brat.deferredPicks).toEqual([
       {
+        namespace: "main",
         slot: 1,
         label: "Language/Any",
         kind: "skill",
@@ -183,6 +197,7 @@ describe("§7.4 worked example — Born Mercenary Brat", () => {
         repeats: null,
       },
       {
+        namespace: "main",
         slot: 2,
         label: "Streetwise/Any",
         kind: "skill",
@@ -235,8 +250,14 @@ describe("availability is resolved affiliation names", () => {
 
   it("resolves numeric indices via resource/affilations.dat", () => {
     expect(file.meta.affiliations[12]).toBe("Independent");
-    expect(byName("Trueborn Creche").availability).toEqual(["Invading Clan", "Homeworld Clan"]);
-    expect(byName("Dark Caste", 4).availability).toEqual(["Invading Clan", "Homeworld Clan"]);
+    expect(byName("Trueborn Creche").availability).toEqual([
+      "Invading Clan",
+      "Homeworld Clan",
+    ]);
+    expect(byName("Dark Caste", 4).availability).toEqual([
+      "Invading Clan",
+      "Homeworld Clan",
+    ]);
     expect(byName("Ne'er-Do-Well", 4).availability).toHaveLength(13);
   });
 });
@@ -262,13 +283,19 @@ describe("Table G blocks are not modules", () => {
       expect(stage2Names).not.toContain(sibkoName);
     }
     const sibkoBranches = file.gating.filter((g) => g.kind === "sibkoBranch");
-    expect(sibkoBranches.map((g) => g.name).sort()).toEqual([...sibkoBranchNames].sort());
+    expect(sibkoBranches.map((g) => g.name).sort()).toEqual(
+      [...sibkoBranchNames].sort(),
+    );
   });
 
   it("emits sibko pickers with their clan branches", () => {
-    const trueborn = file.gating.find((g) => g.kind === "sibkoPicker" && g.appliesTo === "Trueborn Sibko");
+    const trueborn = file.gating.find(
+      (g) => g.kind === "sibkoPicker" && g.appliesTo === "Trueborn Sibko",
+    );
     expect(trueborn).toBeDefined();
-    const conditions = JSON.stringify(trueborn!.branches?.map((b) => b.condition));
+    const conditions = JSON.stringify(
+      trueborn!.branches?.map((b) => b.condition),
+    );
     expect(conditions).toContain("Ghost Bear");
     expect(conditions).toContain("Hell's Horses");
     expect(conditions).toContain("Blood Spirit");
@@ -277,7 +304,9 @@ describe("Table G blocks are not modules", () => {
   it("emits school-list gating by name, not index", () => {
     const gates = file.gating.filter((g) => g.kind === "schoolListGate");
     expect(gates.map((g) => g.name)).toEqual(["Franklin Fiefs", "JarnFolk"]);
-    expect(gates.find((g) => g.name === "JarnFolk")!.schools).toEqual(["Family Training"]);
+    expect(gates.find((g) => g.name === "JarnFolk")!.schools).toEqual([
+      "Family Training",
+    ]);
   });
 });
 
@@ -299,7 +328,10 @@ describe("module entry shape", () => {
         deferredPicks: expect.any(Array),
         prerequisites: expect.objectContaining({ attrs: expect.any(Object) }),
         availability: expect.any(Array),
-        source: expect.objectContaining({ file: expect.any(String), line: expect.any(Number) }),
+        source: expect.objectContaining({
+          file: expect.any(String),
+          line: expect.any(Number),
+        }),
       });
       expect(m.source.line).toBeGreaterThan(0);
     }

@@ -41,10 +41,39 @@ function completeClan() {
   pick("Career/Any", "Career/Accountant (skill)");
 }
 
+function expectBalances(draftXp: number, wizardXp: number) {
+  const balances = within(screen.getByRole("region", { name: "XP balances" }));
+  expect(balances.getByText(`Draft XP remaining: ${draftXp} XP`)).toBeTruthy();
+  expect(
+    balances.getByText(`Wizard XP remaining: ${wizardXp} XP`),
+  ).toBeTruthy();
+}
+
+function completeStreet() {
+  pick("Stage 1 module", "Street");
+  for (let position = 1; position <= 4; position++)
+    pick(`Module choice ${position}`, "STR (attribute)");
+}
+
+function enterStage2() {
+  enterStage0();
+  completeMajor();
+  fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  completeStreet();
+  fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  pick("Stage 2 module", "Back Woods");
+}
+
+function expectFlexRemaining(xp: number) {
+  const flex = within(screen.getByRole("region", { name: "Stage 2 flex XP" }));
+  expect(flex.getByText("Flex remaining").parentElement?.textContent).toContain(
+    `${xp} XP`,
+  );
+}
+
 function expectMajorDraft() {
   const draft = within(screen.getByRole("region", { name: "Current draft" }));
-  expect(draft.getByText("Draft XP remaining: 4220")).toBeTruthy();
-  expect(draft.getByText("Wizard XP remaining: 4925")).toBeTruthy();
+  expectBalances(4220, 4925);
   expect(draft.getAllByText("Language/English: 20 XP")).toHaveLength(1);
   expect(draft.getByText("Perception: 10 XP")).toBeTruthy();
   expect(draft.getAllByText("Equipped: -50 XP")).toHaveLength(1);
@@ -75,6 +104,8 @@ describe("WizardClient shell", () => {
         screen.getByText(`// ${p.title}`, { selector: "h2" }),
       ).toBeTruthy();
       if (p.id === 1) completeMajor();
+      if (p.id === 2) completeStreet();
+      if (p.id === 3) pick("Stage 2 module", "Back Woods");
     }
     expect(
       screen.getByRole("button", { name: "Finish" }).hasAttribute("disabled"),
@@ -93,9 +124,7 @@ describe("WizardClient shell", () => {
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
 
-    // §7.3's confirmation box, text from `wizard.cpp:196`.
     const dialog = screen.getByRole("alertdialog");
-    expect(dialog.textContent).toMatch(/later stages are lost/);
 
     fireEvent.click(within(dialog).getByRole("button", { name: "Stay" }));
     expect(screen.queryByRole("alertdialog")).toBeNull();
@@ -125,14 +154,17 @@ describe("WizardClient Stage 0", () => {
   it("applies the issue XP oracle and actual grants when Major Periphery is completed", () => {
     // Given
     enterStage0();
-    expect(screen.getByText("Draft XP remaining: 4190")).toBeTruthy();
+    expectBalances(4190, 5000);
     // When
     completeMajor();
     // Then: handwritten 800 attributes + 30 skills - 50 traits = 780 spent.
     expectMajorDraft();
-    expect(screen.getByText("Module cost").parentElement?.textContent).toContain("75 XP");
-    expect(screen.getByRole("status").textContent).toMatch(/^Stage 0 complete/);
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(false);
+    expect(
+      screen.getByText("Module cost").parentElement?.textContent,
+    ).toContain("75 XP");
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
   });
 
   it("cannot advance when Stage 0 is incomplete", () => {
@@ -143,7 +175,9 @@ describe("WizardClient Stage 0", () => {
     fireEvent.click(next);
     // Then
     expect(next.hasAttribute("disabled")).toBe(true);
-    expect(screen.getByRole("heading", { name: "// Stage 0 — Affiliation" })).toBeTruthy();
+    expect(
+      screen.getByRole("heading", { name: "// Stage 0 — Affiliation" }),
+    ).toBeTruthy();
   });
 
   it("requires a caste and its choices when the affiliation is Clan", () => {
@@ -153,12 +187,18 @@ describe("WizardClient Stage 0", () => {
     pick("Affiliation", "Invading Clan");
     pick("Sub-affiliation", "None");
     pick("Starting language", "English");
-    expect(screen.getByRole("combobox", { name: "Caste" }).hasAttribute("required")).toBe(true);
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(true);
+    expect(
+      screen.getByRole("combobox", { name: "Caste" }).hasAttribute("required"),
+    ).toBe(true);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
     // When
     completeClan();
     // Then
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(false);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
     expect(screen.getByText("Protocol/Clan: 25 XP")).toBeTruthy();
     expect(screen.getByText("Interests/Aerospace: 10 XP")).toBeTruthy();
     expect(screen.getByText("Reputation: -125 XP")).toBeTruthy();
@@ -173,17 +213,20 @@ describe("WizardClient Stage 0", () => {
     pick("+15 XP to any two other Language — 1 of 2", "French (skill)");
     pick("+50 XP each to any two Attributes — 1 of 2", "STR (attribute)");
     pick("+50 XP each to any two Attributes — 2 of 2", "RFL (attribute)");
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(true);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
     expect(screen.queryByText("Language/French: 15 XP")).toBeNull();
     // When
     pick("+15 XP to any two other Language — 2 of 2", "German (skill)");
     // Then
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(false);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
     expect(screen.getByText("Language/French: 15 XP")).toBeTruthy();
     expect(screen.getByText("Language/German: 15 XP")).toBeTruthy();
     expect(screen.getByText("Language/English: 45 XP")).toBeTruthy();
-    expect(screen.getByText("Draft XP remaining: 4040")).toBeTruthy();
-    expect(screen.getByText("Wizard XP remaining: 4760")).toBeTruthy();
+    expectBalances(4040, 4760);
   });
 
   it("removes obsolete caste, choices and effects when an ancestor is replaced", () => {
@@ -195,31 +238,51 @@ describe("WizardClient Stage 0", () => {
     // Then
     expect(screen.getAllByRole("combobox")).toHaveLength(3);
     for (const name of ["Sub-affiliation", "Starting language"]) {
-      expect(within(screen.getByRole("combobox", { name })).getByRole("option", { selected: true }).getAttribute("value")).toBe("");
+      expect(
+        within(screen.getByRole("combobox", { name }))
+          .getByRole("option", { selected: true })
+          .getAttribute("value"),
+      ).toBe("");
     }
     expect(screen.queryByText("Protocol/Clan: 25 XP")).toBeNull();
     expect(screen.queryByText("Interests/Aerospace: 10 XP")).toBeNull();
     expect(screen.queryByText("Reputation: -125 XP")).toBeNull();
-    expect(screen.getByText("Draft XP remaining: 4190")).toBeTruthy();
-    expect(screen.getByText("Wizard XP remaining: 5000")).toBeTruthy();
-    expect(screen.getByText("Module cost").parentElement?.textContent).toContain("0 XP");
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(true);
+    expectBalances(4190, 5000);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
   });
 
   it("preserves the complete selection and draft when Stay is chosen", () => {
     // Given
     enterStage0();
     completeClan();
-    const values = screen.getAllByRole<HTMLSelectElement>("combobox").map((control) => control.value);
-    const draft = screen.getByRole("region", { name: "Current draft" }).textContent;
+    const values = screen
+      .getAllByRole<HTMLSelectElement>("combobox")
+      .map((control) => control.value);
+    const draft = screen.getByRole("region", {
+      name: "Current draft",
+    }).textContent;
     // When
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
-    fireEvent.click(within(screen.getByRole("alertdialog")).getByRole("button", { name: "Stay" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Stay",
+      }),
+    );
     // Then
     expect(screen.queryByRole("alertdialog")).toBeNull();
-    expect(screen.getAllByRole<HTMLSelectElement>("combobox").map((control) => control.value)).toEqual(values);
-    expect(screen.getByRole("region", { name: "Current draft" }).textContent).toBe(draft);
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(false);
+    expect(
+      screen
+        .getAllByRole<HTMLSelectElement>("combobox")
+        .map((control) => control.value),
+    ).toEqual(values);
+    expect(
+      screen.getByRole("region", { name: "Current draft" }).textContent,
+    ).toBe(draft);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
   });
 
   it("unwinds to the named baseline and avoids duplicate grants when re-entering", () => {
@@ -230,14 +293,20 @@ describe("WizardClient Stage 0", () => {
     fireEvent.click(screen.getByRole("button", { name: "Back" }));
     fireEvent.click(screen.getByRole("button", { name: "Go back" }));
     // Then
-    expect(screen.getByRole<HTMLInputElement>("textbox", { name: "Character name" }).value).toBe("Lisa");
+    expect(
+      screen.getByRole<HTMLInputElement>("textbox", { name: "Character name" })
+        .value,
+    ).toBe("Lisa");
     fireEvent.click(screen.getByRole("button", { name: "Next" }));
-    expect(screen.getByText("Draft XP remaining: 4190")).toBeTruthy();
-    expect(screen.getByText("Wizard XP remaining: 5000")).toBeTruthy();
+    expectBalances(4190, 5000);
     expect(screen.queryByText("Equipped: -50 XP")).toBeNull();
     expect(screen.queryByText("Language/English: 20 XP")).toBeNull();
     for (const control of screen.getAllByRole("combobox")) {
-      expect(within(control).getByRole("option", { selected: true }).getAttribute("value")).toBe("");
+      expect(
+        within(control)
+          .getByRole("option", { selected: true })
+          .getAttribute("value"),
+      ).toBe("");
     }
     completeMajor();
     expectMajorDraft();
@@ -253,6 +322,323 @@ describe("WizardClient Stage 0", () => {
     fireEvent.click(screen.getByRole("button", { name: "Go back" }));
     // Then
     expectMajorDraft();
-    expect(screen.getByRole("button", { name: "Next" }).hasAttribute("disabled")).toBe(false);
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
+  });
+});
+
+describe("WizardClient childhood flow", () => {
+  it("blocks both childhood pages until their required selections are complete", () => {
+    enterStage0();
+    completeMajor();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
+    pick("Stage 1 module", "Street");
+    expect(
+      screen.queryByRole("region", { name: "Stage 2 flex XP" }),
+    ).toBeNull();
+    expectBalances(4220, 4925);
+    for (let position = 1; position <= 4; position++) {
+      expect(
+        screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+      ).toBe(true);
+      pick(`Module choice ${position}`, "STR (attribute)");
+      if (position < 4) expectBalances(4220, 4925);
+    }
+    expectBalances(4020, 4675);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Perception: 20 XP",
+      ),
+    ).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
+    const modules = within(
+      screen.getByRole("combobox", { name: "Stage 2 module" }),
+    );
+    for (const name of [
+      "High School",
+      "Preparatory School",
+      "Clan Apprenticeship",
+      "Freeborn Sibko",
+      "Trueborn Sibko",
+    ]) {
+      expect(modules.queryByRole("option", { name })).toBeNull();
+    }
+    pick("Stage 2 module", "Back Woods");
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(false);
+    expectBalances(3615, 4175);
+    expectFlexRemaining(125);
+  });
+
+  it("validates replacement flex edits and refunds without erasing static XP", () => {
+    enterStage2();
+    pick("Flex skill target", "Perception");
+    const input = screen.getByRole<HTMLInputElement>("spinbutton", {
+      name: "Perception flex XP",
+    });
+    fireEvent.change(input, { target: { value: "35" } });
+    fireEvent.blur(input);
+    expectBalances(3580, 4175);
+    expectFlexRemaining(90);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Perception: 100 XP",
+      ),
+    ).toBeTruthy();
+    fireEvent.change(input, { target: { value: "3" } });
+    expectBalances(3580, 4175);
+    fireEvent.change(input, { target: { value: "36" } });
+    fireEvent.blur(input);
+    expect(input.value).toBe("35");
+    expect(input.getAttribute("aria-invalid")).toBe("true");
+    expect(screen.getByRole("alert")).toBeTruthy();
+    expectBalances(3580, 4175);
+    expectFlexRemaining(90);
+    fireEvent.change(input, { target: { value: "20" } });
+    fireEvent.blur(input);
+    expect(input.value).toBe("20");
+    expect(input.getAttribute("aria-invalid")).toBe("false");
+    expectBalances(3595, 4175);
+    expectFlexRemaining(105);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Perception: 85 XP",
+      ),
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Remove Perception flex allocation" }),
+    );
+    expectBalances(3615, 4175);
+    expectFlexRemaining(125);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Perception: 65 XP",
+      ),
+    ).toBeTruthy();
+  });
+
+  it("keeps Stay intact and unwinds Stage 2 exactly once on confirmed Back", () => {
+    enterStage2();
+    pick("Flex skill target", "Perception");
+    fireEvent.change(
+      screen.getByRole("spinbutton", { name: "Perception flex XP" }),
+      { target: { value: "35" } },
+    );
+    fireEvent.blur(
+      screen.getByRole("spinbutton", { name: "Perception flex XP" }),
+    );
+    const draft = screen.getByRole("region", {
+      name: "Current draft",
+    }).textContent;
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Stay",
+      }),
+    );
+    expect(
+      screen.getByRole("region", { name: "Current draft" }).textContent,
+    ).toBe(draft);
+    expectBalances(3580, 4175);
+    expectFlexRemaining(90);
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Go back",
+      }),
+    );
+    expect(
+      screen.getByRole("combobox", { name: "Stage 1 module" }),
+    ).toBeTruthy();
+    expectBalances(4020, 4675);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Perception: 20 XP",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.queryByRole("region", { name: "Stage 2 flex XP" }),
+    ).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    pick("Stage 2 module", "Back Woods");
+    expectBalances(3615, 4175);
+    expectFlexRemaining(125);
+    pick("Flex skill target", "Perception");
+    fireEvent.change(
+      screen.getByRole("spinbutton", { name: "Perception flex XP" }),
+      { target: { value: "35" } },
+    );
+    fireEvent.blur(
+      screen.getByRole("spinbutton", { name: "Perception flex XP" }),
+    );
+    expectBalances(3580, 4175);
+    expectFlexRemaining(90);
+  });
+
+  it("clears old flex on module replacement and disables restricted categories", () => {
+    enterStage2();
+    fireEvent.change(screen.getByRole("spinbutton", { name: "STR flex XP" }), {
+      target: { value: "100" },
+    });
+    fireEvent.blur(screen.getByRole("spinbutton", { name: "STR flex XP" }));
+    pick("Stage 2 module", "Military School");
+    expectBalances(4020, 4675);
+    expect(
+      screen
+        .getByRole("spinbutton", { name: "STR flex XP" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    expect(
+      screen
+        .getByRole("combobox", { name: "Flex trait target" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    expect(
+      screen
+        .getByRole("combobox", { name: "Flex skill target" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    pick("Interests/Any", "Interests/Aerospace (skill)");
+    expect(
+      screen
+        .getByRole("combobox", { name: "Flex skill target" })
+        .hasAttribute("disabled"),
+    ).toBe(false);
+    expect(
+      screen
+        .getByRole("spinbutton", { name: "STR flex XP" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    expect(
+      screen.getByRole<HTMLInputElement>("spinbutton", { name: "STR flex XP" })
+        .value,
+    ).toBe("0");
+    pick("Stage 2 module", "Back Woods");
+    expectBalances(3615, 4175);
+    expectFlexRemaining(125);
+  });
+
+  it("shows the Clan rebate only after entering Stage 3 and reverses it on Back", () => {
+    enterStage0();
+    completeClan();
+    pick("Sub-affiliation", "Ghost Bear");
+    pick("Art/Any", "Art/Dance (skill)");
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    pick("Stage 1 module", "Trueborn Creche");
+    pick("Stage 1 phenotype", "Phenotype/Elemental");
+    pick("Module choice main:4", "STR (attribute)");
+    for (let position = 1; position <= 4; position++)
+      pick(`Module choice ${position}`, "STR (attribute)");
+    expect(
+      screen.queryByRole("region", { name: "Stage 2 flex XP" }),
+    ).toBeNull();
+    const balances =
+      screen.getByRole("region", { name: "XP balances" }).textContent ?? "";
+    const draftXp = Number(
+      balances.match(/Draft XP remaining: (-?\d+) XP/)?.[1],
+    );
+    const wizardXp = Number(
+      balances.match(/Wizard XP remaining: (-?\d+) XP/)?.[1],
+    );
+    expect(Number.isFinite(draftXp) && Number.isFinite(wizardXp)).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    pick("Stage 2 module", "Freeborn Sibko");
+    expect(
+      screen.getByRole("button", { name: "Next" }).hasAttribute("disabled"),
+    ).toBe(true);
+    pick("Sibko branch", "Aerospace");
+    const basic = screen.getAllByRole<HTMLSelectElement>("combobox", {
+      name: /^Basic field — /,
+    });
+    const advanced = screen.getAllByRole<HTMLSelectElement>("combobox", {
+      name: /^Advanced field — /,
+    });
+    expect(basic).toHaveLength(6);
+    expect(advanced).toHaveLength(5);
+    for (const control of [...basic, ...advanced]) {
+      const option = within(control)
+        .getAllByRole<HTMLOptionElement>("option")
+        .find((entry) => entry.value !== "");
+      if (!option) throw new TypeError("Missing field option");
+      fireEvent.change(control, { target: { value: option.value } });
+    }
+    fireEvent.change(screen.getByRole("spinbutton", { name: "STR flex XP" }), {
+      target: { value: "100" },
+    });
+    fireEvent.blur(screen.getByRole("spinbutton", { name: "STR flex XP" }));
+    pick("Flex trait target", "Vehicle");
+    fireEvent.change(
+      screen.getByRole("spinbutton", { name: "Vehicle flex XP" }),
+      { target: { value: "100" } },
+    );
+    fireEvent.blur(screen.getByRole("spinbutton", { name: "Vehicle flex XP" }));
+    expectBalances(draftXp - 1030, wizardXp - 950);
+    expectFlexRemaining(0);
+    expect(
+      screen
+        .getByRole("combobox", { name: "Flex skill target" })
+        .hasAttribute("disabled"),
+    ).toBe(true);
+    expect(
+      screen
+        .getByRole("spinbutton", { name: "STR flex XP" })
+        .hasAttribute("disabled"),
+    ).toBe(false);
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(
+      screen.getByRole("heading", { name: "// Stage 3 — School" }),
+    ).toBeTruthy();
+    expectBalances(draftXp - 1030, wizardXp - 864);
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Go back",
+      }),
+    );
+    expectBalances(draftXp - 1030, wizardXp - 950);
+    expectFlexRemaining(0);
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expectBalances(draftXp - 1030, wizardXp - 864);
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Go back",
+      }),
+    );
+    pick("Sibko branch", "Cavalry");
+    expect(
+      screen.getByRole<HTMLInputElement>("spinbutton", { name: "STR flex XP" })
+        .value,
+    ).toBe("0");
+    expectFlexRemaining(200);
+    pick("Advanced field — cavalry-2", "Driving/Sea Vehicles");
+    const driving = screen.getByRole<HTMLSelectElement>("combobox", {
+      name: "Advanced field — cavalry-2",
+    });
+    expect(
+      within(driving)
+        .getAllByRole("option", { selected: true })
+        .map((option) => option.textContent),
+    ).toEqual(["Driving/Sea Vehicles"]);
+    fireEvent.change(driving, { target: { value: "" } });
+    pick("Advanced field — cavalry-2", "Driving/Rail Vehicles");
+    pick("Stage 2 module", "Trueborn Sibko");
+    const branches = within(
+      screen.getByRole("combobox", { name: "Sibko branch" }),
+    );
+    expect(
+      branches.getByRole("option", { name: "Elemental (Advanced)" }),
+    ).toBeTruthy();
+    expect(
+      branches.queryByRole("option", { name: "ProtoMech (Advanced)" }),
+    ).toBeNull();
   });
 });

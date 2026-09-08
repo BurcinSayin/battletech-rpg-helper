@@ -27,12 +27,14 @@ import {
   stringLiterals,
   stripTrailingComment,
   toLines,
-  type Conditional,
   type Effects,
-  type FnBody,
 } from "./extract-rules-lib";
 import { extractStage0 } from "./extract-stage0";
 import { subskillsSchema } from "../lib/validation/catalog";
+import type { ChildhoodGate } from "../lib/rules/childhood-contract";
+import type { Stage0Catalog } from "../lib/rules/stage0-contract";
+import { extractChildhood } from "./extract-childhood";
+import { parseChildhoodCatalog } from "../lib/validation/childhood";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -69,7 +71,9 @@ function readAffiliations(): string[] {
 
 function readSourceRev(): string {
   try {
-    return execSync("git rev-parse HEAD", { cwd: SOURCE_ROOT }).toString().trim();
+    return execSync("git rev-parse HEAD", { cwd: SOURCE_ROOT })
+      .toString()
+      .trim();
   } catch {
     return "unknown";
   }
@@ -77,7 +81,9 @@ function readSourceRev(): string {
 
 function loadSubskills(): Record<string, string[]> {
   return subskillsSchema.parse(
-    JSON.parse(readFileSync(join(repoRoot, "data", "rules", "subskills.json"), "utf8")),
+    JSON.parse(
+      readFileSync(join(repoRoot, "data", "rules", "subskills.json"), "utf8"),
+    ),
   );
 }
 
@@ -122,7 +128,10 @@ function affMatchOf(condition: string, affiliations: string[]): AffSet {
       const factor = andPart.trim();
       if (factor.startsWith("!(") && factor.endsWith(")")) {
         const inner = factor.slice(2, -1);
-        group = intersect(group, complement(affMatchOf(inner, affiliations), affiliations.length));
+        group = intersect(
+          group,
+          complement(affMatchOf(inner, affiliations), affiliations.length),
+        );
         continue;
       }
       if (factor.startsWith("(") && factor.endsWith(")")) {
@@ -227,9 +236,23 @@ function parseAffSwitch(
   fnSignature: RegExp,
   listVar: string,
   hardElemFn: string | null,
-): { branches: { affIndex: number; subCondition: string | null; isElse: boolean; offered: string[] | "hardElem"; line: number }[] } {
+): {
+  branches: {
+    affIndex: number;
+    subCondition: string | null;
+    isElse: boolean;
+    offered: string[] | "hardElem";
+    line: number;
+  }[];
+} {
   const fn = extractFunction(readSource(file), fnSignature);
-  const branches: { affIndex: number; subCondition: string | null; isElse: boolean; offered: string[] | "hardElem"; line: number }[] = [];
+  const branches: {
+    affIndex: number;
+    subCondition: string | null;
+    isElse: boolean;
+    offered: string[] | "hardElem";
+    line: number;
+  }[] = [];
   let aff: number | null = null;
   let subCondition: string | null = null;
   let isElse = false;
@@ -263,22 +286,31 @@ function parseAffSwitch(
     const listStart = new RegExp(`^${listVar}\\s*<<\\s*(.*)$`).exec(code);
     if (listStart) {
       const wrapped = readWrappedList(fn.lines, i, listStart[1]);
-      branches.push({ affIndex: aff, subCondition, isElse, offered: wrapped.lits, line });
+      branches.push({
+        affIndex: aff,
+        subCondition,
+        isElse,
+        offered: wrapped.lits,
+        line,
+      });
       i = wrapped.next;
       continue;
     }
-    const hard = hardElemFn ? new RegExp(`^${listVar}\\s*=\\s*${hardElemFn}\\(`).exec(code) : null;
+    const hard = hardElemFn
+      ? new RegExp(`^${listVar}\\s*=\\s*${hardElemFn}\\(`).exec(code)
+      : null;
     if (hard) {
-      branches.push({ affIndex: aff, subCondition, isElse, offered: "hardElem", line });
+      branches.push({
+        affIndex: aff,
+        subCondition,
+        isElse,
+        offered: "hardElem",
+        line,
+      });
       continue;
     }
   }
   return { branches };
-}
-
-interface ListBranch {
-  condition: string | null;
-  offered: string[];
 }
 
 /**
@@ -294,7 +326,10 @@ function captureListBranches(
   const fn = extractFunction(readSource(file), fnSignature);
   const out: ListBranchRecord[] = [];
 
-  function walk(lines: string[], conds: { text: string; isElse: boolean }[]): void {
+  function walk(
+    lines: string[],
+    conds: { text: string; isElse: boolean }[],
+  ): void {
     let i = 0;
     while (i < lines.length) {
       const code = stripTrailingComment(lines[i]).trim();
@@ -302,7 +337,8 @@ function captureListBranches(
       if (ifm) {
         const { body, elseBody, next } = sliceIfElse(lines, i);
         walk(body, [...conds, { text: ifm[1].trim(), isElse: false }]);
-        if (elseBody) walk(elseBody, [...conds, { text: ifm[1].trim(), isElse: true }]);
+        if (elseBody)
+          walk(elseBody, [...conds, { text: ifm[1].trim(), isElse: true }]);
         i = next;
         continue;
       }
@@ -329,7 +365,9 @@ interface ListBranchRecord {
 function composeIf(conds: { text: string; isElse: boolean }[]): string | null {
   if (conds.length === 0) return null;
   return conds
-    .map(({ text, isElse }) => (isElse ? `!(${text})` : text.includes("||") ? `(${text})` : text))
+    .map(({ text, isElse }) =>
+      isElse ? `!(${text})` : text.includes("||") ? `(${text})` : text,
+    )
     .join(" && ");
 }
 
@@ -397,7 +435,10 @@ function parseS2HardElemAffil(file: string): S2HardElemAffilParse {
     }
     const filter = /\[\w+\]\s*!=\s*"([^"]+)"\s*\)\s*\{/.exec(code);
     if (filter) {
-      conditionedRemovals.push({ condition: "character has the Illiterate trait", removed: [filter[1]] });
+      conditionedRemovals.push({
+        condition: "character has the Illiterate trait",
+        removed: [filter[1]],
+      });
       continue;
     }
   }
@@ -438,7 +479,7 @@ function parseS2ClearListElem(file: string): S2ClearListElemParse {
       condDepth = null;
       continue;
     }
-    if (condDepth !== null && depth <= condDepth) {
+    if (condDepth !== null && depth < condDepth) {
       nameStage1Cond = null;
       condDepth = null;
     }
@@ -448,10 +489,16 @@ function parseS2ClearListElem(file: string): S2ClearListElemParse {
       condDepth = depth;
       continue;
     }
-    const filter = /^(?:swpTmpList|listElem)\[\w+\]\s*!=\s*"([^"]+)"\s*\)\s*\{$/.exec(code);
+    const filter =
+      /^if\s*\(\s*(?:swpTmpList|listElem)\[\w+\]\s*!=\s*"([^"]+)"\s*\)\s*\{$/.exec(
+        code,
+      );
     if (filter && aff !== null) {
       if (nameStage1Cond) {
-        conditionedRemovals.push({ condition: `Stage 1 module ${nameStage1Cond}`, removed: [filter[1]] });
+        conditionedRemovals.push({
+          condition: `Stage 1 module ${nameStage1Cond}`,
+          removed: [filter[1]],
+        });
       } else {
         const list = perCaseList(perCase, aff);
         list.push(filter[1]);
@@ -475,11 +522,6 @@ function perCaseList(map: Map<number, string[]>, aff: number): string[] {
 // Stage-2 sibko gating (Table G: nameAttr ×11, nameClan ×2)
 // ---------------------------------------------------------------------------
 
-interface SibkoPickerParse {
-  clanXp: Effects["clanXp"];
-  branches: ListBranchRecord[];
-}
-
 /** Parse `S2FreebornSibko` / `S2TruebornSibko` (branch-of-service pickers). */
 function parseSibkoPicker(
   file: string,
@@ -489,7 +531,9 @@ function parseSibkoPicker(
   const clanXp: Effects["clanXp"] = {};
   for (const raw of fn.lines) {
     const code = stripTrailingComment(raw).trim();
-    const m = /^s2Clan(Basic|Adv)(XP|StepXP|RebateXP)\s*=\s*(\d+)\s*;$/.exec(code);
+    const m = /^s2Clan(Basic|Adv)(XP|StepXP|RebateXP)\s*=\s*(\d+)\s*;$/.exec(
+      code,
+    );
     if (!m) continue;
     const bucket = m[1] === "Basic" ? "basic" : "advanced";
     const g = (clanXp[bucket] ??= { xp: 0, stepXp: 0, rebateXp: 0 });
@@ -497,7 +541,10 @@ function parseSibkoPicker(
     else if (m[2] === "StepXP") g.stepXp = parseInt(m[3], 10);
     else g.rebateXp = parseInt(m[3], 10);
   }
-  return { clanXp, branches: captureListBranches(file, fnSignature, "tmpList") };
+  return {
+    clanXp,
+    branches: captureListBranches(file, fnSignature, "tmpList"),
+  };
 }
 
 /** Parse the `nameAttr` dispatches (`S2FreebornSibkoAttr`, `S2TruebornSibkoAttr`). */
@@ -507,7 +554,10 @@ function parseSibkoAttrBranches(
   appliesTo: string,
   subskills: Record<string, string[]>,
 ): GatingEntry[] {
-  const fn = extractFunction(readSource(file), new RegExp(`Stage2::${functionName}\\(`));
+  const fn = extractFunction(
+    readSource(file),
+    new RegExp(`Stage2::${functionName}\\(`),
+  );
   const blocks = splitModuleBlocks(fn, "nameAttr", file);
   return blocks.map((b) => {
     const effects = interpretBlock(b.lines, 2, subskills).effects;
@@ -525,17 +575,27 @@ function parseSibkoAttrBranches(
 
 /** Parse `S2ClanBasicFieldChange` — the Protocol/{affiliation} field list. */
 function parseClanFieldList(file: string): GatingEntry {
-  const fn = extractFunction(readSource(file), /Stage2::S2ClanBasicFieldChange\(/);
+  const fn = extractFunction(
+    readSource(file),
+    /Stage2::S2ClanBasicFieldChange\(/,
+  );
   let template: string | null = null;
   const fixed: string[] = [];
   for (const raw of fn.lines) {
     const code = stripTrailingComment(raw).trim();
     const tmpl = /^nameAffil\s*=\s*"([^"]*)"\s*\+\s*nameAffil\s*;$/.exec(code);
-    if (tmpl) template = `${tmpl[1]}{nameAffil}`;
+    if (tmpl) template = `${tmpl[1]}{subAffiliation}`;
     const listM = /^swpNameAffil\s*<<\s*(.+);$/.exec(code);
     if (listM) {
-      for (const lit of stringLiterals(listM[1])) fixed.push(lit);
-      if (listM[1].includes("nameAffil")) fixed.push(template ?? "{nameAffil}");
+      for (const operand of listM[1].split("<<").map((value) => value.trim())) {
+        if (operand === "nameAffil" && template) fixed.push(template);
+        else if (/^"(?:[^"\\]|\\.)*"$/.test(operand))
+          fixed.push(...stringLiterals(operand));
+        else
+          throw new Error(
+            `${file}:${fn.startLine}: Unknown basic-field operand ${operand}`,
+          );
+      }
     }
   }
   if (!template) throw new Error("S2ClanBasicFieldChange: template not found");
@@ -544,7 +604,7 @@ function parseClanFieldList(file: string): GatingEntry {
     kind: "clanFieldList",
     function: "S2ClanBasicFieldChange",
     branches: [{ condition: null, offered: fixed }],
-    source: { file, line: 0 },
+    source: { file, line: fn.startLine },
   };
 }
 
@@ -556,14 +616,18 @@ function parseClanFieldList(file: string): GatingEntry {
 function parseS3DefaultSchoolList(file: string): string[] {
   const fn = extractFunction(readSource(file), /Stage3::Stage3\(/);
   for (let i = 0; i < fn.lines.length; i++) {
-    const m = /^S3SChoolList\s*<<\s*(.*)$/.exec(stripTrailingComment(fn.lines[i]).trim());
+    const m = /^S3SChoolList\s*<<\s*(.*)$/.exec(
+      stripTrailingComment(fn.lines[i]).trim(),
+    );
     if (m) return readWrappedList(fn.lines, i, m[1]).lits;
   }
   throw new Error("S3SChoolList default not found");
 }
 
 /** Parse `S3ClearAffilation` — affiliation overrides of the school list, by name. */
-function parseS3ClearAffilation(file: string): { name: string; schools: string[]; line: number }[] {
+function parseS3ClearAffilation(
+  file: string,
+): { name: string; schools: string[]; line: number }[] {
   const fn = extractFunction(readSource(file), /Stage3::S3ClearAffilation\(/);
   const out: { name: string; schools: string[]; line: number }[] = [];
   let i = 0;
@@ -577,7 +641,9 @@ function parseS3ClearAffilation(file: string): { name: string; schools: string[]
     const { body, next } = sliceIfElse(fn.lines, i);
     const schools: string[] = [];
     for (let bi = 0; bi < body.length; bi++) {
-      const listM = /^S3SChoolList\s*<<\s*(.*)$/.exec(stripTrailingComment(body[bi]).trim());
+      const listM = /^S3SChoolList\s*<<\s*(.*)$/.exec(
+        stripTrailingComment(body[bi]).trim(),
+      );
       if (listM) {
         const wrapped = readWrappedList(body, bi, listM[1]);
         schools.push(...wrapped.lits);
@@ -591,7 +657,9 @@ function parseS3ClearAffilation(file: string): { name: string; schools: string[]
 }
 
 /** `S3SchoolEnter` maps each selectable school to its field class. */
-function parseS3SchoolEnter(file: string): Record<string, "civ" | "pol" | "mil"> {
+function parseS3SchoolEnter(
+  file: string,
+): Record<string, "civ" | "pol" | "mil"> {
   const fn = extractFunction(readSource(file), /Stage3::S3SchoolEnter\(/);
   const map: Record<string, "civ" | "pol" | "mil"> = {};
   let i = 0;
@@ -601,9 +669,12 @@ function parseS3SchoolEnter(file: string): Record<string, "civ" | "pol" | "mil">
     if (ifm) {
       const { body, next } = sliceIfElse(fn.lines, i);
       for (const raw of body) {
-        const fieldM = /^nameField\s*=\s*"(civ|pol|mil)"\s*;$/.exec(stripTrailingComment(raw).trim());
+        const fieldM = /^nameField\s*=\s*"(civ|pol|mil)"\s*;$/.exec(
+          stripTrailingComment(raw).trim(),
+        );
         const field = fieldM?.[1];
-        if (field === "civ" || field === "pol" || field === "mil") map[ifm[1]] = field;
+        if (field === "civ" || field === "pol" || field === "mil")
+          map[ifm[1]] = field;
       }
       i = next;
       continue;
@@ -625,7 +696,9 @@ function parseS3SetSchool(file: string): Record<string, string[]> {
       const { body, next } = sliceIfElse(fn.lines, i);
       const flags: string[] = [];
       for (const raw of body) {
-        const flagM = /^s3(Civ|Polic|Mil|Off)Field\s*=\s*true\s*;$/.exec(stripTrailingComment(raw).trim());
+        const flagM = /^s3(Civ|Polic|Mil|Off)Field\s*=\s*true\s*;$/.exec(
+          stripTrailingComment(raw).trim(),
+        );
         if (flagM) flags.push(`${flagM[1].toLowerCase()}Field`);
       }
       (map[ifm[1]] ??= []).push(...flags);
@@ -663,7 +736,10 @@ function parseS4ClearModulesList(
   file: string,
   affiliations: string[],
 ): { records: S4BranchRecord[]; sourceLine: number } {
-  const fn = extractFunction(readSource(file), /Stage4::S4ClearModulesList\(\)/);
+  const fn = extractFunction(
+    readSource(file),
+    /Stage4::S4ClearModulesList\(\)/,
+  );
   const records: S4BranchRecord[] = [];
   const stack: S4Frame[] = [];
 
@@ -673,13 +749,24 @@ function parseS4ClearModulesList(
       const text = f.raw.includes("||") ? `(${f.raw})` : f.raw;
       return f.isElse ? `!(${text})` : text;
     });
-    return { condition: parts.join(" && "), affMatch: stack.reduce<AffSet>((acc, f) => intersect(acc, f.affMatch), null) };
+    return {
+      condition: parts.join(" && "),
+      affMatch: stack.reduce<AffSet>(
+        (acc, f) => intersect(acc, f.affMatch),
+        null,
+      ),
+    };
   };
 
   let i = 0;
   while (i < fn.lines.length) {
     const code = stripTrailingComment(fn.lines[i]).trim();
-    if (code === "" || code.startsWith("//") || /^bool\s/.test(code) || code === "break;") {
+    if (
+      code === "" ||
+      code.startsWith("//") ||
+      /^bool\s/.test(code) ||
+      code === "break;"
+    ) {
       i++;
       continue;
     }
@@ -727,8 +814,8 @@ function parseS4ClearModulesList(
     const listM = /^s4ModulesList\s*<<\s*(.*)$/.exec(code);
     if (listM) {
       const { condition, affMatch } = compose();
-      for (const module of stringLiterals(listM[1])) {
-        records.push({ module, condition, affMatch });
+      for (const ruleModule of stringLiterals(listM[1])) {
+        records.push({ module: ruleModule, condition, affMatch });
       }
       i++;
       continue;
@@ -769,6 +856,210 @@ function assert(condition: unknown, message: string): asserts condition {
   if (!condition) throw new Error(`Extraction cross-check failed: ${message}`);
 }
 
+function normalizeChildhoodGates(
+  stage0: Stage0Catalog,
+  stage1: readonly SwitchBranch[],
+  citizenList: readonly string[],
+  noncitizenList: readonly string[],
+  stage2: readonly SwitchBranch[],
+  hard: S2HardElemAffilParse,
+  clear: S2ClearListElemParse,
+): ChildhoodGate[] {
+  const gates: ChildhoodGate[] = [];
+  const affiliations = stage0.affiliations.map(({ name }) => name);
+  const citizenship = stringLiterals(
+    extractFunction(readSource(STAGE_FILES[1]), /Stage1::S1HardElem\(/)
+      .lines.map(stripTrailingComment)
+      .find((line) => line.includes("tmpTrait[i].first ==")) ?? "",
+  );
+  if (citizenship.length !== 2)
+    throw new Error(
+      "stage1_resurce.cpp: S1HardElem citizenship condition missing",
+    );
+  const subIds = (
+    affId: number,
+    condition: string,
+    isElse: boolean,
+  ): number[] => {
+    const parts = condition.split("||").map((part) => {
+      const match = /^\s*subAffVar\s*(==|>=)\s*(\d+)\s*$/.exec(part);
+      if (!match)
+        throw new Error(
+          `Unknown childhood sub-affiliation condition: ${condition}`,
+        );
+      return { op: match[1], id: Number(match[2]) };
+    });
+    const aff = stage0.affiliations.find(({ id }) => id === affId);
+    if (!aff) throw new Error(`Unknown childhood affiliation ${affId}`);
+    return aff.subAffiliations
+      .filter(
+        ({ id }) =>
+          parts.some((part) =>
+            part.op === "==" ? id === part.id : id >= part.id,
+          ) !== isElse,
+      )
+      .map(({ id }) => id);
+  };
+  for (const [stage, branches] of [
+    [1, stage1],
+    [2, stage2],
+  ] as const) {
+    const explicit = new Set(
+      branches.map(({ affIndex }) => affIndex).filter((id) => id !== -1),
+    );
+    for (const branch of branches) {
+      const affs = stage0.affiliations.filter(({ id }) =>
+        branch.affIndex === -1 ? !explicit.has(id) : id === branch.affIndex,
+      );
+      for (const aff of affs) {
+        const when = {
+          affiliations: [aff.name],
+          ...(branch.subCondition
+            ? {
+                subAffiliationIds: subIds(
+                  aff.id,
+                  branch.subCondition,
+                  branch.isElse,
+                ),
+              }
+            : {}),
+        };
+        const source = { file: STAGE_FILES[stage], line: branch.line };
+        if (branch.offered === "hardElem") {
+          for (const present of [true, false])
+            gates.push({
+              stage,
+              operation: "replace",
+              modules: present ? citizenList : noncitizenList,
+              source,
+              when: { ...when, traitsAny: { names: citizenship, present } },
+            });
+        } else
+          gates.push({
+            stage,
+            operation: "replace",
+            modules: branch.offered,
+            source,
+            when,
+          });
+      }
+    }
+  }
+  const source = {
+    file: STAGE_FILES[2],
+    line: extractFunction(
+      readSource(STAGE_FILES[2]),
+      /Stage2::S2HardElemAffil\(/,
+    ).startLine,
+  };
+  const removalLists = new Map<string, string[]>();
+  for (const removal of hard.removals) {
+    const aff = stage0.affiliations.find(({ id }) => id === removal.affIndex);
+    if (!aff)
+      throw new Error(
+        `${source.file}:${source.line}: Unknown removal affiliation`,
+      );
+    const key = JSON.stringify([
+      removal.affIndex,
+      removal.subCondition,
+      removal.traitContext,
+    ]);
+    let list = removalLists.get(key);
+    if (!list) {
+      const branch =
+        stage2.find(({ affIndex }) => affIndex === aff.id) ??
+        stage2.find(({ affIndex }) => affIndex === -1);
+      if (!branch || branch.offered === "hardElem")
+        throw new Error(`${source.file}:${source.line}: Missing base list`);
+      list = [...branch.offered];
+      removalLists.set(key, list);
+    }
+    const removed = list[removal.removeAt];
+    if (!removed) {
+      if (
+        aff.id === 6 &&
+        removal.subCondition === "subAffVar == 1" &&
+        removal.removeAt === 12
+      )
+        continue;
+      throw new Error(
+        `${source.file}:${source.line}: Unrecognized out-of-range removal`,
+      );
+    }
+    list.splice(removal.removeAt, 1);
+    gates.push({
+      stage: 2,
+      operation: "remove",
+      modules: [removed],
+      source,
+      when: {
+        affiliations: [aff.name],
+        ...(removal.subCondition
+          ? { subAffiliationIds: subIds(aff.id, removal.subCondition, false) }
+          : {}),
+        ...(removal.traitContext
+          ? {
+              traitsAny: {
+                names: citizenship,
+                present: removal.traitContext === "with",
+              },
+            }
+          : {}),
+      },
+    });
+  }
+  const illiterate = extractFunction(
+    readSource(STAGE_FILES[2]),
+    /Stage2::S2HardElemAffil\(/,
+  )
+    .lines.map(stripTrailingComment)
+    .flatMap((line) =>
+      line.includes("charTraits[i].first ==") ? stringLiterals(line) : [],
+    )
+    .filter((name) => !citizenship.includes(name));
+  if (illiterate.length !== 1)
+    throw new Error(
+      `${source.file}:${source.line}: Missing Illiterate predicate`,
+    );
+  for (const removal of hard.conditionedRemovals)
+    gates.push({
+      stage: 2,
+      operation: "remove",
+      modules: removal.removed,
+      source,
+      when: { affiliations, traitsAny: { names: illiterate, present: true } },
+    });
+  const clearSource = {
+    file: STAGE_FILES[2],
+    line: extractFunction(
+      readSource(STAGE_FILES[2]),
+      /Stage2::S2ClearListElem\(/,
+    ).startLine,
+  };
+  const cases = new Set([...clear.perCase.keys()].filter((id) => id !== -1));
+  for (const [id, modules] of clear.perCase)
+    gates.push({
+      stage: 2,
+      operation: "remove",
+      modules,
+      source: clearSource,
+      when: {
+        affiliations: stage0.affiliations
+          .filter((aff) => (id === -1 ? !cases.has(aff.id) : aff.id === id))
+          .map(({ name }) => name),
+      },
+    });
+  for (const removal of clear.conditionedRemovals)
+    gates.push({
+      stage: 2,
+      operation: "remove",
+      modules: removal.removed,
+      source: clearSource,
+      when: { affiliations, stage1Modules: stringLiterals(removal.condition) },
+    });
+  return gates;
+}
+
 /** Build the full output without touching the filesystem. Used by tests. */
 export function buildModulesFile(): ModulesFile {
   const affiliations = readAffiliations();
@@ -776,36 +1067,84 @@ export function buildModulesFile(): ModulesFile {
   const total = affiliations.length;
 
   const modulesStage1 = parseDispatchFunction(
-    readSource, STAGE_FILES[1], /Stage1::S1ChildHood\(/, "nameChild", 1, "module", subskills,
+    readSource,
+    STAGE_FILES[1],
+    /Stage1::S1ChildHood\(/,
+    "nameChild",
+    1,
+    "module",
+    subskills,
   );
   const modulesStage2 = parseDispatchFunction(
-    readSource, STAGE_FILES[2], /Stage2::S2LateChildhood\(/, "nameLChild", 2, "module", subskills,
+    readSource,
+    STAGE_FILES[2],
+    /Stage2::S2LateChildhood\(/,
+    "nameLChild",
+    2,
+    "module",
+    subskills,
   );
   const schoolsStage3 = parseDispatchFunction(
-    readSource, STAGE_FILES[3], /Stage3::S3SchoolChange\(/, "school", 3, "school", subskills,
+    readSource,
+    STAGE_FILES[3],
+    /Stage3::S3SchoolChange\(/,
+    "school",
+    3,
+    "school",
+    subskills,
   );
   const fieldsStage3 = parseDispatchFunction(
-    readSource, STAGE_FILES[3], /Stage3::S3FieldChange\(/, "nameElem", 3, "field", subskills,
+    readSource,
+    STAGE_FILES[3],
+    /Stage3::S3FieldChange\(/,
+    "nameElem",
+    3,
+    "field",
+    subskills,
   );
   const modulesStage4 = parseDispatchFunction(
-    readSource, STAGE_FILES[4], /Stage4::S4ChooseLife\(/, "nameElem", 4, "module", subskills,
+    readSource,
+    STAGE_FILES[4],
+    /Stage4::S4ChooseLife\(/,
+    "nameElem",
+    4,
+    "module",
+    subskills,
   );
 
   const gating: GatingEntry[] = [];
 
   // --- Stage 1: choice switch + S1HardElem (trait-conditioned) ---
-  const choice1 = parseAffSwitch(STAGE_FILES[1], /Stage1::S1ChoiceChillHood\(/, "s1ChildHoodList", "S1HardElem");
-  const hard1 = captureListBranches(STAGE_FILES[1], /Stage1::S1HardElem\(/, "tmpList");
+  const choice1 = parseAffSwitch(
+    STAGE_FILES[1],
+    /Stage1::S1ChoiceChillHood\(/,
+    "s1ChildHoodList",
+    "S1HardElem",
+  );
+  const hard1 = captureListBranches(
+    STAGE_FILES[1],
+    /Stage1::S1HardElem\(/,
+    "tmpList",
+  );
   const hardIf = hard1.find((b) => b.condition === "tmpChek == true")?.offered;
-  const hardElse = hard1.find((b) => b.condition === "!(tmpChek == true)")?.offered;
+  const hardElse = hard1.find(
+    (b) => b.condition === "!(tmpChek == true)",
+  )?.offered;
   if (hardIf === undefined || hardElse === undefined) {
-    throw new Error("Extraction cross-check failed: S1HardElem true/false branches not recognized");
+    throw new Error(
+      "Extraction cross-check failed: S1HardElem true/false branches not recognized",
+    );
   }
 
-  const caseIdx1 = new Set(choice1.branches.filter((b) => b.affIndex !== -1).map((b) => b.affIndex));
+  const caseIdx1 = new Set(
+    choice1.branches.filter((b) => b.affIndex !== -1).map((b) => b.affIndex),
+  );
   const offered1 = new Map<number, Set<string>>();
   for (const b of choice1.branches) {
-    const idxs = b.affIndex === -1 ? range(total).filter((i) => !caseIdx1.has(i)) : [b.affIndex];
+    const idxs =
+      b.affIndex === -1
+        ? range(total).filter((i) => !caseIdx1.has(i))
+        : [b.affIndex];
     if (b.offered === "hardElem") {
       for (const idx of idxs) {
         for (const n of hardIf) offer(offered1, idx, n);
@@ -837,16 +1176,27 @@ export function buildModulesFile(): ModulesFile {
   setAvailability(modulesStage1, offered1, affiliations);
 
   // --- Stage 2: choice switch, subtractive filter, sibko machinery ---
-  const choice2 = parseAffSwitch(STAGE_FILES[2], /Stage2::S2ChoiceLateChildHood\(/, "s2LateChildHoodList", null);
+  const choice2 = parseAffSwitch(
+    STAGE_FILES[2],
+    /Stage2::S2ChoiceLateChildHood\(/,
+    "s2LateChildHoodList",
+    null,
+  );
   const hard2 = parseS2HardElemAffil(STAGE_FILES[2]);
   const clear2 = parseS2ClearListElem(STAGE_FILES[2]);
 
-  const caseIdx2 = new Set(choice2.branches.filter((b) => b.affIndex !== -1).map((b) => b.affIndex));
+  const caseIdx2 = new Set(
+    choice2.branches.filter((b) => b.affIndex !== -1).map((b) => b.affIndex),
+  );
   const offered2 = new Map<number, Set<string>>();
   for (const b of choice2.branches) {
-    const idxs = b.affIndex === -1 ? range(total).filter((i) => !caseIdx2.has(i)) : [b.affIndex];
+    const idxs =
+      b.affIndex === -1
+        ? range(total).filter((i) => !caseIdx2.has(i))
+        : [b.affIndex];
     if (b.offered !== "hardElem") {
-      for (const idx of idxs) for (const n of b.offered) offer(offered2, idx, n);
+      for (const idx of idxs)
+        for (const n of b.offered) offer(offered2, idx, n);
     }
     gating.push({
       stage: 2,
@@ -858,9 +1208,14 @@ export function buildModulesFile(): ModulesFile {
       source: { file: STAGE_FILES[2], line: b.line },
     });
   }
-  const clearCaseIdx = new Set([...clear2.perCase.keys()].filter((k) => k !== -1));
+  const clearCaseIdx = new Set(
+    [...clear2.perCase.keys()].filter((k) => k !== -1),
+  );
   for (const [affKey, names] of clear2.perCase) {
-    const idxs = affKey === -1 ? range(total).filter((i) => !clearCaseIdx.has(i)) : [affKey];
+    const idxs =
+      affKey === -1
+        ? range(total).filter((i) => !clearCaseIdx.has(i))
+        : [affKey];
     for (const idx of idxs) for (const n of names) offered2.get(idx)?.delete(n);
     gating.push({
       stage: 2,
@@ -869,23 +1224,40 @@ export function buildModulesFile(): ModulesFile {
       condition: affKey === -1 ? "affVar default" : `affVar == ${affKey}`,
       affiliations: idxs.map((i) => affiliations[i]),
       removed: names,
-      conditionedRemovals: affKey === -1 ? clear2.conditionedRemovals : undefined,
       source: { file: STAGE_FILES[2], line: 164 },
     });
   }
+  gating.push({
+    stage: 2,
+    kind: "subtractive",
+    function: "S2ClearListElem",
+    affiliations,
+    conditionedRemovals: clear2.conditionedRemovals,
+    source: {
+      file: STAGE_FILES[2],
+      line: extractFunction(
+        readSource(STAGE_FILES[2]),
+        /Stage2::S2ClearListElem\(/,
+      ).startLine,
+    },
+  });
   setAvailability(modulesStage2, offered2, affiliations);
 
   gating.push({
     stage: 2,
     kind: "affGate",
     function: "S2HardElemAffil",
-    condition: "switch(affVar); removals are sub-affiliation- or Citizenship-trait-conditioned (union at affiliation level)",
+    condition:
+      "switch(affVar); removals are sub-affiliation- or Citizenship-trait-conditioned (union at affiliation level)",
     removals: hard2.removals,
     conditionedRemovals: hard2.conditionedRemovals,
     source: { file: STAGE_FILES[2], line: 71 },
   });
 
-  const freeborn = parseSibkoPicker(STAGE_FILES[2], /Stage2::S2FreebornSibko\(/);
+  const freeborn = parseSibkoPicker(
+    STAGE_FILES[2],
+    /Stage2::S2FreebornSibko\(/,
+  );
   gating.push({
     stage: 2,
     kind: "sibkoPicker",
@@ -896,7 +1268,10 @@ export function buildModulesFile(): ModulesFile {
     effects: { clanXp: freeborn.clanXp },
     source: { file: STAGE_FILES[2], line: 827 },
   });
-  const trueborn = parseSibkoPicker(STAGE_FILES[2], /Stage2::S2TruebornSibko\(/);
+  const trueborn = parseSibkoPicker(
+    STAGE_FILES[2],
+    /Stage2::S2TruebornSibko\(/,
+  );
   gating.push({
     stage: 2,
     kind: "sibkoPicker",
@@ -907,8 +1282,22 @@ export function buildModulesFile(): ModulesFile {
     effects: { clanXp: trueborn.clanXp },
     source: { file: STAGE_FILES[2], line: 840 },
   });
-  gating.push(...parseSibkoAttrBranches(STAGE_FILES[2], "S2FreebornSibkoAttr", "Freeborn Sibko", subskills));
-  gating.push(...parseSibkoAttrBranches(STAGE_FILES[2], "S2TruebornSibkoAttr", "Trueborn Sibko", subskills));
+  gating.push(
+    ...parseSibkoAttrBranches(
+      STAGE_FILES[2],
+      "S2FreebornSibkoAttr",
+      "Freeborn Sibko",
+      subskills,
+    ),
+  );
+  gating.push(
+    ...parseSibkoAttrBranches(
+      STAGE_FILES[2],
+      "S2TruebornSibkoAttr",
+      "Trueborn Sibko",
+      subskills,
+    ),
+  );
   gating.push(parseClanFieldList(STAGE_FILES[2]));
 
   // --- Stage 3: school-list gating, school field class, field offerings ---
@@ -952,8 +1341,20 @@ export function buildModulesFile(): ModulesFile {
   // Field modules are offered by the schools' field lists (clan-conditional
   // variants keep their condition text). Fields offered by no school exist in
   // the desktop's career-field dialog (carierfields.cpp), outside §8's scope.
-  const offerings = new Map<string, { school: string; tier: "basic" | "advanced" | "specialist"; condition?: string }[]>();
-  const noteOffering = (name: string, school: string, tier: "basic" | "advanced" | "specialist", condition?: string): void => {
+  const offerings = new Map<
+    string,
+    {
+      school: string;
+      tier: "basic" | "advanced" | "specialist";
+      condition?: string;
+    }[]
+  >();
+  const noteOffering = (
+    name: string,
+    school: string,
+    tier: "basic" | "advanced" | "specialist",
+    condition?: string,
+  ): void => {
     const list = offerings.get(name) ?? [];
     list.push({ school, tier, condition });
     offerings.set(name, list);
@@ -961,7 +1362,8 @@ export function buildModulesFile(): ModulesFile {
   for (const school of schoolsStage3) {
     if (!school.fields) continue;
     for (const tier of ["basic", "advanced", "specialist"] as const) {
-      for (const skill of school.fields[tier]?.skills ?? []) noteOffering(skill, school.name, tier);
+      for (const skill of school.fields[tier]?.skills ?? [])
+        noteOffering(skill, school.name, tier);
     }
   }
   for (const school of schoolsStage3) {
@@ -989,7 +1391,8 @@ export function buildModulesFile(): ModulesFile {
         unrestricted = true;
         continue;
       }
-      for (const idx of affMatchOf(o.condition, affiliations) ?? []) set.add(idx);
+      for (const idx of affMatchOf(o.condition, affiliations) ?? [])
+        set.add(idx);
     }
     field.availability = unrestricted
       ? affiliations.slice()
@@ -1011,13 +1414,18 @@ export function buildModulesFile(): ModulesFile {
       name: rec.module,
       condition: rec.condition ?? undefined,
       affiliations:
-        rec.affMatch === null ? undefined : [...rec.affMatch].sort((a, b) => a - b).map((i) => affiliations[i]),
+        rec.affMatch === null
+          ? undefined
+          : [...rec.affMatch].sort((a, b) => a - b).map((i) => affiliations[i]),
       source: { file: STAGE_FILES[4], line: s4.sourceLine },
     });
   }
   for (const m of modulesStage4) {
     const set = s4Offered.get(m.name);
-    assert(set !== undefined, `stage-4 module ${m.name} never offered by S4ClearModulesList`);
+    assert(
+      set !== undefined,
+      `stage-4 module ${m.name} never offered by S4ClearModulesList`,
+    );
     m.availability = [...set].sort((a, b) => a - b).map((i) => affiliations[i]);
   }
 
@@ -1041,10 +1449,26 @@ export function buildModulesFile(): ModulesFile {
     },
   };
   const tableG = {
-    stage2_nameAttr: countLinesMatching(STAGE_FILES[2], readSource, "nameAttr =="),
-    stage2_nameClan: countLinesMatching(STAGE_FILES[2], readSource, "nameClan =="),
-    stage3_school: countLinesMatching(STAGE_FILES[3], readSource, 'school == "'),
-    stage3_affVar: countLinesMatching(STAGE_FILES[3], readSource, 'affVar == "'),
+    stage2_nameAttr: countLinesMatching(
+      STAGE_FILES[2],
+      readSource,
+      "nameAttr ==",
+    ),
+    stage2_nameClan: countLinesMatching(
+      STAGE_FILES[2],
+      readSource,
+      "nameClan ==",
+    ),
+    stage3_school: countLinesMatching(
+      STAGE_FILES[3],
+      readSource,
+      'school == "',
+    ),
+    stage3_affVar: countLinesMatching(
+      STAGE_FILES[3],
+      readSource,
+      'affVar == "',
+    ),
   };
 
   const sibkoAttrEntries = gating.filter((g) => g.kind === "sibkoBranch");
@@ -1057,17 +1481,31 @@ export function buildModulesFile(): ModulesFile {
   );
   assert(
     tableG.stage2_nameClan === 2 &&
-      ["Ghost Bear", "Hell's Horses", "Blood Spirit"].every((n) => clanBranchNames.includes(n)),
+      ["Ghost Bear", "Hell's Horses", "Blood Spirit"].every((n) =>
+        clanBranchNames.includes(n),
+      ),
     "nameClan lines must resolve to Ghost Bear, Hell's Horses and Blood Spirit",
   );
-  assert(schoolsStage3.length === tableG.stage3_school, "school == blocks vs schools");
+  assert(
+    schoolsStage3.length === tableG.stage3_school,
+    "school == blocks vs schools",
+  );
   assert(
     schoolFieldBranches + overrides.length === tableG.stage3_affVar,
     "affVar == lines vs emitted branches",
   );
-  assert(modulesStage1.length === tableM.stage1.blocks, "stage1 blocks vs modules");
-  assert(modulesStage2.length === tableM.stage2.blocks, "stage2 blocks vs modules");
-  assert(modulesStage4.length === tableM.stage4.blocks, "stage4 blocks vs modules");
+  assert(
+    modulesStage1.length === tableM.stage1.blocks,
+    "stage1 blocks vs modules",
+  );
+  assert(
+    modulesStage2.length === tableM.stage2.blocks,
+    "stage2 blocks vs modules",
+  );
+  assert(
+    modulesStage4.length === tableM.stage4.blocks,
+    "stage4 blocks vs modules",
+  );
   assert(
     fieldsStage3.length + schoolsStage3.length === tableM.stage3.distinct,
     "stage3 distinct names vs field+school entries",
@@ -1081,6 +1519,19 @@ export function buildModulesFile(): ModulesFile {
     ...modulesStage4,
   ];
   const stage0 = extractStage0(readSource, subskills);
+  const gates = normalizeChildhoodGates(
+    stage0,
+    choice1.branches,
+    hardIf,
+    hardElse,
+    choice2.branches,
+    hard2,
+    clear2,
+  );
+  const childhood = parseChildhoodCatalog(
+    extractChildhood({ readSource, modules, gating, gates, stage0, subskills }),
+    stage0,
+  );
 
   const fileLines: Record<string, number> = {};
   for (const file of [
@@ -1088,6 +1539,10 @@ export function buildModulesFile(): ModulesFile {
     "text_resurce.cpp",
     "wizard.cpp",
     "s0moredialog.cpp",
+    "s1moredialog.cpp",
+    "s2advdialog.cpp",
+    "s2flexxpdialog.cpp",
+    "s2clanfielddialog.cpp",
     "resource/affilations.dat",
   ]) {
     fileLines[file] = toLines(readSource(file)).length;
@@ -1096,13 +1551,17 @@ export function buildModulesFile(): ModulesFile {
   return {
     meta: {
       generatedBy: "scripts/extract-rules.ts (build step #11, PLAN.md)",
-      source: { repo: "Battletech-Character-Creator", rev: readSourceRev(), files: fileLines },
+      source: {
+        repo: "Battletech-Character-Creator",
+        rev: readSourceRev(),
+        files: fileLines,
+      },
       affiliations,
       tableM,
       tableG,
       notes: [
         "tableM.blocks follows RULES.md §8 grep semantics (raw line matches, comments included); stage 3's 78 includes one commented-out nameElem line in S3SchoolEnter.",
-        "tableM.distinct counts distinct `param == \"X\"` names (§8: occurrences are not distinct names); stage 3 has 66 distinct (schools + fields).",
+        'tableM.distinct counts distinct `param == "X"` names (§8: occurrences are not distinct names); stage 3 has 66 distinct (schools + fields).',
         "Stage-3 schools are selectable Table-M entries; their data lives in the ten `school ==` Table-G blocks of S3SchoolChange, so school entries are sourced from there.",
         "Officer Candidate School is a tenth school absent from the constructor's S3SChoolList (RULES.md §8); it reaches characters through the field dialog instead.",
         "S3ClearAffilation restricts the school list for the Franklin Fiefs and JarnFolk SUB-affiliations by name; affiliation-level availability cannot express that, so the gating entries carry it.",
@@ -1111,11 +1570,13 @@ export function buildModulesFile(): ModulesFile {
         "Stage-1/2 preambles do not reset xpCost (the wizard refunds first); stage-3/4 preambles reset to 0 — extraction captures per-block values either way (RULES.md §8).",
         "Availability is the affiliation-level union over reachable gate branches; sub-affiliation, caste, trait, school and phenotype conditions stay verbatim on the gating entries that declare them.",
         "Stage-0 affiliation, sub-affiliation, caste, language, choice and overlay data is extracted from text_resurce.cpp with wizard.cpp and s0moredialog.cpp supplying labels and candidate kinds; it remains separate from §8 Table M/G accounting.",
+        "S2HardElemAffil: Fiefdom of Randis calls removeAt(12) on its ten-item base list; this source anomaly has no additional normalized exclusion.",
       ],
     },
     modules,
     gating,
     stage0,
+    childhood,
   };
 }
 
@@ -1123,7 +1584,8 @@ function main(): void {
   const file = buildModulesFile();
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(OUT_FILE, JSON.stringify(file, null, 2) + "\n", "utf8");
-  const byStage = (stage: number): number => file.modules.filter((m) => m.stage === stage).length;
+  const byStage = (stage: number): number =>
+    file.modules.filter((m) => m.stage === stage).length;
   console.log(`Ingesting lifepath modules from ${SOURCE_ROOT}`);
   console.log(
     `  modules: ${file.modules.length} (${byStage(1)}/${byStage(2)}/${byStage(3)}/${byStage(4)} by stage)` +
@@ -1134,12 +1596,17 @@ function main(): void {
       count +
       affiliation.base.choices.length +
       affiliation.subAffiliations.reduce(
-        (subCount, subAffiliation) => subCount + subAffiliation.layer.choices.length,
+        (subCount, subAffiliation) =>
+          subCount + subAffiliation.layer.choices.length,
         0,
       ),
-    file.stage0.castes.reduce((count, caste) => count + caste.layer.choices.length, 0) +
+    file.stage0.castes.reduce(
+      (count, caste) => count + caste.layer.choices.length,
+      0,
+    ) +
       file.stage0.overlays.reduce(
-        (count, overlay) => count + overlay.base.choices.length + overlay.layer.choices.length,
+        (count, overlay) =>
+          count + overlay.base.choices.length + overlay.layer.choices.length,
         0,
       ),
   );
@@ -1151,5 +1618,6 @@ function main(): void {
 }
 
 const isCli =
-  process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
+  process.argv[1] !== undefined &&
+  import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (isCli) main();

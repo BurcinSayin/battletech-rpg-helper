@@ -4,18 +4,17 @@ import { useReducer, useState } from "react";
 import { Panel, HudButton, hudInput } from "@/components/characters/ui";
 import { cn } from "@/lib/utils";
 import { stage0Catalog } from "@/lib/rules/load";
+import { ATTRIBUTE_BASE, ATTRIBUTE_KEYS } from "@/lib/characters";
+import { ChildhoodPanel } from "./childhood-panel";
 import { Stage0Panel } from "./stage0-panel";
 import {
   WIZARD_PAGES,
   initialWizardState,
   wizardReducer,
+  canAdvance,
 } from "./wizard-state";
 
-/**
- * The step-#12a wizard shell: six pages in `RULES.md` §7.1 order with §7.3
- * back-navigation. Stage 0 edits the local draft; later stages remain
- * placeholders and `Finish` stays disabled.
- */
+/** Controlled local lifepath draft through Stage 2; later stages and Finish remain placeholders. */
 export function WizardClient() {
   const [state, dispatch] = useReducer(
     wizardReducer,
@@ -70,6 +69,14 @@ export function WizardClient() {
         </ol>
       </nav>
 
+      <section
+        aria-label="XP balances"
+        className="flex flex-wrap gap-x-6 gap-y-2 rounded border border-hud-line p-3 font-mono text-sm text-hud-text"
+      >
+        <p>Wizard XP remaining: {state.wizardXpRemaining} XP</p>
+        <p>Draft XP remaining: {state.xp.remaining} XP</p>
+      </section>
+
       <Panel title={page.title}>
         {page.key === "intro" ? (
           <label className="flex flex-col gap-1 text-sm text-hud-text">
@@ -89,7 +96,11 @@ export function WizardClient() {
               catalog={stage0Catalog}
               selection={state.selections.stage0}
               complete={state.stage0Complete}
-              moduleCost={state.moduleXpSpent}
+              moduleCost={
+                stage0Catalog.affiliations.find(
+                  (entry) => entry.id === state.selections.stage0.affiliationId,
+                )?.xpCost ?? 0
+              }
               wizardXpRemaining={state.wizardXpRemaining}
               draftXpRemaining={state.xp.remaining}
               onAffiliationChange={(affiliationId) =>
@@ -102,38 +113,79 @@ export function WizardClient() {
                 dispatch({ type: "setStage0Caste", casteId })
               }
               onStartingLanguageChange={(startingLanguage) =>
-                dispatch({ type: "setStage0StartingLanguage", startingLanguage })
+                dispatch({
+                  type: "setStage0StartingLanguage",
+                  startingLanguage,
+                })
               }
               onChoiceChange={(choice) =>
                 dispatch({ type: "setStage0Choice", ...choice })
               }
             />
-            <section aria-label="Current draft" className="mt-4 border-t border-hud-line pt-3 text-sm text-hud-text">
-              <h3 className="font-mono text-xs text-hud-muted">Current draft</h3>
-              <p>Draft XP remaining: {state.xp.remaining}</p>
-              <p>Wizard XP remaining: {state.wizardXpRemaining}</p>
-              <div className="mt-3 grid gap-4 sm:grid-cols-2">
-                {([
-                  ["Skills", state.draft.skills],
-                  ["Traits", state.draft.traits],
-                ] as const).map(([title, rows]) => (
-                  <div key={title}>
-                    <h4 className="font-mono text-xs text-hud-muted">{title}</h4>
-                    <ul aria-label={title}>
-                      {rows.map((row) => (
-                        <li key={row.name}>{row.name}: {row.xp} XP</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
           </>
+        ) : page.key === "stage1" || page.key === "stage2" ? (
+          <ChildhoodPanel
+            stage={page.key}
+            view={state.childhood[page.key]}
+            selection={state.selections[page.key]}
+            complete={
+              page.key === "stage1"
+                ? state.stage1Complete
+                : state.stage2Complete
+            }
+            dispatch={dispatch}
+          />
         ) : (
           <p className="text-sm text-hud-muted">
             {page.title} content lands in a later build step. The shell under it
             — page order and back-navigation — is in place now.
           </p>
+        )}
+        {state.pageId >= 1 && state.pageId <= 3 && (
+          <section
+            aria-label="Current draft"
+            className="mt-4 border-t border-hud-line pt-3 text-sm text-hud-text"
+          >
+            <h3 className="font-mono text-xs text-hud-muted">Current draft</h3>
+            <p>Age: {state.draft.scalars.age}</p>
+            <p>Phenotype: {state.draft.scalars.phenotype || "None"}</p>
+            <p>
+              Early childhood:{" "}
+              {state.draft.scalars.earlychild || "Not selected"}
+            </p>
+            <p>
+              Late childhood: {state.draft.scalars.latechild || "Not selected"}
+            </p>
+            <div className="mt-3 grid gap-4 sm:grid-cols-2">
+              <div>
+                <h4 className="font-mono text-xs text-hud-muted">Attributes</h4>
+                <ul aria-label="Attributes">
+                  {ATTRIBUTE_KEYS.map((key) => (
+                    <li key={key}>
+                      {key}: {state.draft.attrs[key] ?? ATTRIBUTE_BASE} XP
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              {(
+                [
+                  ["Skills", state.draft.skills],
+                  ["Traits", state.draft.traits],
+                ] as const
+              ).map(([title, rows]) => (
+                <div key={title}>
+                  <h4 className="font-mono text-xs text-hud-muted">{title}</h4>
+                  <ul aria-label={title}>
+                    {rows.map((row) => (
+                      <li key={row.name}>
+                        {row.name}: {row.xp} XP
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
         )}
       </Panel>
 
@@ -175,7 +227,7 @@ export function WizardClient() {
           <HudButton
             variant="primary"
             onClick={onNext}
-            disabled={state.pageId === 1 && !state.stage0Complete}
+            disabled={!canAdvance(state)}
           >
             Next
           </HudButton>

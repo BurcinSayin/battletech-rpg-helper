@@ -25,6 +25,8 @@
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import type { ChildhoodCatalog } from "../lib/rules/childhood-contract";
+import type { Stage0Catalog } from "../lib/rules/stage0-contract";
 
 // ---------------------------------------------------------------------------
 // Shapes
@@ -36,6 +38,7 @@ export interface Grant {
 }
 
 export interface DeferredPick {
+  namespace: "main" | "advanced" | "more";
   slot: number;
   label: string | null;
   kind: "skill" | "trait" | "attribute";
@@ -81,7 +84,11 @@ export interface Effects {
   attrDeltas?: Record<string, number>;
   traitGrants?: Grant[];
   skillGrants?: Grant[];
-  parametrizedGrants?: { language?: number; protocols?: number; streetwise?: number };
+  parametrizedGrants?: {
+    language?: number;
+    protocols?: number;
+    streetwise?: number;
+  };
   picks?: DeferredPick[];
   morePicks?: DeferredPick[];
   phenotypes?: string[];
@@ -107,14 +114,22 @@ export interface ModuleEntry {
   attrDeltas: Record<string, number>;
   traitGrants: Grant[];
   skillGrants: Grant[];
-  parametrizedGrants: { language: number; protocols: number; streetwise: number };
+  parametrizedGrants: {
+    language: number;
+    protocols: number;
+    streetwise: number;
+  };
   deferredPicks: DeferredPick[];
   morePicks: DeferredPick[];
   phenotypes: string[];
   prerequisites: Prerequisites;
   conditionals: Conditional[];
   availability: string[];
-  offeredBy?: { school: string; tier: "basic" | "advanced" | "specialist"; condition?: string }[];
+  offeredBy?: {
+    school: string;
+    tier: "basic" | "advanced" | "specialist";
+    condition?: string;
+  }[];
   inDefaultSchoolList?: boolean;
   fieldClass?: "civ" | "pol" | "mil";
   schoolFlags?: string[];
@@ -171,7 +186,8 @@ export interface GatingEntry {
 }
 
 export interface ModulesFile {
-  readonly stage0: import("../lib/rules/stage0-contract").Stage0Catalog;
+  readonly stage0: Stage0Catalog;
+  readonly childhood: ChildhoodCatalog;
   meta: {
     generatedBy: string;
     source: { repo: string; rev: string; files: Record<string, number> };
@@ -205,7 +221,9 @@ export function stripTrailingComment(line: string): string {
 
 /** Decode a C string literal body (`\n`, `\"`, `\\`). */
 export function unescapeCpp(raw: string): string {
-  return raw.replace(/\\(.)/g, (_m, ch: string) => (ch === "n" ? "\n" : ch === "t" ? "\t" : ch));
+  return raw.replace(/\\(.)/g, (_m, ch: string) =>
+    ch === "n" ? "\n" : ch === "t" ? "\t" : ch,
+  );
 }
 
 /** All `"…"` literals on a line, in order. */
@@ -253,7 +271,9 @@ export function splitModuleBlocks(
   file: string,
 ): { name: string; lines: string[]; line: number }[] {
   const blocks: { name: string; lines: string[]; line: number }[] = [];
-  const open = new RegExp(`^if\\s*\\(\\s*${param}\\s*==\\s*"([^"]+)"\\s*\\)\\s*\\{`);
+  const open = new RegExp(
+    `^if\\s*\\(\\s*${param}\\s*==\\s*"([^"]+)"\\s*\\)\\s*\\{`,
+  );
   for (let i = 0; i < fn.lines.length; i++) {
     const m = open.exec(fn.lines[i].trim());
     if (!m) continue;
@@ -271,7 +291,8 @@ export function splitModuleBlocks(
     }
     blocks.push({ name: m[1], lines: body, line: blockStart });
   }
-  if (blocks.length === 0) throw new Error(`No ${param} blocks found in ${file}`);
+  if (blocks.length === 0)
+    throw new Error(`No ${param} blocks found in ${file}`);
   return blocks;
 }
 
@@ -294,9 +315,16 @@ export class BlockInterpreter {
     if (code.startsWith("//")) return;
     // Control scaffolding is handled by the block walker (`interpretBlock`);
     // the interpreter only ever sees plain statements.
-    if (/^if\s*\(/.test(code) || /^}\s*else\s*\{$/.test(code) || /^else\s*\{$/.test(code)) return;
+    if (
+      /^if\s*\(/.test(code) ||
+      /^}\s*else\s*\{$/.test(code) ||
+      /^else\s*\{$/.test(code)
+    )
+      return;
     if (this.tryStatement(code)) return;
-    throw new Error(`Unrecognized statement in stage ${this.stage} block:\n  ${rawLine.trim()}`);
+    throw new Error(
+      `Unrecognized statement in stage ${this.stage} block:\n  ${rawLine.trim()}`,
+    );
   }
 
   private tryStatement(code: string): boolean {
@@ -315,14 +343,18 @@ export class BlockInterpreter {
     }
 
     // tooltip
-    const tip = new RegExp(`^${pfx}toolTip\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"\\s*;$`).exec(code);
+    const tip = new RegExp(
+      `^${pfx}toolTip\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"\\s*;$`,
+    ).exec(code);
     if (tip) {
       this.effects.description = unescapeCpp(tip[1]);
       return true;
     }
 
     // stage-1 stable block id
-    const num = new RegExp(`^${pfx}ChildHoodNumber\\s*=\\s*(\\d+)\\s*;$`).exec(code);
+    const num = new RegExp(`^${pfx}ChildHoodNumber\\s*=\\s*(\\d+)\\s*;$`).exec(
+      code,
+    );
     if (num) {
       this.effects.desktopNumber = parseInt(num[1], 10);
       return true;
@@ -336,7 +368,9 @@ export class BlockInterpreter {
     }
 
     // flex XP (set or +=)
-    const flex = new RegExp(`^${pfx}FlexXP\\s*(\\+?=)\\s*(\\d+)\\s*;$`).exec(code);
+    const flex = new RegExp(`^${pfx}FlexXP\\s*(\\+?=)\\s*(\\d+)\\s*;$`).exec(
+      code,
+    );
     if (flex) {
       if (flex[1] === "+=") this.effects.flexXpDelta = parseInt(flex[2], 10);
       else this.effects.flexXp = parseInt(flex[2], 10);
@@ -344,7 +378,9 @@ export class BlockInterpreter {
     }
 
     // age (stage 4)
-    const age = new RegExp(`^${pfx}Age\\s*=\\s*(\\d+(?:\\.\\d+)?)\\s*;$`).exec(code);
+    const age = new RegExp(`^${pfx}Age\\s*=\\s*(\\d+(?:\\.\\d+)?)\\s*;$`).exec(
+      code,
+    );
     if (age) {
       this.effects.age = Number(age[1]);
       return true;
@@ -352,7 +388,9 @@ export class BlockInterpreter {
 
     // attribute deltas (raw XP) — stage 4 names the map s4AttrMod
     const attrMap = s === 4 ? "s4AttrMod" : pfx + "Attr";
-    const attr = new RegExp(`^${attrMap}\\["(\\w+)"\\]\\s*(\\+?=)\\s*(-?\\d+)\\s*;$`).exec(code);
+    const attr = new RegExp(
+      `^${attrMap}\\["(\\w+)"\\]\\s*(\\+?=)\\s*(-?\\d+)\\s*;$`,
+    ).exec(code);
     if (attr) {
       const [, key, op, val] = attr;
       const map = (this.effects.attrDeltas ??= {});
@@ -362,21 +400,38 @@ export class BlockInterpreter {
     }
 
     // signed grants
-    const trait = new RegExp(`^S${s}AddTraits\\("((?:[^"\\\\]|\\\\.)*)"\\s*,\\s*(-?\\d+)\\s*\\)\\s*;$`).exec(code);
+    const trait = new RegExp(
+      `^S${s}AddTraits\\("((?:[^"\\\\]|\\\\.)*)"\\s*,\\s*(-?\\d+)\\s*\\)\\s*;$`,
+    ).exec(code);
     if (trait) {
-      (this.effects.traitGrants ??= []).push({ name: unescapeCpp(trait[1]), xp: parseInt(trait[2], 10) });
+      (this.effects.traitGrants ??= []).push({
+        name: unescapeCpp(trait[1]),
+        xp: parseInt(trait[2], 10),
+      });
       return true;
     }
-    const skill = new RegExp(`^S${s}AddSkills\\("((?:[^"\\\\]|\\\\.)*)"\\s*,\\s*(-?\\d+)\\s*\\)\\s*;$`).exec(code);
+    const skill = new RegExp(
+      `^S${s}AddSkills\\("((?:[^"\\\\]|\\\\.)*)"\\s*,\\s*(-?\\d+)\\s*\\)\\s*;$`,
+    ).exec(code);
     if (skill) {
-      (this.effects.skillGrants ??= []).push({ name: unescapeCpp(skill[1]), xp: parseInt(skill[2], 10) });
+      (this.effects.skillGrants ??= []).push({
+        name: unescapeCpp(skill[1]),
+        xp: parseInt(skill[2], 10),
+      });
       return true;
     }
 
     // parametrized Language / Protocols / Streetwise grants
-    const aff = new RegExp(`^${pfx}Aff(Lang|Prot|Street)\\s*=\\s*(-?\\d+)\\s*;$`).exec(code);
+    const aff = new RegExp(
+      `^${pfx}Aff(Lang|Prot|Street)\\s*=\\s*(-?\\d+)\\s*;$`,
+    ).exec(code);
     if (aff) {
-      const key = aff[1] === "Lang" ? "language" : aff[1] === "Prot" ? "protocols" : "streetwise";
+      const key =
+        aff[1] === "Lang"
+          ? "language"
+          : aff[1] === "Prot"
+            ? "protocols"
+            : "streetwise";
       (this.effects.parametrizedGrants ??= {})[key] = parseInt(aff[2], 10);
       return true;
     }
@@ -389,7 +444,9 @@ export class BlockInterpreter {
     }
 
     // sibko XP machinery (stage-2 dispatch functions)
-    const clanXp = new RegExp(`^${pfx}Clan(Basic|Adv)(XP|StepXP|RebateXP)\\s*=\\s*(\\d+)\\s*;$`).exec(code);
+    const clanXp = new RegExp(
+      `^${pfx}Clan(Basic|Adv)(XP|StepXP|RebateXP)\\s*=\\s*(\\d+)\\s*;$`,
+    ).exec(code);
     if (clanXp) {
       const bucket = clanXp[1] === "Basic" ? "basic" : "advanced";
       const cx = (this.effects.clanXp ??= {});
@@ -399,7 +456,9 @@ export class BlockInterpreter {
       else g.rebateXp = parseInt(clanXp[3], 10);
       return true;
     }
-    const clanField = new RegExp(`^${pfx}ClanAdvFieldList\\s*<<\\s*(.+);$`).exec(code);
+    const clanField = new RegExp(
+      `^${pfx}ClanAdvFieldList\\s*<<\\s*(.+);$`,
+    ).exec(code);
     if (clanField) {
       (this.effects.clanFieldList ??= []).push(...stringLiterals(clanField[1]));
       return true;
@@ -421,25 +480,34 @@ export class BlockInterpreter {
       `^${pfx}(?:ChildHoodLabel(\\d)|ChildHoodLabelAdv(\\d)|LabelElem(\\d))\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"\\s*;$`,
     ).exec(code);
     if (label) {
-      const pick = this.openPick(parseInt(label[1] ?? label[2] ?? label[3], 10));
+      const pick = this.openPick(
+        parseInt(label[1] ?? label[2] ?? label[3], 10),
+        label[2] ? "advanced" : "main",
+      );
       pick.label = unescapeCpp(label[4]);
       return true;
     }
 
     // Stage-1/2 flex-XP more-picks (S1MoreButton / S2More dialog data, §4).
-    const moreLabel = new RegExp(`^${pfx}subAffElem(\\d)LabelMore\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"\\s*;$`).exec(code);
+    const moreLabel = new RegExp(
+      `^${pfx}subAffElem(\\d)LabelMore\\s*=\\s*"((?:[^"\\\\]|\\\\.)*)"\\s*;$`,
+    ).exec(code);
     if (moreLabel) {
       const pick = this.getMorePick(parseInt(moreLabel[1], 10));
       pick.label = unescapeCpp(moreLabel[2]);
       return true;
     }
-    const moreXp = new RegExp(`^${pfx}affSkillsElem(\\d)More\\s*=\\s*(-?\\d+)\\s*;$`).exec(code);
+    const moreXp = new RegExp(
+      `^${pfx}affSkillsElem(\\d)More\\s*=\\s*(-?\\d+)\\s*;$`,
+    ).exec(code);
     if (moreXp) {
       const pick = this.getMorePick(parseInt(moreXp[1], 10));
       pick.xp = parseInt(moreXp[2], 10);
       return true;
     }
-    const moreList = new RegExp(`^${pfx}subAffElem(\\d)More\\s*<<\\s*(.+);$`).exec(code);
+    const moreList = new RegExp(
+      `^${pfx}subAffElem(\\d)More\\s*<<\\s*(.+);$`,
+    ).exec(code);
     if (moreList) {
       const pick = this.getMorePick(parseInt(moreList[1], 10));
       (pick.candidates ??= []).push(...stringLiterals(moreList[2]));
@@ -451,7 +519,10 @@ export class BlockInterpreter {
       `^${pfx}(ChildHoodAttr(\\d)|ChildHoodAttrAdv(\\d))\\s*(=\\s*CreateSubSkillList\\("([^"]+)"\\)|<<\\s*(.+))\\s*;\\s*$`,
     ).exec(code);
     if (attrList) {
-      const pick = this.openPick(parseInt(attrList[2] ?? attrList[3], 10));
+      const pick = this.openPick(
+        parseInt(attrList[2] ?? attrList[3], 10),
+        attrList[3] ? "advanced" : "main",
+      );
       if (attrList[5]) {
         pick.candidatesSource = `CreateSubSkillList(${attrList[5]})`;
         pick.candidates = this.subSkillCandidates(attrList[5]);
@@ -463,9 +534,12 @@ export class BlockInterpreter {
     }
 
     // Stage-4 candidate lists.
-    const s4skill = /^s4SkillsElem(\d)\s*(=\s*CreateSubSkillList\("([^"]+)"\)|<<\s*(.+))\s*;\s*$/.exec(code);
+    const s4skill =
+      /^s4SkillsElem(\d)\s*(=\s*CreateSubSkillList\("([^"]+)"\)|<<\s*(.+))\s*;\s*$/.exec(
+        code,
+      );
     if (s4skill) {
-      const pick = this.openPick(parseInt(s4skill[1], 10));
+      const pick = this.openPick(parseInt(s4skill[1], 10), "main");
       if (s4skill[3]) {
         pick.candidatesSource = `CreateSubSkillList(${s4skill[3]})`;
         pick.candidates = this.subSkillCandidates(s4skill[3]);
@@ -478,23 +552,26 @@ export class BlockInterpreter {
       }
       return true;
     }
-    const s4dyn = /^s4SkillsElem(\d)\.append\(clanFieldSkills\[i\]\.first\)\s*;$/.exec(code);
+    const s4dyn =
+      /^s4SkillsElem(\d)\.append\(clanFieldSkills\[i\]\.first\)\s*;$/.exec(
+        code,
+      );
     if (s4dyn) {
-      const pick = this.openPick(parseInt(s4dyn[1], 10));
+      const pick = this.openPick(parseInt(s4dyn[1], 10), "main");
       pick.candidatesSource = "clanFieldSkills";
       pick.candidates = null;
       return true;
     }
     const s4traits = /^s4TraitsElem(\d)\s*<<\s*(.+);$/.exec(code);
     if (s4traits) {
-      const pick = this.openPick(parseInt(s4traits[1], 10), "trait");
+      const pick = this.openPick(parseInt(s4traits[1], 10), "main", "trait");
       pick.candidatesSource = "literal";
       (pick.candidates ??= []).push(...stringLiterals(s4traits[2]));
       return true;
     }
     const s4attrs = /^s4AttrElem(\d)\s*<<\s*(.+);$/.exec(code);
     if (s4attrs) {
-      const pick = this.openPick(parseInt(s4attrs[1], 10), "attribute");
+      const pick = this.openPick(parseInt(s4attrs[1], 10), "main", "attribute");
       pick.candidatesSource = "literal";
       (pick.candidates ??= []).push(...stringLiterals(s4attrs[2]));
       return true;
@@ -505,7 +582,10 @@ export class BlockInterpreter {
       `^${pfx}(?:ChildHoodSkills(\\d)|ChildHoodSkillsAdv(\\d)|Elem(\\d))\\s*=\\s*(-?\\d+)\\s*;$`,
     ).exec(code);
     if (pickXp) {
-      const pick = this.openPick(parseInt(pickXp[1] ?? pickXp[2] ?? pickXp[3], 10));
+      const pick = this.openPick(
+        parseInt(pickXp[1] ?? pickXp[2] ?? pickXp[3], 10),
+        pickXp[2] ? "advanced" : "main",
+      );
       pick.xp = parseInt(pickXp[4], 10);
       return true;
     }
@@ -513,13 +593,17 @@ export class BlockInterpreter {
       `^${pfx}(?:ChildHoodTraits(\\d)|ChildHoodTraitsAdv(\\d))\\s*=\\s*(-?\\d+)\\s*;$`,
     ).exec(code);
     if (pickTraitXp) {
-      const pick = this.openPick(parseInt(pickTraitXp[1] ?? pickTraitXp[2], 10), "trait");
+      const pick = this.openPick(
+        parseInt(pickTraitXp[1] ?? pickTraitXp[2], 10),
+        pickTraitXp[2] ? "advanced" : "main",
+        "trait",
+      );
       pick.xp = parseInt(pickTraitXp[3], 10);
       return true;
     }
     const repit = /^s4Repit(\d)\s*=\s*(\d+)\s*;$/.exec(code);
     if (repit) {
-      const pick = this.openPick(parseInt(repit[1], 10));
+      const pick = this.openPick(parseInt(repit[1], 10), "main");
       pick.repeats = parseInt(repit[2], 10);
       return true;
     }
@@ -527,13 +611,13 @@ export class BlockInterpreter {
     // Stage-4 deterministic list post-processing, applied in order.
     const dedup = /^s4SkillsElem(\d)\.removeDuplicates\(\)\s*;$/.exec(code);
     if (dedup) {
-      const pick = this.openPick(parseInt(dedup[1], 10));
+      const pick = this.openPick(parseInt(dedup[1], 10), "main");
       if (pick.candidates) pick.candidates = [...new Set(pick.candidates)];
       return true;
     }
     const sort = /^s4SkillsElem(\d)\.sort\(\)\s*;$/.exec(code);
     if (sort) {
-      const pick = this.openPick(parseInt(sort[1], 10));
+      const pick = this.openPick(parseInt(sort[1], 10), "main");
       pick.candidates?.sort();
       return true;
     }
@@ -546,16 +630,36 @@ export class BlockInterpreter {
     if (this.stage !== 3) return false;
     const list = /^s3(Basic|Adv|Spec)Field\s*<<\s*(.+);$/.exec(code);
     if (list) {
-      const key = list[1] === "Basic" ? "basic" : list[1] === "Adv" ? "advanced" : "specialist";
-      const fields = (this.effects.fields ??= { basic: null, advanced: null, specialist: null });
+      const key =
+        list[1] === "Basic"
+          ? "basic"
+          : list[1] === "Adv"
+            ? "advanced"
+            : "specialist";
+      const fields = (this.effects.fields ??= {
+        basic: null,
+        advanced: null,
+        specialist: null,
+      });
       const g = (fields[key] ??= { skills: [], age: null });
       g.skills.push(...stringLiterals(list[2]));
       return true;
     }
-    const age = /^s3(Basic|Adv|Spec)FieldAge\s*=\s*(\d+(?:\.\d+)?)\s*;$/.exec(code);
+    const age = /^s3(Basic|Adv|Spec)FieldAge\s*=\s*(\d+(?:\.\d+)?)\s*;$/.exec(
+      code,
+    );
     if (age) {
-      const key = age[1] === "Basic" ? "basic" : age[1] === "Adv" ? "advanced" : "specialist";
-      const fields = (this.effects.fields ??= { basic: null, advanced: null, specialist: null });
+      const key =
+        age[1] === "Basic"
+          ? "basic"
+          : age[1] === "Adv"
+            ? "advanced"
+            : "specialist";
+      const fields = (this.effects.fields ??= {
+        basic: null,
+        advanced: null,
+        specialist: null,
+      });
       const g = (fields[key] ??= { skills: [], age: null });
       g.age = Number(age[2]);
       return true;
@@ -565,10 +669,16 @@ export class BlockInterpreter {
 
   private tryPrereq(code: string): boolean {
     const s = this.stage;
-    const preAttr = new RegExp(`^s${s}PreAttr\\["(\\w+)"\\]\\s*(\\+?=)\\s*(\\d+)\\s*;$`).exec(code);
+    const preAttr = new RegExp(
+      `^s${s}PreAttr\\["(\\w+)"\\]\\s*(\\+?=)\\s*(\\d+)\\s*;$`,
+    ).exec(code);
     if (preAttr) {
       const [, key, op, raw] = preAttr;
-      const attrs = (this.effects.prerequisites ??= { attrs: {}, traits: [], skills: [] }).attrs;
+      const attrs = (this.effects.prerequisites ??= {
+        attrs: {},
+        traits: [],
+        skills: [],
+      }).attrs;
       // The preamble clears the map, so the first += behaves like =; repeat
       // writes accumulate, faithful to either source form.
       const v = parseInt(raw, 10);
@@ -579,10 +689,15 @@ export class BlockInterpreter {
       `^s${s}Pre(Traits|Skills)\\.append\\(qMakePair\\((swpstr|"[^"]*"),\\s*(-?\\d+)\\)\\)\\s*;$`,
     ).exec(code);
     if (prePair) {
-      const name = prePair[2] === "swpstr" ? this.lastSwpstr : unescapeCpp(prePair[2]);
+      const name =
+        prePair[2] === "swpstr" ? this.lastSwpstr : unescapeCpp(prePair[2]);
       if (!name) throw new Error(`qMakePair without a known swpstr: ${code}`);
       const grant = { name, xp: parseInt(prePair[3], 10) };
-      const pre = (this.effects.prerequisites ??= { attrs: {}, traits: [], skills: [] });
+      const pre = (this.effects.prerequisites ??= {
+        attrs: {},
+        traits: [],
+        skills: [],
+      });
       if (prePair[1] === "Traits") pre.traits.push(grant);
       else pre.skills.push(grant);
       return true;
@@ -597,13 +712,30 @@ export class BlockInterpreter {
     return subs.map((sub) => `${family}/${sub}`).sort();
   }
 
-  private openPick(slot: number, kind?: "trait" | "attribute"): DeferredPick {
+  private openPick(
+    slot: number,
+    namespace: "main" | "advanced",
+    kind?: "trait" | "attribute",
+  ): DeferredPick {
     const arr = (this.effects.picks ??= []);
-    let pick = arr.find((p) => p.slot === slot);
+    let pick = arr.find((p) => p.namespace === namespace && p.slot === slot);
     if (!pick) {
-      pick = { slot, label: null, kind: "skill", candidates: null, candidatesSource: null, xp: null, repeats: null };
+      pick = {
+        namespace,
+        slot,
+        label: null,
+        kind: "skill",
+        candidates: null,
+        candidatesSource: null,
+        xp: null,
+        repeats: null,
+      };
       arr.push(pick);
-      arr.sort((a, b) => a.slot - b.slot);
+      arr.sort(
+        (a, b) =>
+          Number(a.namespace === "advanced") -
+            Number(b.namespace === "advanced") || a.slot - b.slot,
+      );
     }
     if (kind) pick.kind = kind;
     return pick;
@@ -613,7 +745,16 @@ export class BlockInterpreter {
     const arr = (this.effects.morePicks ??= []);
     let pick = arr.find((p) => p.slot === slot);
     if (!pick) {
-      pick = { slot, label: null, kind: "attribute", candidates: [], candidatesSource: "literal", xp: null, repeats: null };
+      pick = {
+        namespace: "more",
+        slot,
+        label: null,
+        kind: "attribute",
+        candidates: [],
+        candidatesSource: "literal",
+        xp: null,
+        repeats: null,
+      };
       arr.push(pick);
       arr.sort((a, b) => a.slot - b.slot);
     }
@@ -646,7 +787,11 @@ export function sliceIfElse(
   while (j < lines.length && depth > 0) {
     // `} else {` terminates the if-body; its `{` opens the else-body and is
     // not counted here.
-    if (depth === 1 && /^}\s*else\s*\{$/.test(stripTrailingComment(lines[j]).trim())) break;
+    if (
+      depth === 1 &&
+      /^}\s*else\s*\{$/.test(stripTrailingComment(lines[j]).trim())
+    )
+      break;
     for (const ch of lines[j]) {
       if (ch === "{") depth++;
       else if (ch === "}") depth--;
@@ -656,7 +801,10 @@ export function sliceIfElse(
   }
   let elseBody: string[] | null = null;
   let next = j;
-  if (j < lines.length && /^}\s*else\s*\{\s*$/.test(stripTrailingComment(lines[j]).trim())) {
+  if (
+    j < lines.length &&
+    /^}\s*else\s*\{\s*$/.test(stripTrailingComment(lines[j]).trim())
+  ) {
     const ebody: string[] = [];
     let eDepth = 1;
     let k = j + 1;
@@ -713,9 +861,12 @@ export function interpretBlock(
       const cond: Conditional = {
         condition: ifm[1].trim(),
         effects: nested.effects,
-        elseEffects: elseBody ? interpretBlock(elseBody, stage, subskills).effects : null,
+        elseEffects: elseBody
+          ? interpretBlock(elseBody, stage, subskills).effects
+          : null,
       };
-      if (nested.conditionals.length > 0) cond.conditionals = nested.conditionals;
+      if (nested.conditionals.length > 0)
+        cond.conditionals = nested.conditionals;
       conditionals.push(cond);
       i = next;
       continue;
@@ -758,7 +909,11 @@ export function buildModule(
     deferredPicks: effects.picks ?? [],
     morePicks: effects.morePicks ?? [],
     phenotypes: effects.phenotypes ?? [],
-    prerequisites: effects.prerequisites ?? { attrs: {}, traits: [], skills: [] },
+    prerequisites: effects.prerequisites ?? {
+      attrs: {},
+      traits: [],
+      skills: [],
+    },
     conditionals,
     availability: [],
     source: { file, line: sourceLine },
@@ -782,8 +937,26 @@ export function parseDispatchFunction(
   const fn = extractFunction(readSource(file), fnSignature);
   const blocks = splitModuleBlocks(fn, param, file);
   return blocks.map((b, index) => {
-    const parsed = interpretBlock(b.lines, stage, subskills);
-    return buildModule(stage, kind, b.name, index, b.line, file, parsed.effects, parsed.conditionals);
+    try {
+      const parsed = interpretBlock(b.lines, stage, subskills);
+      return buildModule(
+        stage,
+        kind,
+        b.name,
+        index,
+        b.line,
+        file,
+        parsed.effects,
+        parsed.conditionals,
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const statement = message.split("\n").at(-1)?.trim();
+      const offset = b.lines.findIndex((line) => line.trim() === statement);
+      throw new Error(
+        `${file}:${b.line + Math.max(offset + 1, 0)}: ${message}`,
+      );
+    }
   });
 }
 
@@ -792,12 +965,20 @@ export function parseDispatchFunction(
 // ---------------------------------------------------------------------------
 
 /** Count lines containing `needle` — matches `grep -c 'needle'`. */
-export function countLinesMatching(file: string, readSource: (rel: string) => string, needle: string): number {
+export function countLinesMatching(
+  file: string,
+  readSource: (rel: string) => string,
+  needle: string,
+): number {
   return toLines(readSource(file)).filter((l) => l.includes(needle)).length;
 }
 
 /** Distinct `param == "X"` names — matches `grep -o … | sort -u | wc -l`. */
-export function countDistinctNames(file: string, param: string, readSource: (rel: string) => string): number {
+export function countDistinctNames(
+  file: string,
+  param: string,
+  readSource: (rel: string) => string,
+): number {
   const re = new RegExp(`${param}\\s*==\\s*"([^"]+)"`, "g");
   const names = new Set<string>();
   for (const line of toLines(readSource(file))) {

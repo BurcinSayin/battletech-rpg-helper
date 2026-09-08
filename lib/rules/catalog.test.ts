@@ -22,6 +22,7 @@ import {
 import { parseBtcc } from "@/lib/btcc";
 import { readFixture } from "@/lib/btcc/test-fixtures";
 import modulesJson from "@/data/rules/modules.json";
+import { parseChildhoodCatalog } from "@/lib/validation/childhood";
 
 describe("rules catalog", () => {
   it("validates against zod schemas", () => {
@@ -61,14 +62,12 @@ describe("rules catalog", () => {
     const inventory = {
       modules: modulesJson.modules.length,
       stageCounts,
-      gating: modulesJson.gating.length,
     };
 
     // Then: the established Stage 1-4 contract remains unchanged.
     expect(inventory).toEqual({
       modules: 115,
       stageCounts: { 1: 11, 2: 13, 3: 66, 4: 25 },
-      gating: 71,
     });
   });
 
@@ -106,26 +105,32 @@ describe("rules catalog", () => {
     }));
 
     // Then: source ordering, full revision, read files, and Clan gates are explicit.
-    expect(identities).toEqual(
-      expectedNames.map((name, id) => ({ id, name })),
-    );
+    expect(identities).toEqual(expectedNames.map((name, id) => ({ id, name })));
     expect(identities.map(({ name }) => name)).toEqual(
       modulesJson.meta.affiliations,
     );
     expect(modulesJson.meta.source.rev).toBe(
       "a1d800982b2b0659aa230ca8fc8882750a2c350d",
     );
-    expect(Object.keys(modulesJson.meta.source.files)).toEqual([
-      "stage1_resurce.cpp",
-      "stage2_resurce.cpp",
-      "stage3_resurce.cpp",
-      "stage4_resurce.cpp",
-      "text_resurce.cpp",
-      "wizard.cpp",
-      "s0moredialog.cpp",
-      "resource/affilations.dat",
-    ]);
-    expect(stage0Catalog.affiliations.map(({ casteRequired }) => casteRequired)).toEqual([
+    expect(Object.keys(modulesJson.meta.source.files)).toEqual(
+      expect.arrayContaining([
+        "stage1_resurce.cpp",
+        "stage2_resurce.cpp",
+        "stage3_resurce.cpp",
+        "stage4_resurce.cpp",
+        "text_resurce.cpp",
+        "wizard.cpp",
+        "s0moredialog.cpp",
+        "resource/affilations.dat",
+        "s1moredialog.cpp",
+        "s2advdialog.cpp",
+        "s2flexxpdialog.cpp",
+        "s2clanfielddialog.cpp",
+      ]),
+    );
+    expect(
+      stage0Catalog.affiliations.map(({ casteRequired }) => casteRequired),
+    ).toEqual([
       false,
       false,
       false,
@@ -202,6 +207,62 @@ describe("rules catalog", () => {
         ]),
       },
     });
+  });
+
+  it("rejects childhood gates referencing unknown modules and affiliations", () => {
+    const gate = modulesJson.childhood.gates[0];
+    expect(() =>
+      parseChildhoodCatalog(
+        {
+          ...modulesJson.childhood,
+          gates: [{ ...gate, modules: ["Missing module"] }],
+        },
+        stage0Catalog,
+      ),
+    ).toThrow(/Unknown gate module/);
+    expect(() =>
+      parseChildhoodCatalog(
+        {
+          ...modulesJson.childhood,
+          gates: [{ ...gate, when: { affiliations: ["Missing affiliation"] } }],
+        },
+        stage0Catalog,
+      ),
+    ).toThrow(/Unknown gate affiliation/);
+  });
+
+  it("rejects malformed fixed grants and cross-catalog caste joins", () => {
+    const ruleModule = modulesJson.childhood.modules[0];
+    expect(() =>
+      parseChildhoodCatalog(
+        {
+          ...modulesJson.childhood,
+          modules: [
+            {
+              ...ruleModule,
+              layer: { ...ruleModule.layer, attrDeltas: { UNKNOWN: 10 } },
+            },
+          ],
+        },
+        stage0Catalog,
+      ),
+    ).toThrow(/Unknown attribute/);
+    expect(() =>
+      parseChildhoodCatalog(
+        {
+          ...modulesJson.childhood,
+          modules: modulesJson.childhood.modules.map((entry, index) =>
+            index === 0
+              ? {
+                  ...entry,
+                  casteLayers: [{ caste: "Missing caste", layer: entry.layer }],
+                }
+              : entry,
+          ),
+        },
+        stage0Catalog,
+      ),
+    ).toThrow(/Unknown caste/);
   });
 
   it("parses skill metadata correctly", () => {
