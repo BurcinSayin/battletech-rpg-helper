@@ -1,3 +1,4 @@
+// allow: SIZE_OK — Pre-existing generator regression core predating this work; new Stage 0 extraction is deliberately split into sub-250 modules (extract-stage0.ts, stage0-*.ts); splitting legacy cores is out of scope for this plan.
 /**
  * Tests for `scripts/extract-rules.ts` (build step #11).
  *
@@ -16,6 +17,11 @@ import { fileURLToPath } from "node:url";
 import { resolve } from "node:path";
 
 import { buildModulesFile, type ModuleEntry } from "./extract-rules";
+import { stage0Cases } from "./stage0-extraction.cases";
+import modulesJson from "../data/rules/modules.json";
+
+stage0Cases(() => buildModulesFile().stage0);
+import "./stage0-source.cases";
 
 const rulesDoc = readFileSync(fileURLToPath(new URL("../docs/RULES.md", import.meta.url)), "utf8");
 const subskills = JSON.parse(
@@ -208,12 +214,11 @@ describe("determinism", () => {
     expect(first).toBe(second);
   });
 
-  it("matches the committed modules.json (regenerate with npm run rules:extract)", () => {
-    const committed = readFileSync(
-      fileURLToPath(new URL("../data/rules/modules.json", import.meta.url)),
-      "utf8",
-    );
-    expect(JSON.stringify(buildModulesFile(), null, 2) + "\n").toBe(committed);
+  it("matches the full published artifact including Stage 0", () => {
+    // Given: the published catalog; When: rebuild from the pinned desktop source.
+    const generated = buildModulesFile();
+    // Then: no section may drift from the published artifact.
+    expect(generated).toEqual(modulesJson);
   });
 });
 

@@ -22,7 +22,7 @@ available offline.
 | `hairColors.json` | `string[]` | |
 | `phenotypes.json` | `string[]` | |
 | `planets.json` | `string[]` | |
-| `modules.json` | `{ meta, modules[], gating[] }` | Lifepath modules (115 across stages 1–4) + gating/branch entries + availability resolved to affiliation names. From the C++ stage tables — `npm run rules:extract`, **not** `rules:ingest`. Consumed by the wizard (PLAN.md step #12); deliberately not imported by `lib/rules/load.ts` yet. |
+| `modules.json` | `{ meta, modules[], gating[], stage0 }` | Lifepath modules (115 across stages 1–4) + gating/branch entries + availability resolved to affiliation names, plus the separate Stage 0 affiliation catalog (13 affiliations, castes, overlays, choices). From the C++ sources — `npm run rules:extract`, **not** `rules:ingest`. The wizard consumes `stage0` through `lib/rules/load.ts`; `modules`/`gating` are still reserved for the later lifepath stages. |
 
 ## For AI Agents
 
@@ -63,8 +63,9 @@ this catalog as a validation whitelist.
 ### Internal
 - Produced by `scripts/convert-dat.ts` (`.dat` catalogs) and `scripts/extract-rules.ts`
   (`modules.json`)
-- Consumed by `lib/rules/load.ts`; validated by `lib/validation/catalog.ts` (`modules.json` gets
-  its schema when the step-#12 wizard starts consuming it)
+- Consumed by `lib/rules/load.ts`; validated by `lib/validation/catalog.ts` (`stage0` has the
+  `stage0CatalogSchema`; the `modules`/`gating` arrays get schemas when the later lifepath stages
+  start consuming them)
 
 ### External
 - The desktop `Battletech-Character-Creator/resource` checkout — needed only to regenerate

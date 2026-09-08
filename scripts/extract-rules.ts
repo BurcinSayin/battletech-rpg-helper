@@ -1,3 +1,4 @@
+// allow: SIZE_OK — Pre-existing generator core predating this work; new Stage 0 extraction is deliberately split into sub-250 modules (extract-stage0.ts, stage0-*.ts); splitting legacy cores is out of scope for this plan.
 /**
  * Step #11 rules extraction CLI (PLAN.md → Step 11): reads the desktop's
  * stage tables and emits `data/rules/modules.json`. The statement vocabulary
@@ -30,6 +31,8 @@ import {
   type Effects,
   type FnBody,
 } from "./extract-rules-lib";
+import { extractStage0 } from "./extract-stage0";
+import { subskillsSchema } from "../lib/validation/catalog";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -73,10 +76,9 @@ function readSourceRev(): string {
 }
 
 function loadSubskills(): Record<string, string[]> {
-  return JSON.parse(readFileSync(join(repoRoot, "data", "rules", "subskills.json"), "utf8")) as Record<
-    string,
-    string[]
-  >;
+  return subskillsSchema.parse(
+    JSON.parse(readFileSync(join(repoRoot, "data", "rules", "subskills.json"), "utf8")),
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -436,7 +438,7 @@ function parseS2ClearListElem(file: string): S2ClearListElemParse {
       condDepth = null;
       continue;
     }
-    if (condDepth !== null && depth <= (condDepth as number)) {
+    if (condDepth !== null && depth <= condDepth) {
       nameStage1Cond = null;
       condDepth = null;
     }
@@ -600,7 +602,8 @@ function parseS3SchoolEnter(file: string): Record<string, "civ" | "pol" | "mil">
       const { body, next } = sliceIfElse(fn.lines, i);
       for (const raw of body) {
         const fieldM = /^nameField\s*=\s*"(civ|pol|mil)"\s*;$/.exec(stripTrailingComment(raw).trim());
-        if (fieldM) map[ifm[1]] = fieldM[1] as "civ" | "pol" | "mil";
+        const field = fieldM?.[1];
+        if (field === "civ" || field === "pol" || field === "mil") map[ifm[1]] = field;
       }
       i = next;
       continue;
@@ -670,7 +673,7 @@ function parseS4ClearModulesList(
       const text = f.raw.includes("||") ? `(${f.raw})` : f.raw;
       return f.isElse ? `!(${text})` : text;
     });
-    return { condition: parts.join(" && "), affMatch: stack.reduce((acc, f) => intersect(acc, f.affMatch), null as AffSet) };
+    return { condition: parts.join(" && "), affMatch: stack.reduce<AffSet>((acc, f) => intersect(acc, f.affMatch), null) };
   };
 
   let i = 0;
@@ -1077,9 +1080,16 @@ export function buildModulesFile(): ModulesFile {
     ...fieldsStage3,
     ...modulesStage4,
   ];
+  const stage0 = extractStage0(readSource, subskills);
 
   const fileLines: Record<string, number> = {};
-  for (const file of Object.values(STAGE_FILES)) {
+  for (const file of [
+    ...Object.values(STAGE_FILES),
+    "text_resurce.cpp",
+    "wizard.cpp",
+    "s0moredialog.cpp",
+    "resource/affilations.dat",
+  ]) {
     fileLines[file] = toLines(readSource(file)).length;
   }
 
@@ -1100,11 +1110,12 @@ export function buildModulesFile(): ModulesFile {
         "Stage-1 'Fugitives' exists as a block but is only reachable through gating; 'Born Mercenary Brat' is offered only for affVar 12 (Independent) with subAffVar 4 (RULES.md §6.1).",
         "Stage-1/2 preambles do not reset xpCost (the wizard refunds first); stage-3/4 preambles reset to 0 — extraction captures per-block values either way (RULES.md §8).",
         "Availability is the affiliation-level union over reachable gate branches; sub-affiliation, caste, trait, school and phenotype conditions stay verbatim on the gating entries that declare them.",
-        "text_resurce.cpp is out of scope: it holds the Stage-0 affiliation effects consumed by build step #12 and contains none of §8's counted blocks.",
+        "Stage-0 affiliation, sub-affiliation, caste, language, choice and overlay data is extracted from text_resurce.cpp with wizard.cpp and s0moredialog.cpp supplying labels and candidate kinds; it remains separate from §8 Table M/G accounting.",
       ],
     },
     modules,
     gating,
+    stage0,
   };
 }
 
@@ -1117,6 +1128,24 @@ function main(): void {
   console.log(
     `  modules: ${file.modules.length} (${byStage(1)}/${byStage(2)}/${byStage(3)}/${byStage(4)} by stage)` +
       `, gating entries: ${file.gating.length}`,
+  );
+  const stage0Choices = file.stage0.affiliations.reduce(
+    (count, affiliation) =>
+      count +
+      affiliation.base.choices.length +
+      affiliation.subAffiliations.reduce(
+        (subCount, subAffiliation) => subCount + subAffiliation.layer.choices.length,
+        0,
+      ),
+    file.stage0.castes.reduce((count, caste) => count + caste.layer.choices.length, 0) +
+      file.stage0.overlays.reduce(
+        (count, overlay) => count + overlay.base.choices.length + overlay.layer.choices.length,
+        0,
+      ),
+  );
+  console.log(
+    `  stage 0: ${file.stage0.affiliations.length} affiliations, ${file.stage0.castes.length} castes, ` +
+      `${file.stage0.overlays.length} overlays, ${stage0Choices} choices`,
   );
   console.log(`  wrote modules.json`);
 }

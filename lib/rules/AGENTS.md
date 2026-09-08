@@ -10,9 +10,9 @@ Typed read access to the *A Time of War* rules catalogs. The data itself is gene
 ## Key Files
 | File | Description |
 |------|-------------|
-| `load.ts` | Static imports of all nine `.dat`-derived catalogs, re-exported as typed arrays, plus `compositeSkillNames()`. `data/rules/modules.json` is deliberately **not** imported here — it is not `.dat`-derived, and its consumer (the step-#12 wizard) will wire it up itself. |
+| `load.ts` | Static imports of all nine `.dat`-derived catalogs, re-exported as typed arrays, plus `compositeSkillNames()`. It also imports `data/rules/modules.json` solely to parse and export its `stage0` catalog as `stage0Catalog` (validated by `stage0CatalogSchema`); the `modules`/`gating` arrays remain unconsumed here — the later lifepath stages will wire those up. |
 | `types.ts` | Re-exports `Skill`/`Trait`/`Subskills` from `lib/validation/catalog.ts` and defines `composeSkillName()`. |
-| `catalog.test.ts` | Validates the generated JSON against the Zod schemas (6 cases). |
+| `catalog.test.ts` | Validates the generated JSON against the Zod schemas (11 cases). |
 
 ## For AI Agents
 
@@ -24,7 +24,7 @@ round-trip and no loading state — which is what `docs/PLAN.md` step 8 (offline
 Do not convert these to `fetch`, dynamic `import()`, or a database table.
 
 Exports: `skills`, `traits`, `subskills`, `affiliations`, `careers`, `eyeColors`, `hairColors`,
-`phenotypes`, `planets`.
+`phenotypes`, `planets`, `stage0Catalog`.
 
 **Composite skill names.** The desktop app expands sub-skilled parents into `"Parent/Sub"` names
 (`"Gunnery/'Mech"`, `"Animal Handling/Riding"`), built by `CreateSubSkillList` in
@@ -37,7 +37,7 @@ check the composites too — `lib/characters/schema.ts` unions both sets for exa
 
 ### Testing Requirements
 - `npm run test -- lib/rules/catalog.test.ts` — this is the guard that the *generated* data still
-  matches the expected shape, so run it after any `npm run rules:ingest`.
+  matches the expected shape, so run it after any `npm run rules:ingest` or `npm run rules:extract`.
 - It validates against `lib/validation/catalog.ts`, keeping the schemas and the data honest together.
 
 ### Common Patterns
@@ -48,8 +48,9 @@ check the composites too — `lib/characters/schema.ts` unions both sets for exa
 ## Dependencies
 
 ### Internal
-- `data/rules/*.json` — the nine `.dat`-derived catalogs (`modules.json` is the tenth catalog in
-  `data/rules/` but is consumed by the wizard, not this module)
+- `data/rules/*.json` — the nine `.dat`-derived catalogs plus `modules.json`, whose `stage0`
+  member is parsed here into `stage0Catalog` (the `modules`/`gating` arrays stay unconsumed until
+  the later lifepath stages)
 - `lib/validation/catalog.ts` — the type definitions
 
 ### External

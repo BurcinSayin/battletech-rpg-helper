@@ -1,3 +1,4 @@
+// allow: SIZE_OK — Pre-existing generator parsing core predating this work; new Stage 0 extraction is deliberately split into sub-250 modules (extract-stage0.ts, stage0-*.ts); splitting legacy cores is out of scope for this plan.
 /**
  * Parsing core for `scripts/extract-rules.ts` (build step #11).
  *
@@ -170,6 +171,7 @@ export interface GatingEntry {
 }
 
 export interface ModulesFile {
+  readonly stage0: import("../lib/rules/stage0-contract").Stage0Catalog;
   meta: {
     generatedBy: string;
     source: { repo: string; rev: string; files: Record<string, number> };

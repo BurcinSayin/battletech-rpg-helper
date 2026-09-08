@@ -11,7 +11,7 @@ that must be reviewed and checked in — they are not throwaway tooling.
 | File | Description |
 |------|-------------|
 | `convert-dat.ts` | `npm run rules:ingest` — converts the desktop app's `resource/*.dat` tables into the typed JSON under `data/rules/`. |
-| `extract-rules.ts` | `npm run rules:extract` — parses the desktop app's C++ stage tables into `data/rules/modules.json` (lifepath modules + gating). Parsing core lives in `extract-rules-lib.ts`. |
+| `extract-rules.ts` | `npm run rules:extract` — parses the desktop app's C++ sources into `data/rules/modules.json` (lifepath modules + gating + the Stage 0 catalog). Parsing core lives in `extract-rules-lib.ts`, the Stage 0 contract extraction in `extract-stage0.ts`. |
 | `generate-seed.ts` | `npm run seed:generate` — regenerates `supabase/seed.sql` from the `lisa.btcc` fixture. |
 
 ## For AI Agents
@@ -51,8 +51,11 @@ resolved to affiliation names.
   parsed block throws. That is deliberate — desktop changes must fail loudly, never silently drop
   data. Extend the allowlist in `extract-rules-lib.ts` when upstream changes.
 - Output is deterministic; re-running must be byte-identical (a test asserts it).
-- `text_resurce.cpp` is deliberately NOT read: the Stage-0 affiliation effects
-  (`Text_Resurce::rSubAff`) belong to build step #12.
+- Stage 0 is extracted too: `extractStage0` (`scripts/extract-stage0.ts`, contract in
+  `lib/rules/stage0-contract.ts`) reads the affiliation functions of `text_resurce.cpp`
+  (`rSubAff`, `subAffAttr`, `clanCaste`, `comstarAttr`, `comstarSub`, `WoBSub`) with `wizard.cpp`
+  and `s0moredialog.cpp` supplying labels and candidate kinds, and emits the separate top-level
+  `stage0` catalog. It stays out of the §8 Table M/G accounting; see the `meta.notes` entries.
 - The desktop checkout must sit at the pinned revision `a1d8009` — the `docs/RULES.md` citations
   and the §8 counts assume it.
 
@@ -69,9 +72,9 @@ byte-faithful to `lisa.btcc`; keep it that way, and never hand-edit `supabase/se
 
 ### Testing Requirements
 - `convert-dat.ts` and `generate-seed.ts` have no unit tests; they are verified by their output.
-  `extract-rules.ts` has a vitest suite (`scripts/extract-rules.test.ts`, 20 cases) that reads the
-  §8 counts from `docs/RULES.md` and pins the §7.4 worked example, determinism, and availability
-  semantics — it needs the desktop checkout, like the generators themselves.
+  `extract-rules.ts` has a vitest suite (`scripts/extract-rules.test.ts`, 46 cases) that reads the
+  §8 counts from `docs/RULES.md`, pins the §7.4 worked example, determinism, availability
+  semantics, and the Stage 0 contract — it needs the desktop checkout, like the generators themselves.
 - After `npm run rules:ingest`: run `npm run test -- lib/rules/catalog.test.ts`, which validates the
   regenerated JSON against the Zod schemas in `lib/validation/catalog.ts`, then review `git diff`.
 - After `npm run rules:extract`: run `npm run test -- scripts/extract-rules.test.ts` and review

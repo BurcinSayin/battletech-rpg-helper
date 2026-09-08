@@ -11,8 +11,15 @@ import eyeColorsJson from "@/data/rules/eyeColors.json";
 import hairColorsJson from "@/data/rules/hairColors.json";
 import phenotypesJson from "@/data/rules/phenotypes.json";
 import planetsJson from "@/data/rules/planets.json";
+import modulesJson from "@/data/rules/modules.json";
 
-import type { Skill, Trait, Subskills } from "@/lib/validation/catalog";
+import {
+  stage0CatalogSchema,
+  type Skill,
+  type Trait,
+  type Subskills,
+} from "@/lib/validation/catalog";
+import type { Stage0Catalog } from "./stage0-contract";
 import { composeSkillName } from "./types";
 
 export const skills: Skill[] = skillsJson;
@@ -24,6 +31,9 @@ export const eyeColors: string[] = eyeColorsJson;
 export const hairColors: string[] = hairColorsJson;
 export const phenotypes: string[] = phenotypesJson;
 export const planets: string[] = planetsJson;
+export const stage0Catalog: Stage0Catalog = stage0CatalogSchema.parse(
+  modulesJson.stage0,
+);
 
 /** Expand subskills into composite names, e.g. "Gunnery/Aerospace". */
 export function compositeSkillNames(): string[] {

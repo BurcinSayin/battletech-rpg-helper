@@ -3,6 +3,8 @@
 import { useReducer, useState } from "react";
 import { Panel, HudButton, hudInput } from "@/components/characters/ui";
 import { cn } from "@/lib/utils";
+import { stage0Catalog } from "@/lib/rules/load";
+import { Stage0Panel } from "./stage0-panel";
 import {
   WIZARD_PAGES,
   initialWizardState,
@@ -11,8 +13,8 @@ import {
 
 /**
  * The step-#12a wizard shell: six pages in `RULES.md` §7.1 order with §7.3
- * back-navigation. Stage content lands in steps #12b–#14; until then each
- * stage page is a placeholder and `Finish` stays disabled.
+ * back-navigation. Stage 0 edits the local draft; later stages remain
+ * placeholders and `Finish` stays disabled.
  */
 export function WizardClient() {
   const [state, dispatch] = useReducer(
@@ -74,13 +76,59 @@ export function WizardClient() {
             Character name
             <input
               className={hudInput}
-              value={state.characterName}
+              value={state.draft.scalars.name}
               onChange={(e) =>
                 dispatch({ type: "setName", name: e.target.value })
               }
               placeholder="e.g. Lisa"
             />
           </label>
+        ) : page.key === "stage0" ? (
+          <>
+            <Stage0Panel
+              catalog={stage0Catalog}
+              selection={state.selections.stage0}
+              complete={state.stage0Complete}
+              moduleCost={state.moduleXpSpent}
+              wizardXpRemaining={state.wizardXpRemaining}
+              draftXpRemaining={state.xp.remaining}
+              onAffiliationChange={(affiliationId) =>
+                dispatch({ type: "setStage0Affiliation", affiliationId })
+              }
+              onSubAffiliationChange={(subAffiliationId) =>
+                dispatch({ type: "setStage0SubAffiliation", subAffiliationId })
+              }
+              onCasteChange={(casteId) =>
+                dispatch({ type: "setStage0Caste", casteId })
+              }
+              onStartingLanguageChange={(startingLanguage) =>
+                dispatch({ type: "setStage0StartingLanguage", startingLanguage })
+              }
+              onChoiceChange={(choice) =>
+                dispatch({ type: "setStage0Choice", ...choice })
+              }
+            />
+            <section aria-label="Current draft" className="mt-4 border-t border-hud-line pt-3 text-sm text-hud-text">
+              <h3 className="font-mono text-xs text-hud-muted">Current draft</h3>
+              <p>Draft XP remaining: {state.xp.remaining}</p>
+              <p>Wizard XP remaining: {state.wizardXpRemaining}</p>
+              <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                {([
+                  ["Skills", state.draft.skills],
+                  ["Traits", state.draft.traits],
+                ] as const).map(([title, rows]) => (
+                  <div key={title}>
+                    <h4 className="font-mono text-xs text-hud-muted">{title}</h4>
+                    <ul aria-label={title}>
+                      {rows.map((row) => (
+                        <li key={row.name}>{row.name}: {row.xp} XP</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </>
         ) : (
           <p className="text-sm text-hud-muted">
             {page.title} content lands in a later build step. The shell under it
@@ -124,7 +172,11 @@ export function WizardClient() {
           Back
         </HudButton>
         {state.pageId < 5 ? (
-          <HudButton variant="primary" onClick={onNext}>
+          <HudButton
+            variant="primary"
+            onClick={onNext}
+            disabled={state.pageId === 1 && !state.stage0Complete}
+          >
             Next
           </HudButton>
         ) : (
