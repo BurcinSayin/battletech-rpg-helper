@@ -3,6 +3,7 @@ import {
   ATTRIBUTE_KEYS,
   CHARACTER_START_XP,
   computeXp,
+  mergePrerequisites,
   type XpSummary,
 } from "@/lib/characters";
 import { mergeRows } from "@/lib/characters/grants";
@@ -252,24 +253,15 @@ export function rebuildStage0(
   draft.scalars.aff = resolved.affiliation.name;
   draft.scalars.subaff = resolved.subAffiliation.name;
   draft.scalars.clancaste = selection.casteId ?? "";
+  const prerequisites = mergePrerequisites(
+    resolved.layers.map((entry) => entry.layer.prerequisites),
+  );
   for (const entry of resolved.layers) {
     const layer = entry.layer;
     for (const [key, delta] of Object.entries(layer.attrDeltas))
       draft.attrs[key] = (draft.attrs[key] ?? 0) + delta;
     draft.skills = mergeRows(draft.skills, layer.skillGrants, add);
     draft.traits = mergeRows(draft.traits, layer.traitGrants, add);
-    for (const [key, minimum] of Object.entries(layer.prerequisites.attrs))
-      draft.preAttrs[key] = Math.max(draft.preAttrs[key] ?? 0, minimum);
-    draft.preSkills = mergeRows(
-      draft.preSkills,
-      layer.prerequisites.skills,
-      Math.max,
-    );
-    draft.preTraits = mergeRows(
-      draft.preTraits,
-      layer.prerequisites.traits,
-      Math.max,
-    );
     for (const choice of layer.choices) {
       const picks =
         selection.choices.find(
@@ -294,6 +286,9 @@ export function rebuildStage0(
       }
     }
   }
+  draft.preAttrs = prerequisites.attrs;
+  draft.preSkills = prerequisites.skills;
+  draft.preTraits = prerequisites.traits;
   draft.skills = draft.skills.filter((row) => row.xp !== 0);
   draft.traits = draft.traits.filter((row) => row.xp !== 0);
   return {

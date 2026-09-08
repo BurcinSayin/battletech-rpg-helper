@@ -12,6 +12,7 @@ import type {
   Stage0Layer,
 } from "@/lib/rules/stage0-contract";
 import { mergeRows } from "./grants";
+import { mergePrerequisites } from "./prereq";
 import type { SibkoSelection } from "./sibko";
 
 export type ChildhoodContext = {
@@ -122,28 +123,17 @@ function mergeLayers(
     attrDeltas[key] =
       attributes === "replace" ? value : (attrDeltas[key] ?? 0) + value;
   }
-  const attrs = { ...base.prerequisites.attrs };
-  for (const [key, value] of Object.entries(overlay.prerequisites.attrs))
-    attrs[key] = Math.max(attrs[key] ?? 0, value);
+  const prerequisites = mergePrerequisites([
+    base.prerequisites,
+    overlay.prerequisites,
+  ]);
   const choices = new Map(base.choices.map((choice) => [choice.id, choice]));
   for (const choice of overlay.choices) choices.set(choice.id, choice);
   return {
     attrDeltas,
     skillGrants: [...base.skillGrants, ...overlay.skillGrants],
     traitGrants: [...base.traitGrants, ...overlay.traitGrants],
-    prerequisites: {
-      attrs,
-      skills: mergeRows(
-        base.prerequisites.skills,
-        overlay.prerequisites.skills,
-        Math.max,
-      ),
-      traits: mergeRows(
-        base.prerequisites.traits,
-        overlay.prerequisites.traits,
-        Math.max,
-      ),
-    },
+    prerequisites,
     choices: Array.from(choices.values()),
     source: base.source,
   };
@@ -343,12 +333,17 @@ export function applyChildhoodModule(
   selection: ChildhoodSelection,
 ): BtccDraft {
   const layer = resolved.layer;
+  const prerequisites = mergePrerequisites([
+    {
+      attrs: prefix.preAttrs,
+      skills: prefix.preSkills,
+      traits: prefix.preTraits,
+    },
+    layer.prerequisites,
+  ]);
   const attrs = { ...prefix.attrs };
-  const preAttrs = { ...prefix.preAttrs };
   for (const [key, delta] of Object.entries(layer.attrDeltas))
     attrs[key] = (attrs[key] ?? 0) + delta;
-  for (const [key, minimum] of Object.entries(layer.prerequisites.attrs))
-    preAttrs[key] = Math.max(preAttrs[key] ?? 0, minimum);
   const skills: BtccRow[] = [
     ...layer.skillGrants,
     ...resolved.parameterSkillGrants,
@@ -391,16 +386,8 @@ export function applyChildhoodModule(
     traits: mergeRows(prefix.traits, traits, (a, b) => a + b).filter(
       (row) => row.xp !== 0,
     ),
-    preAttrs,
-    preSkills: mergeRows(
-      prefix.preSkills,
-      layer.prerequisites.skills,
-      Math.max,
-    ),
-    preTraits: mergeRows(
-      prefix.preTraits,
-      layer.prerequisites.traits,
-      Math.max,
-    ),
+    preAttrs: prerequisites.attrs,
+    preSkills: prerequisites.skills,
+    preTraits: prerequisites.traits,
   };
 }

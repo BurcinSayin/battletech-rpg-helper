@@ -46,6 +46,14 @@ export {
   type PrepareImportResult,
 } from "./import";
 export {
+  mergePrerequisites,
+  checkPrerequisites,
+  type PrerequisiteSet,
+  type MergedPrerequisiteSet,
+  type PrerequisiteReport,
+  type UnmetPrerequisite,
+} from "./prereq";
+export {
   availableChildhoodModules,
   resolveChildhoodModule,
   applyChildhoodModule,
