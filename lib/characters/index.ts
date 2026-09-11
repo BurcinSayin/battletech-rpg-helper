@@ -76,3 +76,25 @@ export {
   type FlexAllocation,
   type FlexValidation,
 } from "./flex-xp";
+export {
+  availableSchools,
+  availableRealLife,
+  resolveAdultModule,
+  schoolChoices,
+  fieldChoices,
+  validAdultChoices,
+  completeAdultChoices,
+  applyAdultModule,
+  type AdultContext,
+  type AdultChoice,
+  type AdultChoiceSelection,
+} from "./adult";
+export {
+  projectSchool,
+  type SchoolSelection,
+  type SchoolFieldSelection,
+  type SchoolTier,
+  type SchoolView,
+  type RealLifeSelection,
+  type ResolvedRealLife,
+} from "./school";

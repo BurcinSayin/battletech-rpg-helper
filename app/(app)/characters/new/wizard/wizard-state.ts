@@ -15,7 +15,11 @@ import {
   validateFlexAllocations,
   applyFlexAllocations,
   type FlexAllocation,
+  type SchoolSelection,
+  type SchoolTier,
+  type RealLifeSelection,
 } from "@/lib/characters";
+import { projectAdult, type AdultView } from "./wizard-adult";
 import { mergeRows } from "@/lib/characters/grants";
 import { stage0Catalog, childhoodCatalog } from "@/lib/rules/load";
 import type { ChildhoodModule } from "@/lib/rules/childhood-contract";
@@ -63,9 +67,6 @@ export function stageForPage(pageId: WizardPageId): StageKey | null {
     pageId
   ];
 }
-export interface StageSelection {
-  readonly choice: string;
-}
 export type Stage2Selection = ChildhoodSelection & {
   readonly flexGrants: readonly FlexAllocation[];
 };
@@ -96,22 +97,41 @@ export interface WizardDraftState {
   readonly stage1Complete: boolean;
   readonly stage2Complete: boolean;
   readonly stage2Handoff: Stage2Handoff | null;
+  readonly adult: AdultView | null;
   readonly childhood: Readonly<Record<ChildhoodStageKey, ChildhoodStageView>>;
   readonly selections: {
     readonly stage0: Stage0Selection;
     readonly stage1: ChildhoodSelection | null;
     readonly stage2: Stage2Selection | null;
-    readonly stage3: StageSelection | null;
-    readonly stage4: StageSelection | null;
+    readonly stage3: SchoolSelection | null;
+    readonly stage4: RealLifeSelection | null;
   };
 }
 export type WizardAction =
   | { readonly type: "setName"; readonly name: string }
+  | { readonly type: "setSchool"; readonly moduleName: string | null }
   | {
-      readonly type: "select";
-      readonly stage: "stage3" | "stage4";
-      readonly choice: string;
+      readonly type: "setSchoolChoice";
+      readonly choiceId: string;
+      readonly candidate: Stage0Candidate | null;
     }
+  | {
+      readonly type: "setSchoolField";
+      readonly index: number;
+      readonly tier: SchoolTier;
+      readonly name: string | null;
+    }
+  | {
+      readonly type: "setSchoolFieldChoice";
+      readonly index: number;
+      readonly choiceId: string;
+      readonly candidate: Stage0Candidate | null;
+    }
+  | { readonly type: "setRealLife"; readonly moduleName: string | null }
+  | { readonly type: "addRealLife" }
+  | { readonly type: "removeRealLife"; readonly index: number }
+  | { readonly type: "skipSchool" }
+  | { readonly type: "skipRealLife" }
   | {
       readonly type: "setStageModule";
       readonly stage: ChildhoodStageKey;
@@ -188,6 +208,7 @@ export function initialWizardState(): WizardDraftState {
     stage1Complete: false,
     stage2Complete: false,
     stage2Handoff: null,
+    adult: null,
     childhood: { stage1: emptyView, stage2: emptyView },
     selections: {
       stage0: emptyStage0,
@@ -355,6 +376,27 @@ function project(
       flexTargets,
     };
   }
+  const adult =
+    stage2Complete && selections.stage0.startingLanguage
+      ? projectAdult(
+          {
+            draft,
+            startingLanguage: selections.stage0.startingLanguage,
+            militaryField: stage2Handoff?.militaryField ?? false,
+            clanFields: [
+              ...(stage2Handoff?.basicSkills ?? []),
+              ...(stage2Handoff?.advancedSkills ?? []),
+            ],
+          },
+          selections.stage3,
+          selections.stage4,
+        )
+      : null;
+  if (stage2Complete && !adult) return null;
+  if (adult) {
+    draft = adult.draft;
+    spent += adult.cost;
+  }
   return withNameView({
     ...state,
     selections,
@@ -364,11 +406,13 @@ function project(
     wizardXpRemaining:
       CHARACTER_START_XP -
       spent +
-      (state.pageId >= 4 ? (stage2Handoff?.rebateXp ?? 0) : 0),
+      (state.pageId >= 4 ? (stage2Handoff?.rebateXp ?? 0) : 0) +
+      (state.pageId >= 5 ? (adult?.school.rebate ?? 0) : 0),
     stage0Complete: result.status === "complete",
     stage1Complete,
     stage2Complete,
     stage2Handoff,
+    adult,
     childhood: views,
   });
 }
@@ -392,6 +436,7 @@ export function canAdvance(state: WizardDraftState): boolean {
   if (state.pageId === 1) return state.stage0Complete;
   if (state.pageId === 2) return state.stage1Complete;
   if (state.pageId === 3) return state.stage2Complete;
+  if (state.pageId === 4) return state.adult?.school.complete ?? false;
   return state.pageId < 5;
 }
 
@@ -745,14 +790,177 @@ export function wizardReducer(
         }) ?? state
       );
     }
-    case "select":
-      return withNameView({
-        ...state,
-        selections: {
+    case "setSchool": {
+      if (
+        state.pageId !== 4 ||
+        !state.adult ||
+        (state.selections.stage3?.moduleName ?? null) === action.moduleName
+      )
+        return state;
+      return (
+        project(state, {
           ...state.selections,
-          [action.stage]: { choice: action.choice },
-        },
-      });
+          stage3:
+            action.moduleName === null
+              ? null
+              : { moduleName: action.moduleName, choices: {}, fields: [] },
+          stage4: null,
+        }) ?? state
+      );
+    }
+    case "setSchoolChoice": {
+      const school = state.selections.stage3;
+      if (
+        state.pageId !== 4 ||
+        !school ||
+        !state.adult?.school.choices.some(
+          (choice) => choice.id === action.choiceId,
+        )
+      )
+        return state;
+      const prior = school.choices[action.choiceId];
+      if (prior && action.candidate && sameCandidate(prior, action.candidate))
+        return state;
+      const choices = { ...school.choices };
+      if (action.candidate) choices[action.choiceId] = { ...action.candidate };
+      else delete choices[action.choiceId];
+      return (
+        project(state, {
+          ...state.selections,
+          stage3: { ...school, choices, fields: [] },
+          stage4: null,
+        }) ?? state
+      );
+    }
+    case "setSchoolField": {
+      const school = state.selections.stage3;
+      if (
+        state.pageId !== 4 ||
+        !school ||
+        !Number.isInteger(action.index) ||
+        action.index < 0 ||
+        action.index > school.fields.length ||
+        action.index > 2
+      )
+        return state;
+      const prior = school.fields[action.index];
+      if (prior?.name === action.name && prior.tier === action.tier)
+        return state;
+      if (
+        action.index > 0 &&
+        !state.adult?.school.fields[action.index - 1]?.complete
+      )
+        return state;
+      const fields = school.fields.slice(0, action.index);
+      if (action.name !== null)
+        fields.push({ tier: action.tier, name: action.name, choices: {} });
+      return (
+        project(state, {
+          ...state.selections,
+          stage3: { ...school, fields },
+          stage4: null,
+        }) ?? state
+      );
+    }
+    case "setSchoolFieldChoice": {
+      const school = state.selections.stage3;
+      const field = school?.fields[action.index];
+      if (
+        state.pageId !== 4 ||
+        !school ||
+        !field ||
+        !state.adult?.school.fields[action.index]?.choices.some(
+          (choice) => choice.id === action.choiceId,
+        )
+      )
+        return state;
+      const prior = field.choices[action.choiceId];
+      if (prior && action.candidate && sameCandidate(prior, action.candidate))
+        return state;
+      const choices = { ...field.choices };
+      if (action.candidate) choices[action.choiceId] = { ...action.candidate };
+      else delete choices[action.choiceId];
+      const fields = [
+        ...school.fields.slice(0, action.index),
+        { ...field, choices },
+      ];
+      return (
+        project(state, {
+          ...state.selections,
+          stage3: { ...school, fields },
+          stage4: null,
+        }) ?? state
+      );
+    }
+    case "setRealLife": {
+      if (state.pageId !== 5 || !state.adult) return state;
+      return (
+        project(state, {
+          ...state.selections,
+          stage4: {
+            modules: state.selections.stage4?.modules ?? [],
+            pending: action.moduleName,
+            skipped: false,
+          },
+        }) ?? state
+      );
+    }
+    case "addRealLife": {
+      const life = state.selections.stage4;
+      if (state.pageId !== 5 || !life?.pending || !state.adult?.life.pending)
+        return state;
+      return (
+        project(state, {
+          ...state.selections,
+          stage4: {
+            modules: [...life.modules, life.pending],
+            pending: null,
+            skipped: false,
+          },
+        }) ?? state
+      );
+    }
+    case "removeRealLife": {
+      const life = state.selections.stage4;
+      if (
+        state.pageId !== 5 ||
+        !life ||
+        !Number.isInteger(action.index) ||
+        action.index < 0 ||
+        action.index >= life.modules.length
+      )
+        return state;
+      // Later modules may depend on this one (Tour of Duty unlocks Solaris Games).
+      return (
+        project(state, {
+          ...state.selections,
+          stage4: {
+            modules: life.modules.slice(0, action.index),
+            pending: null,
+            skipped: false,
+          },
+        }) ?? state
+      );
+    }
+    case "skipSchool": {
+      if (state.pageId !== 4 || !state.adult) return state;
+      return (
+        project(withNameView({ ...state, pageId: 5 }), {
+          ...state.selections,
+          stage3: null,
+          stage4: null,
+        }) ?? state
+      );
+    }
+    case "skipRealLife": {
+      if (state.pageId !== 5 || !state.adult) return state;
+      return (
+        project(state, {
+          ...state.selections,
+          stage4: { modules: [], pending: null, skipped: true },
+        }) ?? state
+      );
+    }
     case "next": {
       if (!canAdvance(state)) return state;
       const page = WIZARD_PAGES[state.pageId + 1];

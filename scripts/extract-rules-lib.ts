@@ -26,6 +26,10 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { ChildhoodCatalog } from "../lib/rules/childhood-contract";
+import type {
+  AdultAttributeWrite,
+  CareerFields,
+} from "../lib/validation/adult";
 import type { Stage0Catalog } from "../lib/rules/stage0-contract";
 
 // ---------------------------------------------------------------------------
@@ -112,6 +116,8 @@ export interface ModuleEntry {
   flexXp: number | null;
   age: number | null;
   attrDeltas: Record<string, number>;
+  /** Source-ordered writes when adult attribute assignments cross branches. */
+  attributeWrites?: AdultAttributeWrite[];
   traitGrants: Grant[];
   skillGrants: Grant[];
   parametrizedGrants: {
@@ -186,6 +192,7 @@ export interface GatingEntry {
 }
 
 export interface ModulesFile {
+  readonly careerFields: CareerFields;
   readonly stage0: Stage0Catalog;
   readonly childhood: ChildhoodCatalog;
   meta: {
@@ -307,6 +314,7 @@ export class BlockInterpreter {
   constructor(
     private readonly stage: number,
     private readonly subskills: Record<string, string[]>,
+    private readonly onAttributeWrite?: (write: AdultAttributeWrite) => void,
   ) {}
 
   consume(rawLine: string): void {
@@ -396,6 +404,12 @@ export class BlockInterpreter {
       const map = (this.effects.attrDeltas ??= {});
       if (op === "+=") map[key] = (map[key] ?? 0) + parseInt(val, 10);
       else map[key] = parseInt(val, 10);
+      this.onAttributeWrite?.({
+        key,
+        operation: op === "+=" ? "add" : "set",
+        xp: parseInt(val, 10),
+        conditions: [],
+      });
       return true;
     }
 
@@ -661,7 +675,9 @@ export class BlockInterpreter {
         specialist: null,
       });
       const g = (fields[key] ??= { skills: [], age: null });
-      g.age = Number(age[2]);
+      // stage3_resurce.h:32–38 declares all field durations as int. C++
+      // truncates each assignment (0.5 -> 0, 1.5 -> 1) before age is added.
+      g.age = Math.trunc(Number(age[2]));
       return true;
     }
     return false;
@@ -832,8 +848,15 @@ export function interpretBlock(
   lines: string[],
   stage: number,
   subskills: Record<string, string[]>,
-): { effects: Effects; conditionals: Conditional[] } {
-  const it = new BlockInterpreter(stage, subskills);
+): {
+  effects: Effects;
+  conditionals: Conditional[];
+  attributeWrites: AdultAttributeWrite[];
+} {
+  const attributeWrites: AdultAttributeWrite[] = [];
+  const it = new BlockInterpreter(stage, subskills, (write) =>
+    attributeWrites.push(write),
+  );
   const conditionals: Conditional[] = [];
   let i = 0;
   while (i < lines.length) {
@@ -858,23 +881,38 @@ export function interpretBlock(
     if (ifm) {
       const { body, elseBody, next } = sliceIfElse(lines, i);
       const nested = interpretBlock(body, stage, subskills);
+      const alternate = elseBody
+        ? interpretBlock(elseBody, stage, subskills)
+        : null;
       const cond: Conditional = {
         condition: ifm[1].trim(),
         effects: nested.effects,
-        elseEffects: elseBody
-          ? interpretBlock(elseBody, stage, subskills).effects
-          : null,
+        elseEffects: alternate?.effects ?? null,
       };
       if (nested.conditionals.length > 0)
         cond.conditionals = nested.conditionals;
       conditionals.push(cond);
+      // Keep assignments at their original position relative to ordinary
+      // statements, including nested if/else branches and += operations.
+      attributeWrites.push(
+        ...nested.attributeWrites.map((write) => ({
+          ...write,
+          conditions: [cond.condition, ...write.conditions],
+        })),
+      );
+      attributeWrites.push(
+        ...(alternate?.attributeWrites ?? []).map((write) => ({
+          ...write,
+          conditions: [`!(${cond.condition})`, ...write.conditions],
+        })),
+      );
       i = next;
       continue;
     }
     it.consume(lines[i]);
     i++;
   }
-  return { effects: it.effects, conditionals };
+  return { effects: it.effects, conditionals, attributeWrites };
 }
 
 /** Assemble a ModuleEntry from interpreted effects. */
@@ -939,7 +977,7 @@ export function parseDispatchFunction(
   return blocks.map((b, index) => {
     try {
       const parsed = interpretBlock(b.lines, stage, subskills);
-      return buildModule(
+      const entry = buildModule(
         stage,
         kind,
         b.name,
@@ -949,6 +987,14 @@ export function parseDispatchFunction(
         parsed.effects,
         parsed.conditionals,
       );
+      // Flat attrDeltas are sufficient only when no branch writes attributes.
+      // Preserve the complete write order where baseline/branch grouping loses it.
+      if (
+        stage >= 3 &&
+        parsed.attributeWrites.some((write) => write.conditions.length)
+      )
+        entry.attributeWrites = parsed.attributeWrites;
+      return entry;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       const statement = message.split("\n").at(-1)?.trim();

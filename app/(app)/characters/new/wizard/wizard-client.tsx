@@ -7,14 +7,16 @@ import { stage0Catalog } from "@/lib/rules/load";
 import { ATTRIBUTE_BASE, ATTRIBUTE_KEYS } from "@/lib/characters";
 import { ChildhoodPanel } from "./childhood-panel";
 import { Stage0Panel } from "./stage0-panel";
+import { SchoolPanel, RealLifePanel } from "./adult-panel";
 import {
   WIZARD_PAGES,
   initialWizardState,
   wizardReducer,
   canAdvance,
+  type WizardAction,
 } from "./wizard-state";
 
-/** Controlled local lifepath draft through Stage 2; later stages and Finish remain placeholders. */
+/** Local lifepath draft. Stage 4 advanced choices and Finish are separate build steps. */
 export function WizardClient() {
   const [state, dispatch] = useReducer(
     wizardReducer,
@@ -37,6 +39,11 @@ export function WizardClient() {
     // navigating forward must not leave it armed against a different page.
     setConfirmingBack(false);
     dispatch({ type: "next" });
+  }
+
+  function onAdultAction(action: WizardAction) {
+    setConfirmingBack(false);
+    dispatch(action);
   }
 
   return (
@@ -135,13 +142,12 @@ export function WizardClient() {
             }
             dispatch={dispatch}
           />
+        ) : page.key === "stage3" ? (
+          <SchoolPanel state={state} dispatch={onAdultAction} />
         ) : (
-          <p className="text-sm text-hud-muted">
-            {page.title} content lands in a later build step. The shell under it
-            — page order and back-navigation — is in place now.
-          </p>
+          <RealLifePanel state={state} dispatch={onAdultAction} />
         )}
-        {state.pageId >= 1 && state.pageId <= 3 && (
+        {state.pageId >= 1 && (
           <section
             aria-label="Current draft"
             className="mt-4 border-t border-hud-line pt-3 text-sm text-hud-text"
@@ -156,6 +162,12 @@ export function WizardClient() {
             <p>
               Late childhood: {state.draft.scalars.latechild || "Not selected"}
             </p>
+            {state.pageId >= 4 && (
+              <p>School: {state.draft.scalars.schoolname || "None"}</p>
+            )}
+            {state.pageId >= 5 && (
+              <p>Real Life: {state.draft.scalars.reallife || "None"}</p>
+            )}
             <div className="mt-3 grid gap-4 sm:grid-cols-2">
               <div>
                 <h4 className="font-mono text-xs text-hud-muted">Attributes</h4>

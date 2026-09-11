@@ -34,6 +34,7 @@ import { subskillsSchema } from "../lib/validation/catalog";
 import type { ChildhoodGate } from "../lib/rules/childhood-contract";
 import type { Stage0Catalog } from "../lib/rules/stage0-contract";
 import { extractChildhood } from "./extract-childhood";
+import { extractCareerFields } from "./extract-career-fields";
 import { parseChildhoodCatalog } from "../lib/validation/childhood";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -1543,6 +1544,7 @@ export function buildModulesFile(): ModulesFile {
     "s2advdialog.cpp",
     "s2flexxpdialog.cpp",
     "s2clanfielddialog.cpp",
+    "carierfields.cpp",
     "resource/affilations.dat",
   ]) {
     fileLines[file] = toLines(readSource(file)).length;
@@ -1577,6 +1579,7 @@ export function buildModulesFile(): ModulesFile {
     gating,
     stage0,
     childhood,
+    careerFields: extractCareerFields(readSource),
   };
 }
 

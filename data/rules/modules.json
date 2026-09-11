@@ -16,6 +16,7 @@
         "s2advdialog.cpp": 272,
         "s2flexxpdialog.cpp": 580,
         "s2clanfielddialog.cpp": 234,
+        "carierfields.cpp": 527,
         "resource/affilations.dat": 13
       }
     },
@@ -9161,6 +9162,50 @@
           "age": 2
         }
       },
+      "attributeWrites": [
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 100,
+          "conditions": [
+            "lateVar != \"Preparatory School\"",
+            "earlyVar != \"Nobility\" || earlyVar != \"White Collar\""
+          ]
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": -100,
+          "conditions": [
+            "lateVar != \"Preparatory School\"",
+            "earlyVar != \"Nobility\" || earlyVar != \"White Collar\""
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 150,
+          "conditions": []
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 75,
+          "conditions": []
+        },
+        {
+          "key": "CHA",
+          "operation": "set",
+          "xp": 25,
+          "conditions": []
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": 25,
+          "conditions": []
+        }
+      ],
       "fieldClass": "civ",
       "schoolFlags": [
         "civField"
@@ -9441,7 +9486,7 @@
           "skills": [
             "Police Officer"
           ],
-          "age": 0.5
+          "age": 0
         },
         "advanced": {
           "skills": [
@@ -9746,6 +9791,50 @@
           "age": 2
         }
       },
+      "attributeWrites": [
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 100,
+          "conditions": [
+            "lateVar != \"Preparatory School\"",
+            "lateVar != \"Military School\""
+          ]
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": -100,
+          "conditions": [
+            "lateVar != \"Preparatory School\"",
+            "lateVar != \"Military School\""
+          ]
+        },
+        {
+          "key": "STR",
+          "operation": "set",
+          "xp": 50,
+          "conditions": []
+        },
+        {
+          "key": "BOD",
+          "operation": "set",
+          "xp": 100,
+          "conditions": []
+        },
+        {
+          "key": "RFL",
+          "operation": "set",
+          "xp": 125,
+          "conditions": []
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 100,
+          "conditions": []
+        }
+      ],
       "fieldClass": "mil",
       "schoolFlags": [
         "milField"
@@ -9823,7 +9912,7 @@
             "Basic Training",
             "Basic Training (Naval)"
           ],
-          "age": 0.5
+          "age": 0
         },
         "advanced": {
           "skills": [
@@ -9836,7 +9925,7 @@
             "Ship's Crew",
             "Technician - Military"
           ],
-          "age": 1.5
+          "age": 1
         },
         "specialist": {
           "skills": [
@@ -9934,7 +10023,7 @@
             "Basic Training",
             "Basic Training (Naval)"
           ],
-          "age": 0.5
+          "age": 0
         },
         "advanced": {
           "skills": [
@@ -9948,7 +10037,7 @@
             "Scout",
             "Ship's Crew"
           ],
-          "age": 1.5
+          "age": 1
         },
         "specialist": {
           "skills": [
@@ -14595,7 +14684,69 @@
       "source": {
         "file": "stage4_resurce.cpp",
         "line": 701
-      }
+      },
+      "attributeWrites": [
+        {
+          "key": "CHA",
+          "operation": "set",
+          "xp": -25,
+          "conditions": []
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": -50,
+          "conditions": []
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4clanCastName.first == \"Scientist Caste\""
+          ]
+        },
+        {
+          "key": "RFL",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4clanCastName.first == \"Scientist Caste\""
+          ]
+        },
+        {
+          "key": "RFL",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4clanCastName.first == \"Technician Caste\""
+          ]
+        },
+        {
+          "key": "STR",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4clanCastName.first == \"Technician Caste\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 75,
+          "conditions": [
+            "s4clanCastName.first == \"Merchant Caste\""
+          ]
+        },
+        {
+          "key": "BOD",
+          "operation": "set",
+          "xp": 75,
+          "conditions": [
+            "s4clanCastName.first == \"Laborer Caste\""
+          ]
+        }
+      ]
     },
     {
       "stage": 4,
@@ -15302,7 +15453,53 @@
       "source": {
         "file": "stage4_resurce.cpp",
         "line": 938
-      }
+      },
+      "attributeWrites": [
+        {
+          "key": "DEX",
+          "operation": "set",
+          "xp": 50,
+          "conditions": []
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 50,
+          "conditions": []
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4ComChk == true"
+          ]
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": -25,
+          "conditions": [
+            "s4ComChk == true"
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4WobChk == true"
+          ]
+        },
+        {
+          "key": "CHA",
+          "operation": "set",
+          "xp": -25,
+          "conditions": [
+            "s4WobChk == true"
+          ]
+        }
+      ]
     },
     {
       "stage": 4,
@@ -16735,7 +16932,129 @@
       "source": {
         "file": "stage4_resurce.cpp",
         "line": 1044
-      }
+      },
+      "attributeWrites": [
+        {
+          "key": "DEX",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4AffName.first == \"Cappelan Confederation\""
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4ComChk == true || s4WobChk == true"
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4AffName.first == \"Terran\""
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Draconis Combine\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Draconis Combine\""
+          ]
+        },
+        {
+          "key": "CHA",
+          "operation": "set",
+          "xp": -50,
+          "conditions": [
+            "s4AffName.first == \"Draconis Combine\""
+          ]
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": -50,
+          "conditions": [
+            "s4AffName.first == \"Draconis Combine\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Free Rasalhague Republic\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 30,
+          "conditions": [
+            "s4AffName.first == \"Lyran Alliance\""
+          ]
+        },
+        {
+          "key": "BOD",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4AffName.first == \"Minor Periphery\" || s4AffName.first == \"Major Periphery State\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Minor Periphery\" || s4AffName.first == \"Major Periphery State\""
+          ]
+        },
+        {
+          "key": "BOD",
+          "operation": "set",
+          "xp": 25,
+          "conditions": [
+            "s4AffName.first == \"Deep Periphery\""
+          ]
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Deep Periphery\""
+          ]
+        },
+        {
+          "key": "RFL",
+          "operation": "set",
+          "xp": 75,
+          "conditions": [
+            "s4AffName.first == \"Independent\""
+          ]
+        },
+        {
+          "key": "CHA",
+          "operation": "set",
+          "xp": -50,
+          "conditions": [
+            "s4AffName.first == \"Independent\""
+          ]
+        }
+      ]
     },
     {
       "stage": 4,
@@ -17627,7 +17946,29 @@
       "source": {
         "file": "stage4_resurce.cpp",
         "line": 1646
-      }
+      },
+      "attributeWrites": [
+        {
+          "key": "STR",
+          "operation": "set",
+          "xp": 100,
+          "conditions": []
+        },
+        {
+          "key": "WIL",
+          "operation": "set",
+          "xp": 100,
+          "conditions": []
+        },
+        {
+          "key": "EDG",
+          "operation": "set",
+          "xp": -25,
+          "conditions": [
+            "!(s4AffName.first == \"Free Rasalhague Republic\")"
+          ]
+        }
+      ]
     },
     {
       "stage": 4,
@@ -20354,7 +20695,25 @@
       "source": {
         "file": "stage4_resurce.cpp",
         "line": 2182
-      }
+      },
+      "attributeWrites": [
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Minor Periphery\" || s4AffName.first == \"Major Periphery State\""
+          ]
+        },
+        {
+          "key": "INT",
+          "operation": "set",
+          "xp": 50,
+          "conditions": [
+            "s4AffName.first == \"Deep Periphery\""
+          ]
+        }
+      ]
     },
     {
       "stage": 4,
@@ -78390,6 +78749,1067 @@
           "file": "text_resurce.cpp",
           "line": 350
         }
+      }
+    ]
+  },
+  "careerFields": {
+    "fields": [
+      {
+        "name": "Anthropologist",
+        "skills": [
+          "Career/Anthropologist",
+          "Interests/History (Any one culture)",
+          "Investigation",
+          "Language/Any",
+          "Language/Any",
+          "Protocol/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 10
+        }
+      },
+      {
+        "name": "Archaeologist",
+        "skills": [
+          "Career/Archaeologist",
+          "Appraisal",
+          "Interests/Geology",
+          "Interests/History (any)",
+          "Navigation/Ground",
+          "Perception"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 18
+        }
+      },
+      {
+        "name": "Cartographer",
+        "skills": [
+          "Career/Cartographer",
+          "Computers",
+          "Navigation/Air",
+          "Navigation/Ground",
+          "Perception",
+          "Sensor Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 26
+        }
+      },
+      {
+        "name": "Communications",
+        "skills": [
+          "Acting",
+          "Career/Communications",
+          "Communications/Conventional",
+          "Computers",
+          "Protocol/Any",
+          "Sensor Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 34
+        }
+      },
+      {
+        "name": "Doctor",
+        "skills": [
+          "Administration",
+          "Career/Doctor",
+          "MedTech",
+          "Protocol/Affiliation",
+          "Surgery/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 42
+        }
+      },
+      {
+        "name": "Engineer",
+        "skills": [
+          "Appraisal",
+          "Career/Engineer",
+          "Perception",
+          "Technician/Nuclear",
+          "Technician/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 49
+        }
+      },
+      {
+        "name": "General Studies",
+        "skills": [
+          "Computers",
+          "Career/Any",
+          "Interests/Any",
+          "Perception",
+          "Protocol/Affiliation"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 56
+        }
+      },
+      {
+        "name": "HPG Technician",
+        "skills": [
+          "Administration",
+          "Communications/Conventional",
+          "Communications/HPG",
+          "Computers",
+          "Cryptography"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 63
+        }
+      },
+      {
+        "name": "Journalist",
+        "skills": [
+          "Acting",
+          "Art/Writing",
+          "Career/Journalist",
+          "Computers",
+          "Investigation",
+          "Perception"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 70
+        }
+      },
+      {
+        "name": "Lawyer",
+        "skills": [
+          "Acting",
+          "Administration",
+          "Career/Lawyer",
+          "Interests/Law",
+          "Negotiation",
+          "Protocol/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 78
+        }
+      },
+      {
+        "name": "Manager",
+        "skills": [
+          "Administration",
+          "Career/Management",
+          "Leadership",
+          "Negotiation",
+          "Protocol/Affiliation",
+          "Training"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 86
+        }
+      },
+      {
+        "name": "Medical Assistant",
+        "skills": [
+          "Computers",
+          "Career/Medtech",
+          "Interests/Pharmacology",
+          "MedTech",
+          "Perception"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 94
+        }
+      },
+      {
+        "name": "Merchant",
+        "skills": [
+          "Administration",
+          "Appraisal",
+          "Career/Merchant",
+          "Negotiation",
+          "Protocol/Any",
+          "Streetwise/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 101
+        }
+      },
+      {
+        "name": "Merchant Marine",
+        "skills": [
+          "Career/Merchant Marine",
+          "Protocol/Any",
+          "Technician/Aeronautics",
+          "Technician/Any",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 109
+        }
+      },
+      {
+        "name": "Pilot - Aerospace (Civilian)",
+        "skills": [
+          "Career/Aerospace Pilot",
+          "Communications/Conventional",
+          "Navigation/Air",
+          "Navigation/Space",
+          "Piloting/Aerospace",
+          "Sensor Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 116
+        }
+      },
+      {
+        "name": "Pilot - Aircraft (Civilian)",
+        "skills": [
+          "Career/Aircraft Pilot",
+          "Communications/Conventional",
+          "Navigation/Air",
+          "Piloting/Aircraft or VTOL",
+          "Sensor Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 124
+        }
+      },
+      {
+        "name": "Pilot - DropShip (Civilian)",
+        "skills": [
+          "Career/DropShip Pilot",
+          "Communications/Conventional",
+          "Navigation/Space",
+          "Piloting/Spacecraft",
+          "Sensor Operations",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 131
+        }
+      },
+      {
+        "name": "Pilot - Exoskeleton",
+        "skills": [
+          "Piloting/Battlesuit",
+          "Sensor Operations",
+          "Technician/Electric",
+          "Technician/Mechanical",
+          "Technician/Myomer"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 139
+        }
+      },
+      {
+        "name": "Pilot - IndustrialMech",
+        "skills": [
+          "Piloting/Mech",
+          "Sensor Operations",
+          "Technician/Electronic",
+          "Technician/Mechanical",
+          "Technician/Myomer"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 146
+        }
+      },
+      {
+        "name": "Pilot - JumpShip",
+        "skills": [
+          "Administration",
+          "Computers",
+          "Navigation/K-F Jump",
+          "Navigation/Space"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 153
+        }
+      },
+      {
+        "name": "Planetary Surveyor",
+        "skills": [
+          "Appraisal",
+          "Driving/Any",
+          "Navigation/Ground",
+          "Survival/Any",
+          "Tracking/Wilds"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 159
+        }
+      },
+      {
+        "name": "Politician",
+        "skills": [
+          "Acting",
+          "Career/Politician",
+          "Leadership",
+          "Negotiation",
+          "Protocol/Affiliation"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 166
+        }
+      },
+      {
+        "name": "Scientist",
+        "skills": [
+          "Career/Scientist",
+          "Computers",
+          "Interests/Any",
+          "Investigation",
+          "Perception",
+          "Science/Any",
+          "Training"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 173
+        }
+      },
+      {
+        "name": "Technician - Aerospace",
+        "skills": [
+          "Computers",
+          "Technician/Aeronautics",
+          "Technician/Nuclear",
+          "Technician/Jets",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 182
+        }
+      },
+      {
+        "name": "Technician - Civilian",
+        "skills": [
+          "Appraisal",
+          "Career/Technician",
+          "Technician/Electronic",
+          "Technician/Mechanical",
+          "Technician/Nuclear"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 189
+        }
+      },
+      {
+        "name": "Technician - Mech",
+        "skills": [
+          "Technician/Electronic",
+          "Technician/Jets",
+          "Technician/Mechanical",
+          "Technician/Myomer",
+          "Technician/Nuclear"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 196
+        }
+      },
+      {
+        "name": "Technician - Vehicle",
+        "skills": [
+          "Computers",
+          "Technician/Electronic",
+          "Technician/Mechanical",
+          "Technician/Nuclear"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 203
+        }
+      },
+      {
+        "name": "Analysis",
+        "skills": [
+          "Computers",
+          "Investigation",
+          "Language/Any",
+          "Language/Any",
+          "Sensor Operations",
+          "Strategy",
+          "Tactics/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 211
+        }
+      },
+      {
+        "name": "Covert Operations",
+        "skills": [
+          "Acting",
+          "Escape Artist",
+          "Language/Any",
+          "Perception",
+          "Protocol/Any",
+          "Streetwise/Any",
+          "Tracking/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 220
+        }
+      },
+      {
+        "name": "Detective",
+        "skills": [
+          "Career/Detective",
+          "Computers",
+          "Interrogation",
+          "Investigation",
+          "Perception",
+          "Security Systems",
+          "Streetwise/Affiliation"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 229
+        }
+      },
+      {
+        "name": "Intelligence",
+        "skills": [
+          "Communications/Conventional",
+          "Computers",
+          "Cryptography",
+          "Language/Any",
+          "Sensor Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 238
+        }
+      },
+      {
+        "name": "Police Officer",
+        "skills": [
+          "Acting",
+          "Career/Police",
+          "Driving/Any",
+          "Martial Arts",
+          "MedTech",
+          "Small Arms",
+          "Streetwise/Affiliation"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 245
+        }
+      },
+      {
+        "name": "Police Tactical Officer",
+        "skills": [
+          "Climbing",
+          "Demolitions",
+          "Running",
+          "Support Weapons",
+          "Tactics/Infantry",
+          "Thrown Weapons",
+          "Tracking/Urban"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 254
+        }
+      },
+      {
+        "name": "Basic Training",
+        "skills": [
+          "Career/Soldier",
+          "Martial Arts",
+          "MedTech",
+          "Navigation/Ground",
+          "Small Arms"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 263
+        }
+      },
+      {
+        "name": "Basic Training (Naval)",
+        "skills": [
+          "Career/Pilot or Ship's Crew",
+          "Martial Arts",
+          "MedTech",
+          "Navigation/Space",
+          "Small Arms",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 270
+        }
+      },
+      {
+        "name": "Cavalry",
+        "skills": [
+          "Artillery",
+          "Driving/Any",
+          "Gunnery/Any Vehicle",
+          "Sensor Operations",
+          "Tactics/Land or Sea",
+          "Technician/Mechanical"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 278
+        }
+      },
+      {
+        "name": "Infantry",
+        "skills": [
+          "Acrobatics/Free-Fall",
+          "Artillery",
+          "Climbing",
+          "Communications/Conventional",
+          "Support Weapons",
+          "Tactics/Infantry"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 286
+        }
+      },
+      {
+        "name": "Infantry - Anti-'Mech",
+        "skills": [
+          "Acrobatics/Gymnastics",
+          "Demolitions",
+          "Perception",
+          "Security Systems/Electronic",
+          "Technician/Mechanical",
+          "Technician/Myomer"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 294
+        }
+      },
+      {
+        "name": "Marine",
+        "skills": [
+          "Acrobatics/Free-Fall",
+          "Demolitions",
+          "Gunnery/Spacecraft",
+          "Communications/Conventional",
+          "Security Systems/Any",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 302
+        }
+      },
+      {
+        "name": "MechWarrior",
+        "skills": [
+          "Gunnery/`Mech",
+          "Piloting/`Mech",
+          "Sensor Operations",
+          "Tactics/Land",
+          "Technician/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 310
+        }
+      },
+      {
+        "name": "Military Scientist",
+        "skills": [
+          "Career/Military Scientist",
+          "Computers",
+          "Cryptography",
+          "Interests/Military History",
+          "Strategy",
+          "Tactics/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 318
+        }
+      },
+      {
+        "name": "Officer",
+        "skills": [
+          "Administration",
+          "Leadership",
+          "Melee Weapons",
+          "Protocol/Affiliation",
+          "Training"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 326
+        }
+      },
+      {
+        "name": "Pilot - Aerospace (Combat)",
+        "skills": [
+          "Gunnery/Aerospace",
+          "Navigation/Air",
+          "Navigation/Space",
+          "Piloting/Aerospace",
+          "Sensor Operations",
+          "Tactics/Space",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 333
+        }
+      },
+      {
+        "name": "Pilot - Aircraft (Combat)",
+        "skills": [
+          "Gunnery/Air Vehicle",
+          "Navigation/Air",
+          "Piloting/Air Vehicle",
+          "Sensor Operations",
+          "Tactics/Air"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 342
+        }
+      },
+      {
+        "name": "Pilot - Battle Armor",
+        "skills": [
+          "Climbing",
+          "Gunnery/Battlesuit",
+          "Martial Arts",
+          "Piloting/Battlesuit",
+          "Sensor Operations",
+          "Tactics/Land"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 349
+        }
+      },
+      {
+        "name": "Pilot - WarShip",
+        "skills": [
+          "Computers",
+          "Leadership",
+          "Navigation/K-F Jump",
+          "Navigation/Space",
+          "Protocol/Affiliation",
+          "Strategy",
+          "Tactics/Space"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 357
+        }
+      },
+      {
+        "name": "Scout",
+        "skills": [
+          "Communications/Conventional",
+          "Disguise",
+          "Language/Any",
+          "Security Systems/Any",
+          "Stealth",
+          "Streetwise/Any",
+          "Tracking/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 366
+        }
+      },
+      {
+        "name": "Ship's Crew",
+        "skills": [
+          "Career/Ship's Crew",
+          "Computers",
+          "Gunnery/Spacecraft",
+          "Technician/Any",
+          "Zero-G Operations"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 375
+        }
+      },
+      {
+        "name": "Special Forces",
+        "skills": [
+          "Acrobatics/Free-Fall",
+          "Demolitions",
+          "Small Arms",
+          "Stealth",
+          "Survival/Any",
+          "Tracking/Any"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 382
+        }
+      },
+      {
+        "name": "Technician - Military",
+        "skills": [
+          "Appraisal",
+          "Career/Technician",
+          "Technician/Electronics",
+          "Technician/Mechanical",
+          "Technician/Nuclear",
+          "Technician/Weapons"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 390
+        }
+      },
+      {
+        "name": "Clan Aerospace Warrior",
+        "skills": [
+          "Gunnery/Aerospace",
+          "Navigation/Space",
+          "Piloting/Aerospace",
+          "Sensor Operations",
+          "Tactics/Space"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 401
+        }
+      },
+      {
+        "name": "Clan Basic Training",
+        "skills": [
+          "Martial Arts",
+          "MedTech",
+          "Melee Weapons",
+          "Navigation/Ground",
+          "Protocol/Affiliation",
+          "Small Arms"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 408
+        }
+      },
+      {
+        "name": "Clan Cavalry",
+        "skills": [
+          "Artillery",
+          "Driving/Any (or Piloting/Air Vehicle)",
+          "Gunnery/Land, Sea, or Air Vehicle",
+          "Sensor Operations",
+          "Tactics/Land (or Air)"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 416
+        }
+      },
+      {
+        "name": "Clan Elemental",
+        "skills": [
+          "Climbing",
+          "Gunnery/Battlesuit)",
+          "Melee Weapons",
+          "Piloting/Battlesuit",
+          "Sensor Operations",
+          "Small Arms",
+          "Tactics/Infantry"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 423
+        }
+      },
+      {
+        "name": "Clan MechWarrior",
+        "skills": [
+          "Gunnery/`Mech",
+          "Leadership)",
+          "Navigation/Ground",
+          "Piloting/'Mech",
+          "Sensor Operations",
+          "Tactics/Land"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 432
+        }
+      },
+      {
+        "name": "Clan ProtoMech Warrior",
+        "skills": [
+          "Gunnery/ProtoMech",
+          "Navigation/Ground)",
+          "Piloting/ProtoMech",
+          "Sensor Operations",
+          "Tactics/Land"
+        ],
+        "source": {
+          "file": "carierfields.cpp",
+          "line": 440
+        }
+      }
+    ],
+    "choices": [
+      {
+        "match": "Interests/History (Any one culture)",
+        "candidates": [
+          "Interests/Star League History",
+          "Interests/Combine History",
+          "Interests/FedSuns History",
+          "Interests/Regulan History",
+          "Interests/Marian History",
+          "Interests/Roman History",
+          "Interests/Clan History",
+          "Interests/Star League History",
+          "Interests/Terran History"
+        ]
+      },
+      {
+        "match": "Language/Any",
+        "candidates": [
+          "Language/English",
+          "Language/Mandarin Chinese",
+          "Language/Russian",
+          "Language/Cantonese",
+          "Language/Vietnamese",
+          "Language/Japanese",
+          "Language/Arabic",
+          "Language/Swedenese",
+          "Language/French",
+          "Language/German",
+          "Language/Hindi",
+          "Language/Greek",
+          "Language/Italian",
+          "Language/Mongolian",
+          "Language/Romanian",
+          "Language/Slovak",
+          "Language/Spanish",
+          "Language/Urdu",
+          "Language/Scots Gaelic",
+          "Language/Swedish"
+        ]
+      },
+      {
+        "match": "Protocol/Any",
+        "candidates": [
+          "Protocol/Capellan",
+          "Protocol/Combine",
+          "Protocol/FedSuns",
+          "Protocol/Lyran",
+          "Protocol/Clan",
+          "Protocol/Nearest state",
+          "Protocol/ComStar",
+          "Protocol/Word of Blake",
+          "Protocol/Free Worlds",
+          "Protocol/Rasalhague"
+        ]
+      },
+      {
+        "match": "Interests/History (any)",
+        "candidates": [
+          "Interests/Star League History",
+          "Interests/Combine History",
+          "Interests/FedSuns History",
+          "Interests/Regulan History",
+          "Interests/Marian History",
+          "Interests/Roman History",
+          "Interests/Clan History",
+          "Interests/Star League History",
+          "Interests/Terran History",
+          "Interests/History"
+        ]
+      },
+      {
+        "match": "Surgery/Any",
+        "candidates": [
+          "General",
+          "Veterinary"
+        ]
+      },
+      {
+        "match": "Technician/Any",
+        "candidates": [
+          "Technician/Aeronautics",
+          "Technician/Cybernetics",
+          "Technician/Electronic",
+          "Technician/Jets",
+          "Technician/Mechanical",
+          "Technician/Myomer",
+          "Technician/Nuclear",
+          "Technician/Weapons"
+        ]
+      },
+      {
+        "match": "Career/Any",
+        "candidates": [
+          "Career/Anthropologist",
+          "Career/Archaeologist",
+          "Career/Cartographer",
+          "Career/Communications",
+          "Career/Doctor",
+          "Career/Engineer",
+          "Career/Journalist",
+          "Career/Lawyer",
+          "Career/Management",
+          "Career/Medtech",
+          "Career/Merchant",
+          "Career/Merchant Marine",
+          "Career/Aerospace Pilot",
+          "Career/Aircraft Pilot",
+          "Career/DropShip Pilot",
+          "Career/Politician",
+          "Career/Scientist",
+          "Career/Technician",
+          "Career/Detective",
+          "Career/Soldier",
+          "Career/Pilot",
+          "Career/Ships Crew",
+          "Career/Military Scientist"
+        ]
+      },
+      {
+        "match": "Streetwise/Any",
+        "candidates": [
+          "Streetwise/Periphery",
+          "Streetwise/Clan",
+          "Streetwise/Combine",
+          "Streetwise/FedSuns",
+          "Streetwise/Lyran",
+          "Streetwise/Rim Collection",
+          "Streetwise/Magistracy",
+          "Streetwise/Outworlds",
+          "Streetwise/Taurian",
+          "Streetwise/Rasalhague"
+        ]
+      },
+      {
+        "match": "Driving/Any",
+        "candidates": [
+          "Driving/Ground Vehicles",
+          "Driving/Rail Vehicles",
+          "Driving/Sea Vehicles"
+        ]
+      },
+      {
+        "match": "Survival/Any",
+        "candidates": [
+          "Survival/Desert",
+          "Survival/Forests",
+          "Survival/Jungle",
+          "Survival/Arctic",
+          "Survival/Steppe",
+          "Survival/City",
+          "Survival/Martian Desert"
+        ]
+      },
+      {
+        "match": "Tracking/Any",
+        "candidates": [
+          "Tracking/Urban",
+          "Tracking/Wilds"
+        ]
+      },
+      {
+        "match": "Career/Pilot or Ship's Crew",
+        "candidates": [
+          "Career/Pilot",
+          "Career/Ship's Crew"
+        ]
+      },
+      {
+        "match": "Tactics/Land or Sea",
+        "candidates": [
+          "Tactics/Land",
+          "Tactics/Sea"
+        ]
+      },
+      {
+        "match": "Gunnery/Any Vehicle",
+        "candidates": [
+          "Gunnery/Air Vehicle",
+          "Gunnery/Ground Vehicle",
+          "Gunnery/Sea Vehicle"
+        ]
+      },
+      {
+        "match": "Security Systems/Any",
+        "candidates": [
+          "Security Systems/Electronic",
+          "Security Systems/Mechanical"
+        ]
+      },
+      {
+        "match": "Tactics/Any",
+        "candidates": [
+          "Tactics/Infantry",
+          "Tactics/Land",
+          "Tactics/Sea",
+          "Tactics/Air",
+          "Tactics/Space"
+        ]
+      },
+      {
+        "match": "Interests/Any",
+        "candidates": [
+          "Interests/Star League History",
+          "Interests/Combine History",
+          "Interests/FedSuns History",
+          "Interests/Regulan History",
+          "Interests/Remembrance",
+          "Interests/Marian History",
+          "Interests/Roman History",
+          "Interests/Nova Cat Vision Quest",
+          "Interests/Clan History",
+          "Interests/Theology",
+          "Interests/Coyote Rituals",
+          "Interests/Star League History",
+          "Interests/Clan Remembrance",
+          "Interests/Terran History",
+          "Interests/History",
+          "Interests/Literature",
+          "Interests/Holo-Games",
+          "Interests/Sports Statistics",
+          "Interests/Writings of Jerome Blake",
+          "Interests/BattleMechs"
+        ]
+      },
+      {
+        "match": "Science/Any",
+        "candidates": [
+          "Science/Biology",
+          "Science/Chemistry",
+          "Science/Mathematics",
+          "Science/Physics"
+        ]
       }
     ]
   }

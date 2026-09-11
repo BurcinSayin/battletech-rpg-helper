@@ -79,6 +79,112 @@ function expectMajorDraft() {
   expect(draft.getAllByText("Equipped: -50 XP")).toHaveLength(1);
 }
 
+describe("WizardClient School and Real Life", () => {
+  function enterSchool() {
+    enterStage2();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+  }
+
+  it("renders school field charges, gates unfinished picks, and credits the rebate on Next", () => {
+    enterSchool();
+    pick("School", "Technical College");
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", { name: "Next" }).disabled,
+    ).toBe(true);
+    pick("Interests/Any — choice 1", "Interests/Aerospace (skill)");
+    pick("Basic field", "Pilot - Aerospace (Civilian)");
+    expect(
+      screen.getByText(
+        "School charges applied: 780 XP. Rebate on entering Stage 4: 36 XP.",
+      ),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", { name: "Next" }).disabled,
+    ).toBe(false);
+    const balance = screen.getByRole("region", {
+      name: "XP balances",
+    }).textContent;
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    expect(
+      screen.getByRole("combobox", { name: "Real Life module" }),
+    ).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    fireEvent.click(
+      within(screen.getByRole("alertdialog")).getByRole("button", {
+        name: "Go back",
+      }),
+    );
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balance);
+  });
+
+  it("skips both stages and clears school selection effects", () => {
+    enterSchool();
+    const balance = screen.getByRole("region", {
+      name: "XP balances",
+    }).textContent;
+    pick("School", "Police Academy");
+    fireEvent.click(screen.getByRole("button", { name: "Back" }));
+    expect(screen.getByRole("alertdialog")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Skip School" }));
+    expect(screen.queryByRole("alertdialog")).toBeNull();
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balance);
+    fireEvent.click(screen.getByRole("button", { name: "Skip Real Life" }));
+    expect(screen.getByRole("status").textContent).toBe(
+      "Stage 4 skipped. Your lifepath ends after Late Childhood.",
+    );
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", { name: "Finish" })
+        .disabled,
+    ).toBe(true);
+  });
+
+  it("adds multiple Real Life modules, excludes committed modules, and refunds removed modules", () => {
+    enterSchool();
+    fireEvent.click(screen.getByRole("button", { name: "Skip School" }));
+    const balance = screen.getByRole("region", {
+      name: "XP balances",
+    }).textContent;
+    pick("Real Life module", "Travel");
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balance);
+    fireEvent.click(
+      screen.getByRole("button", { name: "Add Real Life module" }),
+    );
+    expect(
+      within(
+        screen.getByRole("combobox", { name: "Real Life module" }),
+      ).queryByRole("option", { name: "Travel" }),
+    ).toBeNull();
+    pick("Real Life module", "Civilian Job");
+    fireEvent.click(
+      screen.getByRole("button", { name: "Add Real Life module" }),
+    );
+    const completed = screen.getByRole("region", {
+      name: "Completed Real Life modules",
+    });
+    expect(within(completed).getAllByRole("listitem")).toHaveLength(2);
+    expect(
+      within(screen.getByRole("region", { name: "Current draft" })).getByText(
+        "Age: 28",
+      ),
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Remove Travel and later modules" }),
+    );
+    expect(
+      screen.queryByRole("region", { name: "Completed Real Life modules" }),
+    ).toBeNull();
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balance);
+  });
+});
+
 describe("WizardClient shell", () => {
   it("renders the six §7.1 pages in declaration order, starting on Intro", () => {
     render(<WizardClient />);
