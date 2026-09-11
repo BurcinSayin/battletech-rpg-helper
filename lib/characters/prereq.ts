@@ -49,26 +49,25 @@ export function mergePrerequisites(
   return { attrs, skills, traits };
 }
 
-function xpByName(rows: readonly BtccRow[]): Readonly<Record<string, number>> {
-  const xp: Record<string, number> = {};
-  for (const row of rows) xp[row.name] = row.xp;
-  return xp;
+function xpByName(rows: readonly BtccRow[]): ReadonlyMap<string, number> {
+  return new Map(rows.map((row) => [row.name, row.xp]));
 }
 
 function hasAtLeast(
-  rows: Readonly<Record<string, number>>,
+  rows: ReadonlyMap<string, number>,
   names: readonly string[],
   minimum: number,
 ): boolean {
-  return names.some((name) => (rows[name] ?? 0) >= minimum);
+  return names.some((name) => (rows.get(name) ?? 0) >= minimum);
 }
 
 /**
  * Report current shortfalls after merging every selected stage.
  *
- * Missing attributes use the desktop's 100-point starting value; missing skills
- * and traits have 0 XP. The three module-specific alternative prerequisites are
- * applied after collection, as in CheckPrereq.
+ * Missing attributes use the desktop's 100-point starting value. Missing skills
+ * and traits are unmet even for nonpositive requirements (reported as 0 XP),
+ * matching CheckPrereq's presence checks at mainwindow.cpp:3337-3367. The three
+ * module-specific alternative prerequisites are applied after collection.
  */
 export function checkPrerequisites(
   draft: BtccDraft,
@@ -86,14 +85,14 @@ export function checkPrerequisites(
     }
   }
   for (const { name, xp: required } of requirements.skills) {
-    const actual = skillXp[name] ?? 0;
-    if (actual < required) {
+    const actual = skillXp.get(name) ?? 0;
+    if (!skillXp.has(name) || actual < required) {
       unmet.push({ kind: "skill", name, required, actual });
     }
   }
   for (const { name, xp: required } of requirements.traits) {
-    const actual = traitXp[name] ?? 0;
-    if (actual < required) {
+    const actual = traitXp.get(name) ?? 0;
+    if (!traitXp.has(name) || actual < required) {
       unmet.push({ kind: "trait", name, required, actual });
     }
   }
