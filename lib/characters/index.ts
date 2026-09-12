@@ -4,6 +4,7 @@ export {
   CHARACTER_START_XP,
   attributeXp,
   computeXp,
+  reconcileWizardXp,
   sumRows,
   type AttributeKey,
   type XpSummary,

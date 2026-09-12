@@ -1,4 +1,12 @@
 import { describe, it, expect } from "vitest";
+import { fullWizardState } from "@/app/(app)/characters/new/wizard/test-fixtures";
+import {
+  computeXp,
+  draftToColumns,
+  rowToDraft,
+  reconcileWizardXp,
+  type CharacterRow,
+} from "@/lib/characters";
 import { parseBtcc } from "./parse";
 import { serializeBtcc } from "./serialize";
 import { readFixture, FIXTURE_NAMES } from "./test-fixtures";
@@ -45,4 +53,17 @@ describe("btcc round-trip", () => {
       });
     });
   }
+});
+
+it("wizard-built character survives database storage and a byte-equal .btcc re-import", () => {
+  const state = fullWizardState();
+  const finished = reconcileWizardXp(state.draft, state.wizardXpRemaining);
+  const stored = rowToDraft(draftToColumns(finished) as unknown as CharacterRow);
+  const exported = serializeBtcc(stored);
+  const imported = parseBtcc(exported);
+  expect(Buffer.from(serializeBtcc(imported))).toEqual(Buffer.from(exported));
+  expect(serializeBtcc(finished)).toBe(exported);
+  expect(computeXp(imported).remaining).toBe(state.wizardXpRemaining);
+  expect(imported.preSkills).toEqual(finished.preSkills);
+  expect(imported.skills).toEqual(finished.skills);
 });

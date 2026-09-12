@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { emptyDraft, parseBtcc } from "@/lib/btcc";
+import { emptyDraft, parseBtcc, type BtccDraft } from "@/lib/btcc";
 import {
   ATTRIBUTE_BASE,
   ATTRIBUTE_KEYS,
@@ -14,6 +14,9 @@ import {
   draftToPayload,
   formToDraft,
   prepareImport,
+  reconcileWizardXp,
+  looksLikeCharacter,
+  NAME_MAX_LENGTH,
   rowToDraft,
 } from "@/lib/characters";
 
@@ -27,7 +30,11 @@ export type SaveResult =
 // Result of an import. On success the action redirects into the new character
 // (throws NEXT_REDIRECT and never returns), so only failures come back — the
 // import client renders `message` inline and keeps the dropzone for a retry.
-export type ImportResult = { ok: false; kind: "invalid" | "error"; message: string };
+export type ImportResult = {
+  ok: false;
+  kind: "invalid" | "error";
+  message: string;
+};
 
 /**
  * Create a blank character owned by the current user and open it. Usable directly
@@ -35,15 +42,23 @@ export type ImportResult = { ok: false; kind: "invalid" | "error"; message: stri
  * own with a null campaign.
  */
 export async function createCharacter(): Promise<void> {
+  const draft = emptyDraft();
+  draft.scalars.name = "New Character";
+  for (const key of ATTRIBUTE_KEYS) draft.attrs[key] = ATTRIBUTE_BASE;
+
+  await insertCharacter(draft, "/dashboard?error=create");
+}
+
+/** Shared RLS-gated create path; ownership always comes from the session. */
+async function insertCharacter(
+  draft: BtccDraft,
+  failureRedirect?: string,
+): Promise<ImportResult> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) redirect("/login");
-
-  const draft = emptyDraft();
-  draft.scalars.name = "New Character";
-  for (const key of ATTRIBUTE_KEYS) draft.attrs[key] = ATTRIBUTE_BASE;
 
   const { data, error } = await supabase
     .from("characters")
@@ -53,7 +68,12 @@ export async function createCharacter(): Promise<void> {
 
   if (error || !data) {
     console.error("[characters] create failed:", error?.code, error?.message);
-    redirect("/dashboard?error=create");
+    if (failureRedirect) redirect(failureRedirect);
+    return {
+      ok: false,
+      kind: "error",
+      message: "Could not create character. Please try again.",
+    };
   }
 
   revalidatePath("/dashboard");
@@ -68,12 +88,6 @@ export async function createCharacter(): Promise<void> {
  * return an `ImportResult` for the import client to render.
  */
 export async function importCharacter(text: string): Promise<ImportResult> {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect("/login");
-
   const prepared = prepareImport(parseBtcc(text));
   if (!prepared.ok) {
     return {
@@ -83,19 +97,47 @@ export async function importCharacter(text: string): Promise<ImportResult> {
     };
   }
 
-  const { data, error } = await supabase
-    .from("characters")
-    .insert(draftToInsert(prepared.draft, user.id))
-    .select("id")
-    .single();
+  const result = await insertCharacter(prepared.draft);
+  return { ...result, message: "Could not import. Please try again." };
+}
 
-  if (error || !data) {
-    console.error("[characters] import failed:", error?.code, error?.message);
-    return { ok: false, kind: "error", message: "Could not import. Please try again." };
+/** Re-parse and reconcile on the server, then open the existing editor. */
+export async function createWizardCharacter(
+  text: string,
+  wizardXpRemaining: number,
+): Promise<ImportResult> {
+  const input = z
+    .object({
+      text: z.string(),
+      wizardXpRemaining: z.number().int().nonnegative().safe(),
+    })
+    .safeParse({ text, wizardXpRemaining });
+  if (!input.success) {
+    return {
+      ok: false,
+      kind: "invalid",
+      message: "The wizard XP balance is invalid.",
+    };
   }
-
-  revalidatePath("/dashboard");
-  redirect(`/characters/${data.id}`);
+  const draft = parseBtcc(input.data.text);
+  if (!looksLikeCharacter(draft)) {
+    return {
+      ok: false,
+      kind: "invalid",
+      message: "The wizard draft is invalid.",
+    };
+  }
+  draft.scalars.name =
+    draft.scalars.name.trim().slice(0, NAME_MAX_LENGTH) || "New Character";
+  const finished = reconcileWizardXp(draft, input.data.wizardXpRemaining);
+  if (!Number.isSafeInteger(finished.scalars.gmxpmod)) {
+    return {
+      ok: false,
+      kind: "invalid",
+      message: "The wizard XP balance is invalid.",
+    };
+  }
+  return insertCharacter(finished);
 }
 
 /**
@@ -120,9 +162,15 @@ export async function saveCharacter(
   // generic "Could not save" with no diagnosis. `campaign !== undefined` is the
   // single presence test in this path; there is deliberately no `??` anywhere.
   if (campaign !== undefined) {
-    const parsedCampaign = z.object({ id: z.string().uuid().nullable() }).safeParse(campaign);
+    const parsedCampaign = z
+      .object({ id: z.string().uuid().nullable() })
+      .safeParse(campaign);
     if (!parsedCampaign.success) {
-      return { ok: false, kind: "error", message: "Invalid campaign selection." };
+      return {
+        ok: false,
+        kind: "error",
+        message: "Invalid campaign selection.",
+      };
     }
   }
 
@@ -148,10 +196,18 @@ export async function saveCharacter(
     const kind = classifyUpdateError(error);
     if (kind === "conflict") return { ok: false, kind: "conflict" };
     if (kind === "forbidden") {
-      return { ok: false, kind: "forbidden", message: "You can't save to that campaign." };
+      return {
+        ok: false,
+        kind: "forbidden",
+        message: "You can't save to that campaign.",
+      };
     }
     console.error("[characters] save failed:", error.code, error.message);
-    return { ok: false, kind: "error", message: "Could not save. Please try again." };
+    return {
+      ok: false,
+      kind: "error",
+      message: "Could not save. Please try again.",
+    };
   }
 
   revalidatePath(`/characters/${id}`);

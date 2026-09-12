@@ -75,3 +75,21 @@ export function computeXp(draft: BtccDraft): XpSummary {
     remaining: budget - spent - draft.scalars.gmxpmod,
   };
 }
+
+/** Reconcile the editor's stat ledger with the wizard's running pool.
+ * MainWindow::FinishWizard(), mainwindow.cpp:397-401; RULES.md §2.5.
+ * Ignore any previous residual: this is a fresh reconciliation, not a debit.
+ */
+export function reconcileWizardXp(
+  draft: BtccDraft,
+  wizardXpRemaining: number,
+): BtccDraft {
+  const { budget, spent } = computeXp(draft);
+  return {
+    ...draft,
+    scalars: {
+      ...draft.scalars,
+      gmxpmod: budget - spent - wizardXpRemaining,
+    },
+  };
+}

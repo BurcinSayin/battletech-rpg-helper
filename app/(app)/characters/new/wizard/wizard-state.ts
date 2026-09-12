@@ -446,6 +446,19 @@ export function canAdvance(state: WizardDraftState): boolean {
   return state.pageId < 5;
 }
 
+export function canFinish(state: WizardDraftState): boolean {
+  return (
+    state.pageId === 5 &&
+    state.stage0Complete &&
+    state.stage1Complete &&
+    state.stage2Complete &&
+    !!state.adult?.school.complete &&
+    // Pending advanced choices affect the preview before the module is charged.
+    !state.adult.life.pending &&
+    state.wizardXpRemaining >= 0
+  );
+}
+
 function updateChildhood(
   state: WizardDraftState,
   stage: ChildhoodStageKey,

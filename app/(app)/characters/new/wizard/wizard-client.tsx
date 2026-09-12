@@ -1,7 +1,9 @@
 "use client";
 
-import { useReducer, useState } from "react";
+import { useReducer, useState, useTransition } from "react";
 import { Panel, HudButton, hudInput } from "@/components/characters/ui";
+import { serializeBtcc } from "@/lib/btcc";
+import { createWizardCharacter } from "@/app/(app)/characters/actions";
 import { cn } from "@/lib/utils";
 import { stage0Catalog } from "@/lib/rules/load";
 import { ATTRIBUTE_BASE, ATTRIBUTE_KEYS } from "@/lib/characters";
@@ -13,10 +15,11 @@ import {
   initialWizardState,
   wizardReducer,
   canAdvance,
+  canFinish,
   type WizardAction,
 } from "./wizard-state";
 
-/** Local lifepath draft. Finish and handoff are a separate build step. */
+/** Build locally, then reconcile and persist the finished lifepath. */
 export function WizardClient() {
   const [state, dispatch] = useReducer(
     wizardReducer,
@@ -27,7 +30,23 @@ export function WizardClient() {
   // (`wizard.cpp:196`) — it is the moment selections are destroyed (§7.3).
   const [confirmingBack, setConfirmingBack] = useState(false);
 
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
   const page = WIZARD_PAGES[state.pageId];
+
+  function onFinish() {
+    if (isPending || !canFinish(state)) return;
+    setConfirmingBack(false);
+    setError(null);
+    startTransition(async () => {
+      // Success redirects; only an expected failure returns to this draft.
+      const result = await createWizardCharacter(
+        serializeBtcc(state.draft),
+        state.wizardXpRemaining,
+      );
+      setError(result.message);
+    });
+  }
 
   function onBackConfirmed() {
     setConfirmingBack(false);
@@ -47,7 +66,11 @@ export function WizardClient() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <fieldset
+      disabled={isPending}
+      className="flex min-w-0 flex-col gap-4"
+      aria-busy={isPending}
+    >
       <header>
         <h1 className="text-xl font-semibold text-hud-text">Lifepath wizard</h1>
         <p className="mt-1 text-sm text-hud-muted">
@@ -94,6 +117,7 @@ export function WizardClient() {
               onChange={(e) =>
                 dispatch({ type: "setName", name: e.target.value })
               }
+              maxLength={100}
               placeholder="e.g. Lisa"
             />
           </label>
@@ -225,6 +249,22 @@ export function WizardClient() {
         </div>
       )}
 
+      {error && (
+        <p role="alert" className="text-sm text-hud-red">
+          {error}
+        </p>
+      )}
+      {state.pageId === 5 && state.adult?.life.pending && (
+        <p role="status" className="text-sm text-hud-muted">
+          Add or clear the selected Real Life module before finishing.
+        </p>
+      )}
+      {state.pageId === 5 && state.wizardXpRemaining < 0 && (
+        <p role="alert" className="text-sm text-hud-red">
+          Your lifepath exceeds the XP budget. Remove a module before finishing.
+        </p>
+      )}
+
       <footer className="flex items-center justify-between gap-2">
         <HudButton
           variant="ghost"
@@ -246,13 +286,13 @@ export function WizardClient() {
         ) : (
           <HudButton
             variant="primary"
-            disabled
-            title="Completion lands in build step #14c."
+            disabled={isPending || !canFinish(state)}
+            onClick={onFinish}
           >
-            Finish
+            {isPending ? "Creating…" : "Finish"}
           </HudButton>
         )}
       </footer>
-    </div>
+    </fieldset>
   );
 }

@@ -1,16 +1,35 @@
 // @vitest-environment jsdom
-import { describe, it, expect, afterEach, beforeAll, afterAll } from "vitest";
+import {
+  describe,
+  it,
+  expect,
+  afterEach,
+  beforeAll,
+  afterAll,
+  vi,
+} from "vitest";
 import {
   render,
   screen,
   fireEvent,
   cleanup,
   within,
+  waitFor,
+  act,
 } from "@testing-library/react";
 import { WizardClient } from "./wizard-client";
 import { WIZARD_PAGES } from "./wizard-state";
 
-afterEach(cleanup);
+vi.mock("@/app/(app)/characters/actions", () => ({
+  createWizardCharacter: vi.fn(),
+}));
+import { createWizardCharacter } from "@/app/(app)/characters/actions";
+import { parseBtcc } from "@/lib/btcc";
+
+afterEach(() => {
+  cleanup();
+  vi.clearAllMocks();
+});
 
 function pick(name: string, option: string) {
   const control = screen.getByRole("combobox", { name });
@@ -139,7 +158,7 @@ describe("WizardClient School and Real Life", () => {
     expect(
       screen.getByRole<HTMLButtonElement>("button", { name: "Finish" })
         .disabled,
-    ).toBe(true);
+    ).toBe(false);
   });
 
   it("adds multiple Real Life modules, excludes committed modules, and refunds removed modules", () => {
@@ -200,7 +219,7 @@ describe("WizardClient shell", () => {
     expect(screen.getByLabelText("Character name")).toBeTruthy();
   });
 
-  it("walks forward through all six pages; Finish is disabled on the last", () => {
+  it("walks forward through all six pages and enables Finish on the last", () => {
     render(<WizardClient />);
 
     for (const p of WIZARD_PAGES.slice(1)) {
@@ -215,7 +234,7 @@ describe("WizardClient shell", () => {
     }
     expect(
       screen.getByRole("button", { name: "Finish" }).hasAttribute("disabled"),
-    ).toBe(true);
+    ).toBe(false);
   });
 
   it("disables Back on the Intro page (`wizard.cpp:30-33`)", () => {
@@ -813,5 +832,69 @@ describe("WizardClient Stage 4 advanced dialog", () => {
     expect(
       screen.getByRole("region", { name: "Completed Real Life modules" }),
     ).toBeTruthy();
+  });
+});
+
+describe("WizardClient completion", () => {
+  it("retains the draft after a failed create, disables edits while pending, and allows retry", async () => {
+    let resolve!: (
+      value: Awaited<ReturnType<typeof createWizardCharacter>>,
+    ) => void;
+    vi.mocked(createWizardCharacter).mockImplementation(
+      () =>
+        new Promise((done) => {
+          resolve = done;
+        }),
+    );
+    enterStage2();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    fireEvent.click(screen.getByRole("button", { name: "Skip School" }));
+    pick("Real Life module", "Travel");
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", { name: "Finish" })
+        .disabled,
+    ).toBe(true);
+    fireEvent.click(
+      screen.getByRole("button", { name: "Add Real Life module" }),
+    );
+    const balances = screen.getByRole("region", {
+      name: "XP balances",
+    }).textContent;
+    fireEvent.click(screen.getByRole("button", { name: "Finish" }));
+    await waitFor(() => expect(createWizardCharacter).toHaveBeenCalledTimes(1));
+    expect(
+      screen.getByRole<HTMLButtonElement>("button", { name: "Creating…" })
+        .disabled,
+    ).toBe(true);
+    expect(
+      screen.getByRole("button", { name: "Back" }).closest("fieldset")
+        ?.disabled,
+    ).toBe(true);
+    const [text, remaining] = vi.mocked(createWizardCharacter).mock.calls[0];
+    expect(parseBtcc(text).scalars).toMatchObject({
+      name: "Lisa",
+      reallife: "Travel",
+    });
+    expect(balances).toContain(`Wizard XP remaining: ${remaining} XP`);
+    await act(async () =>
+      resolve({
+        ok: false,
+        kind: "error",
+        message: "Could not create character. Please try again.",
+      }),
+    );
+    expect(screen.getByRole("alert").textContent).toContain(
+      "Could not create character",
+    );
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balances);
+    vi.mocked(createWizardCharacter).mockResolvedValue({
+      ok: false,
+      kind: "error",
+      message: "Retry failed",
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Finish" }));
+    await waitFor(() => expect(createWizardCharacter).toHaveBeenCalledTimes(2));
   });
 });
