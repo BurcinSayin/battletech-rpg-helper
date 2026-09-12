@@ -675,6 +675,8 @@ Declared `wizard.h:55`, constructed `wizard.cpp:26`, connected at `wizard.cpp:41
 
 Its interface is three result lists — `s4AdvDialAttr`, `s4AdvDialSkills`, `s4AdvDialTraits` (`s4advdial.h:34-36`) — plus eight `…Elem` slots, each a label, a skill candidate list, a trait candidate list and an allowance (`s4advdial.h:40-60`). On accept, `S4AdvDialAcceptButton()` (`wizard.cpp:4248-4260`) funnels the three lists through the same `AddAffilAttr` / `AddAfillSkill` / `AddAfillTraits` helpers the rest of the wizard uses (`wizard.cpp:4256-4258`). On cancel it simply clears them (`wizard.cpp:4262-4267`). Reopening it first unwinds the previous grants (`wizard.cpp:4157-4189`) — with a defect; see §9.
 
+**Stage 4 web-port behavior.** Advanced selections are recorded per Real Life module and replayed onto the earlier-stage draft. Reopening clears that module's accepted advanced grants; Cancel leaves them removed, while Apply replaces them. Module removal, Skip and Back discard the corresponding selections. Skill, trait and attribute deltas therefore unwind symmetrically, intentionally avoiding the attribute assignment defect in §9.7. Repeated slots permit the same candidate and retain separate XP deltas; the Scientist Caste Service and To Serve And Protect paired options grant their constituent entries rather than a literal combined trait name.
+
 Because Stage 4 is repeatable, this dialog runs once per Real Life module. It is part of the stage, not an optional extra.
 
 ### 7.6 Completion — what is written back, and where `wizardMod` is set

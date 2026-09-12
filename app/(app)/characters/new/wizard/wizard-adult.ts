@@ -3,6 +3,9 @@ import {
   availableRealLife,
   resolveAdultModule,
   applyAdultModule,
+  realLifeChoices,
+  applyRealLifeChoices,
+  validAdultChoices,
   type AdultContext,
   type SchoolSelection,
   type RealLifeSelection,
@@ -37,7 +40,15 @@ export function projectAdult(
     ).find((entry) => entry.name === name);
     if (!entry) return null;
     const resolved = resolveAdultModule(entry, lifeContext);
-    draft = applyAdultModule(draft, resolved, lifeContext);
+    const choices = realLifeChoices(resolved, lifeContext);
+    const selected = stage4?.choices?.[name] ?? {};
+    if (!validAdultChoices(choices, selected)) return null;
+    draft = applyRealLifeChoices(
+      applyAdultModule(draft, resolved, lifeContext),
+      resolved,
+      choices,
+      selected,
+    );
     draft = {
       ...draft,
       scalars: {
@@ -64,6 +75,21 @@ export function projectAdult(
     : [];
   const pending = offered.find((entry) => entry.name === stage4?.pending);
   if (stage4?.pending && !pending) return null;
+  const pendingModule = pending
+    ? resolveAdultModule(pending, lifeContext)
+    : null;
+  const pendingChoices = pendingModule
+    ? realLifeChoices(pendingModule, lifeContext)
+    : [];
+  if (!validAdultChoices(pendingChoices, stage4?.pendingChoices ?? {}))
+    return null;
+  if (pendingModule && stage4?.pendingChoices)
+    draft = applyRealLifeChoices(
+      draft,
+      pendingModule,
+      pendingChoices,
+      stage4.pendingChoices,
+    );
   return {
     school,
     draft,
@@ -71,7 +97,11 @@ export function projectAdult(
     life: {
       offered,
       committed,
-      pending: pending ? resolveAdultModule(pending, lifeContext) : null,
+      pending: pendingModule,
+      pendingChoices,
+      choices: committed.map((entry) =>
+        realLifeChoices(entry.module, lifeContext),
+      ),
     },
   };
 }

@@ -16,7 +16,7 @@ import {
   type WizardAction,
 } from "./wizard-state";
 
-/** Local lifepath draft. Stage 4 advanced choices and Finish are separate build steps. */
+/** Local lifepath draft. Finish and handoff are a separate build step. */
 export function WizardClient() {
   const [state, dispatch] = useReducer(
     wizardReducer,

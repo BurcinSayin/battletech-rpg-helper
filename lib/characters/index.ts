@@ -98,3 +98,5 @@ export {
   type RealLifeSelection,
   type ResolvedRealLife,
 } from "./school";
+
+export { realLifeChoices, applyRealLifeChoices } from "./real-life-choices";

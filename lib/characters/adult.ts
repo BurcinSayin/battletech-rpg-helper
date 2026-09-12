@@ -144,8 +144,30 @@ export function resolveAdultModule(
 ): AdultModule {
   let result = { ...entry };
   function apply(effect: AdultEffects) {
+    const picks = new Map(
+      result.deferredPicks.map((pick) => [pick.slot, pick]),
+    );
+    for (const overlay of effect.picks ?? []) {
+      const previous = picks.get(overlay.slot);
+      picks.set(
+        overlay.slot,
+        previous
+          ? {
+              ...previous,
+              label: overlay.label ?? previous.label,
+              kind: overlay.candidates ? overlay.kind : previous.kind,
+              candidates: overlay.candidates ?? previous.candidates,
+              candidatesSource:
+                overlay.candidatesSource ?? previous.candidatesSource,
+              xp: overlay.xp ?? previous.xp,
+              repeats: overlay.repeats ?? previous.repeats,
+            }
+          : overlay,
+      );
+    }
     result = {
       ...result,
+      deferredPicks: [...picks.values()].sort((a, b) => a.slot - b.slot),
       xpCost: effect.xpCost ?? result.xpCost,
       flexXp: (effect.flexXp ?? result.flexXp ?? 0) + (effect.flexXpDelta ?? 0),
       attrDeltas: { ...result.attrDeltas, ...effect.attrDeltas },

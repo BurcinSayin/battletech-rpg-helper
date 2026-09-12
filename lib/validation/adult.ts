@@ -28,6 +28,7 @@ const pick = z.object({
   label: z.string().nullable(),
   kind: z.enum(["skill", "trait", "attribute"]),
   candidates: z.array(z.string()).nullable(),
+  candidatesSource: z.string().nullable().optional(),
   xp: z.number().int().nullable(),
   repeats: z.number().int().nullable(),
 });
@@ -46,6 +47,7 @@ const effects = z.object({
   parametrizedGrants: parameters.optional(),
   prerequisites: prerequisites.optional(),
   fields: fields.optional(),
+  picks: z.array(pick).optional(),
 });
 export type AdultEffects = z.infer<typeof effects>;
 export type AdultBranch = {

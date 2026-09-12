@@ -18,6 +18,7 @@ import {
   type SchoolSelection,
   type SchoolTier,
   type RealLifeSelection,
+  type AdultChoiceSelection,
 } from "@/lib/characters";
 import { projectAdult, type AdultView } from "./wizard-adult";
 import { mergeRows } from "@/lib/characters/grants";
@@ -129,6 +130,11 @@ export type WizardAction =
     }
   | { readonly type: "setRealLife"; readonly moduleName: string | null }
   | { readonly type: "addRealLife" }
+  | {
+      readonly type: "setRealLifeChoices";
+      readonly index: number | null;
+      readonly choices: AdultChoiceSelection | null;
+    }
   | { readonly type: "removeRealLife"; readonly index: number }
   | { readonly type: "skipSchool" }
   | { readonly type: "skipRealLife" }
@@ -899,10 +905,38 @@ export function wizardReducer(
           ...state.selections,
           stage4: {
             modules: state.selections.stage4?.modules ?? [],
+            choices: state.selections.stage4?.choices,
             pending: action.moduleName,
             skipped: false,
           },
         }) ?? state
+      );
+    }
+    case "setRealLifeChoices": {
+      const life = state.selections.stage4;
+      if (state.pageId !== 5 || !life || !state.adult) return state;
+      if (action.index === null) {
+        if (!life.pending) return state;
+        return (
+          project(state, {
+            ...state.selections,
+            stage4: { ...life, pendingChoices: action.choices ?? undefined },
+          }) ?? state
+        );
+      }
+      if (
+        !Number.isInteger(action.index) ||
+        action.index < 0 ||
+        action.index >= life.modules.length
+      )
+        return state;
+      const choices = { ...life.choices };
+      const name = life.modules[action.index];
+      if (action.choices === null) delete choices[name];
+      else choices[name] = action.choices;
+      return (
+        project(state, { ...state.selections, stage4: { ...life, choices } }) ??
+        state
       );
     }
     case "addRealLife": {
@@ -914,6 +948,10 @@ export function wizardReducer(
           ...state.selections,
           stage4: {
             modules: [...life.modules, life.pending],
+            choices: {
+              ...life.choices,
+              [life.pending]: life.pendingChoices ?? {},
+            },
             pending: null,
             skipped: false,
           },
@@ -936,6 +974,11 @@ export function wizardReducer(
           ...state.selections,
           stage4: {
             modules: life.modules.slice(0, action.index),
+            choices: Object.fromEntries(
+              Object.entries(life.choices ?? {}).filter(([name]) =>
+                life.modules.slice(0, action.index).includes(name),
+              ),
+            ),
             pending: null,
             skipped: false,
           },

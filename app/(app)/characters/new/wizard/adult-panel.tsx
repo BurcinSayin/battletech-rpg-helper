@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, type Dispatch } from "react";
+import { useId, useState, type Dispatch } from "react";
 import { HudButton } from "@/components/characters/ui";
 import {
   completeAdultChoices,
@@ -9,6 +9,7 @@ import {
   type SchoolTier,
 } from "@/lib/characters";
 import type { Stage0Candidate } from "@/lib/rules/stage0-contract";
+import { RealLifeDialog } from "./real-life-dialog";
 import { ChoiceSelect } from "./choice-select";
 import type { WizardAction, WizardDraftState } from "./wizard-state";
 
@@ -223,9 +224,18 @@ export function RealLifePanel({
   readonly dispatch: Dispatch<WizardAction>;
 }) {
   const id = useId();
+  const [dialog, setDialog] = useState<{ index: number | null } | null>(null);
   const view = state.adult?.life;
   if (!view) return null;
   const selection = state.selections.stage4;
+  function openChoices(index: number | null) {
+    dispatch({ type: "setRealLifeChoices", index, choices: null });
+    setDialog({ index });
+  }
+  const dialogModule =
+    dialog?.index != null ? view.committed[dialog.index]?.module : view.pending;
+  const dialogChoices =
+    dialog?.index != null ? view.choices[dialog.index] : view.pendingChoices;
   return (
     <div className="flex flex-col gap-4">
       <p className="text-sm text-hud-muted">
@@ -245,6 +255,21 @@ export function RealLifePanel({
           dispatch({ type: "setRealLife", moduleName: moduleName || null })
         }
       />
+      {dialog && dialogModule && dialogChoices && (
+        <RealLifeDialog
+          name={dialogModule.name}
+          choices={dialogChoices}
+          onCancel={() => setDialog(null)}
+          onAccept={(choices) => {
+            dispatch({
+              type: "setRealLifeChoices",
+              index: dialog.index,
+              choices,
+            });
+            setDialog(null);
+          }}
+        />
+      )}
       {view.pending && (
         <>
           <p className="whitespace-pre-line text-sm text-hud-text">
@@ -254,6 +279,11 @@ export function RealLifePanel({
             Module cost: {view.pending.xpCost} XP · Duration: {view.pending.age}{" "}
             years
           </p>
+          {view.pendingChoices.length > 0 && (
+            <HudButton onClick={() => openChoices(null)}>
+              Advanced choices
+            </HudButton>
+          )}
         </>
       )}
       <HudButton
@@ -274,6 +304,11 @@ export function RealLifePanel({
                 <p>
                   {index + 1}. {module.name} · {cost} XP · {age} years
                 </p>
+                {view.choices[index].length > 0 && (
+                  <HudButton onClick={() => openChoices(index)}>
+                    Edit {module.name} advanced choices
+                  </HudButton>
+                )}
                 <HudButton
                   variant="ghost"
                   onClick={() => dispatch({ type: "removeRealLife", index })}

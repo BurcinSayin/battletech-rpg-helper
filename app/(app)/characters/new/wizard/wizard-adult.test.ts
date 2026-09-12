@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import type { AdultChoiceSelection } from "@/lib/characters";
 import {
   initialWizardState,
   wizardReducer,
@@ -245,5 +246,140 @@ describe("wizard Stages 3–4 replay", () => {
         name: "Cartographer",
       }),
     ).toBe(result);
+  });
+});
+
+describe("Stage 4 advanced grant lifecycle", () => {
+  function life() {
+    return drive(
+      technicalCollege(),
+      { type: "next" },
+      { type: "setRealLife", moduleName: "Travel" },
+    );
+  }
+  const travelChoice = {
+    "life-1-0": { kind: "skill", value: "Art/Dance" },
+  } as const;
+
+  it("accepts, reopens, cancels, and replaces pending choices without changing module charges", () => {
+    const prefix = life();
+    const accepted = wizardReducer(prefix, {
+      type: "setRealLifeChoices",
+      index: null,
+      choices: travelChoice,
+    });
+    expect(accepted.draft.skills).toContainEqual({ name: "Art/Dance", xp: 35 });
+    expect(accepted.wizardXpRemaining).toBe(prefix.wizardXpRemaining);
+    const reopened = wizardReducer(accepted, {
+      type: "setRealLifeChoices",
+      index: null,
+      choices: null,
+    });
+    expect(reopened.draft).toEqual(prefix.draft);
+    expect(reopened.wizardXpRemaining).toBe(prefix.wizardXpRemaining);
+    const replacement = wizardReducer(reopened, {
+      type: "setRealLifeChoices",
+      index: null,
+      choices: { "life-1-0": { kind: "skill", value: "Art/Music" } },
+    });
+    expect(
+      replacement.draft.skills.some((row) => row.name === "Art/Dance"),
+    ).toBe(false);
+    expect(replacement.draft.skills).toContainEqual({
+      name: "Art/Music",
+      xp: 35,
+    });
+    expect(
+      wizardReducer(accepted, {
+        type: "setRealLife",
+        moduleName: "Civilian Job",
+      }).draft,
+    ).toEqual(prefix.draft);
+  });
+
+  it("commits once and removes only the targeted module's advanced grants on reopen", () => {
+    const prefix = life();
+    const first = drive(
+      prefix,
+      { type: "setRealLifeChoices", index: null, choices: travelChoice },
+      { type: "addRealLife" },
+    );
+    const second = drive(
+      first,
+      { type: "setRealLife", moduleName: "Civilian Job" },
+      {
+        type: "setRealLifeChoices",
+        index: null,
+        choices: {
+          "life-3-0": { kind: "skill", value: "Interests/Aerospace" },
+        },
+      },
+      { type: "addRealLife" },
+    );
+    expect(first.draft.skills).toContainEqual({ name: "Art/Dance", xp: 35 });
+    const reopened = wizardReducer(second, {
+      type: "setRealLifeChoices",
+      index: 0,
+      choices: null,
+    });
+    expect(reopened.draft.skills.some((row) => row.name === "Art/Dance")).toBe(
+      false,
+    );
+    expect(
+      reopened.draft.skills.find((row) => row.name === "Interests/Aerospace"),
+    ).toEqual(
+      second.draft.skills.find((row) => row.name === "Interests/Aerospace"),
+    );
+    expect(reopened.wizardXpRemaining).toBe(second.wizardXpRemaining);
+    expect(reopened.draft.scalars).toEqual(second.draft.scalars);
+    const restored = wizardReducer(reopened, {
+      type: "setRealLifeChoices",
+      index: 0,
+      choices: travelChoice,
+    });
+    expect(restored.draft).toEqual(second.draft);
+    expect(
+      wizardReducer(second, { type: "removeRealLife", index: 1 }).draft,
+    ).toEqual(first.draft);
+    expect(
+      wizardReducer(second, { type: "removeRealLife", index: 0 }).draft,
+    ).toEqual(prefix.draft);
+    expect(wizardReducer(second, { type: "skipRealLife" }).draft).toEqual(
+      prefix.draft,
+    );
+    expect(wizardReducer(second, { type: "back" }).draft).toEqual(
+      technicalCollege().draft,
+    );
+  });
+
+  it("rejects forged kinds, slots, repeat positions, and indices atomically", () => {
+    const prefix = life();
+    for (const choices of [
+      { "life-1-0": { kind: "attribute", value: "WIL" } },
+      { "life-9-0": { kind: "skill", value: "Art/Dance" } },
+      { "life-1-1": { kind: "skill", value: "Art/Dance" } },
+    ] as AdultChoiceSelection[])
+      expect(
+        wizardReducer(prefix, {
+          type: "setRealLifeChoices",
+          index: null,
+          choices,
+        }),
+      ).toBe(prefix);
+    for (const index of [-1, 0, 0.5, NaN])
+      expect(
+        wizardReducer(prefix, {
+          type: "setRealLifeChoices",
+          index,
+          choices: travelChoice,
+        }),
+      ).toBe(prefix);
+    expect(
+      wizardReducer(initialWizardState(), {
+        type: "setRealLifeChoices",
+        index: null,
+        choices: travelChoice,
+      }).pageId,
+    ).toBe(0);
   });
 });

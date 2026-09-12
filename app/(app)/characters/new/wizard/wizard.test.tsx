@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect, afterEach, beforeAll, afterAll } from "vitest";
 import {
   render,
   screen,
@@ -746,5 +746,72 @@ describe("WizardClient childhood flow", () => {
     expect(
       branches.queryByRole("option", { name: "ProtoMech (Advanced)" }),
     ).toBeNull();
+  });
+});
+
+describe("WizardClient Stage 4 advanced dialog", () => {
+  // jsdom has no native dialog lifecycle; the browser check covers modal focus.
+  beforeAll(() => {
+    HTMLDialogElement.prototype.showModal = function () {
+      this.setAttribute("open", "");
+    };
+    HTMLDialogElement.prototype.close = function () {
+      this.removeAttribute("open");
+    };
+  });
+  afterAll(() => {
+    Reflect.deleteProperty(HTMLDialogElement.prototype, "showModal");
+    Reflect.deleteProperty(HTMLDialogElement.prototype, "close");
+  });
+  function enterLife() {
+    enterStage2();
+    fireEvent.click(screen.getByRole("button", { name: "Next" }));
+    fireEvent.click(screen.getByRole("button", { name: "Skip School" }));
+    pick("Real Life module", "Travel");
+  }
+  it("applies defaults once, unwinds on reopen/cancel, and edits a committed module", () => {
+    enterLife();
+    const balances = screen.getByRole("region", {
+      name: "XP balances",
+    }).textContent;
+    fireEvent.click(screen.getByRole("button", { name: "Advanced choices" }));
+    expect(
+      screen.getByRole("dialog", { name: "Travel — Advanced choices" }),
+    ).toBeTruthy();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Apply advanced choices" }),
+    );
+    const draft = within(screen.getByRole("region", { name: "Current draft" }));
+    expect(draft.getByText("Art/Dance: 35 XP")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Advanced choices" }));
+    expect(draft.queryByText("Art/Dance: 35 XP")).toBeNull();
+    fireEvent.click(
+      screen.getByRole("button", { name: "Cancel advanced choices" }),
+    );
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(
+      screen.getByRole("region", { name: "XP balances" }).textContent,
+    ).toBe(balances);
+    fireEvent.click(screen.getByRole("button", { name: "Advanced choices" }));
+    pick("Art/Any — choice 1", "Art/Music (skill)");
+    fireEvent.click(
+      screen.getByRole("button", { name: "Apply advanced choices" }),
+    );
+    fireEvent.click(
+      screen.getByRole("button", { name: "Add Real Life module" }),
+    );
+    expect(draft.getAllByText("Art/Music: 35 XP")).toHaveLength(1);
+    fireEvent.click(
+      screen.getByRole("button", { name: "Edit Travel advanced choices" }),
+    );
+    expect(draft.queryByText("Art/Music: 35 XP")).toBeNull();
+    fireEvent(
+      screen.getByRole("dialog"),
+      new Event("cancel", { bubbles: true, cancelable: true }),
+    );
+    expect(screen.queryByRole("dialog")).toBeNull();
+    expect(
+      screen.getByRole("region", { name: "Completed Real Life modules" }),
+    ).toBeTruthy();
   });
 });

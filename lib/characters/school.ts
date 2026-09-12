@@ -143,6 +143,8 @@ export type RealLifeSelection = {
   readonly modules: readonly string[];
   readonly pending: string | null;
   readonly skipped: boolean;
+  readonly choices?: Readonly<Record<string, AdultChoiceSelection>>;
+  readonly pendingChoices?: AdultChoiceSelection;
 };
 
 export type ResolvedRealLife = {
