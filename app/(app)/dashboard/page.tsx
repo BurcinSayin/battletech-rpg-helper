@@ -6,6 +6,7 @@ import {
   createCharacter,
   deleteCharacter,
 } from "@/app/(app)/characters/actions";
+import { DeleteCharacterButton } from "@/components/characters/delete-character-button";
 import { HudButton } from "@/components/characters/ui";
 import { PageContainer } from "@/components/layout/page-container";
 
@@ -89,15 +90,10 @@ export default async function DashboardPage() {
                       {subtitle}
                     </p>
                   </Link>
-                  <form action={deleteCharacter.bind(null, row.id)}>
-                    <button
-                      type="submit"
-                      aria-label={`Delete ${row.name}`}
-                      className="h-8 w-8 shrink-0 rounded border border-hud-line text-hud-muted transition hover:border-hud-red hover:text-hud-red"
-                    >
-                      ✕
-                    </button>
-                  </form>
+                  <DeleteCharacterButton
+                    name={row.name}
+                    deleteAction={deleteCharacter.bind(null, row.id)}
+                  />
                 </li>
               );
             })}
