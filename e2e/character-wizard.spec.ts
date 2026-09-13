@@ -11,7 +11,8 @@ test("five-stage wizard → create → editor XP → edit → reload", async ({
   await page.getByLabel("Password").fill("secret123");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page).toHaveURL(/\/dashboard$/);
-  await page.goto("/characters/new");
+  await page.getByRole("link", { name: "+ New character" }).click();
+  await expect(page).toHaveURL(/\/characters\/new\/wizard$/);
   await page
     .getByRole("textbox", { name: "Character name" })
     .fill("Wizard Pilot");

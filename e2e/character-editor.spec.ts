@@ -13,7 +13,7 @@ test("create → edit → save → persist", async ({ page }) => {
   await expect(page).toHaveURL(/\/dashboard$/);
 
   // Create a blank character → lands in the editor.
-  await page.getByRole("button", { name: "+ New character" }).click();
+  await page.getByRole("button", { name: "Create blank character" }).click();
   await expect(page).toHaveURL(/\/characters\/[0-9a-f-]+$/);
   await expect(page.getByRole("heading", { name: "New Character" })).toBeVisible();
 

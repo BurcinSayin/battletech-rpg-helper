@@ -48,10 +48,10 @@ test("GM edits a member's character → the player's open page syncs", async ({ 
     await expect(
       player.page.getByRole("link", { name: /Wolf's Dragoons/ }).first(),
     ).toBeVisible();
-    await expect(panel.getByRole("button", { name: "+ New character" })).toHaveCount(0);
+    await expect(panel.getByRole("link", { name: "+ New character" })).toHaveCount(0);
 
     // Player creates a character and attaches it to the campaign.
-    await player.page.getByRole("button", { name: "+ New character" }).click();
+    await player.page.getByRole("button", { name: "Create blank character" }).click();
     await expect(player.page).toHaveURL(/\/characters\/[0-9a-f-]+$/);
     await player.page.getByRole("button", { name: "Edit" }).click();
     await player.page.getByLabel("Name", { exact: true }).fill("Grey Death Scout");
