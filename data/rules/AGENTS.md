@@ -14,7 +14,8 @@ available offline.
 | File | Shape | Notes |
 |------|-------|-------|
 | `skills.json` | `{ name, attributes, cost, category }[]` | Largest catalog (~10 KB). `attributes` is a code like `RFL`. `cost` is the skill's **Target Number**, not an XP cost — `allskills.dat` is `Name;LINK,TN/CAT` (`scripts/convert-dat.ts:57-69`). `category` (`SB`/`CB`/`SA`/`CA`) has **no pricing effect**. Rename is step 10. `docs/RULES.md` §2.3. |
-| `traits.json` | `{ name, page }[]` | `page` is the rulebook reference. |
+| `traits.json` | `{ name, category, trait_type, tp_score, description, page, sub_traits }[]` | Canonical *A Time of War* traits (56 entries) with rich descriptions, mechanics, and sub_traits. Ingested from `docs/rule_book/traits.json` via `npm run traits:ingest` (or `rules:ingest`). |
+| `subtraits.json` | `Record<string, string[]>` | Parent trait to ordered sub-trait names (e.g. `Compulsion` → 20 sub-traits); extracted from `docs/rule_book/traits.json` and expanded into composite `"Parent/Sub"` names. |
 | `subskills.json` | `Record<string, string[]>` | Parent skill to ordered sub-skill names; expanded into composite `"Parent/Sub"` names. |
 | `affiliations.json` | `string[]` | |
 | `careers.json` | `string[]` | Generated from the singular `career.dat`. |

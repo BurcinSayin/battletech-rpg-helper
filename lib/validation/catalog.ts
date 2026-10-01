@@ -14,6 +14,11 @@ export const skillSchema = z.object({
 export const traitSchema = z.object({
   name: z.string().min(1),
   page: z.string().min(1),
+  category: z.string().min(1),
+  trait_type: z.string().min(1),
+  tp_score: z.string().min(1),
+  description: z.string().min(1),
+  sub_traits: z.array(z.string()).default([]),
 });
 
 export const skillsSchema = z.array(skillSchema);
@@ -21,6 +26,9 @@ export const traitsSchema = z.array(traitSchema);
 
 /** subskills.json: parent skill → ordered list of sub-skill names. */
 export const subskillsSchema = z.record(z.string(), z.array(z.string().min(1)));
+
+/** subtraits.json: parent trait → ordered list of sub-trait names. */
+export const subtraitsSchema = z.record(z.string(), z.array(z.string().min(1)));
 
 /** Plain string-list catalogs (affiliations, careers, colors, etc.). */
 export const stringListSchema = z.array(z.string().min(1));
@@ -190,3 +198,4 @@ export const stage0CatalogSchema = z
 export type Skill = z.infer<typeof skillSchema>;
 export type Trait = z.infer<typeof traitSchema>;
 export type Subskills = z.infer<typeof subskillsSchema>;
+export type Subtraits = z.infer<typeof subtraitsSchema>;

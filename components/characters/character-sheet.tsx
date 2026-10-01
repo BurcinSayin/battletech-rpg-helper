@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
 import { ATTRIBUTE_KEYS, skillLevel } from "@/lib/characters";
+import { findTrait } from "@/lib/rules/load";
 import { skillComplexity } from "@/lib/rules/skill-complexity";
 import { CatalogWarningBanner } from "./warnings";
 import { HudButton, Panel } from "./ui";
@@ -34,6 +35,7 @@ export function CharacterSheet({
 }) {
   const { scalars } = draft;
   const [showAllSkills, setShowAllSkills] = useState(false);
+  const [expandedTrait, setExpandedTrait] = useState<string | null>(null);
   const sortedSkills = [...draft.skills].sort((a, b) => b.xp - a.xp);
   const visibleSkills = showAllSkills
     ? sortedSkills
@@ -166,21 +168,62 @@ export function CharacterSheet({
               <p className="text-sm text-hud-muted">No traits yet.</p>
             ) : (
               <ul className="flex flex-col gap-1.5">
-                {sortedTraits.map((row, i) => (
-                  <li
-                    key={`${row.name}-${i}`}
-                    className="flex items-center justify-between font-mono text-sm"
-                  >
-                    <span className="text-hud-text">{row.name}</span>
-                    <span
-                      className={
-                        row.xp >= 0 ? "text-hud-green" : "text-hud-red"
-                      }
+                {sortedTraits.map((row, i) => {
+                  const meta = findTrait(row.name);
+                  const isExpanded = expandedTrait === row.name;
+                  return (
+                    <li
+                      key={`${row.name}-${i}`}
+                      className="flex flex-col gap-1 border-b border-hud-line/40 pb-1.5 last:border-b-0 font-mono text-sm"
                     >
-                      {signed(row.xp)}
-                    </span>
-                  </li>
-                ))}
+                      <div
+                        className={`flex items-center justify-between ${
+                          meta ? "cursor-pointer select-none group" : ""
+                        }`}
+                        onClick={() => {
+                          if (meta) {
+                            setExpandedTrait(isExpanded ? null : row.name);
+                          }
+                        }}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-hud-text ${
+                              meta ? "group-hover:text-hud-amber transition-colors" : ""
+                            }`}
+                          >
+                            {row.name}
+                          </span>
+                          {meta && (
+                            <span className="text-[10px] text-hud-muted bg-hud-raised px-1.5 py-0.5 rounded border border-hud-line/50">
+                              {meta.page}
+                            </span>
+                          )}
+                        </div>
+                        <span
+                          className={
+                            row.xp >= 0 ? "text-hud-green" : "text-hud-red"
+                          }
+                        >
+                          {signed(row.xp)}
+                        </span>
+                      </div>
+                      {isExpanded && meta && (
+                        <div className="mt-1 rounded bg-hud-raised/60 p-2 text-xs font-sans text-hud-muted border border-hud-line/40 flex flex-col gap-1">
+                          <div className="flex items-center justify-between font-mono text-[11px] text-hud-text">
+                            <span>
+                              {meta.category} · {meta.trait_type}
+                            </span>
+                            <span className="text-hud-amber">{meta.tp_score}</span>
+                          </div>
+                          <p className="leading-relaxed text-hud-text/90">
+                            {meta.description}
+                          </p>
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </Panel>

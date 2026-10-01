@@ -19,6 +19,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseRulebookTraits } from "./parse-rulebook-traits";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -109,7 +110,7 @@ function main(): void {
   console.log(`Ingesting rules from ${SOURCE_DIR}`);
 
   writeJson("skills.json", parseSkills());
-  writeJson("traits.json", parseTraits());
+  parseRulebookTraits();
   writeJson("subskills.json", parseSubskills());
   writeJson("affiliations.json", parseList("affilations.dat"));
   writeJson("careers.json", parseList("career.dat"));

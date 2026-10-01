@@ -1,0 +1,49 @@
+{
+  "Citizenship": [
+    "Clan",
+    "Inner Sphere",
+    "Trueborn"
+  ],
+  "Compulsion": [
+    "Berserker",
+    "Catatonia",
+    "Chemical Addiction",
+    "Confusion",
+    "Distrust of Inner Sphere",
+    "Flashbacks",
+    "Gambling",
+    "Hatred for Authority",
+    "Hatred of Clans",
+    "Hatred of ComStar",
+    "Hatred of Word of Blake",
+    "Hysteria",
+    "Loyalty to Crime Boss",
+    "Loyalty to Draconis Combine",
+    "Loyalty to House Kurita",
+    "Paranoia",
+    "Rasalhague Pride",
+    "Regression",
+    "Smoking",
+    "Split Personality"
+  ],
+  "Implant": [
+    "EI Neural Implant",
+    "Prosthetic"
+  ],
+  "Natural Aptitude": [
+    "Computers",
+    "Gunnery/Any",
+    "Interests/Any",
+    "Martial Arts",
+    "Melee Weapons",
+    "Protocol",
+    "Strategy",
+    "Technician/Any",
+    "Zero-G Operations"
+  ],
+  "Title": [
+    "Bloodname",
+    "Clan",
+    "Inner Sphere"
+  ]
+}

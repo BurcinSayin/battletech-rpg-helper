@@ -65,4 +65,10 @@ describe("catalogWarnings", () => {
     expect(warnings.traits).toContain("Bogus Trait");
     expect(characterFormSchema.safeParse(draftToForm(dirty)).success).toBe(true);
   });
+
+  it("produces zero trait warnings on legacy fixtures like newchar.btcc", () => {
+    const newchar = parseBtcc(readFixture("newchar.btcc"));
+    const warnings = catalogWarnings(newchar);
+    expect(warnings.traits).toEqual([]);
+  });
 });

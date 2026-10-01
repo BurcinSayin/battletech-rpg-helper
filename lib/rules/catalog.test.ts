@@ -3,6 +3,7 @@ import {
   skills,
   traits,
   subskills,
+  subtraits,
   affiliations,
   careers,
   eyeColors,
@@ -10,12 +11,17 @@ import {
   phenotypes,
   planets,
   compositeSkillNames,
+  compositeTraitNames,
+  findTrait,
+  resolveTraitName,
+  opposingTrait,
   stage0Catalog,
 } from "./load";
 import {
   skillsSchema,
   traitsSchema,
   subskillsSchema,
+  subtraitsSchema,
   stringListSchema,
   stage0CatalogSchema,
 } from "@/lib/validation/catalog";
@@ -29,6 +35,7 @@ describe("rules catalog", () => {
     expect(() => skillsSchema.parse(skills)).not.toThrow();
     expect(() => traitsSchema.parse(traits)).not.toThrow();
     expect(() => subskillsSchema.parse(subskills)).not.toThrow();
+    expect(() => subtraitsSchema.parse(subtraits)).not.toThrow();
     for (const list of [
       affiliations,
       careers,
@@ -43,7 +50,7 @@ describe("rules catalog", () => {
 
   it("has the expected catalog sizes", () => {
     expect(skills).toHaveLength(92);
-    expect(traits).toHaveLength(76);
+    expect(traits).toHaveLength(56);
     expect(affiliations).toHaveLength(13);
     expect(careers).toHaveLength(26);
   });
@@ -279,8 +286,61 @@ describe("rules catalog", () => {
     expect(appraisal?.attributes).toBe("INT");
   });
 
-  it("includes known traits", () => {
-    expect(traits.map((t) => t.name)).toContain("Combat Sense");
+  it("includes known traits with rich metadata", () => {
+    const combatSense = traits.find((t) => t.name === "Combat Sense");
+    expect(combatSense).toBeDefined();
+    expect(combatSense).toMatchObject({
+      name: "Combat Sense",
+      category: "Character",
+      trait_type: "Positive, Opposed",
+      tp_score: "+4 TP",
+      page: "p.110",
+    });
+    expect(combatSense?.description).toContain("Combat Sense");
+
+    // Canonical traits present
+    const names = new Set(traits.map((t) => t.name));
+    expect(names.has("Compulsion")).toBe(true);
+    expect(names.has("Dependents")).toBe(true);
+    expect(names.has("Exceptional Attribute")).toBe(true);
+    expect(names.has("TDS — Transit Disorientation Syndrome")).toBe(true);
+    expect(names.has("Vehicle Level")).toBe(true);
+
+    // Duplicate removed
+    expect(traits.filter((t) => t.name === "Thin-Skinned")).toHaveLength(1);
+  });
+
+  it("builds composite trait names from subtraits", () => {
+    expect(subtraits.Compulsion).toContain("Berserker");
+    expect(subtraits.Compulsion).toHaveLength(20);
+    const composites = compositeTraitNames();
+    expect(composites).toContain("Compulsion/Berserker");
+    expect(composites).toContain("Compulsion/Paranoia");
+    expect(composites).toContain("Citizenship/Trueborn");
+  });
+
+  it("resolves legacy trait aliases and composite sub-traits", () => {
+    expect(resolveTraitName("Dependent")).toBe("Dependents");
+    expect(resolveTraitName("Except Attribute")).toBe("Exceptional Attribute");
+    expect(resolveTraitName("TDS")).toBe("TDS — Transit Disorientation Syndrome");
+    expect(resolveTraitName("Vehicle")).toBe("Vehicle Level");
+    expect(resolveTraitName("Compulsion/Paranoid")).toBe("Compulsion/Paranoia");
+
+    // findTrait looks up directly, by alias, and falls back to parent for sub-traits
+    expect(findTrait("Dependents")?.name).toBe("Dependents");
+    expect(findTrait("Dependent")?.name).toBe("Dependents");
+    expect(findTrait("Except Attribute")?.name).toBe("Exceptional Attribute");
+    expect(findTrait("Compulsion/Berserker")?.name).toBe("Compulsion");
+    expect(findTrait("Compulsion/Paranoid")?.name).toBe("Compulsion");
+  });
+
+  it("identifies opposing trait pairs", () => {
+    expect(opposingTrait("Animal Empathy")?.name).toBe("Animal Antipathy");
+    expect(opposingTrait("Animal Antipathy")?.name).toBe("Animal Empathy");
+    expect(opposingTrait("Attractive")?.name).toBe("Unattractive");
+    expect(opposingTrait("Combat Sense")?.name).toBe("Combat Paralysis");
+    expect(opposingTrait("Fast Learner")?.name).toBe("Slow Learner");
+    expect(opposingTrait("Thick-Skinned")?.name).toBe("Thin-Skinned");
   });
 
   it("builds composite skill names from subskills", () => {

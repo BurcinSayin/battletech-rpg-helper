@@ -10,7 +10,8 @@ that must be reviewed and checked in — they are not throwaway tooling.
 ## Key Files
 | File | Description |
 |------|-------------|
-| `convert-dat.ts` | `npm run rules:ingest` — converts the desktop app's `resource/*.dat` tables into the typed JSON under `data/rules/`. |
+| `convert-dat.ts` | `npm run rules:ingest` — converts the desktop app's `resource/*.dat` tables into the typed JSON under `data/rules/`, and delegates trait ingestion to `parse-rulebook-traits.ts`. |
+| `parse-rulebook-traits.ts` | `npm run traits:ingest` — parses the digitized rulebook traits from `docs/rule_book/traits.json` into canonical `data/rules/traits.json` and `data/rules/subtraits.json`. |
 | `extract-rules.ts` | `npm run rules:extract` — parses the desktop app's C++ sources into `data/rules/modules.json` (lifepath modules + gating + the Stage 0 catalog). Parsing core lives in `extract-rules-lib.ts`, the Stage 0 contract extraction in `extract-stage0.ts`. |
 | `generate-seed.ts` | `npm run seed:generate` — regenerates `supabase/seed.sql` from the `lisa.btcc` fixture. |
 
