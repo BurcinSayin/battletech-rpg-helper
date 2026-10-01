@@ -1,6 +1,12 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { render, screen, fireEvent, cleanup } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  within,
+} from "@testing-library/react";
 import { emptyDraft } from "@/lib/btcc/types";
 import type { BtccDraft, BtccRow, BtccScalars } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
@@ -85,30 +91,149 @@ describe("CharacterSheet", () => {
     expect(screen.getByText("No traits yet.")).toBeTruthy();
   });
 
-  it("shows only the top skills and expands/collapses the rest", () => {
-    const skills = Array.from({ length: 7 }, (_, i) => ({
-      name: `Skill${i}`,
-      xp: (i + 1) * 10,
-    }));
-    render(
+  it.each(["Edit", "Import/Cancel"] as const)(
+    "shows derived levels and raw XP in sorted, expandable rows with %s actions",
+    (actionMode) => {
+      const skills = [24, 80, 30, 570, -10, 120, 50].map((value, i) => ({
+        name: `Career/Skill${i}`,
+        xp: value,
+      }));
+      const draft = draftWith({
+        skills,
+        traits: [{ name: "Fast Learner", xp: 300 }],
+      });
+      const originalSkills = draft.skills.map((row) => ({ ...row }));
+      const originalTraits = draft.traits.map((row) => ({ ...row }));
+      render(
+        <CharacterSheet
+          draft={draft}
+          xp={xp}
+          warnings={noWarnings}
+          actions={
+            actionMode === "Import/Cancel" ? (
+              <>
+                <button>Import character</button>
+                <button>Cancel</button>
+              </>
+            ) : undefined
+          }
+        />,
+      );
+
+      const assertRows = (indices: number[], levels: number[]) => {
+        const list = screen.getByText(skills[3].name).closest("ul")!;
+        const names = within(list)
+          .getAllByRole("listitem")
+          .filter((row) => !within(row).queryByRole("button"))
+          .map((row) => row.firstElementChild?.textContent);
+        expect(names).toEqual(indices.map((i) => skills[i].name));
+        indices.forEach((index, position) => {
+          const row = within(
+            screen.getByText(skills[index].name).closest("li")!,
+          );
+          expect(row.getByText(`Level ${levels[position]}`)).toBeTruthy();
+          expect(row.getByText(`${skills[index].xp} XP`)).toBeTruthy();
+        });
+      };
+      assertRows([3, 5, 1, 6, 2], [10, 4, 3, 2, 1]);
+      expect(screen.queryByText(skills[0].name)).toBeNull();
+      expect(screen.queryByText(skills[4].name)).toBeNull();
+      if (actionMode === "Import/Cancel") {
+        expect(
+          screen.getByRole("button", { name: "Import character" }),
+        ).toBeTruthy();
+        expect(screen.getByRole("button", { name: "Cancel" })).toBeTruthy();
+        expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
+      } else {
+        expect(screen.getByRole("button", { name: "Edit" })).toBeTruthy();
+      }
+
+      const toggle = screen.getByRole("button", { name: /2 more skills/ });
+      expect(toggle.getAttribute("aria-expanded")).toBe("false");
+      fireEvent.click(toggle);
+      expect(toggle.getAttribute("aria-expanded")).toBe("true");
+      assertRows([3, 5, 1, 6, 2, 0, 4], [10, 4, 3, 2, 1, 1, 0]);
+      fireEvent.click(screen.getByRole("button", { name: /show less/i }));
+      expect(toggle.getAttribute("aria-expanded")).toBe("false");
+      expect(screen.queryByText(skills[0].name)).toBeNull();
+      expect(screen.queryByText(skills[4].name)).toBeNull();
+      expect(draft.skills).toEqual(originalSkills);
+      expect(draft.traits).toEqual(originalTraits);
+    },
+  );
+
+  it("recalculates levels from current traits and skill XP on rerender", () => {
+    const sheet = (skillXp: number, traits: BtccRow[]) => (
       <CharacterSheet
-        draft={draftWith({ skills })}
+        draft={draftWith({
+          skills: [{ name: "Career/Soldier", xp: skillXp }],
+          traits,
+        })}
         xp={xp}
         warnings={noWarnings}
-        onEdit={() => {}}
+      />
+    );
+    const { rerender } = render(sheet(30, []));
+    const assertMetrics = (level: number, rawXp: number) => {
+      const row = within(screen.getByText("Career/Soldier").closest("li")!);
+      expect(row.getByText(`Level ${level}`)).toBeTruthy();
+      expect(row.getByText(`${rawXp} XP`)).toBeTruthy();
+    };
+    assertMetrics(1, 30);
+    rerender(sheet(30, [{ name: "Slow Learner", xp: -300 }]));
+    assertMetrics(0, 30);
+    rerender(
+      sheet(30, [
+        { name: "Slow Learner", xp: -300 },
+        { name: "Fast Learner", xp: 300 },
+      ]),
+    );
+    assertMetrics(1, 30);
+    rerender(sheet(80, []));
+    assertMetrics(3, 80);
+  });
+
+  it.each([
+    ["Acting", 30, "CB"],
+    ["Career/Soldier", 80, "SB"],
+    ["Technician/BattleMech", 120, "CA"],
+    ["Art", 80, "CB"],
+    ["Art", 120, "CA"],
+    ["Martial Arts", 120, "SA"],
+    ["Custom skill", 30, "unknown"],
+    ["constructor", 30, "unknown"],
+  ])(
+    "shows rule-book complexity for %s at %i XP",
+    (name, rawXp, complexity) => {
+      render(
+        <CharacterSheet
+          draft={draftWith({ skills: [{ name, xp: rawXp }] })}
+          xp={xp}
+          warnings={noWarnings}
+        />,
+      );
+      const row = within(screen.getByText(name).closest("li")!);
+      expect(row.getByText(`Complexity ${complexity}`)).toBeTruthy();
+      expect(row.getByText(`${rawXp} XP`)).toBeTruthy();
+    },
+  );
+
+  it("updates tiered complexity when traits change the derived level", () => {
+    const draft = draftWith({ skills: [{ name: "Art", xp: 100 }] });
+    const { rerender } = render(
+      <CharacterSheet draft={draft} xp={xp} warnings={noWarnings} />,
+    );
+    expect(screen.getByText("Level 3")).toBeTruthy();
+    expect(screen.getByText("Complexity CB")).toBeTruthy();
+    rerender(
+      <CharacterSheet
+        draft={{ ...draft, traits: [{ name: "Fast Learner", xp: 300 }] }}
+        xp={xp}
+        warnings={noWarnings}
       />,
     );
-
-    // Highest-xp skill visible, lowest hidden behind the toggle.
-    expect(screen.getByText("Skill6")).toBeTruthy();
-    expect(screen.queryByText("Skill0")).toBeNull();
-
-    const toggle = screen.getByRole("button", { name: /2 more skills/ });
-    fireEvent.click(toggle);
-    expect(screen.getByText("Skill0")).toBeTruthy();
-
-    fireEvent.click(screen.getByRole("button", { name: /show less/i }));
-    expect(screen.queryByText("Skill0")).toBeNull();
+    expect(screen.getByText("Level 4")).toBeTruthy();
+    expect(screen.getByText("Complexity CA")).toBeTruthy();
   });
 
   it("renders traits with signed xp coloring and a warning banner", () => {

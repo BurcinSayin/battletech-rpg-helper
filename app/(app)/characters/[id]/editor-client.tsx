@@ -22,6 +22,7 @@ import {
   computeXp,
   draftToForm,
   formToDraft,
+  skillLevel,
   type CharacterFormValues,
 } from "@/lib/characters";
 import { saveCharacter } from "@/app/(app)/characters/actions";
@@ -58,7 +59,9 @@ export function CharacterEditor({
   const [serverError, setServerError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
   const [remoteVersion, setRemoteVersion] = useState<number | null>(null);
-  const [selectedCampaign, setSelectedCampaign] = useState<string | null>(campaignId);
+  const [selectedCampaign, setSelectedCampaign] = useState<string | null>(
+    campaignId,
+  );
 
   // The version this client actually knows about. The `version` prop stays stale for
   // the whole save round trip (the server refresh lands later), so echo-suppressing
@@ -126,7 +129,9 @@ export function CharacterEditor({
     startTransition(async () => {
       const result = campaignLocked
         ? await saveCharacter(id, knownVersion, values)
-        : await saveCharacter(id, knownVersion, values, { id: selectedCampaign });
+        : await saveCharacter(id, knownVersion, values, {
+            id: selectedCampaign,
+          });
       if (result.ok) {
         setKnownVersion(result.version);
         setRemoteVersion(null);
@@ -302,6 +307,9 @@ export function CharacterEditor({
               datalistId="skill-options"
               options={skillOptions}
               errors={errors.skills as unknown as RowError[] | undefined}
+              levels={liveDraft.skills.map((row) =>
+                skillLevel(row.xp, liveDraft.traits),
+              )}
             />
           </Panel>
 
@@ -417,6 +425,7 @@ type RowListProps = {
   datalistId: string;
   options: string[];
   errors?: RowError[];
+  levels?: number[];
 };
 
 function RowList({
@@ -427,6 +436,7 @@ function RowList({
   datalistId,
   options,
   errors,
+  levels,
 }: RowListProps) {
   if (fields.length === 0) {
     return <p className="text-sm text-hud-muted">None yet — use “+ Add”.</p>;
@@ -439,11 +449,11 @@ function RowList({
         ))}
       </datalist>
       {fields.map((field, index) => (
-        <div key={field.id} className="flex items-center gap-2">
+        <div key={field.id} className="flex flex-wrap items-center gap-2">
           <input
             list={datalistId}
             placeholder="Name"
-            className={cn(hudInput, "flex-1")}
+            className={cn(hudInput, "min-w-0 flex-1 basis-32")}
             {...register(`${name}.${index}.name`)}
           />
           <input
@@ -452,6 +462,11 @@ function RowList({
             className={cn(hudInput, "w-24")}
             {...register(`${name}.${index}.xp`, { valueAsNumber: true })}
           />
+          {levels && (
+            <span className="whitespace-nowrap font-mono text-sm text-hud-muted">
+              Lvl {levels[index]}
+            </span>
+          )}
           <button
             type="button"
             aria-label="Remove"

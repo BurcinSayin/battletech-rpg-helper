@@ -101,6 +101,14 @@ Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsT
 - **Save** = explicit button → `update_character` RPC with `expected_version`; conflict → reload dialog (no autosave).
 - **Realtime:** subscribe to `postgres_changes` filtered `id=eq.<id>`. Remote higher-version update hot-swaps when the local
   form is clean; otherwise shows a non-destructive "remote changes available" banner. Realtime respects RLS (GM live edits).
+- Saved sheets and import previews share `CharacterSheet`: skill rows display trait-aware `Level N` alongside raw
+  `X XP`, sorted by descending raw XP with the top five initially visible. Levels derive from current traits via
+  `skillLevel`; stored XP and `.btcc` rows remain unchanged.
+- View-mode skill complexity comes from `docs/rule_book/skills_table.json`: `SB` (Simple-Basic), `SA`
+  (Simple-Advanced), `CB` (Complex-Basic), or `CA` (Complex-Advanced). Slash specialties inherit the parent entry;
+  tiered skills use Basic below level 4 and Advanced from level 4, unless their name explicitly identifies a tier.
+  Unlisted names show `Complexity unknown`, not an invented rule.
+- Edit-mode skill rows show read-only levels that update with unsaved skill XP and learner-trait changes.
 
 ## .btcc import/export (`lib/btcc/`)
 - `parseBtcc(text)`: split on first `:`; accumulate attr/skill/trait/pre* preserving order; capture `<notes>…</notes>`

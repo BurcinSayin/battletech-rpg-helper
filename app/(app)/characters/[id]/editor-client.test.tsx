@@ -1,6 +1,13 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, afterEach } from "vitest";
-import { render, screen, fireEvent, cleanup, waitFor } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  cleanup,
+  waitFor,
+  within,
+} from "@testing-library/react";
 import { emptyDraft } from "@/lib/btcc";
 
 // Stub the server action so jsdom never pulls server-only modules, and so we can
@@ -13,7 +20,10 @@ vi.mock("./use-character-realtime", () => ({ useCharacterRealtime: vi.fn() }));
 
 import { CharacterEditor } from "./editor-client";
 
-const CAMP = { id: "a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3", name: "Wolf's Dragoons" };
+const CAMP = {
+  id: "a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3",
+  name: "Wolf's Dragoons",
+};
 
 afterEach(() => {
   cleanup();
@@ -46,7 +56,9 @@ function renderEditor(props: {
 describe("CharacterEditor — campaign select", () => {
   it("disables the select and explains why when the viewer is not the owner (AC 31)", () => {
     renderEditor({ isOwner: false, campaignId: CAMP.id });
-    expect((screen.getByLabelText("Campaign") as HTMLSelectElement).disabled).toBe(true);
+    expect(
+      (screen.getByLabelText("Campaign") as HTMLSelectElement).disabled,
+    ).toBe(true);
     expect(
       screen.getByText("Only the character’s owner can change its campaign."),
     ).toBeTruthy();
@@ -73,7 +85,9 @@ describe("CharacterEditor — campaign select", () => {
 
   it("locks the select when the character sits in a campaign the viewer cannot see", async () => {
     renderEditor({ isOwner: true, campaigns: [], campaignId: CAMP.id });
-    expect((screen.getByLabelText("Campaign") as HTMLSelectElement).disabled).toBe(true);
+    expect(
+      (screen.getByLabelText("Campaign") as HTMLSelectElement).disabled,
+    ).toBe(true);
     expect(
       screen.getByText("You’re no longer in this character’s campaign."),
     ).toBeTruthy();
@@ -81,5 +95,54 @@ describe("CharacterEditor — campaign select", () => {
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
     await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
     expect(saveCharacter.mock.calls[0]).toHaveLength(3);
+  });
+});
+
+describe("CharacterEditor — skill levels", () => {
+  it("updates read-only levels with XP and learner traits, preserving row identity after removal", () => {
+    const draft = emptyDraft();
+    draft.scalars.name = "Test Pilot";
+    draft.skills = [
+      { name: "Art", xp: 30 },
+      { name: "Career/Soldier", xp: 80 },
+    ];
+    draft.traits = [{ name: "Slow Learner", xp: -200 }];
+    render(
+      <CharacterEditor
+        id="c1"
+        version={1}
+        draft={draft}
+        campaigns={[]}
+        campaignId={null}
+        isOwner
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    const artRow = screen.getByDisplayValue("Art").parentElement!;
+    const soldierRow =
+      screen.getByDisplayValue("Career/Soldier").parentElement!;
+    expect(within(artRow).getByText("Level 1")).toBeTruthy();
+    expect(within(soldierRow).getByText("Level 3")).toBeTruthy();
+    const traitRow = screen.getByDisplayValue("Slow Learner").parentElement!;
+    expect(within(traitRow).queryByText(/Level/)).toBeNull();
+    fireEvent.change(within(traitRow).getByRole("spinbutton", { name: "XP" }), {
+      target: { value: "-300" },
+    });
+    expect(within(artRow).getByText("Level 0")).toBeTruthy();
+    expect(within(soldierRow).getByText("Level 2")).toBeTruthy();
+    fireEvent.change(
+      within(soldierRow).getByRole("spinbutton", { name: "XP" }),
+      {
+        target: { value: "144" },
+      },
+    );
+    expect(within(soldierRow).getByText("Level 4")).toBeTruthy();
+    fireEvent.click(within(artRow).getByRole("button", { name: "Remove" }));
+    expect(screen.queryByDisplayValue("Art")).toBeNull();
+    expect(within(soldierRow).getByText("Level 4")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    const restored = within(screen.getByText("Career/Soldier").closest("li")!);
+    expect(restored.getByText("Level 3")).toBeTruthy();
+    expect(restored.getByText("80 XP")).toBeTruthy();
   });
 });

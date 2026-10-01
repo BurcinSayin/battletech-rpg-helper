@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
-import { ATTRIBUTE_KEYS } from "@/lib/characters";
+import { ATTRIBUTE_KEYS, skillLevel } from "@/lib/characters";
+import { skillComplexity } from "@/lib/rules/skill-complexity";
 import { CatalogWarningBanner } from "./warnings";
 import { HudButton, Panel } from "./ui";
 
@@ -121,15 +122,27 @@ export function CharacterSheet({
               <p className="text-sm text-hud-muted">No skills yet.</p>
             ) : (
               <ul className="flex flex-col gap-1.5">
-                {visibleSkills.map((row, i) => (
-                  <li
-                    key={`${row.name}-${i}`}
-                    className="flex items-center justify-between font-mono text-sm"
-                  >
-                    <span className="text-hud-text">{row.name}</span>
-                    <span className="text-hud-muted">{row.xp}</span>
-                  </li>
-                ))}
+                {visibleSkills.map((row, i) => {
+                  const level = skillLevel(row.xp, draft.traits);
+                  const complexity = skillComplexity(row.name, level);
+                  return (
+                    <li
+                      key={`${row.name}-${i}`}
+                      className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-sm"
+                    >
+                      <span className="min-w-0 break-words text-hud-text">
+                        {row.name}
+                      </span>
+                      <div className="ml-auto flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-hud-muted">
+                        <span className="whitespace-nowrap">Lvl {level}</span>
+                        <span className="whitespace-nowrap">
+                          {complexity ?? "unknown"}
+                        </span>
+                        <span className="whitespace-nowrap">{row.xp} XP</span>
+                      </div>
+                    </li>
+                  );
+                })}
                 {hiddenCount > 0 && (
                   <li className="pt-1">
                     <button
@@ -138,7 +151,9 @@ export function CharacterSheet({
                       onClick={() => setShowAllSkills((v) => !v)}
                       className="text-xs text-hud-amber transition hover:brightness-110"
                     >
-                      {showAllSkills ? "Show less" : `+ ${hiddenCount} more skills`}
+                      {showAllSkills
+                        ? "Show less"
+                        : `+ ${hiddenCount} more skills`}
                     </button>
                   </li>
                 )}
