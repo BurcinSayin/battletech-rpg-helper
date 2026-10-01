@@ -4,6 +4,7 @@
 // values are raw XP. Requirements from multiple stages are maxima, never sums.
 
 import type { BtccDraft, BtccRow } from "@/lib/btcc";
+import { resolveSkillName } from "@/lib/rules/load";
 import { mergeRows } from "./grants";
 import { ATTRIBUTE_BASE } from "./xp";
 
@@ -50,7 +51,15 @@ export function mergePrerequisites(
 }
 
 function xpByName(rows: readonly BtccRow[]): ReadonlyMap<string, number> {
-  return new Map(rows.map((row) => [row.name, row.xp]));
+  const map = new Map<string, number>();
+  for (const row of rows) {
+    map.set(row.name, row.xp);
+    const resolved = resolveSkillName(row.name);
+    if (resolved !== row.name && !map.has(resolved)) {
+      map.set(resolved, row.xp);
+    }
+  }
+  return map;
 }
 
 function hasAtLeast(
@@ -85,8 +94,10 @@ export function checkPrerequisites(
     }
   }
   for (const { name, xp: required } of requirements.skills) {
-    const actual = skillXp.get(name) ?? 0;
-    if (!skillXp.has(name) || actual < required) {
+    const resolved = resolveSkillName(name);
+    const actual = skillXp.get(name) ?? skillXp.get(resolved) ?? 0;
+    const has = skillXp.has(name) || skillXp.has(resolved);
+    if (!has || actual < required) {
       unmet.push({ kind: "skill", name, required, actual });
     }
   }

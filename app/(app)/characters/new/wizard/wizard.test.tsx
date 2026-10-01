@@ -801,9 +801,9 @@ describe("WizardClient Stage 4 advanced dialog", () => {
       screen.getByRole("button", { name: "Apply advanced choices" }),
     );
     const draft = within(screen.getByRole("region", { name: "Current draft" }));
-    expect(draft.getByText("Art/Dance: 35 XP")).toBeTruthy();
+    expect(draft.getByText("Art/Cooking: 35 XP")).toBeTruthy();
     fireEvent.click(screen.getByRole("button", { name: "Advanced choices" }));
-    expect(draft.queryByText("Art/Dance: 35 XP")).toBeNull();
+    expect(draft.queryByText("Art/Cooking: 35 XP")).toBeNull();
     fireEvent.click(
       screen.getByRole("button", { name: "Cancel advanced choices" }),
     );

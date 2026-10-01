@@ -11,7 +11,10 @@ export function stage0Cases(extract: () => Stage0Catalog): void {
         { id: "subAffElem1More", xp: 15 },
         { id: "subAffElem3More", xp: 15 },
       ]);
-      expect(choices.map(({ candidates }) => candidates.length)).toEqual([8, 16]);
+      expect(choices.map(({ candidates }) => candidates.length)).toEqual([
+        subskills.Art.length,
+        subskills.Art.length * 2,
+      ]);
     });
     it("keeps all 13 affiliations in catalog order when switches are reordered", () => {
       const catalog = extract();

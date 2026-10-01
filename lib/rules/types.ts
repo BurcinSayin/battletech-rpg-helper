@@ -1,4 +1,4 @@
-export type { Skill, Trait, Subskills, Subtraits } from "@/lib/validation/catalog";
+export type { Skill, TierMetadata, Trait, Subskills, Subtraits } from "@/lib/validation/catalog";
 export type {
   Stage0Affiliation,
   Stage0Candidate,

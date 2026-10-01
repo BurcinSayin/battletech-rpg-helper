@@ -49,7 +49,7 @@ describe("rules catalog", () => {
   });
 
   it("has the expected catalog sizes", () => {
-    expect(skills).toHaveLength(92);
+    expect(skills).toHaveLength(51);
     expect(traits).toHaveLength(56);
     expect(affiliations).toHaveLength(13);
     expect(careers).toHaveLength(26);
@@ -273,17 +273,23 @@ describe("rules catalog", () => {
   });
 
   it("parses skill metadata correctly", () => {
-    const gunnery = skills.find((s) => s.name === "Gunnery/'Mech");
-    expect(gunnery).toEqual({
-      name: "Gunnery/'Mech",
+    const gunnery = skills.find((s) => s.name === "Gunnery");
+    expect(gunnery).toMatchObject({
+      name: "Gunnery",
       attributes: "RFL+DEX",
       targetNumber: 8,
       category: "SA",
+      page: "p.142",
     });
-    // The one row with a stray space ("INT, 8/CB") trims cleanly.
+    expect(gunnery?.subskills).toContain("'Mech");
+
     const appraisal = skills.find((s) => s.name === "Appraisal");
     expect(appraisal?.targetNumber).toBe(8);
     expect(appraisal?.attributes).toBe("INT");
+
+    const disguise = skills.find((s) => s.name === "Disguise");
+    expect(disguise?.targetNumber).toBe(7);
+    expect(disguise?.category).toBe("SB");
   });
 
   it("includes known traits with rich metadata", () => {

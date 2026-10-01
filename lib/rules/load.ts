@@ -63,6 +63,102 @@ export function compositeSkillNames(): string[] {
   );
 }
 
+const DYNAMIC_SKILL_ALIASES: Record<string, string> = {};
+for (const s of skills) {
+  if (s.alias_list) {
+    for (const alias of s.alias_list) {
+      DYNAMIC_SKILL_ALIASES[alias] = s.name;
+    }
+  }
+}
+
+/** Legacy / abbreviated desktop skill name aliases. */
+export const SKILL_ALIASES: Record<string, string> = Object.assign(
+  Object.create(null),
+  {
+    ...DYNAMIC_SKILL_ALIASES,
+    "Gunnery/`Mech": "Gunnery/'Mech",
+    "Piloting/`Mech": "Piloting/'Mech",
+    "Gunnery/Mech": "Gunnery/'Mech",
+    "Piloting/Mech": "Piloting/'Mech",
+    "Technician/Jet": "Technician/Jets",
+  },
+);
+
+const skillByName = new Map<string, Skill>(skills.map((s) => [s.name, s]));
+
+/** Returns default subskill for a skill if defined in the rulebook, e.g. "General" for MedTech or Surgery. */
+export function defaultSubskill(name: string): string | undefined {
+  const trimmed = name.trim();
+  const direct = skillByName.get(trimmed);
+  if (direct?.default_sub) return direct.default_sub;
+  const alias = SKILL_ALIASES[trimmed];
+  if (typeof alias === "string") {
+    const aliasedSkill = skillByName.get(alias);
+    if (aliasedSkill?.default_sub) return aliasedSkill.default_sub;
+  }
+  return undefined;
+}
+
+/**
+ * Resolve alias names, composite subskill aliases, and expand bare skills that have a default_sub
+ * (e.g. "MedTech" -> "MedTech/General", "Medtech" -> "MedTech/General", "Surgery" -> "Surgery/General").
+ */
+export function resolveSkillName(name: string): string {
+  const trimmed = name.trim();
+
+  // 1. Direct alias check
+  const exactAlias = SKILL_ALIASES[trimmed];
+  const target = typeof exactAlias === "string" ? exactAlias : trimmed;
+
+  // 2. If it contains a slash, resolve the parent portion's alias
+  const slashIdx = target.indexOf("/");
+  if (slashIdx !== -1) {
+    const parent = target.slice(0, slashIdx);
+    const sub = target.slice(slashIdx + 1);
+    const parentAlias = SKILL_ALIASES[parent];
+    const canonicalParent = typeof parentAlias === "string" ? parentAlias : parent;
+    return `${canonicalParent}/${sub}`;
+  }
+
+  // 3. Bare skill name: if it has a default subskill, assume `${canonical}/${default_sub}`
+  const defSub = defaultSubskill(target);
+  if (defSub) {
+    const canonical = typeof exactAlias === "string" ? exactAlias : (skillByName.get(target)?.name ?? target);
+    return `${canonical}/${defSub}`;
+  }
+
+  return target;
+}
+
+/**
+ * Find a canonical skill definition.
+ * Resolves aliases, and for composite subskills (e.g. "Gunnery/'Mech" or "Interests/BattleMechs"),
+ * falls back to the parent skill definition ("Gunnery" or "Interest").
+ */
+export function findSkill(name: string): Skill | undefined {
+  const trimmed = name.trim();
+  const direct = skillByName.get(trimmed);
+  if (direct) return direct;
+
+  const resolved = resolveSkillName(trimmed);
+  const resolvedDirect = skillByName.get(resolved);
+  if (resolvedDirect) return resolvedDirect;
+
+  const slashIdx = resolved.indexOf("/");
+  if (slashIdx !== -1) {
+    const parentName = resolved.slice(0, slashIdx);
+    return skillByName.get(parentName);
+  }
+
+  return undefined;
+}
+
+/** Get tiered skills from the catalog. */
+export function tieredSkills(): Skill[] {
+  return skills.filter((s) => s.tiered);
+}
+
 /** Expand subtraits into composite names, e.g. "Compulsion/Berserker". */
 export function compositeTraitNames(): string[] {
   return Object.entries(subtraits).flatMap(([parent, subs]) =>
@@ -71,17 +167,20 @@ export function compositeTraitNames(): string[] {
 }
 
 /** Legacy / abbreviated desktop trait name aliases. */
-export const TRAIT_ALIASES: Record<string, string> = {
-  Dependent: "Dependents",
-  "Except Attribute": "Exceptional Attribute",
-  TDS: "TDS — Transit Disorientation Syndrome",
-  "Transit Disorientation Syndrome": "TDS — Transit Disorientation Syndrome",
-  Vehicle: "Vehicle Level",
-  "Compulsion/Paranoid": "Compulsion/Paranoia",
-  Citizenship: "Citizenship/Trueborn",
-  Implant: "Implant/Prosthetic",
-  Title: "Title/Bloodname",
-};
+export const TRAIT_ALIASES: Record<string, string> = Object.assign(
+  Object.create(null),
+  {
+    Dependent: "Dependents",
+    "Except Attribute": "Exceptional Attribute",
+    TDS: "TDS — Transit Disorientation Syndrome",
+    "Transit Disorientation Syndrome": "TDS — Transit Disorientation Syndrome",
+    Vehicle: "Vehicle Level",
+    "Compulsion/Paranoid": "Compulsion/Paranoia",
+    Citizenship: "Citizenship/Trueborn",
+    Implant: "Implant/Prosthetic",
+    Title: "Title/Bloodname",
+  },
+);
 
 /** Canonical opposing trait pairs in A Time of War. */
 export const OPPOSING_TRAITS: Record<string, string> = {
@@ -116,7 +215,8 @@ const traitByName = new Map<string, Trait>(traits.map((t) => [t.name, t]));
 /** Resolve alias names and sub-trait prefixes to a canonical name. */
 export function resolveTraitName(name: string): string {
   const trimmed = name.trim();
-  return TRAIT_ALIASES[trimmed] ?? trimmed;
+  const alias = TRAIT_ALIASES[trimmed];
+  return typeof alias === "string" ? alias : trimmed;
 }
 
 /**

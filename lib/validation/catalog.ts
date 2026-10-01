@@ -4,11 +4,24 @@ import { z } from "zod";
 // the ingested catalog (tests now) and, later, to validate character writes
 // against the legal catalog (PLAN.md step #5).
 
+export const tierMetadataSchema = z.object({
+  attributes: z.string().min(1),
+  targetNumber: z.number().int(),
+  category: z.string().min(1),
+});
+
 export const skillSchema = z.object({
   name: z.string().min(1),
   attributes: z.string().min(1),
   targetNumber: z.number().int(),
   category: z.string().min(1),
+  page: z.string().min(1).default("p.142"),
+  description: z.string().default(""),
+  subskills: z.array(z.string()).default([]),
+  tiered: z.boolean().default(false),
+  advanced: tierMetadataSchema.optional(),
+  alias_list: z.array(z.string()).optional(),
+  default_sub: z.string().optional(),
 });
 
 export const traitSchema = z.object({
@@ -196,6 +209,7 @@ export const stage0CatalogSchema = z
   .strict();
 
 export type Skill = z.infer<typeof skillSchema>;
+export type TierMetadata = z.infer<typeof tierMetadataSchema>;
 export type Trait = z.infer<typeof traitSchema>;
 export type Subskills = z.infer<typeof subskillsSchema>;
 export type Subtraits = z.infer<typeof subtraitsSchema>;

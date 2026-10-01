@@ -14,6 +14,7 @@ import {
   compositeSkillNames,
   compositeTraitNames,
   TRAIT_ALIASES,
+  SKILL_ALIASES,
 } from "@/lib/rules/load";
 import { ATTRIBUTE_KEYS } from "./xp";
 
@@ -112,6 +113,7 @@ function skillNameSet(): Set<string> {
     validSkillNames = new Set([
       ...skillCatalog.map((s) => s.name),
       ...compositeSkillNames(),
+      ...Object.keys(SKILL_ALIASES),
     ]);
   }
   return validSkillNames;

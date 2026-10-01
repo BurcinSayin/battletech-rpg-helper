@@ -153,6 +153,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -424,7 +425,9 @@
             "Career/Cook",
             "Career/Doctor",
             "Career/Jounalist",
+            "Career/Journalist",
             "Career/Lawyer",
+            "Career/Management",
             "Career/Mangement",
             "Career/Soldier"
           ],
@@ -2802,6 +2805,7 @@
           "label": "Art/Any",
           "kind": "skill",
           "candidates": [
+            "Art/Cooking",
             "Art/Dance",
             "Art/Drawing",
             "Art/Music",
@@ -3537,7 +3541,9 @@
             "Career/Cook",
             "Career/Doctor",
             "Career/Jounalist",
+            "Career/Journalist",
             "Career/Lawyer",
+            "Career/Management",
             "Career/Mangement",
             "Career/Soldier"
           ],
@@ -5990,6 +5996,7 @@
           "label": "Art/Any",
           "kind": "skill",
           "candidates": [
+            "Art/Cooking",
             "Art/Dance",
             "Art/Drawing",
             "Art/Music",
@@ -6600,6 +6607,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -6850,7 +6858,9 @@
                   "Career/Cook",
                   "Career/Doctor",
                   "Career/Jounalist",
+                  "Career/Journalist",
                   "Career/Lawyer",
+                  "Career/Management",
                   "Career/Mangement",
                   "Career/Soldier"
                 ],
@@ -6965,8 +6975,10 @@
                 "candidates": [
                   "Science/Biology",
                   "Science/Chemestry",
+                  "Science/Chemistry",
                   "Science/Matallurgy",
                   "Science/Mathematics",
+                  "Science/Metallurgy",
                   "Science/Physics"
                 ],
                 "candidatesSource": "CreateSubSkillList(Science)",
@@ -7586,6 +7598,7 @@
           "kind": "skill",
           "candidates": [
             "Tactics/Air",
+            "Tactics/Ground",
             "Tactics/Infantry",
             "Tactics/Land",
             "Tactics/Sea",
@@ -13989,6 +14002,7 @@
                 "candidates": [
                   "Survival/Arctic",
                   "Survival/Desert",
+                  "Survival/Forest",
                   "Survival/Forests",
                   "Survival/Jungle",
                   "Survival/Mountain",
@@ -14082,6 +14096,7 @@
                 "candidates": [
                   "Survival/Arctic",
                   "Survival/Desert",
+                  "Survival/Forest",
                   "Survival/Forests",
                   "Survival/Jungle",
                   "Survival/Mountain",
@@ -14295,8 +14310,10 @@
                 "candidates": [
                   "Science/Biology",
                   "Science/Chemestry",
+                  "Science/Chemistry",
                   "Science/Matallurgy",
                   "Science/Mathematics",
+                  "Science/Metallurgy",
                   "Science/Physics"
                 ],
                 "candidatesSource": "CreateSubSkillList(Science)",
@@ -14329,6 +14346,7 @@
                 "candidates": [
                   "Communications/Black Box",
                   "Communications/Conventional",
+                  "Communications/Conventional (EM)",
                   "Communications/Hyperpulse Generator"
                 ],
                 "candidatesSource": "CreateSubSkillList(Communications)",
@@ -14997,6 +15015,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -15109,6 +15128,7 @@
           "candidates": [
             "Communications/Black Box",
             "Communications/Conventional",
+            "Communications/Conventional (EM)",
             "Communications/Hyperpulse Generator"
           ],
           "candidatesSource": "CreateSubSkillList(Communications)",
@@ -15402,6 +15422,7 @@
                 "candidates": [
                   "Communications/Black Box",
                   "Communications/Conventional",
+                  "Communications/Conventional (EM)",
                   "Communications/Hyperpulse Generator"
                 ],
                 "candidatesSource": "CreateSubSkillList(Communications)",
@@ -15553,6 +15574,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -15699,6 +15721,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -15771,6 +15794,7 @@
                 "candidates": [
                   "Communications/Black Box",
                   "Communications/Conventional",
+                  "Communications/Conventional (EM)",
                   "Communications/Hyperpulse Generator"
                 ],
                 "candidatesSource": "CreateSubSkillList(Communications)",
@@ -15784,6 +15808,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -15875,6 +15900,7 @@
                 "candidates": [
                   "Communications/Black Box",
                   "Communications/Conventional",
+                  "Communications/Conventional (EM)",
                   "Communications/Hyperpulse Generator"
                 ],
                 "candidatesSource": "CreateSubSkillList(Communications)",
@@ -15888,6 +15914,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -15968,6 +15995,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -16095,6 +16123,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -16449,6 +16478,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -16530,6 +16560,7 @@
                 "candidates": [
                   "Survival/Arctic",
                   "Survival/Desert",
+                  "Survival/Forest",
                   "Survival/Forests",
                   "Survival/Jungle",
                   "Survival/Mountain",
@@ -16626,6 +16657,7 @@
                 "candidates": [
                   "Survival/Arctic",
                   "Survival/Desert",
+                  "Survival/Forest",
                   "Survival/Forests",
                   "Survival/Jungle",
                   "Survival/Mountain",
@@ -16902,6 +16934,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -17137,13 +17170,14 @@
           "label": "Gunnery/Any",
           "kind": "skill",
           "candidates": [
+            "Gunnery/'Mech",
             "Gunnery/Aerospace",
             "Gunnery/Air Vehicle",
             "Gunnery/Battlesuit",
             "Gunnery/Ground Vehicle",
-            "Gunnery/Mech",
             "Gunnery/ProtoMech",
             "Gunnery/Sea Vehicle",
+            "Gunnery/Spacecraft",
             "Gunnery/Turret"
           ],
           "candidatesSource": "CreateSubSkillList(Gunnery)",
@@ -17175,7 +17209,9 @@
             "Piloting/'Mech",
             "Piloting/Aerospace",
             "Piloting/Air Vehicle",
+            "Piloting/Battlesuit",
             "Piloting/Ground Vehicle",
+            "Piloting/ProtoMech",
             "Piloting/Rail Vehicle",
             "Piloting/Sea Vehicle",
             "Piloting/Spacecraft"
@@ -17192,6 +17228,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -17351,6 +17388,7 @@
           "candidates": [
             "Communications/Black Box",
             "Communications/Conventional",
+            "Communications/Conventional (EM)",
             "Communications/Hyperpulse Generator"
           ],
           "candidatesSource": "CreateSubSkillList(Communications)",
@@ -17409,7 +17447,9 @@
             "Piloting/'Mech",
             "Piloting/Aerospace",
             "Piloting/Air Vehicle",
+            "Piloting/Battlesuit",
             "Piloting/Ground Vehicle",
+            "Piloting/ProtoMech",
             "Piloting/Rail Vehicle",
             "Piloting/Sea Vehicle",
             "Piloting/Spacecraft"
@@ -17426,6 +17466,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -17643,6 +17684,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -17781,6 +17823,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -17851,6 +17894,7 @@
                 "kind": "skill",
                 "candidates": [
                   "Tactics/Air",
+                  "Tactics/Ground",
                   "Tactics/Infantry",
                   "Tactics/Land",
                   "Tactics/Sea",
@@ -18388,6 +18432,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -18762,6 +18807,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -19121,8 +19167,10 @@
           "candidates": [
             "Science/Biology",
             "Science/Chemestry",
+            "Science/Chemistry",
             "Science/Matallurgy",
             "Science/Mathematics",
+            "Science/Metallurgy",
             "Science/Physics"
           ],
           "candidatesSource": "CreateSubSkillList(Science)",
@@ -19690,8 +19738,10 @@
           "candidates": [
             "Science/Biology",
             "Science/Chemestry",
+            "Science/Chemistry",
             "Science/Matallurgy",
             "Science/Mathematics",
+            "Science/Metallurgy",
             "Science/Physics"
           ],
           "candidatesSource": "CreateSubSkillList(Science)",
@@ -20537,6 +20587,7 @@
                 "candidates": [
                   "Communications/Black Box",
                   "Communications/Conventional",
+                  "Communications/Conventional (EM)",
                   "Communications/Hyperpulse Generator"
                 ],
                 "candidatesSource": "CreateSubSkillList(Communications)",
@@ -20934,6 +20985,7 @@
           "label": "Art/Any",
           "kind": "skill",
           "candidates": [
+            "Art/Cooking",
             "Art/Dance",
             "Art/Drawing",
             "Art/Music",
@@ -21092,6 +21144,7 @@
           "candidates": [
             "Survival/Arctic",
             "Survival/Desert",
+            "Survival/Forest",
             "Survival/Forests",
             "Survival/Jungle",
             "Survival/Mountain",
@@ -23197,6 +23250,10 @@
                   "candidates": [
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -23290,6 +23347,10 @@
                   "id": "subAffElem1",
                   "label": "Art/Any",
                   "candidates": [
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
                     {
                       "kind": "skill",
                       "value": "Art/Dance"
@@ -23388,6 +23449,10 @@
                   "id": "subAffElem1",
                   "label": "Choose one Art or Interest",
                   "candidates": [
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
                     {
                       "kind": "skill",
                       "value": "Art/Dance"
@@ -23527,6 +23592,10 @@
                     {
                       "kind": "skill",
                       "value": "Survival/Desert"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Survival/Forest"
                     },
                     {
                       "kind": "skill",
@@ -23873,6 +23942,10 @@
                   "candidates": [
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -24094,6 +24167,10 @@
                   "id": "subAffElem2",
                   "label": "Art/Any",
                   "candidates": [
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
                     {
                       "kind": "skill",
                       "value": "Art/Dance"
@@ -24462,6 +24539,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Survival/Forest"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Survival/Forests"
                     },
                     {
@@ -24669,6 +24750,10 @@
                   "id": "subAffElem1",
                   "label": "Art/Any",
                   "candidates": [
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
                     {
                       "kind": "skill",
                       "value": "Art/Dance"
@@ -25107,6 +25192,10 @@
               "id": "affElem2",
               "label": "Arts",
               "candidates": [
+                {
+                  "kind": "skill",
+                  "value": "Art/Cooking"
+                },
                 {
                   "kind": "skill",
                   "value": "Art/Dance"
@@ -27934,6 +28023,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Survival/Forest"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Survival/Forests"
                     },
                     {
@@ -29056,6 +29149,10 @@
                     {
                       "kind": "skill",
                       "value": "Survival/Desert"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Survival/Forest"
                     },
                     {
                       "kind": "skill",
@@ -33961,6 +34058,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -33988,7 +34089,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -34009,6 +34110,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -34036,7 +34141,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -34057,6 +34162,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -34084,7 +34193,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -34733,6 +34842,10 @@
                     {
                       "kind": "skill",
                       "value": "Zero-G Operations"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
                     },
                     {
                       "kind": "skill",
@@ -35412,6 +35525,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -36088,6 +36205,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -36300,6 +36421,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36327,7 +36452,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36348,6 +36473,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36375,8 +36504,12 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
+                    },
+                    {
+                      "kind": "trait",
+                      "value": "Art/Cooking"
                     },
                     {
                       "kind": "trait",
@@ -36498,6 +36631,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Survival/Forest"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Survival/Forests"
                     },
                     {
@@ -36562,6 +36699,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36589,7 +36730,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36610,6 +36751,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36637,7 +36782,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36658,6 +36803,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36685,7 +36834,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36781,6 +36930,10 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Survival/Forest"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Survival/Forests"
                     },
                     {
@@ -36817,6 +36970,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36844,7 +37001,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36865,6 +37022,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36892,7 +37053,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -36913,6 +37074,10 @@
                   "candidates": [
                     {
                       "kind": "attribute",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "attribute",
                       "value": "Art/Dance"
                     },
                     {
@@ -36940,7 +37105,7 @@
                       "value": "Art/Songwriting"
                     },
                     {
-                      "kind": "attribute",
+                      "kind": "trait",
                       "value": "Art/Writing"
                     }
                   ],
@@ -39458,6 +39623,10 @@
                   "id": "subAffElem1",
                   "label": "Art/Any",
                   "candidates": [
+                    {
+                      "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
                     {
                       "kind": "skill",
                       "value": "Art/Dance"
@@ -42310,6 +42479,10 @@
                   "candidates": [
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -43171,6 +43344,10 @@
                   "candidates": [
                     {
                       "kind": "skill",
+                      "value": "Art/Cooking"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Art/Dance"
                     },
                     {
@@ -43487,6 +43664,10 @@
                     {
                       "kind": "skill",
                       "value": "Survival/Desert"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Survival/Forest"
                     },
                     {
                       "kind": "skill",
@@ -44294,6 +44475,10 @@
                     {
                       "kind": "skill",
                       "value": "Survival/Desert"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Survival/Forest"
                     },
                     {
                       "kind": "skill",
@@ -50440,11 +50625,19 @@
                 },
                 {
                   "kind": "skill",
+                  "value": "Science/Chemistry"
+                },
+                {
+                  "kind": "skill",
                   "value": "Science/Matallurgy"
                 },
                 {
                   "kind": "skill",
                   "value": "Science/Mathematics"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Science/Metallurgy"
                 },
                 {
                   "kind": "skill",
@@ -51056,7 +51249,15 @@
                 },
                 {
                   "kind": "skill",
+                  "value": "Career/Journalist"
+                },
+                {
+                  "kind": "skill",
                   "value": "Career/Lawyer"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Management"
                 },
                 {
                   "kind": "skill",
@@ -51464,6 +51665,10 @@
                 {
                   "kind": "skill",
                   "value": "Survival/Desert"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Survival/Forest"
                 },
                 {
                   "kind": "skill",
@@ -52257,7 +52462,15 @@
                 },
                 {
                   "kind": "skill",
+                  "value": "Career/Journalist"
+                },
+                {
+                  "kind": "skill",
                   "value": "Career/Lawyer"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Management"
                 },
                 {
                   "kind": "skill",
@@ -60057,6 +60270,10 @@
               "candidates": [
                 {
                   "kind": "skill",
+                  "value": "Art/Cooking"
+                },
+                {
+                  "kind": "skill",
                   "value": "Art/Dance"
                 },
                 {
@@ -62499,7 +62716,15 @@
                 },
                 {
                   "kind": "skill",
+                  "value": "Career/Journalist"
+                },
+                {
+                  "kind": "skill",
                   "value": "Career/Lawyer"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Management"
                 },
                 {
                   "kind": "skill",
@@ -70436,6 +70661,10 @@
               "candidates": [
                 {
                   "kind": "skill",
+                  "value": "Art/Cooking"
+                },
+                {
+                  "kind": "skill",
                   "value": "Art/Dance"
                 },
                 {
@@ -72342,6 +72571,10 @@
                 },
                 {
                   "kind": "skill",
+                  "value": "Survival/Forest"
+                },
+                {
+                  "kind": "skill",
                   "value": "Survival/Forests"
                 },
                 {
@@ -72732,7 +72965,15 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Career/Journalist"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Career/Lawyer"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Career/Management"
                     },
                     {
                       "kind": "skill",
@@ -72955,11 +73196,19 @@
                     },
                     {
                       "kind": "skill",
+                      "value": "Science/Chemistry"
+                    },
+                    {
+                      "kind": "skill",
                       "value": "Science/Matallurgy"
                     },
                     {
                       "kind": "skill",
                       "value": "Science/Mathematics"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Science/Metallurgy"
                     },
                     {
                       "kind": "skill",
@@ -74903,6 +75152,10 @@
                 {
                   "kind": "skill",
                   "value": "Tactics/Air"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Tactics/Ground"
                 },
                 {
                   "kind": "skill",
