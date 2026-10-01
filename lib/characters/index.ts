@@ -9,6 +9,7 @@ export {
   type AttributeKey,
   type XpSummary,
 } from "./xp";
+export { skillLevel } from "./skill-level";
 export {
   rowToDraft,
   draftToColumns,
