@@ -1,0 +1,471 @@
+{
+  "table_name": "MASTER SKILLS LIST",
+  "source_page": 142,
+  "rows": [
+    {
+      "skill_name": "Acrobatics",
+      "links": "RFL",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Acting",
+      "links": "CHA",
+      "tn_c": "8 / CB",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Administration",
+      "links": "INT + WIL",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Animal Handling",
+      "links": "WIL",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Appraisal",
+      "links": "INT",
+      "tn_c": "8 / CB",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Archery",
+      "links": "DEX",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Art [Basic Tier]",
+      "links": "DEX",
+      "tn_c": "8 / CB*",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Art [Advanced Tier]",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA*",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Artillery",
+      "links": "INT + WIL",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Career",
+      "links": "INT",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Climbing",
+      "links": "DEX",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Communications",
+      "links": "INT",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Computers [Basic Tier]",
+      "links": "INT",
+      "tn_c": "8 / CB*",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Computers [Advanced Tier]",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA*",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Cryptography",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Demolitions",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Disguise",
+      "links": "CHA",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Driving",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Escape Artist",
+      "links": "STR + DEX",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Forgery",
+      "links": "DEX + INT",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Gunnery",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Interest [Basic Tier]",
+      "links": "INT",
+      "tn_c": "8 / CB*",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Interest [Advanced Tier]",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA*",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Interrogation",
+      "links": "WIL + CHA",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Investigation",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Language",
+      "links": "INT + CHA",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Leadership",
+      "links": "WIL + CHA",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Martial Arts [Basic Tier]",
+      "links": "RFL",
+      "tn_c": "7 / SB*",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Martial Arts [Advanced Tier]",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA*",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "MedTech",
+      "links": "INT",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Melee Weapons [Basic Tier]",
+      "links": "DEX",
+      "tn_c": "7 / SB*",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Melee Weapons [Advanced Tier]",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA*",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Navigation",
+      "links": "INT",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Negotiation",
+      "links": "CHA",
+      "tn_c": "8 / CB",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Perception",
+      "links": "INT",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Piloting",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Prestidigitation [Basic Tier]",
+      "links": "DEX",
+      "tn_c": "7 / SB*",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Prestidigitation [Advanced Tier]",
+      "links": "RFL + DEX",
+      "tn_c": "8 / SA*",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": true
+    },
+    {
+      "skill_name": "Protocol",
+      "links": "WIL + CHA",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Running",
+      "links": "RFL",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Science",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Security Systems",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Sensor Operations",
+      "links": "INT + WIL",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Small Arms",
+      "links": "DEX",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Stealth",
+      "links": "RFL + INT",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Strategy",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Streetwise",
+      "links": "CHA",
+      "tn_c": "8 / CB",
+      "target_number": 8,
+      "complexity": "CB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Support Weapons",
+      "links": "DEX",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Surgery",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Survival",
+      "links": "BOD + INT",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Swimming",
+      "links": "STR",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Tactics",
+      "links": "INT + WIL",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Technician",
+      "links": "DEX + INT",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Thrown Weapons",
+      "links": "DEX",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Tracking",
+      "links": "INT + WIL",
+      "tn_c": "8 / SA",
+      "target_number": 8,
+      "complexity": "SA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Training",
+      "links": "INT + CHA",
+      "tn_c": "9 / CA",
+      "target_number": 9,
+      "complexity": "CA",
+      "tiered_skill": false
+    },
+    {
+      "skill_name": "Zero-G Operations",
+      "links": "RFL",
+      "tn_c": "7 / SB",
+      "target_number": 7,
+      "complexity": "SB",
+      "tiered_skill": false
+    }
+  ],
+  "complexity_codes": {
+    "CA": "Complex-Advanced",
+    "CB": "Complex-Basic",
+    "SA": "Simple-Advanced",
+    "SB": "Simple-Basic"
+  },
+  "footnotes": {
+    "*": "Tiered Skill: Basic Tier has a Skill Level maximum of 3; Advanced Tier has a Skill Level minimum of 4."
+  }
+}
