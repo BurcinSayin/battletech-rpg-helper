@@ -68,7 +68,8 @@
       "Lawyer",
       "Management",
       "Mangement",
-      "Soldier"
+      "Soldier",
+      "Technician"
     ]
   },
   {
@@ -115,9 +116,15 @@
       "Sea Vehicles"
     ],
     "subskill_aliases": {
-      "Ground Vehicles": ["Ground Vehicle"],
-      "Rail Vehicles": ["Rail Vehicle"],
-      "Sea Vehicles": ["Sea Vehicle"]
+      "Ground Vehicles": [
+        "Ground Vehicle"
+      ],
+      "Rail Vehicles": [
+        "Rail Vehicle"
+      ],
+      "Sea Vehicles": [
+        "Sea Vehicle"
+      ]
     }
   },
   {
@@ -145,7 +152,10 @@
       "Turret"
     ],
     "subskill_aliases": {
-      "'Mech": ["`Mech", "Mech"]
+      "'Mech": [
+        "`Mech",
+        "Mech"
+      ]
     }
   },
   {
@@ -273,7 +283,10 @@
       "Spacecraft"
     ],
     "subskill_aliases": {
-      "'Mech": ["`Mech", "Mech"]
+      "'Mech": [
+        "`Mech",
+        "Mech"
+      ]
     }
   },
   {
@@ -503,7 +516,9 @@
       "Weapons"
     ],
     "subskill_aliases": {
-      "Jets": ["Jet"]
+      "Jets": [
+        "Jet"
+      ]
     }
   },
   {
