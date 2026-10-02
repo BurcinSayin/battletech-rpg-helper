@@ -203,7 +203,18 @@
       "Rail Vehicles",
       "Sea Vehicles"
     ],
-    "tiered": false
+    "tiered": false,
+    "subskill_aliases": {
+      "Ground Vehicles": [
+        "Ground Vehicle"
+      ],
+      "Rail Vehicles": [
+        "Rail Vehicle"
+      ],
+      "Sea Vehicles": [
+        "Sea Vehicle"
+      ]
+    }
   },
   {
     "name": "Escape Artist",
@@ -243,7 +254,13 @@
       "Spacecraft",
       "Turret"
     ],
-    "tiered": false
+    "tiered": false,
+    "subskill_aliases": {
+      "'Mech": [
+        "`Mech",
+        "Mech"
+      ]
+    }
   },
   {
     "name": "Interest",
@@ -443,7 +460,13 @@
       "Sea Vehicle",
       "Spacecraft"
     ],
-    "tiered": false
+    "tiered": false,
+    "subskill_aliases": {
+      "'Mech": [
+        "`Mech",
+        "Mech"
+      ]
+    }
   },
   {
     "name": "Prestidigitation",
@@ -755,7 +778,12 @@
       "Nuclear",
       "Weapons"
     ],
-    "tiered": false
+    "tiered": false,
+    "subskill_aliases": {
+      "Jets": [
+        "Jet"
+      ]
+    }
   },
   {
     "name": "Thrown Weapons",

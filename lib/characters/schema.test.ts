@@ -71,4 +71,18 @@ describe("catalogWarnings", () => {
     const warnings = catalogWarnings(newchar);
     expect(warnings.traits).toEqual([]);
   });
+
+  it("recognizes subskill aliases like Driving/Ground Vehicle without warnings", () => {
+    const withSubskillAlias = {
+      ...draft,
+      skills: [
+        ...draft.skills,
+        { name: "Driving/Ground Vehicle", xp: 30 },
+        { name: "Driving/Sea Vehicle", xp: 20 },
+      ],
+    };
+    const warnings = catalogWarnings(withSubskillAlias);
+    expect(warnings.skills).not.toContain("Driving/Ground Vehicle");
+    expect(warnings.skills).not.toContain("Driving/Sea Vehicle");
+  });
 });

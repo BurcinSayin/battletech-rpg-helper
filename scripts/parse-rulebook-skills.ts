@@ -41,6 +41,7 @@ export interface RulebookSkillInput {
   description: string;
   alias_list?: string[];
   default_sub?: string;
+  subskill_aliases?: Record<string, string[]>;
 }
 
 export interface TierMetadata {
@@ -61,6 +62,7 @@ export interface CanonicalSkill {
   advanced?: TierMetadata;
   alias_list?: string[];
   default_sub?: string;
+  subskill_aliases?: Record<string, string[]>;
 }
 
 function writeJson(name: string, data: unknown): void {
@@ -178,6 +180,9 @@ export function parseRulebookSkills(): {
     }
     if (skillInput?.default_sub) {
       skillObj.default_sub = skillInput.default_sub.trim();
+    }
+    if (skillInput?.subskill_aliases) {
+      skillObj.subskill_aliases = skillInput.subskill_aliases;
     }
 
     if (isTiered && group.advanced) {

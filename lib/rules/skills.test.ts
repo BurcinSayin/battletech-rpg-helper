@@ -153,6 +153,19 @@ describe("skill catalog and lookups", () => {
 
     expect(resolveSkillName("Technician/Jet")).toBe("Technician/Jets");
     expect(findSkill("Technician/Jet")?.name).toBe("Technician");
+
+    expect(resolveSkillName("Driving/Ground Vehicle")).toBe("Driving/Ground Vehicles");
+    expect(resolveSkillName("Driving/Rail Vehicle")).toBe("Driving/Rail Vehicles");
+    expect(resolveSkillName("Driving/Sea Vehicle")).toBe("Driving/Sea Vehicles");
+    expect(findSkill("Driving/Ground Vehicle")?.name).toBe("Driving");
+    expect(SKILL_ALIASES["Driving/Ground Vehicle"]).toBe("Driving/Ground Vehicles");
+
+    const driving = findSkill("Driving")!;
+    expect(driving.subskill_aliases).toEqual({
+      "Ground Vehicles": ["Ground Vehicle"],
+      "Rail Vehicles": ["Rail Vehicle"],
+      "Sea Vehicles": ["Sea Vehicle"],
+    });
   });
 
   it("findSkill handles direct, alias, and composite parent fallback", () => {

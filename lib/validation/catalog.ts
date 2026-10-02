@@ -22,6 +22,7 @@ export const skillSchema = z.object({
   advanced: tierMetadataSchema.optional(),
   alias_list: z.array(z.string()).optional(),
   default_sub: z.string().optional(),
+  subskill_aliases: z.record(z.string(), z.array(z.string().min(1))).optional(),
 });
 
 export const traitSchema = z.object({

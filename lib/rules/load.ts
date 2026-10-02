@@ -31,7 +31,7 @@ import {
   careerFieldsSchema,
 } from "@/lib/validation/adult";
 
-export const skills: Skill[] = skillsJson;
+export const skills: Skill[] = skillsJson as unknown as Skill[];
 export const traits: Trait[] = traitsJson;
 export const subskills: Subskills = subskillsJson;
 export const subtraits: Subtraits = subtraitsJson;
@@ -68,6 +68,21 @@ for (const s of skills) {
   if (s.alias_list) {
     for (const alias of s.alias_list) {
       DYNAMIC_SKILL_ALIASES[alias] = s.name;
+    }
+  }
+  if (s.subskill_aliases) {
+    for (const [canonicalSub, aliases] of Object.entries(s.subskill_aliases)) {
+      if (!aliases) continue;
+      for (const subAlias of aliases) {
+        DYNAMIC_SKILL_ALIASES[`${s.name}/${subAlias}`] = `${s.name}/${canonicalSub}`;
+
+        if (s.alias_list) {
+          for (const parentAlias of s.alias_list) {
+            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${subAlias}`] = `${s.name}/${canonicalSub}`;
+            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${canonicalSub}`] = `${s.name}/${canonicalSub}`;
+          }
+        }
+      }
     }
   }
 }
@@ -118,6 +133,16 @@ export function resolveSkillName(name: string): string {
     const sub = target.slice(slashIdx + 1);
     const parentAlias = SKILL_ALIASES[parent];
     const canonicalParent = typeof parentAlias === "string" ? parentAlias : parent;
+
+    const parentSkill = skillByName.get(canonicalParent);
+    if (parentSkill?.subskill_aliases) {
+      for (const [canonicalSub, aliases] of Object.entries(parentSkill.subskill_aliases)) {
+        if (aliases.includes(sub)) {
+          return `${canonicalParent}/${canonicalSub}`;
+        }
+      }
+    }
+
     return `${canonicalParent}/${sub}`;
   }
 
