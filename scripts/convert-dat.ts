@@ -19,6 +19,8 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { parseRulebookTraits } from "./parse-rulebook-traits";
+import { parseRulebookSkills } from "./parse-rulebook-skills";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -87,17 +89,6 @@ function parseTraits(): Trait[] {
   });
 }
 
-/** subskill.dat: `parent;sub` → { parent: subs[] }, preserving file order. */
-function parseSubskills(): Record<string, string[]> {
-  const map: Record<string, string[]> = {};
-  for (const line of readLines("subskill.dat")) {
-    const [parent, sub] = line.split(";");
-    const p = parent.trim();
-    (map[p] ??= []).push(sub.trim());
-  }
-  return map;
-}
-
 function writeJson(name: string, data: unknown): void {
   const path = join(OUT_DIR, name);
   writeFileSync(path, JSON.stringify(data, null, 2) + "\n", "utf8");
@@ -108,9 +99,8 @@ function main(): void {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log(`Ingesting rules from ${SOURCE_DIR}`);
 
-  writeJson("skills.json", parseSkills());
-  writeJson("traits.json", parseTraits());
-  writeJson("subskills.json", parseSubskills());
+  parseRulebookTraits();
+  parseRulebookSkills();
   writeJson("affiliations.json", parseList("affilations.dat"));
   writeJson("careers.json", parseList("career.dat"));
   writeJson("eyeColors.json", parseList("eyecolor.dat"));

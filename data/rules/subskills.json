@@ -1,11 +1,14 @@
 {
+  "Acrobatics": [
+    "Free-Fall",
+    "Gymnastics"
+  ],
   "Animal Handling": [
     "Herding",
     "Riding",
     "Training"
   ],
   "Art": [
-    "Cooking",
     "Dance",
     "Drawing",
     "Music",
@@ -13,20 +16,24 @@
     "Poetry",
     "Sculpture",
     "Songwriting",
-    "Writing"
+    "Writing",
+    "Cooking"
   ],
   "Career": [
-    "Doctor",
-    "Lawyer",
-    "Soldier",
     "Accountant",
     "Cook",
+    "Doctor",
+    "Journalist",
+    "Jounalist",
+    "Lawyer",
+    "Management",
     "Mangement",
-    "Jounalist"
+    "Soldier"
   ],
   "Communications": [
     "Black Box",
     "Conventional",
+    "Conventional (EM)",
     "Hyperpulse Generator"
   ],
   "Driving": [
@@ -37,12 +44,36 @@
   "Gunnery": [
     "Aerospace",
     "Air Vehicle",
+    "Battlesuit",
     "Ground Vehicle",
-    "Sea Vehicle",
-    "Mech",
+    "'Mech",
     "ProtoMech",
-    "Turret",
-    "Battlesuit"
+    "Sea Vehicle",
+    "Spacecraft",
+    "Turret"
+  ],
+  "Interest": [
+    "BattleMechs",
+    "Battlesuits",
+    "Aerospace",
+    "Spacecraft",
+    "Aircraft",
+    "Ground Vehicles",
+    "Sea Vehicles",
+    "Rail Vehicles",
+    "FedSuns History",
+    "Regulan History",
+    "History (Star League)",
+    "History (Terran)",
+    "History (Clan)",
+    "History (Inner Sphere)",
+    "History (Periphery)",
+    "Literature",
+    "Holo-Games",
+    "Sports",
+    "Weapons",
+    "Martial Arts",
+    "GameMastering for Battletech"
   ],
   "Interests": [
     "BattleMechs",
@@ -85,28 +116,35 @@
     "Slovak",
     "Spanish"
   ],
+  "MedTech": [
+    "General",
+    "Veterinary"
+  ],
   "Medtech": [
     "General",
     "Veterinary"
   ],
   "Navigation": [
-    "Ground",
     "Air",
+    "Ground",
+    "K-F Jump",
     "Sea",
-    "Space",
-    "K-F Jump"
+    "Space"
   ],
   "Piloting": [
     "Aerospace",
     "Air Vehicle",
+    "Battlesuit",
     "Ground Vehicle",
     "'Mech",
-    "Sea Vehicle",
+    "ProtoMech",
     "Rail Vehicle",
+    "Sea Vehicle",
     "Spacecraft"
   ],
   "Prestidigitation": [
     "Pick Pocket",
+    "Quickdraw",
     "Quick Draw",
     "Sleight of Hand"
   ],
@@ -164,10 +202,12 @@
   ],
   "Science": [
     "Biology",
+    "Chemistry",
     "Chemestry",
     "Mathematics",
-    "Physics",
-    "Matallurgy"
+    "Metallurgy",
+    "Matallurgy",
+    "Physics"
   ],
   "Security Systems": [
     "Electronic",
@@ -231,18 +271,20 @@
   ],
   "Survival": [
     "Arctic",
-    "Forests",
     "Desert",
+    "Forest",
+    "Forests",
     "Jungle",
-    "Ocean",
     "Mountain",
+    "Ocean",
     "Steppe"
   ],
   "Tactics": [
+    "Air",
+    "Ground",
     "Infantry",
     "Land",
     "Sea",
-    "Air",
     "Space"
   ],
   "Technician": [
@@ -257,7 +299,9 @@
   ],
   "Thrown Weapons": [
     "Blade",
-    "Blunt"
+    "Blades",
+    "Blunt",
+    "Blunt Weapons"
   ],
   "Tracking": [
     "Urban",

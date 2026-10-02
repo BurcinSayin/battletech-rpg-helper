@@ -8,8 +8,14 @@
 
 import { z } from "zod";
 import type { BtccDraft, BtccScalars } from "@/lib/btcc/types";
-import { skills as skillCatalog, traits as traitCatalog } from "@/lib/rules/load";
-import { compositeSkillNames } from "@/lib/rules/load";
+import {
+  skills as skillCatalog,
+  traits as traitCatalog,
+  compositeSkillNames,
+  compositeTraitNames,
+  TRAIT_ALIASES,
+  SKILL_ALIASES,
+} from "@/lib/rules/load";
 import { ATTRIBUTE_KEYS } from "./xp";
 
 const intField = z.coerce.number().int();
@@ -107,6 +113,7 @@ function skillNameSet(): Set<string> {
     validSkillNames = new Set([
       ...skillCatalog.map((s) => s.name),
       ...compositeSkillNames(),
+      ...Object.keys(SKILL_ALIASES),
     ]);
   }
   return validSkillNames;
@@ -114,7 +121,11 @@ function skillNameSet(): Set<string> {
 
 function traitNameSet(): Set<string> {
   if (!validTraitNames) {
-    validTraitNames = new Set(traitCatalog.map((t) => t.name));
+    validTraitNames = new Set([
+      ...traitCatalog.map((t) => t.name),
+      ...compositeTraitNames(),
+      ...Object.keys(TRAIT_ALIASES),
+    ]);
   }
   return validTraitNames;
 }
@@ -139,7 +150,11 @@ export function catalogSkillNames(): string[] {
   return [...skillNameSet()].sort((a, b) => a.localeCompare(b));
 }
 
-/** Sorted trait names for the editor's trait `<datalist>`. */
+/** Sorted trait names (incl. composites) for the editor's trait `<datalist>`. */
 export function catalogTraitNames(): string[] {
-  return [...traitNameSet()].sort((a, b) => a.localeCompare(b));
+  const names = new Set([
+    ...traitCatalog.map((t) => t.name),
+    ...compositeTraitNames(),
+  ]);
+  return [...names].sort((a, b) => a.localeCompare(b));
 }

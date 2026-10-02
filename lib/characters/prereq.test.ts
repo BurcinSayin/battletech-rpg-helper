@@ -248,4 +248,28 @@ describe("CheckPrereq module waivers", () => {
     expect(report.satisfied).toBe(true);
     expect(report.unmet).toEqual([]);
   });
+
+  it("satisfies MedTech/General prereq when draft has bare MedTech", () => {
+    const draft = emptyDraft();
+    draft.skills = [{ name: "MedTech", xp: 45 }];
+
+    const report = checkPrerequisites(draft, [
+      requirements({}, [{ name: "MedTech/General", xp: 30 }], []),
+    ]);
+
+    expect(report.satisfied).toBe(true);
+    expect(report.unmet).toEqual([]);
+  });
+
+  it("satisfies bare MedTech prereq when draft has MedTech/General", () => {
+    const draft = emptyDraft();
+    draft.skills = [{ name: "MedTech/General", xp: 45 }];
+
+    const report = checkPrerequisites(draft, [
+      requirements({}, [{ name: "MedTech", xp: 30 }], []),
+    ]);
+
+    expect(report.satisfied).toBe(true);
+    expect(report.unmet).toEqual([]);
+  });
 });

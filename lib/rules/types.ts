@@ -1,4 +1,4 @@
-export type { Skill, Trait, Subskills } from "@/lib/validation/catalog";
+export type { Skill, TierMetadata, Trait, Subskills, Subtraits } from "@/lib/validation/catalog";
 export type {
   Stage0Affiliation,
   Stage0Candidate,
@@ -22,5 +22,10 @@ export type {
 
 /** Compose a desktop-style composite skill name, e.g. "Animal Handling/Riding". */
 export function composeSkillName(parent: string, sub: string): string {
+  return `${parent}/${sub}`;
+}
+
+/** Compose a composite trait name, e.g. "Compulsion/Berserker". */
+export function composeTraitName(parent: string, sub: string): string {
   return `${parent}/${sub}`;
 }

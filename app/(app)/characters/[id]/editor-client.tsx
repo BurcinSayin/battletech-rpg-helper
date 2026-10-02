@@ -464,7 +464,7 @@ function RowList({
           />
           {levels && (
             <span className="whitespace-nowrap font-mono text-sm text-hud-muted">
-              Lvl {levels[index]}
+              Level {levels[index]}
             </span>
           )}
           <button

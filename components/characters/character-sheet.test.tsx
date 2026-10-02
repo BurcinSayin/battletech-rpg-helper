@@ -276,4 +276,23 @@ describe("CharacterSheet", () => {
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expect(onEdit).toHaveBeenCalledTimes(1);
   });
+
+  it("renders bare skills with default_sub as assumed composite subskills", () => {
+    const draft = draftWith({
+      skills: [
+        { name: "MedTech", xp: 45 },
+        { name: "Surgery", xp: 30 },
+      ],
+    });
+    render(
+      <CharacterSheet
+        draft={draft}
+        xp={xp}
+        warnings={noWarnings}
+      />,
+    );
+
+    expect(screen.getByText("MedTech/General")).toBeTruthy();
+    expect(screen.getByText("Surgery/General")).toBeTruthy();
+  });
 });
