@@ -5,7 +5,7 @@ import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
 import { ATTRIBUTE_KEYS, skillLevel } from "@/lib/characters";
 import { findSkill, findTrait, resolveSkillName } from "@/lib/rules/load";
-import { skillComplexity } from "@/lib/rules/skill-complexity";
+import { skillComplexity, skillTargetNumber } from "@/lib/rules/skill-complexity";
 import { CatalogWarningBanner } from "./warnings";
 import { HudButton, Panel } from "./ui";
 
@@ -128,6 +128,7 @@ export function CharacterSheet({
                 {visibleSkills.map((row, i) => {
                   const level = skillLevel(row.xp, draft.traits);
                   const complexity = skillComplexity(row.name, level);
+                  const targetNumber = skillTargetNumber(row.name, level);
                   const meta = findSkill(row.name);
                   const isExpanded = expandedSkill === row.name;
                   return (
@@ -136,9 +137,8 @@ export function CharacterSheet({
                       className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1 font-mono text-sm border-b border-hud-line/40 pb-1.5 last:border-b-0"
                     >
                       <span
-                        className={`min-w-0 break-words text-hud-text ${
-                          meta ? "cursor-pointer select-none hover:text-hud-amber transition-colors" : ""
-                        }`}
+                        className={`min-w-0 break-words text-hud-text ${meta ? "cursor-pointer select-none hover:text-hud-amber transition-colors" : ""
+                          }`}
                         onClick={() => {
                           if (meta) {
                             setExpandedSkill(isExpanded ? null : row.name);
@@ -148,11 +148,11 @@ export function CharacterSheet({
                         {resolveSkillName(row.name)}
                       </span>
                       <div className="ml-auto flex flex-wrap items-center justify-end gap-x-3 gap-y-1 text-hud-muted">
-                        <span className="whitespace-nowrap">Level {level}</span>
+                        <span className="whitespace-nowrap">Lvl {level}</span>
                         <span className="whitespace-nowrap">
-                          Complexity {complexity ?? "unknown"}
+                          {complexity ?? "unknown"}/{targetNumber}
                         </span>
-                        <span className="whitespace-nowrap">{row.xp} XP</span>
+
                       </div>
                       {isExpanded && meta && (
                         <div className="w-full mt-1 rounded bg-hud-raised/60 p-2 text-xs font-sans text-hud-muted border border-hud-line/40 flex flex-col gap-1">
@@ -211,9 +211,8 @@ export function CharacterSheet({
                       className="flex flex-col gap-1 border-b border-hud-line/40 pb-1.5 last:border-b-0 font-mono text-sm"
                     >
                       <div
-                        className={`flex items-center justify-between ${
-                          meta ? "cursor-pointer select-none group" : ""
-                        }`}
+                        className={`flex items-center justify-between ${meta ? "cursor-pointer select-none group" : ""
+                          }`}
                         onClick={() => {
                           if (meta) {
                             setExpandedTrait(isExpanded ? null : row.name);
@@ -222,9 +221,8 @@ export function CharacterSheet({
                       >
                         <div className="flex items-center gap-2">
                           <span
-                            className={`text-hud-text ${
-                              meta ? "group-hover:text-hud-amber transition-colors" : ""
-                            }`}
+                            className={`text-hud-text ${meta ? "group-hover:text-hud-amber transition-colors" : ""
+                              }`}
                           >
                             {row.name}
                           </span>
