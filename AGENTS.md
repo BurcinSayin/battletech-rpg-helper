@@ -32,20 +32,19 @@
 ## Subdirectories
 | Directory | Purpose |
 |-----------|---------|
-| `app/` | App Router routes, layouts, and server actions (see `app/AGENTS.md`) |
-| `components/` | Presentational React components (see `components/AGENTS.md`) |
-| `lib/` | Domain core: `.btcc` format, character mapping, rules, Supabase clients (see `lib/AGENTS.md`) |
-| `supabase/` | Local stack config, migrations, RLS test matrix, generated seed (see `supabase/AGENTS.md`) |
-| `data/` | Generated rules catalogs, bundled at build time (see `data/AGENTS.md`) |
-| `scripts/` | Generators for the rules JSON and `seed.sql` (see `scripts/AGENTS.md`) |
-| `e2e/` | Playwright end-to-end specs (see `e2e/AGENTS.md`) |
-| `docs/` | `PLAN.md` (design + intended build order), `RULES.md` (desktop rules, cited to source), design wireframes (see `docs/AGENTS.md`) |
+| `app/` | App Router routes, layouts, and server actions |
+| `components/` | Presentational React components |
+| `lib/` | Domain core: `.btcc` format, character mapping, rules, Supabase clients |
+| `supabase/` | Local stack config, migrations, RLS test matrix, generated seed |
+| `data/` | Generated rules catalogs, bundled at build time |
+| `scripts/` | Generators for the rules JSON and `seed.sql` |
+| `e2e/` | Playwright end-to-end specs |
+| `docs/` | `PLAN.md` (design + intended build order), `RULES.md` (desktop rules, cited to source), design wireframes |
 
 ## Documentation Map
 - `docs/PLAN.md` — intended design and build order. Not a progress record.
 - `docs/RULES.md` — the desktop application's character-generation rules, every claim cited to `Battletech-Character-Creator@a1d8009`.
-- `CLAUDE.md` — commands, architecture, and conventions for this repository.
-- `AGENTS.md` — directory-local context, one file per directory.
+- `AGENTS.md` — commands, architecture, and conventions for this repository.
 - Build status — answered by `git log` and GitHub issues, not by any document.
 
 <!-- MANUAL: Notes added below this line are preserved on regeneration -->
