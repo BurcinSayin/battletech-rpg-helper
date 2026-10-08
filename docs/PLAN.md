@@ -103,12 +103,17 @@ error. FK-driven detachment also advances the version; `updated_at` is maintaine
 
 **Decision: static JSON in the repo** (not DB reference tables). Rules are read-only, identical for all users, tiny
 (~168 rows), versioned with code, need no RLS, validate with zero latency on server + client, and work offline for the PWA.
-- One-time `scripts/convert-dat.ts` reads the source `resource/*.dat` and emits typed JSON to `data/rules/`,
-  committed to the repo. It reads each file as `latin1` (`scripts/convert-dat.ts:34`), which suffices because the
-  catalog files are pure ASCII — no transcoding dependency is installed or required. The Windows-1251 description
-  files are deferred, as `convert-dat.ts:12-13` records.
-- Compose composite skill names from `subskill.dat` to match `.btcc` naming (e.g. `Animal Handling/Riding`).
-- Descriptions lazy-loaded only in detail panels.
+- `npm run rules:ingest` runs `scripts/convert-dat.ts` to regenerate the rules catalogs under `data/rules/`,
+  committed to the repo. Remaining desktop `.dat` lists are read as `latin1`.
+- `npm run skills:ingest` regenerates only `skills.json` and `subskills.json` through
+  `scripts/parse-rulebook-skills.ts`. Skill statistics and Basic/Advanced tiers come from
+  `docs/rule_book/skills_table.json`; descriptions, specialties, and aliases come from
+  `docs/rule_book/skills.json`. Update those sources and regenerate rather than editing the artifacts.
+- Compose composite skill names from the generated specialty mappings to match `.btcc` naming
+  (e.g. `Animal Handling/Riding`). Canonical root entries retain legacy lookup aliases.
+- Skill descriptions are bundled with the catalog and shown when a sheet detail panel is expanded.
+- After regenerating specialties, run `npm run rules:extract` to refresh the embedded lifepath choice
+  candidates in `modules.json` so the wizard offers the same specialties as the skill catalog.
 
 ## Character editor
 Server component fetches the row + rules JSON, passes data + `version` to a client editor built on **react-hook-form + zod**.
@@ -124,13 +129,14 @@ Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsT
 - **Save synchronization:** acknowledge the returned version to suppress own-save echoes, but do not synthesize a saved
   sheet from local fields. Show a disabled `Refreshing…` action until server data reaches that version (or newer), preventing
   another session from pairing stale values with a newer save version. Snapshot ownership is keyed by character ID.
-- Saved sheets and import previews share `CharacterSheet`: skill rows display trait-aware `Level N` alongside raw
-  `X XP`, sorted by descending raw XP with the top five initially visible. Levels derive from current traits via
-  `skillLevel`; stored XP and `.btcc` rows remain unchanged.
-- View-mode skill complexity comes from `docs/rule_book/skills_table.json`: `SB` (Simple-Basic), `SA`
-  (Simple-Advanced), `CB` (Complex-Basic), or `CA` (Complex-Advanced). Slash specialties inherit the parent entry;
-  tiered skills use Basic below level 4 and Advanced from level 4, unless their name explicitly identifies a tier.
-  Unlisted names show `Complexity unknown`, not an invented rule.
+- Saved sheets and import previews share `CharacterSheet`: skill rows display trait-aware `Lvl N` and
+  compact complexity/target-number metadata such as `CB/8`. Rows are sorted by descending raw XP with
+  the top five initially visible; raw XP is not displayed in view-mode rows. Levels derive from current
+  traits via `skillLevel`; stored XP and `.btcc` rows remain unchanged.
+- View-mode skill complexity and target numbers come from the rulebook-derived catalog: `SB` (Simple-Basic),
+  `SA` (Simple-Advanced), `CB` (Complex-Basic), or `CA` (Complex-Advanced). Slash specialties inherit the
+  parent entry; tiered skills use Basic below level 4 and Advanced from level 4.
+  Unlisted names show `unknown/` without an invented complexity or target number.
 - Edit-mode skill rows show read-only levels that update with unsaved skill XP and learner-trait changes.
 
 ## .btcc import/export (`lib/btcc/`)
