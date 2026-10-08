@@ -43,6 +43,7 @@ export default async function CharacterPage({
     <PageContainer width="content">
       <div className="rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
         <CharacterEditor
+          key={row.id}
           id={row.id}
           version={row.version}
           draft={rowToDraft(row)}

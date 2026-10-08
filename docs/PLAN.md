@@ -114,8 +114,16 @@ error. FK-driven detachment also advances the version; `updated_at` is maintaine
 Server component fetches the row + rules JSON, passes data + `version` to a client editor built on **react-hook-form + zod**.
 Panels: `BasicInfoForm`, `AttributesPanel` (8 steppers), `SkillsTable`, `TraitsTable`, `XpSummary`, `NotesEditor`.
 - **Save** = explicit button → `update_character` RPC with `expected_version`; conflict → reload dialog (no autosave).
-- **Realtime:** subscribe to `postgres_changes` filtered `id=eq.<id>`. Remote higher-version update hot-swaps when the local
-  form is clean; otherwise shows a non-destructive "remote changes available" banner. Realtime respects RLS (GM live edits).
+- **Edit snapshots:** entering Edit freezes the accepted draft, campaign selection and save base version, even before
+  any field is dirty. Higher-version server responses queue without resetting the form; equal/older responses are ignored.
+  Campaign write permissions still follow live server props. Cancel discards edits and adopts the newest available
+  snapshot; Reload also requests a fresh read. Conflict Keep editing retains the original base, so a stale save still conflicts.
+- **Realtime:** subscribe to `postgres_changes` filtered `id=eq.<id>`. While viewing, higher-version events request refresh;
+  while editing, events and incoming snapshots raise the non-destructive remote-change banner. Dismiss hides only that
+  announced version, without discarding queued data; a higher version shows it again. Realtime respects RLS (GM live edits).
+- **Save synchronization:** acknowledge the returned version to suppress own-save echoes, but do not synthesize a saved
+  sheet from local fields. Show a disabled `Refreshing…` action until server data reaches that version (or newer), preventing
+  another session from pairing stale values with a newer save version. Snapshot ownership is keyed by character ID.
 - Saved sheets and import previews share `CharacterSheet`: skill rows display trait-aware `Level N` alongside raw
   `X XP`, sorted by descending raw XP with the top five initially visible. Levels derive from current traits via
   `skillLevel`; stored XP and `.btcc` rows remain unchanged.

@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  useEffect,
+  useCallback,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -38,6 +38,12 @@ import {
   hudInput,
 } from "@/components/characters/ui";
 
+type CharacterSnapshot = {
+  version: number;
+  draft: BtccDraft;
+  campaignId: string | null;
+};
+
 export function CharacterEditor({
   id,
   version,
@@ -54,23 +60,26 @@ export function CharacterEditor({
   isOwner: boolean;
 }) {
   const router = useRouter();
+  const [snapshot, setSnapshot] = useState<CharacterSnapshot>({
+    version,
+    draft,
+    campaignId,
+  });
+  const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
   const [remoteVersion, setRemoteVersion] = useState<number | null>(null);
+  const [dismissedRemoteVersion, setDismissedRemoteVersion] = useState<
+    number | null
+  >(null);
   const [selectedCampaign, setSelectedCampaign] = useState<string | null>(
     campaignId,
   );
 
-  // The version this client actually knows about. The `version` prop stays stale for
-  // the whole save round trip (the server refresh lands later), so echo-suppressing
-  // against it would let the user's own save raise a "changed elsewhere" banner at
-  // them. Advanced from the value saveCharacter returns.
+  // Acknowledged versions suppress own-save echoes, but never rebase an edit.
   const [knownVersion, setKnownVersion] = useState(version);
-  useEffect(() => {
-    setKnownVersion(version);
-  }, [version]);
 
   // A layout effect, not a passive one: a passive effect can be deferred past a
   // later task, so a websocket message could read a stale `false` and refresh the
@@ -84,8 +93,9 @@ export function CharacterEditor({
     id,
     version: knownVersion,
     onRemoteVersion: (next) => {
-      if (isEditingRef.current) setRemoteVersion(next);
-      else router.refresh();
+      if (next <= knownVersion) return;
+      setRemoteVersion((current) => Math.max(current ?? 0, next));
+      if (!isEditingRef.current) router.refresh();
     },
   });
 
@@ -100,7 +110,7 @@ export function CharacterEditor({
 
   const form = useForm<CharacterFormValues>({
     resolver: zodResolver(characterFormSchema),
-    defaultValues: draftToForm(draft),
+    defaultValues: draftToForm(snapshot.draft),
   });
   const {
     control,
@@ -111,31 +121,75 @@ export function CharacterEditor({
     formState: { errors },
   } = form;
 
-  // Re-sync the form whenever the server hands us a new row (after save/reload).
-  useEffect(() => {
-    reset(draftToForm(draft));
-    setSelectedCampaign(campaignId);
-  }, [draft, campaignId, reset]);
+  const adoptSnapshot = useCallback(
+    (next: CharacterSnapshot): void => {
+      setSnapshot(next);
+      reset(draftToForm(next.draft));
+      setSelectedCampaign(next.campaignId);
+      setKnownVersion((current) => Math.max(current, next.version));
+      setRemoteVersion((current) =>
+        current !== null && current > next.version ? current : null,
+      );
+      setDismissedRemoteVersion((current) =>
+        current !== null && current > next.version ? current : null,
+      );
+    },
+    [reset],
+  );
 
   const skills = useFieldArray({ control, name: "skills" });
   const traits = useFieldArray({ control, name: "traits" });
 
-  const liveDraft = formToDraft(draft, watch());
+  useLayoutEffect(() => {
+    if (version > latestSnapshotRef.current.version) {
+      latestSnapshotRef.current = { version, draft, campaignId };
+    }
+    const next = latestSnapshotRef.current;
+    if (isEditing) {
+      if (next.version > snapshot.version && next.version > knownVersion) {
+        setRemoteVersion((current) => Math.max(current ?? 0, next.version));
+      }
+    } else if (next.version > snapshot.version && next.version >= knownVersion) {
+      adoptSnapshot(next);
+    }
+  }, [
+    version,
+    draft,
+    campaignId,
+    isEditing,
+    snapshot.version,
+    knownVersion,
+    adoptSnapshot,
+  ]);
+
+  const liveDraft = isEditing
+    ? formToDraft(snapshot.draft, watch())
+    : snapshot.draft;
   const xp = computeXp(liveDraft);
   const warnings = catalogWarnings(liveDraft);
 
   const onSubmit = handleSubmit((values) => {
+    const baseVersion = snapshot.version;
+    const submittedCampaign = selectedCampaign;
     setServerError(null);
     startTransition(async () => {
       const result = campaignLocked
-        ? await saveCharacter(id, knownVersion, values)
-        : await saveCharacter(id, knownVersion, values, {
-            id: selectedCampaign,
+        ? await saveCharacter(id, baseVersion, values)
+        : await saveCharacter(id, baseVersion, values, {
+            id: submittedCampaign,
           });
       if (result.ok) {
-        setKnownVersion(result.version);
-        setRemoteVersion(null);
+        setKnownVersion((current) => Math.max(current, result.version));
+        setRemoteVersion((current) =>
+          current !== null && current > result.version ? current : null,
+        );
+        setServerError(null);
+        setConflict(false);
+        setDismissedRemoteVersion(null);
+        isEditingRef.current = false;
         setIsEditing(false);
+        const next = latestSnapshotRef.current;
+        if (next.version >= result.version) adoptSnapshot(next);
         router.refresh();
       } else if (result.kind === "conflict") {
         setConflict(true);
@@ -145,20 +199,49 @@ export function CharacterEditor({
     });
   });
 
-  function cancelEdit() {
-    reset(draftToForm(draft));
-    setSelectedCampaign(campaignId);
+  function beginEdit(): void {
+    if (isPending || knownVersion > snapshot.version) return;
+    reset(draftToForm(snapshot.draft));
+    setSelectedCampaign(snapshot.campaignId);
     setServerError(null);
+    setConflict(false);
+    setDismissedRemoteVersion(null);
+    isEditingRef.current = true;
+    setIsEditing(true);
+  }
+
+  function finishEditing(reload: boolean): void {
+    if (isPending) return;
+    const latest = latestSnapshotRef.current;
+    const next =
+      latest.version > snapshot.version && latest.version >= knownVersion
+        ? latest
+        : snapshot;
+    adoptSnapshot(next);
+    setServerError(null);
+    setConflict(false);
+    setDismissedRemoteVersion(null);
+    isEditingRef.current = false;
     setIsEditing(false);
+    if (reload || (remoteVersion !== null && remoteVersion > latest.version)) {
+      router.refresh();
+    }
   }
 
   if (!isEditing) {
     return (
       <CharacterSheet
-        draft={draft}
+        draft={snapshot.draft}
         xp={xp}
         warnings={warnings}
-        onEdit={() => setIsEditing(true)}
+        onEdit={beginEdit}
+        actions={
+          knownVersion > snapshot.version || isPending ? (
+            <HudButton variant="primary" disabled>
+              Refreshing…
+            </HudButton>
+          ) : undefined
+        }
       />
     );
   }
@@ -170,23 +253,21 @@ export function CharacterEditor({
 
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
-      {remoteVersion !== null && remoteVersion > knownVersion && (
-        <RemoteChangeBanner
-          onReload={() => {
-            setRemoteVersion(null);
-            setIsEditing(false);
-            router.refresh();
-          }}
-          onDismiss={() => setRemoteVersion(null)}
-        />
-      )}
+      {remoteVersion !== null &&
+        remoteVersion > snapshot.version &&
+        remoteVersion > (dismissedRemoteVersion ?? 0) && (
+          <RemoteChangeBanner
+            onReload={() => finishEditing(true)}
+            onDismiss={() => setDismissedRemoteVersion(remoteVersion)}
+          />
+        )}
       <header className="flex items-center justify-between gap-2">
         <h1 className="text-xl font-semibold text-hud-text">Edit character</h1>
         <div className="flex gap-2">
           <HudButton
             type="button"
             variant="ghost"
-            onClick={cancelEdit}
+            onClick={() => finishEditing(false)}
             disabled={isPending}
           >
             Cancel
@@ -383,11 +464,7 @@ export function CharacterEditor({
 
       {conflict && (
         <ConflictDialog
-          onReload={() => {
-            setConflict(false);
-            setIsEditing(false);
-            router.refresh();
-          }}
+          onReload={() => finishEditing(true)}
           onKeepEditing={() => setConflict(false)}
         />
       )}
