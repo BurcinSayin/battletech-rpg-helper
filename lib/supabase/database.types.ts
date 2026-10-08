@@ -141,6 +141,13 @@ export type Database = {
             referencedRelation: "campaigns"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "characters_campaign_owner_membership_fkey"
+            columns: ["campaign_id", "owner_id"]
+            isOneToOne: false
+            referencedRelation: "campaign_members"
+            referencedColumns: ["campaign_id", "user_id"]
+          },
         ]
       }
       profiles: {

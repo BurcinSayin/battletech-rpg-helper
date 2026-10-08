@@ -59,17 +59,32 @@ Tables:
 - **characters** — `id, owner_id, campaign_id (nullable), name, info jsonb, attributes jsonb, skills jsonb, traits jsonb,
   pre_snapshot jsonb, notes text, version int, created_at, updated_at`.
 
-**Optimistic concurrency:** all character writes go through an RPC `update_character(p_id, p_expected_version, p_payload)`
+Character attachment lifetime is enforced by the immediate composite FK
+`characters(campaign_id, owner_id) → campaign_members(campaign_id, user_id)`.
+Deleting membership (self or GM) atomically sets only the affected characters' `campaign_id` to null,
+preserving ownership/data and revoking campaign-derived access. Campaign deletion also detaches rather than deletes.
+FK detachment increments `version` once; an explicit RPC detach already increments it and is not bumped again.
+Concurrent INSERT/attachment and removal serialize on the referenced membership row, so no orphan attachment commits.
+The column-list `ON DELETE SET NULL (campaign_id)` requires PostgreSQL 15 or newer (local stack: 17).
+
+Database regressions: `SUPABASE_TEST_DB_URL=<direct local DB_URL> npm run test:db` runs the rollback-only
+pgTAP authorization matrix and four lock-observed overlapping-session schedules. Obtain DB_URL with
+`npx supabase status -o env`; the fixture-writing concurrency runner accepts loopback hosts only.
+Ordinary `npm run test` remains independent of Supabase.
+
+**Optimistic concurrency:** client character updates go through an RPC `update_character(p_id, p_expected_version, p_payload)`
 that does `UPDATE … SET version = version + 1 WHERE id = $1 AND version = $expected`; `rowCount = 0` → raise a conflict
-error. `updated_at` maintained by trigger.
+error. FK-driven detachment also advances the version; `updated_at` is maintained by the existing trigger.
 - The RPC is **`SECURITY DEFINER`** and `authenticated` is **not** granted table `UPDATE` — so this RPC is the *only*
-  character write path (a direct `PATCH /characters` would otherwise bypass the version check and let a client write
+  client character update path (a direct `PATCH /characters` would otherwise bypass the version check and let a client write
   `version`/`owner_id`). Because DEFINER bypasses RLS, the RPC repeats the row authorization in its `WHERE`:
   `owner_id = auth.uid() OR is_campaign_gm(campaign_id)`. Wrong id / not-permitted / stale version all collapse to
   `not found` → conflict.
 - **Custom SQLSTATEs** map server errors to client UX: `PT409` version conflict (reload dialog), `PT403` attach to a
-  campaign you're not a member of, `PT404` invalid invite code. `campaign_id` uses a present-vs-absent (`payload ?
-  'campaign_id'`) check so it can be cleared (set to null), and INSERT/attach require membership in the target campaign.
+  campaign the character owner is not a member of, `PT404` invalid invite code. `campaign_id` uses a present-vs-absent
+  (`payload ? 'campaign_id'`) check so it can be cleared (set to null). INSERT/attach require owner membership,
+  including for GM-owned characters; campaign ownership alone is insufficient. An attachment RPC racing removal
+  translates only the membership FK violation into `PT403`; racing INSERT can return `23503`.
 - Whitelisted payload columns only — `owner_id`, `version`, timestamps are never client-writable, so `owner_id` is immutable.
 
 ## RLS policies (plain English; enabled on every table)
@@ -77,7 +92,7 @@ error. `updated_at` maintained by trigger.
 - **campaigns** — read if GM or member; insert by any authed user (force `gm_id = auth.uid()`); update/delete only GM.
 - **campaign_members** — read if GM of campaign or the member; GM inserts members (or self-join via invite RPC); delete by GM or self.
 - **characters** — SELECT/DELETE if `owner_id = auth.uid()` OR `is_campaign_gm(campaign_id)`. INSERT requires
-  `owner_id = auth.uid()` **and** `campaign_id` is null or one the owner belongs to (`is_campaign_member`/`is_campaign_gm`),
+  `owner_id = auth.uid()` **and** `campaign_id` is null or one the owner belongs to (`is_campaign_member`),
   so nobody can inject a character into a campaign they're not in. **No `UPDATE` policy** — updates go through the
   `update_character` DEFINER RPC (above), and `authenticated` has no table `UPDATE` grant.
 - Use **SECURITY DEFINER helper functions** (`is_campaign_gm`, `is_campaign_member`, `shares_campaign`) to avoid policy
