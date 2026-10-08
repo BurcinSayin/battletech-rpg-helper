@@ -46,49 +46,6 @@ function parseList(file: string): string[] {
   return readLines(file);
 }
 
-interface Skill {
-  name: string;
-  /** Linked attribute(s), e.g. "RFL" or "RFL+DEX". */
-  attributes: string;
-  /**
-   * The skill's Target Number, NOT an XP price: printed in the desktop sheet's
-   * `TN/C` column (`mainwindow.cpp:1005`) and re-substituted past level 3 by
-   * `AdvTried()` (`mainwindow.cpp:1055`). RULES.md §2.3.
-   */
-  targetNumber: number;
-  /** Complexity code, e.g. "SB", "CB", "SA", "CA". */
-  category: string;
-}
-
-/** allskills.dat: `name;ATTRS,TN/category` (note: one row has a stray space). */
-function parseSkills(): Skill[] {
-  return readLines("allskills.dat").map((line) => {
-    const [name, meta] = line.split(";");
-    const [attrs, tnCat] = meta.split(",");
-    const [targetNumber, category] = tnCat.split("/");
-    return {
-      name: name.trim(),
-      attributes: attrs.trim(),
-      targetNumber: parseInt(targetNumber.trim(), 10),
-      category: category.trim(),
-    };
-  });
-}
-
-interface Trait {
-  name: string;
-  /** Rulebook page reference, e.g. "p.108". Kept verbatim. */
-  page: string;
-}
-
-/** alltraits.dat: `name;pageref`. */
-function parseTraits(): Trait[] {
-  return readLines("alltraits.dat").map((line) => {
-    const [name, page] = line.split(";");
-    return { name: name.trim(), page: page.trim() };
-  });
-}
-
 function writeJson(name: string, data: unknown): void {
   const path = join(OUT_DIR, name);
   writeFileSync(path, JSON.stringify(data, null, 2) + "\n", "utf8");
