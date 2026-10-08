@@ -14,9 +14,6 @@ import {
 // (app/(app)/AGENTS.md:78).
 export type CampaignActionResult = { ok: false; message: string };
 
-/** How many detach passes `leaveCampaign` will make before giving up. */
-const DETACH_ATTEMPTS = 2;
-
 /**
  * Create a campaign owned by the current user and open it. The `on_campaign_created`
  * trigger (init.sql:87-90) adds the GM membership, so nothing here inserts one.
@@ -104,15 +101,7 @@ export async function deleteCampaign(campaignId: string): Promise<CampaignAction
 }
 
 /**
- * Leave a campaign: detach the leaver's characters FIRST, verify none remain, and
- * only then drop the membership row.
- *
- * Ordering is the whole point. `campaign_members` deletion does not touch
- * `characters.campaign_id` — `on delete set null` (init.sql:54) fires only when the
- * *campaign* is deleted — so dropping the membership first would leave the GM holding
- * write access to a departed player's character via `is_campaign_gm(campaign_id)`.
- * Every partial state this function can reach is "still a member, still attached":
- * consistent, retryable, and never orphaned.
+ * Membership deletion atomically detaches owned characters via the membership FK.
  */
 export async function leaveCampaign(campaignId: string): Promise<CampaignActionResult | void> {
   const supabase = await createClient();
@@ -142,57 +131,7 @@ export async function leaveCampaign(campaignId: string): Promise<CampaignActionR
     };
   }
 
-  // Detach every character this user has in the campaign, re-reading between passes
-  // so a concurrent GM save (PT409) can be retried rather than lost.
-  for (let attempt = 0; attempt < DETACH_ATTEMPTS; attempt += 1) {
-    const { data: rows, error: readError } = await supabase
-      .from("characters")
-      .select("id, version")
-      .eq("owner_id", user.id)
-      .eq("campaign_id", campaignId);
-
-    if (readError) {
-      console.error("[campaigns] leave: read failed:", readError.code, readError.message);
-      break;
-    }
-    if (!rows || rows.length === 0) break;
-
-    for (const row of rows) {
-      const { error } = await supabase.rpc("update_character", {
-        p_id: row.id,
-        p_expected_version: row.version,
-        p_payload: { campaign_id: null },
-      });
-      if (error) {
-        console.error("[campaigns] leave: detach retryable:", row.id, error.code, error.message);
-      }
-    }
-  }
-
-  // Gate. `count !== 0` and not `if (count)`: PostgREST types count as
-  // `number | null`, and a null count is falsy — writing `if (count)` would fall
-  // through to the membership delete and produce the orphan state this exists to
-  // prevent. Treating null as failure is the correct bias.
-  const { count, error: countError } = await supabase
-    .from("characters")
-    .select("id", { count: "exact", head: true })
-    .eq("owner_id", user.id)
-    .eq("campaign_id", campaignId);
-
-  if (countError || count !== 0) {
-    console.error(
-      "[campaigns] leave: detach incomplete, membership kept:",
-      campaignId,
-      count,
-      countError?.code,
-      countError?.message,
-    );
-    return {
-      ok: false,
-      message: "Couldn't detach all your characters. Nothing was changed — please try again.",
-    };
-  }
-
+  // The membership FK clears campaign_id and revokes the GM's character access.
   const { error: deleteError } = await supabase
     .from("campaign_members")
     .delete()

@@ -65,8 +65,8 @@ export function CampaignControls({
               </>
             ) : (
               <>
-                Leaving detaches your characters from this campaign first, so the GM
-                loses access to them.
+                Leaving detaches your characters from this campaign, so the GM loses
+                access to them.
               </>
             )}
           </p>
