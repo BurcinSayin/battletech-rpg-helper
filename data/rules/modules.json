@@ -429,7 +429,8 @@
             "Career/Lawyer",
             "Career/Management",
             "Career/Mangement",
-            "Career/Soldier"
+            "Career/Soldier",
+            "Career/Technician"
           ],
           "candidatesSource": "CreateSubSkillList(Career)",
           "xp": 10,
@@ -3545,7 +3546,8 @@
             "Career/Lawyer",
             "Career/Management",
             "Career/Mangement",
-            "Career/Soldier"
+            "Career/Soldier",
+            "Career/Technician"
           ],
           "candidatesSource": "CreateSubSkillList(Career)",
           "xp": 15,
@@ -6862,7 +6864,8 @@
                   "Career/Lawyer",
                   "Career/Management",
                   "Career/Mangement",
-                  "Career/Soldier"
+                  "Career/Soldier",
+                  "Career/Technician"
                 ],
                 "candidatesSource": "CreateSubSkillList(Career)",
                 "xp": 50,
@@ -51266,6 +51269,10 @@
                 {
                   "kind": "skill",
                   "value": "Career/Soldier"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Technician"
                 }
               ],
               "xp": 15,
@@ -52479,6 +52486,10 @@
                 {
                   "kind": "skill",
                   "value": "Career/Soldier"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Technician"
                 }
               ],
               "xp": 10,
@@ -62733,6 +62744,10 @@
                 {
                   "kind": "skill",
                   "value": "Career/Soldier"
+                },
+                {
+                  "kind": "skill",
+                  "value": "Career/Technician"
                 }
               ],
               "xp": 15,
@@ -72982,6 +72997,10 @@
                     {
                       "kind": "skill",
                       "value": "Career/Soldier"
+                    },
+                    {
+                      "kind": "skill",
+                      "value": "Career/Technician"
                     }
                   ],
                   "xp": 50,

@@ -41,6 +41,19 @@ const xp: XpSummary = {
 
 const noWarnings: CatalogWarnings = { skills: [], traits: [] };
 
+function skillMetrics(name: string) {
+  const row = within(screen.getByText(name).closest("li")!);
+  const level = Number(row.getByText(/^Lvl \d+$/).textContent!.slice(4));
+  const [complexity, targetNumber] = row
+    .getByText(/^(SB|CB|SA|CA|unknown)\//)
+    .textContent!.split("/");
+  return {
+    level,
+    complexity,
+    targetNumber: targetNumber ? Number(targetNumber) : undefined,
+  };
+}
+
 describe("CharacterSheet", () => {
   it("renders name, affiliation and vitals from scalars", () => {
     const draft = draftWith({
@@ -92,7 +105,7 @@ describe("CharacterSheet", () => {
   });
 
   it.each(["Edit", "Import/Cancel"] as const)(
-    "shows derived levels and raw XP in sorted, expandable rows with %s actions",
+    "preserves XP while sorting and expanding derived skill rows with %s actions",
     (actionMode) => {
       const skills = [24, 80, 30, 570, -10, 120, 50].map((value, i) => ({
         name: `Career/Skill${i}`,
@@ -128,11 +141,11 @@ describe("CharacterSheet", () => {
           .map((row) => row.firstElementChild?.textContent);
         expect(names).toEqual(indices.map((i) => skills[i].name));
         indices.forEach((index, position) => {
-          const row = within(
-            screen.getByText(skills[index].name).closest("li")!,
-          );
-          expect(row.getByText(`Level ${levels[position]}`)).toBeTruthy();
-          expect(row.getByText(`${skills[index].xp} XP`)).toBeTruthy();
+          expect(skillMetrics(skills[index].name)).toEqual({
+            level: levels[position],
+            complexity: "SB",
+            targetNumber: 7,
+          });
         });
       };
       assertRows([3, 5, 1, 6, 2], [10, 4, 3, 2, 1]);
@@ -174,37 +187,40 @@ describe("CharacterSheet", () => {
       />
     );
     const { rerender } = render(sheet(30, []));
-    const assertMetrics = (level: number, rawXp: number) => {
-      const row = within(screen.getByText("Career/Soldier").closest("li")!);
-      expect(row.getByText(`Level ${level}`)).toBeTruthy();
-      expect(row.getByText(`${rawXp} XP`)).toBeTruthy();
+    const assertMetrics = (level: number) => {
+      expect(skillMetrics("Career/Soldier")).toEqual({
+        level,
+        complexity: "SB",
+        targetNumber: 7,
+      });
     };
-    assertMetrics(1, 30);
+    assertMetrics(1);
     rerender(sheet(30, [{ name: "Slow Learner", xp: -300 }]));
-    assertMetrics(0, 30);
+    assertMetrics(0);
     rerender(
       sheet(30, [
         { name: "Slow Learner", xp: -300 },
         { name: "Fast Learner", xp: 300 },
       ]),
     );
-    assertMetrics(1, 30);
+    assertMetrics(1);
     rerender(sheet(80, []));
-    assertMetrics(3, 80);
+    assertMetrics(3);
   });
 
   it.each([
-    ["Acting", 30, "CB"],
-    ["Career/Soldier", 80, "SB"],
-    ["Technician/BattleMech", 120, "CA"],
-    ["Art", 80, "CB"],
-    ["Art", 120, "CA"],
-    ["Martial Arts", 120, "SA"],
-    ["Custom skill", 30, "unknown"],
-    ["constructor", 30, "unknown"],
+    ["Acting", 30, 1, "CB", 8],
+    ["Career/Soldier", 80, 3, "SB", 7],
+    ["Technician/Weapons", 120, 4, "CA", 9],
+    ["Art", 80, 3, "CB", 8],
+    ["Art", 120, 4, "CA", 9],
+    ["Martial Arts", 80, 3, "SB", 7],
+    ["Martial Arts", 120, 4, "SA", 8],
+    ["Custom skill", 30, 1, "unknown", undefined],
+    ["constructor", 30, 1, "unknown", undefined],
   ])(
-    "shows rule-book complexity for %s at %i XP",
-    (name, rawXp, complexity) => {
+    "derives level and rulebook metadata for %s at %i XP",
+    (name, rawXp, level, complexity, targetNumber) => {
       render(
         <CharacterSheet
           draft={draftWith({ skills: [{ name, xp: rawXp }] })}
@@ -212,19 +228,20 @@ describe("CharacterSheet", () => {
           warnings={noWarnings}
         />,
       );
-      const row = within(screen.getByText(name).closest("li")!);
-      expect(row.getByText(`Complexity ${complexity}`)).toBeTruthy();
-      expect(row.getByText(`${rawXp} XP`)).toBeTruthy();
+      expect(skillMetrics(name)).toEqual({ level, complexity, targetNumber });
     },
   );
 
-  it("updates tiered complexity when traits change the derived level", () => {
+  it("updates both complexity and target number across the learner-adjusted tier boundary", () => {
     const draft = draftWith({ skills: [{ name: "Art", xp: 100 }] });
     const { rerender } = render(
       <CharacterSheet draft={draft} xp={xp} warnings={noWarnings} />,
     );
-    expect(screen.getByText("Level 3")).toBeTruthy();
-    expect(screen.getByText("Complexity CB")).toBeTruthy();
+    expect(skillMetrics("Art")).toEqual({
+      level: 3,
+      complexity: "CB",
+      targetNumber: 8,
+    });
     rerender(
       <CharacterSheet
         draft={{ ...draft, traits: [{ name: "Fast Learner", xp: 300 }] }}
@@ -232,8 +249,17 @@ describe("CharacterSheet", () => {
         warnings={noWarnings}
       />,
     );
-    expect(screen.getByText("Level 4")).toBeTruthy();
-    expect(screen.getByText("Complexity CA")).toBeTruthy();
+    expect(skillMetrics("Art")).toEqual({
+      level: 4,
+      complexity: "CA",
+      targetNumber: 9,
+    });
+    rerender(<CharacterSheet draft={draft} xp={xp} warnings={noWarnings} />);
+    expect(skillMetrics("Art")).toEqual({
+      level: 3,
+      complexity: "CB",
+      targetNumber: 8,
+    });
   });
 
   it("renders traits with signed xp coloring and a warning banner", () => {
