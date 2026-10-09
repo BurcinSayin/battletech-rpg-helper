@@ -85,12 +85,23 @@ One of the project's primary goals is **byte-compatible round-trip fidelity** wi
    ```
 
 3. **Set up local environment variables**:
-   Create a `.env.local` file in the root directory:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-   SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+   From the repository root, copy the template to `.env.local`. If `.env.local` already exists, edit its values instead of overwriting it.
+
+   Bash:
+   ```bash
+   cp .env.example .env.local
    ```
+
+   Windows PowerShell:
+   ```powershell
+   Copy-Item .env.example .env.local
+   ```
+
+   Fill in `BT_CHARGEN_SUPABASE_URL` with your Supabase project's URL and `NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY` with the public anon key from that same project.
+
+   `next.config.ts` exposes the non-secret `BT_CHARGEN_SUPABASE_URL` to the browser at build time despite its lack of a `NEXT_PUBLIC_` prefix. The anon key is also public by design; Row Level Security (RLS) protects data. After changing these values, restart the development server and rebuild deployed bundles.
+
+   `BT_CHARGEN_SUPABASE_SERVICE_ROLE_KEY` is an optional server-only secret. Ordinary app development does not require it; leave it blank. Never prefix it with `NEXT_PUBLIC_` or add it to Next's `env` mapping.
 
 4. **Ingest Rules Data**:
    Convert the raw game tables into static typed JSON:
