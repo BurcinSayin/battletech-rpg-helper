@@ -3,7 +3,12 @@
 import { useState, type ReactNode } from "react";
 import type { BtccDraft } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
-import { ATTRIBUTE_KEYS, skillLevel } from "@/lib/characters";
+import {
+  ATTRIBUTE_KEYS,
+  attributeLevel,
+  attributeLinkModifier,
+  skillLevel,
+} from "@/lib/characters";
 import { findSkill, findTrait, resolveSkillName } from "@/lib/rules/load";
 import { skillComplexity, skillTargetNumber } from "@/lib/rules/skill-complexity";
 import { CatalogWarningBanner } from "./warnings";
@@ -89,33 +94,40 @@ export function CharacterSheet({
           </Panel>
 
           <Panel title="Attributes">
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2">
               {ATTRIBUTE_KEYS.map((key) => {
-                const value = draft.attrs[key] ?? 100;
-                const pct = Math.min(100, Math.max(0, (value / 300) * 100));
+                const level = attributeLevel(draft.attrs[key]);
+                const modifier = attributeLinkModifier(level);
                 return (
                   <div
                     key={key}
-                    className="rounded-md border border-hud-line bg-hud-raised p-3"
+                    className="rounded-md border border-hud-amber/60 bg-hud-raised p-3"
                   >
-                    <div className="flex items-baseline justify-between">
-                      <span className="font-mono text-xs uppercase tracking-widest text-hud-muted">
-                        {key}
-                      </span>
-                      <span className="font-mono text-lg text-hud-text">
-                        {value}
-                      </span>
-                    </div>
-                    <div className="mt-2 h-1 overflow-hidden rounded-full bg-hud-bg">
-                      <div
-                        className="h-full bg-hud-amber/70"
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
+                    <h3 className="font-mono text-base font-semibold uppercase tracking-widest text-hud-amber">
+                      {key}
+                    </h3>
+                    <dl className="mt-2 flex items-baseline justify-between gap-1">
+                      <div className="flex items-baseline gap-1">
+                        <dt className="text-xs text-hud-muted">LVL</dt>
+                        <dd className="font-mono text-sm text-hud-text">
+                          {level === null ? "N/A" : level}
+                        </dd>
+                      </div>
+                      <div className="flex items-baseline gap-1">
+                        <dt className="text-xs text-hud-muted">MOD</dt>
+                        <dd className="font-mono text-sm text-hud-text">
+                          {modifier === null ? "N/A" : signed(modifier)}
+                        </dd>
+                      </div>
+                    </dl>
                   </div>
                 );
               })}
             </div>
+            <p className="mt-3 text-xs text-hud-muted">
+              Levels are unavailable when attribute XP is missing. Link Modifiers
+              are undefined below Level 1.
+            </p>
           </Panel>
         </div>
 

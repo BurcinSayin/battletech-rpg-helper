@@ -348,6 +348,9 @@ export function CharacterEditor({
           </Panel>
 
           <Panel title="Attributes">
+            <p className="mb-3 text-xs text-hud-muted">
+              Raw attribute XP (100 XP per level).
+            </p>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {ATTRIBUTE_KEYS.map((key) => (
                 <Controller

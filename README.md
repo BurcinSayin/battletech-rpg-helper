@@ -61,6 +61,12 @@ One of the project's primary goals is **byte-compatible round-trip fidelity** wi
 - **Importing**: Parsed entirely client-side. The file is validated against the catalog rules, translating attributes, traits, and skills into application state.
 - **Exporting**: Regenerates the `.btcc` format using desktop key order, formatting, and notes.
 
+### Attribute display
+
+Saved character sheets and import previews show attribute **Level** (`floor(XP / 100)`) and signed **Link Modifier**, including `+0`, instead of raw attribute XP. Edit mode retains accumulated XP inputs (`100 XP per level`); derived values never replace stored XP or alter `.btcc` serialization.
+
+Missing attribute XP displays `N/A` for both values. Zero and negative levels remain visible, with Link Modifier `N/A` below Level 1. The modifier is −2 at Level 1, −1 at Levels 2–3, +0 at 4–6, +1 at 7–9, +2 at 10, and `floor(level / 3)` at 11 and above.
+
 ---
 
 ## 🚀 Getting Started

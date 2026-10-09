@@ -10,6 +10,7 @@ export {
   type XpSummary,
 } from "./xp";
 export { skillLevel } from "./skill-level";
+export { attributeLevel, attributeLinkModifier } from "./attribute-level";
 export {
   rowToDraft,
   draftToColumns,

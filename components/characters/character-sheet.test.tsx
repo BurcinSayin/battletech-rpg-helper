@@ -8,6 +8,7 @@ import {
   within,
 } from "@testing-library/react";
 import { emptyDraft } from "@/lib/btcc/types";
+import { serializeBtcc } from "@/lib/btcc/serialize";
 import type { BtccDraft, BtccRow, BtccScalars } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
 import { CharacterSheet } from "./character-sheet";
@@ -54,7 +55,85 @@ function skillMetrics(name: string) {
   };
 }
 
+function attributeMetrics(name: string) {
+  const card = within(
+    screen.getByRole("heading", { name, level: 3 }).parentElement!,
+  );
+  return {
+    level: card.getByText("LVL").nextElementSibling!.textContent,
+    modifier: card.getByText("MOD").nextElementSibling!.textContent,
+  };
+}
+
 describe("CharacterSheet", () => {
+  it("shows derived attributes without changing stored XP or desktop serialization", () => {
+    const draft = draftWith({
+      attrs: {
+        STR: 750,
+        BOD: 100,
+        RFL: 200,
+        DEX: 400,
+        INT: 1000,
+        WIL: 1100,
+        CHA: 1200,
+        EDG: 99,
+        UNKNOWN: 1234,
+      },
+    });
+    const original = structuredClone(draft);
+    const serialized = serializeBtcc(draft);
+    render(<CharacterSheet draft={draft} xp={xp} warnings={noWarnings} />);
+
+    for (const [name, level, modifier] of [
+      ["STR", "7", "+1"],
+      ["BOD", "1", "-2"],
+      ["RFL", "2", "-1"],
+      ["DEX", "4", "+0"],
+      ["INT", "10", "+2"],
+      ["WIL", "11", "+3"],
+      ["CHA", "12", "+4"],
+      ["EDG", "0", "N/A"],
+    ]) {
+      expect(attributeMetrics(name)).toEqual({ level, modifier });
+    }
+    const panel = within(
+      screen.getByRole("heading", { name: "// Attributes" }).closest("section")!,
+    );
+    expect(panel.queryByText("750")).toBeNull();
+    expect(panel.queryByText("XP", { selector: "dt" })).toBeNull();
+    expect(draft).toEqual(original);
+    expect(serializeBtcc(draft)).toBe(serialized);
+  });
+
+  it("distinguishes missing XP from zero and negative levels", () => {
+    render(
+      <CharacterSheet
+        draft={draftWith({ attrs: { BOD: 0, RFL: -1 } })}
+        xp={xp}
+        warnings={noWarnings}
+      />,
+    );
+    expect(attributeMetrics("BOD")).toEqual({ level: "0", modifier: "N/A" });
+    expect(attributeMetrics("RFL")).toEqual({ level: "-1", modifier: "N/A" });
+    for (const name of ["STR", "DEX", "INT", "WIL", "CHA", "EDG"]) {
+      expect(attributeMetrics(name)).toEqual({ level: "N/A", modifier: "N/A" });
+    }
+  });
+
+  it("updates derived attributes when XP changes or becomes missing", () => {
+    const sheet = (attrs: Record<string, number>) => (
+      <CharacterSheet draft={draftWith({ attrs })} xp={xp} warnings={noWarnings} />
+    );
+    const { rerender } = render(sheet({ STR: 399 }));
+    expect(attributeMetrics("STR")).toEqual({ level: "3", modifier: "-1" });
+    rerender(sheet({ STR: 400 }));
+    expect(attributeMetrics("STR")).toEqual({ level: "4", modifier: "+0" });
+    rerender(sheet({ STR: 750 }));
+    expect(attributeMetrics("STR")).toEqual({ level: "7", modifier: "+1" });
+    rerender(sheet({}));
+    expect(attributeMetrics("STR")).toEqual({ level: "N/A", modifier: "N/A" });
+  });
+
   it("renders name, affiliation and vitals from scalars", () => {
     const draft = draftWith({
       scalars: {
