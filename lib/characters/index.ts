@@ -11,6 +11,7 @@ export {
 } from "./xp";
 export { skillLevel } from "./skill-level";
 export { attributeLevel, attributeLinkModifier } from "./attribute-level";
+export { traitLevel, traitLevels } from "./trait-level";
 export {
   rowToDraft,
   draftToColumns,

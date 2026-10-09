@@ -396,6 +396,10 @@ Three clamp entries do something other than bound a range, and a port that copie
 
 This function is also what feeds the C-Bill lookup: `mainwindow.cpp:862` calls it for `Wealth`, so the money table in §3.1 is indexed by a **clamped** level — and therefore by a **truncated** one. See §3.1 for what that costs.
 
+**Web-port display (issue #62).** Saved-character sheets and import previews use `traitLevel(name, xp)` / `traitLevels(rows)` from `@/lib/characters`, not the unsafe desktop clamps above. Canonical `tp_score` values generate required, sorted integer `tp_levels` metadata: fixed costs, inclusive ranges, or discrete alternatives (Natural Aptitude remains `[3, 5]`). The attained tier is the largest same-sign legal magnitude funded by `Math.trunc(xp / 100)`; underfunded, wrong-sign, and zero-only traits show `0 TP · Inactive`. Unknown/custom traits use the signed truncated amount without inferred limits.
+
+When both explicit catalog opponents are present, their raw signed XP is summed before truncation or caps. The effective level appears only on the first original row of the surviving canonical side; canceled counterparts and duplicate aliases remain visible but inactive. A missing counterpart leaves rows independent. Original names, row order, and XP are never mutated. Editing, XP totals, saves, desktop serialization, and raw-XP-based skill modifiers retain their existing behavior; TP is derived, never persisted.
+
 ### 5.3 Skill thresholds, and the Fast/Slow Learner multiplier
 
 `MainWindow::CheckSkillLvl(int number)` (`mainwindow.cpp:1851-1919`) converts skill XP to a level through eleven thresholds scaled by a global multiplier. **Unlike §5.2's, the `qFloor` here does real work:** `Skillmultiplier` is a `double` (`mainwindow.h:101`), so `30 * Skillmultiplier` is a genuine floating-point product and `qFloor` is what converts it to an integer threshold. Same function name, different situation — do not carry §5.2's truncation caveat across.

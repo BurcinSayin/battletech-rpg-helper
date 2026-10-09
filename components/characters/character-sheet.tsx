@@ -8,6 +8,7 @@ import {
   attributeLevel,
   attributeLinkModifier,
   skillLevel,
+  traitLevels,
 } from "@/lib/characters";
 import { findSkill, findTrait, resolveSkillName } from "@/lib/rules/load";
 import { skillComplexity, skillTargetNumber } from "@/lib/rules/skill-complexity";
@@ -47,7 +48,10 @@ export function CharacterSheet({
     ? sortedSkills
     : sortedSkills.slice(0, TOP_SKILLS);
   const hiddenCount = sortedSkills.length - TOP_SKILLS;
-  const sortedTraits = [...draft.traits].sort((a, b) => b.xp - a.xp);
+  const levels = traitLevels(draft.traits);
+  const sortedTraits = draft.traits
+    .map((row, index) => ({ row, index, level: levels[index] }))
+    .sort((a, b) => b.row.xp - a.row.xp);
   const spentPct =
     xp.budget > 0
       ? Math.min(100, Math.max(0, (xp.spent / xp.budget) * 100))
@@ -214,12 +218,12 @@ export function CharacterSheet({
               <p className="text-sm text-hud-muted">No traits yet.</p>
             ) : (
               <ul className="flex flex-col gap-1.5">
-                {sortedTraits.map((row, i) => {
+                {sortedTraits.map(({ row, index, level }) => {
                   const meta = findTrait(row.name);
                   const isExpanded = expandedTrait === row.name;
                   return (
                     <li
-                      key={`${row.name}-${i}`}
+                      key={`${row.name}-${index}`}
                       className="flex flex-col gap-1 border-b border-hud-line/40 pb-1.5 last:border-b-0 font-mono text-sm"
                     >
                       <div
@@ -246,10 +250,14 @@ export function CharacterSheet({
                         </div>
                         <span
                           className={
-                            row.xp >= 0 ? "text-hud-green" : "text-hud-red"
+                            level > 0
+                              ? "text-hud-green"
+                              : level < 0
+                                ? "text-hud-red"
+                                : "text-hud-muted"
                           }
                         >
-                          {signed(row.xp)}
+                          {level === 0 ? "0 TP · Inactive" : `${signed(level)} TP`}
                         </span>
                       </div>
                       {isExpanded && meta && (

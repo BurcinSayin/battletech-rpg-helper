@@ -33,9 +33,26 @@ export interface CanonicalTrait {
   category: string;
   trait_type: string;
   tp_score: string;
+  tp_levels: number[];
   description: string;
   page: string;
   sub_traits: string[];
+}
+
+/** Parse only the supported canonical TP score forms, never inferred costs. */
+export function parseTraitPointLevels(score: string): number[] {
+  const normalized = score.replace(/[–−]/g, "-").trim();
+  const range = /^([+-]?\d+)\s+to\s+([+-]?\d+)\s+TP$/.exec(normalized);
+  if (range) {
+    const low = Math.min(Number(range[1]), Number(range[2]));
+    const high = Math.max(Number(range[1]), Number(range[2]));
+    return Array.from({ length: high - low + 1 }, (_, i) => low + i);
+  }
+  if (/^[+-]?\d+(?:\s+or\s+[+-]?\d+)*\s+TP$/.test(normalized)) {
+    const levels = normalized.replace(/\s+TP$/, "").split(/\s+or\s+/).map(Number);
+    return [...new Set(levels)].sort((a, b) => a - b);
+  }
+  throw new Error(`Unsupported trait TP score: ${score}`);
 }
 
 function writeJson(name: string, data: unknown): void {
@@ -74,6 +91,7 @@ export function parseRulebookTraits(): {
       category: item.category.trim(),
       trait_type: item.trait_type.trim(),
       tp_score: item.tp_score.trim(),
+      tp_levels: parseTraitPointLevels(item.tp_score),
       description: item.description.trim(),
       page: `p.${item.source_page}`,
       sub_traits: subTraits,

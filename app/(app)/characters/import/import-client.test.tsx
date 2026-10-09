@@ -70,13 +70,36 @@ describe("ImportClient", () => {
     expect(within(banner).getByText(/Totally Made Up Trait/)).toBeTruthy();
   });
 
-  it("sends the raw file text to importCharacter on confirm", async () => {
+  it("previews derived trait TP and imports the unchanged raw file text", async () => {
     importCharacter.mockResolvedValue({ ok: false, kind: "error", message: "" });
-    const content = readFixture("lisa.btcc");
+    const content =
+      "name:Trait Preview\ntrait:Rank=270\ntrait:Compulsion=-125\ntrait:Toughness=299\ntrait:Custom Trait=270\n";
     render(<ImportClient />);
-    selectFile(makeFile(content));
+    selectFile(makeFile(content, "trait-preview.btcc"));
 
-    fireEvent.click(await screen.findByRole("button", { name: "Import character" }));
+    const importButton = await screen.findByRole("button", {
+      name: "Import character",
+    });
+    expect(screen.getByRole("heading", { name: "Trait Preview" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Cancel" })).toBeTruthy();
+
+    const panel = within(
+      screen.getByRole("heading", { name: "// Traits" }).closest("section")!,
+    );
+    expect(panel.getByText("4 total")).toBeTruthy();
+    expect(panel.getAllByRole("listitem")).toHaveLength(4);
+    for (const [name, level] of [
+      ["Rank", "+2 TP"],
+      ["Compulsion", "-1 TP"],
+      ["Toughness", "0 TP · Inactive"],
+      ["Custom Trait", "+2 TP"],
+    ]) {
+      const row = within(panel.getByText(name, { exact: true }).closest("li")!);
+      expect(row.getByText(level, { exact: true })).toBeTruthy();
+    }
+    expect(panel.queryByText(/270|-125|299/)).toBeNull();
+
+    fireEvent.click(importButton);
     await waitFor(() => expect(importCharacter).toHaveBeenCalledWith(content));
   });
 

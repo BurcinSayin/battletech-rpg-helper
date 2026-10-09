@@ -219,6 +219,97 @@ function renderSnapshot(overrides: Partial<EditorProps> = {}) {
   };
 }
 
+describe("CharacterEditor — trait XP and displayed levels", () => {
+  function traitXp(name: string) {
+    const panel = screen
+      .getByRole("heading", { name: "// Traits" })
+      .closest("section")!;
+    const row = within(panel).getByDisplayValue(name).parentElement!;
+    return within(row).getByRole("spinbutton", {
+      name: "XP",
+    }) as HTMLInputElement;
+  }
+
+  function expectTraitLevels() {
+    const panel = screen
+      .getByRole("heading", { name: "// Traits" })
+      .closest("section")!;
+    const rank = within(panel).getByText("Rank").closest("li")!;
+    const compulsion = within(panel).getByText("Compulsion").closest("li")!;
+    expect(within(rank).getByText("+2 TP", { exact: true })).toBeTruthy();
+    expect(within(compulsion).getByText("-1 TP", { exact: true })).toBeTruthy();
+  }
+
+  it("retains exact signed XP when entering edit and canceling pristine or changed traits", () => {
+    const draft = namedDraft("Trait Pilot");
+    draft.traits = [
+      { name: "Rank", xp: 270 },
+      { name: "Compulsion", xp: -125 },
+    ];
+    renderSnapshot({ draft });
+    expectTraitLevels();
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expect(traitXp("Rank").value).toBe("270");
+    expect(traitXp("Compulsion").value).toBe("-125");
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    expectTraitLevels();
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expect(traitXp("Rank").value).toBe("270");
+    expect(traitXp("Compulsion").value).toBe("-125");
+
+    fireEvent.change(traitXp("Rank"), { target: { value: "299" } });
+    fireEvent.change(traitXp("Compulsion"), { target: { value: "-199" } });
+    expect(traitXp("Rank").value).toBe("299");
+    expect(traitXp("Compulsion").value).toBe("-199");
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    expectTraitLevels();
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expect(traitXp("Rank").value).toBe("270");
+    expect(traitXp("Compulsion").value).toBe("-125");
+    expect(saveCharacter).not.toHaveBeenCalled();
+  });
+
+  it("saves exact signed XP and preserves it after the refreshed snapshot displays TP", async () => {
+    const draft = namedDraft("Trait Pilot");
+    draft.traits = [
+      { name: "Rank", xp: 100 },
+      { name: "Compulsion", xp: -100 },
+    ];
+    const editor = renderSnapshot({ draft });
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    fireEvent.change(traitXp("Rank"), { target: { value: "270" } });
+    fireEvent.change(traitXp("Compulsion"), { target: { value: "-125" } });
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+
+    await screen.findByRole("button", { name: "Refreshing…" });
+    expect(saveCharacter).toHaveBeenCalledTimes(1);
+    expect(saveCharacter).toHaveBeenCalledWith(
+      "c1",
+      1,
+      expect.objectContaining({
+        traits: [
+          { name: "Rank", xp: 270 },
+          { name: "Compulsion", xp: -125 },
+        ],
+      }),
+      { id: CAMP.id },
+    );
+    expect(screen.queryByRole("button", { name: "Edit" })).toBeNull();
+
+    const savedDraft = namedDraft("Trait Pilot");
+    savedDraft.traits = [
+      { name: "Rank", xp: 270 },
+      { name: "Compulsion", xp: -125 },
+    ];
+    editor.receive(2, "Trait Pilot", { draft: savedDraft });
+    expectTraitLevels();
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expect(traitXp("Rank").value).toBe("270");
+    expect(traitXp("Compulsion").value).toBe("-125");
+  });
+});
+
 function changeName(name: string) {
   fireEvent.change(screen.getByRole("textbox", { name: "Name" }), {
     target: { value: name },

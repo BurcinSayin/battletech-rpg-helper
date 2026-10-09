@@ -11,6 +11,7 @@ import { emptyDraft } from "@/lib/btcc/types";
 import { serializeBtcc } from "@/lib/btcc/serialize";
 import type { BtccDraft, BtccRow, BtccScalars } from "@/lib/btcc/types";
 import type { CatalogWarnings, XpSummary } from "@/lib/characters";
+import { computeXp } from "@/lib/characters";
 import { CharacterSheet } from "./character-sheet";
 
 afterEach(cleanup);
@@ -341,31 +342,62 @@ describe("CharacterSheet", () => {
     });
   });
 
-  it("renders traits with signed xp coloring and a warning banner", () => {
-    const draft = draftWith({
-      traits: [
-        { name: "Good Reputation", xp: 100 },
-        { name: "Unlucky", xp: -50 },
-      ],
-    });
-    const warnings: CatalogWarnings = {
-      skills: ["MedTech"],
-      traits: ["Custom Trait"],
-    };
-    render(
-      <CharacterSheet
-        draft={draft}
-        xp={xp}
-        warnings={warnings}
-        onEdit={() => {}}
-      />,
-    );
+  it.each(["Edit", "Import/Cancel"] as const)(
+    "shows attained TP and preserves exact XP with %s actions",
+    (actionMode) => {
+      const draft = draftWith({
+        traits: [
+          { name: "Rank", xp: 270 },
+          { name: "Compulsion", xp: -125 },
+          { name: "Toughness", xp: 299 },
+          { name: "Custom Trait", xp: 270 },
+        ],
+      });
+      const original = structuredClone(draft);
+      const totals = computeXp(draft);
+      const bytes = serializeBtcc(draft);
+      const warnings: CatalogWarnings = { skills: ["MedTech"], traits: ["Custom Trait"] };
+      const sheet = (value: BtccDraft) => (
+        <CharacterSheet draft={value} xp={computeXp(value)} warnings={warnings}
+          actions={actionMode === "Import/Cancel" ? <><button>Import character</button><button>Cancel</button></> : undefined} />
+      );
+      const { rerender } = render(sheet(draft));
+      const panel = within(screen.getByRole("heading", { name: "// Traits" }).closest("section")!);
+      const expectLevel = (name: string, label: string) => {
+        expect(within(panel.getByText(name).closest("li")!).getByText(label)).toBeTruthy();
+      };
+      expectLevel("Rank", "+2 TP");
+      expectLevel("Compulsion", "-1 TP");
+      expectLevel("Toughness", "0 TP · Inactive");
+      expectLevel("Custom Trait", "+2 TP");
+      expect(panel.getByText("4 total")).toBeTruthy();
+      expect(panel.getAllByRole("listitem").map((row) => row.firstElementChild!.firstElementChild!.firstElementChild!.textContent))
+        .toEqual(["Toughness", "Rank", "Custom Trait", "Compulsion"]);
+      for (const value of ["+270", "-125", "+299", "270", "299"]) expect(panel.queryByText(value)).toBeNull();
+      expect(screen.getByText(/2 names not in catalog/)).toBeTruthy();
+      expect(screen.getByText(/MedTech, Custom Trait/)).toBeTruthy();
+      fireEvent.click(panel.getByText("Rank"));
+      const rank = within(panel.getByText("Rank").closest("li")!);
+      expect(rank.getByText("+1 to +15 TP")).toBeTruthy();
+      expectLevel("Rank", "+2 TP");
+      fireEvent.click(panel.getByText("Rank"));
+      expect(draft).toEqual(original);
+      expect(computeXp(draft)).toEqual(totals);
+      expect(serializeBtcc(draft)).toBe(bytes);
+      expect(screen.getByRole("button", { name: actionMode === "Edit" ? "Edit" : "Import character" })).toBeTruthy();
+      if (actionMode === "Import/Cancel") expect(screen.getByRole("button", { name: "Cancel" })).toBeTruthy();
 
-    expect(screen.getByText("+100")).toBeTruthy();
-    expect(screen.getByText("-50")).toBeTruthy();
-    expect(screen.getByText(/2 names not in catalog/)).toBeTruthy();
-    expect(screen.getByText(/MedTech, Custom Trait/)).toBeTruthy();
-  });
+      rerender(sheet({ ...draft, traits: draft.traits.map((row) => row.name === "Toughness" ? { ...row, xp: 300 } : row) }));
+      expectLevel("Toughness", "+3 TP");
+      rerender(sheet({ ...draft, traits: [{ name: "Glass Jaw", xp: -300 }, { name: "Toughness", xp: 650 }] }));
+      expectLevel("Toughness", "+3 TP");
+      expectLevel("Glass Jaw", "0 TP · Inactive");
+      expect(panel.getByText("2 total")).toBeTruthy();
+      expect(draft).toEqual(original);
+      expect(computeXp(draft)).toEqual(totals);
+      expect(serializeBtcc(draft)).toBe(bytes);
+    },
+  );
 
   it("invokes onEdit when the Edit button is clicked", () => {
     const onEdit = vi.fn();

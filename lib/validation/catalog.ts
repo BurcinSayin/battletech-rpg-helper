@@ -31,6 +31,10 @@ export const traitSchema = z.object({
   category: z.string().min(1),
   trait_type: z.string().min(1),
   tp_score: z.string().min(1),
+  tp_levels: z.array(z.number().int()).min(1).refine(
+    (levels) => levels.every((level, i) => i === 0 || levels[i - 1] < level),
+    "Trait TP levels must be strictly ascending and unique",
+  ),
   description: z.string().min(1),
   sub_traits: z.array(z.string()).default([]),
 });
