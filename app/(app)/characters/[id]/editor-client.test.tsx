@@ -11,16 +11,22 @@ import {
 } from "@testing-library/react";
 import { emptyDraft } from "@/lib/btcc";
 import { emptyMech } from "@/lib/mech/schema";
+import { emptyMechDamage, type MechDamage } from "@/lib/mech/damage";
+import type { ApplyMechDamageResult } from "./mech-damage-actions";
 import type { SaveResult } from "@/app/(app)/characters/actions";
 
 // Stub the server action so jsdom never pulls server-only modules, and so we can
 // assert exactly how many arguments the save is called with.
-const { saveCharacter, refresh, realtime } = vi.hoisted(() => ({
-  saveCharacter: vi.fn(),
-  refresh: vi.fn(),
-  realtime: { deliver: null as ((version: number) => void) | null },
-}));
+const { saveCharacter, applyMechDamage, refresh, realtime } = vi.hoisted(
+  () => ({
+    saveCharacter: vi.fn(),
+    applyMechDamage: vi.fn(),
+    refresh: vi.fn(),
+    realtime: { deliver: null as ((version: number) => void) | null },
+  }),
+);
 vi.mock("@/app/(app)/characters/actions", () => ({ saveCharacter }));
+vi.mock("./mech-damage-actions", () => ({ applyMechDamage }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ refresh }) }));
 // Model the hook's version filter without opening a websocket. Each render
 // replaces the delivery callback, just as the real hook updates its refs.
@@ -72,9 +78,86 @@ vi.mock("@/components/characters/mech-tab", () => ({
       </button>
     </div>
   ),
-  MechView: ({ mech }: { mech: { chassis: string } | null }) => (
-    <p>{`Mech view: ${mech ? mech.chassis : "none"}`}</p>
+  MechView: ({
+    mech,
+    damage,
+    onDamageChange,
+    controlsDisabled,
+  }: {
+    mech: { chassis: string } | null;
+    damage?: MechDamage;
+    onDamageChange?: (next: MechDamage) => void;
+    controlsDisabled?: boolean;
+  }) => (
+    <div>
+      <p>{`Mech view: ${mech ? mech.chassis : "none"}`}</p>
+      {mech && damage && (
+        <>
+          <p>{`Heat: ${damage.heat}; pilot hits: ${damage.pilotHits}`}</p>
+          {onDamageChange && (
+            <button
+              type="button"
+              disabled={controlsDisabled}
+              onClick={() =>
+                onDamageChange({ ...damage, heat: damage.heat + 1 })
+              }
+            >
+              Increase heat
+            </button>
+          )}
+        </>
+      )}
+    </div>
   ),
+}));
+
+vi.mock("@/components/characters/mech-damage-bar", () => ({
+  MechDamageBar: ({
+    pending,
+    applying,
+    stale,
+    error,
+    canReset,
+    onApply,
+    onDiscard,
+    onReset,
+  }: {
+    pending: boolean;
+    applying: boolean;
+    stale: boolean;
+    error: string | null;
+    canReset: boolean;
+    onApply: () => void;
+    onDiscard: () => void;
+    onReset: () => void;
+  }) => (
+    <div data-testid="damage-bar">
+      {stale ? (
+        <p role="status">Damage draft is stale</p>
+      ) : applying ? (
+        <p role="status">Applying damage</p>
+      ) : null}
+      {error && <p role="alert">{error}</p>}
+      <button
+        type="button"
+        disabled={!pending || applying || stale}
+        onClick={onApply}
+      >
+        Apply damage
+      </button>
+      <button type="button" disabled={!pending || applying} onClick={onDiscard}>
+        Discard damage changes
+      </button>
+      <button
+        type="button"
+        disabled={!canReset || applying || stale}
+        onClick={onReset}
+      >
+        Reset all damage
+      </button>
+    </div>
+  ),
+  MechDamageResetWarning: () => <p role="status">Mech damage reset warning</p>,
 }));
 
 const CAMP = {
@@ -89,11 +172,17 @@ const CAMP_B = {
 
 beforeEach(() => {
   saveCharacter.mockResolvedValue({ ok: true, version: 2 });
+  applyMechDamage.mockImplementation(async (_id, _version, damage) => ({
+    ok: true,
+    version: 2,
+    damage,
+  }));
 });
 
 afterEach(() => {
   cleanup();
   saveCharacter.mockReset();
+  applyMechDamage.mockReset();
   refresh.mockReset();
   realtime.deliver = null;
 });
@@ -861,6 +950,324 @@ function expectMechEditor(text: string) {
   expect(screen.getByText(`Mech editor: ${text}`)).toBeTruthy();
 }
 
+describe("CharacterEditor — mech damage batches", () => {
+  function damageButton(name: string) {
+    return screen.getByRole("button", { name }) as HTMLButtonElement;
+  }
+
+  function startDamage(overrides: Partial<EditorProps> = {}) {
+    const editor = renderSnapshot({
+      mech: MECH_A,
+      mechDamage: emptyMechDamage(),
+      ...overrides,
+    });
+    openTab("Mech");
+    fireEvent.click(damageButton("Increase heat"));
+    return editor;
+  }
+
+  it("pins the pending base mech and damage on newer props, while Sheet updates; Discard adopts latest", () => {
+    const editor = startDamage();
+    editor.receive(2, "Remote Pilot", {
+      mech: MECH_B,
+      mechDamage: { ...emptyMechDamage(), heat: 7 },
+    });
+    expect(screen.getByText("Mech view: Atlas")).toBeTruthy();
+    expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    expect(screen.getByRole("status").textContent).toContain("stale");
+    expect(damageButton("Apply damage").disabled).toBe(true);
+    expect(damageButton("Increase heat").disabled).toBe(true);
+    openTab("Sheet");
+    expect(screen.getByRole("heading", { name: "Remote Pilot" })).toBeTruthy();
+    openTab("Mech");
+    fireEvent.click(damageButton("Discard damage changes"));
+    expect(screen.getByText("Mech view: Locust")).toBeTruthy();
+    expect(screen.getByText("Heat: 7; pilot hits: 0")).toBeTruthy();
+    expect(screen.queryByRole("status")).toBeNull();
+    expect(damageButton("Edit").disabled).toBe(false);
+    expect(refresh).not.toHaveBeenCalled();
+    fireEvent.click(damageButton("Increase heat"));
+    expect(screen.getByText("Heat: 8; pilot hits: 0")).toBeTruthy();
+  });
+
+  it("goes stale immediately on an unrelated newer realtime version and refreshes on discard", () => {
+    startDamage();
+    deliverRealtime(3);
+    deliverRealtime(2);
+    expect(refresh).toHaveBeenCalledTimes(2);
+    expect(damageButton("Apply damage").disabled).toBe(true);
+    expect(damageButton("Increase heat").disabled).toBe(true);
+    expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    fireEvent.click(damageButton("Discard damage changes"));
+    expect(refresh).toHaveBeenCalledTimes(3);
+    expect(screen.getByText("Heat: 0; pilot hits: 0")).toBeTruthy();
+  });
+
+  it("retains a conflicted draft with disabled controls until discard and load latest", async () => {
+    applyMechDamage.mockResolvedValueOnce({ ok: false, kind: "conflict" });
+    startDamage();
+    fireEvent.click(damageButton("Apply damage"));
+    await screen.findByText("Damage draft is stale");
+    expect(applyMechDamage).toHaveBeenCalledWith("c1", 1, {
+      ...emptyMechDamage(),
+      heat: 1,
+    });
+    expect(damageButton("Apply damage").disabled).toBe(true);
+    expect(damageButton("Increase heat").disabled).toBe(true);
+    expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    fireEvent.click(damageButton("Discard damage changes"));
+    expect(screen.queryByRole("status")).toBeNull();
+    expect(refresh).toHaveBeenCalledTimes(1);
+  });
+
+  it.each(["invalid", "error"] as const)(
+    "retains the batch and original version after %s, allowing retry",
+    async (kind) => {
+      applyMechDamage.mockResolvedValueOnce({
+        ok: false,
+        kind,
+        message: "Apply failed",
+      });
+      startDamage();
+      fireEvent.click(damageButton("Apply damage"));
+      await screen.findByRole("alert");
+      await waitFor(() =>
+        expect(damageButton("Apply damage").disabled).toBe(false),
+      );
+      expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+      expect(damageButton("Edit").disabled).toBe(true);
+      expect(damageButton("Increase heat").disabled).toBe(false);
+      fireEvent.click(damageButton("Apply damage"));
+      await waitFor(() => expect(applyMechDamage).toHaveBeenCalledTimes(2));
+      expect(applyMechDamage.mock.calls[1][1]).toBe(1);
+    },
+  );
+
+  it("blocks Edit during pending/applying and keeps authoritative own Apply visible until props arrive", async () => {
+    let resolve!: (result: ApplyMechDamageResult) => void;
+    const promise = new Promise<ApplyMechDamageResult>((fulfill) => {
+      resolve = fulfill;
+    });
+    applyMechDamage.mockReturnValueOnce(promise);
+    const editor = startDamage();
+    expect(damageButton("Edit").disabled).toBe(true);
+    const hint = screen.getByText("Apply or discard damage first");
+    expect(hint.id).toBeTruthy();
+    expect(damageButton("Edit").getAttribute("aria-describedby")).toBe(hint.id);
+    fireEvent.click(damageButton("Edit"));
+    expect(screen.queryByRole("button", { name: "Save" })).toBeNull();
+    fireEvent.click(damageButton("Apply damage"));
+    await waitFor(() => expect(applyMechDamage).toHaveBeenCalledTimes(1));
+    expect(damageButton("Increase heat").disabled).toBe(true);
+    expect(damageButton("Discard damage changes").disabled).toBe(true);
+    expect(damageButton("Edit").getAttribute("aria-describedby")).toBe(hint.id);
+    const authoritative = { ...emptyMechDamage(), heat: 2, pilotHits: 1 };
+    await act(async () => {
+      resolve({ ok: true, version: 2, damage: authoritative });
+      await promise;
+    });
+    expect(screen.getByText("Heat: 2; pilot hits: 1")).toBeTruthy();
+    expect(damageButton("Refreshing…").disabled).toBe(true);
+    expect(damageButton("Apply damage").disabled).toBe(true);
+    expect(refresh).toHaveBeenCalledTimes(1);
+    deliverRealtime(2);
+    editor.receive(1, "Delayed Pilot", { mechDamage: emptyMechDamage() });
+    expect(screen.getByText("Heat: 2; pilot hits: 1")).toBeTruthy();
+    expect(refresh).toHaveBeenCalledTimes(1);
+    editor.receive(2, "Stored Pilot", { mechDamage: authoritative });
+    expect(damageButton("Edit").disabled).toBe(false);
+    expect(damageButton("Edit").hasAttribute("aria-describedby")).toBe(false);
+    expect(screen.queryByText("Apply or discard damage first")).toBeNull();
+    fireEvent.click(damageButton("Edit"));
+    expect(screen.getByRole("button", { name: "Save" })).toBeTruthy();
+  });
+
+  it("adopts a newer snapshot that arrived during own Apply instead of retaining its placeholder", async () => {
+    let resolve!: (result: ApplyMechDamageResult) => void;
+    const promise = new Promise<ApplyMechDamageResult>((fulfill) => {
+      resolve = fulfill;
+    });
+    applyMechDamage.mockReturnValueOnce(promise);
+    const editor = startDamage();
+    fireEvent.click(damageButton("Apply damage"));
+    await waitFor(() => expect(applyMechDamage).toHaveBeenCalled());
+    editor.receive(3, "Newest Pilot", {
+      mech: MECH_B,
+      mechDamage: { ...emptyMechDamage(), pilotHits: 2 },
+    });
+    await act(async () => {
+      resolve({
+        ok: true,
+        version: 2,
+        damage: { ...emptyMechDamage(), heat: 1 },
+      });
+      await promise;
+    });
+    expect(screen.getByText("Mech view: Locust")).toBeTruthy();
+    expect(screen.getByText("Heat: 0; pilot hits: 2")).toBeTruthy();
+    expect(damageButton("Edit").disabled).toBe(false);
+  });
+
+  it.each([
+    { delivery: "props", outcome: "success" },
+    { delivery: "realtime", outcome: "success" },
+    { delivery: "props", outcome: "conflict" },
+    { delivery: "realtime", outcome: "conflict" },
+  ] as const)(
+    "keeps Applying rather than stale when $delivery arrives before the held action settles ($outcome)",
+    async ({ delivery, outcome }) => {
+      let resolve!: (result: ApplyMechDamageResult) => void;
+      const promise = new Promise<ApplyMechDamageResult>((fulfill) => {
+        resolve = fulfill;
+      });
+      applyMechDamage.mockReturnValueOnce(promise);
+      const editor = startDamage();
+      const authoritative = { ...emptyMechDamage(), heat: 2, pilotHits: 1 };
+      fireEvent.click(damageButton("Apply damage"));
+      await screen.findByText("Applying damage");
+      if (delivery === "props") {
+        editor.receive(2, "Stored Pilot", { mechDamage: authoritative });
+      } else {
+        deliverRealtime(2);
+      }
+      expect(screen.getByRole("status").textContent).toBe("Applying damage");
+      expect(screen.queryByText("Damage draft is stale")).toBeNull();
+      expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+      expect(damageButton("Increase heat").disabled).toBe(true);
+      expect(damageButton("Apply damage").disabled).toBe(true);
+      expect(damageButton("Discard damage changes").disabled).toBe(true);
+
+      await act(async () => {
+        resolve(
+          outcome === "success"
+            ? { ok: true, version: 2, damage: authoritative }
+            : { ok: false, kind: "conflict" },
+        );
+        await promise;
+      });
+
+      if (outcome === "conflict") {
+        expect(screen.getByRole("status").textContent).toBe(
+          "Damage draft is stale",
+        );
+        expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+        expect(damageButton("Apply damage").disabled).toBe(true);
+        expect(damageButton("Discard damage changes").disabled).toBe(false);
+      } else {
+        expect(screen.queryByRole("status")).toBeNull();
+        expect(screen.getByText("Heat: 2; pilot hits: 1")).toBeTruthy();
+        expect(screen.queryByText("Heat: 0; pilot hits: 0")).toBeNull();
+        if (delivery === "realtime") {
+          expect(damageButton("Refreshing…").disabled).toBe(true);
+          editor.receive(1, "Older Pilot", { mechDamage: emptyMechDamage() });
+          expect(screen.getByText("Heat: 2; pilot hits: 1")).toBeTruthy();
+          editor.receive(2, "Stored Pilot", { mechDamage: authoritative });
+        }
+        expect(screen.getByText("Heat: 2; pilot hits: 1")).toBeTruthy();
+        expect(damageButton("Edit").disabled).toBe(false);
+      }
+    },
+  );
+
+  it("Reset is a local batch and discard resolves Edit gating", () => {
+    renderSnapshot({
+      mech: MECH_A,
+      mechDamage: { ...emptyMechDamage(), heat: 7, pilotHits: 2 },
+    });
+    openTab("Mech");
+    fireEvent.click(damageButton("Reset all damage"));
+    expect(screen.getByText("Heat: 0; pilot hits: 0")).toBeTruthy();
+    expect(damageButton("Edit").disabled).toBe(true);
+    expect(applyMechDamage).not.toHaveBeenCalled();
+    fireEvent.click(damageButton("Discard damage changes"));
+    expect(screen.getByText("Heat: 7; pilot hits: 2")).toBeTruthy();
+    expect(damageButton("Edit").disabled).toBe(false);
+  });
+
+  it("does not render damage controls/bar without a mech and restores stored pilot hits on attachment", () => {
+    const pilotOnly = { ...emptyMechDamage(), pilotHits: 3 };
+    const editor = renderSnapshot({ mechDamage: pilotOnly });
+    openTab("Mech");
+    expect(screen.getByText("Mech view: none")).toBeTruthy();
+    expect(screen.queryByTestId("damage-bar")).toBeNull();
+    expect(screen.queryByRole("button", { name: "Increase heat" })).toBeNull();
+    editor.receive(2, "Stored Pilot", { mech: MECH_A, mechDamage: pilotOnly });
+    expect(screen.getByText("Heat: 0; pilot hits: 3")).toBeTruthy();
+  });
+
+  it.each([false, true])(
+    "full save never sends stored damage (mech changed: %s)",
+    async (changed) => {
+      renderSnapshot({
+        mech: MECH_A,
+        mechDamage: { ...emptyMechDamage(), heat: 7 },
+      });
+      fireEvent.click(damageButton("Edit"));
+      openTab("Mech");
+      if (changed) fireEvent.click(damageButton("Rename mech"));
+      fireEvent.click(damageButton("Save"));
+      await waitFor(() => expect(saveCharacter).toHaveBeenCalledTimes(1));
+      const call = saveCharacter.mock.calls[0];
+      expect(call).toHaveLength(changed ? 5 : 4);
+      expect(call[2]).not.toHaveProperty("mech_damage");
+      expect(call[2]).not.toHaveProperty("damage");
+      if (changed) expect(call[4]).toEqual({ ...MECH_A, chassis: "Atlas II" });
+      expect(applyMechDamage).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    {
+      damage: { ...emptyMechDamage(), heat: 1 },
+      mech: MECH_A,
+      change: "Rename mech",
+      warning: true,
+    },
+    {
+      damage: {
+        ...emptyMechDamage(),
+        structure: [{ index: 0, max: 10, lost: 0 }],
+      },
+      mech: MECH_A,
+      change: "Remove mech",
+      warning: true,
+    },
+    {
+      damage: { ...emptyMechDamage(), pilotHits: 2 },
+      mech: MECH_A,
+      change: "Rename mech",
+      warning: false,
+    },
+    {
+      damage: emptyMechDamage(),
+      mech: MECH_A,
+      change: "Rename mech",
+      warning: false,
+    },
+    {
+      damage: { ...emptyMechDamage(), pilotHits: 2 },
+      mech: null,
+      change: "Add mech",
+      warning: false,
+    },
+  ])(
+    "shows reset warning only for changed existing base with mech-specific damage ($change, $warning)",
+    ({ damage, mech, change, warning }) => {
+      renderSnapshot({ mech, mechDamage: damage });
+      fireEvent.click(damageButton("Edit"));
+      openTab("Mech");
+      expect(screen.queryByText("Mech damage reset warning")).toBeNull();
+      fireEvent.click(damageButton(change));
+      expect(Boolean(screen.queryByText("Mech damage reset warning"))).toBe(
+        warning,
+      );
+      expect(screen.queryByTestId("damage-bar")).toBeNull();
+      fireEvent.click(damageButton("Cancel"));
+      expect(screen.queryByText("Mech damage reset warning")).toBeNull();
+    },
+  );
+});
+
 describe("CharacterEditor — Mech tab", () => {
   it("renders Sheet and Mech tabs with tablist/tab/tabpanel roles in view mode", () => {
     renderWithMech(MECH_A);
@@ -870,13 +1277,15 @@ describe("CharacterEditor — Mech tab", () => {
     expect(tabs[0].getAttribute("aria-selected")).toBe("true");
     expect(tabs[1].getAttribute("aria-selected")).toBe("false");
     expect(screen.getAllByRole("tabpanel", { hidden: true })).toHaveLength(2);
-    expect(
-      screen.getByRole("heading", { name: "Stored Pilot" }),
-    ).toBeTruthy();
+    expect(screen.getByRole("heading", { name: "Stored Pilot" })).toBeTruthy();
 
     openTab("Mech");
-    expect(screen.getByRole("tab", { name: "Mech" }).getAttribute("aria-selected")).toBe("true");
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    expect(
+      screen.getByRole("tab", { name: "Mech" }).getAttribute("aria-selected"),
+    ).toBe("true");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Atlas",
+    );
     expect(screen.queryByRole("heading", { name: "Stored Pilot" })).toBeNull();
   });
 
@@ -902,9 +1311,13 @@ describe("CharacterEditor — Mech tab", () => {
   it("shows the persisted mech in view mode and brings in a refreshed mech through props", () => {
     const editor = renderWithMech(MECH_A);
     openTab("Mech");
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Atlas",
+    );
     editor.receive(2, "Stored Pilot", { mech: MECH_B });
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Locust");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Locust",
+    );
   });
 
   it("keeps Edit reachable from the Mech tab", () => {
@@ -1003,7 +1416,9 @@ describe("CharacterEditor — Mech tab", () => {
     fireEvent.click(screen.getByRole("button", { name: "Remove mech" }));
     expectMechEditor("none");
     fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Atlas",
+    );
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expectMechEditor("Atlas");
     expect(saveCharacter).not.toHaveBeenCalled();
@@ -1052,10 +1467,14 @@ describe("CharacterEditor — Mech tab", () => {
     );
     fireEvent.click(within(dialog).getByRole("button", { name: "Reload" }));
     expect(refresh).toHaveBeenCalledTimes(1);
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Atlas",
+    );
 
     editor.receive(2, "Stored Pilot", { mech: MECH_B });
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Locust");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Locust",
+    );
   });
 
   it("adopts the saved mech when the refreshed row arrives after a successful save", async () => {
@@ -1068,7 +1487,9 @@ describe("CharacterEditor — Mech tab", () => {
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
     await screen.findByRole("button", { name: "Refreshing…" });
     editor.receive(2, "Stored Pilot", { mech: saved });
-    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas II");
+    expect(screen.getByRole("tabpanel").textContent).toContain(
+      "Mech view: Atlas II",
+    );
     expect(screen.queryByRole("button", { name: "Refreshing…" })).toBeNull();
   });
 

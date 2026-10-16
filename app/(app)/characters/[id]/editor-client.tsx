@@ -28,9 +28,21 @@ import {
   type CharacterFormValues,
 } from "@/lib/characters";
 import type { MechData } from "@/lib/mech/types";
+import {
+  emptyMechDamage,
+  hasMechSpecificDamage,
+  resetMechDamage,
+  sameMechDamage,
+  type MechDamage,
+} from "@/lib/mech/damage";
 import { saveCharacter } from "@/app/(app)/characters/actions";
 import { CharacterSheet } from "@/components/characters/character-sheet";
 import { MechTab, MechView } from "@/components/characters/mech-tab";
+import {
+  MechDamageBar,
+  MechDamageResetWarning,
+} from "@/components/characters/mech-damage-bar";
+import { applyMechDamage } from "./mech-damage-actions";
 import { useCharacterRealtime } from "./use-character-realtime";
 import { ConflictDialog } from "@/components/characters/conflict-dialog";
 import { RemoteChangeBanner } from "@/components/characters/remote-change-banner";
@@ -47,15 +59,30 @@ type CharacterSnapshot = {
   draft: BtccDraft;
   campaignId: string | null;
   mech: MechData | null;
+  damage: MechDamage;
 };
 
+type DamageDraft = {
+  baseVersion: number;
+  mech: MechData | null;
+  base: MechDamage;
+  value: MechDamage;
+};
+
+function pendingDamage(draft: DamageDraft): boolean {
+  return !sameMechDamage(draft.base, draft.value);
+}
+
 type TabId = "sheet" | "mech";
+
+const EMPTY_DAMAGE = emptyMechDamage();
 
 export function CharacterEditor({
   id,
   version,
   draft,
   mech,
+  mechDamage = EMPTY_DAMAGE,
   campaigns,
   campaignId,
   isOwner,
@@ -64,6 +91,7 @@ export function CharacterEditor({
   version: number;
   draft: BtccDraft;
   mech: MechData | null;
+  mechDamage?: MechDamage;
   campaigns: { id: string; name: string }[];
   campaignId: string | null;
   isOwner: boolean;
@@ -75,6 +103,7 @@ export function CharacterEditor({
     draft,
     campaignId,
     mech,
+    damage: mechDamage,
   });
   const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
@@ -83,6 +112,10 @@ export function CharacterEditor({
   // component; it is re-seeded from the snapshot on every beginEdit.
   const [mechDraft, setMechDraft] = useState<MechData | null>(mech);
   const [isPending, startTransition] = useTransition();
+  const [damageDraft, setDamageDraft] = useState<DamageDraft | null>(null);
+  const [damageError, setDamageError] = useState<string | null>(null);
+  const [damageConflict, setDamageConflict] = useState(false);
+  const [isApplying, startDamageTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
   const [remoteVersion, setRemoteVersion] = useState<number | null>(null);
@@ -95,6 +128,15 @@ export function CharacterEditor({
 
   // Acknowledged versions suppress own-save echoes, but never rebase an edit.
   const [knownVersion, setKnownVersion] = useState(version);
+  const damagePending = damageDraft !== null && pendingDamage(damageDraft);
+  const damageStale =
+    damagePending &&
+    !isApplying &&
+    (damageConflict ||
+      Math.max(snapshot.version, remoteVersion ?? 0) > damageDraft.baseVersion);
+  const viewMech = damageDraft ? damageDraft.mech : snapshot.mech;
+  const viewDamage = damageDraft ? damageDraft.value : snapshot.damage;
+  const damageControlsDisabled = isApplying || damageStale || isPending;
 
   // A layout effect, not a passive one: a passive effect can be deferred past a
   // later task, so a websocket message could read a stale `false` and refresh the
@@ -139,6 +181,15 @@ export function CharacterEditor({
   const adoptSnapshot = useCallback(
     (next: CharacterSnapshot): void => {
       setSnapshot(next);
+      // A pending batch stays pinned to its original version and mech. Only an
+      // acknowledged, non-pending placeholder can be replaced by fresh props.
+      setDamageDraft((current) =>
+        current &&
+        !pendingDamage(current) &&
+        next.version >= current.baseVersion
+          ? null
+          : current,
+      );
       reset(draftToForm(next.draft));
       setSelectedCampaign(next.campaignId);
       setKnownVersion((current) => Math.max(current, next.version));
@@ -157,14 +208,23 @@ export function CharacterEditor({
 
   useLayoutEffect(() => {
     if (version > latestSnapshotRef.current.version) {
-      latestSnapshotRef.current = { version, draft, campaignId, mech };
+      latestSnapshotRef.current = {
+        version,
+        draft,
+        campaignId,
+        mech,
+        damage: mechDamage,
+      };
     }
     const next = latestSnapshotRef.current;
     if (isEditing) {
       if (next.version > snapshot.version && next.version > knownVersion) {
         setRemoteVersion((current) => Math.max(current ?? 0, next.version));
       }
-    } else if (next.version > snapshot.version && next.version >= knownVersion) {
+    } else if (
+      next.version > snapshot.version &&
+      next.version >= knownVersion
+    ) {
       adoptSnapshot(next);
     }
   }, [
@@ -172,6 +232,7 @@ export function CharacterEditor({
     draft,
     campaignId,
     mech,
+    mechDamage,
     isEditing,
     snapshot.version,
     knownVersion,
@@ -238,7 +299,13 @@ export function CharacterEditor({
   );
 
   function beginEdit(): void {
-    if (isPending || knownVersion > snapshot.version) return;
+    if (
+      isPending ||
+      knownVersion > snapshot.version ||
+      damagePending ||
+      isApplying
+    )
+      return;
     reset(draftToForm(snapshot.draft));
     setSelectedCampaign(snapshot.campaignId);
     setMechDraft(snapshot.mech);
@@ -247,6 +314,62 @@ export function CharacterEditor({
     setDismissedRemoteVersion(null);
     isEditingRef.current = true;
     setIsEditing(true);
+  }
+
+  function changeDamage(value: MechDamage): void {
+    if (damageControlsDisabled || isEditing || viewMech === null) return;
+    setDamageError(null);
+    setDamageDraft((current) => ({
+      ...(current ?? {
+        baseVersion: snapshot.version,
+        mech: snapshot.mech,
+        base: snapshot.damage,
+      }),
+      value,
+    }));
+  }
+
+  function applyDamage(): void {
+    if (!damageDraft || !damagePending || damageControlsDisabled) return;
+    const submitted = damageDraft;
+    setDamageError(null);
+    startDamageTransition(async () => {
+      const result = await applyMechDamage(
+        id,
+        submitted.baseVersion,
+        submitted.value,
+      );
+      if (result.ok) {
+        setKnownVersion((current) => Math.max(current, result.version));
+        setRemoteVersion((current) =>
+          current !== null && current > result.version ? current : null,
+        );
+        setDamageDraft({
+          baseVersion: result.version,
+          mech: submitted.mech,
+          base: result.damage,
+          value: result.damage,
+        });
+        setDamageError(null);
+        setDamageConflict(false);
+        const next = latestSnapshotRef.current;
+        if (next.version >= result.version) adoptSnapshot(next);
+        router.refresh();
+      } else if (result.kind === "conflict") {
+        setDamageConflict(true);
+      } else {
+        setDamageError(result.message);
+      }
+    });
+  }
+
+  function discardDamage(): void {
+    if (isApplying) return;
+    setDamageDraft(null);
+    setDamageError(null);
+    setDamageConflict(false);
+    if ((remoteVersion ?? 0) > snapshot.version || damageConflict)
+      router.refresh();
   }
 
   function finishEditing(reload: boolean): void {
@@ -273,15 +396,34 @@ export function CharacterEditor({
       <div className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <TabList baseId={baseId} value={tab} onChange={setTab} />
-          {knownVersion > snapshot.version || isPending ? (
-            <HudButton variant="primary" disabled>
-              Refreshing…
-            </HudButton>
-          ) : (
-            <HudButton variant="primary" onClick={beginEdit}>
-              Edit
-            </HudButton>
-          )}
+          <div className="flex items-center gap-2">
+            {(damagePending || isApplying) && (
+              <span
+                id={`${baseId}-damage-edit-hint`}
+                className="font-mono text-xs text-hud-amber"
+              >
+                Apply or discard damage first
+              </span>
+            )}
+            {knownVersion > snapshot.version || isPending ? (
+              <HudButton variant="primary" disabled>
+                Refreshing…
+              </HudButton>
+            ) : (
+              <HudButton
+                variant="primary"
+                onClick={beginEdit}
+                disabled={damagePending || isApplying}
+                aria-describedby={
+                  damagePending || isApplying
+                    ? `${baseId}-damage-edit-hint`
+                    : undefined
+                }
+              >
+                Edit
+              </HudButton>
+            )}
+          </div>
         </div>
         {/* Wrappers carry no display class so the `hidden` attribute applies. */}
         <div
@@ -305,7 +447,26 @@ export function CharacterEditor({
           aria-labelledby={tabIds(baseId, "mech").tab}
           hidden={tab !== "mech"}
         >
-          <MechView mech={snapshot.mech} />
+          <MechView
+            mech={viewMech}
+            damage={viewDamage}
+            onDamageChange={viewMech === null ? undefined : changeDamage}
+            controlsDisabled={damageControlsDisabled}
+          />
+          {viewMech !== null && (
+            <MechDamageBar
+              pending={damagePending}
+              applying={isApplying}
+              stale={damageStale}
+              error={damageError}
+              canReset={
+                !sameMechDamage(resetMechDamage(viewDamage), viewDamage)
+              }
+              onApply={applyDamage}
+              onDiscard={discardDamage}
+              onReset={() => changeDamage(resetMechDamage(viewDamage))}
+            />
+          )}
         </div>
       </div>
     );
@@ -396,7 +557,9 @@ export function CharacterEditor({
                     className={hudInput}
                     disabled={campaignLocked}
                     value={selectedCampaign ?? ""}
-                    onChange={(e) => setSelectedCampaign(e.target.value || null)}
+                    onChange={(e) =>
+                      setSelectedCampaign(e.target.value || null)
+                    }
                   >
                     <option value="">No campaign</option>
                     {campaigns.map((campaign) => (
@@ -522,7 +685,10 @@ export function CharacterEditor({
                   />
                 </Labeled>
                 <Labeled label="Eyes">
-                  <input className={hudInput} {...register("scalars.eyecolor")} />
+                  <input
+                    className={hudInput}
+                    {...register("scalars.eyecolor")}
+                  />
                 </Labeled>
               </div>
             </Panel>
@@ -544,6 +710,9 @@ export function CharacterEditor({
         aria-labelledby={tabIds(baseId, "mech").tab}
         hidden={tab !== "mech"}
       >
+        {snapshot.mech !== null &&
+          !sameMech(mechDraft, snapshot.mech) &&
+          hasMechSpecificDamage(snapshot.damage) && <MechDamageResetWarning />}
         <MechTab
           value={mechDraft}
           onChange={setMechDraft}
@@ -664,9 +833,7 @@ function jsonEqual(a: unknown, b: unknown): boolean {
   }
   if (Array.isArray(a) || Array.isArray(b)) {
     if (!Array.isArray(a) || !Array.isArray(b)) return false;
-    return (
-      a.length === b.length && a.every((item, i) => jsonEqual(item, b[i]))
-    );
+    return a.length === b.length && a.every((item, i) => jsonEqual(item, b[i]));
   }
   const left = a as Record<string, unknown>;
   const right = b as Record<string, unknown>;

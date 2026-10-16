@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { rowToDraft, rowToMech } from "@/lib/characters";
+import { rowToDraft, rowToMech, rowToMechDamage } from "@/lib/characters";
 import { PageContainer } from "@/components/layout/page-container";
 import { CharacterEditor } from "./editor-client";
 
@@ -39,6 +39,8 @@ export default async function CharacterPage({
     .flatMap((r) => (r.campaigns ? [r.campaigns] : []))
     .sort((a, b) => a.name.localeCompare(b.name));
 
+  const mech = rowToMech(row);
+
   return (
     <PageContainer width="content">
       <div className="rounded-xl border border-hud-line bg-hud-bg p-4 text-hud-text">
@@ -47,7 +49,8 @@ export default async function CharacterPage({
           id={row.id}
           version={row.version}
           draft={rowToDraft(row)}
-          mech={rowToMech(row)}
+          mech={mech}
+          mechDamage={rowToMechDamage(row, mech)}
           campaigns={campaigns}
           campaignId={row.campaign_id}
           isOwner={row.owner_id === user.id}
