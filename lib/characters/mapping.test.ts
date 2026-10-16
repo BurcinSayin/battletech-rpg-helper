@@ -1,8 +1,15 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { emptyDraft, parseBtcc } from "@/lib/btcc";
 import type { BtccDraft } from "@/lib/btcc/types";
 import { FIXTURE_NAMES, readFixture } from "@/lib/btcc/test-fixtures";
-import { draftToColumns, draftToPayload, rowToDraft } from "./mapping";
+import { emptyMech } from "@/lib/mech/schema";
+import {
+  draftToColumns,
+  draftToPayload,
+  rowToDraft,
+  rowToMech,
+  withMechPayload,
+} from "./mapping";
 import type { CharacterRow } from "./types";
 
 /** Wrap the writable columns in a full row, as the DB would store them. */
@@ -19,6 +26,7 @@ function columnsToRow(draft: BtccDraft): CharacterRow {
     traits: cols.traits as unknown as CharacterRow["traits"],
     prerequisites: cols.prerequisites as unknown as CharacterRow["prerequisites"],
     notes: cols.notes,
+    mech: null,
     version: 1,
     created_at: "2026-01-01T00:00:00Z",
     updated_at: "2026-01-01T00:00:00Z",
@@ -52,6 +60,7 @@ describe("row <-> draft mapping", () => {
       traits: [] as unknown as CharacterRow["traits"],
       prerequisites: {} as unknown as CharacterRow["prerequisites"],
       notes: "",
+      mech: null,
       version: 1,
       created_at: "2026-01-01T00:00:00Z",
       updated_at: "2026-01-01T00:00:00Z",
@@ -87,5 +96,54 @@ describe("draftToPayload — campaign presence contract (AC 16, R15)", () => {
     const id = "a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3";
     const payload = draftToPayload(draft, { id }) as Record<string, unknown>;
     expect(payload.campaign_id).toBe(id);
+  });
+});
+
+describe("mech column — presence contract", () => {
+  const draft = emptyDraft();
+  const payload = draftToPayload(draft);
+
+  it("omits the mech key when the argument is undefined (unchanged)", () => {
+    expect("mech" in (withMechPayload(payload, undefined) as object)).toBe(
+      false,
+    );
+  });
+
+  it("sends JSON null to clear the stored mech", () => {
+    const out = withMechPayload(payload, null) as Record<string, unknown>;
+    expect("mech" in out).toBe(true);
+    expect(out.mech).toBeNull();
+  });
+
+  it("sends the object to set the stored mech without mutating the input", () => {
+    const mech = emptyMech();
+    const out = withMechPayload(payload, mech) as Record<string, unknown>;
+    expect(out.mech).toEqual(mech);
+    expect("mech" in (payload as object)).toBe(false);
+  });
+});
+
+describe("rowToMech", () => {
+  function rowWith(mech: unknown): CharacterRow {
+    return { ...columnsToRow(emptyDraft()), mech } as unknown as CharacterRow;
+  }
+
+  it("returns null for a character without a mech", () => {
+    expect(rowToMech(rowWith(null))).toBeNull();
+  });
+
+  it("returns the parsed mech for a valid stored record", () => {
+    expect(rowToMech(rowWith(emptyMech()))).toEqual(emptyMech());
+  });
+
+  it("treats an invalid stored record as no mech and logs without the payload", () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      expect(rowToMech(rowWith({ chassis: 42 }))).toBeNull();
+      expect(log).toHaveBeenCalledTimes(1);
+      expect(JSON.stringify(log.mock.calls[0])).not.toContain("42");
+    } finally {
+      log.mockRestore();
+    }
   });
 });

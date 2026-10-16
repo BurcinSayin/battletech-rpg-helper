@@ -2,11 +2,13 @@
 
 import {
   useCallback,
+  useId,
   useLayoutEffect,
   useMemo,
   useRef,
   useState,
   useTransition,
+  type KeyboardEvent,
 } from "react";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,8 +27,10 @@ import {
   skillLevel,
   type CharacterFormValues,
 } from "@/lib/characters";
+import type { MechData } from "@/lib/mech/types";
 import { saveCharacter } from "@/app/(app)/characters/actions";
 import { CharacterSheet } from "@/components/characters/character-sheet";
+import { MechTab, MechView } from "@/components/characters/mech-tab";
 import { useCharacterRealtime } from "./use-character-realtime";
 import { ConflictDialog } from "@/components/characters/conflict-dialog";
 import { RemoteChangeBanner } from "@/components/characters/remote-change-banner";
@@ -42,12 +46,16 @@ type CharacterSnapshot = {
   version: number;
   draft: BtccDraft;
   campaignId: string | null;
+  mech: MechData | null;
 };
+
+type TabId = "sheet" | "mech";
 
 export function CharacterEditor({
   id,
   version,
   draft,
+  mech,
   campaigns,
   campaignId,
   isOwner,
@@ -55,18 +63,25 @@ export function CharacterEditor({
   id: string;
   version: number;
   draft: BtccDraft;
+  mech: MechData | null;
   campaigns: { id: string; name: string }[];
   campaignId: string | null;
   isOwner: boolean;
 }) {
   const router = useRouter();
+  const baseId = useId();
   const [snapshot, setSnapshot] = useState<CharacterSnapshot>({
     version,
     draft,
     campaignId,
+    mech,
   });
   const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
+  const [tab, setTab] = useState<TabId>("sheet");
+  // The unsaved mech draft. Lives outside RHF because MechTab is a controlled
+  // component; it is re-seeded from the snapshot on every beginEdit.
+  const [mechDraft, setMechDraft] = useState<MechData | null>(mech);
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
   const [conflict, setConflict] = useState(false);
@@ -142,7 +157,7 @@ export function CharacterEditor({
 
   useLayoutEffect(() => {
     if (version > latestSnapshotRef.current.version) {
-      latestSnapshotRef.current = { version, draft, campaignId };
+      latestSnapshotRef.current = { version, draft, campaignId, mech };
     }
     const next = latestSnapshotRef.current;
     if (isEditing) {
@@ -156,6 +171,7 @@ export function CharacterEditor({
     version,
     draft,
     campaignId,
+    mech,
     isEditing,
     snapshot.version,
     knownVersion,
@@ -168,41 +184,64 @@ export function CharacterEditor({
   const xp = computeXp(liveDraft);
   const warnings = catalogWarnings(liveDraft);
 
-  const onSubmit = handleSubmit((values) => {
-    const baseVersion = snapshot.version;
-    const submittedCampaign = selectedCampaign;
-    setServerError(null);
-    startTransition(async () => {
-      const result = campaignLocked
-        ? await saveCharacter(id, baseVersion, values)
-        : await saveCharacter(id, baseVersion, values, {
-            id: submittedCampaign,
-          });
-      if (result.ok) {
-        setKnownVersion((current) => Math.max(current, result.version));
-        setRemoteVersion((current) =>
-          current !== null && current > result.version ? current : null,
-        );
-        setServerError(null);
-        setConflict(false);
-        setDismissedRemoteVersion(null);
-        isEditingRef.current = false;
-        setIsEditing(false);
-        const next = latestSnapshotRef.current;
-        if (next.version >= result.version) adoptSnapshot(next);
-        router.refresh();
-      } else if (result.kind === "conflict") {
-        setConflict(true);
-      } else {
-        setServerError(result.message);
-      }
-    });
-  });
+  const onSubmit = handleSubmit(
+    (values) => {
+      const baseVersion = snapshot.version;
+      const submittedCampaign = selectedCampaign;
+      // Send the mech only when the draft differs from the snapshot it was based
+      // on. Unchanged (including "no mech, no mech edits") omits the key entirely,
+      // so the stored mech is left alone by the RPC.
+      const mechChanged = !sameMech(mechDraft, snapshot.mech);
+      const submittedMech = mechDraft;
+      setServerError(null);
+      startTransition(async () => {
+        const campaignArg = campaignLocked
+          ? undefined
+          : { id: submittedCampaign };
+        const result = mechChanged
+          ? await saveCharacter(
+              id,
+              baseVersion,
+              values,
+              campaignArg,
+              submittedMech,
+            )
+          : campaignLocked
+            ? await saveCharacter(id, baseVersion, values)
+            : await saveCharacter(id, baseVersion, values, campaignArg);
+        if (result.ok) {
+          setKnownVersion((current) => Math.max(current, result.version));
+          setRemoteVersion((current) =>
+            current !== null && current > result.version ? current : null,
+          );
+          setServerError(null);
+          setConflict(false);
+          setDismissedRemoteVersion(null);
+          isEditingRef.current = false;
+          setIsEditing(false);
+          // The saved mech arrives with the refreshed row (page props), exactly
+          // like the saved fields; it is adopted with the snapshot below or by
+          // the layout effect when the props land.
+          const next = latestSnapshotRef.current;
+          if (next.version >= result.version) adoptSnapshot(next);
+          router.refresh();
+        } else if (result.kind === "conflict") {
+          setConflict(true);
+        } else {
+          setServerError(result.message);
+        }
+      });
+    },
+    // Invalid fields live on the Sheet panel, which is hidden while the Mech tab
+    // is open; bring it forward so the validation message is visible.
+    () => setTab("sheet"),
+  );
 
   function beginEdit(): void {
     if (isPending || knownVersion > snapshot.version) return;
     reset(draftToForm(snapshot.draft));
     setSelectedCampaign(snapshot.campaignId);
+    setMechDraft(snapshot.mech);
     setServerError(null);
     setConflict(false);
     setDismissedRemoteVersion(null);
@@ -218,6 +257,7 @@ export function CharacterEditor({
         ? latest
         : snapshot;
     adoptSnapshot(next);
+    setMechDraft(next.mech);
     setServerError(null);
     setConflict(false);
     setDismissedRemoteVersion(null);
@@ -230,19 +270,44 @@ export function CharacterEditor({
 
   if (!isEditing) {
     return (
-      <CharacterSheet
-        draft={snapshot.draft}
-        xp={xp}
-        warnings={warnings}
-        onEdit={beginEdit}
-        actions={
-          knownVersion > snapshot.version || isPending ? (
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <TabList baseId={baseId} value={tab} onChange={setTab} />
+          {knownVersion > snapshot.version || isPending ? (
             <HudButton variant="primary" disabled>
               Refreshing…
             </HudButton>
-          ) : undefined
-        }
-      />
+          ) : (
+            <HudButton variant="primary" onClick={beginEdit}>
+              Edit
+            </HudButton>
+          )}
+        </div>
+        {/* Wrappers carry no display class so the `hidden` attribute applies. */}
+        <div
+          role="tabpanel"
+          id={tabIds(baseId, "sheet").panel}
+          aria-labelledby={tabIds(baseId, "sheet").tab}
+          hidden={tab !== "sheet"}
+        >
+          <CharacterSheet
+            draft={snapshot.draft}
+            xp={xp}
+            warnings={warnings}
+            // The header action lives in the tab bar so Edit stays reachable on
+            // the Mech tab; an empty fragment suppresses the sheet's own button.
+            actions={<></>}
+          />
+        </div>
+        <div
+          role="tabpanel"
+          id={tabIds(baseId, "mech").panel}
+          aria-labelledby={tabIds(baseId, "mech").tab}
+          hidden={tab !== "mech"}
+        >
+          <MechView mech={snapshot.mech} />
+        </div>
+      </div>
     );
   }
 
@@ -276,188 +341,214 @@ export function CharacterEditor({
       {serverError && <p className="text-sm text-hud-red">{serverError}</p>}
       <CatalogWarningBanner warnings={warnings} />
 
-      <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-        <div className="flex flex-col gap-4">
-          <Panel title="Experience">
-            <dl className="flex items-baseline justify-between font-mono text-sm">
-              <div className="flex items-baseline gap-2">
-                <dt className="text-xs text-hud-muted">Remaining XP</dt>
-                <dd className="text-hud-text">
-                  {xp.remaining.toLocaleString()}
-                </dd>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <dt className="text-xs text-hud-muted">Total XP</dt>
-                <dd className="text-hud-text">
-                  {xp.budget.toLocaleString()}
-                </dd>
-              </div>
-            </dl>
-            <p className="mt-2 font-mono text-xs text-hud-muted">
-              attributes {xp.byCategory.attributes} · skills{" "}
-              {xp.byCategory.skills} · traits {xp.byCategory.traits}
-            </p>
-          </Panel>
+      <TabList baseId={baseId} value={tab} onChange={setTab} />
 
-          <Panel title="Basic info">
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Labeled label="Name" error={errors.scalars?.name?.message}>
-                <input className={hudInput} {...register("scalars.name")} />
-              </Labeled>
-              <Labeled label="Affiliation">
-                <input className={hudInput} {...register("scalars.aff")} />
-              </Labeled>
-              <Labeled label="Sub-affiliation">
-                <input className={hudInput} {...register("scalars.subaff")} />
-              </Labeled>
-              <Labeled label="Sex">
-                <input className={hudInput} {...register("scalars.sex")} />
-              </Labeled>
-              <Labeled label="Campaign">
-                <select
-                  aria-label="Campaign"
-                  className={hudInput}
-                  disabled={campaignLocked}
-                  value={selectedCampaign ?? ""}
-                  onChange={(e) => setSelectedCampaign(e.target.value || null)}
-                >
-                  <option value="">No campaign</option>
-                  {campaigns.map((campaign) => (
-                    <option key={campaign.id} value={campaign.id}>
-                      {campaign.name}
-                    </option>
-                  ))}
-                </select>
-                {!isOwner && (
-                  <p className="mt-1 text-xs text-hud-muted">
-                    Only the character&rsquo;s owner can change its campaign.
-                  </p>
-                )}
-                {isOwner && campaignUnreadable && (
-                  <p className="mt-1 text-xs text-hud-muted">
-                    You&rsquo;re no longer in this character&rsquo;s campaign.
-                  </p>
-                )}
-              </Labeled>
-            </div>
-          </Panel>
+      {/*
+        Hidden, not unmounted: the RHF fields must stay registered while the Mech
+        tab is open so their unsaved values survive tab switches.
+      */}
+      <div
+        role="tabpanel"
+        id={tabIds(baseId, "sheet").panel}
+        aria-labelledby={tabIds(baseId, "sheet").tab}
+        hidden={tab !== "sheet"}
+      >
+        <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
+          <div className="flex flex-col gap-4">
+            <Panel title="Experience">
+              <dl className="flex items-baseline justify-between font-mono text-sm">
+                <div className="flex items-baseline gap-2">
+                  <dt className="text-xs text-hud-muted">Remaining XP</dt>
+                  <dd className="text-hud-text">
+                    {xp.remaining.toLocaleString()}
+                  </dd>
+                </div>
+                <div className="flex items-baseline gap-2">
+                  <dt className="text-xs text-hud-muted">Total XP</dt>
+                  <dd className="text-hud-text">
+                    {xp.budget.toLocaleString()}
+                  </dd>
+                </div>
+              </dl>
+              <p className="mt-2 font-mono text-xs text-hud-muted">
+                attributes {xp.byCategory.attributes} · skills{" "}
+                {xp.byCategory.skills} · traits {xp.byCategory.traits}
+              </p>
+            </Panel>
 
-          <Panel title="Attributes">
-            <p className="mb-3 text-xs text-hud-muted">
-              Raw attribute XP (100 XP per level).
-            </p>
-            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              {ATTRIBUTE_KEYS.map((key) => (
-                <Controller
-                  key={key}
-                  control={control}
-                  name={`attributes.${key}`}
-                  render={({ field }) => (
-                    <Stepper
-                      label={key}
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
+            <Panel title="Basic info">
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Labeled label="Name" error={errors.scalars?.name?.message}>
+                  <input className={hudInput} {...register("scalars.name")} />
+                </Labeled>
+                <Labeled label="Affiliation">
+                  <input className={hudInput} {...register("scalars.aff")} />
+                </Labeled>
+                <Labeled label="Sub-affiliation">
+                  <input className={hudInput} {...register("scalars.subaff")} />
+                </Labeled>
+                <Labeled label="Sex">
+                  <input className={hudInput} {...register("scalars.sex")} />
+                </Labeled>
+                <Labeled label="Campaign">
+                  <select
+                    aria-label="Campaign"
+                    className={hudInput}
+                    disabled={campaignLocked}
+                    value={selectedCampaign ?? ""}
+                    onChange={(e) => setSelectedCampaign(e.target.value || null)}
+                  >
+                    <option value="">No campaign</option>
+                    {campaigns.map((campaign) => (
+                      <option key={campaign.id} value={campaign.id}>
+                        {campaign.name}
+                      </option>
+                    ))}
+                  </select>
+                  {!isOwner && (
+                    <p className="mt-1 text-xs text-hud-muted">
+                      Only the character&rsquo;s owner can change its campaign.
+                    </p>
                   )}
-                />
-              ))}
-            </div>
-          </Panel>
+                  {isOwner && campaignUnreadable && (
+                    <p className="mt-1 text-xs text-hud-muted">
+                      You&rsquo;re no longer in this character&rsquo;s campaign.
+                    </p>
+                  )}
+                </Labeled>
+              </div>
+            </Panel>
+
+            <Panel title="Attributes">
+              <p className="mb-3 text-xs text-hud-muted">
+                Raw attribute XP (100 XP per level).
+              </p>
+              <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                {ATTRIBUTE_KEYS.map((key) => (
+                  <Controller
+                    key={key}
+                    control={control}
+                    name={`attributes.${key}`}
+                    render={({ field }) => (
+                      <Stepper
+                        label={key}
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    )}
+                  />
+                ))}
+              </div>
+            </Panel>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            <Panel
+              title="Skills"
+              count={`${skills.fields.length} total`}
+              action={
+                <HudButton
+                  type="button"
+                  onClick={() => skills.append({ name: "", xp: 0 })}
+                >
+                  + Add skill
+                </HudButton>
+              }
+            >
+              <RowList
+                fields={skills.fields}
+                remove={skills.remove}
+                register={register}
+                name="skills"
+                datalistId="skill-options"
+                options={skillOptions}
+                errors={errors.skills as unknown as RowError[] | undefined}
+                levels={liveDraft.skills.map((row) =>
+                  skillLevel(row.xp, liveDraft.traits),
+                )}
+              />
+            </Panel>
+
+            <Panel
+              title="Traits"
+              count={`${traits.fields.length} total`}
+              action={
+                <HudButton
+                  type="button"
+                  onClick={() => traits.append({ name: "", xp: 0 })}
+                >
+                  + Add trait
+                </HudButton>
+              }
+            >
+              <RowList
+                fields={traits.fields}
+                remove={traits.remove}
+                register={register}
+                name="traits"
+                datalistId="trait-options"
+                options={traitOptions}
+                errors={errors.traits as unknown as RowError[] | undefined}
+              />
+            </Panel>
+
+            <Panel title="Vitals">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <Labeled label="Age">
+                  <input
+                    type="number"
+                    className={hudInput}
+                    {...register("scalars.age", { valueAsNumber: true })}
+                  />
+                </Labeled>
+                <Labeled label="Height (cm)">
+                  <input
+                    type="number"
+                    className={hudInput}
+                    {...register("scalars.height", { valueAsNumber: true })}
+                  />
+                </Labeled>
+                <Labeled label="Weight (kg)">
+                  <input
+                    type="number"
+                    className={hudInput}
+                    {...register("scalars.weight", { valueAsNumber: true })}
+                  />
+                </Labeled>
+                <Labeled label="Hair">
+                  <input
+                    className={hudInput}
+                    {...register("scalars.haircolor")}
+                  />
+                </Labeled>
+                <Labeled label="Eyes">
+                  <input className={hudInput} {...register("scalars.eyecolor")} />
+                </Labeled>
+              </div>
+            </Panel>
+
+            <Panel title="Notes">
+              <textarea
+                rows={6}
+                className={`${hudInput} resize-y font-mono`}
+                {...register("notes")}
+              />
+            </Panel>
+          </div>
         </div>
+      </div>
 
-        <div className="flex flex-col gap-4">
-          <Panel
-            title="Skills"
-            count={`${skills.fields.length} total`}
-            action={
-              <HudButton
-                type="button"
-                onClick={() => skills.append({ name: "", xp: 0 })}
-              >
-                + Add skill
-              </HudButton>
-            }
-          >
-            <RowList
-              fields={skills.fields}
-              remove={skills.remove}
-              register={register}
-              name="skills"
-              datalistId="skill-options"
-              options={skillOptions}
-              errors={errors.skills as unknown as RowError[] | undefined}
-              levels={liveDraft.skills.map((row) =>
-                skillLevel(row.xp, liveDraft.traits),
-              )}
-            />
-          </Panel>
-
-          <Panel
-            title="Traits"
-            count={`${traits.fields.length} total`}
-            action={
-              <HudButton
-                type="button"
-                onClick={() => traits.append({ name: "", xp: 0 })}
-              >
-                + Add trait
-              </HudButton>
-            }
-          >
-            <RowList
-              fields={traits.fields}
-              remove={traits.remove}
-              register={register}
-              name="traits"
-              datalistId="trait-options"
-              options={traitOptions}
-              errors={errors.traits as unknown as RowError[] | undefined}
-            />
-          </Panel>
-
-          <Panel title="Vitals">
-            <div className="grid gap-3 sm:grid-cols-3">
-              <Labeled label="Age">
-                <input
-                  type="number"
-                  className={hudInput}
-                  {...register("scalars.age", { valueAsNumber: true })}
-                />
-              </Labeled>
-              <Labeled label="Height (cm)">
-                <input
-                  type="number"
-                  className={hudInput}
-                  {...register("scalars.height", { valueAsNumber: true })}
-                />
-              </Labeled>
-              <Labeled label="Weight (kg)">
-                <input
-                  type="number"
-                  className={hudInput}
-                  {...register("scalars.weight", { valueAsNumber: true })}
-                />
-              </Labeled>
-              <Labeled label="Hair">
-                <input
-                  className={hudInput}
-                  {...register("scalars.haircolor")}
-                />
-              </Labeled>
-              <Labeled label="Eyes">
-                <input className={hudInput} {...register("scalars.eyecolor")} />
-              </Labeled>
-            </div>
-          </Panel>
-
-          <Panel title="Notes">
-            <textarea
-              rows={6}
-              className={`${hudInput} resize-y font-mono`}
-              {...register("notes")}
-            />
-          </Panel>
-        </div>
+      <div
+        role="tabpanel"
+        id={tabIds(baseId, "mech").panel}
+        aria-labelledby={tabIds(baseId, "mech").tab}
+        hidden={tab !== "mech"}
+      >
+        <MechTab
+          value={mechDraft}
+          onChange={setMechDraft}
+          disabled={isPending}
+        />
       </div>
 
       {conflict && (
@@ -467,6 +558,123 @@ export function CharacterEditor({
         />
       )}
     </form>
+  );
+}
+
+function tabIds(baseId: string, tab: TabId) {
+  return { tab: `${baseId}-tab-${tab}`, panel: `${baseId}-panel-${tab}` };
+}
+
+const TAB_IDS: readonly TabId[] = ["sheet", "mech"];
+const TAB_LABELS: Record<TabId, string> = { sheet: "Sheet", mech: "Mech" };
+
+/** Two-tab switcher. Roving tabindex with arrow/Home/End keys (WAI-ARIA tabs). */
+function TabList({
+  baseId,
+  value,
+  onChange,
+}: {
+  baseId: string;
+  value: TabId;
+  onChange: (next: TabId) => void;
+}) {
+  const buttons = useRef<Partial<Record<TabId, HTMLButtonElement | null>>>({});
+
+  function onKeyDown(event: KeyboardEvent<HTMLDivElement>): void {
+    const last = TAB_IDS.length - 1;
+    const current = TAB_IDS.indexOf(value);
+    let target: number;
+    switch (event.key) {
+      case "ArrowRight":
+        target = current === last ? 0 : current + 1;
+        break;
+      case "ArrowLeft":
+        target = current === 0 ? last : current - 1;
+        break;
+      case "Home":
+        target = 0;
+        break;
+      case "End":
+        target = last;
+        break;
+      default:
+        return;
+    }
+    event.preventDefault();
+    const next = TAB_IDS[target];
+    if (next === undefined) return;
+    onChange(next);
+    buttons.current[next]?.focus();
+  }
+
+  return (
+    <div
+      role="tablist"
+      aria-label="Character sections"
+      onKeyDown={onKeyDown}
+      className="flex w-full min-w-0 flex-1 gap-1 border-b border-hud-line sm:w-auto sm:flex-none"
+    >
+      {TAB_IDS.map((tab) => {
+        const selected = tab === value;
+        return (
+          <button
+            key={tab}
+            ref={(element) => {
+              buttons.current[tab] = element;
+            }}
+            type="button"
+            role="tab"
+            id={tabIds(baseId, tab).tab}
+            aria-controls={tabIds(baseId, tab).panel}
+            aria-selected={selected}
+            tabIndex={selected ? 0 : -1}
+            onClick={() => onChange(tab)}
+            className={cn(
+              "-mb-px min-h-11 flex-1 border-b-2 px-4 font-mono text-xs uppercase tracking-[0.2em] transition sm:flex-none",
+              selected
+                ? "border-hud-amber text-hud-amber"
+                : "border-transparent text-hud-muted hover:text-hud-text",
+            )}
+          >
+            {TAB_LABELS[tab]}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/**
+ * Structural equality for the mech draft vs. its snapshot. Object keys whose
+ * value is `undefined` count as absent (an optional field left unset).
+ */
+function sameMech(a: MechData | null, b: MechData | null): boolean {
+  return jsonEqual(a, b);
+}
+
+function jsonEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (
+    a === null ||
+    b === null ||
+    typeof a !== "object" ||
+    typeof b !== "object"
+  ) {
+    return false;
+  }
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b)) return false;
+    return (
+      a.length === b.length && a.every((item, i) => jsonEqual(item, b[i]))
+    );
+  }
+  const left = a as Record<string, unknown>;
+  const right = b as Record<string, unknown>;
+  const leftKeys = Object.keys(left).filter((k) => left[k] !== undefined);
+  const rightKeys = Object.keys(right).filter((k) => right[k] !== undefined);
+  return (
+    leftKeys.length === rightKeys.length &&
+    leftKeys.every((k) => jsonEqual(left[k], right[k]))
   );
 }
 

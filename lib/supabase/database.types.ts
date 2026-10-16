@@ -94,6 +94,7 @@ export type Database = {
           created_at: string
           id: string
           info: Json
+          mech: Json | null
           name: string
           notes: string
           owner_id: string
@@ -109,6 +110,7 @@ export type Database = {
           created_at?: string
           id?: string
           info?: Json
+          mech?: Json | null
           name: string
           notes?: string
           owner_id: string
@@ -124,6 +126,7 @@ export type Database = {
           created_at?: string
           id?: string
           info?: Json
+          mech?: Json | null
           name?: string
           notes?: string
           owner_id?: string
@@ -201,6 +204,7 @@ export type Database = {
           created_at: string
           id: string
           info: Json
+          mech: Json | null
           name: string
           notes: string
           owner_id: string

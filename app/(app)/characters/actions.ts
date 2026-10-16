@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { emptyDraft, parseBtcc, type BtccDraft } from "@/lib/btcc";
+import { mechSchema, type MechData } from "@/lib/mech/schema";
 import {
   ATTRIBUTE_BASE,
   ATTRIBUTE_KEYS,
@@ -18,6 +19,7 @@ import {
   looksLikeCharacter,
   NAME_MAX_LENGTH,
   rowToDraft,
+  withMechPayload,
 } from "@/lib/characters";
 
 // Result of a save, surfaced to the editor client (never throws on expected
@@ -145,12 +147,18 @@ export async function createWizardCharacter(
  * stored row server-side and merge the editable form fields onto it, so untouched
  * sections (equip/weapons/pre*) are preserved and the client only sends what it
  * edits. A stale `expectedVersion` collapses to PT409 → conflict.
+ *
+ * `mech` follows the same presence rule as `campaign`: `undefined` leaves the
+ * stored mech untouched (no key is sent), `null` removes it, and an object
+ * replaces it after `mechSchema` validation. Only the caller's intent is sent;
+ * the RPC enforces the version and ownership.
  */
 export async function saveCharacter(
   id: string,
   expectedVersion: number,
   values: unknown,
   campaign?: { id: string | null },
+  mech?: unknown,
 ): Promise<SaveResult> {
   const parsed = characterFormSchema.safeParse(values);
   if (!parsed.success) {
@@ -174,6 +182,20 @@ export async function saveCharacter(
     }
   }
 
+  // Same presence test for the mech: `mech !== undefined`, never `??`.
+  let parsedMech: MechData | null | undefined;
+  if (mech !== undefined) {
+    if (mech === null) {
+      parsedMech = null;
+    } else {
+      const parsedMechValue = mechSchema.safeParse(mech);
+      if (!parsedMechValue.success) {
+        return { ok: false, kind: "error", message: "Mech data is invalid." };
+      }
+      parsedMech = parsedMechValue.data;
+    }
+  }
+
   const supabase = await createClient();
   const { data: row, error: fetchError } = await supabase
     .from("characters")
@@ -189,7 +211,7 @@ export async function saveCharacter(
   const { data, error } = await supabase.rpc("update_character", {
     p_id: id,
     p_expected_version: expectedVersion,
-    p_payload: draftToPayload(draft, campaign),
+    p_payload: withMechPayload(draftToPayload(draft, campaign), parsedMech),
   });
 
   if (error) {

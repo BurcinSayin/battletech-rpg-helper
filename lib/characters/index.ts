@@ -14,9 +14,11 @@ export { attributeLevel, attributeLinkModifier } from "./attribute-level";
 export { traitLevel, traitLevels } from "./trait-level";
 export {
   rowToDraft,
+  rowToMech,
   draftToColumns,
   draftToPayload,
   draftToInsert,
+  withMechPayload,
 } from "./mapping";
 export type {
   CharacterColumns,

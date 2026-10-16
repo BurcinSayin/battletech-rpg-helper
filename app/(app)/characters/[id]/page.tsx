@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { rowToDraft } from "@/lib/characters";
+import { rowToDraft, rowToMech } from "@/lib/characters";
 import { PageContainer } from "@/components/layout/page-container";
 import { CharacterEditor } from "./editor-client";
 
@@ -47,6 +47,7 @@ export default async function CharacterPage({
           id={row.id}
           version={row.version}
           draft={rowToDraft(row)}
+          mech={rowToMech(row)}
           campaigns={campaigns}
           campaignId={row.campaign_id}
           isOwner={row.owner_id === user.id}

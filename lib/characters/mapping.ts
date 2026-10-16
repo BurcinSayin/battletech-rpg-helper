@@ -10,6 +10,7 @@
 import type { Database, Json } from "@/lib/supabase/database.types";
 import type { BtccDraft, BtccRow, BtccScalars } from "@/lib/btcc/types";
 import { NUMERIC_SCALAR_KEYS, SCALAR_KEYS, emptyDraft } from "@/lib/btcc/types";
+import { mechSchema, type MechData } from "@/lib/mech/schema";
 import type {
   CharacterColumns,
   CharacterInfo,
@@ -101,6 +102,24 @@ export function rowToDraft(row: CharacterRow): BtccDraft {
   return draft;
 }
 
+/**
+ * The stored `mech` column as an editable record. NULL means no mech. A stored
+ * value that fails the mech schema is shown as no mech and logged (with the row
+ * id and offending paths only, not the payload), so one malformed row never
+ * breaks the editor page.
+ */
+export function rowToMech(row: CharacterRow): MechData | null {
+  if (row.mech === null || row.mech === undefined) return null;
+  const parsed = mechSchema.safeParse(row.mech);
+  if (parsed.success) return parsed.data;
+  console.error(
+    "[characters] stored mech is invalid; showing none:",
+    row.id,
+    parsed.error.issues.map((issue) => issue.path.join(".")),
+  );
+  return null;
+}
+
 function draftToInfo(draft: BtccDraft): CharacterInfo {
   return {
     scalars: draft.scalars,
@@ -152,6 +171,20 @@ export function draftToPayload(draft: BtccDraft, campaign?: { id: string | null 
   const columns = draftToColumns(draft) as unknown as Record<string, unknown>;
   if (campaign !== undefined) columns.campaign_id = campaign.id;
   return columns as Json;
+}
+
+/**
+ * Adds the `mech` key to an `update_character` payload **iff `mech !== undefined`**,
+ * the same positional presence contract as `draftToPayload`'s campaign argument.
+ * The RPC treats an absent key as "unchanged", `null` as "clear", and an object
+ * as "set", so `undefined` must never be written as a key here.
+ */
+export function withMechPayload(
+  payload: Json,
+  mech: MechData | null | undefined,
+): Json {
+  if (mech === undefined) return payload;
+  return { ...(payload as JsonObject), mech: mech as unknown as Json };
 }
 
 type CharacterInsert = Database["public"]["Tables"]["characters"]["Insert"];

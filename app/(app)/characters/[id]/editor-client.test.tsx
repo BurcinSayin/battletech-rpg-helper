@@ -10,6 +10,7 @@ import {
   within,
 } from "@testing-library/react";
 import { emptyDraft } from "@/lib/btcc";
+import { emptyMech } from "@/lib/mech/schema";
 import type { SaveResult } from "@/app/(app)/characters/actions";
 
 // Stub the server action so jsdom never pulls server-only modules, and so we can
@@ -38,6 +39,43 @@ vi.mock("./use-character-realtime", () => ({
 }));
 
 import { CharacterEditor } from "./editor-client";
+
+// The designer lane owns MechTab/MechView. Stub them with a minimal, deterministic
+// surface so these tests exercise only the editor's wiring.
+vi.mock("@/components/characters/mech-tab", () => ({
+  MechTab: ({
+    value,
+    onChange,
+    disabled,
+  }: {
+    value: { chassis: string } | null;
+    onChange: (next: unknown) => void;
+    disabled?: boolean;
+  }) => (
+    <div>
+      <p>{`Mech editor: ${value ? value.chassis : "none"}`}</p>
+      <button
+        type="button"
+        disabled={disabled || value === null}
+        onClick={() => value && onChange({ ...value, chassis: "Atlas II" })}
+      >
+        Rename mech
+      </button>
+      <button type="button" onClick={() => onChange(null)}>
+        Remove mech
+      </button>
+      <button
+        type="button"
+        onClick={() => onChange({ ...MECH_NEW, chassis: "Locust" })}
+      >
+        Add mech
+      </button>
+    </div>
+  ),
+  MechView: ({ mech }: { mech: { chassis: string } | null }) => (
+    <p>{`Mech view: ${mech ? mech.chassis : "none"}`}</p>
+  ),
+}));
 
 const CAMP = {
   id: "a3a3a3a3-a3a3-a3a3-a3a3-a3a3a3a3a3a3",
@@ -74,6 +112,7 @@ function renderEditor(props: {
       id="c1"
       version={1}
       draft={draft}
+      mech={null}
       campaigns={props.campaigns ?? [CAMP]}
       campaignId={props.campaignId ?? null}
       isOwner={props.isOwner ?? true}
@@ -141,6 +180,7 @@ describe("CharacterEditor — skill levels", () => {
         id="c1"
         version={1}
         draft={draft}
+        mech={null}
         campaigns={[]}
         campaignId={null}
         isOwner
@@ -205,6 +245,7 @@ function renderSnapshot(overrides: Partial<EditorProps> = {}) {
     id: "c1",
     version: 1,
     draft: namedDraft("Stored Pilot"),
+    mech: null,
     campaigns: [CAMP, CAMP_B],
     campaignId: CAMP.id,
     isOwner: true,
@@ -796,5 +837,278 @@ describe("CharacterEditor — pending remote notices", () => {
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expectName("Newest Pilot");
     expect(screen.queryByRole("status")).toBeNull();
+  });
+});
+
+const MECH_A = {
+  ...emptyMech(),
+  chassis: "Atlas",
+  model: "AS7-D",
+  catalogFile: null,
+};
+const MECH_B = { ...emptyMech(), chassis: "Locust", model: "LCT-1V" };
+const MECH_NEW = { ...emptyMech(), chassis: "New", model: "Fresh" };
+
+function renderWithMech(mech: typeof MECH_A | null) {
+  return renderSnapshot({ mech });
+}
+
+function openTab(name: "Sheet" | "Mech") {
+  fireEvent.click(screen.getByRole("tab", { name }));
+}
+
+function expectMechEditor(text: string) {
+  expect(screen.getByText(`Mech editor: ${text}`)).toBeTruthy();
+}
+
+describe("CharacterEditor — Mech tab", () => {
+  it("renders Sheet and Mech tabs with tablist/tab/tabpanel roles in view mode", () => {
+    renderWithMech(MECH_A);
+    const list = screen.getByRole("tablist");
+    const tabs = within(list).getAllByRole("tab");
+    expect(tabs.map((t) => t.textContent)).toEqual(["Sheet", "Mech"]);
+    expect(tabs[0].getAttribute("aria-selected")).toBe("true");
+    expect(tabs[1].getAttribute("aria-selected")).toBe("false");
+    expect(screen.getAllByRole("tabpanel", { hidden: true })).toHaveLength(2);
+    expect(
+      screen.getByRole("heading", { name: "Stored Pilot" }),
+    ).toBeTruthy();
+
+    openTab("Mech");
+    expect(screen.getByRole("tab", { name: "Mech" }).getAttribute("aria-selected")).toBe("true");
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    expect(screen.queryByRole("heading", { name: "Stored Pilot" })).toBeNull();
+  });
+
+  it("moves between tabs with the arrow, Home and End keys", () => {
+    renderWithMech(null);
+    const list = screen.getByRole("tablist");
+    const selected = () =>
+      screen
+        .getAllByRole("tab")
+        .find((t) => t.getAttribute("aria-selected") === "true")?.textContent;
+    fireEvent.keyDown(list, { key: "ArrowRight" });
+    expect(selected()).toBe("Mech");
+    fireEvent.keyDown(list, { key: "ArrowRight" });
+    expect(selected()).toBe("Sheet");
+    fireEvent.keyDown(list, { key: "ArrowLeft" });
+    expect(selected()).toBe("Mech");
+    fireEvent.keyDown(list, { key: "Home" });
+    expect(selected()).toBe("Sheet");
+    fireEvent.keyDown(list, { key: "End" });
+    expect(selected()).toBe("Mech");
+  });
+
+  it("shows the persisted mech in view mode and brings in a refreshed mech through props", () => {
+    const editor = renderWithMech(MECH_A);
+    openTab("Mech");
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    editor.receive(2, "Stored Pilot", { mech: MECH_B });
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Locust");
+  });
+
+  it("keeps Edit reachable from the Mech tab", () => {
+    renderWithMech(MECH_A);
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expectMechEditor("Atlas");
+  });
+
+  it("saves a mech-only edit with the mech as the fifth argument", async () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    const call = saveCharacter.mock.calls[0];
+    expect(call).toHaveLength(5);
+    expect(call[0]).toBe("c1");
+    expect(call[1]).toBe(1);
+    expect(call[3]).toEqual({ id: CAMP.id });
+    expect(call[4]).toEqual({ ...MECH_A, chassis: "Atlas II" });
+  });
+
+  it("passes an undefined campaign slot with the mech for a non-owner", async () => {
+    render(
+      <CharacterEditor
+        id="c1"
+        version={1}
+        draft={namedDraft("Stored Pilot")}
+        mech={MECH_A}
+        campaigns={[CAMP]}
+        campaignId={CAMP.id}
+        isOwner={false}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    const call = saveCharacter.mock.calls[0];
+    expect(call).toHaveLength(5);
+    expect(call[3]).toBeUndefined();
+    expect(call[4]).toEqual({ ...MECH_A, chassis: "Atlas II" });
+  });
+
+  it("sends no mech argument when the mech is untouched, even with a mech on the character (AC-009)", async () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    fireEvent.change(screen.getByRole("textbox", { name: "Name" }), {
+      target: { value: "Renamed" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    expect(saveCharacter.mock.calls[0]).toHaveLength(4);
+    expect(saveCharacter.mock.calls[0][3]).toEqual({ id: CAMP.id });
+  });
+
+  it("sends no mech argument for a character without a mech when no mech edits happen", async () => {
+    renderWithMech(null);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    expect(saveCharacter.mock.calls[0]).toHaveLength(4);
+  });
+
+  it("sends null to remove the stored mech", async () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Remove mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    expect(saveCharacter.mock.calls[0]).toHaveLength(5);
+    expect(saveCharacter.mock.calls[0][4]).toBeNull();
+  });
+
+  it("sends a newly added mech for a character without one", async () => {
+    renderWithMech(null);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Add mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalled());
+    expect(saveCharacter.mock.calls[0][4]).toEqual({
+      ...MECH_NEW,
+      chassis: "Locust",
+    });
+  });
+
+  it("Cancel discards the mech draft and the next edit starts from the snapshot", () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Remove mech" }));
+    expectMechEditor("none");
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expectMechEditor("Atlas");
+    expect(saveCharacter).not.toHaveBeenCalled();
+  });
+
+  it("keeps the mech draft on conflict and under Keep editing, then saves it at the same base", async () => {
+    saveCharacter.mockResolvedValueOnce({ ok: false, kind: "conflict" });
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByRole("dialog", { name: "Remote changes" });
+    await waitFor(() =>
+      expect(
+        (screen.getByRole("button", { name: "Save" }) as HTMLButtonElement)
+          .disabled,
+      ).toBe(false),
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Keep editing" }));
+    expectMechEditor("Atlas II");
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalledTimes(2));
+    expect(saveCharacter.mock.calls[1][1]).toBe(1);
+    expect(saveCharacter.mock.calls[1][4]).toEqual({
+      ...MECH_A,
+      chassis: "Atlas II",
+    });
+  });
+
+  it("Reload after conflict discards the mech draft and shows the persisted mech once refreshed", async () => {
+    saveCharacter.mockResolvedValueOnce({ ok: false, kind: "conflict" });
+    const editor = renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    const dialog = await screen.findByRole("dialog", {
+      name: "Remote changes",
+    });
+    await waitFor(() =>
+      expect(
+        (screen.getByRole("button", { name: "Save" }) as HTMLButtonElement)
+          .disabled,
+      ).toBe(false),
+    );
+    fireEvent.click(within(dialog).getByRole("button", { name: "Reload" }));
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas");
+
+    editor.receive(2, "Stored Pilot", { mech: MECH_B });
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Locust");
+  });
+
+  it("adopts the saved mech when the refreshed row arrives after a successful save", async () => {
+    const saved = { ...MECH_A, chassis: "Atlas II" };
+    saveCharacter.mockResolvedValueOnce({ ok: true, version: 2 });
+    const editor = renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByRole("button", { name: "Refreshing…" });
+    editor.receive(2, "Stored Pilot", { mech: saved });
+    expect(screen.getByRole("tabpanel").textContent).toContain("Mech view: Atlas II");
+    expect(screen.queryByRole("button", { name: "Refreshing…" })).toBeNull();
+  });
+
+  it("keeps the mech draft after an ordinary save error", async () => {
+    saveCharacter.mockResolvedValueOnce({
+      ok: false,
+      kind: "error",
+      message: "Mech data is invalid.",
+    });
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Rename mech" }));
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByText("Mech data is invalid.");
+    expectMechEditor("Atlas II");
+  });
+
+  it("keeps RHF fields mounted across tab switches so unsaved text survives", () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    changeName("Typed Pilot");
+    openTab("Mech");
+    expect(screen.queryByRole("textbox", { name: "Name" })).toBeNull();
+    openTab("Sheet");
+    expectName("Typed Pilot");
+  });
+
+  it("returns to the Sheet tab when a field fails validation on the hidden Sheet panel", async () => {
+    renderWithMech(MECH_A);
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Mech");
+    fireEvent.change(screen.getByDisplayValue("Stored Pilot"), {
+      target: { value: "" },
+    });
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByText("Name is required");
+    expect(
+      screen.getByRole("tab", { name: "Sheet" }).getAttribute("aria-selected"),
+    ).toBe("true");
+    expect(saveCharacter).not.toHaveBeenCalled();
   });
 });
