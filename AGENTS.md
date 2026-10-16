@@ -1,92 +1,61 @@
 # Repository Guidelines
 
-## Project Overview
+BattleTech RPG character manager: Next.js App Router, React 19, TypeScript, Supabase. Core constraints: desktop `.btcc` format fidelity and database-enforced authorization. Run npm from the repo root.
 
-BattleTech RPG character manager built with Next.js App Router, React, TypeScript, and Supabase. Supports desktop `.btcc` import/export, character editing, lifepath generation, campaigns, realtime updates, and an offline PWA fallback. Desktop format fidelity and database-enforced authorization are core constraints.
+## Architecture Invariants
 
-## Architecture & Data Flow
+- Auth guards are route-group layouts: `app/(app)/layout.tsx` sends anonymous users to `/login`; `app/(auth)/layout.tsx` sends signed-in users to `/dashboard`. Beyond sign-in, RLS and RPC checks enforce access, not UI visibility.
+- `middleware.ts` only refreshes the session cookie (`lib/supabase/middleware.ts`). Its matcher deliberately skips the PWA surface and static assets. Never run code between client creation and `auth.getUser()`.
+- `.btcc` import: `lib/btcc/parse.ts` → `lib/characters/import.ts` → `lib/characters/mapping.ts` → RLS-gated insert. Previews are untrusted; actions reparse raw text server-side. Export: `lib/btcc/serialize.ts`.
+- Wizard (`app/(app)/characters/new/wizard/`): reducer state stays local. On finish, the client serializes the draft to `.btcc` text; `createWizardCharacter` reparses it and reconciles XP server-side before insert.
+- Saves (`saveCharacter`, `app/(app)/characters/actions.ts`): Zod-validate, refetch the stored row, merge with `formToDraft(rowToDraft(row), values)`, then call `update_character` with the expected version. `characters` has no direct UPDATE grant or policy; never bypass the RPC. `PT409` is a version conflict; `PT403` is forbidden campaign attachment (`lib/characters/errors.ts`).
+- Campaign membership: a composite FK `(campaign_id, owner_id)` → `campaign_members(campaign_id, user_id)` uses `ON DELETE SET NULL (campaign_id)`. A trigger bumps the character version on detach. Do not reimplement detach in app code.
+- Realtime (`app/(app)/characters/[id]/use-character-realtime.ts`): subscribe to UPDATEs only. Call `realtime.setAuth` with the user's JWT before `subscribe()`. Use per-subscription unique topics and remove the exact channel on cleanup. Version and callback live in refs so keystrokes don't resubscribe.
+- Desktop compatibility: preserve fixed `.btcc` field order, intentional sort/insert order, verbatim notes, and pass-through equipment/weapons/pre* sections. Legacy catalog labels warn (`catalogWarnings`); they never reject otherwise valid saves.
+- `lib/rules/load.ts` bundles `data/rules/*.json` statically; the app never fetches rules.
 
-- Server Components fetch session-scoped Supabase data; client components handle forms and invoke `"use server"` actions. Auth guards live in `app/(app)/layout.tsx` and `app/(auth)/layout.tsx`. Root `middleware.ts` only delegates cookie/session refresh; never insert logic between Supabase client creation and `auth.getUser()`.
-- `.btcc` text flows through `lib/btcc/parse.ts` → `lib/characters/import.ts` → draft/JSONB adapters in `lib/characters/mapping.ts` → RLS-gated insertion. Import preview is not trusted: actions reparse input server-side. Export uses `lib/btcc/serialize.ts`.
-- Character saves validate values, refetch the stored row, merge editable fields with `formToDraft(rowToDraft(row), values)`, then call `update_character` with the expected version. `characters` intentionally has no direct table `UPDATE` grant/policy; do not bypass the RPC.
-- RLS, RPC checks, and constraints—not UI visibility—enforce access. Campaign attachment requires the character owner's membership. Deleting membership atomically detaches their characters through a composite foreign key; the detach trigger increments character versions.
-- `app/(app)/characters/[id]/use-character-realtime.ts` subscribes to character UPDATEs and reports newer versions to the editor. Keep per-subscription unique topics, exact-channel cleanup, and user-JWT authentication before subscribing. Version/callback refs avoid resubscribing on every keystroke.
-- The wizard uses local reducer state in `app/(app)/characters/new/wizard/wizard-state.ts`; domain calculations live in `lib/characters/`. Completion is serialized, reparsed, and XP-reconciled server-side. `lib/rules/load.ts` bundles generated JSON catalogs rather than fetching rules over the network.
-- `app/sw.ts` is service-worker glue; `lib/sw/config.ts` owns cache policy. Navigation is network-only with `/offline` fallback outside auth guards. Never precache authenticated/dynamic routes or import application/Supabase code into worker policy.
+## Conventions
 
-## Key Directories
+- Use relative imports in `next.config.ts` and its helpers; config loading is outside webpack's `@/*` resolution.
+- Server actions validate with Zod `safeParse`, return typed user-safe results for expected failures, and log unexpected errors with context before returning generic messages.
+- Server Supabase clients are per request (`lib/supabase/server.ts`). Client state stays local: React Hook Form for character forms, reducer for the wizard. Await writes before `revalidatePath`/`redirect`; keep conflict handling.
+- Prettier uses `prettier-plugin-tailwindcss`; keep Tailwind class order.
 
-| Path                           | Working boundary                                                                      |
-| ------------------------------ | ------------------------------------------------------------------------------------- |
-| `app/(auth)/`, `app/(app)/`    | Auth/session guards, server pages/actions, editor and wizard clients                  |
-| `lib/btcc/`, `lib/characters/` | Desktop format fidelity, row/draft/form adapters, XP and lifepath rules               |
-| `lib/supabase/`, `supabase/`   | Typed client factories; migrations, RLS, database tests, generated seed               |
-| `components/`                  | Reusable forms/sheets and Tailwind/shadcn UI primitives                               |
-| `data/rules/`, `scripts/`      | Committed generated catalogs and their generators; regenerate instead of hand-editing |
-| `lib/sw/`, `e2e-pwa/`          | Isolated service-worker policy and production-only PWA verification                   |
-| `e2e/`                         | Browser workflows against the development server                                      |
-| `docs/`                        | Desktop-rule evidence, intended design, rulebook inputs, and wireframes               |
+## Commands
 
-## Development Commands
+- Dev/build/serve: `npm run dev`, `npm run build`, `npm run start`
+- Typecheck app and service worker: `npm run typecheck`. Lint: `npm run lint`
+- Unit/component tests: `npm run test`; focused: `npm run test -- lib/btcc/roundtrip.test.ts`
+- Browser E2E: `npm run test:e2e -- e2e/auth.spec.ts`
+- PWA E2E: `npm run test:e2e:pwa` (its `pretest` hook runs `build` first)
+- DB: `npm run test:db` (pgTAP, then concurrency); concurrency only: `npm run test:db:concurrency`
+- Local schema: `npx supabase migration up --local`; then `npm run supabase:types` and commit `lib/supabase/database.types.ts`
+- Generators: `npm run rules:ingest`, `npm run skills:ingest`, `npm run traits:ingest`, `npm run rules:extract`, `npm run seed:generate`
 
-Run from the repository root with npm.
+## Gotchas
 
-| Purpose                                       | Command                                                                                       |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Install locked dependencies                   | `npm ci`                                                                                      |
-| Development                                   | `npm run dev`                                                                                 |
-| Production build / serve                      | `npm run build` / `npm run start`                                                             |
-| Typecheck app and worker                      | `npm run typecheck`                                                                           |
-| Lint                                          | `npm run lint`                                                                                |
-| Unit/component tests                          | `npm run test`                                                                                |
-| Focused test / watch / coverage               | `npm run test -- lib/btcc/roundtrip.test.ts` / `npm run test:watch` / `npm run test:coverage` |
-| Browser E2E                                   | `npm run test:e2e -- e2e/auth.spec.ts`                                                        |
-| Production PWA E2E                            | `npm run test:e2e:pwa` (automatically builds first)                                           |
-| Start local Supabase                          | `npx supabase start`                                                                          |
-| Apply pending local migrations                | `npx supabase migration up --local`                                                           |
-| RLS + concurrency checks                      | `npm run test:db`                                                                             |
-| Concurrency checks only                       | `npm run test:db:concurrency`                                                                 |
-| Regenerate database types                     | `npm run supabase:types`                                                                      |
-| Regenerate catalogs / lifepath modules / seed | `npm run rules:ingest` / `npm run rules:extract` / `npm run seed:generate`                    |
+- `npm run supabase:start` runs `supabase stop --all` first, killing other local stacks. Use `npx supabase start`.
+- `npx supabase db reset` loads `supabase/seed.sql`. Use only on disposable data. Seed is generated from `lib/btcc/__fixtures__/lisa.btcc`; never hand-edit it or apply it to a real project.
+- Env: copy `.env.example` to `.env.local` only if absent. `BT_CHARGEN_SUPABASE_URL` is unprefixed and reaches the browser only via `next.config.ts`'s `env` mapping. `NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY` is public; RLS protects data. `BT_CHARGEN_SUPABASE_SERVICE_ROLE_KEY` stays blank for development. Never `NEXT_PUBLIC_`-prefix it or add it to `env`. Restart after env changes. Never print secrets from `supabase status`.
+- Rules generators read the desktop checkout. `BTCC_SOURCE_DIR` overrides the **resource** directory (default `../Battletech-Character-Creator/resource`); `rules:extract` also reads C++ sources from that checkout's root. After changing skill or subskill catalogs, rerun `rules:extract`.
+- Never add `--turbopack`: @serwist/next does not support it and silently emits no worker. Serwist is disabled in development, so PWA behavior is verifiable only in production builds.
+- `data/rules/**` and seed SQL are generated; regenerate instead of editing. Generated `public/sw.js*` and tsbuildinfo are ignored.
+- `docs/RULES.md` documents desktop behavior, including defects; it is evidence, not rulebook canon. `docs/PLAN.md` is intended design, not progress. Check code, tests, and git history for status.
 
-- `npx supabase db reset` recreates the local database and loads `supabase/seed.sql`; use only for disposable data. Avoid `npm run supabase:start` when other local stacks matter: it runs `supabase stop --all` first.
-- After schema changes, regenerate and commit `lib/supabase/database.types.ts`.
-- Rules ingestion/extraction default to sibling `../Battletech-Character-Creator/resource`; `BTCC_SOURCE_DIR` overrides the **resource directory**, not the repository root. Extraction also reads desktop source files from its parent directory.
-- `npm run skills:ingest` reads `docs/rule_book/skills_table.json` and `skills.json`; `npm run traits:ingest` regenerates traits. Rerun `rules:extract` after changing skill/subskill catalogs. Seed generation uses `lib/btcc/__fixtures__/lisa.btcc`; never hand-edit generated seed SQL or apply it to a real project.
+## Service Worker
 
-## Code Conventions & Common Patterns
+- `app/sw.ts` is glue. Cache policy lives in `lib/sw/config.ts`, which may import only `serwist` (anything else bundles into the worker). Read the comments there before changing `runtimeCaching`, fallbacks, or plugins.
+- Never precache authenticated or dynamic routes. `additionalPrecacheEntries` in `lib/sw/next-options.ts` replaces the `public/` glob scan; explicitly list new public assets only if they need precaching.
+- `/offline` stays outside auth guards and must remain precached.
 
-- Strict TypeScript; `@/*` resolves from the repository root. Use relative imports in `next.config.ts` and its helpers because config loading is outside webpack.
-- Follow existing kebab-case module names and colocated `*.test.ts`/`*.test.tsx` tests. Prettier uses `prettier-plugin-tailwindcss`; preserve Tailwind class sorting. ESLint extends Next Core Web Vitals/TypeScript; generated `data/rules/**` is ignored.
-- Validate action input with Zod `safeParse`. Expected validation/backend failures return typed, user-safe results; unexpected failures are logged with domain context and generalized. `lib/characters/errors.ts` classifies `PT409` as version conflict and `PT403` as forbidden campaign attachment/save.
-- Compose domain helpers with session-bound Supabase factories at the boundary: server clients are per request; browser clients use the browser factory. Tests mock framework/client seams rather than adding a global dependency-injection layer.
-- Client state stays local: React Hook Form for character forms, reducer state for the wizard, and transitions/pending state around async actions. Await writes before revalidation/redirects; preserve conflict handling rather than silently overwriting remote versions.
-- `.btcc` serialization and JSONB ordering are compatibility-sensitive. Preserve fixed field order, intentional sorting/insertion order, verbatim notes, and pass-through equipment/weapons/pre* sections when merging forms. Legacy/variant catalog labels are warn-not-fail, not grounds to reject otherwise valid saves.
+## Testing
 
-## Important Files
-
-- `app/layout.tsx`, `app/page.tsx`, `app/(app)/dashboard/page.tsx`: application shell and landing/dashboard routes.
-- `app/(app)/characters/actions.ts`, `lib/characters/schema.ts`, `lib/characters/mapping.ts`: authoritative persistence, form validation, and draft adapters.
-- `lib/supabase/database.types.ts`, `supabase/migrations/`: generated DB contract and authorization/schema source of truth.
-- `next.config.ts`, `lib/sw/next-options.ts`, `lib/sw/config.ts`: browser environment mapping, Serwist build options, and cache policy.
-- `package.json`, `tsconfig.json`, `tsconfig.sw.json`, `eslint.config.mjs`, `.prettierrc`: commands and compilation/style boundaries. `next-env.d.ts` is Next-generated; do not edit manually.
-- `docs/RULES.md`: desktop behavior, including observed defects, cited to `Battletech-Character-Creator@a1d8009`; not published-rulebook canon. `docs/PLAN.md` is intended design/build order, not progress. README contains marketing claims; use code, tests, Git history, and issues for implementation status.
-
-## Runtime/Tooling Preferences
-
-- Use Node.js and npm with committed `package-lock.json`; no Bun workflow or Node/npm version pin is declared in `package.json`. Dependencies currently target Next 15 and React 19.
-- Copy `.env.example` to `.env.local` only if the latter does not exist. Fill `BT_CHARGEN_SUPABASE_URL` and `NEXT_PUBLIC_BT_CHARGEN_SUPABASE_ANON_KEY` from the same project. Next's `env` mapping exposes the non-secret URL to browser bundles; restart dev/rebuild deployments after changes. Anon keys are public; RLS protects data.
-- Leave `BT_CHARGEN_SUPABASE_SERVICE_ROLE_KEY` blank for ordinary development. Never prefix it with `NEXT_PUBLIC_` or add it to Next's `env` mapping. Preserve existing credentials and do not print secrets from Supabase status.
-- Serwist is disabled in development. Do not add `--turbopack` to dev/build scripts: this integration does not support it. Generated `public/sw.js`/worker assets and TypeScript build metadata are ignored, not hand-maintained source.
-
-## Testing & QA
-
-- Vitest defaults to Node and discovers tests under `lib/`, `app/`, `components/`, and `scripts/`. DOM tests opt in with `// @vitest-environment jsdom` and use React Testing Library. Reset mocks and clean up rendered components; isolate fixtures.
-- `lib/btcc/roundtrip.test.ts` guards golden byte equality and serialization stability. Preserve these compatibility tests; add behavior/boundary regressions rather than assertions tied to incidental wording or implementation.
-- `npm run test:coverage` produces V8 text/HTML/JSON/LCOV reports for app/lib/components; no minimum coverage threshold is configured. Default Vitest does not run database specs or browser E2E. Extraction tests require the desktop checkout described above.
-- Regular Playwright starts Next on port 3000 and may reuse a running server outside CI. Supabase must already have current migrations; signup tests require email confirmations disabled. Install Chromium with `npx playwright install chromium`. Use accessible labels/roles and unique disposable accounts; realtime tests need separate browser contexts. `PW_MOBILE=1` enables the optional Pixel 5 project.
-- PWA Playwright uses production output on port 3100, runs desktop/Pixel 5 projects, and does not reuse a server. Wait for service-worker control before offline/cache assertions; development rendering cannot verify PWA behavior.
-- `supabase/tests/rls_matrix_test.sql` uses pgTAP with authenticated-role/JWT contexts. Concurrency Vitest uses `vitest.db.config.ts`, serial files, isolated fixtures, and real PostgreSQL connections. Set `SUPABASE_TEST_DB_URL` to a direct local DB URL; its loopback guard prevents writes to remote databases.
-- For changed user-facing behavior, exercise the actual surface in addition to relevant checks: auth redirects, save/conflict handling, cross-tab realtime updates, or production offline navigation. Rendering alone does not prove realtime initialization.
+- Root Vitest runs Node by default and discovers `lib/`, `app/`, `components/`, `scripts/` tests only. DOM tests opt in with `// @vitest-environment jsdom` and use React Testing Library. Root Vitest excludes `supabase/tests/` and `e2e/`.
+- Extraction tests require the external desktop checkout described above.
+- `lib/btcc/roundtrip.test.ts` guards golden `.btcc` bytes. Keep it green; add behavior regressions, not assertions tied to wording.
+- DB: `supabase/tests/rls_matrix_test.sql` is pgTAP run by `supabase test db`. `vitest.db.config.ts` runs `supabase/tests/**/*.test.ts` serially against real Postgres. `SUPABASE_TEST_DB_URL` must be the direct local DB URL; the suite refuses non-loopback hosts because it writes fixtures.
+- Browser E2E (`e2e/`): needs migrated local Supabase and email confirmations disabled (signup yields a session). Port 3000 reuses a running server outside CI. Install with `npx playwright install chromium`. Use accessible roles, unique disposable accounts, and separate contexts for realtime. `PW_MOBILE=1` adds the Pixel 5 project.
+- PWA E2E (`e2e-pwa/`): production build on port 3100; never reuses a server. Wait for `navigator.serviceWorker.controller` before offline or cache assertions.
+- For user-facing changes, exercise the surface: auth redirects, save/conflict, cross-tab realtime, production offline navigation. Rendering alone does not prove realtime.
 
 <!-- MANUAL: Notes added below this line are preserved on regeneration -->
