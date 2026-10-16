@@ -163,8 +163,19 @@ describe("CharacterSheet", () => {
     expect(screen.getByText("Natasha Kerensky")).toBeTruthy();
     expect(screen.getByText("Clan Wolf · Alpha Galaxy")).toBeTruthy();
     expect(screen.getByText(/Age 40/)).toBeTruthy();
-    expect(screen.getByText("1,200 spent")).toBeTruthy();
-    expect(screen.getByText("3,800 left")).toBeTruthy();
+    const section = screen
+      .getByRole("heading", { name: "// Experience" })
+      .closest("section")!;
+    const panel = within(section);
+    expect(
+      panel.getByText("Remaining XP").nextElementSibling!.textContent,
+    ).toBe("3,800");
+    expect(panel.getByText("Total XP").nextElementSibling!.textContent).toBe(
+      "5,000",
+    );
+    expect(panel.queryByText(/spent|left/)).toBeNull();
+    expect(panel.queryByRole("progressbar")).toBeNull();
+    expect(section.querySelector("[style*='width']")).toBeNull();
   });
 
   it("falls back to placeholders when name, affiliation and vitals are empty", () => {

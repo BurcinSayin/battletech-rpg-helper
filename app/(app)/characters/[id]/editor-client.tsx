@@ -246,11 +246,6 @@ export function CharacterEditor({
     );
   }
 
-  const spentPct =
-    xp.budget > 0
-      ? Math.min(100, Math.max(0, (xp.spent / xp.budget) * 100))
-      : 0;
-
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
       {remoteVersion !== null &&
@@ -284,20 +279,20 @@ export function CharacterEditor({
       <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
         <div className="flex flex-col gap-4">
           <Panel title="Experience">
-            <div className="flex items-baseline justify-between font-mono text-sm">
-              <span className="text-hud-text">
-                {xp.spent.toLocaleString()} spent
-              </span>
-              <span className="text-hud-muted">
-                {xp.remaining.toLocaleString()} left
-              </span>
-            </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-hud-raised">
-              <div
-                className="h-full bg-hud-amber"
-                style={{ width: `${spentPct}%` }}
-              />
-            </div>
+            <dl className="flex items-baseline justify-between font-mono text-sm">
+              <div className="flex items-baseline gap-2">
+                <dt className="text-xs text-hud-muted">Remaining XP</dt>
+                <dd className="text-hud-text">
+                  {xp.remaining.toLocaleString()}
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-2">
+                <dt className="text-xs text-hud-muted">Total XP</dt>
+                <dd className="text-hud-text">
+                  {xp.budget.toLocaleString()}
+                </dd>
+              </div>
+            </dl>
             <p className="mt-2 font-mono text-xs text-hud-muted">
               attributes {xp.byCategory.attributes} · skills{" "}
               {xp.byCategory.skills} · traits {xp.byCategory.traits}

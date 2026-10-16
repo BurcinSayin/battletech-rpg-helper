@@ -52,10 +52,6 @@ export function CharacterSheet({
   const sortedTraits = draft.traits
     .map((row, index) => ({ row, index, level: levels[index] }))
     .sort((a, b) => b.row.xp - a.row.xp);
-  const spentPct =
-    xp.budget > 0
-      ? Math.min(100, Math.max(0, (xp.spent / xp.budget) * 100))
-      : 0;
 
   return (
     <div className="flex flex-col gap-4">
@@ -81,20 +77,20 @@ export function CharacterSheet({
       <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
         <div className="flex flex-col gap-4">
           <Panel title="Experience">
-            <div className="flex items-baseline justify-between font-mono text-sm">
-              <span className="text-hud-text">
-                {xp.spent.toLocaleString()} spent
-              </span>
-              <span className="text-hud-muted">
-                {xp.remaining.toLocaleString()} left
-              </span>
-            </div>
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-hud-raised">
-              <div
-                className="h-full bg-hud-amber"
-                style={{ width: `${spentPct}%` }}
-              />
-            </div>
+            <dl className="flex items-baseline justify-between font-mono text-sm">
+              <div className="flex items-baseline gap-2">
+                <dt className="text-xs text-hud-muted">Remaining XP</dt>
+                <dd className="text-hud-text">
+                  {xp.remaining.toLocaleString()}
+                </dd>
+              </div>
+              <div className="flex items-baseline gap-2">
+                <dt className="text-xs text-hud-muted">Total XP</dt>
+                <dd className="text-hud-text">
+                  {xp.budget.toLocaleString()}
+                </dd>
+              </div>
+            </dl>
           </Panel>
 
           <Panel title="Attributes">
