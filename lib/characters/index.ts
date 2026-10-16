@@ -15,6 +15,7 @@ export { traitLevel, traitLevels } from "./trait-level";
 export {
   rowToDraft,
   rowToMech,
+  rowToMechDamage,
   draftToColumns,
   draftToPayload,
   draftToInsert,

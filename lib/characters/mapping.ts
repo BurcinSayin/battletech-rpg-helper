@@ -11,6 +11,12 @@ import type { Database, Json } from "@/lib/supabase/database.types";
 import type { BtccDraft, BtccRow, BtccScalars } from "@/lib/btcc/types";
 import { NUMERIC_SCALAR_KEYS, SCALAR_KEYS, emptyDraft } from "@/lib/btcc/types";
 import { mechSchema, type MechData } from "@/lib/mech/schema";
+import {
+  emptyMechDamage,
+  mechDamageSchema,
+  normalizeMechDamage,
+  type MechDamage,
+} from "@/lib/mech/damage";
 import type {
   CharacterColumns,
   CharacterInfo,
@@ -64,7 +70,10 @@ function asStringArray(value: Json | undefined): string[] {
 }
 
 /** Coerce stored `info.scalars` JSON into a complete BtccScalars (name from the column). */
-function coerceScalars(infoScalars: Json | undefined, name: string): BtccScalars {
+function coerceScalars(
+  infoScalars: Json | undefined,
+  name: string,
+): BtccScalars {
   const scalars = emptyDraft().scalars;
   const src = asObject(infoScalars);
   const out = scalars as unknown as Record<string, string | number>;
@@ -120,6 +129,22 @@ export function rowToMech(row: CharacterRow): MechData | null {
   return null;
 }
 
+/** Stored damage is untrusted; log paths only, never the stored payload. */
+export function rowToMechDamage(
+  row: CharacterRow,
+  mech: MechData | null,
+): MechDamage {
+  if (row.mech_damage == null) return emptyMechDamage();
+  const parsed = mechDamageSchema.safeParse(row.mech_damage);
+  if (parsed.success) return normalizeMechDamage(parsed.data, mech);
+  console.error(
+    "[characters] stored mech damage is invalid; showing none:",
+    row.id,
+    parsed.error.issues.map((issue) => issue.path.join(".")),
+  );
+  return emptyMechDamage();
+}
+
 function draftToInfo(draft: BtccDraft): CharacterInfo {
   return {
     scalars: draft.scalars,
@@ -167,7 +192,10 @@ export function draftToColumns(draft: BtccDraft): CharacterColumns {
  * silently detached. `draftToPayload(draft)` and `draftToPayload(draft, undefined)`
  * both correctly leave the key absent.
  */
-export function draftToPayload(draft: BtccDraft, campaign?: { id: string | null }): Json {
+export function draftToPayload(
+  draft: BtccDraft,
+  campaign?: { id: string | null },
+): Json {
   const columns = draftToColumns(draft) as unknown as Record<string, unknown>;
   if (campaign !== undefined) columns.campaign_id = campaign.id;
   return columns as Json;
@@ -190,7 +218,10 @@ export function withMechPayload(
 type CharacterInsert = Database["public"]["Tables"]["characters"]["Insert"];
 
 /** Insert shape for creating a new character owned by `ownerId`. */
-export function draftToInsert(draft: BtccDraft, ownerId: string): CharacterInsert {
+export function draftToInsert(
+  draft: BtccDraft,
+  ownerId: string,
+): CharacterInsert {
   const cols = draftToColumns(draft);
   return {
     owner_id: ownerId,

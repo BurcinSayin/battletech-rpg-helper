@@ -3,11 +3,13 @@ import { emptyDraft, parseBtcc } from "@/lib/btcc";
 import type { BtccDraft } from "@/lib/btcc/types";
 import { FIXTURE_NAMES, readFixture } from "@/lib/btcc/test-fixtures";
 import { emptyMech } from "@/lib/mech/schema";
+import { emptyMechDamage } from "@/lib/mech/damage";
 import {
   draftToColumns,
   draftToPayload,
   rowToDraft,
   rowToMech,
+  rowToMechDamage,
   withMechPayload,
 } from "./mapping";
 import type { CharacterRow } from "./types";
@@ -24,9 +26,11 @@ function columnsToRow(draft: BtccDraft): CharacterRow {
     attributes: cols.attributes as unknown as CharacterRow["attributes"],
     skills: cols.skills as unknown as CharacterRow["skills"],
     traits: cols.traits as unknown as CharacterRow["traits"],
-    prerequisites: cols.prerequisites as unknown as CharacterRow["prerequisites"],
+    prerequisites:
+      cols.prerequisites as unknown as CharacterRow["prerequisites"],
     notes: cols.notes,
     mech: null,
+    mech_damage: null,
     version: 1,
     created_at: "2026-01-01T00:00:00Z",
     updated_at: "2026-01-01T00:00:00Z",
@@ -61,6 +65,7 @@ describe("row <-> draft mapping", () => {
       prerequisites: {} as unknown as CharacterRow["prerequisites"],
       notes: "",
       mech: null,
+      mech_damage: null,
       version: 1,
       created_at: "2026-01-01T00:00:00Z",
       updated_at: "2026-01-01T00:00:00Z",
@@ -83,11 +88,16 @@ describe("draftToPayload — campaign presence contract (AC 16, R15)", () => {
     // The serialization-safety case: React preserves `undefined` object properties
     // across the action boundary, so an options-object + `in` test would wrongly
     // see a present key here and silently detach the character.
-    expect("campaign_id" in (draftToPayload(draft, undefined) as object)).toBe(false);
+    expect("campaign_id" in (draftToPayload(draft, undefined) as object)).toBe(
+      false,
+    );
   });
 
   it("sets campaign_id to null when detaching", () => {
-    const payload = draftToPayload(draft, { id: null }) as Record<string, unknown>;
+    const payload = draftToPayload(draft, { id: null }) as Record<
+      string,
+      unknown
+    >;
     expect("campaign_id" in payload).toBe(true);
     expect(payload.campaign_id).toBeNull();
   });
@@ -142,6 +152,72 @@ describe("rowToMech", () => {
       expect(rowToMech(rowWith({ chassis: 42 }))).toBeNull();
       expect(log).toHaveBeenCalledTimes(1);
       expect(JSON.stringify(log.mock.calls[0])).not.toContain("42");
+    } finally {
+      log.mockRestore();
+    }
+  });
+});
+
+describe("rowToMechDamage", () => {
+  it("maps NULL to empty and keeps damage out of full-save payloads", () => {
+    expect(rowToMechDamage(columnsToRow(emptyDraft()), emptyMech())).toEqual(
+      emptyMechDamage(),
+    );
+    expect(draftToPayload(emptyDraft())).not.toHaveProperty("mech_damage");
+    expect(
+      withMechPayload(draftToPayload(emptyDraft()), emptyMech()),
+    ).not.toHaveProperty("mech_damage");
+  });
+  it("normalizes against the supplied mech and retains pilot hits without a mech", () => {
+    const row: CharacterRow = {
+      ...columnsToRow(emptyDraft()),
+      mech_damage: {
+        armor: [
+          { index: 1, lost: 7 },
+          { index: 0, lost: 5 },
+        ],
+        structure: [{ index: 0, max: 9, lost: 3 }],
+        criticals: [],
+        heat: 2,
+        pilotHits: 3,
+      },
+    };
+    const mech = {
+      ...emptyMech(),
+      armor: [{ location: "LA", value: 4 }],
+      criticalSlots: [],
+    };
+    expect(rowToMechDamage(row, mech)).toEqual({
+      ...emptyMechDamage(),
+      armor: [{ index: 0, lost: 4 }],
+      heat: 2,
+      pilotHits: 3,
+    });
+    expect(rowToMechDamage(row, null)).toEqual({
+      ...emptyMechDamage(),
+      pilotHits: 3,
+    });
+  });
+  it("invalid stored damage logs row id and paths, not values, then returns empty", () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const row: CharacterRow = {
+        ...columnsToRow(emptyDraft()),
+        mech_damage: {
+          armor: [],
+          structure: [],
+          criticals: [],
+          heat: "SECRET_PAYLOAD",
+          pilotHits: 0,
+        },
+      };
+      expect(rowToMechDamage(row, emptyMech())).toEqual(emptyMechDamage());
+      expect(log).toHaveBeenCalledWith(
+        "[characters] stored mech damage is invalid; showing none:",
+        row.id,
+        ["heat"],
+      );
+      expect(JSON.stringify(log.mock.calls)).not.toContain("SECRET_PAYLOAD");
     } finally {
       log.mockRestore();
     }

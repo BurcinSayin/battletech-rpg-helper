@@ -95,6 +95,7 @@ export type Database = {
           id: string
           info: Json
           mech: Json | null
+          mech_damage: Json | null
           name: string
           notes: string
           owner_id: string
@@ -111,6 +112,7 @@ export type Database = {
           id?: string
           info?: Json
           mech?: Json | null
+          mech_damage?: Json | null
           name: string
           notes?: string
           owner_id: string
@@ -127,6 +129,7 @@ export type Database = {
           id?: string
           info?: Json
           mech?: Json | null
+          mech_damage?: Json | null
           name?: string
           notes?: string
           owner_id?: string
@@ -195,6 +198,10 @@ export type Database = {
           isSetofReturn: false
         }
       }
+      mech_damage_is_valid: {
+        Args: { p_damage: Json; p_mech: Json }
+        Returns: boolean
+      }
       shares_campaign: { Args: { p_user_id: string }; Returns: boolean }
       update_character: {
         Args: { p_expected_version: number; p_id: string; p_payload: Json }
@@ -205,6 +212,33 @@ export type Database = {
           id: string
           info: Json
           mech: Json | null
+          mech_damage: Json | null
+          name: string
+          notes: string
+          owner_id: string
+          prerequisites: Json
+          skills: Json
+          traits: Json
+          updated_at: string
+          version: number
+        }
+        SetofOptions: {
+          from: "*"
+          to: "characters"
+          isOneToOne: true
+          isSetofReturn: false
+        }
+      }
+      update_character_mech_damage: {
+        Args: { p_damage: Json; p_expected_version: number; p_id: string }
+        Returns: {
+          attributes: Json
+          campaign_id: string | null
+          created_at: string
+          id: string
+          info: Json
+          mech: Json | null
+          mech_damage: Json | null
           name: string
           notes: string
           owner_id: string

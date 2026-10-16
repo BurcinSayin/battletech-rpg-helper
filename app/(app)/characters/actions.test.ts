@@ -163,6 +163,7 @@ function storedRow(mech: unknown = null): CharacterRow {
     owner_id: "owner",
     campaign_id: null,
     mech,
+    mech_damage: null,
     version: 1,
     created_at: "2026-01-01T00:00:00Z",
     updated_at: "2026-01-01T00:00:00Z",
