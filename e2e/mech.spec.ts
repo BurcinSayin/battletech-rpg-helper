@@ -260,6 +260,8 @@ test("catalog pick (Firestarter FS9-H) loads, edits, and persists repeats, empty
 
   // Slot order and empty slots: Left Arm has 5 entries then -Empty- padding.
   const leftArm = view.getByRole("region", { name: "Left Arm critical slots" });
+  const leftExpand = leftArm.getByRole("button", { expanded: false });
+  if (await leftExpand.isVisible()) await leftExpand.click();
   const leftItems = leftArm.getByRole("listitem");
   await expect(leftItems).toHaveCount(12);
   await expect(leftItems.nth(0)).toContainText("Shoulder");
@@ -270,6 +272,8 @@ test("catalog pick (Firestarter FS9-H) loads, edits, and persists repeats, empty
   const centerTorso = view.getByRole("region", {
     name: "Center Torso critical slots",
   });
+  const centerExpand = centerTorso.getByRole("button", { expanded: false });
+  if (await centerExpand.isVisible()) await centerExpand.click();
   await expect(centerTorso.getByRole("listitem")).toHaveCount(12);
   await expect(centerTorso.getByRole("listitem").nth(0)).toContainText(
     "Fusion Engine",

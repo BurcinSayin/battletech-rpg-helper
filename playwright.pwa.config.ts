@@ -37,7 +37,7 @@ export default defineConfig({
     { name: "pixel5", use: { ...devices["Pixel 5"] } },
   ],
   webServer: {
-    command: `PORT=${PORT} npm run start`,
+    command: `npm run start -- --port ${PORT}`,
     url: baseURL,
     reuseExistingServer: false,
     timeout: 240_000,

@@ -17,6 +17,7 @@ The project is structured as an installable Progressive Web App (PWA) that bridg
 - **📱 Installable PWA (Mobile-First)**: Built to work beautifully on mobile viewports at the gaming table, with offline support powered by Serwist.
 - **🔄 `.btcc` Native Import/Export**: Fully compatible with the desktop app. Supports importing existing `.btcc` character sheets and exporting them with 100% byte-compatibility.
 - **⚡ Real-Time Syncing**: Real-time collaborative editing. GMs can edit character sheets, and players see updates immediately, and vice-versa.
+- **🛡️ Manual Mech Damage**: Track armor, internal structure, critical hits, heat and pilot hits in view mode with batch Apply and conflict protection. See the [mech damage guide](docs/MECH_DAMAGE.md) for reset and replacement behavior.
 
 ---
 

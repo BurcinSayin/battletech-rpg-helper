@@ -164,7 +164,7 @@ test("caches nothing user-specific, even after sign-out", async ({ page }) => {
   await waitForServiceWorkerControl(page);
 
   await signUp(page);
-  await page.getByRole("button", { name: "+ New character" }).click();
+  await page.getByRole("button", { name: "Create blank character" }).click();
   await expect(page).toHaveURL(/\/characters\/[0-9a-f-]+$/);
   await page.goto("/dashboard");
 
@@ -196,7 +196,7 @@ test("does not reload and discard unsaved edits when the network returns", async
   await waitForServiceWorkerControl(page);
 
   await signUp(page, "reload");
-  await page.getByRole("button", { name: "+ New character" }).click();
+  await page.getByRole("button", { name: "Create blank character" }).click();
   await expect(page).toHaveURL(/\/characters\/[0-9a-f-]+$/);
 
   await page.getByRole("button", { name: "Edit" }).click();
