@@ -1,0 +1,7128 @@
+{
+  "version": 1,
+  "desktopSource": {
+    "repository": "https://github.com/bearchik/Battletech-Character-Creator",
+    "revision": null,
+    "files": {
+      "resource/equiplist.dat": "6aebb991f90a7791bbc769c9712740d4a991e08be3732de14b89d52611f8d339",
+      "resource/weaponslist.dat": "1844eca39d57a7b031a1572eba18286dd0db86d1eaeba763040ccb5d44960f40",
+      "loadresurce.cpp": "12d841eb6096b0a31d6750f2f2472963baa0a193977baa8b832914507ffa5285",
+      "mainwindow.cpp": "81e3390e22a40709e8004d2a78ce4c80683834974c9ba214b3b99980237030c3"
+    }
+  },
+  "tables": [
+    {
+      "file": "ARCHAIC MELEE WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "ARCHAIC RANGED WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "AUDIO-VIDEO-TRIDEO EQUIPMENT.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "BALLISTIC WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "COMBAT ARMOR ACCESSORIES.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "COMMUNICATIONS EQUIPMENT.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "RANGE",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "COMPUTERS.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "Camo Stealth Effects in Tactical Combat.json",
+      "adapter": "reference",
+      "columns": [
+        [
+          "Camo Rating",
+          "Tactical Rules Effect (additional roll modifiers based on target MP spent)*"
+        ]
+      ]
+    },
+    {
+      "file": "DEMOLITIONS.json",
+      "adapter": "explosive",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "DRUG CREATION TABLES.json",
+      "adapter": "reference",
+      "columns": [
+        [
+          "BASE DRUG STRENGTH",
+          "BASE EQUIPMENT RATING",
+          "BASE COST (C-BILLS)",
+          "BASE CREATION TIME (IN HOURS)"
+        ],
+        [
+          "POISON OR DRUG CHARACTERISTIC",
+          "CREATION ROLL MOD",
+          "CREATION TIME MOD*",
+          "EQUIPMENT RATING MOD",
+          "COST MOD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "ECM Stealth Effects in Tactical Combat.json",
+      "adapter": "reference",
+      "columns": [
+        [
+          "ECM Rating",
+          "Tactical Rules Effect"
+        ]
+      ]
+    },
+    {
+      "file": "ELECTIVE IMPLANTS.json",
+      "adapter": "implant",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "ENERGY WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "ESPIONAGE GEAR AND SECURITY SYSTEMS.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "EXOTIC ARMOR.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "FLECHETTE WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "GAUSS WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "GRENADE LAUNCHERS AND MORTARS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "GYROJET WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "HOSTILE ENVIRONMENT GEAR.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "IR Stealth Effects in Tactical Combat.json",
+      "adapter": "reference",
+      "columns": [
+        [
+          "IR Rating",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)"
+        ]
+      ]
+    },
+    {
+      "file": "LIMB AND ORGAN REPLACEMENTS.json",
+      "adapter": "implant",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MACHINE GUN SUPPORT WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MECHWARRIOR KITS.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MEDICAL EQUIPMENT.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MISCELLANEOUS GEAR.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MISCELLANEOUS RANGED WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MISSILE LAUNCHERS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "MODERN MELEE WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "NON-COMBAT ATTIRE.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "OPTICS.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "ORDNANCE.json",
+      "adapter": "ordnance",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "COST/RELOAD",
+          "AFF",
+          "MASS",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "PERSONAL ARMOR.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "PERSONAL VEHICLES.json",
+      "adapter": "vehicle",
+      "columns": [
+        [
+          "VEHICLE",
+          "EQUIPMENT RATINGS",
+          "COST*",
+          "ARMOR** F/S/R (BAR)",
+          "FUEL (KG)/TYPE***",
+          "RANGE†",
+          "SPEED (KPH)†",
+          "AFF",
+          "CREW/PASS",
+          "CARGO (KG)"
+        ]
+      ]
+    },
+    {
+      "file": "POWER PACKS.json",
+      "adapter": "powerPack",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER CAPACITY",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "RECHARGERS.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER GENERATION",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "RECOILLESS RIFLES.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "REMOTE SENSORS.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "RANGE",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "REPAIR-SALVAGE GEAR.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SAMPLE DRUGS AND POISONS.json",
+      "adapter": "drug",
+      "columns": [
+        [
+          "SAMPLE DRUG OR POISON",
+          "PRIMARY VECTOR",
+          "DRUG STRENGTH",
+          "POISON AP",
+          "DURATION",
+          "BASE PRICE",
+          "EQUIP. RATINGS",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SPECIAL COMBAT KITS.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SPECIALTY AMMUNITION.json",
+      "adapter": "ammoModifier",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "COST/RELOAD",
+          "AFF",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "STANDARD ARMOR KITS (BY FACTION).json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "STANDARD EXPLOSIVES.json",
+      "adapter": "explosive",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "STEALTH GEAR.json",
+      "adapter": "armor",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "BAR (M/B/E/X)",
+          "COST/PATCH",
+          "AFF",
+          "MASS",
+          "COVERAGE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SUPPORT ENERGY WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SUPPORT GAUSS WEAPONS.json",
+      "adapter": "weapon",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "AP/BD",
+          "RANGE",
+          "SHOTS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS/RELOAD",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "SURVEILLANCE GEAR.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST",
+          "AFF",
+          "MASS",
+          "DETECTION RANGE",
+          "POWER USE",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "VEHICULAR FUELS (TYPICAL).json",
+      "adapter": "fuel",
+      "columns": [
+        [
+          "FUEL TYPE",
+          "EQUIPMENT RATINGS",
+          "COST PER KG",
+          "NOTES"
+        ]
+      ]
+    },
+    {
+      "file": "WEAPON ACCESSORIES.json",
+      "adapter": "equipment",
+      "columns": [
+        [
+          "ITEM",
+          "EQUIPMENT RATINGS",
+          "COST/RELOAD",
+          "AFF",
+          "MASS",
+          "NOTES"
+        ]
+      ]
+    }
+  ],
+  "overrides": [
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "FLAK ARMOR",
+        "item": "JACKET",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "FLAK ARMOR",
+        "item": "PANTS",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "FLAK ARMOR",
+        "item": "SHORTS/SKIRT/KILT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "FLAK ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "FLAK ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE ARMOR",
+        "item": "JACKET",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE ARMOR",
+        "item": "PANTS",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE ARMOR",
+        "item": "SHORTS/SKIRT/KILT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE/FLAK ARMOR",
+        "item": "JACKET",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE/FLAK ARMOR",
+        "item": "PANTS",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE/FLAK ARMOR",
+        "item": "SHORTS/SKIRT/KILT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE/FLAK ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "ABLATIVE/FLAK ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "ABLATIVE/FLAK ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "BALLISTIC PLATE ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "BALLISTIC PLATE ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "BALLISTIC PLATE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "BALLISTIC PLATE ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "BALLISTIC PLATE ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "JACKET (UNHOODED)",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      },
+      "aliases": [
+        "JACKET (UNHOODED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "JACKET (HOODED)",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      },
+      "aliases": [
+        "JACKET (HOODED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "PANTS",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "SHORTS/SKIRT/KILT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "NEO-CHAIN ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "NEO-CHAIN ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "MYOMER ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "MYOMER ARMOR",
+        "item": "SUIT",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "MYOMER ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "MYOMER ARMOR",
+        "item": "VEST",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "MYOMER ARMOR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "CONCEALED ARMOR",
+        "occurrence": 0
+      },
+      "reason": "Family header supplies only ratings, BAR, affiliation and family notes.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "CONCEALED ARMOR",
+        "item": "CONCEALED FLAK",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "CONCEALED ARMOR",
+        "occurrence": 0
+      },
+      "kind": "modifier",
+      "aliases": [
+        "CONCEALED FLAK"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "CONCEALED ARMOR",
+        "item": "CONCEALED ABLATIVE",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "CONCEALED ARMOR",
+        "occurrence": 0
+      },
+      "kind": "modifier",
+      "aliases": [
+        "CONCEALED ABLATIVE"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "CONCEALED ARMOR",
+        "item": "CONCEALED AB/FLAK",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "CONCEALED ARMOR",
+        "occurrence": 0
+      },
+      "kind": "modifier",
+      "aliases": [
+        "CONCEALED AB/FLAK"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL ARMOR",
+        "section": "CONCEALED ARMOR",
+        "item": "CONCEALED BALLISTIC PLATE",
+        "occurrence": 0
+      },
+      "reason": "Link to printed armor family; do not inherit cost, mass or coverage. Unique bare printed label for section-qualified catalog name.",
+      "parent": {
+        "table": "PERSONAL ARMOR",
+        "section": null,
+        "item": "CONCEALED ARMOR",
+        "occurrence": 0
+      },
+      "kind": "modifier",
+      "aliases": [
+        "CONCEALED BALLISTIC PLATE"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "FEDERATED-BARRETT M42B",
+        "occurrence": 0
+      },
+      "reason": "Printed weapon family header, not independently purchasable.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(STANDARD MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance. Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "parent": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "FEDERATED-BARRETT M42B",
+        "occurrence": 0
+      },
+      "aliases": [
+        "Federated-barret M42B"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(CLOSE-IN MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance.",
+      "parent": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "FEDERATED-BARRETT M42B",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "FEDERATED-BARRETT M42B",
+        "occurrence": 0
+      },
+      "reason": "Printed weapon family header, not independently purchasable.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "(LT. MACHINE GUN MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance. Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "parent": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "FEDERATED-BARRETT M42B",
+        "occurrence": 0
+      },
+      "aliases": [
+        "Federated-Barret M42B(Lt. Machine Gun Mode)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "EBONY ASSAULT RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Printed weapon family header, not independently purchasable.",
+      "disposition": "parent"
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(STANDARD MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance. Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "parent": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "EBONY ASSAULT RIFLE",
+        "occurrence": 0
+      },
+      "aliases": [
+        "Ebony Assault Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(HIGH-POWER MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance.",
+      "parent": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "EBONY ASSAULT RIFLE",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(EXTENDED-RANGE MODE)",
+        "occurrence": 0
+      },
+      "reason": "Flatten printed mode with explicit family provenance and missing-cell inheritance.",
+      "parent": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "EBONY ASSAULT RIFLE",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "(LT. MACHINE GUN MODE)",
+        "occurrence": 0
+      },
+      "reason": "Printed cross-reference; use complete support-weapon mode.",
+      "disposition": "crossReference",
+      "target": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "(LT. MACHINE GUN MODE)",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "STEALTH GEAR",
+        "section": null,
+        "item": "SNEAK SUIT, ECM/IR",
+        "occurrence": 1
+      },
+      "reason": "Exact repeated transcription row; fail if any source metadata or cell diverges.",
+      "disposition": "duplicate",
+      "target": {
+        "table": "STEALTH GEAR",
+        "section": null,
+        "item": "SNEAK SUIT, ECM/IR",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "WITH SOLID AMMO",
+        "occurrence": 0
+      },
+      "reason": "Solid-ammo variant retains its own damage and reload stats; ordinary Avenger remains an item.",
+      "parent": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "AVENGER CCW",
+        "occurrence": 0
+      }
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "SEA MINES",
+        "occurrence": 0
+      },
+      "reason": "Printed installation modifier, not an absolute standalone purchase.",
+      "kind": "modifier"
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "LAND MINES",
+        "occurrence": 0
+      },
+      "reason": "Printed installation modifier, not an absolute standalone purchase.",
+      "kind": "modifier"
+    },
+    {
+      "source": {
+        "table": "DEMOLITIONS",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "DEMOLITION KIT",
+        "occurrence": 0
+      },
+      "reason": "Equipment kit, not a weapon; purchase cost is COST/RELOAD purchase half.",
+      "output": "equipment",
+      "kind": "gear"
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "STABILIZERS AND HARNESSES",
+        "item": "RECOIL COMPENSATION",
+        "occurrence": 0
+      },
+      "reason": "Printed proportional cost and mass modifier. Unique bare printed label for section-qualified catalog name.",
+      "kind": "modifier",
+      "aliases": [
+        "RECOIL COMPENSATION"
+      ]
+    },
+    {
+      "source": {
+        "table": "VEHICULAR FUELS (TYPICAL)",
+        "section": null,
+        "item": "BATTERIES",
+        "occurrence": 0
+      },
+      "reason": "Price describes recharge service, not battery purchase.",
+      "disposition": "reference"
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "MARIAN HEGEMONY",
+        "item": "HELMET",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Marian/Helmet"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "MARIAN HEGEMONY",
+        "item": "JACKET",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values. Desktop Suit/TAL differs from book JACKET/TORSO, ARMS; identity only, never rewrite coverage.",
+      "aliases": [
+        "Marian/Suit"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "MARIAN HEGEMONY",
+        "item": "BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Marian/Boots"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "MARIAN HEGEMONY",
+        "item": "GLOVES",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Marian/Gloves"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "SNIPER RIFLE (MINOLTA 9000)",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Sniper Rifle(Minolta 9000)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "KNIFE/DAGGER/BAYONET",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Knife",
+        "Dagger",
+        "Bayonet"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "HATCHET/TOMAHAWK",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Hatchet",
+        "Tomahawk"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "HATCHET/TOMAHAWK",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "(R)Hatchet",
+        "(R)Tomahawk"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "VIBROBLADE/VIBRODAGGER",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Vibroblade",
+        "Vibrodagger"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "PULSE LASER PISTOL, CLAN",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Pulse Laser Pistol, Clan"
+      ]
+    },
+    {
+      "source": {
+        "table": "POWER PACKS",
+        "section": "STANDARD PACKS",
+        "item": "POWER PACK",
+        "occurrence": 0
+      },
+      "reason": "Reviewed desktop display-name compatibility alias; never changes imported row values.",
+      "aliases": [
+        "Power Pack"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "AXE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Axe"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "BLACKJACK/SAP",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Blackjack/Sap"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "BOKKEN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Bokken"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "CLUB OR IMPROVISED",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Club or Improvised "
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "DAO",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Dao"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "KATANA",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Katana"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "NO-DACHI",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "No-Dachi"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "NUNCHAKU",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Nunchaku"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "POLE ARM",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Pole Arm"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "SCIMITAR",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Scimitar"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "STAFF",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Staff"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "SWORD",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Sword"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "WAKIZASHI",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Wakizashi"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: ARCHERY",
+        "item": "SHORT BOW",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Short bow"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: ARCHERY",
+        "item": "COMPOUND BOW",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Compound bow"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: ARCHERY",
+        "item": "HANKYU",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Hankyu"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: ARCHERY",
+        "item": "DAIKYU",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Daikyu"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "DART",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Dart"
+      ]
+    },
+    {
+      "source": {
+        "table": "ARCHAIC RANGED WEAPONS",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "SPEAR",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Spear"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "MEDUSA WHIP",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Medusa Whip"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "MINI STUNSTICK",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mini Stunstick"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "NEURAL LASH",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Neural Lash"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "NEURAL WHIP",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Neural Whip"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "STUNSTICK",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Stunstick"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "STUN-STAFF, SINGLE-END",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Stun-staff, single-end"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "STUN-STAFF, DOUBLE-END",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Stun-staff, double-end"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "MONOWIRE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Monowire"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "VIBROAXE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Vibroaxe"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "VIBROKATANA",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Vibrokatana"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "VIBROMACE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Vibromace"
+      ]
+    },
+    {
+      "source": {
+        "table": "MODERN MELEE WEAPONS",
+        "section": "SKILL: MELEE WEAPONS",
+        "item": "VIBROSWORD",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Vibrosword"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "AUTO-PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Auto-Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "REVOLVER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Revolver"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (SMGs)",
+        "item": "SUBMACHINE GUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Submachine Gun"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "ELEPHANT GUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Elephant Gun"
+      ]
+    },
+    {
+      "source": {
+        "table": "BALLISTIC WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "SNIPER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Sniper Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "BLAZER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Blazer Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "ER LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Er Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "HOLDOUT LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Holdout Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "NAKJIMA HAND LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Nakjima Hand Laser"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "NOVA LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Nova Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "SUNBEAM LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "SunBeam Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "PULSE LASER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Pulse Laser Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "BLAZER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Blazer Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "MARX XX LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Marx XX Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "INTEK LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Intek Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "MAGNA LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Magna Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "M61A COMBAT SYSTEM",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "M61A Combat System"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "MAUSER 1200 LSS",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mauser 1200 LSS"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "MAUSER IIC IAS",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mauser IIC IAS"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "ER LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Er Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "PULSE LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Pulse Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "ENERGY WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "STARFIRE ER LASER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Starfire Er Laser Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "NEEDLER PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Needler Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "M&G FLECHETTE PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "M&G Flechette Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "AUTOMATIC SHOTGUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Automatic Shotgun"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "COMBAT SHOTGUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Combat Shotgun"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "DOUBLE-BARRELED SHOTGUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Double-Barreled Shotgun"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "AVENGER CCW",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Avenger CCW"
+      ]
+    },
+    {
+      "source": {
+        "table": "FLECHETTE WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "NEEDLER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Needler Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "GAUSS WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "GAUSS PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gauss Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "COVENTRY HANDROCKET",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Coventry Handrocket"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "GYROJET PISTOL",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyrojet Pistol"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "GYROJET PISTOL, HOLDOUT",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyrojet Pistol, Holdout"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "GYROJET RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyrojet Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "GYROJET GUN, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyrojet Gun, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "GYROSLUG CARBINE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyroslug Carbine"
+      ]
+    },
+    {
+      "source": {
+        "table": "GYROJET WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "GYROSLUG RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Gyroslug Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "DART GUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Dart Gun"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "SONIC STUNNER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Sonic Stunner"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (PISTOLS)",
+        "item": "TRANQ GUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Tranq Gun"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "BUCCANEER GEL GUN",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Buccaneer Gel Gun"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "CERES ARMS CROWDBUSTER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Ceres Arms Crowdbuster"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS RANGED WEAPONS",
+        "section": "SKILL: SMALL ARMS (RIFLES)",
+        "item": "RADIUM SNIPER RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Radium Sniper Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "AUTOCANNON, BEARHUNTER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Autocannon, BearHunter"
+      ]
+    },
+    {
+      "source": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "AUTOCANNON, SEMI-PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Autocannon, Semi-Portable"
+      ]
+    },
+    {
+      "source": {
+        "table": "MACHINE GUN SUPPORT WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT NEEDLER, FIREDRAKE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Needler, Firedrake"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "GRENADE LAUNCHER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade Launcher"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "GRENADE LAUNCHER, COMPACT",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade Launcher, Compact"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "GRENADE LAUNCHER, AUTOMATIC",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade Launcher, Automatic"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "GRENADE LAUNCHER, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade Launcher, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: ARTILLERY",
+        "item": "MORTAR, LIGHT",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mortar, Light"
+      ]
+    },
+    {
+      "source": {
+        "table": "GRENADE LAUNCHERS AND MORTARS",
+        "section": "SKILL: ARTILLERY",
+        "item": "MORTAR, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mortar, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISSILE LAUNCHERS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "VLAW",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "VLAW"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISSILE LAUNCHERS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "LAW",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "LAW"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISSILE LAUNCHERS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "LRM LAUNCHER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "LRM Launcher"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISSILE LAUNCHERS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "MRM LAUNCHER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "MRM Launcher"
+      ]
+    },
+    {
+      "source": {
+        "table": "RECOILLESS RIFLES",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "RECOILLESS RIFLE, LIGHT",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Recoilless Rifle, Light"
+      ]
+    },
+    {
+      "source": {
+        "table": "RECOILLESS RIFLES",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "RECOILLESS RIFLE, MEDIUM",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Recoilless Rifle, Medium"
+      ]
+    },
+    {
+      "source": {
+        "table": "RECOILLESS RIFLES",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "RECOILLESS RIFLE, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Recoilless Rifle, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "DRAGONSBANE PULSE LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Dragonsbane Pulse Laser"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "HELLBORE ASSAULT LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Hellbore Assault Laser"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Laser"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT LASER, SEMI-PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Laser, Semi-Portable"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT PULSE LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Pulse Laser"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT PULSE LASER, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Pulse Laser, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "SUPPORT PULSE LASER, SEMI-PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Support Pulse Laser,  Semi-Portable"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "FLAMER, MAN-PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Flamer, Man-Pack"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "FLAMER, HEAVY",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Flamer, Heavy"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "PARTICLE CANNON, SEMI-PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Particle cannon, Semi-portable"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "PARTICLE CANNON, SUPPORT",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Particle cannon, Support"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT ENERGY WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "PLASMA RIFLE, MAN-PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Plasma Rifle, man-portable"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT GAUSS WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "DAVID LIGHT GAUSS RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "David Light Gauss Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT GAUSS WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "KING DAVID LIGHT GAUSS RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "King David Light Gauss Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT GAUSS WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "MAGSHOT GAUSS RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Magshot Gauss Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "SUPPORT GAUSS WEAPONS",
+        "section": "SKILL: SUPPORT WEAPONS",
+        "item": "TSUNAMI HEAVY GAUSS RIFLE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Tsunami Heavy Gauss Rifle"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "GRENADE, MICRO",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade, Micro"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "GRENADE, MINI",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade, Mini"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: THROWN WEAPONS",
+        "item": "GRENADE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Grenade"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "MINE, ACTIVE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mine, Active"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD EXPLOSIVES",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "MINE, VIBRABOMB",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Mine, VibraBomb"
+      ]
+    },
+    {
+      "source": {
+        "table": "DEMOLITIONS",
+        "section": "SKILL: DEMOLITIONS",
+        "item": "PENTAGLYCERINE",
+        "occurrence": 0
+      },
+      "reason": "Unique normalized printed-label match to reviewed latin1 desktop display name and weapon skill.",
+      "aliases": [
+        "Pentaglycerine"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "RECORDING DEVICES",
+        "item": "MICRO-RECORDER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICRO-RECORDER"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "RECORDING DEVICES",
+        "item": "MICRO-CAMCORDER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICRO-CAMCORDER"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "RECORDING DEVICES",
+        "item": "VIDEO CAMERA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VIDEO CAMERA"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "RECORDING DEVICES",
+        "item": "TRI-VID CAMERA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRI-VID CAMERA"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "HOLOMAP",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOMAP"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "HOLOPROJECTOR, PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOPROJECTOR, PORTABLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "HOLOTANK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOTANK"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "HOLOVISION MONITOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOVISION MONITOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "PERSONAL MUSIC SET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PERSONAL MUSIC SET"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "TRI-VID SET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRI-VID SET"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "PROJECTION/PLAYBACK DEVICES",
+        "item": "VIDEO MONITOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VIDEO MONITOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "STORAGE MEDIA (BLANK)",
+        "item": "AUDIO/AUDIO-VIDEO CHIP",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AUDIO/AUDIO-VIDEO CHIP"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "STORAGE MEDIA (BLANK)",
+        "item": "HOLOVID VID-CHIP/ CRYSTAL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOVID VID-CHIP/ CRYSTAL"
+      ]
+    },
+    {
+      "source": {
+        "table": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+        "section": "STORAGE MEDIA (BLANK)",
+        "item": "HOLOMAP CHIP",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLOMAP CHIP"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "HELMETS",
+        "item": "FLAK HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLAK HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "HELMETS",
+        "item": "ABLATIVE HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ABLATIVE HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "HELMETS",
+        "item": "ABLATIVE/FLAK HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ABLATIVE/FLAK HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "HELMETS",
+        "item": "STANDARD COMBAT HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "STANDARD COMBAT HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "HELMETS",
+        "item": "ADVANCED COMBAT HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ADVANCED COMBAT HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GLOVES",
+        "item": "HEAVY COMBAT GLOVES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEAVY COMBAT GLOVES"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "BOOTS",
+        "item": "COMBAT BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMBAT BOOTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "SHIELDS*",
+        "item": "RIOT SHIELD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RIOT SHIELD"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "SHIELDS*",
+        "item": "BULLET SHIELD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BULLET SHIELD"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "SHIELDS*",
+        "item": "HEAVY SHIELD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEAVY SHIELD"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "LOAD-BEARING EQUIPMENT**",
+        "item": "PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "LOAD-BEARING EQUIPMENT**",
+        "item": "PACKFRAME",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PACKFRAME"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GRIPPER GEAR",
+        "item": "GRIPPER BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GRIPPER BOOTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GRIPPER GEAR",
+        "item": "GRIPPER GLOVES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GRIPPER GLOVES"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GRIPPER GEAR",
+        "item": "MICROHOOK BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICROHOOK BOOTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GRIPPER GEAR",
+        "item": "MICROHOOK GLOVES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICROHOOK GLOVES"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMBAT ARMOR ACCESSORIES",
+        "section": "GRIPPER GEAR",
+        "item": "GRAPPLE ROD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GRAPPLE ROD"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "COMMUNICATIONS HEADSET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMMUNICATIONS HEADSET"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "COMM. KIT, LONG-RANGE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMM. KIT, LONG-RANGE"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "CIVILIAN COMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CIVILIAN COMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "CIVILIAN MICRO- COMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CIVILIAN MICRO- COMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "INTERCOM-LINK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "INTERCOM-LINK"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "SATNAV RECEIVER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SATNAV RECEIVER"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "CIVILIAN COMMUNICATIONS",
+        "item": "VID-PHONE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VID-PHONE"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "MILITARY/INDUSTRIAL COMMUNICATIONS",
+        "item": "FIELD COMM. KIT, ADVANCED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FIELD COMM. KIT, ADVANCED"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "MILITARY/INDUSTRIAL COMMUNICATIONS",
+        "item": "FIELD COMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FIELD COMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "MILITARY/INDUSTRIAL COMMUNICATIONS",
+        "item": "MILITARY COMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MILITARY COMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "MILITARY/INDUSTRIAL COMMUNICATIONS",
+        "item": "MILITARY MICRO- COMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MILITARY MICRO- COMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "MILITARY/INDUSTRIAL COMMUNICATIONS",
+        "item": "SUBVOCAL MICROCOMMUNICATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SUBVOCAL MICROCOMMUNICATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "RELAYS/HUBS",
+        "item": "CIVILIAN FIELD RELAY, SMALL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CIVILIAN FIELD RELAY, SMALL"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "RELAYS/HUBS",
+        "item": "CIVILIAN FIELD RELAY, LARGE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CIVILIAN FIELD RELAY, LARGE"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "RELAYS/HUBS",
+        "item": "CIVILIAN COMM. HUB",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CIVILIAN COMM. HUB"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "RELAYS/HUBS",
+        "item": "MILITARY RELAY ANTENNA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MILITARY RELAY ANTENNA"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMMUNICATIONS EQUIPMENT",
+        "section": "RELAYS/HUBS",
+        "item": "MILITARY COMM. HUB",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MILITARY COMM. HUB"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "PERSONAL COMPUTING",
+        "item": "COMPAD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMPAD"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "PERSONAL COMPUTING",
+        "item": "NOTEPUTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NOTEPUTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "PERSONAL COMPUTING",
+        "item": "PERSONAL COMPUTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PERSONAL COMPUTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "PERSONAL COMPUTING",
+        "item": "POCKET TRANSCRIBER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "POCKET TRANSCRIBER"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "PERSONAL COMPUTING",
+        "item": "TELESCAN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TELESCAN"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "DIAGNOSTIC EQUIPMENT",
+        "item": "DESCARTES MK XXI",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DESCARTES MK XXI"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "DIAGNOSTIC EQUIPMENT",
+        "item": "DESCARTES MK XXV",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DESCARTES MK XXV"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "DIAGNOSTIC EQUIPMENT",
+        "item": "SCANALYZER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SCANALYZER"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "CONTROL INTERFACES",
+        "item": "ENGINEER’S PORTABLE CONSOLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENGINEER’S PORTABLE CONSOLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "CONTROL INTERFACES",
+        "item": "ENHANCED IMAGING DISPLAY",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENHANCED IMAGING DISPLAY"
+      ]
+    },
+    {
+      "source": {
+        "table": "COMPUTERS",
+        "section": "SPECIAL SYSTEMS",
+        "item": "VERIGRAPH SCANNER/ READER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VERIGRAPH SCANNER/ READER"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ELECTIVE MYOMER IMPLANT (ARM)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTIVE MYOMER IMPLANT (ARM)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ELECTIVE MYOMER IMPLANT (FEET, BOTH)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTIVE MYOMER IMPLANT (FEET, BOTH)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ELECTIVE MYOMER IMPLANT (HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTIVE MYOMER IMPLANT (HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ELECTIVE MYOMER IMPLANT (LEGS, BOTH)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTIVE MYOMER IMPLANT (LEGS, BOTH)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ELECTIVE MYOMER IMPLANT (FULL BODY)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTIVE MYOMER IMPLANT (FULL BODY)"
+      ]
+    },
+    {
+      "source": {
+        "table": "ELECTIVE IMPLANTS",
+        "section": "ELECTIVE MYOMER IMPLANTS",
+        "item": "ENHANCED IMAGING (EI) NEURAL IMPLANT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENHANCED IMAGING (EI) NEURAL IMPLANT"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "LOCK-PICKS AND SECURITY BYPASSES",
+        "item": "BASIC LOCK PICK SET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BASIC LOCK PICK SET"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "LOCK-PICKS AND SECURITY BYPASSES",
+        "item": "VIBRO LOCK PICK SET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VIBRO LOCK PICK SET"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "LOCK-PICKS AND SECURITY BYPASSES",
+        "item": "ELECTRONIC SECURITY BYPASS KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTRONIC SECURITY BYPASS KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "LOCK-PICKS AND SECURITY BYPASSES",
+        "item": "ELECTRONIC CODEBREAKER, ADVANCED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTRONIC CODEBREAKER, ADVANCED"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "LOCK-PICKS AND SECURITY BYPASSES",
+        "item": "NEUROHELMET CODEBREAKER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NEUROHELMET CODEBREAKER"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "DISGUISE/MAKE-UP KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DISGUISE/MAKE-UP KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "FORGERY KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FORGERY KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "FORENSICS ANALYSIS KIT, ADVANCED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FORENSICS ANALYSIS KIT, ADVANCED"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "FORENSICS ANALYSIS KIT, BASIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FORENSICS ANALYSIS KIT, BASIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "COUNTER-FORGERY KIT, BASIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COUNTER-FORGERY KIT, BASIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "COUNTER-FORGERY KIT, ELECTRONIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COUNTER-FORGERY KIT, ELECTRONIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "FIRE CAPSULE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FIRE CAPSULE"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "LIE DETECTOR/ POLYGRAPH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LIE DETECTOR/ POLYGRAPH"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL ESPIONAGE GEAR",
+        "item": "NEURAL INTERROGATION COMPUTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NEURAL INTERROGATION COMPUTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, MAGNETIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, MAGNETIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, MECHANICAL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, MECHANICAL"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, ALARMED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, ALARMED"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, REINFORCED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, REINFORCED"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, BOOBY-TRAPPED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, BOOBY-TRAPPED"
+      ]
+    },
+    {
+      "source": {
+        "table": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+        "section": "GENERAL SECURITY SYSTEMS",
+        "item": "LOCK, NEURAL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LOCK, NEURAL"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "MASKS AND RESPIRATORS",
+        "item": "FILTER MASK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FILTER MASK"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "MASKS AND RESPIRATORS",
+        "item": "RESPIRATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RESPIRATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "MASKS AND RESPIRATORS",
+        "item": "HUMIDIFIER MASK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HUMIDIFIER MASK"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "HOSTILE WEATHER GEAR",
+        "item": "HEAT SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEAT SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "HOSTILE WEATHER GEAR",
+        "item": "PARKA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PARKA"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "HOSTILE WEATHER GEAR",
+        "item": "SNOW SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SNOW SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "HOSTILE WEATHER GEAR",
+        "item": "WETSUIT (SCUBA SUIT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "WETSUIT (SCUBA SUIT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "HOSTILE WEATHER GEAR",
+        "item": "UNDERWATER OPERATIONS GEAR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "UNDERWATER OPERATIONS GEAR"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ENVIRONMENT SUITS",
+        "item": "ENGINEERING SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENGINEERING SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ENVIRONMENT SUITS",
+        "item": "ENVIRONMENT SUIT (HEAVY)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENVIRONMENT SUIT (HEAVY)"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ENVIRONMENT SUITS",
+        "item": "ENVIRONMENT SUIT (LIGHT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENVIRONMENT SUIT (LIGHT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ENVIRONMENT SUITS",
+        "item": "SPACE SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SPACE SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ENVIRONMENT SUITS",
+        "item": "PATCHWORK ENVIRO-SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PATCHWORK ENVIRO-SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ACCESSORIES",
+        "item": "GRIP SHOES/SLIPS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GRIP SHOES/SLIPS"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ACCESSORIES",
+        "item": "ENGINEER’S HELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENGINEER’S HELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ACCESSORIES",
+        "item": "PROTECTIVE GOGGLES/ VISOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PROTECTIVE GOGGLES/ VISOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ACCESSORIES",
+        "item": "POLARIZED GOGGLES/ VISOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "POLARIZED GOGGLES/ VISOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "HOSTILE ENVIRONMENT GEAR",
+        "section": "ACCESSORIES",
+        "item": "SUNGLASSES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SUNGLASSES"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 1: SIMPLE LIMB (ARM/LEG)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 1: SIMPLE LIMB (ARM/LEG)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 2: USEFUL LIMB (ARM/HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 2: USEFUL LIMB (ARM/HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 2: USEFUL LIMB (LEG/FOOT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 2: USEFUL LIMB (LEG/FOOT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 3: STANDARD PROSTHETIC (ARM/HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 3: STANDARD PROSTHETIC (ARM/HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 3: STANDARD PROSTHETIC (LEG/FOOT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 3: STANDARD PROSTHETIC (LEG/FOOT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 4: ADVANCED PROSTHETIC (ARM/HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4: ADVANCED PROSTHETIC (ARM/HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 4: ADVANCED PROSTHETIC (LEG/FOOT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4: ADVANCED PROSTHETIC (LEG/FOOT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 5: MYOMER REPLACEMENT (ARM)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5: MYOMER REPLACEMENT (ARM)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 5: MYOMER REPLACEMENT (FOOT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5: MYOMER REPLACEMENT (FOOT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 5: MYOMER REPLACEMENT (HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5: MYOMER REPLACEMENT (HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "PROSTHETICS",
+        "item": "TYPE 5: MYOMER REPLACEMENT (LEG)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5: MYOMER REPLACEMENT (LEG)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "CLONED REPLACEMENTS",
+        "item": "TYPE 6: CLONED REPLACEMENT (ARM)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 6: CLONED REPLACEMENT (ARM)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "CLONED REPLACEMENTS",
+        "item": "TYPE 6: CLONED REPLACEMENT (FOOT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 6: CLONED REPLACEMENT (FOOT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "CLONED REPLACEMENTS",
+        "item": "TYPE 6: CLONED REPLACEMENT (HAND)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 6: CLONED REPLACEMENT (HAND)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "CLONED REPLACEMENTS",
+        "item": "TYPE 6: CLONED REPLACEMENT (LEG)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 6: CLONED REPLACEMENT (LEG)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "CLONED REPLACEMENTS",
+        "item": "TYPE 6: CLONED REPLACEMENT (ORGAN)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 6: CLONED REPLACEMENT (ORGAN)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "BIONIC REPLACEMENTS",
+        "item": "TYPE 5: BIONIC EAR REPLACEMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5: BIONIC EAR REPLACEMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "BIONIC REPLACEMENTS",
+        "item": "TYPE 4: BIONIC EYE REPLACEMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4: BIONIC EYE REPLACEMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "BIONIC REPLACEMENTS",
+        "item": "TYPE 3: BIONIC ORGAN (ARTIFICIAL HEART)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 3: BIONIC ORGAN (ARTIFICIAL HEART)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "BIONIC REPLACEMENTS",
+        "item": "TYPE 4: BIONIC ORGAN (ARTIFICIAL LIVER/ KIDNEY)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4: BIONIC ORGAN (ARTIFICIAL LIVER/ KIDNEY)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "BIONIC REPLACEMENTS",
+        "item": "TYPE 4: BIONIC ORGAN (ARTIFICIAL LUNG)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4: BIONIC ORGAN (ARTIFICIAL LUNG)"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "COSMETIC MODIFICATIONS",
+        "item": "TYPE 4 LIMB: COSMETIC TREATMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 4 LIMB: COSMETIC TREATMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "COSMETIC MODIFICATIONS",
+        "item": "TYPE 5 LIMB: COSMETIC TREATMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPE 5 LIMB: COSMETIC TREATMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "COSMETIC MODIFICATIONS",
+        "item": "BIONIC EAR COSMETIC TREATMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BIONIC EAR COSMETIC TREATMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "LIMB AND ORGAN REPLACEMENTS",
+        "section": "COSMETIC MODIFICATIONS",
+        "item": "BIONIC EYE COSMETIC TREATMENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BIONIC EYE COSMETIC TREATMENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)",
+        "item": "COOLING VEST",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COOLING VEST"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)",
+        "item": "NEUROHELMET, STANDARD",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NEUROHELMET, STANDARD"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (INNER SPHERE – ELITE OR COMSTAR/WORD OF BLAKE)",
+        "item": "MECHWARRIOR COMBAT SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MECHWARRIOR COMBAT SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (INNER SPHERE – ELITE OR COMSTAR/WORD OF BLAKE)",
+        "item": "NEUROHELMET, COMBAT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NEUROHELMET, COMBAT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (CLAN)",
+        "item": "COOLING SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COOLING SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MECHWARRIOR KITS",
+        "section": "MECHWARRIOR KIT (CLAN)",
+        "item": "NEUROHELMET, CLAN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NEUROHELMET, CLAN"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL KITS",
+        "item": "ADVANCED MEDICAL KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ADVANCED MEDICAL KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL KITS",
+        "item": "FIELD SURGICAL KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FIELD SURGICAL KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL KITS",
+        "item": "MEDICAL KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MEDICAL KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "MEDIPATCH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MEDIPATCH"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "PLASTIFLESH BANDAGE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PLASTIFLESH BANDAGE"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "PRESERVING SLEEVE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PRESERVING SLEEVE"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "SEDATIVE PATCH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SEDATIVE PATCH"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "STIMPATCH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "STIMPATCH"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "FIRST AID CONSUMABLES",
+        "item": "STIMPATCH, CLAN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "STIMPATCH, CLAN"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDIPACKS",
+        "item": "CLAN LSSU",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CLAN LSSU"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDIPACKS",
+        "item": "MEDIPACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MEDIPACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL TOOLS",
+        "item": "LASER SCALPEL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LASER SCALPEL"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL TOOLS",
+        "item": "LIFE-SUPPORT UNIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LIFE-SUPPORT UNIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL TOOLS",
+        "item": "MYOMER IMPLANTATION DEVICE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MYOMER IMPLANTATION DEVICE"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL TOOLS",
+        "item": "PORTABLE MEDICAL MONITOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PORTABLE MEDICAL MONITOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "MEDICAL EQUIPMENT",
+        "section": "MEDICAL TOOLS",
+        "item": "STASIS TUBE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "STASIS TUBE"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "ADVANCED FIELD KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ADVANCED FIELD KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "BASIC FIELD KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BASIC FIELD KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "COMPASS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMPASS"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "ELECTRONIC COMPASS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTRONIC COMPASS"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "EMERGENCY FLARES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "EMERGENCY FLARES"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "EMERGENCY RATIONS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "EMERGENCY RATIONS"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL SURVIVAL GEAR",
+        "item": "PORTABLE LIFE SUPPORT UNIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PORTABLE LIFE SUPPORT UNIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "TENTS AND SHELTERS",
+        "item": "BUBBLE TENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BUBBLE TENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "TENTS AND SHELTERS",
+        "item": "TENT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TENT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "TENTS AND SHELTERS",
+        "item": "PERSONAL ENVIRONMENT BAG",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PERSONAL ENVIRONMENT BAG"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "TENTS AND SHELTERS",
+        "item": "POP-UP CAMPER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "POP-UP CAMPER"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "CLIMBING/RAPPELLING KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CLIMBING/RAPPELLING KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "EMERGENCY JET PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "EMERGENCY JET PACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "HANG GLIDER, POWERED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HANG GLIDER, POWERED"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "HANG GLIDER, UNPOWERED",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HANG GLIDER, UNPOWERED"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "HULL-BREACHING FRAME",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HULL-BREACHING FRAME"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "JUMP PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JUMP PACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "MISCELLANEOUS GEAR",
+        "section": "GENERAL EQUIPMENT",
+        "item": "PARACHUTE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PARACHUTE"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "DRESS/ROBE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DRESS/ROBE"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "DRESS SHOES/BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DRESS SHOES/BOOTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "FORMAL GOWN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FORMAL GOWN"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "FORMAL SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FORMAL SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "HAT/CAP/FEDORA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HAT/CAP/FEDORA"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SHOES/SANDALS/ SNEAKERS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SHOES/SANDALS/ SNEAKERS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "JACKET/BLAZER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JACKET/BLAZER"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "OVERCOAT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "OVERCOAT"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "PAJAMAS/SLEEPWEAR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PAJAMAS/SLEEPWEAR"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SHIRT/TUNIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SHIRT/TUNIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SKIRT/KILT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SKIRT/KILT"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SWEATER/SWEATSHIRT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SWEATER/SWEATSHIRT"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SWEATPANTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SWEATPANTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SWIMWEAR (MALE)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SWIMWEAR (MALE)"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SWIMWEAR (FEMALE)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SWIMWEAR (FEMALE)"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "SOCKS/STOCKINGS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SOCKS/STOCKINGS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "UNDERWEAR (MALE)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "UNDERWEAR (MALE)"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "FORMAL/CASUAL ATTIRE",
+        "item": "UNDERWEAR (FEMALE)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "UNDERWEAR (FEMALE)"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "MILITARY/WORK ATTIRE",
+        "item": "FATIGUES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FATIGUES"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "MILITARY/WORK ATTIRE",
+        "item": "JUMP SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JUMP SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "MILITARY/WORK ATTIRE",
+        "item": "WORK BOOTS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "WORK BOOTS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "LEATHERWEAR",
+        "item": "PANTS/CHAPS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PANTS/CHAPS"
+      ]
+    },
+    {
+      "source": {
+        "table": "NON-COMBAT ATTIRE",
+        "section": "LEATHERWEAR",
+        "item": "SHOES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SHOES"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "ROUTEMASTER HOVERBUS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ROUTEMASTER HOVERBUS"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "CRIMSON STREAK HOVER RACER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CRIMSON STREAK HOVER RACER"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "BAYAMO HOVERBIKE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BAYAMO HOVERBIKE"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "SLIPPER LX HOVERCAR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SLIPPER LX HOVERCAR"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "AIR CAR HOVERCRAFT‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AIR CAR HOVERCRAFT‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "FEICUI AIRCAR HOVERCRAFT‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FEICUI AIRCAR HOVERCRAFT‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "HURRICANE HOVER CAR‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HURRICANE HOVER CAR‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "TURBOFAN CAR‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TURBOFAN CAR‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "HOVER/WIGE VEHICLES",
+        "item": "COANDA PERSONAL WIGE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COANDA PERSONAL WIGE"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "SATURNUS V RACER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SATURNUS V RACER"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "BLUE NOVA SPORTS CAR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BLUE NOVA SPORTS CAR"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "ASTON-MARTIN FIVER ROADSTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ASTON-MARTIN FIVER ROADSTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "A-M FIVER TRAVELER MINIVAN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "A-M FIVER TRAVELER MINIVAN"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "FLASHBANG ZZ10000 MOTORCYCLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLASHBANG ZZ10000 MOTORCYCLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "SKODA “GROWLER” UTILITY TRUCK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SKODA “GROWLER” UTILITY TRUCK"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "BULLDOG MEDIUM TRUCK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BULLDOG MEDIUM TRUCK"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "AVANTI LUXURY SEDAN‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AVANTI LUXURY SEDAN‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "JEEP‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JEEP‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "JITNEY (MINIBUS)‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JITNEY (MINIBUS)‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "MACADAM GROUND CAR‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MACADAM GROUND CAR‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "SPEEDER‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SPEEDER‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "TRANSPORT, HEAVY‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRANSPORT, HEAVY‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "TYPHOON GROUND CAR‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TYPHOON GROUND CAR‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WHEELED/TRACKED VEHICLES",
+        "item": "JET SLED TRACKED SNOWMOBILE‡‡",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JET SLED TRACKED SNOWMOBILE‡‡"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "FIXED-WING/VTOL VEHICLES",
+        "item": "JETTA CORUNA 4X JET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "JETTA CORUNA 4X JET"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "FIXED-WING/VTOL VEHICLES",
+        "item": "ZANADU AIR BUS JET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ZANADU AIR BUS JET"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "FIXED-WING/VTOL VEHICLES",
+        "item": "SOAR HELICOPTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SOAR HELICOPTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WATER VEHICLES",
+        "item": "WHITESTREAK JETSKI",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "WHITESTREAK JETSKI"
+      ]
+    },
+    {
+      "source": {
+        "table": "PERSONAL VEHICLES",
+        "section": "WATER VEHICLES",
+        "item": "ATLANTIA LUXURY YACHT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ATLANTIA LUXURY YACHT"
+      ]
+    },
+    {
+      "source": {
+        "table": "POWER PACKS",
+        "section": "QUICK-CHARGE (QC)",
+        "item": "PORTABLE POWER UNIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PORTABLE POWER UNIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "POWER PACKS",
+        "section": "QUICK-CHARGE (QC)",
+        "item": "SUPPORT PPC POWER PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SUPPORT PPC POWER PACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "HEAT SENSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEAT SENSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "MOTION SENSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MOTION SENSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "RADAR SENSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADAR SENSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "SEISMIC SENSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SEISMIC SENSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "TRIP-LINE SENSOR (INFRARED)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRIP-LINE SENSOR (INFRARED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "TRIP-LINE SENSOR (LASER)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRIP-LINE SENSOR (LASER)"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "REMOTE SENSORS",
+        "item": "TRIP-LINE SENSOR (PHYSICAL)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRIP-LINE SENSOR (PHYSICAL)"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "SENSOR MONITORS",
+        "item": "HEAT MONITOR, PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEAT MONITOR, PORTABLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "SENSOR MONITORS",
+        "item": "MOTION MONITOR, PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MOTION MONITOR, PORTABLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "SENSOR MONITORS",
+        "item": "RADAR MONITOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADAR MONITOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "SENSOR MONITORS",
+        "item": "SEISMIC MONITOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SEISMIC MONITOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "REMOTE SENSORS",
+        "section": "SENSOR MONITORS",
+        "item": "TRIP-LINE MONITOR, PORTABLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRIP-LINE MONITOR, PORTABLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "TOOLKITS",
+        "item": "BASIC TOOLKIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BASIC TOOLKIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "TOOLKITS",
+        "item": "DELUXE TOOLKIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DELUXE TOOLKIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "AEROSPACE REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AEROSPACE REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "BIONIC MAINTENANCE KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BIONIC MAINTENANCE KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "CUTTING/JOINING KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CUTTING/JOINING KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "ELECTRONICS REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ELECTRONICS REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "FISSION/FUSION REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FISSION/FUSION REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "MYOMER/ACTUATOR REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MYOMER/ACTUATOR REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "VEHICLE REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VEHICLE REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SPECIALIZED REPAIR KITS*",
+        "item": "WEAPON REPAIR KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "WEAPON REPAIR KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SMALL ARMS MAINTENANCE KITS",
+        "item": "ENERGY WEAPON KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ENERGY WEAPON KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SMALL ARMS MAINTENANCE KITS",
+        "item": "RELOADING KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RELOADING KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "SMALL ARMS MAINTENANCE KITS",
+        "item": "SLUG-THROWER KIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SLUG-THROWER KIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "MISCELLANEOUS TOOLS",
+        "item": "HAND-HELD LASER TORCH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HAND-HELD LASER TORCH"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "MISCELLANEOUS TOOLS",
+        "item": "NULL-G PACK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NULL-G PACK"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "MISCELLANEOUS TOOLS",
+        "item": "NULL-G PACK CONTROLLER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NULL-G PACK CONTROLLER"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "MISCELLANEOUS TOOLS",
+        "item": "RADIATION SHEETING (PER SQ. M)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADIATION SHEETING (PER SQ. M)"
+      ]
+    },
+    {
+      "source": {
+        "table": "REPAIR/SALVAGE GEAR",
+        "section": "MISCELLANEOUS TOOLS",
+        "item": "REPAIR PLATFORM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "REPAIR PLATFORM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "ALCOHOL: BEER/WINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ALCOHOL: BEER/WINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "ALCOHOL: MIXED DRINK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ALCOHOL: MIXED DRINK"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "ALCOHOL: HARD LIQUOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ALCOHOL: HARD LIQUOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "ALCOHOL: FUSIONNAIRE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ALCOHOL: FUSIONNAIRE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "CANNABIS/HASHISH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CANNABIS/HASHISH"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "HEROIN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEROIN"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "CODEINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CODEINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "BARBITURATES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BARBITURATES"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "SEDATEMAXX",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SEDATEMAXX"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "DEPRESSANTS (NARCOTIC)*",
+        "item": "BATTLESTUN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BATTLESTUN"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "CAFFEINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "CAFFEINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "NICOTINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NICOTINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "COCAINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COCAINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "AMPHETAMINES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AMPHETAMINES"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "METHAMPHETAMINES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "METHAMPHETAMINES"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "K-Z (“KRAZY”)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "K-Z (“KRAZY”)"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "STIMULANTS (NARCOTIC)*",
+        "item": "X-QUICK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "X-QUICK"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "PEYOTE/MESCALINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PEYOTE/MESCALINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "LYSERGIC ACID DIETHYLAMIDE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LYSERGIC ACID DIETHYLAMIDE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "PHENCYCLIDINE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PHENCYCLIDINE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "PSILOCYBIN",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PSILOCYBIN"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "INGROT VENOM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "INGROT VENOM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "HALLUCINOGENS (NARCOTIC)*",
+        "item": "NECROSIA",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NECROSIA"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "RATTLESNAKE VENOM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RATTLESNAKE VENOM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "AZH VENOM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AZH VENOM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "GOLIATH SCORPION VENOM*",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GOLIATH SCORPION VENOM*"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "RADIUM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADIUM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "THALLIUM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "THALLIUM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "ARSENIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ARSENIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "HEMLOCK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HEMLOCK"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "DIOXINS (INJECTED)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DIOXINS (INJECTED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "DIOXINS (INGESTED)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "DIOXINS (INGESTED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "VX GAS (INHALED)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VX GAS (INHALED)"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "POISONS",
+        "item": "VX GAS (CONTACT)",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VX GAS (CONTACT)"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "PERFORMANCE ENHANCERS*",
+        "item": "QWIKSTIM",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "QWIKSTIM"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "PERFORMANCE ENHANCERS*",
+        "item": "RAGE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RAGE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "PERFORMANCE ENHANCERS*",
+        "item": "LD-512",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LD-512"
+      ]
+    },
+    {
+      "source": {
+        "table": "SAMPLE DRUGS AND POISONS",
+        "section": "PERFORMANCE ENHANCERS*",
+        "item": "SPAZZ",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SPAZZ"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "AEROSPACE FIGHTER PILOT KIT",
+        "item": "COMBAT FLIGHT SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMBAT FLIGHT SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "AEROSPACE FIGHTER PILOT KIT",
+        "item": "PILOT’S NEUROHELMET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "PILOT’S NEUROHELMET"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "AEROSPACE FIGHTER PILOT KIT",
+        "item": "FLIGHT GLOVES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLIGHT GLOVES"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "OTHER SPECIAL COMBAT KITS",
+        "item": "COMBAT SPACE SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "COMBAT SPACE SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "OTHER SPECIAL COMBAT KITS",
+        "item": "MARINE COMBAT SUIT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MARINE COMBAT SUIT"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIAL COMBAT KITS",
+        "section": "OTHER SPECIAL COMBAT KITS",
+        "item": "TANKER’S SMOCK",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TANKER’S SMOCK"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "AET",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AET"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "AIR-BURST",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AIR-BURST"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "ARMOR-PIERCING",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ARMOR-PIERCING"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "FLECHETTE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLECHETTE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "FRANGIBLE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FRANGIBLE"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "RADIOACTIVE TRACKER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADIOACTIVE TRACKER"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "SUBSONIC",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SUBSONIC"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "SLUG-THROWER SPECIALTY AMMO",
+        "item": "TRACER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRACER"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "GAUSS SPECIALTY AMMO",
+        "item": "GDPC ROUNDS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GDPC ROUNDS"
+      ]
+    },
+    {
+      "source": {
+        "table": "SPECIALTY AMMUNITION",
+        "section": "GYROJET SPECIALTY AMMO",
+        "item": "GUIDED GYROJET ROUNDS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GUIDED GYROJET ROUNDS"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "FEDERATED SUNS (PAB-27 ELITE KIT)",
+        "item": "ARM GUARDS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ARM GUARDS"
+      ]
+    },
+    {
+      "source": {
+        "table": "STANDARD ARMOR KITS (BY FACTION)",
+        "section": "FEDERATED SUNS (PAB-27 ELITE KIT)",
+        "item": "LEG GUARDS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LEG GUARDS"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "AUDIO RECEIVERS AND COUNTERMEASURES",
+        "item": "MICROPHONE, DIRECTIONAL",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICROPHONE, DIRECTIONAL"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "AUDIO RECEIVERS AND COUNTERMEASURES",
+        "item": "MICROPHONE, LASER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICROPHONE, LASER"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "AUDIO RECEIVERS AND COUNTERMEASURES",
+        "item": "VOICE DISTORTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "VOICE DISTORTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "AUDIO RECEIVERS AND COUNTERMEASURES",
+        "item": "WHITE NOISE GENERATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "WHITE NOISE GENERATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUGS",
+        "item": "MICROPHONE BUG",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "MICROPHONE BUG"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUGS",
+        "item": "SATNAV BUG",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SATNAV BUG"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUGS",
+        "item": "TRACKING BUG",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRACKING BUG"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUGS",
+        "item": "TRACKING MICROPHONE BUG",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRACKING MICROPHONE BUG"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUG SCANNERS/LOCATORS",
+        "item": "BUG SCANNER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BUG SCANNER"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUG SCANNERS/LOCATORS",
+        "item": "BUG SCANNER WATCH",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BUG SCANNER WATCH"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUG SCANNERS/LOCATORS",
+        "item": "TRACKING BUG LOCATOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRACKING BUG LOCATOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "SURVEILLANCE GEAR",
+        "section": "BUG SCANNERS/LOCATORS",
+        "item": "TRACKING BUG LOCATOR, COMPACT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TRACKING BUG LOCATOR, COMPACT"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SIGHTS AND SCOPES",
+        "item": "BARREL-MOUNTED FLASHLIGHT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BARREL-MOUNTED FLASHLIGHT"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SIGHTS AND SCOPES",
+        "item": "LASER SIGHT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "LASER SIGHT"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SIGHTS AND SCOPES",
+        "item": "NIGHT VISION SCOPE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "NIGHT VISION SCOPE"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SIGHTS AND SCOPES",
+        "item": "TELESCOPIC SCOPE",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "TELESCOPIC SCOPE"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "CORNERSHOTS",
+        "item": "ISR-71G “TRIPWIRE”",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ISR-71G “TRIPWIRE”"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "CORNERSHOTS",
+        "item": "ISR-93TX “ROUNDHOUSE”",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "ISR-93TX “ROUNDHOUSE”"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "STABILIZERS AND HARNESSES",
+        "item": "GYROSCOPIC HARNESS",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GYROSCOPIC HARNESS"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "STABILIZERS AND HARNESSES",
+        "item": "“MAKO” GYROSTABILIZER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "“MAKO” GYROSTABILIZER"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "AMR-20 RIFLE/PISTOL SILENCER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "AMR-20 RIFLE/PISTOL SILENCER"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "SOUND SUPPRESSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SOUND SUPPRESSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "SILENCER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SILENCER"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "SOUND AND FLASH SUPPRESSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "SOUND AND FLASH SUPPRESSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "FLASH SUPPRESSOR",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLASH SUPPRESSOR"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SILENCERS AND SUPPRESSORS",
+        "item": "FLASH SUPPRESSOR, JAF-05",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "FLASH SUPPRESSOR, JAF-05"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "GENERAL ACCESSORIES",
+        "item": "BOW ACCESSORY MOUNT",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "BOW ACCESSORY MOUNT"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "GENERAL ACCESSORIES",
+        "item": "HOLSTER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "HOLSTER"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SPECIALIZED ACCESSORIES",
+        "item": "GUIDED RIFLE MODULES",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "GUIDED RIFLE MODULES"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SPECIALIZED ACCESSORIES",
+        "item": "M-11J “CLOAKING DEVICE”",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "M-11J “CLOAKING DEVICE”"
+      ]
+    },
+    {
+      "source": {
+        "table": "WEAPON ACCESSORIES",
+        "section": "SPECIALIZED ACCESSORIES",
+        "item": "RADIOACTIVE TRACKER SCANNER",
+        "occurrence": 0
+      },
+      "reason": "Unique bare printed label for section-qualified catalog name.",
+      "aliases": [
+        "RADIOACTIVE TRACKER SCANNER"
+      ]
+    }
+  ]
+}

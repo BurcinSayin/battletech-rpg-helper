@@ -13,6 +13,8 @@ import hairColorsJson from "@/data/rules/hairColors.json";
 import phenotypesJson from "@/data/rules/phenotypes.json";
 import planetsJson from "@/data/rules/planets.json";
 import modulesJson from "@/data/rules/modules.json";
+import equipmentJson from "@/data/rules/equipment.json";
+import weaponsJson from "@/data/rules/weapons.json";
 
 import {
   stage0CatalogSchema,
@@ -20,6 +22,8 @@ import {
   type Trait,
   type Subskills,
   type Subtraits,
+  type EquipmentItem,
+  type WeaponItem,
 } from "@/lib/validation/catalog";
 import type { Stage0Catalog } from "./stage0-contract";
 import { composeSkillName, composeTraitName } from "./types";
@@ -33,6 +37,9 @@ import {
 
 export const skills: Skill[] = skillsJson as unknown as Skill[];
 export const traits: Trait[] = traitsJson;
+export const equipment: EquipmentItem[] =
+  equipmentJson as unknown as EquipmentItem[];
+export const weapons: WeaponItem[] = weaponsJson as unknown as WeaponItem[];
 export const subskills: Subskills = subskillsJson;
 export const subtraits: Subtraits = subtraitsJson;
 export const affiliations: string[] = affiliationsJson;
@@ -74,12 +81,15 @@ for (const s of skills) {
     for (const [canonicalSub, aliases] of Object.entries(s.subskill_aliases)) {
       if (!aliases) continue;
       for (const subAlias of aliases) {
-        DYNAMIC_SKILL_ALIASES[`${s.name}/${subAlias}`] = `${s.name}/${canonicalSub}`;
+        DYNAMIC_SKILL_ALIASES[`${s.name}/${subAlias}`] =
+          `${s.name}/${canonicalSub}`;
 
         if (s.alias_list) {
           for (const parentAlias of s.alias_list) {
-            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${subAlias}`] = `${s.name}/${canonicalSub}`;
-            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${canonicalSub}`] = `${s.name}/${canonicalSub}`;
+            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${subAlias}`] =
+              `${s.name}/${canonicalSub}`;
+            DYNAMIC_SKILL_ALIASES[`${parentAlias}/${canonicalSub}`] =
+              `${s.name}/${canonicalSub}`;
           }
         }
       }
@@ -132,11 +142,14 @@ export function resolveSkillName(name: string): string {
     const parent = target.slice(0, slashIdx);
     const sub = target.slice(slashIdx + 1);
     const parentAlias = SKILL_ALIASES[parent];
-    const canonicalParent = typeof parentAlias === "string" ? parentAlias : parent;
+    const canonicalParent =
+      typeof parentAlias === "string" ? parentAlias : parent;
 
     const parentSkill = skillByName.get(canonicalParent);
     if (parentSkill?.subskill_aliases) {
-      for (const [canonicalSub, aliases] of Object.entries(parentSkill.subskill_aliases)) {
+      for (const [canonicalSub, aliases] of Object.entries(
+        parentSkill.subskill_aliases,
+      )) {
         if (aliases.includes(sub)) {
           return `${canonicalParent}/${canonicalSub}`;
         }
@@ -149,7 +162,10 @@ export function resolveSkillName(name: string): string {
   // 3. Bare skill name: if it has a default subskill, assume `${canonical}/${default_sub}`
   const defSub = defaultSubskill(target);
   if (defSub) {
-    const canonical = typeof exactAlias === "string" ? exactAlias : (skillByName.get(target)?.name ?? target);
+    const canonical =
+      typeof exactAlias === "string"
+        ? exactAlias
+        : (skillByName.get(target)?.name ?? target);
     return `${canonical}/${defSub}`;
   }
 
@@ -265,7 +281,9 @@ export function findTrait(name: string): Trait | undefined {
 
 /** Get traits matching a category (e.g. "Character", "Vehicle", "Character (Identity)"). */
 export function traitsByCategory(category: string): Trait[] {
-  return traits.filter((t) => t.category === category || t.category.startsWith(category));
+  return traits.filter(
+    (t) => t.category === category || t.category.startsWith(category),
+  );
 }
 
 /** Get the opposing trait, if any. */
@@ -274,4 +292,54 @@ export function opposingTrait(name: string): Trait | undefined {
   const baseName = resolved.split("/")[0];
   const opposedName = OPPOSING_TRAITS[baseName];
   return opposedName ? findTrait(opposedName) : undefined;
+}
+
+function inventoryNames<
+  T extends { id: string; name: string; aliases: string[] },
+>(items: T[]): Map<string, T> {
+  const names = new Map<string, T>();
+  for (const item of items) {
+    for (const name of [item.name, ...item.aliases]) {
+      const key = name.trim().toLowerCase();
+      const existing = names.get(key);
+      if (existing && existing.id !== item.id)
+        throw new Error(`Ambiguous inventory lookup: ${name}`);
+      names.set(key, item);
+    }
+  }
+  return names;
+}
+
+const equipmentNames = inventoryNames(equipment);
+const weaponNames = inventoryNames(weapons);
+const equipmentIds = new Map(equipment.map((item) => [item.id, item]));
+const weaponIds = new Map(weapons.map((item) => [item.id, item]));
+
+export function findEquipment(name: string): EquipmentItem | undefined {
+  return equipmentNames.get(name.trim().toLowerCase());
+}
+
+export function findWeapon(name: string): WeaponItem | undefined {
+  return weaponNames.get(name.trim().toLowerCase());
+}
+
+export function equipmentById(id: string): EquipmentItem | undefined {
+  return equipmentIds.get(id);
+}
+
+export function weaponById(id: string): WeaponItem | undefined {
+  return weaponIds.get(id);
+}
+
+export function equipmentByCategory(category: string): EquipmentItem[] {
+  return equipment.filter((item) => item.category === category.trim());
+}
+
+export function weaponsByCategory(category: string): WeaponItem[] {
+  return weapons.filter((item) => item.category === category.trim());
+}
+
+export function weaponsBySkill(skill: string): WeaponItem[] {
+  const canonical = skill.trim() === "None" ? "None" : findSkill(skill)?.name;
+  return canonical ? weapons.filter((item) => item.skill === canonical) : [];
 }

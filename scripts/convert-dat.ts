@@ -8,7 +8,7 @@
  * BTCC_SOURCE_DIR env var; otherwise we default to the sibling checkout's
  * `resource/` directory.
  *
- * The catalog `.dat` files are pure ASCII and `;`-delimited. Skill/trait
+ * Catalog tables are semicolon-delimited and decoded as latin1. Skill/trait
  * description files (skillsdesc.dat / traitsdesc.dat) are Windows-1251 and are
  * intentionally DEFERRED — they need `iconv-lite` and are only used in lazy
  * detail panels (PLAN.md step #4, later).
@@ -21,6 +21,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { parseRulebookTraits } from "./parse-rulebook-traits";
 import { parseRulebookSkills } from "./parse-rulebook-skills";
+import { parseRulebookEquipment } from "./parse-rulebook-equipment";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -58,6 +59,7 @@ function main(): void {
 
   parseRulebookTraits();
   parseRulebookSkills();
+  parseRulebookEquipment();
   writeJson("affiliations.json", parseList("affilations.dat"));
   writeJson("careers.json", parseList("career.dat"));
   writeJson("eyeColors.json", parseList("eyecolor.dat"));

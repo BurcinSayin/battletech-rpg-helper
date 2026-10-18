@@ -68,6 +68,20 @@ Saved character sheets and import previews show attribute **Level** (`floor(XP /
 
 Missing attribute XP displays `N/A` for both values. Zero and negative levels remain visible, with Link Modifier `N/A` below Level 1. The modifier is −2 at Level 1, −1 at Levels 2–3, +0 at 4–6, +1 at 7–9, +2 at 10, and `floor(level / 3)` at 11 and above.
 
+### Equipment and weapon catalogs
+
+`lib/rules/load.ts` statically bundles the Warrior's Catalog, with canonical/legacy-name lookup (`findEquipment`, `findWeapon`), exact-ID lookup, and category/weapon-skill filters. Costs and masses are normalized only when unambiguous; multipliers, conditional expressions, original cells, scoped notes, and source page references remain available. This is inventory data, not a combat rules evaluator.
+
+Generate `data/rules/equipment.json` and `weapons.json` with `npm run equipment:ingest`. It reads the 50 transcribed tables in `docs/rule_book/Warriors-Catalog/` and the curated `docs/rule_book/equipment-mapping.json`; no desktop checkout or environment variable is needed. Add new tables/layouts and reviewed aliases to the manifest; stale selectors, unmapped collisions, or changed explicit duplicates fail generation before replacing either artifact. Never edit generated catalogs directly.
+
+Each ingestion invocation reads the current generated `data/rules/skills.json` for weapon-skill validation; aggregate ingestion regenerates skills first. The pure `buildEquipmentCatalog(tables, mapping, skillNames)` API takes its canonical skill names explicitly, so repeated builds cannot reuse a stale module-level skill snapshot.
+
+Consumers import `lib/btcc/inventory` directly for lossless 7/11-field views and new equipment, weapon, or physical-ammunition rows. Creators return typed failures for unresolved amounts/coverage, invalid values, or desktop-unsafe delimiters. Purchase cost/mass are stack totals; shots and reload values remain per unit. Monetary values/counts must fit desktop signed-32-bit integer arithmetic; fractional catalog prices require an explicit integer price override, never silent rounding. Pure-PPS weapons require a separately selected power pack.
+
+Book and desktop defaults can differ: the Clan pulse laser pistol's book reload cells are `†` (unresolved), while the desktop fixture stores reload purchase values `5`/`0.25`. Preserve both representations in their respective paths; the imported Power Pack's trailing `2`/`0.14` fields are separate legacy ammo metadata, not its purchase price/mass.
+
+Imported inventory remains raw and byte-preserving, including unknown/custom names, malformed positional rows, historical ammo metadata, and Marian Suit coverage. Alias resolution identifies a catalog entry; it never replaces imported statistics. New notes include labeled table/shared context, flatten whitespace, and replace colon/semicolon delimiters; source notes and imported rows stay verbatim. No Equipment-tab UI is added by these APIs.
+
 ---
 
 ## 🚀 Getting Started
@@ -114,6 +128,11 @@ Missing attribute XP displays `N/A` for both values. Zero and negative levels re
    Convert the raw game tables into static typed JSON:
    ```bash
    npm run rules:ingest
+   ```
+
+   Aggregate ingestion also runs the rulebook equipment parser. Desktop-backed inputs still expect `BTCC_SOURCE_DIR` to name the **resource directory**, for example:
+   ```bash
+   BTCC_SOURCE_DIR=/home/orin/Work/Personal/Battletech-Character-Creator/resource npm run rules:ingest
    ```
 
 5. **Start the development server**:

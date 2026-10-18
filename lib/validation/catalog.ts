@@ -31,16 +31,157 @@ export const traitSchema = z.object({
   category: z.string().min(1),
   trait_type: z.string().min(1),
   tp_score: z.string().min(1),
-  tp_levels: z.array(z.number().int()).min(1).refine(
-    (levels) => levels.every((level, i) => i === 0 || levels[i - 1] < level),
-    "Trait TP levels must be strictly ascending and unique",
-  ),
+  tp_levels: z
+    .array(z.number().int())
+    .min(1)
+    .refine(
+      (levels) => levels.every((level, i) => i === 0 || levels[i - 1] < level),
+      "Trait TP levels must be strictly ascending and unique",
+    ),
   description: z.string().min(1),
   sub_traits: z.array(z.string()).default([]),
 });
 
 export const skillsSchema = z.array(skillSchema);
 export const traitsSchema = z.array(traitSchema);
+
+const catalogNumber = z.number().finite().nonnegative();
+export const catalogAmountSchema = z
+  .object({
+    text: z.string().nullable(),
+    value: catalogNumber.nullable(),
+    multiplier: catalogNumber.nullable(),
+  })
+  .strict()
+  .refine(
+    (amount) => amount.value === null || amount.multiplier === null,
+    "An amount cannot be both absolute and a multiplier",
+  );
+
+const catalogSourceSchema = z
+  .object({
+    file: z.string().min(1),
+    table: z.string().min(1),
+    printedPage: z.number().int().positive(),
+    pdfPage: z.number().int().positive(),
+    part: z.number().int().nonnegative(),
+    row: z.number().int().nonnegative(),
+    role: z.enum(["item", "parent", "crossReference", "duplicate"]),
+  })
+  .strict();
+
+const catalogNoteSchema = z
+  .object({
+    text: z.string(),
+    scope: z.enum(["item", "row", "family", "part", "shared"]),
+    section: z.string().nullable(),
+  })
+  .strict();
+
+const catalogBase = {
+  id: z.string().trim().min(1),
+  name: z.string().trim().min(1),
+  category: z.string().trim().min(1),
+  section: z.string().nullable(),
+  aliases: z.array(z.string().trim().min(1)),
+  sources: z.array(catalogSourceSchema).min(1),
+  raw: z.record(z.string(), z.string()),
+  notes: z.array(catalogNoteSchema),
+  equipmentRatings: z.string().nullable(),
+  affiliation: z.string().nullable(),
+  cost: catalogAmountSchema,
+  mass: catalogAmountSchema,
+};
+
+export const equipmentItemSchema = z
+  .object({
+    ...catalogBase,
+    kind: z.enum([
+      "gear",
+      "armor",
+      "implant",
+      "drug",
+      "vehicle",
+      "fuel",
+      "modifier",
+    ]),
+    armor: z
+      .object({
+        coverage: z.string(),
+        locations: z.array(z.enum(["H", "T", "A", "L", "HAN", "F"])).nullable(),
+        bar: z.string(),
+        ratings: z
+          .tuple([catalogNumber, catalogNumber, catalogNumber, catalogNumber])
+          .nullable(),
+        patchCost: catalogAmountSchema,
+      })
+      .strict()
+      .nullable(),
+    purchaseUnit: z.enum(["item", "kg"]),
+  })
+  .strict();
+
+export const weaponItemSchema = z
+  .object({
+    ...catalogBase,
+    kind: z.enum(["weapon", "ammunition", "powerPack", "modifier"]),
+    skill: z.string().min(1),
+    specialty: z.string().nullable(),
+    family: z.string().nullable(),
+    damage: z.string().nullable(),
+    range: z.string().nullable(),
+    rangeMeters: z
+      .union([
+        z.tuple([catalogNumber]),
+        z.tuple([catalogNumber, catalogNumber, catalogNumber, catalogNumber]),
+      ])
+      .nullable(),
+    shots: z.string().nullable(),
+    capacity: catalogNumber.int().nullable(),
+    capacityUnit: z.enum(["rounds", "powerPoints"]).nullable(),
+    powerPerShot: catalogNumber.int().nullable(),
+    ammoCost: catalogAmountSchema,
+    ammoMass: catalogAmountSchema,
+  })
+  .strict();
+
+function uniqueCatalog(
+  entries: { id: string; name: string; aliases: string[] }[],
+  context: z.RefinementCtx,
+) {
+  const ids = new Set<string>();
+  const names = new Map<string, number>();
+  entries.forEach((entry, index) => {
+    if (ids.has(entry.id))
+      context.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: [index, "id"],
+        message: `Duplicate ID: ${entry.id}`,
+      });
+    ids.add(entry.id);
+    for (const name of [entry.name, ...entry.aliases]) {
+      const key = name.trim().toLowerCase();
+      const owner = names.get(key);
+      if (owner !== undefined && owner !== index)
+        context.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: [index, "aliases"],
+          message: `Ambiguous lookup: ${name}`,
+        });
+      names.set(key, index);
+    }
+  });
+}
+
+export const equipmentSchema = z
+  .array(equipmentItemSchema)
+  .superRefine(uniqueCatalog);
+export const weaponsSchema = z
+  .array(weaponItemSchema)
+  .superRefine(uniqueCatalog);
+export type CatalogAmount = z.infer<typeof catalogAmountSchema>;
+export type EquipmentItem = z.infer<typeof equipmentItemSchema>;
+export type WeaponItem = z.infer<typeof weaponItemSchema>;
 
 /** subskills.json: parent skill → ordered list of sub-skill names. */
 export const subskillsSchema = z.record(z.string(), z.array(z.string().min(1)));
@@ -99,8 +240,9 @@ export const stage0ChoiceSchema = z
   .strict()
   .superRefine((choice, context) => {
     const available = choice.unique
-      ? new Set(choice.candidates.map(({ kind, value }) => `${kind}\u0000${value}`))
-          .size
+      ? new Set(
+          choice.candidates.map(({ kind, value }) => `${kind}\u0000${value}`),
+        ).size
       : choice.candidates.length;
     if (choice.selectionCount > available) {
       context.addIssue({
