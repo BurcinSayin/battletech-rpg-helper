@@ -1,0 +1,215 @@
+{
+  "table_name": "WEAPON ACCESSORIES",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      286
+    ],
+    "pdf_pages": [
+      288
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 286,
+      "pdf_page": 288,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "BARREL-MOUNTED FLASHLIGHT",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "250 G",
+          "NOTES": "NEGATES DARKNESS MODS UP TO 15M*",
+          "_section": "SIGHTS AND SCOPES"
+        },
+        {
+          "ITEM": "LASER SIGHT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST/RELOAD": "25",
+          "AFF": "—",
+          "MASS": "100 G",
+          "NOTES": "+1 ATTACK ROLL MODIFIER*",
+          "_section": "SIGHTS AND SCOPES"
+        },
+        {
+          "ITEM": "NIGHT VISION SCOPE",
+          "EQUIPMENT RATINGS": "D/A-B-B/A",
+          "COST/RELOAD": "125",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "+2 ATTACK ROLL MODIFIER AT M/L/E RANGES; NEGATES DARKNESS MODS UP TO 1,000M*",
+          "_section": "SIGHTS AND SCOPES"
+        },
+        {
+          "ITEM": "TELESCOPIC SCOPE",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST/RELOAD": "30",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "+2 ATTACK ROLL MODIFIER AT M/L/E RANGES",
+          "_section": "SIGHTS AND SCOPES"
+        },
+        {
+          "ITEM": "ISR-71G “TRIPWIRE”",
+          "EQUIPMENT RATINGS": "C/D-E-D/D",
+          "COST/RELOAD": "560",
+          "AFF": "—",
+          "MASS": "3.7 KG",
+          "NOTES": "USEABLE BY PISTOLS ONLY; MAY SHOOT AROUND AN ADJACENT CORNER WITH FULL COVER; REQUIRES POWER PACK FOR CAMERA (0.3 POINTS PER MINUTE)",
+          "_section": "CORNERSHOTS"
+        },
+        {
+          "ITEM": "ISR-93TX “ROUNDHOUSE”",
+          "EQUIPMENT RATINGS": "D/D-F-D/D",
+          "COST/RELOAD": "2,400",
+          "AFF": "—",
+          "MASS": "6.2 KG",
+          "NOTES": "USEABLE BY RIFLES, SMGS AND PISTOLS ONLY; MAY SHOOT AROUND AN ADJACENT CORNER WITH FULL COVER; REQUIRES POWER PACK FOR CAMERA (0.5 POINTS PER MINUTE); RECOIL +1**",
+          "_section": "CORNERSHOTS"
+        },
+        {
+          "ITEM": "GYROSCOPIC HARNESS",
+          "EQUIPMENT RATINGS": "D/D/D",
+          "COST/RELOAD": "1,000",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "NOTES": "RECOIL +1; ENCUMBERING**",
+          "_section": "STABILIZERS AND HARNESSES"
+        },
+        {
+          "ITEM": "RECOIL COMPENSATION",
+          "EQUIPMENT RATINGS": "C/B/D",
+          "COST/RELOAD": "X1.1",
+          "AFF": "—",
+          "MASS": "X1.1",
+          "NOTES": "RECOIL +1**",
+          "_section": "STABILIZERS AND HARNESSES"
+        },
+        {
+          "ITEM": "“MAKO” GYROSTABILIZER",
+          "EQUIPMENT RATINGS": "D/E/D",
+          "COST/RELOAD": "8,400",
+          "AFF": "—",
+          "MASS": "3.7 KG",
+          "NOTES": "RANGE MODS: –2/–1/+1/+2 WHEN ACTIVE; REQUIRES POWER PACK AND USES 1 POWER POINT PER MINUTE",
+          "_section": "STABILIZERS AND HARNESSES"
+        },
+        {
+          "ITEM": "AMR-20 RIFLE/PISTOL SILENCER",
+          "EQUIPMENT RATINGS": "E/D/D",
+          "COST/RELOAD": "500",
+          "AFF": "CS",
+          "MASS": "50 G",
+          "NOTES": "–4 TO PERCEPTION CHECK ROLL (TO HEAR)†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "SOUND SUPPRESSOR",
+          "EQUIPMENT RATINGS": "C/B/D",
+          "COST/RELOAD": "50",
+          "AFF": "—",
+          "MASS": "250 G",
+          "NOTES": "–2 TO PERCEPTION CHECK ROLL (TO HEAR)†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "SILENCER",
+          "EQUIPMENT RATINGS": "C/B/D",
+          "COST/RELOAD": "25",
+          "AFF": "—",
+          "MASS": "100 G",
+          "NOTES": "–4 TO SOUND PERCEPTION CHECK ROLL; BREAKS ON ATTACK FUMBLE†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "SOUND AND FLASH SUPPRESSOR",
+          "EQUIPMENT RATINGS": "C/C/D",
+          "COST/RELOAD": "200",
+          "AFF": "—",
+          "MASS": "300 G",
+          "NOTES": "–2 TO PERCEPTION CHECK (VISION AND SOUND)†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "FLASH SUPPRESSOR",
+          "EQUIPMENT RATINGS": "C/B/D",
+          "COST/RELOAD": "100",
+          "AFF": "—",
+          "MASS": "250 G",
+          "NOTES": "–2 TO PERCEPTION CHECK (TO SEE)†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "FLASH SUPPRESSOR, JAF-05",
+          "EQUIPMENT RATINGS": "E/D/D",
+          "COST/RELOAD": "1,000",
+          "AFF": "CS",
+          "MASS": "675 G",
+          "NOTES": "–4 TO PERCEPTION CHECK (VISION AND SOUND)†",
+          "_section": "SILENCERS AND SUPPRESSORS"
+        },
+        {
+          "ITEM": "BOW ACCESSORY MOUNT",
+          "EQUIPMENT RATINGS": "B/B/A",
+          "COST/RELOAD": "15",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "ALLOWS FOR MOUNTING 1 SCOPE, SIGHT, OR FLASHLIGHT ON A BOW WEAPON",
+          "_section": "GENERAL ACCESSORIES"
+        },
+        {
+          "ITEM": "HOLSTER",
+          "EQUIPMENT RATINGS": "B/A/A",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "150 G",
+          "NOTES": "AVAILABLE FOR PISTOLS AND RIFLES ONLY",
+          "_section": "GENERAL ACCESSORIES"
+        },
+        {
+          "ITEM": "GUIDED RIFLE MODULES",
+          "EQUIPMENT RATINGS": "E/X-X-D/F",
+          "COST/RELOAD": "2,000",
+          "AFF": "FW/FS",
+          "MASS": "250 G",
+          "NOTES": "ATTACH TO WEAPON USING GUIDED GYROJET OR AIR-BURST RIFLE AMMO TO USE GUIDANCE/SPECIAL FEATURES (SEE SPECIALTY MUNITIONS, P. 285); REQUIRES POWER PACK (1 POINT PER HOUR)",
+          "_section": "SPECIALIZED ACCESSORIES"
+        },
+        {
+          "ITEM": "M-11J “CLOAKING DEVICE”",
+          "EQUIPMENT RATINGS": "F/F-X/F/F",
+          "COST/RELOAD": "4,350,000",
+          "AFF": "CS",
+          "MASS": "4.5 KG",
+          "NOTES": "WORN AS A SUIT (COVERS ARMS, LEGS AND TORSO; NO BAR); CONCEALS WEAPONS AND NON-ENCUMBERING EQUIPMENT FROM SENSORS (–8 TO PERCEPTION AND SENSOR OPERATIONS CHECK ROLLS TO SPOT HIDDEN WEAPON); REQUIRES POWER PACK (0.5 POINTS PER MINUTE)",
+          "_section": "SPECIALIZED ACCESSORIES"
+        },
+        {
+          "ITEM": "RADIOACTIVE TRACKER SCANNER",
+          "EQUIPMENT RATINGS": "C/E-F-E/E",
+          "COST/RELOAD": "2250",
+          "AFF": "—",
+          "MASS": "100 G",
+          "NOTES": "DETECTS TARGETS “PAINTED” BY RADIOACTIVE TRACKER ROUNDS (SEE SPECIALTY AMMUNITION, P. 285); MAX RANGE 35M (+1 TO SENSOR OPERATIONS CHECK ROLL PER 5 METERS CLOSER); REQUIRES POWER PACK (0.5 POINTS PER HOUR)",
+          "_section": "SPECIALIZED ACCESSORIES"
+        }
+      ],
+      "notes": [
+        "*Requires Micro-Power Pack to function; uses 0.1 point points per hour of continuous use.",
+        "**Recoil modifiers cannot rise above 0; Recoil Compensation is a specifi c weapon modification, not a detachable accessory.",
+        "†These accessories will not work with Gauss, gyrojet, or plasma weapons; of these, only the JAF-05 may be used with energy weapons of any kind."
+      ]
+    }
+  ],
+  "row_count": 20
+}

@@ -1,0 +1,175 @@
+{
+  "table_name": "AUDIO/VIDEO/TRIDEO EQUIPMENT",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      302
+    ],
+    "pdf_pages": [
+      304
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 302,
+      "pdf_page": 304,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "MICRO-RECORDER",
+          "EQUIPMENT RATINGS": "C/A-B-B/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "150 G",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "AUDIO RECORDINGS ONLY; 1 HOUR MAX ON HIGH-QUALITY (10 HOURS AT LOW-QUALITY); SIZE: TINY",
+          "_section": "RECORDING DEVICES"
+        },
+        {
+          "ITEM": "MICRO-CAMCORDER",
+          "EQUIPMENT RATINGS": "D/B-D-C/A",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "400 G",
+          "POWER USE": "1 PPH",
+          "NOTES": "AUDIO-VIDEO RECORDINGS; 1 HOUR OF VIDEO (OR 5,000 STILL IMAGES) MAX; SIZE: TINY",
+          "_section": "RECORDING DEVICES"
+        },
+        {
+          "ITEM": "VIDEO CAMERA",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "AUDIO-VIDEO RECORDINGS; 6 HOURS VIDEO (OR 30,000 STILL IMAGES) MAX*",
+          "_section": "RECORDING DEVICES"
+        },
+        {
+          "ITEM": "TRI-VID CAMERA",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "375",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "HOLO RECORDINGS; 2 HOURS OF VIDEO (OR 15,000 STILL IMAGES) MAX*",
+          "_section": "RECORDING DEVICES"
+        },
+        {
+          "ITEM": "HOLOMAP",
+          "EQUIPMENT RATINGS": "D/A-D-C/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "CAN LINK TO SATNAV RECEIVERS; PROJECTS HOLOGRAPHIC MAPS",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "HOLOPROJECTOR, PORTABLE",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "400",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "2 PPH",
+          "NOTES": "PROJECTS HOLOVID (TRI-VID) RECORDINGS",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "HOLOTANK",
+          "EQUIPMENT RATINGS": "E/E-X-E/B",
+          "COST": "500,000",
+          "AFF": "CLAN",
+          "MASS": "2,000 KG",
+          "POWER USE": "1 PPM",
+          "NOTES": "CAN BE HOOKED TO ADVANCED FIELD COMMUNICATIONS TO PRODUCE A +2 ROLL MODIFIER TO A COMMANDER’S STRATEGY, TACTICS AND INITIATIVE",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "HOLOVISION MONITOR",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "300",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "POWER USE": "2 PPH",
+          "NOTES": "PLAYS LIVE AND RECORDED HOLOVID (TRI-VID) MEDIA",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "PERSONAL MUSIC SET",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "20",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "PLAYS LIVE AND RECORDED AUDIO-ONLY MEDIA",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "TRI-VID SET",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "220",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "POWER USE": "2 PPH",
+          "NOTES": "PLAYS LIVE AND RECORDED HOLOVID (TRI-VID) MEDIA",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "VIDEO MONITOR",
+          "EQUIPMENT RATINGS": "B/A-B-A/A",
+          "COST": "160",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "PLAYS LIVE AND RECORDED FLAT VIDEO MEDIA",
+          "_section": "PROJECTION/PLAYBACK DEVICES"
+        },
+        {
+          "ITEM": "AUDIO/AUDIO-VIDEO CHIP",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "1",
+          "AFF": "—",
+          "MASS": "5 G",
+          "POWER USE": "—",
+          "NOTES": "STORAGE MEDIUM FOR DATA, AUDIO AND AUDIO-VIDEO MEDIA",
+          "_section": "STORAGE MEDIA (BLANK)"
+        },
+        {
+          "ITEM": "HOLOVID VID-CHIP/ CRYSTAL",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "2",
+          "AFF": "—",
+          "MASS": "10 G",
+          "POWER USE": "—",
+          "NOTES": "STORAGE MEDIUM FOR HOLO-VID (TRI-VID) MEDIA",
+          "_section": "STORAGE MEDIA (BLANK)"
+        },
+        {
+          "ITEM": "HOLOMAP CHIP",
+          "EQUIPMENT RATINGS": "D/A-D-C/A",
+          "COST": "20",
+          "AFF": "—",
+          "MASS": "10 G",
+          "POWER USE": "—",
+          "NOTES": "STORAGE MEDIUM FOR HOLOMAP/SATNAV RECEIVER",
+          "_section": "STORAGE MEDIA (BLANK)"
+        }
+      ],
+      "notes": [
+        "*These recorders are compatible with Infrared, Telescopic and Night Vision scopes",
+        "Note: PPH = Power Points per Hour; PPM = Power Points per Minute"
+      ]
+    }
+  ],
+  "row_count": 14
+}

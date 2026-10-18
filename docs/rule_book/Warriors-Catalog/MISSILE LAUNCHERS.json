@@ -1,0 +1,144 @@
+{
+  "table_name": "MISSILE LAUNCHERS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      274
+    ],
+    "pdf_pages": [
+      276
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 274,
+      "pdf_page": 276,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "VLAW",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "(C)",
+          "RANGE": "35/150/295/450",
+          "SHOTS": "1",
+          "COST/RELOAD": "75",
+          "AFF": "—",
+          "MASS/RELOAD": "2.2 KG/—",
+          "NOTES": "CANNOT BE RELOADED",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "LAW",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "(D)",
+          "RANGE": "55/200/335/560",
+          "SHOTS": "1",
+          "COST/RELOAD": "350",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/—",
+          "NOTES": "CANNOT BE RELOADED",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "LRM LAUNCHER",
+          "EQUIPMENT RATINGS": "D/X-X-D/E",
+          "AP/BD": "(C)",
+          "RANGE": "75/400/1000/2100",
+          "SHOTS": "1",
+          "COST/RELOAD": "2,000/*",
+          "AFF": "—",
+          "MASS/RELOAD": "30 KG/8.3 KG",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MRM LAUNCHER",
+          "EQUIPMENT RATINGS": "D/X-X-E/E",
+          "AP/BD": "(D)",
+          "RANGE": "65/300/1100/1500",
+          "SHOTS": "1",
+          "COST/RELOAD": "2,500/*",
+          "AFF": "—",
+          "MASS/RELOAD": "30 KG/5 KG",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SRM LAUNCHER (STANDARD)",
+          "EQUIPMENT RATINGS": "C/B-D-D/E",
+          "AP/BD": "(E)",
+          "RANGE": "60/225/425/740",
+          "SHOTS": "2",
+          "COST/RELOAD": "1,500/*",
+          "AFF": "—",
+          "MASS/RELOAD": "30 KG/20 KG",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SRM LAUNCHER (LIGHT)",
+          "EQUIPMENT RATINGS": "C/C-C-C/E",
+          "AP/BD": "(E)",
+          "RANGE": "55/180/270/475",
+          "SHOTS": "2",
+          "COST/RELOAD": "1,500/*",
+          "AFF": "—",
+          "MASS/RELOAD": "10 KG/9 KG",
+          "NOTES": "—",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SRM LAUNCHER (HEAVY)",
+          "EQUIPMENT RATINGS": "C/C-D-D/E",
+          "AP/BD": "(E)",
+          "RANGE": "74/235/353/530",
+          "SHOTS": "1",
+          "COST/RELOAD": "3,000/*",
+          "AFF": "—",
+          "MASS/RELOAD": "20 KG/18 KG",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MK 1 LIGHT AA WEAPON",
+          "EQUIPMENT RATINGS": "D/E-F-D/E",
+          "AP/BD": "5B/6S",
+          "RANGE": "40/160/320/650",
+          "SHOTS": "1",
+          "COST/RELOAD": "1,000",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/—",
+          "NOTES": "CANNOT BE RELOADED; +2 TO ATTACK ROLL VS. AIRBORNE TARGETS; –5 VS. ALL OTHERS",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MK 2 MAN-PORTABLE AA WEAPON",
+          "EQUIPMENT RATINGS": "D/F-X-D/E",
+          "AP/BD": "6B/8S",
+          "RANGE": "60/360/900/1800",
+          "SHOTS": "4",
+          "COST/RELOAD": "3,500/1,000",
+          "AFF": "—",
+          "MASS/RELOAD": "35 KG/14 KG",
+          "NOTES": "ENCUMBERING; CREW: 2; +2 TO ATTACK ROLL VS. AIRBORNE TARGETS; –5 VS. ALL OTHERS",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        }
+      ],
+      "notes": [
+        "*Per ordnance type (see Ordnance, pp. 282-284), but increase cost by 10 percent for SRM or MRM munitions, and by 15 percent for LRM munitions."
+      ]
+    }
+  ],
+  "row_count": 9
+}

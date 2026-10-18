@@ -1,0 +1,215 @@
+{
+  "table_name": "REPAIR/SALVAGE GEAR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      310
+    ],
+    "pdf_pages": [
+      312
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 310,
+      "pdf_page": 312,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "BASIC TOOLKIT",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; REQUIRED TO PERFORM ANY REPAIR THAT REQUIRES A SKILL ROLL",
+          "_section": "TOOLKITS"
+        },
+        {
+          "ITEM": "DELUXE TOOLKIT",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "750",
+          "AFF": "—",
+          "MASS": "50 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; +1 TO ALL TECHNICIAN SKILL ROLLS",
+          "_section": "TOOLKITS"
+        },
+        {
+          "ITEM": "AEROSPACE REPAIR KIT",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "2,500",
+          "AFF": "—",
+          "MASS": "310 KG",
+          "POWER USE": "—",
+          "NOTES": "MOBILE; RESTOCKING COST: 500; +1 TO TECHNICIAN/ AERONAUTICS AND TECHNICIAN/JETS ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "BIONIC MAINTENANCE KIT",
+          "EQUIPMENT RATINGS": "D/C-E-D/A",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "45 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; RESTOCKING COST: 1,000; +1 TO TECHNICIAN/ CYBERNETICS AND TECHNICIAN/MYOMER SKILL ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "CUTTING/JOINING KIT",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "1,250",
+          "AFF": "—",
+          "MASS": "175 KG",
+          "POWER USE": "—",
+          "NOTES": "MOBILE; RESTOCKING COST: 250; +1 TO TECHNICIAN/ MECHANICS ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "ELECTRONICS REPAIR KIT",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "2,000",
+          "AFF": "—",
+          "MASS": "40 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; RESTOCKING COST: 400; +1 TO TECHNICIAN/ ELECTRONICS SKILL ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "FISSION/FUSION REPAIR KIT",
+          "EQUIPMENT RATINGS": "C/B-D-C/B",
+          "COST": "15,000",
+          "AFF": "—",
+          "MASS": "345 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; RESTOCKING COST: 3,000; +1 TO TECHNICIAN/ NUCLEAR AND TECHNICIAN/ELECTRONIC SKILL ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "MYOMER/ACTUATOR REPAIR KIT",
+          "EQUIPMENT RATINGS": "D/B-D-B/A",
+          "COST": "3,000",
+          "AFF": "—",
+          "MASS": "260 KG",
+          "POWER USE": "—",
+          "NOTES": "MOBILE; RESTOCKING COST: 600; +1 TO TECHNICIAN/MYOMER SKILL ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "VEHICLE REPAIR KIT",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "225 KG",
+          "POWER USE": "—",
+          "NOTES": "MOBILE; RESTOCKING COST: 200; +1 TO TECHNICIAN/MECHANICS ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "WEAPON REPAIR KIT",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "1,500",
+          "AFF": "—",
+          "MASS": "200 KG",
+          "POWER USE": "—",
+          "NOTES": "MOBILE; RESTOCKING COST: 300; +1 TO TECHNICIAN/WEAPONS ROLLS",
+          "_section": "SPECIALIZED REPAIR KITS*"
+        },
+        {
+          "ITEM": "ENERGY WEAPON KIT",
+          "EQUIPMENT RATINGS": "D/A-B-B/A",
+          "COST": "850",
+          "AFF": "—",
+          "MASS": "2.5 KG",
+          "POWER USE": "—",
+          "NOTES": "ALLOWS MAINTENANCE OF ENERGY-BASED SMALL ARMS AND SUPPORT WEAPONS; RESTOCKING COST: 160; +1 TO TECHNICIAN/ WEAPONS SKILL ROLL (FOR ENERGY-BASED SMALL ARMS AND SUPPORT WEAPONS ONLY)",
+          "_section": "SMALL ARMS MAINTENANCE KITS"
+        },
+        {
+          "ITEM": "RELOADING KIT",
+          "EQUIPMENT RATINGS": "C/A-B-B/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "25 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; CAN BE USED TO CAST AMMUNITION FOR BALLISTIC- AND GAUSS-BASED SMALL ARMS AND SUPPORT WEAPONS (SUPPLIES COST AS MUCH AS THE EQUIVALENT AMOUNT OF PRE-MADE AMMUNITION X0.5)",
+          "_section": "SMALL ARMS MAINTENANCE KITS"
+        },
+        {
+          "ITEM": "SLUG-THROWER KIT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER USE": "—",
+          "NOTES": "ALLOWS MAINTENANCE OF BALLISTIC- AND GAUSS-BASED SMALL ARMS AND SUPPORT WEAPONS; RESTOCKING COST: 20; +1 TO TECHNICIAN/WEAPONS SKILL ROLL (FOR BALLISTIC- AND GAUSS- BASED SMALL ARMS AND SUPPORT WEAPONS ONLY)",
+          "_section": "SMALL ARMS MAINTENANCE KITS"
+        },
+        {
+          "ITEM": "HAND-HELD LASER TORCH",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "40",
+          "AFF": "—",
+          "MASS": "950 G",
+          "POWER USE": "1 PPT",
+          "NOTES": "AP/BD: 5E/4 ; CUTS ON CONTACT ONLY",
+          "_section": "MISCELLANEOUS TOOLS"
+        },
+        {
+          "ITEM": "NULL-G PACK",
+          "EQUIPMENT RATINGS": "D/B-D-B/A",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "20 KG",
+          "POWER USE": "—",
+          "NOTES": "FUEL: 60 PTS; REFUELING COST: 10; CONSUMES 1 PT/MIN X TONS OF CARGO MOVED (USABLE IN ZERO-G ONLY)",
+          "_section": "MISCELLANEOUS TOOLS"
+        },
+        {
+          "ITEM": "NULL-G PACK CONTROLLER",
+          "EQUIPMENT RATINGS": "D/B-D-B/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "REQUIRED TO OPERATE 2 NULL-G PACKS (WHICH MUST OPERATE AS A SET)",
+          "_section": "MISCELLANEOUS TOOLS"
+        },
+        {
+          "ITEM": "RADIATION SHEETING (PER SQ. M)",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "1",
+          "AFF": "—",
+          "MASS": "250 G",
+          "POWER USE": "—",
+          "NOTES": "AVG. 50 SQ. M NEEDED FOR TYPICAL VEHICULAR FUSION ENGINE WORK; REDUCES REPAIR TIME BY 10%",
+          "_section": "MISCELLANEOUS TOOLS"
+        },
+        {
+          "ITEM": "REPAIR PLATFORM",
+          "EQUIPMENT RATINGS": "D/B-B-A/A",
+          "COST": "12,500",
+          "AFF": "—",
+          "MASS": "2,250 KG",
+          "POWER USE": "2 PPM",
+          "NOTES": "MOBILE; REDUCES REPAIR TIME BY 20%",
+          "_section": "MISCELLANEOUS TOOLS"
+        }
+      ],
+      "notes": [
+        "NOTES: PPT = Power Points per (5-second) Turn; PPH = Power Points per Hour; PPM = Power Points per Minute. Items identified as “Mobile” are mounted on wheeled carts that cannot be carried, but can be moved with relative ease. All kits with a Restocking Cost must be restocked after 12 uses to maintain their bonuses.",
+        "*Specialized Repair Kits require occasional restocking; after a month of regular use (presuming 40-hour work weeks), a given Specialized Repair Kit will require a full restocking."
+      ]
+    }
+  ],
+  "row_count": 18
+}

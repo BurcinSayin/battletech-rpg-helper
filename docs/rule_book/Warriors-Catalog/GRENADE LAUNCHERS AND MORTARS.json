@@ -1,0 +1,120 @@
+{
+  "table_name": "GRENADE LAUNCHERS AND MORTARS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      273
+    ],
+    "pdf_pages": [
+      275
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 273,
+      "pdf_page": 275,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "GRENADE LAUNCHER",
+          "EQUIPMENT RATINGS": "C/A-B-B/D",
+          "AP/BD": "(B)",
+          "RANGE": "20/55/130/200",
+          "SHOTS": "20",
+          "COST/RELOAD": "465/*",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/4.5 KG",
+          "NOTES": "—",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE LAUNCHER, COMPACT",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "(A)",
+          "RANGE": "15/40/90/150",
+          "SHOTS": "1",
+          "COST/RELOAD": "290/*",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/200 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE LAUNCHER, AUTOMATIC",
+          "EQUIPMENT RATINGS": "C/B-B-B/E",
+          "AP/BD": "(B)",
+          "RANGE": "20/45/110/180",
+          "SHOTS": "10",
+          "COST/RELOAD": "975/*",
+          "AFF": "—",
+          "MASS/RELOAD": "12 KG/9 KG",
+          "NOTES": "BURST 5; RECOIL –2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE LAUNCHER, HEAVY",
+          "EQUIPMENT RATINGS": "C/X-X-D/E",
+          "AP/BD": "(C)",
+          "RANGE": "20/60/150/250",
+          "SHOTS": "20",
+          "COST/RELOAD": "1,500/*",
+          "AFF": "—",
+          "MASS/RELOAD": "15 KG/12 KG",
+          "NOTES": "BURST 5; RECOIL –2; ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE LAUNCHER, HVY. AUTO",
+          "EQUIPMENT RATINGS": "D/X-X-D/E",
+          "AP/BD": "(D)",
+          "RANGE": "25/65/150/240",
+          "SHOTS": "20",
+          "COST/RELOAD": "4,500/*",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "20 KG/12 KG",
+          "NOTES": "BURST 5; RECOIL –2; ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MORTAR, LIGHT",
+          "EQUIPMENT RATINGS": "B/A-A-A/D",
+          "AP/BD": "(D)",
+          "RANGE": "40/100/250/565",
+          "SHOTS": "1",
+          "COST/RELOAD": "1,400/*",
+          "AFF": "—",
+          "MASS/RELOAD": "50 KG/2 KG",
+          "NOTES": "CREW: 2; INDIRECT; MINIMUM RANGE: 40**",
+          "_section": "SKILL: ARTILLERY"
+        },
+        {
+          "ITEM": "MORTAR, HEAVY",
+          "EQUIPMENT RATINGS": "B/A-A-A/D",
+          "AP/BD": "(E)",
+          "RANGE": "100/180/400/900",
+          "SHOTS": "1",
+          "COST/RELOAD": "5,000/*",
+          "AFF": "—",
+          "MASS/RELOAD": "220 KG/4 KG",
+          "NOTES": "CREW: 3; INDIRECT; MINIMUM RANGE:100**",
+          "_section": "SKILL: ARTILLERY"
+        }
+      ],
+      "notes": [
+        "*Per ordnance type (see Ordnance, p. 282-284) **Due to their arcing fire, mortars cannot effectively target any unit or area within their minimum range."
+      ]
+    }
+  ],
+  "row_count": 7
+}

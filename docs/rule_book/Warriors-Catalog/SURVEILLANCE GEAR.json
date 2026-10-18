@@ -1,0 +1,167 @@
+{
+  "table_name": "SURVEILLANCE GEAR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      304
+    ],
+    "pdf_pages": [
+      306
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 304,
+      "pdf_page": 306,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "DETECTION RANGE",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "MICROPHONE, DIRECTIONAL",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "60",
+          "AFF": "—",
+          "MASS": "1.5 KG",
+          "DETECTION RANGE": "100 M",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "USED TO HEAR SOUNDS VIA DIRECT AUDIO",
+          "_section": "AUDIO RECEIVERS AND COUNTERMEASURES"
+        },
+        {
+          "ITEM": "MICROPHONE, LASER",
+          "EQUIPMENT RATINGS": "C/A-D-C/C",
+          "COST": "500",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "DETECTION RANGE": "1,000 M",
+          "POWER USE": "3 PPH",
+          "NOTES": "USED TO HEAR SOUNDS BASED ON WALL/ WINDOW VIBRATION; REDUCE RANGE TO AS LITTLE AS 100 METERS IN FOG, SMOKE, OR THROUGH OTHER VISUALLY HINDERING TERRAIN.",
+          "_section": "AUDIO RECEIVERS AND COUNTERMEASURES"
+        },
+        {
+          "ITEM": "VOICE DISTORTER",
+          "EQUIPMENT RATINGS": "C/D-F-D/C",
+          "COST": "600",
+          "AFF": "—",
+          "MASS": "500 G",
+          "DETECTION RANGE": "—",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "USED TO OBSCURE USER’S VOICE",
+          "_section": "AUDIO RECEIVERS AND COUNTERMEASURES"
+        },
+        {
+          "ITEM": "WHITE NOISE GENERATOR",
+          "EQUIPMENT RATINGS": "C/D-E-D/B",
+          "COST": "400",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "DETECTION RANGE": "5 M",
+          "POWER USE": "1 PPM",
+          "NOTES": "USED TO THWART AUDIO RECORDINGS WITHIN ITS DETECTION RANGE",
+          "_section": "AUDIO RECEIVERS AND COUNTERMEASURES"
+        },
+        {
+          "ITEM": "MICROPHONE BUG",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "COST": "40",
+          "AFF": "—",
+          "MASS": "10 G",
+          "DETECTION RANGE": "5 M",
+          "POWER USE": "—",
+          "NOTES": "SOUND-ACTIVATED; RECORDS UP TO 2 HOURS’ TOTAL TIME; CAN TRANSMIT RECORDINGS UP TO 100 M FOR 2 DAYS (MAX)",
+          "_section": "BUGS"
+        },
+        {
+          "ITEM": "SATNAV BUG",
+          "EQUIPMENT RATINGS": "D/B-E-D/C",
+          "COST": "150",
+          "AFF": "—",
+          "MASS": "50 G",
+          "DETECTION RANGE": "—",
+          "POWER USE": "—",
+          "NOTES": "COMPATIBLE WITH SATNAV RECEIVERS AND SATNAV NETWORKS ONLY; TRANSMITS FOR UP TO 3 DAYS",
+          "_section": "BUGS"
+        },
+        {
+          "ITEM": "TRACKING BUG",
+          "EQUIPMENT RATINGS": "C/B-D-C/C",
+          "COST": "30",
+          "AFF": "—",
+          "MASS": "100 G",
+          "DETECTION RANGE": "—",
+          "POWER USE": "—",
+          "NOTES": "TRANSMITS LOCATION FOR UP TO 10 DAYS",
+          "_section": "BUGS"
+        },
+        {
+          "ITEM": "TRACKING MICROPHONE BUG",
+          "EQUIPMENT RATINGS": "C/B-E-D/C",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "150 G",
+          "DETECTION RANGE": "—",
+          "POWER USE": "—",
+          "NOTES": "TRANSMITS AUDIO AND LOCATION FOR UP TO 24 HOURS",
+          "_section": "BUGS"
+        },
+        {
+          "ITEM": "BUG SCANNER",
+          "EQUIPMENT RATINGS": "C/B-D-C/C",
+          "COST": "800",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "DETECTION RANGE": "15 M",
+          "POWER USE": "1 PPH",
+          "NOTES": "DETECTS BUGS IN RANGE; SENSOR OPERATIONS SKILL CHECK TO LOCATE EACH BUG",
+          "_section": "BUG SCANNERS/LOCATORS"
+        },
+        {
+          "ITEM": "BUG SCANNER WATCH",
+          "EQUIPMENT RATINGS": "D/C-E-D/C",
+          "COST": "1,500",
+          "AFF": "—",
+          "MASS": "100 G",
+          "DETECTION RANGE": "10 M",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "DETECTS BUGS IN RANGE; SENSOR OPERATIONS SKILL CHECK –4 TO LOCATE EACH BUG",
+          "_section": "BUG SCANNERS/LOCATORS"
+        },
+        {
+          "ITEM": "TRACKING BUG LOCATOR",
+          "EQUIPMENT RATINGS": "C/B-D-C/C",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "8 KG",
+          "DETECTION RANGE": "500 M",
+          "POWER USE": "1 PPH",
+          "NOTES": "DETECTS AND RECEIVES AUDIO FROM FRIENDLY TRACKING BUGS",
+          "_section": "BUG SCANNERS/LOCATORS"
+        },
+        {
+          "ITEM": "TRACKING BUG LOCATOR, COMPACT",
+          "EQUIPMENT RATINGS": "D/C-E-D/C",
+          "COST": "2,000",
+          "AFF": "—",
+          "MASS": "800 G",
+          "DETECTION RANGE": "200 M",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "DETECTS AND RECEIVES AUDIO FROM FRIENDLY TRACKING BUGS",
+          "_section": "BUG SCANNERS/LOCATORS"
+        }
+      ],
+      "notes": [
+        "Note: PPH = Power Points per Hour; PPM = Power Points per Minute"
+      ]
+    }
+  ],
+  "row_count": 12
+}

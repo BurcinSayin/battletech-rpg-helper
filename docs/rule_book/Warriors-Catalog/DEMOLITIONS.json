@@ -1,0 +1,82 @@
+{
+  "table_name": "DEMOLITIONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      278
+    ],
+    "pdf_pages": [
+      280
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 278,
+      "pdf_page": 280,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "C8, BLASTING BLOCK",
+          "EQUIPMENT RATINGS": "D/B-B-B/D",
+          "AP/BD": "7X/10A",
+          "RANGE": "—",
+          "SHOTS": "1",
+          "COST/RELOAD": "50",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "NOTES": "–4AP/–4BD PER METER",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "C8, SATCHEL CHARGE",
+          "EQUIPMENT RATINGS": "D/B-D-C/E",
+          "AP/BD": "8X/12A",
+          "RANGE": "STR X 0.5/1/1.5/2",
+          "SHOTS": "1",
+          "COST/RELOAD": "210",
+          "AFF": "—",
+          "MASS": "4.5 KG",
+          "NOTES": "–2AP/–2BD PER METER; RANGE APPLIES WHEN THROWN AS A GRENADE",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "DEMOLITION KIT",
+          "EQUIPMENT RATINGS": "C/A-C-B/D",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "SHOTS": "12",
+          "COST/RELOAD": "200",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "USED TO RIG UP TO 12 EXPLOSIVES FOR REMOTE OR TIMED EXPLOSIVES; +1 TO DEMOLITIONS ROLL TO RIG EXPLOSIVES",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "PENTAGLYCERINE",
+          "EQUIPMENT RATINGS": "D/C-E-D/D",
+          "AP/BD": "7X/10A",
+          "RANGE": "—",
+          "SHOTS": "1",
+          "COST/RELOAD": "150",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "–2AP/–2BD PER METER",
+          "_section": "SKILL: DEMOLITIONS"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 4
+}

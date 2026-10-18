@@ -1,0 +1,235 @@
+{
+  "table_name": "ESPIONAGE GEAR AND SECURITY SYSTEMS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      308
+    ],
+    "pdf_pages": [
+      310
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 308,
+      "pdf_page": 310,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "BASIC LOCK PICK SET",
+          "EQUIPMENT RATINGS": "B/A-A-A/C",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "365 G",
+          "POWER USE": "—",
+          "NOTES": "+2 TO SECURITY SYSTEMS/MECHANICAL ROLL TO PICK (MECHANICAL LOCKS ONLY)",
+          "_section": "LOCK-PICKS AND SECURITY BYPASSES"
+        },
+        {
+          "ITEM": "VIBRO LOCK PICK SET",
+          "EQUIPMENT RATINGS": "D/C-E-D/D",
+          "COST": "2,000",
+          "AFF": "—",
+          "MASS": "520 G",
+          "POWER USE": "1 PPS",
+          "NOTES": "+4 TO SECURITY SYSTEMS/MECHANICAL ROLL TO PICK (MECHANICAL LOCKS ONLY)",
+          "_section": "LOCK-PICKS AND SECURITY BYPASSES"
+        },
+        {
+          "ITEM": "ELECTRONIC SECURITY BYPASS KIT",
+          "EQUIPMENT RATINGS": "C/C-D-D/E",
+          "COST": "1,200",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "+2 TO SECURITY SYSTEMS/ELECTRONIC ROLL TO PICK (ELECTRONIC LOCKS ONLY)",
+          "_section": "LOCK-PICKS AND SECURITY BYPASSES"
+        },
+        {
+          "ITEM": "ELECTRONIC CODEBREAKER, ADVANCED",
+          "EQUIPMENT RATINGS": "E/E-E-E/F",
+          "COST": "20,000",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER USE": "0.2 PPH",
+          "NOTES": "+4 TO SECURITY/ELECTRONIC ROLL TO PICK (ELECTRONIC LOCKS ONLY)",
+          "_section": "LOCK-PICKS AND SECURITY BYPASSES"
+        },
+        {
+          "ITEM": "NEUROHELMET CODEBREAKER",
+          "EQUIPMENT RATINGS": "D/D-F-E/E",
+          "COST": "100,000",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "+2 TO SECURITY SYSTEMS/ELECTRONIC ROLL TO HACK (’MECH CONTROL SYSTEMS ONLY)",
+          "_section": "LOCK-PICKS AND SECURITY BYPASSES"
+        },
+        {
+          "ITEM": "DISGUISE/MAKE-UP KIT",
+          "EQUIPMENT RATINGS": "C/A-B-B/A",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "6.5 KG",
+          "POWER USE": "—",
+          "NOTES": "+1 TO DISGUISE SKILL ROLLS; 5 USES",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "FORGERY KIT",
+          "EQUIPMENT RATINGS": "D/B-C-C/E",
+          "COST": "1,225",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "POWER USE": "—",
+          "NOTES": "+1 TO FORGERY SKILL ROLLS; 5 USES",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "FORENSICS ANALYSIS KIT, ADVANCED",
+          "EQUIPMENT RATINGS": "D/D-C-B/B",
+          "COST": "4,500",
+          "AFF": "—",
+          "MASS": "8 KG",
+          "POWER USE": "0.6 PPH",
+          "NOTES": "+3 TO INVESTIGATION ROLL; 1D6 MINUTES PER USE; REFILL COST: 100 C-BILLS (REQUIRED AFTER 5 USES)",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "FORENSICS ANALYSIS KIT, BASIC",
+          "EQUIPMENT RATINGS": "C/B-B-A/A",
+          "COST": "300",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "POWER USE": "0.2 PPH",
+          "NOTES": "+1 TO INVESTIGATION ROLL; 1D6X5 MINUTES PER USE; REFILL COST: 75 C-BILLS (REQUIRED AFTER 3 USES)",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "COUNTER-FORGERY KIT, BASIC",
+          "EQUIPMENT RATINGS": "D/B-C-A/A",
+          "COST": "700",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "0.4 PPH",
+          "NOTES": "+2 TO APPRAISAL (OF NON-ELECTRONIC DOCUMENTS AND IMAGES ONLY); 2D6 TURNS PER USE",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "COUNTER-FORGERY KIT, ELECTRONIC",
+          "EQUIPMENT RATINGS": "D/C-E-B/A",
+          "COST": "900",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "0.4 PPH",
+          "NOTES": "+2 TO APPRAISAL (OF ELECTRONIC DOCUMENTS AND IMAGES ONLY); 1D6 TURNS PER USE",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "FIRE CAPSULE",
+          "EQUIPMENT RATINGS": "C/B-C-C/B",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "10 G",
+          "POWER USE": "—",
+          "NOTES": "USED TO DESTROY PREPARED DOCUMENTS; –4 TO PERCEPTION TO DETECT EMBEDDED FIRE CAPSULE",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "LIE DETECTOR/ POLYGRAPH",
+          "EQUIPMENT RATINGS": "B/F-F-E/D",
+          "COST": "380",
+          "AFF": "—",
+          "MASS": "9.5 KG",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "+1 TO INTERROGATION SKILL ROLL (INTERROGATOR ONLY)",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "NEURAL INTERROGATION COMPUTER",
+          "EQUIPMENT RATINGS": "D/X-X-E/F",
+          "COST": "45,000",
+          "AFF": "CC",
+          "MASS": "200 KG",
+          "POWER USE": "1 PPM",
+          "NOTES": "+2 TO INTERROGATION SKILL ROLL (INTERROGATOR ONLY); SUBJECT MUST MAKE A BOD + WIL ATTRIBUTE CHECK EVERY MINUTE OR SUFFER A –1 TP HANDICAP (–2 TP ON FUMBLE)",
+          "_section": "GENERAL ESPIONAGE GEAR"
+        },
+        {
+          "ITEM": "LOCK, MAGNETIC",
+          "EQUIPMENT RATINGS": "D/C-C-B/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER USE": "0.1 PPD",
+          "NOTES": "TYPICALLY USES KEYCARD, PUNCH-CODE, OPTICAL OR VOICEPRINT ACCESS STYLES; SECURITY SYSTEMS/ELECTRONIC SKILL REQUIRED TO INSTALL OR PICK.",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        },
+        {
+          "ITEM": "LOCK, MECHANICAL",
+          "EQUIPMENT RATINGS": "B/A-B-C/A",
+          "COST": "30",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "POWER USE": "—",
+          "NOTES": "DEADBOLT, CHAIN AND COMBINATION STYLE LOCKS; SECURITY SYSTEMS/MECHANICAL SKILL REQUIRED TO INSTALL OR PICK.",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        },
+        {
+          "ITEM": "LOCK, ALARMED",
+          "EQUIPMENT RATINGS": "B/B-B-B/A",
+          "COST": "+25",
+          "AFF": "—",
+          "MASS": "+0.5 KG",
+          "POWER USE": "0.1 PPD",
+          "NOTES": "ALARM WILL SOUND OR FLASH (SOMEWHERE) WHEN PICKED UNLESS THE ACTION CHECK TO DO SO SUCCEEDS BY 2 POINTS OR MORE.",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        },
+        {
+          "ITEM": "LOCK, REINFORCED",
+          "EQUIPMENT RATINGS": "C/C-C-C/A",
+          "COST": "+75",
+          "AFF": "—",
+          "MASS": "+2 KG",
+          "POWER USE": "—",
+          "NOTES": "LOCK FEATURES A REDUNDANT MECHANICAL MECHANISM OR ELECTRONIC FAILSAFE THAT MAKES IT TOUGHER THAN STANDARD MODELS, ADDING A –3 MODIFIER TO THE SECURITY SYSTEMS SKILL ROLL TO PICK (BUT NOT TO INSTALL).",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        },
+        {
+          "ITEM": "LOCK, BOOBY-TRAPPED",
+          "EQUIPMENT RATINGS": "*",
+          "COST": "*",
+          "AFF": "—",
+          "MASS": "*",
+          "POWER USE": "—",
+          "NOTES": "LOCK FEATURES A BOOBY TRAP SLAVED TO AN ALARM; IF AN EFFORT TO PICK THE LOCK FAILS BY 3+ POINTS, THE BOOBY TRAP WILL GO OFF. EQUIPMENT RATINGS, COST AND ADDED WEIGHT ARE BASED ON THE NATURE OF THE ORDNANCE OR TRAP MECHANISMS USED.",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        },
+        {
+          "ITEM": "LOCK, NEURAL",
+          "EQUIPMENT RATINGS": "D/B-C-B/A",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "POWER USE": "0.1 PPD",
+          "NOTES": "NEUROHELMET-STYLE ELECTRONIC SECURITY; APPLIES –3 MODIFIER TO SECURITY SYSTEMS SKILL ROLL TO BYPASS WITHOUT A NEUROHELMET CODEBREAKER.*",
+          "_section": "GENERAL SECURITY SYSTEMS"
+        }
+      ],
+      "notes": [
+        "NOTE: PPS = Power Point per Shot (per use); PPH = Power Point per Hour; PPM = Power Point per Minute; PPD = Power Point per Day",
+        "*Neural Locks always have a secondary system (such as the voice key code MechWarriors use in addition to the neurohelmet interface). Both locks must be broken separately to gain access, and both are alarmed. If an alarm fails, the system shuts down and “hard locks,” requiring force to override, if possible."
+      ]
+    }
+  ],
+  "row_count": 20
+}

@@ -1,0 +1,90 @@
+{
+  "table_name": "ELECTIVE IMPLANTS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      317
+    ],
+    "pdf_pages": [
+      319
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 317,
+      "pdf_page": 319,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "ELECTIVE MYOMER IMPLANT (ARM)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "300000",
+          "AFF": "CC",
+          "NOTES": "GRAFTED; STR +1 FOR ALL ACTIONS PERFORMED USING AFFECTED ARM, PLUS BENEFITS FROM ELECTIVE MYOMER IMPLANT (HAND)*",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        },
+        {
+          "ITEM": "ELECTIVE MYOMER IMPLANT (FEET, BOTH)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "150000",
+          "AFF": "CC",
+          "NOTES": "GRAFTED; HALF FATIGUE FOR USING SPRINTING MOVEMENT**",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        },
+        {
+          "ITEM": "ELECTIVE MYOMER IMPLANT (HAND)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "150000",
+          "AFF": "CC",
+          "NOTES": "GRAFTED; +1 TO MARTIAL ARTS AND CLIMBING SKILLS USING AFFECTED HAND*",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        },
+        {
+          "ITEM": "ELECTIVE MYOMER IMPLANT (LEGS, BOTH)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "375000",
+          "AFF": "CC",
+          "NOTES": "GRAFTED; STR +1 AND RFL +1 FOR MOVEMENT PURPOSES**",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        },
+        {
+          "ITEM": "ELECTIVE MYOMER IMPLANT (FULL BODY)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "975000",
+          "AFF": "CC",
+          "NOTES": "GRAFTED; STR +2, RFL +1; CHA –1; CHARACTER GAINS TOUGHNESS TRAIT",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        },
+        {
+          "ITEM": "ENHANCED IMAGING (EI) NEURAL IMPLANT",
+          "EQUIPMENT RATINGS": "F/X-X-D/F",
+          "COST": "1500000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; SEE RULES",
+          "_section": "ELECTIVE MYOMER IMPLANTS"
+        }
+      ],
+      "notes": [
+        "*Modifiers not cumulative; if both arms and/or hands are so modifi ed, modifiers apply to both actions equally (character also gains Ambidextrous Trait)",
+        "**No effects apply if the implanting is only done on one leg/foot."
+      ],
+      "shared_notes": [
+        {
+          "text": "ALL ELECTIVE IMPLANTS IMPOSE A –2 ROLL MODIFIER TO SURGERY SKILL ROLLS MADE FOR THE"
+        },
+        {
+          "text": "AFFECTED BODY PART, IF DAMAGED IN THE FUTURE.",
+          "section": "ELECTIVE MYOMER IMPLANTS"
+        }
+      ]
+    }
+  ],
+  "row_count": 6
+}

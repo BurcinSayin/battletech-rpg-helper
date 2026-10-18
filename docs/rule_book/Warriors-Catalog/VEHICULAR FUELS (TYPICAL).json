@@ -1,0 +1,68 @@
+{
+  "table_name": "VEHICULAR FUELS (TYPICAL)",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      325
+    ],
+    "pdf_pages": [
+      327
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 325,
+      "pdf_page": 327,
+      "columns": [
+        "FUEL TYPE",
+        "EQUIPMENT RATINGS",
+        "COST PER KG",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "FUEL TYPE": "ALCOHOL",
+          "EQUIPMENT RATINGS": "A/A-A-A/B",
+          "COST PER KG": "2",
+          "NOTES": "USED BY ICE ENGINE AND STEAM TYPES"
+        },
+        {
+          "FUEL TYPE": "COAL",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST PER KG": "1",
+          "NOTES": "USED BY STEAM ENGINE TYPES"
+        },
+        {
+          "FUEL TYPE": "PETROCHEMICAL",
+          "EQUIPMENT RATINGS": "A/A-A-A/B",
+          "COST PER KG": "1.5",
+          "NOTES": "USED BY ICE ENGINE AND STEAM TYPES"
+        },
+        {
+          "FUEL TYPE": "HYDROGEN",
+          "EQUIPMENT RATINGS": "C/A-C-C/B",
+          "COST PER KG": "20",
+          "NOTES": "USED BY FUEL CELL ENGINE TYPES"
+        },
+        {
+          "FUEL TYPE": "NATURAL GAS",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "COST PER KG": "2",
+          "NOTES": "USED BY ICE ENGINE AND STEAM TYPES"
+        },
+        {
+          "FUEL TYPE": "BATTERIES",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "COST PER KG": "0.25*",
+          "NOTES": "USED BY ELECTRIC ENGINE TYPES"
+        }
+      ],
+      "notes": [
+        "*Cost to recharge per kilogram of battery weight",
+        "Note: Fission and fusion refueling is part of normal engine maintenance costs and thus not addressed here. For bulk fuel purchasing, refer to p. 179, Strategic Operations."
+      ]
+    }
+  ],
+  "row_count": 6
+}

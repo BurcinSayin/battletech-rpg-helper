@@ -1,0 +1,363 @@
+{
+  "table_name": "NON-COMBAT ATTIRE",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      299
+    ],
+    "pdf_pages": [
+      301
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 299,
+      "pdf_page": 301,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "DRESS/ROBE",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "20-44",
+          "AFF": "—",
+          "MASS": "0.5-0.7 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "ARM COVERAGE OPTIONAL",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "DRESS SHOES/BOOTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "30-75",
+          "AFF": "—",
+          "MASS": "0.8-1.4 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "FORMAL GOWN",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "90-780",
+          "AFF": "—",
+          "MASS": "1-5 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "ARM COVERAGE OPTIONAL",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "FORMAL SUIT",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "140-575",
+          "AFF": "—",
+          "MASS": "2-3 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "HAT/CAP/FEDORA",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "12-15",
+          "AFF": "—",
+          "MASS": "0.5-0.9 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SHOES/SANDALS/ SNEAKERS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "17-50",
+          "AFF": "—",
+          "MASS": "0.8-1 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "JACKET/BLAZER",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "28-36",
+          "AFF": "—",
+          "MASS": "1-1.5 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "OVERCOAT",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "8-55",
+          "AFF": "—",
+          "MASS": "1.3-1.6 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "PANTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "8-23",
+          "AFF": "—",
+          "MASS": "0.9-1.1 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "PAJAMAS/SLEEPWEAR",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "15-20",
+          "AFF": "—",
+          "MASS": "0.5-0.8 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SHIRT/TUNIC",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "3-15",
+          "AFF": "—",
+          "MASS": "0.3-0.6 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "ARM COVERAGE OPTIONAL",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SHORTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "6-10",
+          "AFF": "—",
+          "MASS": "40-85 G",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SKIRT/KILT",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "22-25",
+          "AFF": "—",
+          "MASS": "35-90 G",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SWEATER/SWEATSHIRT",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "5-12",
+          "AFF": "—",
+          "MASS": "1-1.3 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SWEATPANTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "8-15",
+          "AFF": "—",
+          "MASS": "60-95 G",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SWIMWEAR (MALE)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "7-11",
+          "AFF": "—",
+          "MASS": "20-25 G",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SWIMWEAR (FEMALE)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "12-19",
+          "AFF": "—",
+          "MASS": "50-70 G",
+          "COVERAGE": "TORSO, LEGS",
+          "NOTES": "ONE-PIECE OR BIKINI",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "SOCKS/STOCKINGS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "5-8",
+          "AFF": "—",
+          "MASS": "12-20 G",
+          "COVERAGE": "FEET",
+          "NOTES": "STOCKINGS COVER LEGS TOO",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "UNDERWEAR (MALE)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "3-5",
+          "AFF": "—",
+          "MASS": "15-20 G",
+          "COVERAGE": "TORSO OR LEGS",
+          "NOTES": "UNDERSHIRT OR BRIEFS/BOXERS",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "UNDERWEAR (FEMALE)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "12-25",
+          "AFF": "—",
+          "MASS": "11-50 G",
+          "COVERAGE": "TORSO OR LEGS",
+          "NOTES": "ONE-PIECE OR TWO",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "VEST/APRON",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "4-9",
+          "AFF": "—",
+          "MASS": "0.1-0.7 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "APRON ONLY COVERS FRONT",
+          "_section": "FORMAL/CASUAL ATTIRE"
+        },
+        {
+          "ITEM": "FATIGUES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "MILITARY/WORK ATTIRE"
+        },
+        {
+          "ITEM": "JUMP SUIT",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "24",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "MILITARY/WORK ATTIRE"
+        },
+        {
+          "ITEM": "WORK BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "36",
+          "AFF": "—",
+          "MASS": "1.7 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MILITARY/WORK ATTIRE"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "50",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "LEATHERWEAR"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "25",
+          "AFF": "—",
+          "MASS": "0.8 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "LEATHERWEAR"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "20",
+          "AFF": "—",
+          "MASS": "0.4 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "–1 TO DEX-RELATED ROLLS",
+          "_section": "LEATHERWEAR"
+        },
+        {
+          "ITEM": "PANTS/CHAPS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "35",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "LEATHERWEAR"
+        },
+        {
+          "ITEM": "SHOES",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "25",
+          "AFF": "—",
+          "MASS": "0.8 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "LEATHERWEAR"
+        },
+        {
+          "ITEM": "VEST/APRON",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/0/1",
+          "COST/PATCH": "25",
+          "AFF": "—",
+          "MASS": "1.2 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "APRON ONLY COVERS FRONT",
+          "_section": "LEATHERWEAR"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 30
+}

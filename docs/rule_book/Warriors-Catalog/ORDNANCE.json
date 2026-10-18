@@ -1,0 +1,658 @@
+{
+  "table_name": "ORDNANCE",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      282,
+      283,
+      284
+    ],
+    "pdf_pages": [
+      284,
+      285,
+      286
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 282,
+      "pdf_page": 284,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "2X/8A",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "3X/10A",
+          "COST/RELOAD": "8",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/A-B-A/E",
+          "AP/BD": "4X/12A",
+          "COST/RELOAD": "16",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "4X/13A",
+          "COST/RELOAD": "24",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "4X/14A",
+          "COST/RELOAD": "32",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "D/X-X-C/F",
+          "AP/BD": "5X/10A",
+          "COST/RELOAD": "60",
+          "AFF": "FW",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, AIR-BURST"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "D/X-X-C/F",
+          "AP/BD": "5X/11A",
+          "COST/RELOAD": "80",
+          "AFF": "FW",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, AIR-BURST"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "8X/10A",
+          "COST/RELOAD": "100",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-VEHICLE"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "8X/11A",
+          "COST/RELOAD": "250",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-VEHICLE"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "8X/12A",
+          "COST/RELOAD": "400",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, ANTI-VEHICLE"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "D/X-X-B/E",
+          "AP/BD": "**",
+          "COST/RELOAD": "50",
+          "AFF": "CC",
+          "MASS": "3 KG",
+          "NOTES": "AFFECTS 3M RADIUS",
+          "_section": "ORDNANCE, FASCAM"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "D/X-X-B/E",
+          "AP/BD": "**",
+          "COST/RELOAD": "100",
+          "AFF": "CC",
+          "MASS": "5 KG",
+          "NOTES": "AFFECTS 5M RADIUS",
+          "_section": "ORDNANCE, FASCAM"
+        },
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/A-B-B/B",
+          "AP/BD": "—",
+          "COST/RELOAD": "1",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "ILLUMINATES 50M RADIUS",
+          "_section": "ORDNANCE, FLARE"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/A-B-B/B",
+          "AP/BD": "—",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "ILLUMINATES 75M RADIUS",
+          "_section": "ORDNANCE, FLARE"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/A-B-A/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "4",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "ILLUMINATES 100M RADIUS",
+          "_section": "ORDNANCE, FLARE"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "ILLUMINATES 200M RADIUS",
+          "_section": "ORDNANCE, FLARE"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "ILLUMINATES 300M RADIUS",
+          "_section": "ORDNANCE, FLARE"
+        },
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/B-C-C/D",
+          "AP/BD": "2S/2AD",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, FLASH"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "3S/3AD",
+          "COST/RELOAD": "8",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, FLASH"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/A-B-A/C",
+          "AP/BD": "4S/4AD",
+          "COST/RELOAD": "16",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, FLASH"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "5S/5AD",
+          "COST/RELOAD": "24",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, FLASH"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "7S/6AD",
+          "COST/RELOAD": "32",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, FLASH"
+        }
+      ],
+      "notes": [
+        "*Halve AP/BD value for all targets in that area not directly hit by this ordnance.",
+        "**FASCAM rounds may deploy anti-personnel, high-explosive or inferno mines. These are considered standard mines, but with an Ordnance Type of B, that raise the minefield density rating over the described area. See additional mine rules under Standard Explosives (p. 277).",
+        "†Sunglasses provide a BAR of 1 vs. flash ordnance; combat helmet visors and tinted vehicular windows provide BAR 3; advanced combat helmet visors provide BAR 7; battle armor, BattleMech, ProtoMech, Combat Vehicle and all aerospace craft windows provide a 10 BAR vs. flash.",
+        "††Damage shown is for standard tear gas; other inhalation-vector poisons of equal BD may be used instead (see Drugs and Poisons, pp. 317-321); Damage may be negated or reduced by appropriate hostile environment gear (see p. 296).",
+        "‡Only anti-vehicle and high-explosive ordnance may be enhanced for compatibility with Narc missiles. Doing so reduces the missile’s BD by 1 and adds 50 percent to the munitions’ cost."
+      ],
+      "shared_notes": [
+        {
+          "text": "ALL AIR-BURST ORDNANCE: AVAILABLE TO MORTARS ONLY; ATTACK",
+          "section": "ORDNANCE, ANTI-PERSONNEL"
+        },
+        {
+          "text": "IGNORES ANY GROUND-LEVEL COVER.",
+          "section": "ORDNANCE, AIR-BURST"
+        },
+        {
+          "text": "ALL ANTI-VEHICLES: MAXIMUM 1-METER BLAST AREA*",
+          "section": "ORDNANCE, ANTI-VEHICLE"
+        },
+        {
+          "text": "ALL FASCAMS: INCREASE MINEFIELD DENSITY BY 2",
+          "section": "ORDNANCE, FASCAM"
+        },
+        {
+          "text": "ALL FLARES: NEGATES DARKNESS MODS FOR 25 SECONDS",
+          "section": "ORDNANCE, FLARE"
+        },
+        {
+          "text": "ALL FLASH ORDNANCE: NO EFFECT VS. ANTI-FLASH BAR HIGHER THAN",
+          "section": "ORDNANCE, FLARE"
+        },
+        {
+          "text": "ORDNANCE AP†",
+          "section": "ORDNANCE, FLASH"
+        }
+      ]
+    },
+    {
+      "printed_page": 283,
+      "pdf_page": 285,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/B-D-D/E",
+          "AP/BD": "1S/5ACD††",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "AFFECTS 3M RADIUS",
+          "_section": "ORDNANCE, GAS"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "1S/5ACD††",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "AFFECTS 6M RADIUS",
+          "_section": "ORDNANCE, GAS"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "1S/5ACD††",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "AFFECTS 9M RADIUS",
+          "_section": "ORDNANCE, GAS"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "1S/5ACD††",
+          "COST/RELOAD": "30",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "AFFECTS 12M RADIUS",
+          "_section": "ORDNANCE, GAS"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "1S/5ACD††",
+          "COST/RELOAD": "40",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "AFFECTS 15M RADIUS",
+          "_section": "ORDNANCE, GAS"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "D/X-X-C/F",
+          "AP/BD": "5X/10A",
+          "COST/RELOAD": "120",
+          "AFF": "FW",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, GUIDED"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "D/X-X-C/F",
+          "AP/BD": "5X/11A",
+          "COST/RELOAD": "160",
+          "AFF": "FW",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, GUIDED"
+        },
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/B-D-C/E",
+          "AP/BD": "4X/6A",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "5X/8A",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/A-A-A/E",
+          "AP/BD": "6X/10A",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "6X/11A",
+          "COST/RELOAD": "30",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "6X/12A",
+          "COST/RELOAD": "40",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/B-D-C/E",
+          "AP/BD": "3E/3ACS",
+          "COST/RELOAD": "8",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, INFERNO"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "3E/5ACS",
+          "COST/RELOAD": "16",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, INFERNO"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "3E/7ACS",
+          "COST/RELOAD": "24",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, INFERNO"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/B-C-B/E",
+          "AP/BD": "3E/9ACS",
+          "COST/RELOAD": "32",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, INFERNO"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "E/E-X-E/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "600",
+          "AFF": "CS",
+          "MASS": "1 KG",
+          "NOTES": "+1 TO INFANTRY-PORTABLE NARC-COMPATIBLE MISSILES",
+          "_section": "ORDNANCE, NARC"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "E/D-X-D/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "800",
+          "AFF": "CS",
+          "MASS": "3 KG",
+          "NOTES": "+2 TO INFANTRY-PORTABLE NARC-COMPATIBLE MISSILES",
+          "_section": "ORDNANCE, NARC"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "E/D-X-D/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "1000",
+          "AFF": "CS",
+          "MASS": "5 KG",
+          "NOTES": "+3 TO INFANTRY-PORTABLE NARC-COMPATIBLE MISSILES",
+          "_section": "ORDNANCE, NARC"
+        }
+      ],
+      "notes": [
+        "*Halve AP/BD value for all targets in that area not directly hit by this ordnance.",
+        "**FASCAM rounds may deploy anti-personnel, high-explosive or inferno mines. These are considered standard mines, but with an Ordnance Type of B, that raise the minefield density rating over the described area. See additional mine rules under Standard Explosives (p. 277).",
+        "†Sunglasses provide a BAR of 1 vs. flash ordnance; combat helmet visors and tinted vehicular windows provide BAR 3; advanced combat helmet visors provide BAR 7; battle armor, BattleMech, ProtoMech, Combat Vehicle and all aerospace craft windows provide a 10 BAR vs. flash.",
+        "††Damage shown is for standard tear gas; other inhalation-vector poisons of equal BD may be used instead (see Drugs and Poisons, pp. 317-321); Damage may be negated or reduced by appropriate hostile environment gear (see p. 296).",
+        "‡Only anti-vehicle and high-explosive ordnance may be enhanced for compatibility with Narc missiles. Doing so reduces the missile’s BD by 1 and adds 50 percent to the munitions’ cost."
+      ],
+      "shared_notes": [
+        {
+          "text": "ALL GAS: NO EFFECT IN THIN ATMOSPHERES/VACUUM; LASTS FOR 4D6"
+        },
+        {
+          "text": "TURNS (2D6 IN STRONG WINDS); EFFECTS REMAIN CONTINUOUS WHILE CHARACTERS ARE IN GASSED AREA.",
+          "section": "ORDNANCE, GAS"
+        },
+        {
+          "text": "ALL GUIDED ORDNANCE: AVAILABLE TO MORTARS ONLY; ATTACK",
+          "section": "ORDNANCE, GAS"
+        },
+        {
+          "text": "RECEIVES A +2 ATTACK ROLL MODIFIER AGAINST ANY TARGET SUCCESSFULLY DESIGNATED BY FRIENDLY TAG.",
+          "section": "ORDNANCE, GUIDED"
+        },
+        {
+          "text": "ALL INFERNOS: NO EFFECT IN THIN ATMOSPHERES/VACUUM; IGNITES ALL",
+          "section": "ORDNANCE, HIGH-EXPLOSIVE"
+        },
+        {
+          "text": "AFFECTED TERRAIN AND LASTS FOR 4D6 MINUTES (2D6 IN RAINY/SNOWY WEATHER)",
+          "section": "ORDNANCE, INFERNO"
+        },
+        {
+          "text": "ALL NARCS: ATTACK ROLL MODIFIER APPLIES TO FRIENDLY INFANTRY-",
+          "section": "ORDNANCE, INFERNO"
+        },
+        {
+          "text": "LAUNCHED NARC-COMPATIBLE MISSILES; FOR VEHICULAR UNITS, SEE PP. 138-139, TW‡",
+          "section": "ORDNANCE, NARC"
+        }
+      ]
+    },
+    {
+      "printed_page": 284,
+      "pdf_page": 286,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "CLASS A",
+          "EQUIPMENT RATINGS": "C/A-B-B/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "1",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "AFFECTS 3M RADIUS",
+          "_section": "ORDNANCE, SMOKE"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "C/A-A-A/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "AFFECTS 6M RADIUS",
+          "_section": "ORDNANCE, SMOKE"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "B/A-A-A/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "4",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "AFFECTS 9M RADIUS",
+          "_section": "ORDNANCE, SMOKE"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "B/A-A-A/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "AFFECTS 12M RADIUS",
+          "_section": "ORDNANCE, SMOKE"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "B/A-A-B/C",
+          "AP/BD": "—",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "AFFECTS 15M RADIUS",
+          "_section": "ORDNANCE, SMOKE"
+        },
+        {
+          "ITEM": "CLASS B",
+          "EQUIPMENT RATINGS": "D/A-B-B/C",
+          "AP/BD": "1S/8AD",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, STUN"
+        },
+        {
+          "ITEM": "CLASS C",
+          "EQUIPMENT RATINGS": "C/A-B-A/C",
+          "AP/BD": "1S/10AD",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "—",
+          "_section": "ORDNANCE, STUN"
+        },
+        {
+          "ITEM": "CLASS D",
+          "EQUIPMENT RATINGS": "C/A-A-A/D",
+          "AP/BD": "1S/12AD",
+          "COST/RELOAD": "30",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, STUN"
+        },
+        {
+          "ITEM": "CLASS E",
+          "EQUIPMENT RATINGS": "C/A-B-B/D",
+          "AP/BD": "1S/14AD",
+          "COST/RELOAD": "40",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "—",
+          "_section": "ORDNANCE, STUN"
+        }
+      ],
+      "notes": [
+        "*Halve AP/BD value for all targets in that area not directly hit by this ordnance.",
+        "**FASCAM rounds may deploy anti-personnel, high-explosive or inferno mines. These are considered standard mines, but with an Ordnance Type of B, that raise the minefield density rating over the described area. See additional mine rules under Standard Explosives (p. 277).",
+        "†Sunglasses provide a BAR of 1 vs. flash ordnance; combat helmet visors and tinted vehicular windows provide BAR 3; advanced combat helmet visors provide BAR 7; battle armor, BattleMech, ProtoMech, Combat Vehicle and all aerospace craft windows provide a 10 BAR vs. flash.",
+        "††Damage shown is for standard tear gas; other inhalation-vector poisons of equal BD may be used instead (see Drugs and Poisons, pp. 317-321); Damage may be negated or reduced by appropriate hostile environment gear (see p. 296).",
+        "‡Only anti-vehicle and high-explosive ordnance may be enhanced for compatibility with Narc missiles. Doing so reduces the missile’s BD by 1 and adds 50 percent to the munitions’ cost."
+      ],
+      "shared_notes": [
+        {
+          "text": "ALL SMOKE: NO EFFECT IN THIN ATMOSPHERES/VACUUM; LASTS FOR 4D6"
+        },
+        {
+          "text": "TURNS (2D6 IN STRONG WINDS). SEE WEATHER CONDITIONS, P. 237, FOR RULES ON SMOKE.",
+          "section": "ORDNANCE, SMOKE"
+        }
+      ]
+    }
+  ],
+  "row_count": 50
+}

@@ -1,0 +1,145 @@
+{
+  "table_name": "STEALTH GEAR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      297
+    ],
+    "pdf_pages": [
+      299
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 297,
+      "pdf_page": 299,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "CAMOUFLAGE CLOTHING",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "X1.25",
+          "AFF": "—",
+          "MASS": "+0 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "COST/WEIGHT BASED ON ATTIRE (TYPICALLY JUMPSUIT OR FATIGUES); E/I/C: 0/0/2*"
+        },
+        {
+          "ITEM": "DEST INFILTRATION SUIT",
+          "EQUIPMENT RATINGS": "D/F-E-E/E",
+          "BAR (M/B/E/X)": "2/4/5/2",
+          "COST/PATCH": "50,000",
+          "AFF": "DC",
+          "MASS": "9 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 0/6/2; REQUIRES HC POWER PACK (1 PT PER 15 MIN WHEN ACTIVE); INCLUDES WRAPAROUND VISOR (BAR 8 VS. FLASH; +1 TO PERCEPTION, CANNOT BE SURPRISED)"
+        },
+        {
+          "ITEM": "GHILLIE SUIT",
+          "EQUIPMENT RATINGS": "A/A-B-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "50",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 0/0/6*"
+        },
+        {
+          "ITEM": "SNEAK SUIT, CAMO",
+          "EQUIPMENT RATINGS": "D/C-D-C/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "7,000",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 0/0/4; REQUIRES HC POWER PACK (1 PT PER 15 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, CAMO/ECM",
+          "EQUIPMENT RATINGS": "D/C-D-D/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "21,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 6/0/4; REQUIRES HC POWER PACK (1 PT PER 10 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, CAMO/IR",
+          "EQUIPMENT RATINGS": "D/C-E-D/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "21,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 0/6/4; REQUIRES HC POWER PACK (1 PT PER 10 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, ECM",
+          "EQUIPMENT RATINGS": "D/C-D-C/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "7,000",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 6/0/0; REQUIRES HC POWER PACK (1 PT PER 15 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, ECM/IR",
+          "EQUIPMENT RATINGS": "D/C-E-D/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "21,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 6/6/0; REQUIRES HC POWER PACK (1 PT PER 10 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, IR",
+          "EQUIPMENT RATINGS": "D/C-D-C/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "7,000",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 0/6/0; REQUIRES HC POWER PACK (1 PT PER 15 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, IR/ECM/ CAMO",
+          "EQUIPMENT RATINGS": "D/D-F-E/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "28,000",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 6/6/4; REQUIRES HC POWER PACK (1 PT PER 5 MIN WHEN ACTIVE)"
+        },
+        {
+          "ITEM": "SNEAK SUIT, ECM/IR",
+          "EQUIPMENT RATINGS": "D/C-E-D/D",
+          "BAR (M/B/E/X)": "0/2/1/2",
+          "COST/PATCH": "21,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "E/I/C: 6/6/0; REQUIRES HC POWER PACK (1 PT PER 10 MIN WHEN ACTIVE)"
+        }
+      ],
+      "notes": [
+        "*The Camo modifier for these items only applies if the stealth gear is matched to the environment it is used in (such as woodland camoufl age colors in wooded terrain)."
+      ]
+    }
+  ],
+  "row_count": 11
+}

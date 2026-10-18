@@ -1,0 +1,204 @@
+{
+  "table_name": "MODERN MELEE WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      264
+    ],
+    "pdf_pages": [
+      266
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 264,
+      "pdf_page": 266,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "MEDUSA WHIP",
+          "EQUIPMENT RATINGS": "E/X-F-E/E",
+          "AP/BD": "0E/1D",
+          "RANGE": "3M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "2,200/*",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "450 G/*",
+          "NOTES": "+1 TO-HIT; MAY ADD +1D BD PER +0.25 PPS, TO MAX OF 9D AT 3PPS; DO NOT ADD STR DAMAGE",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "MINI STUNSTICK",
+          "EQUIPMENT RATINGS": "C/B-A-A/B",
+          "AP/BD": "0E/3D",
+          "RANGE": "1M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "50/*",
+          "AFF": "—",
+          "MASS/RELOAD": "150 G/*",
+          "NOTES": "DO NOT ADD STR DAMAGE",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "NEURAL LASH",
+          "EQUIPMENT RATINGS": "D/E-E-D/C",
+          "AP/BD": "0E/5D",
+          "RANGE": "1M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "750/*",
+          "AFF": "DC",
+          "MASS/RELOAD": "100 G/*",
+          "NOTES": "DO NOT ADD STR DAMAGE",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "NEURAL WHIP",
+          "EQUIPMENT RATINGS": "D/F-F-E/E",
+          "AP/BD": "0E/5D",
+          "RANGE": "1M",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "500/*",
+          "AFF": "DC",
+          "MASS/RELOAD": "300 G/*",
+          "NOTES": "DO NOT ADD STR DAMAGE",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "STUNSTICK",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "AP/BD": "0E/4D",
+          "RANGE": "1M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "200/*",
+          "AFF": "—",
+          "MASS/RELOAD": "200 G/*",
+          "NOTES": "DO NOT ADD STR DAMAGE",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "STUN-STAFF, SINGLE-END",
+          "EQUIPMENT RATINGS": "C/A-C-A/B",
+          "AP/BD": "0E/4D",
+          "RANGE": "2M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "300/*",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/*",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "STUN-STAFF, DOUBLE-END",
+          "EQUIPMENT RATINGS": "C/A-C-A/B",
+          "AP/BD": "0E/4D",
+          "RANGE": "2M",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "500/*",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/*",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "MONOWIRE",
+          "EQUIPMENT RATINGS": "E/E-F-E/E",
+          "AP/BD": "4M/5",
+          "RANGE": "0M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "200/*",
+          "AFF": "—",
+          "MASS/RELOAD": "250 G/*",
+          "NOTES": "–2 TO ATTACK ROLL; REQUIRES AIMED SHOT HIT TO HEAD",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROAXE",
+          "EQUIPMENT RATINGS": "E/C-D-D/C",
+          "AP/BD": "6M/4",
+          "RANGE": "1M",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "150/*",
+          "AFF": "CC",
+          "MASS/RELOAD": "5 KG/*",
+          "NOTES": "–1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROBLADE/VIBRODAGGER",
+          "EQUIPMENT RATINGS": "D/B-C-B/C",
+          "AP/BD": "6M/2",
+          "RANGE": "1M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "100/*",
+          "AFF": "CC",
+          "MASS/RELOAD": "350 G/*",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROKATANA",
+          "EQUIPMENT RATINGS": "E/E-E-D/D",
+          "AP/BD": "6M/3",
+          "RANGE": "1M",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "350/*",
+          "AFF": "DC",
+          "MASS/RELOAD": "1 KG/*",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROMACE",
+          "EQUIPMENT RATINGS": "D/X-F-E/E",
+          "AP/BD": "3M/5",
+          "RANGE": "1M",
+          "SHOTS": "3 PPS",
+          "COST/RELOAD": "540/*",
+          "AFF": "CF",
+          "MASS/RELOAD": "6 KG/*",
+          "NOTES": "–2 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROSWORD",
+          "EQUIPMENT RATINGS": "E/D-D-C/D",
+          "AP/BD": "6M/3",
+          "RANGE": "1M",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "300/*",
+          "AFF": "—",
+          "MASS/RELOAD": "2.5 KG/*",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "VIBROSWORD, CLAN",
+          "EQUIPMENT RATINGS": "F/X-F-E/D",
+          "AP/BD": "7M/3",
+          "RANGE": "1M",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "500/*",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "250 G/*",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        }
+      ],
+      "notes": [
+        "Note: PPS = Power Points per Shot (1 turn = 1 shot). *Per power pack (see Power Packs, p. 306)"
+      ]
+    }
+  ],
+  "row_count": 14
+}

@@ -1,0 +1,372 @@
+{
+  "table_name": "ENERGY WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      267
+    ],
+    "pdf_pages": [
+      269
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 267,
+      "pdf_page": 269,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "LASER PISTOL",
+          "EQUIPMENT RATINGS": "D/B-A-A/D",
+          "AP/BD": "4E/3",
+          "RANGE": "15/35/80/225",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "750/†",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "BLAZER PISTOL",
+          "EQUIPMENT RATINGS": "D/C-C-D/E",
+          "AP/BD": "5E/3",
+          "RANGE": "15/40/90/240",
+          "SHOTS": "8 PPS",
+          "COST/RELOAD": "3,000/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "2 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "ER LASER PISTOL",
+          "EQUIPMENT RATINGS": "F/X-D-C/D",
+          "AP/BD": "4E/3",
+          "RANGE": "20/50/125/300",
+          "SHOTS": "3 PPS",
+          "COST/RELOAD": "1,000/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "HOLDOUT LASER PISTOL",
+          "EQUIPMENT RATINGS": "D/B-B-B/D",
+          "AP/BD": "4E/2",
+          "RANGE": "10/22/50/120",
+          "SHOTS": "3 PPS",
+          "COST/RELOAD": "100/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "50 G/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "LASER PISTOL (WHITE DWARF)",
+          "EQUIPMENT RATINGS": "D/X-X-C/E",
+          "AP/BD": "4E/3",
+          "RANGE": "10/25/60/150",
+          "SHOTS": "1",
+          "COST/RELOAD": "250",
+          "AFF": "FW",
+          "MASS/RELOAD": "250 G/—",
+          "NOTES": "ONE SHOT, -3 TO PERCEPTION CHECK ROLL TO NOTICE BEAM",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "NAKJIMA HAND LASER",
+          "EQUIPMENT RATINGS": "D/X-D-C/D",
+          "AP/BD": "5E/2",
+          "RANGE": "20/40/100/250",
+          "SHOTS": "1 PPS",
+          "COST/RELOAD": "750/†",
+          "AFF": "DC",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "NOVA LASER PISTOL",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "3E/5",
+          "RANGE": "8/20/40/100",
+          "SHOTS": "10 PPS",
+          "COST/RELOAD": "1,250/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "1.5 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "SUNBEAM LASER PISTOL",
+          "EQUIPMENT RATINGS": "D/X-F-D/E",
+          "AP/BD": "4E/4",
+          "RANGE": "15/30/65/200",
+          "SHOTS": "4 PPS",
+          "COST/RELOAD": "750/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "PULSE LASER PISTOL",
+          "EQUIPMENT RATINGS": "D/B-F-C/D",
+          "AP/BD": "3E/2B",
+          "RANGE": "12/30/70/195",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "1,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "BURST 5; RECOIL 0",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "PULSE LASER PISTOL, CLAN",
+          "EQUIPMENT RATINGS": "F/X-C-C/D",
+          "AP/BD": "3E/3B",
+          "RANGE": "15/35/80/200",
+          "SHOTS": "3 PPS",
+          "COST/RELOAD": "1,500/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "BURST 5; RECOIL 0",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "LASER RIFLE",
+          "EQUIPMENT RATINGS": "D/C-B-B/D",
+          "AP/BD": "4E/4",
+          "RANGE": "60/205/465/1100",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "1250/†",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "LASER RIFLE (MAXELL PL-10)",
+          "EQUIPMENT RATINGS": "D/X-X-C/D",
+          "AP/BD": "5E/3",
+          "RANGE": "55/200/460/1050",
+          "SHOTS": "9 PPS",
+          "COST/RELOAD": "2,000/†",
+          "AFF": "LA",
+          "MASS/RELOAD": "6.5 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "BLAZER RIFLE",
+          "EQUIPMENT RATINGS": "D/C-C-D/E",
+          "AP/BD": "5E/4",
+          "RANGE": "65/220/485/1180",
+          "SHOTS": "10 PPS",
+          "COST/RELOAD": "2190/†",
+          "AFF": "—",
+          "MASS/RELOAD": "7 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "MARX XX LASER RIFLE",
+          "EQUIPMENT RATINGS": "D/D-E-D/D",
+          "AP/BD": "5E/3",
+          "RANGE": "75/250/500/1150",
+          "SHOTS": "6 PPS",
+          "COST/RELOAD": "1750/†",
+          "AFF": "—",
+          "MASS/RELOAD": "6 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "EBONY ASSAULT RIFLE",
+          "EQUIPMENT RATINGS": "F/X-X-E/F",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "8,500/†",
+          "AFF": "MC",
+          "MASS/RELOAD": "10 KG/†",
+          "NOTES": "SIMPLE ACTION TO CHANGE SETTING",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(STANDARD MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "4E/3",
+          "RANGE": "65/200/475/1,000",
+          "SHOTS": "8 PPS",
+          "COST/RELOAD": "—",
+          "AFF": "—",
+          "MASS/RELOAD": "—",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(HIGH-POWER MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "5E/4",
+          "RANGE": "50/160/350/700",
+          "SHOTS": "12 PPS",
+          "COST/RELOAD": "—",
+          "AFF": "—",
+          "MASS/RELOAD": "—",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(EXTENDED-RANGE MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "3E/2",
+          "RANGE": "80/260/610/1,200",
+          "SHOTS": "4 PPS",
+          "COST/RELOAD": "—",
+          "AFF": "—",
+          "MASS/RELOAD": "—",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "INTEK LASER RIFLE",
+          "EQUIPMENT RATINGS": "D/X-D-D/D",
+          "AP/BD": "4E/3",
+          "RANGE": "80/275/550/1200",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "1,250/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "5 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "MAGNA LASER RIFLE",
+          "EQUIPMENT RATINGS": "D/C-C-D/D",
+          "AP/BD": "3E/5",
+          "RANGE": "50/190/440/1000",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "1,500/†",
+          "AFF": "DC",
+          "MASS/RELOAD": "6 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "M61A COMBAT SYSTEM",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "4E/4",
+          "RANGE": "70/225/480/1,100",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "7,150/—",
+          "AFF": "FS",
+          "MASS/RELOAD": "9 KG/†",
+          "NOTES": "INCLUDES LASER SIGHT AND COMPACT GRENADE LAUNCHER",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "MAUSER 960 ASSAULT SYSTEM",
+          "EQUIPMENT RATINGS": "E/C-F-D/D",
+          "AP/BD": "3E/3B",
+          "RANGE": "55/170/365/740",
+          "SHOTS": "2 PPS",
+          "COST/RELOAD": "8,000/†",
+          "AFF": "CS",
+          "MASS/RELOAD": "10.5 KG/†",
+          "NOTES": "BURST 10; RECOIL 0, INCLUDES A DETACHABLE VIBROBLADE†† AND A COMPACT GRENADE LAUNCHER‡",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "MAUSER 1200 LSS",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "4E/4B",
+          "RANGE": "55/170/365/740",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "10,000/†",
+          "AFF": "CS",
+          "MASS/RELOAD": "11 KG/†",
+          "NOTES": "BURST 5; RECOIL 0, INCLUDES A DETACHABLE VIBROBLADE†† AND A COMPACT GRENADE LAUNCHER‡",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "MAUSER IIC IAS",
+          "EQUIPMENT RATINGS": "F/X-F-E/F",
+          "AP/BD": "4E/5",
+          "RANGE": "90/300/700/1,400",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "18,000/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "12 KG/†",
+          "NOTES": "ENCUMBERING; INCLUDES DETACHABLE VIBROBLADE†† AND A GRENADE LAUNCHER‡",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "ER LASER RIFLE",
+          "EQUIPMENT RATINGS": "F/X-D-D/D",
+          "AP/BD": "4B/4",
+          "RANGE": "90/300/700/1400",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "2,000/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "5 KG/†",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "PULSE LASER RIFLE, CLAN",
+          "EQUIPMENT RATINGS": "F/X-E-D/D",
+          "AP/BD": "3E/4B",
+          "RANGE": "60/180/400/800",
+          "SHOTS": "5 PPS",
+          "COST/RELOAD": "2,000/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "6 KG/†",
+          "NOTES": "BURST 10; RECOIL 0",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "PULSE LASER RIFLE",
+          "EQUIPMENT RATINGS": "D/D-E-C/D",
+          "AP/BD": "3E/3B",
+          "RANGE": "40/130/275/595",
+          "SHOTS": "4 PPS",
+          "COST/RELOAD": "2,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/†",
+          "NOTES": "BURST 10; RECOIL 0",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "STARFIRE ER LASER RIFLE",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "4E/4",
+          "RANGE": "85/285/625/1300",
+          "SHOTS": "6 PPS",
+          "COST/RELOAD": "2,500/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "5 KG/†",
+          "NOTES": "RECHARGE: 1; –3 TO PERCEPTION CHECK ROLL TO NOTICE BEAM",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        }
+      ],
+      "notes": [
+        "Note: PPS = Power Points per Shot. †Per power pack (see Power Packs, p. 306) ††See Modern Melee Weapons, p. 264 ‡See Grenade Launchers, pp. 273-274"
+      ]
+    }
+  ],
+  "row_count": 28
+}

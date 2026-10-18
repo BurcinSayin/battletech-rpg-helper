@@ -1,0 +1,113 @@
+{
+  "table_name": "SPECIAL COMBAT KITS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      295
+    ],
+    "pdf_pages": [
+      297
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 295,
+      "pdf_page": 297,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "COMBAT FLIGHT SUIT",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "BAR (M/B/E/X)": "2/3/2/2",
+          "COST/PATCH": "3,000/300",
+          "AFF": "—",
+          "MASS": "7 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "MAY BE SEALED IN HOSTILE ENVIRONMENTS (WITH GLOVES, BOOTS AND PILOT’S HELMET; PROVIDES 48- HOUR LIFE SUPPORT)*",
+          "_section": "AEROSPACE FIGHTER PILOT KIT"
+        },
+        {
+          "ITEM": "PILOT’S NEUROHELMET",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "BAR (M/B/E/X)": "2/3/2/2",
+          "COST/PATCH": "1,200",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "MAY BE SEALED (WITH COMBAT FLIGHT SUIT); AV 10 VS. FLASH**",
+          "_section": "AEROSPACE FIGHTER PILOT KIT"
+        },
+        {
+          "ITEM": "FLIGHT GLOVES",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "20",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "REQUIRED TO SEAL COMBAT FLIGHT SUIT",
+          "_section": "AEROSPACE FIGHTER PILOT KIT"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "55/15",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "REQUIRED TO SEAL COMBAT FLIGHT SUIT",
+          "_section": "AEROSPACE FIGHTER PILOT KIT"
+        },
+        {
+          "ITEM": "COMBAT SPACE SUIT",
+          "EQUIPMENT RATINGS": "D/E-E-E/E",
+          "BAR (M/B/E/X)": "1/5/1/3",
+          "COST/PATCH": "7,000/15",
+          "AFF": "—",
+          "MASS": "14 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; MAY BE SEALED IN HOSTILE ENVIRONMENTS (PROVIDES 48-HOUR LIFE SUPPORT); AV 8 VS. FLASH",
+          "_section": "OTHER SPECIAL COMBAT KITS"
+        },
+        {
+          "ITEM": "MARINE COMBAT SUIT",
+          "EQUIPMENT RATINGS": "D/D-D-D/D",
+          "BAR (M/B/E/X)": "4/5/5/2",
+          "COST/PATCH": "15,000/100",
+          "AFF": "—",
+          "MASS": "20 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "+2 TO ZERO-G OPERATIONS; MAY BE SEALED IN HOSTILE ENVIRONMENTS (PROVIDES 18-HOUR LIFE SUPPORT); AV 10 VS. FLASH",
+          "_section": "OTHER SPECIAL COMBAT KITS"
+        },
+        {
+          "ITEM": "TANKER’S SMOCK",
+          "EQUIPMENT RATINGS": "C/B-C-B/C",
+          "BAR (M/B/E/X)": "3/5/5/3",
+          "COST/PATCH": "275/30",
+          "AFF": "—",
+          "MASS": "7.5 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "REPLACES TORSO ARMOR IN STANDARD INFANTRY ATTIRE ; INCORPORATES COOLING SYSTEMS*",
+          "_section": "OTHER SPECIAL COMBAT KITS"
+        }
+      ],
+      "notes": [
+        "*If a Cooling Vest/Suit, Flight Suit or Tanker’s smock is reduced to a BAR of 0 in any category, it loses its cooling functionality; treat the unit as if it has suffered a Life Support critical hit in game play. For vehicle crewmen, character suffers the effects of Thin Skinned Trait, see p. 126, while inside a combat vehicle.)",
+        "**Neurohelmets are required to safely operate BattleMechs, IndustrialMechs and aerospace fighters. Without a neurohelmet, pilot suffers a –6 Piloting Skill roll modifier, and must make Piloting Skill rolls even when turning at walk/Safe Thrust. Notes: PPH = Power Points per Hour"
+      ]
+    }
+  ],
+  "row_count": 7
+}

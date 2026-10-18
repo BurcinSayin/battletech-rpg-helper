@@ -1,0 +1,482 @@
+{
+  "table_name": "SAMPLE DRUGS AND POISONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      319,
+      320
+    ],
+    "pdf_pages": [
+      321,
+      322
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 319,
+      "pdf_page": 321,
+      "columns": [
+        "SAMPLE DRUG OR POISON",
+        "PRIMARY VECTOR",
+        "DRUG STRENGTH",
+        "POISON AP",
+        "DURATION",
+        "BASE PRICE",
+        "EQUIP. RATINGS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "SAMPLE DRUG OR POISON": "ALCOHOL: BEER/WINE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "1",
+          "POISON AP": "—",
+          "DURATION": "2 HR",
+          "BASE PRICE": "1",
+          "EQUIP. RATINGS": "A/A-A-A/B",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "ALCOHOL: MIXED DRINK",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "2",
+          "POISON AP": "—",
+          "DURATION": "3 HR",
+          "BASE PRICE": "2",
+          "EQUIP. RATINGS": "A/A-A-A/B",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "ALCOHOL: HARD LIQUOR",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "—",
+          "DURATION": "4 HR",
+          "BASE PRICE": "2",
+          "EQUIP. RATINGS": "A/A-B-B/B",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "ALCOHOL: FUSIONNAIRE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "—",
+          "DURATION": "5 HR",
+          "BASE PRICE": "5",
+          "EQUIP. RATINGS": "A/X-C-B/B",
+          "NOTES": "AFF: CLAN",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "CANNABIS/HASHISH",
+          "PRIMARY VECTOR": "INGESTED/ INHALED",
+          "DRUG STRENGTH": "2",
+          "POISON AP": "—",
+          "DURATION": "3 HR",
+          "BASE PRICE": "2",
+          "EQUIP. RATINGS": "A/B-B-B/C",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "HEROIN",
+          "PRIMARY VECTOR": "INGESTED/ INHALED",
+          "DRUG STRENGTH": "7",
+          "POISON AP": "—",
+          "DURATION": "6 HR",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "A/B-B-B/D",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "CODEINE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "5",
+          "POISON AP": "—",
+          "DURATION": "8 HR",
+          "BASE PRICE": "6",
+          "EQUIP. RATINGS": "A/B-B-B/C",
+          "NOTES": "MEDICINAL (PAIN REDUCER)",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "BARBITURATES",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "6",
+          "POISON AP": "—",
+          "DURATION": "4 HR",
+          "BASE PRICE": "7",
+          "EQUIP. RATINGS": "A/B-B-B/D",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "SEDATEMAXX",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "—",
+          "DURATION": "8 HR",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "A/X-C-B/A",
+          "NOTES": "MEDICINAL (SEDATIVE)",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "BATTLESTUN",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "6",
+          "POISON AP": "—",
+          "DURATION": "2 HR",
+          "BASE PRICE": "15",
+          "EQUIP. RATINGS": "B/X-C-C/A",
+          "NOTES": "—",
+          "_section": "DEPRESSANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "CAFFEINE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "1",
+          "POISON AP": "—",
+          "DURATION": "2 HR",
+          "BASE PRICE": "0.5",
+          "EQUIP. RATINGS": "A/A-A-A/A",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "NICOTINE",
+          "PRIMARY VECTOR": "INGESTED/ INHALED",
+          "DRUG STRENGTH": "2",
+          "POISON AP": "—",
+          "DURATION": "2 HR",
+          "BASE PRICE": "1",
+          "EQUIP. RATINGS": "A/A-A-A/B",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "COCAINE",
+          "PRIMARY VECTOR": "INHALED/ INJECTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "—",
+          "DURATION": "4 HR",
+          "BASE PRICE": "7",
+          "EQUIP. RATINGS": "A/C-B-B/D",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "AMPHETAMINES",
+          "PRIMARY VECTOR": "INGESTED/ INJECTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "—",
+          "DURATION": "6 HR",
+          "BASE PRICE": "6",
+          "EQUIP. RATINGS": "A/B-B-B/D",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "METHAMPHETAMINES",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "5",
+          "POISON AP": "—",
+          "DURATION": "6 HR",
+          "BASE PRICE": "6",
+          "EQUIP. RATINGS": "B/B-B-B/D",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "K-Z (“KRAZY”)",
+          "PRIMARY VECTOR": "INGESTED/ INJECTED",
+          "DRUG STRENGTH": "6",
+          "POISON AP": "—",
+          "DURATION": "10 HR",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "C/F-D-C/E",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "X-QUICK",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "—",
+          "DURATION": "2 HR",
+          "BASE PRICE": "2",
+          "EQUIP. RATINGS": "C/X-F-C/E",
+          "NOTES": "—",
+          "_section": "STIMULANTS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "PEYOTE/MESCALINE",
+          "PRIMARY VECTOR": "INGESTED/ INHALED",
+          "DRUG STRENGTH": "2",
+          "POISON AP": "—",
+          "DURATION": "8 HR",
+          "BASE PRICE": "2",
+          "EQUIP. RATINGS": "A/A-B-A/C",
+          "NOTES": "—",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "LYSERGIC ACID DIETHYLAMIDE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "6",
+          "POISON AP": "—",
+          "DURATION": "8 HR",
+          "BASE PRICE": "4",
+          "EQUIP. RATINGS": "A/B-B-B/C",
+          "NOTES": "AKA LSD/ACID",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "PHENCYCLIDINE",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "7",
+          "POISON AP": "—",
+          "DURATION": "8 HR",
+          "BASE PRICE": "6",
+          "EQUIP. RATINGS": "A/B-B-B/D",
+          "NOTES": "AKA PCP",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "PSILOCYBIN",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "—",
+          "DURATION": "4 HR",
+          "BASE PRICE": "3",
+          "EQUIP. RATINGS": "A/B-A-A/A",
+          "NOTES": "AKA “MAGIC” MUSHROOMS",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "INGROT VENOM",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "—",
+          "DURATION": "6 HR",
+          "BASE PRICE": "9",
+          "EQUIP. RATINGS": "A/X-D-C/D",
+          "NOTES": "—",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "NECROSIA",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "8",
+          "POISON AP": "—",
+          "DURATION": "4 HR",
+          "BASE PRICE": "12",
+          "EQUIP. RATINGS": "C/X-F-D/E",
+          "NOTES": "AFF: HC",
+          "_section": "HALLUCINOGENS (NARCOTIC)*"
+        }
+      ],
+      "notes": [
+        "*These drugs have a narcotic effect and may be addictive. Additional narcotic effects as follows:",
+        "For Depressants, character receives –(Drug Strength ÷ 2) to WIL and RFL scores**",
+        "For Stimulants, character receives –(Drug Strength ÷ 2) to DEX and +(0.25 x Drug Strength) to RFL**",
+        "For Hallucinogens, character receives –(Drug Strength ÷ 2) to WIL score and Perception Skill, and –(0.25 x Drug Strength) to Compulsion/Paranoid Trait**",
+        "**Round values down to a minimum of 0. If the drug modifi es a Trait the character does not otherwise have, the character receives that Trait while under the drug’s infl uence. Poison Notes: Lethal poisons inflict their Drug Strength as damage. Delayed poisons hold their effect until the end of the Duration period. Continuous poisons apply half their Drug Strength in damage every Duration until an anti-toxin is applied, or the victim dies."
+      ]
+    },
+    {
+      "printed_page": 320,
+      "pdf_page": 322,
+      "columns": [
+        "SAMPLE DRUG OR POISON",
+        "PRIMARY VECTOR",
+        "DRUG STRENGTH",
+        "POISON AP",
+        "DURATION",
+        "BASE PRICE",
+        "EQUIP. RATINGS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "SAMPLE DRUG OR POISON": "RATTLESNAKE VENOM",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "0",
+          "DURATION": "3 TURNS",
+          "BASE PRICE": "5",
+          "EQUIP. RATINGS": "A/A-B-B/C",
+          "NOTES": "LETHAL; CONTINUOUS",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "AZH VENOM",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "0",
+          "DURATION": "1 TURN",
+          "BASE PRICE": "5",
+          "EQUIP. RATINGS": "A/X-C-B/C",
+          "NOTES": "LETHAL",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "GOLIATH SCORPION VENOM*",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "5",
+          "POISON AP": "1",
+          "DURATION": "1 TURN",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "B/X-D-B/D",
+          "NOTES": "AFF: HC; HALLUCINOGENIC; LETHAL",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "RADIUM",
+          "PRIMARY VECTOR": "INHALED/ INJECTED",
+          "DRUG STRENGTH": "7",
+          "POISON AP": "3",
+          "DURATION": "1 TURN",
+          "BASE PRICE": "50",
+          "EQUIP. RATINGS": "B/C-E-D/D",
+          "NOTES": "LETHAL",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "THALLIUM",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "3",
+          "POISON AP": "0",
+          "DURATION": "4 TURNS",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "B/A-B-C/D",
+          "NOTES": "LETHAL; CONTINUOUS",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "ARSENIC",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "1",
+          "DURATION": "2 TURNS",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "A/A-B-C/C",
+          "NOTES": "LETHAL; CONTINUOUS",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "HEMLOCK",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "5",
+          "POISON AP": "0",
+          "DURATION": "1 TURN",
+          "BASE PRICE": "15",
+          "EQUIP. RATINGS": "B/B-D-C/D",
+          "NOTES": "LETHAL",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "DIOXINS (INJECTED)",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "0",
+          "DURATION": "4 TURNS",
+          "BASE PRICE": "20",
+          "EQUIP. RATINGS": "A/C-D-C/C",
+          "NOTES": "LETHAL; CONTINUOUS",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "DIOXINS (INGESTED)",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "4",
+          "POISON AP": "0",
+          "DURATION": "8 TURNS",
+          "BASE PRICE": "20",
+          "EQUIP. RATINGS": "A/C-D-C/C",
+          "NOTES": "LETHAL; CONTINUOUS",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "VX GAS (INHALED)",
+          "PRIMARY VECTOR": "INHALED",
+          "DRUG STRENGTH": "30",
+          "POISON AP": "6",
+          "DURATION": "12 TURNS",
+          "BASE PRICE": "70",
+          "EQUIP. RATINGS": "D/C-E-D/E",
+          "NOTES": "LETHAL; DELAYED",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "VX GAS (CONTACT)",
+          "PRIMARY VECTOR": "CONTACT",
+          "DRUG STRENGTH": "30",
+          "POISON AP": "6",
+          "DURATION": "24 TURNS",
+          "BASE PRICE": "70",
+          "EQUIP. RATINGS": "D/C-E-D/E",
+          "NOTES": "LETHAL; DELAYED",
+          "_section": "POISONS"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "QWIKSTIM",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "8",
+          "POISON AP": "—",
+          "DURATION": "1D6X2 HR",
+          "BASE PRICE": "8",
+          "EQUIP. RATINGS": "D/X-F-E/E",
+          "NOTES": "AFF: LA; IGNORE FATIGUE; DEX –1",
+          "_section": "PERFORMANCE ENHANCERS*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "RAGE",
+          "PRIMARY VECTOR": "INJECTED",
+          "DRUG STRENGTH": "9",
+          "POISON AP": "—",
+          "DURATION": "1D6X0.5 HR",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "E/X-E-E/E",
+          "NOTES": "AFF: CC; IGNORE INJURY MODIFIERS; STR +3, INT –1, WIL –1",
+          "_section": "PERFORMANCE ENHANCERS*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "LD-512",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "6",
+          "POISON AP": "—",
+          "DURATION": "1D6X0.5 HR",
+          "BASE PRICE": "12",
+          "EQUIP. RATINGS": "E/X-X-E/E",
+          "NOTES": "AFF: FS; INT +3, WIL +1; –3 TO PERCEPTION",
+          "_section": "PERFORMANCE ENHANCERS*"
+        },
+        {
+          "SAMPLE DRUG OR POISON": "SPAZZ",
+          "PRIMARY VECTOR": "INGESTED",
+          "DRUG STRENGTH": "10",
+          "POISON AP": "—",
+          "DURATION": "1D6 HR",
+          "BASE PRICE": "10",
+          "EQUIP. RATINGS": "D/X-X-E/E",
+          "NOTES": "RFL +2, DEX –1; COMPULSION/PARANOIA (–3 TP)",
+          "_section": "PERFORMANCE ENHANCERS*"
+        }
+      ],
+      "notes": [
+        "*These drugs have a narcotic effect and may be addictive. Additional narcotic effects as follows:",
+        "For Depressants, character receives –(Drug Strength ÷ 2) to WIL and RFL scores**",
+        "For Stimulants, character receives –(Drug Strength ÷ 2) to DEX and +(0.25 x Drug Strength) to RFL**",
+        "For Hallucinogens, character receives –(Drug Strength ÷ 2) to WIL score and Perception Skill, and –(0.25 x Drug Strength) to Compulsion/Paranoid Trait**",
+        "**Round values down to a minimum of 0 Poison Notes: Lethal poisons inflict their Drug Strength as damage. Delayed poisons hold their effect until the end of the Duration period. Continuous poisons apply half their Drug Strength in damage every Duration until an anti-toxin is applied, or the victim dies."
+      ]
+    }
+  ],
+  "row_count": 38
+}

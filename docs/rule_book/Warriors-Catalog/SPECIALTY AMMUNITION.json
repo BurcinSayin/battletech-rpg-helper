@@ -1,0 +1,176 @@
+{
+  "table_name": "SPECIALTY AMMUNITION",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      285
+    ],
+    "pdf_pages": [
+      287
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 285,
+      "pdf_page": 287,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "COST/RELOAD",
+        "AFF",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "EXPLOSIVE",
+          "EQUIPMENT RATINGS": "C/C-E-D/D",
+          "AP/BD": "–1X/+1S",
+          "RANGE": "—",
+          "COST/RELOAD": "X3",
+          "AFF": "—",
+          "NOTES": "*",
+          "_section": "BOW AND ARROW SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "INCENDIARY",
+          "EQUIPMENT RATINGS": "C/B-C-C/C",
+          "AP/BD": "–1B/–1CS",
+          "RANGE": "—",
+          "COST/RELOAD": "X1.5",
+          "AFF": "—",
+          "NOTES": "CHANGES BD TO CONTINUOUS/SPLASH",
+          "_section": "BOW AND ARROW SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "AET",
+          "EQUIPMENT RATINGS": "D/D-X-D/C",
+          "AP/BD": "+0/+0",
+          "RANGE": "—",
+          "COST/RELOAD": "X2",
+          "AFF": "CS",
+          "NOTES": "AP 50% (ROUND DOWN) VS. BARRIERS",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "AIR-BURST",
+          "EQUIPMENT RATINGS": "D/X-X-D/E",
+          "AP/BD": "–1X/–1S",
+          "RANGE": "—",
+          "COST/RELOAD": "X8",
+          "AFF": "FS",
+          "NOTES": "AVAILABLE TO RIFLES ONLY; REQUIRES GUIDED RIFLE MODULE; COMPLEX ACTION TO ATTACK *",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "ARMOR-PIERCING",
+          "EQUIPMENT RATINGS": "C/C-E-D/D",
+          "AP/BD": "+2B/–1",
+          "RANGE": "—",
+          "COST/RELOAD": "X3",
+          "AFF": "—",
+          "NOTES": "—",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "EXPLOSIVE",
+          "EQUIPMENT RATINGS": "C/C-E-D/D",
+          "AP/BD": "–1X/+1S",
+          "RANGE": "—",
+          "COST/RELOAD": "X3",
+          "AFF": "—",
+          "NOTES": "*",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "FLECHETTE",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "AP/BD": "–3B/+1S",
+          "RANGE": "—",
+          "COST/RELOAD": "X1",
+          "AFF": "—",
+          "NOTES": "UNAVAILABLE TO SHOTGUNS",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "FRANGIBLE",
+          "EQUIPMENT RATINGS": "C/D-X-D/B",
+          "AP/BD": "–1B/+0",
+          "RANGE": "—",
+          "COST/RELOAD": "X2",
+          "AFF": "CS",
+          "NOTES": "0 AP VS. BARRIERS",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "INCENDIARY",
+          "EQUIPMENT RATINGS": "C/B-C-C/C",
+          "AP/BD": "–1B/–1CS",
+          "RANGE": "—",
+          "COST/RELOAD": "X1.5",
+          "AFF": "—",
+          "NOTES": "ADDS CONTINUOUS/SPLASH TO BD",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "RADIOACTIVE TRACKER",
+          "EQUIPMENT RATINGS": "C/E-F-E/E",
+          "AP/BD": "+0B/+0",
+          "RANGE": "—",
+          "COST/RELOAD": "X3.5",
+          "AFF": "—",
+          "NOTES": "TARGET “TAGGED” ON A SUCCESSFUL HIT (EVEN IF UNDAMAGED); SIGNATURE LASTS 1 MONTH; REQUIRES TRACKER SCANNER TO SPOT.",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "SUBSONIC",
+          "EQUIPMENT RATINGS": "C/B-C-C/D",
+          "AP/BD": "–2B/–1",
+          "RANGE": "HALF RANGE",
+          "COST/RELOAD": "X1",
+          "AFF": "—",
+          "NOTES": "–1 PERCEPTION TO HEAR THE SHOT",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "TRACER",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "COST/RELOAD": "X1.5",
+          "AFF": "—",
+          "NOTES": "+1 ATTACK ROLL MODIFIER FOR SUPPRESSION FIRE OR IN DARKNESS; +2 PERCEPTION TO SPOT ATTACKER USING TRACER AMMO",
+          "_section": "SLUG-THROWER SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "GDPC ROUNDS",
+          "EQUIPMENT RATINGS": "D/X-X-F/E",
+          "AP/BD": "**",
+          "RANGE": "—",
+          "COST/RELOAD": "X2",
+          "AFF": "FW",
+          "NOTES": "FOR SUPPORT GAUSS WEAPONS ONLY",
+          "_section": "GAUSS SPECIALTY AMMO"
+        },
+        {
+          "ITEM": "GUIDED GYROJET ROUNDS",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "–1B/–1",
+          "RANGE": "—",
+          "COST/RELOAD": "X8",
+          "AFF": "—",
+          "NOTES": "REQUIRES GUIDED RIFLE MODULE; COMPLEX ACTION TO ATTACK; +2 TO ATTACK",
+          "_section": "GYROJET SPECIALTY AMMO"
+        }
+      ],
+      "notes": [
+        "*On a Fumble, weapon explosively misfires and delivers half AP/BD damage to attacker. (The weapon is also destroyed.)",
+        "**Gauss-delivered Payload Canisters replaces normal weapon damage with Class D Gas Ordnance effects (see Ordnance, p. 279).",
+        "Note: Guided Rifl e Modules and the Radioactive Tracker Scanner may be found under Weapon Accessories (see p. 286)."
+      ]
+    }
+  ],
+  "row_count": 14
+}

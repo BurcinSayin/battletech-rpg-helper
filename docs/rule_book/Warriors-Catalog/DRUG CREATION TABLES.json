@@ -1,0 +1,346 @@
+{
+  "table_name": "DRUG CREATION TABLES",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      322,
+      323
+    ],
+    "pdf_pages": [
+      324,
+      325
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 322,
+      "pdf_page": 324,
+      "columns": [
+        "BASE DRUG STRENGTH",
+        "BASE EQUIPMENT RATING",
+        "BASE COST (C-BILLS)",
+        "BASE CREATION TIME (IN HOURS)"
+      ],
+      "rows": [
+        {
+          "BASE DRUG STRENGTH": "1",
+          "BASE EQUIPMENT RATING": "A/A-A-A/A",
+          "BASE COST (C-BILLS)": "5",
+          "BASE CREATION TIME (IN HOURS)": "1"
+        },
+        {
+          "BASE DRUG STRENGTH": "2",
+          "BASE EQUIPMENT RATING": "A/A-A-A/A",
+          "BASE COST (C-BILLS)": "10",
+          "BASE CREATION TIME (IN HOURS)": "2"
+        },
+        {
+          "BASE DRUG STRENGTH": "3",
+          "BASE EQUIPMENT RATING": "A/B-B-B/B",
+          "BASE COST (C-BILLS)": "25",
+          "BASE CREATION TIME (IN HOURS)": "4"
+        },
+        {
+          "BASE DRUG STRENGTH": "4",
+          "BASE EQUIPMENT RATING": "A/B-B-B/B",
+          "BASE COST (C-BILLS)": "50",
+          "BASE CREATION TIME (IN HOURS)": "8"
+        },
+        {
+          "BASE DRUG STRENGTH": "5",
+          "BASE EQUIPMENT RATING": "B/C-B-B/C",
+          "BASE COST (C-BILLS)": "100",
+          "BASE CREATION TIME (IN HOURS)": "12"
+        },
+        {
+          "BASE DRUG STRENGTH": "6",
+          "BASE EQUIPMENT RATING": "B/C-C-C/C",
+          "BASE COST (C-BILLS)": "200",
+          "BASE CREATION TIME (IN HOURS)": "16"
+        },
+        {
+          "BASE DRUG STRENGTH": "7",
+          "BASE EQUIPMENT RATING": "B/D-C-C/C",
+          "BASE COST (C-BILLS)": "400",
+          "BASE CREATION TIME (IN HOURS)": "21"
+        },
+        {
+          "BASE DRUG STRENGTH": "8",
+          "BASE EQUIPMENT RATING": "C/E-D-C/D",
+          "BASE COST (C-BILLS)": "750",
+          "BASE CREATION TIME (IN HOURS)": "26"
+        },
+        {
+          "BASE DRUG STRENGTH": "9",
+          "BASE EQUIPMENT RATING": "C/F-E-D/D",
+          "BASE COST (C-BILLS)": "1,200",
+          "BASE CREATION TIME (IN HOURS)": "30"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "printed_page": 322,
+      "pdf_page": 324,
+      "columns": [
+        "POISON OR DRUG CHARACTERISTIC",
+        "CREATION ROLL MOD",
+        "CREATION TIME MOD*",
+        "EQUIPMENT RATING MOD",
+        "COST MOD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "POISON OR DRUG CHARACTERISTIC": "INGESTED",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "–1",
+          "EQUIPMENT RATING MOD": "—/+1/—",
+          "COST MOD": "X1",
+          "NOTES": "ONLY EFFECTIVE WHEN CONSUMED BY MOUTH",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "INHALED",
+          "CREATION ROLL MOD": "0",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "—/+1/+1",
+          "COST MOD": "X1",
+          "NOTES": "ONLY EFFECTIVE WHEN INHALED INTO LUNGS",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "CONTACT",
+          "CREATION ROLL MOD": "–2",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "+1/+1/+1",
+          "COST MOD": "X2",
+          "NOTES": "ONLY EFFECTIVE WHEN ABSORBED THROUGH SKIN",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "LETHAL",
+          "CREATION ROLL MOD": "0",
+          "CREATION TIME MOD*": "0",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X1",
+          "NOTES": "DAMAGE IN STANDARD DAMAGE POINTS ONLY",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "INCAPACITATING",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "0",
+          "EQUIPMENT RATING MOD": "—/—/–1",
+          "COST MOD": "X1",
+          "NOTES": "DAMAGE IN FATIGUE ONLY (EXCESS FATIGUE WILL NOT TRANSLATE TO STANDARD DAMAGE)",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "CONTINUOUS",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "0",
+          "EQUIPMENT RATING MOD": "—/+1/—",
+          "COST MOD": "X1.5",
+          "NOTES": "APPLY HALF-STRENGTH DAMAGE PER TURN OF DURATION; MUST ADD EXTRA DURATION",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "DELAYED EFFECT",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "0",
+          "EQUIPMENT RATING MOD": "+1/—/—",
+          "COST MOD": "X2",
+          "NOTES": "DAMAGE OCCURS AT END OF DURATION",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "EXTRA DURATION",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "–1/+1/+1",
+          "COST MOD": "X2",
+          "NOTES": "ADDS 1D6 TO THE POISON’S DURATION",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "DIFFICULT DETECTION",
+          "CREATION ROLL MOD": "–1 TO –3",
+          "CREATION TIME MOD*": "+1 TO +3",
+          "EQUIPMENT RATING MOD": "—/—/+1",
+          "COST MOD": "XTIME MOD",
+          "NOTES": "APPLY CREATION ROLL MOD TO ANY MEDTECH SKILL USED TO DIAGNOSE",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "COMMON ANTIDOTE",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "–1",
+          "EQUIPMENT RATING MOD": "—/—/–1",
+          "COST MOD": "X0.5",
+          "NOTES": "APPLY A +1 ROLL MOD TO MEDTECH SKILL ROLLS WHEN TREATING",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "RARE ANTIDOTE",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "—/—/+1",
+          "COST MOD": "X2.5",
+          "NOTES": "APPLY A –1 ROLL MOD TO MEDTECH SKILL ROLLS WHEN TREATING",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "NEW POISON",
+          "CREATION ROLL MOD": "–4",
+          "CREATION TIME MOD*": "X10",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X10",
+          "NOTES": "APPLY A –2 ROLL MOD TO MEDTECH SKILL ROLLS WHEN TREATING",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "DOUBLE DOSE",
+          "CREATION ROLL MOD": "+0",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X2",
+          "NOTES": "—",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "QUADRUPLE DOSE",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "+2",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X4",
+          "NOTES": "—",
+          "_section": "POISONS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "10X DOSE",
+          "CREATION ROLL MOD": "–2",
+          "CREATION TIME MOD*": "+4",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X10",
+          "NOTES": "—",
+          "_section": "POISONS"
+        }
+      ],
+      "notes": [
+        "*In hours, to a minimum of 1 hour",
+        "Note: The default Duration for a poison is 1 turn; the default Duration for a performance-enhancing drug is 1D6 hours"
+      ]
+    },
+    {
+      "printed_page": 323,
+      "pdf_page": 325,
+      "columns": [
+        "POISON OR DRUG CHARACTERISTIC",
+        "CREATION ROLL MOD",
+        "CREATION TIME MOD*",
+        "EQUIPMENT RATING MOD",
+        "COST MOD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "POISON OR DRUG CHARACTERISTIC": "SINGLE SKILL BOOSTER",
+          "CREATION ROLL MOD": "–2",
+          "CREATION TIME MOD*": "+2",
+          "EQUIPMENT RATING MOD": "+1/+1/+1",
+          "COST MOD": "X1.5",
+          "NOTES": "APPLY +1 TO ONE SPECIFIED SKILL",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "ATTRIBUTE-SKILL BOOSTER",
+          "CREATION ROLL MOD": "–4",
+          "CREATION TIME MOD*": "+4",
+          "EQUIPMENT RATING MOD": "+1/+1/+2",
+          "COST MOD": "X3",
+          "NOTES": "APPLY +1 TO ALL SKILLS LINKED TO ONE ATTRIBUTE",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "ANTI-FATIGUE",
+          "CREATION ROLL MOD": "–1",
+          "CREATION TIME MOD*": "+1",
+          "EQUIPMENT RATING MOD": "—/+1/—",
+          "COST MOD": "X2",
+          "NOTES": "HALVE ALL FATIGUE DAMAGE; APPLY –1 TO ALL DEX-BASED SKILLS",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "DOUBLE DURATION",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "+0",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X2",
+          "NOTES": "ADD 1D6 ÷ 2 HOURS TO DURATION; USER TAKES 1 POINT OF STANDARD DAMAGE",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "PAIN RESISTANCE",
+          "CREATION ROLL MOD": "–3",
+          "CREATION TIME MOD*": "+2",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X2.5",
+          "NOTES": "HALVE ALL INJURY MODS; USER TAKES HALF DRUG STRENGTH IN STANDARD DAMAGE",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "STRENGTH BOOST",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "+0",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X2",
+          "NOTES": "STR +1, ANY ONE OTHER ATTRIBUTE (EXCEPT EDG) –1",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "REFLEX BOOST",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "+0",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X3",
+          "NOTES": "RFL +1; DEX –1",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "INTELLIGENCE BOOST",
+          "CREATION ROLL MOD": "+0",
+          "CREATION TIME MOD*": "+2",
+          "EQUIPMENT RATING MOD": "+1/—/—",
+          "COST MOD": "X3",
+          "NOTES": "INT +1; PERCEPTION SKILL –1",
+          "_section": "PERFORMANCE ENHANCERS"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "PER ASSISTANT (MAX 4)",
+          "CREATION ROLL MOD": "+1",
+          "CREATION TIME MOD*": "–2",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X1",
+          "NOTES": "—",
+          "_section": "CREATION ASSISTANCE"
+        },
+        {
+          "POISON OR DRUG CHARACTERISTIC": "POOR/NO FACILITIES",
+          "CREATION ROLL MOD": "–5",
+          "CREATION TIME MOD*": "X5",
+          "EQUIPMENT RATING MOD": "—/—/—",
+          "COST MOD": "X0.5",
+          "NOTES": "—",
+          "_section": "CREATION ASSISTANCE"
+        }
+      ],
+      "notes": [
+        "*In hours, to a minimum of 1 hour",
+        "Note: The default Duration for a poison is 1 turn; the default Duration for a performance-enhancing drug is 1D6 hours"
+      ]
+    }
+  ],
+  "row_count": 34
+}

@@ -1,0 +1,96 @@
+{
+  "table_name": "GAUSS WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      268
+    ],
+    "pdf_pages": [
+      270
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 268,
+      "pdf_page": 270,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "GAUSS PISTOL",
+          "EQUIPMENT RATINGS": "F/X-D-D/D",
+          "AP/BD": "4B/5",
+          "RANGE": "5/20/60/150",
+          "SHOTS": "4, 1PPS",
+          "COST/RELOAD": "1,500/1",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "1 KG/10 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "GAUSS PISTOL (MANDRAKE)",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "3B/4",
+          "RANGE": "3/10/35/80",
+          "SHOTS": "1",
+          "COST/RELOAD": "750",
+          "AFF": "CC",
+          "MASS/RELOAD": "0.1 KG/10 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "GAUSS RIFLE (THUNDERSTROKE)",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "5B/6",
+          "RANGE": "30/80/250/700",
+          "SHOTS": "5, 2PPS",
+          "COST/RELOAD": "2,500/3",
+          "AFF": "FS",
+          "MASS/RELOAD": "7 KG/330 G",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "GAUSS RIFLE (THUNDERSTROKE II)",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "5B/6",
+          "RANGE": "45/100/300/850",
+          "SHOTS": "20, 1PPS",
+          "COST/RELOAD": "3,500/10",
+          "AFF": "FS",
+          "MASS/RELOAD": "6.5 KG/420 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "GAUSS SUBMACHINE GUN",
+          "EQUIPMENT RATINGS": "E/X-X-D/F",
+          "AP/BD": "5B/4B",
+          "RANGE": "30/80/250/700",
+          "SHOTS": "30, 1PPS",
+          "COST/RELOAD": "2,000/10",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "4.5 KG/520 G",
+          "NOTES": "BURST: 3; RECOIL –1; JAM ON FUMBLE",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        }
+      ],
+      "notes": [
+        "Note: Gauss weapons also require power packs (see Power Packs, p. 306)."
+      ]
+    }
+  ],
+  "row_count": 5
+}

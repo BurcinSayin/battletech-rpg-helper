@@ -1,0 +1,146 @@
+{
+  "table_name": "MECHWARRIOR KITS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      294
+    ],
+    "pdf_pages": [
+      296
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 294,
+      "pdf_page": 296,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "COOLING VEST",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "BAR (M/B/E/X)": "1/2/0/1",
+          "COST/PATCH": "200",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "*",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)"
+        },
+        {
+          "ITEM": "NEUROHELMET, STANDARD",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "BAR (M/B/E/X)": "4/4/3/2",
+          "COST/PATCH": "900",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–2 TO PERCEPTION; ENCUMBERING**",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)"
+        },
+        {
+          "ITEM": "SHORTS",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "6",
+          "AFF": "—",
+          "MASS": "90 G",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)"
+        },
+        {
+          "ITEM": "PLASTEEL BOOTS",
+          "EQUIPMENT RATINGS": "D/C-D-C/A",
+          "BAR (M/B/E/X)": "4/6/4/4",
+          "COST/PATCH": "175/50",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – REGULAR)"
+        },
+        {
+          "ITEM": "MECHWARRIOR COMBAT SUIT",
+          "EQUIPMENT RATINGS": "E/B-F-C/D",
+          "BAR (M/B/E/X)": "2/5/1/3",
+          "COST/PATCH": "20,000/50",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "1/4/0/2 BAR FOR ARMS, LEGS*",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – ELITE OR COMSTAR/WORD OF BLAKE)"
+        },
+        {
+          "ITEM": "NEUROHELMET, COMBAT",
+          "EQUIPMENT RATINGS": "E/B-D-B/B",
+          "BAR (M/B/E/X)": "2/3/2/1",
+          "COST/PATCH": "1400",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–1 TO PERCEPTION; ENCUMBERING; MAY BE SEALED IN HOSTILE ENVIRONMENTS (1-HOUR AIR SUPPLY)**",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – ELITE OR COMSTAR/WORD OF BLAKE)"
+        },
+        {
+          "ITEM": "PLASTEEL BOOTS",
+          "EQUIPMENT RATINGS": "D/C-D-C/A",
+          "BAR (M/B/E/X)": "4/6/4/4",
+          "COST/PATCH": "175/50",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MECHWARRIOR KIT (INNER SPHERE – ELITE OR COMSTAR/WORD OF BLAKE)"
+        },
+        {
+          "ITEM": "COOLING SUIT",
+          "EQUIPMENT RATINGS": "E/X-E-D/B",
+          "BAR (M/B/E/X)": "2/2/1/1",
+          "COST/PATCH": "5,000/500",
+          "AFF": "CLAN",
+          "MASS": "2 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "1/1/1/1 BAR FOR ARMS, LEGS*",
+          "_section": "MECHWARRIOR KIT (CLAN)"
+        },
+        {
+          "ITEM": "NEUROHELMET, CLAN",
+          "EQUIPMENT RATINGS": "F/X-E-B/B",
+          "BAR (M/B/E/X)": "2/3/2/1",
+          "COST/PATCH": "5000",
+          "AFF": "CLAN",
+          "MASS": "3 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–1 TO PERCEPTION**",
+          "_section": "MECHWARRIOR KIT (CLAN)"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "C/E-E-E/F",
+          "BAR (M/B/E/X)": "3/5/5/3",
+          "COST/PATCH": "100/20",
+          "AFF": "CLAN",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MECHWARRIOR KIT (CLAN)"
+        }
+      ],
+      "notes": [
+        "*If a Cooling Vest/Suit or Flight Suit is reduced to a BAR of 0 in any category, it loses its functionality; treat the unit as if it has suffered a Life Support critical hit in game play.",
+        "**Neurohelmets are required to safely operate BattleMechs and IndustrialMechs. Without a neurohelmet, pilot suffers a –6 Piloting Skill roll modifier, and must make Piloting Skill rolls even when turning at walk. Notes: PPH = Power Points per Hour"
+      ]
+    }
+  ],
+  "row_count": 10
+}

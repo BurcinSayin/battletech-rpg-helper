@@ -1,0 +1,183 @@
+{
+  "table_name": "ARCHAIC RANGED WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      261
+    ],
+    "pdf_pages": [
+      263
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 261,
+      "pdf_page": 263,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "SHORT BOW",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "2B/1",
+          "RANGE": "8/20/50/100",
+          "SHOTS": "1",
+          "COST/RELOAD": "10/1",
+          "AFF": "—",
+          "MASS/RELOAD": "0.8 KG/60 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "LONGBOW",
+          "EQUIPMENT RATINGS": "A/B-B-B/A",
+          "AP/BD": "2B/2",
+          "RANGE": "10/30/80/175",
+          "SHOTS": "1",
+          "COST/RELOAD": "20/2",
+          "AFF": "—",
+          "MASS/RELOAD": "1.5 KG/70 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "COMPOUND BOW",
+          "EQUIPMENT RATINGS": "C/B-A-A/A",
+          "AP/BD": "2B/2",
+          "RANGE": "10/25/70/160",
+          "SHOTS": "1",
+          "COST/RELOAD": "15/2",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/70 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD; +1 TO ATTACK ROLL",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "HANKYU",
+          "EQUIPMENT RATINGS": "A/C-C-C/A",
+          "AP/BD": "2B/1",
+          "RANGE": "8/20/55/110",
+          "SHOTS": "1",
+          "COST/RELOAD": "15/1",
+          "AFF": "DC",
+          "MASS/RELOAD": "0.8 KG/60 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "DAIKYU",
+          "EQUIPMENT RATINGS": "A/C-D-D/A",
+          "AP/BD": "2B/2",
+          "RANGE": "10/25/60/125",
+          "SHOTS": "1",
+          "COST/RELOAD": "30/2",
+          "AFF": "DC",
+          "MASS/RELOAD": "1 KG/70 G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "CROSSBOW, BASIC",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "3B/2",
+          "RANGE": "5/16/30/70",
+          "SHOTS": "1",
+          "COST/RELOAD": "10/1",
+          "AFF": "—",
+          "MASS/RELOAD": "2 KG/50G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "CROSSBOW, HEAVY",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "3B/3",
+          "RANGE": "5/20/40/100",
+          "SHOTS": "1",
+          "COST/RELOAD": "10/1",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/60G",
+          "NOTES": "SIMPLE ACTION TO RELOAD",
+          "_section": "SKILL: ARCHERY"
+        },
+        {
+          "ITEM": "DART",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "1M/1",
+          "RANGE": "*",
+          "SHOTS": "—",
+          "COST/RELOAD": "3",
+          "AFF": "—",
+          "MASS/RELOAD": "10 G/—",
+          "NOTES": "+1 TO-HIT; HALF THROWN WEAPON RANGE (ROUND DOWN)",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "SHURIKEN",
+          "EQUIPMENT RATINGS": "A/B-B-B/A",
+          "AP/BD": "2M/1",
+          "RANGE": "*",
+          "SHOTS": "—",
+          "COST/RELOAD": "5",
+          "AFF": "DC",
+          "MASS/RELOAD": "100 G/—",
+          "NOTES": "EXTREME RANGE = 6X SHORT",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "KNIFE, THROWING",
+          "EQUIPMENT RATINGS": "A/C-C-C/B",
+          "AP/BD": "2M/1",
+          "RANGE": "*",
+          "SHOTS": "—",
+          "COST/RELOAD": "8",
+          "AFF": "—",
+          "MASS/RELOAD": "250 G/—",
+          "NOTES": "—",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "HATCHET/TOMAHAWK",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "3M/1",
+          "RANGE": "*",
+          "SHOTS": "—",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/—",
+          "NOTES": "—",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "SPEAR",
+          "EQUIPMENT RATINGS": "A/B-B-B/B",
+          "AP/BD": "2M/2",
+          "RANGE": "*",
+          "SHOTS": "—",
+          "COST/RELOAD": "15",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/—",
+          "NOTES": "DOUBLE THROWN WEAPON RANGE",
+          "_section": "SKILL: THROWN WEAPONS"
+        }
+      ],
+      "notes": [],
+      "shared_notes": [
+        {
+          "text": "*The effective range for these thrown weapons is equal to the character’s STR + DEX scores, x1 for Short Range, x2 for Medium Range, x3 for Long Range and x4 for Extreme Range."
+        }
+      ]
+    }
+  ],
+  "row_count": 12
+}

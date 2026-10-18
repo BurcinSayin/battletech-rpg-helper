@@ -1,0 +1,441 @@
+{
+  "table_name": "PERSONAL ARMOR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      288,
+      289
+    ],
+    "pdf_pages": [
+      290,
+      291
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 288,
+      "pdf_page": 290,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "FLAK ARMOR",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "BAR (M/B/E/X)": "1/5/1/3",
+          "COST/PATCH": "—/—",
+          "AFF": "—",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "100/10",
+          "AFF": "—",
+          "MASS": "3.5 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "FLAK ARMOR"
+        },
+        {
+          "ITEM": "PANTS",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "75/10",
+          "AFF": "—",
+          "MASS": "5.5 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FLAK ARMOR"
+        },
+        {
+          "ITEM": "SHORTS/SKIRT/KILT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "100/10",
+          "AFF": "—",
+          "MASS": "3.5 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "+1 TO ATTACK’S AP",
+          "_section": "FLAK ARMOR"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "150/10",
+          "AFF": "—",
+          "MASS": "8.6 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "FLAK ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "50/10",
+          "AFF": "—",
+          "MASS": "2.8 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "FLAK ARMOR"
+        },
+        {
+          "ITEM": "ABLATIVE ARMOR",
+          "EQUIPMENT RATINGS": "D/A-B-A/C",
+          "BAR (M/B/E/X)": "3/1/6/1",
+          "COST/PATCH": "—/—",
+          "AFF": "—",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "750/10",
+          "AFF": "—",
+          "MASS": "2.6 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "ABLATIVE ARMOR"
+        },
+        {
+          "ITEM": "PANTS",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "500/10",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "ABLATIVE ARMOR"
+        },
+        {
+          "ITEM": "SHORTS/SKIRT/KILT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "750/20",
+          "AFF": "—",
+          "MASS": "2.5 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "+1 TO ATTACK’S AP",
+          "_section": "ABLATIVE ARMOR"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "1,000/20",
+          "AFF": "—",
+          "MASS": "6.3 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "ABLATIVE ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "400/20",
+          "AFF": "—",
+          "MASS": "2.1 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "ABLATIVE ARMOR"
+        },
+        {
+          "ITEM": "ABLATIVE/FLAK ARMOR",
+          "EQUIPMENT RATINGS": "D/B-C-B/C",
+          "BAR (M/B/E/X)": "2/4/5/2",
+          "COST/PATCH": "—/—",
+          "AFF": "—",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "600/15",
+          "AFF": "—",
+          "MASS": "4.1 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "ABLATIVE/FLAK ARMOR"
+        },
+        {
+          "ITEM": "PANTS",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "400/15",
+          "AFF": "—",
+          "MASS": "6.3 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "ABLATIVE/FLAK ARMOR"
+        },
+        {
+          "ITEM": "SHORTS/SKIRT/KILT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "750/20",
+          "AFF": "—",
+          "MASS": "4.2 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "+1 TO ATTACK’S AP",
+          "_section": "ABLATIVE/FLAK ARMOR"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "800/15",
+          "AFF": "—",
+          "MASS": "9.8 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "ABLATIVE/FLAK ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "300/15",
+          "AFF": "—",
+          "MASS": "3.2 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "ABLATIVE/FLAK ARMOR"
+        },
+        {
+          "ITEM": "BALLISTIC PLATE ARMOR",
+          "EQUIPMENT RATINGS": "D/C-C-C/D",
+          "BAR (M/B/E/X)": "4/6/5/4",
+          "COST/PATCH": "—/—",
+          "AFF": "—",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "CANNOT BE PATCHED IF ANY BAR IS REDUCED BELOW HALF"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "1,600/50",
+          "AFF": "—",
+          "MASS": "22 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "ENCUMBERING",
+          "_section": "BALLISTIC PLATE ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "600/50",
+          "AFF": "—",
+          "MASS": "8.8 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "BALLISTIC PLATE ARMOR"
+        },
+        {
+          "ITEM": "NEO-CHAIN ARMOR",
+          "EQUIPMENT RATINGS": "D/X-X-C/D",
+          "BAR (M/B/E/X)": "3/3/2/2",
+          "COST/PATCH": "—/—",
+          "AFF": "—",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "CONCEALABLE"
+        },
+        {
+          "ITEM": "JACKET (UNHOODED)",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "700/17",
+          "AFF": "—",
+          "MASS": "1.9 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "NEO-CHAIN ARMOR"
+        },
+        {
+          "ITEM": "JACKET (HOODED)",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "830/17",
+          "AFF": "—",
+          "MASS": "2.1 KG",
+          "COVERAGE": "TORSO, ARMS, HEAD",
+          "NOTES": "—",
+          "_section": "NEO-CHAIN ARMOR"
+        },
+        {
+          "ITEM": "PANTS",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "450/17",
+          "AFF": "—",
+          "MASS": "2.8 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "NEO-CHAIN ARMOR"
+        },
+        {
+          "ITEM": "SHORTS/SKIRT/KILT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "375/17",
+          "AFF": "—",
+          "MASS": "1.8 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "+1 TO ATTACK’S AP",
+          "_section": "NEO-CHAIN ARMOR"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "920/17",
+          "AFF": "—",
+          "MASS": "4.7 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "NEO-CHAIN ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "375/17",
+          "AFF": "—",
+          "MASS": "1.7 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "NEO-CHAIN ARMOR"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "printed_page": 289,
+      "pdf_page": 291,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "MYOMER ARMOR",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "BAR (M/B/E/X)": "3/5/4/5",
+          "COST/PATCH": "—/—",
+          "AFF": "LA",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "CONCEALABLE; REQUIRES HC MICRO-POWER PACK (0.5 POINTS PER MINUTE WHEN ACTIVE); HALF BAR WHEN INACTIVE(ROUND DOWN)"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "5,800/150",
+          "AFF": "—",
+          "MASS": "18 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "ENCUMBERING",
+          "_section": "MYOMER ARMOR"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "1,800/150",
+          "AFF": "—",
+          "MASS": "7.5 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "MYOMER ARMOR"
+        },
+        {
+          "ITEM": "CONCEALED ARMOR",
+          "EQUIPMENT RATINGS": "—",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "—/—",
+          "AFF": "NO CLAN",
+          "MASS": "—",
+          "COVERAGE": "—",
+          "NOTES": "CONCEALABLE; –4 TO PERCEPTION, –2 TO SENSOR OPERATIONS CHECK ROLLS TO SPOT WHEN WORN UNDER CLOTHING."
+        },
+        {
+          "ITEM": "CONCEALED FLAK",
+          "EQUIPMENT RATINGS": "D/D-C-B/C",
+          "BAR (M/B/E/X)": "1/4/1/2",
+          "COST/PATCH": "X1.5",
+          "AFF": "—",
+          "MASS": "X0.75",
+          "COVERAGE": "—",
+          "NOTES": "VEST, JACKET, PANTS OR SUIT",
+          "_section": "CONCEALED ARMOR"
+        },
+        {
+          "ITEM": "CONCEALED ABLATIVE",
+          "EQUIPMENT RATINGS": "E/E-D-B/D",
+          "BAR (M/B/E/X)": "2/1/4/1",
+          "COST/PATCH": "X1.5",
+          "AFF": "—",
+          "MASS": "X0.75",
+          "COVERAGE": "—",
+          "NOTES": "VEST, JACKET, PANTS OR SUIT",
+          "_section": "CONCEALED ARMOR"
+        },
+        {
+          "ITEM": "CONCEALED AB/FLAK",
+          "EQUIPMENT RATINGS": "E/F-D-C/D",
+          "BAR (M/B/E/X)": "2/3/3/2",
+          "COST/PATCH": "X1.75",
+          "AFF": "—",
+          "MASS": "X0.80",
+          "COVERAGE": "—",
+          "NOTES": "VEST, JACKET, PANTS OR SUIT",
+          "_section": "CONCEALED ARMOR"
+        },
+        {
+          "ITEM": "CONCEALED BALLISTIC PLATE",
+          "EQUIPMENT RATINGS": "E/X-F-D/D",
+          "BAR (M/B/E/X)": "3/4/4/3",
+          "COST/PATCH": "X1.8",
+          "AFF": "—",
+          "MASS": "X0.75",
+          "COVERAGE": "—",
+          "NOTES": "VEST, JACKET OR SUIT; +1 TO DETECTION ROLLS",
+          "_section": "CONCEALED ARMOR"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 36
+}

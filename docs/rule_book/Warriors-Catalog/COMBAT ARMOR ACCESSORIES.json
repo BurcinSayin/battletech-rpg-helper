@@ -1,0 +1,246 @@
+{
+  "table_name": "COMBAT ARMOR ACCESSORIES",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      290
+    ],
+    "pdf_pages": [
+      292
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 290,
+      "pdf_page": 292,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "FLAK HELMET",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "BAR (M/B/E/X)": "1/5/1/3",
+          "COST/PATCH": "25/10",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "+0 TO PERCEPTION; BAR 2 VS. FLASH",
+          "_section": "HELMETS"
+        },
+        {
+          "ITEM": "ABLATIVE HELMET",
+          "EQUIPMENT RATINGS": "D/A-B-A/C",
+          "BAR (M/B/E/X)": "3/1/6/1",
+          "COST/PATCH": "200/20",
+          "AFF": "—",
+          "MASS": "800 G",
+          "COVERAGE": "HEAD",
+          "NOTES": "+0 TO PERCEPTION; BAR 3 VS. FLASH",
+          "_section": "HELMETS"
+        },
+        {
+          "ITEM": "ABLATIVE/FLAK HELMET",
+          "EQUIPMENT RATINGS": "D/B-C-B/C",
+          "BAR (M/B/E/X)": "2/4/5/2",
+          "COST/PATCH": "150/15",
+          "AFF": "—",
+          "MASS": "800 G",
+          "COVERAGE": "HEAD",
+          "NOTES": "+0 TO PERCEPTION; BAR 3 VS. FLASH",
+          "_section": "HELMETS"
+        },
+        {
+          "ITEM": "STANDARD COMBAT HELMET",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "BAR (M/B/E/X)": "3/4/3/1",
+          "COST/PATCH": "100/15",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–2 TO PERCEPTION; BAR 3 VS. FLASH",
+          "_section": "HELMETS"
+        },
+        {
+          "ITEM": "ADVANCED COMBAT HELMET",
+          "EQUIPMENT RATINGS": "D/D-C-B/C",
+          "BAR (M/B/E/X)": "5/6/5/2",
+          "COST/PATCH": "200/25",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–1 TO PERCEPTION; BAR 7 VS. FLASH; INCLUDES MILITARY COMM.",
+          "_section": "HELMETS"
+        },
+        {
+          "ITEM": "HEAVY COMBAT GLOVES",
+          "EQUIPMENT RATINGS": "E/D-F-E/C",
+          "BAR (M/B/E/X)": "3/4/4/3",
+          "COST/PATCH": "125/15",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "–1 TO DEX-RELATED ROLLS",
+          "_section": "GLOVES"
+        },
+        {
+          "ITEM": "COMBAT BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "BOOTS"
+        },
+        {
+          "ITEM": "PLASTEEL BOOTS",
+          "EQUIPMENT RATINGS": "D/D-F-C/A",
+          "BAR (M/B/E/X)": "4/6/4/4",
+          "COST/PATCH": "175/50",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "BOOTS"
+        },
+        {
+          "ITEM": "RIOT SHIELD",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "BAR (M/B/E/X)": "2/2/2/2",
+          "COST/PATCH": "100",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "—",
+          "NOTES": "PROVIDES FULL COVER WHEN CROUCHED; BARRIER INTEGRITY: 5",
+          "_section": "SHIELDS*"
+        },
+        {
+          "ITEM": "BULLET SHIELD",
+          "EQUIPMENT RATINGS": "D/B-B-B/B",
+          "BAR (M/B/E/X)": "4/4/4/4",
+          "COST/PATCH": "300",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "—",
+          "NOTES": "PROVIDES FULL COVER WHEN CROUCHED; BARRIER INTEGRITY: 8",
+          "_section": "SHIELDS*"
+        },
+        {
+          "ITEM": "HEAVY SHIELD",
+          "EQUIPMENT RATINGS": "D/C-C-C/C",
+          "BAR (M/B/E/X)": "6/6/6/6",
+          "COST/PATCH": "500",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "COVERAGE": "—",
+          "NOTES": "PROVIDES FULL COVER WHEN CROUCHED; ENCUMBERING; BARRIER INTEGRITY: 12",
+          "_section": "SHIELDS*"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/3/1/1",
+          "COST/PATCH": "20",
+          "AFF": "—",
+          "MASS": "400 G",
+          "COVERAGE": "TORSO",
+          "NOTES": "+1 STR (CARRY/ENCUMBRANCE ONLY)",
+          "_section": "LOAD-BEARING EQUIPMENT**"
+        },
+        {
+          "ITEM": "PACK",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "10",
+          "AFF": "—",
+          "MASS": "100 G",
+          "COVERAGE": "—",
+          "NOTES": "+1 STR (CARRY/ENCUMBRANCE ONLY); SIMPLE ACTION TO DETACH; COMPLEX ACTION TO ATTACH",
+          "_section": "LOAD-BEARING EQUIPMENT**"
+        },
+        {
+          "ITEM": "PACKFRAME",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "45",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "COVERAGE": "—",
+          "NOTES": "+2 STR (CARRY/ENCUMBRANCE ONLY); COMPLEX ACTION TO ATTACH/DETACH",
+          "_section": "LOAD-BEARING EQUIPMENT**"
+        },
+        {
+          "ITEM": "GRIPPER BOOTS",
+          "EQUIPMENT RATINGS": "E/E-E-E/B",
+          "BAR (M/B/E/X)": "2/2/1/2",
+          "COST/PATCH": "600",
+          "AFF": "LA",
+          "MASS": "5 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "+2 TO CLIMBING (+4 WITH GRIPPER GLOVES); REQUIRES STANDARD POWER PACK (1 PPM)†",
+          "_section": "GRIPPER GEAR"
+        },
+        {
+          "ITEM": "GRIPPER GLOVES",
+          "EQUIPMENT RATINGS": "E/E-E-E/C",
+          "BAR (M/B/E/X)": "2/2/1/2",
+          "COST/PATCH": "1,000",
+          "AFF": "LA",
+          "MASS": "1 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "+3 TO CLIMBING (+4 WITH GRIPPER BOOTS); –2 TO ALL OTHER DEX-RELATED ROLLS; +3 TO STR ROLLS WHERE GRIP IS A FACTOR ONLY; REQUIRES STANDARD POWER PACK (1 PPM)†",
+          "_section": "GRIPPER GEAR"
+        },
+        {
+          "ITEM": "MICROHOOK BOOTS",
+          "EQUIPMENT RATINGS": "D/D-F-D/B",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "90",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "+1 TO CLIMBING (+3 WITH MICROHOOK GLOVES); INEFFECTIVE ON SMOOTH SURFACES",
+          "_section": "GRIPPER GEAR"
+        },
+        {
+          "ITEM": "MICROHOOK GLOVES",
+          "EQUIPMENT RATINGS": "D/D-F-C/B",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "100",
+          "AFF": "—",
+          "MASS": "400 G",
+          "COVERAGE": "HANDS",
+          "NOTES": "+2 TO CLIMBING (+3 WITH MICROHOOK GLOVES); INEFFECTIVE ON SMOOTH SURFACES",
+          "_section": "GRIPPER GEAR"
+        },
+        {
+          "ITEM": "GRAPPLE ROD",
+          "EQUIPMENT RATINGS": "D/C-D-A/B",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "500",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "—",
+          "NOTES": "MAX RANGE: 20M; FIRE AS SUPPORT WEAPON (NO RANGE MODIFIER WHEN IN RANGE); ON SUCCESS, USER GAINS +3 CLIMBING ROLL TO ASCEND 20M IN ONE TURN; ONE-SHOT ONLY (50 C-BILLS TO RESET)",
+          "_section": "GRIPPER GEAR"
+        }
+      ],
+      "notes": [
+        "*Shields are not personal armor per se, but are treated like objects that use the Barrier Armor rules (see pp. 185-189)",
+        "**STR mods for Load-Bearing Equipment apply to carrying capacity and Encumbrance rules only, not movement rates or melee combat actions.",
+        "†PPM = Power Point per Minute"
+      ]
+    }
+  ],
+  "row_count": 19
+}

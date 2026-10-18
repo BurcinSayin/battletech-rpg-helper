@@ -1,0 +1,96 @@
+{
+  "table_name": "SUPPORT GAUSS WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      275
+    ],
+    "pdf_pages": [
+      277
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 275,
+      "pdf_page": 277,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "DAVID LIGHT GAUSS RIFLE",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "5B/5",
+          "RANGE": "90/330/745/1535",
+          "SHOTS": "8, 8 PPS",
+          "COST/RELOAD": "6,000/20†",
+          "AFF": "FW",
+          "MASS/RELOAD": "18 KG/2 KG†",
+          "NOTES": "BURST 4; RECOIL –1; ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "GRAND MAULER GAUSS CANNON",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "6B/6",
+          "RANGE": "45/120/375/1000",
+          "SHOTS": "5, 6 PPS",
+          "COST/RELOAD": "5,000/5†",
+          "AFF": "FS",
+          "MASS/RELOAD": "14 KG/ 4.5 KG†",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "KING DAVID LIGHT GAUSS RIFLE",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "6B/5",
+          "RANGE": "100/350/775/1575",
+          "SHOTS": "80, 8 PPS",
+          "COST/RELOAD": "8,000/200†",
+          "AFF": "FW",
+          "MASS/RELOAD": "30 KG/ 20 KG†",
+          "NOTES": "BURST: 5; RECOIL –1, CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MAGSHOT GAUSS RIFLE",
+          "EQUIPMENT RATINGS": "E/X-X-E/F",
+          "AP/BD": "6B/7",
+          "RANGE": "70/280/600/1250",
+          "SHOTS": "20, 3 PPS",
+          "COST/RELOAD": "8,500/10†",
+          "AFF": "FS",
+          "MASS/RELOAD": "45 KG/ 16.5 KG†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "TSUNAMI HEAVY GAUSS RIFLE",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "6B/6",
+          "RANGE": "45/135/400/1070",
+          "SHOTS": "5, 8 PPS",
+          "COST/RELOAD": "5,500/5†",
+          "AFF": "DC",
+          "MASS/RELOAD": "12.5 KG/ 4.5 KG †",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        }
+      ],
+      "notes": [
+        "†Gauss weapons also require power packs (see Power Packs, p. 306) which adds to the cost and weight of any ammunition."
+      ]
+    }
+  ],
+  "row_count": 5
+}

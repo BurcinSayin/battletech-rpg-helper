@@ -1,0 +1,51 @@
+{
+  "table_name": "IR Stealth Effects in Tactical Combat",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      298
+    ],
+    "pdf_pages": [
+      300
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 298,
+      "pdf_page": 300,
+      "columns": [
+        "IR Rating",
+        "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)"
+      ],
+      "description": "The IR Rating (I) for stealth gear helps identify how well the infantry or character can obscure its thermal signature on vehicular sensors, which aff ects how well it can be targeted over distance.",
+      "rows": [
+        {
+          "IR Rating": "Less than 4",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)": "No tactical effect"
+        },
+        {
+          "IR Rating": "4 to 5",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)": "+0/–1/–2/–3"
+        },
+        {
+          "IR Rating": "6 to 7",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)": "–1/–1/–2/–3"
+        },
+        {
+          "IR Rating": "8 to 9",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)": "–1/–2/–3/–5"
+        },
+        {
+          "IR Rating": "10 or more",
+          "Tactical Rules Effect (Additional roll modifiers at Short/Med/Long/Extreme Range)": "–2/–3/–3/–6"
+        }
+      ],
+      "notes": [
+        "*A Tactical MP (Total Warfare) is equal to 15 meters per 5-second turn or 30 meters per 10-second turn. IR Rating tactical modifiers are for the targeted infantry unit moving 0 MP/1 MP/2 MP/3 MP/4+ MP (respectively).",
+        "Note: All modifiers are cumulative, but only apply to an infantry unit if all the unit’s members are using the same stealth gear type. (For example, infantry wearing Combination IR/ Camo gear (E/I/C: 0/6/4) gets no benefit for ECM, applies attack roll modifiers of –1/–1/–2/–3 for Short/Medium/Long/Extreme ranges respectively, and additional attack roll modifiers of –2/–1/+0/+0/+0 if the stealthed unit moves 0/1/2/3/4 MP per turn. The unit cannot hide from probes, but a stationary unit wearing such combo stealth gear would apply a –3 attack roll modifier at short range [–1 for Short Range –2 for stationary].)"
+      ]
+    }
+  ],
+  "row_count": 5
+}

@@ -1,0 +1,47 @@
+{
+  "table_name": "ECM Stealth Effects in Tactical Combat",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      298
+    ],
+    "pdf_pages": [
+      300
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 298,
+      "pdf_page": 300,
+      "columns": [
+        "ECM Rating",
+        "Tactical Rules Effect"
+      ],
+      "description": "The ECM Rating (E) for stealth gear helps identify how well the infantry or character can hide from electromagnetic vehicular sensors (so long as the unit remains stationary and under cover).",
+      "rows": [
+        {
+          "ECM Rating": "Less than 0",
+          "Tactical Rules Effect": "Unit cannot hide from enemy EM sensors at all (no Hidden Units rules, pp. 259-260, TW)"
+        },
+        {
+          "ECM Rating": "0 to 5",
+          "Tactical Rules Effect": "No tactical effect. Unit may use Hidden Units rules, but can be spotted with Active Probes."
+        },
+        {
+          "ECM Rating": "6 to 9",
+          "Tactical Rules Effect": "Unit can hide from vehicle sensors and all Active Probes except the Bloodhound."
+        },
+        {
+          "ECM Rating": "10 or more",
+          "Tactical Rules Effect": "Unit cannot be spotted by any Active Probes (including the Bloodhound)."
+        }
+      ],
+      "notes": [
+        "*A Tactical MP (Total Warfare) is equal to 15 meters per 5-second turn or 30 meters per 10-second turn. IR Rating tactical modifiers are for the targeted infantry unit moving 0 MP/1 MP/2 MP/3 MP/4+ MP (respectively).",
+        "Note: All modifiers are cumulative, but only apply to an infantry unit if all the unit’s members are using the same stealth gear type. (For example, infantry wearing Combination IR/ Camo gear (E/I/C: 0/6/4) gets no benefit for ECM, applies attack roll modifiers of –1/–1/–2/–3 for Short/Medium/Long/Extreme ranges respectively, and additional attack roll modifiers of –2/–1/+0/+0/+0 if the stealthed unit moves 0/1/2/3/4 MP per turn. The unit cannot hide from probes, but a stationary unit wearing such combo stealth gear would apply a –3 attack roll modifier at short range [–1 for Short Range –2 for stationary].)"
+      ]
+    }
+  ],
+  "row_count": 4
+}

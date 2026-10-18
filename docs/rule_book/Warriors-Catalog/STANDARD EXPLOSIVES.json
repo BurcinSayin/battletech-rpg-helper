@@ -1,0 +1,156 @@
+{
+  "table_name": "STANDARD EXPLOSIVES",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      278
+    ],
+    "pdf_pages": [
+      280
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 278,
+      "pdf_page": 280,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "GRENADE, MICRO",
+          "EQUIPMENT RATINGS": "C/B-C-C/E",
+          "AP/BD": "(A)",
+          "RANGE": "STR X 1/2/3/4",
+          "SHOTS": "1",
+          "COST/RELOAD": "2",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "INDIRECT",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE, MINI",
+          "EQUIPMENT RATINGS": "C/B-B-B/E",
+          "AP/BD": "(B)",
+          "RANGE": "STR X 1/2/3/4",
+          "SHOTS": "1",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS": "450 G",
+          "NOTES": "INDIRECT",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE",
+          "EQUIPMENT RATINGS": "C/A-A-A/E",
+          "AP/BD": "(C)",
+          "RANGE": "STR X 1/2/3/4",
+          "SHOTS": "1",
+          "COST/RELOAD": "20",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "INDIRECT",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "GRENADE, ROCKET- ASSISTED",
+          "EQUIPMENT RATINGS": "C/X-X-D/E",
+          "AP/BD": "5X/10A",
+          "RANGE": "STR X 1/2/3/4",
+          "SHOTS": "1",
+          "COST/RELOAD": "50",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "INDIRECT; –2 TO ATTACK; RANGE X5 AND BD –2 IN ROCKET- ASSISTED MODE",
+          "_section": "SKILL: THROWN WEAPONS"
+        },
+        {
+          "ITEM": "MINE, ACTIVE",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "(D)",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "1,000",
+          "AFF": "CC",
+          "MASS": "5 KG",
+          "NOTES": "–4 TO DETONATION CHECK VS. JUMPING UNITS OR HOVERCRAFT IMMEDIATELY OVERHEAD",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "MINE, COMMAND- DETONATED",
+          "EQUIPMENT RATINGS": "C/B-B-B/E",
+          "AP/BD": "(E)",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "75",
+          "AFF": "—",
+          "MASS": "600 G",
+          "NOTES": "WILL NOT DETONATE UNLESS TRIGGERED BY FRIENDLY UNIT WITH WORKING COMMS.",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "MINE, STANDARD",
+          "EQUIPMENT RATINGS": "B/A-A-A/E",
+          "AP/BD": "(E)",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "50",
+          "AFF": "—",
+          "MASS": "500 G",
+          "NOTES": "+4 TO DETONATION CHECK VS. HOVERCRAFT; MAY NOT ATTACK JUMPING UNITS OVERHEAD",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "MINE, VIBRABOMB",
+          "EQUIPMENT RATINGS": "D/B-D-C/E",
+          "AP/BD": "(E)",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "500",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "NOTES": "TRIGGERED BY TONNAGE SETTING (SEE P. 209, TACTICAL OPERATIONS)",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "SEA MINES",
+          "EQUIPMENT RATINGS": "*",
+          "AP/BD": "*",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "X2",
+          "AFF": "—",
+          "MASS": "X1",
+          "NOTES": "CAN BE DEPLOYED IN WATER UP TO 72 METERS DEEP.",
+          "_section": "SKILL: DEMOLITIONS"
+        },
+        {
+          "ITEM": "LAND MINES",
+          "EQUIPMENT RATINGS": "*",
+          "AP/BD": "*",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "X1",
+          "AFF": "—",
+          "MASS": "X1",
+          "NOTES": "CAN BE DEPLOYED ON LAND OR UNDERWATER (ON THE FLOOR OF THE WATER FEATURE) TO A MAX DEPTH OF 15 METERS",
+          "_section": "SKILL: DEMOLITIONS"
+        }
+      ],
+      "notes": [
+        "*Land mines and sea mines refl ect common minefield deployment options. If none are specified, a minefield is presumed to be land mines. If no type is then specified (Active, Command-Detonated, Standard or Vibrabomb), the minefield is presumed to be a Standard type."
+      ]
+    }
+  ],
+  "row_count": 10
+}

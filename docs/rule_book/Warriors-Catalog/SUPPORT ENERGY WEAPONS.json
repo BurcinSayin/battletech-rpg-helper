@@ -1,0 +1,240 @@
+{
+  "table_name": "SUPPORT ENERGY WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      275
+    ],
+    "pdf_pages": [
+      277
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 275,
+      "pdf_page": 277,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "DRAGONSBANE PULSE LASER",
+          "EQUIPMENT RATINGS": "E/X-X-D/E",
+          "AP/BD": "5E/3B",
+          "RANGE": "60/230/500/1250",
+          "SHOTS": "15",
+          "COST/RELOAD": "5,000",
+          "AFF": "DC",
+          "MASS/RELOAD": "7 KG/—",
+          "NOTES": "BURST 15; RECOIL 0; MUST FIRE FULL BURST AND CANNOT BE RECHARGED",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "HELLBORE ASSAULT LASER",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "6E/6",
+          "RANGE": "60/205/465/1100",
+          "SHOTS": "10PPS",
+          "COST/RELOAD": "2,500/†",
+          "AFF": "CS",
+          "MASS/RELOAD": "10 KG/†",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER",
+          "EQUIPMENT RATINGS": "D/C-D-D/E",
+          "AP/BD": "6E/8",
+          "RANGE": "100/325/760/1500",
+          "SHOTS": "10PPS",
+          "COST/RELOAD": "10,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "72 KG/†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER, SEMI-PORTABLE",
+          "EQUIPMENT RATINGS": "D/C-D-C/E",
+          "AP/BD": "5E/7",
+          "RANGE": "80/300/700/1450",
+          "SHOTS": "7PPS",
+          "COST/RELOAD": "5,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "40 KG/†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER, ER (NON-CLAN)",
+          "EQUIPMENT RATINGS": "E/X-X-E/E",
+          "AP/BD": "6E/8",
+          "RANGE": "110/400/800/1650",
+          "SHOTS": "15PPS",
+          "COST/RELOAD": "11,250/†",
+          "AFF": "FW",
+          "MASS/RELOAD": "110 KG/†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER, ER (CLAN)",
+          "EQUIPMENT RATINGS": "F/X-X-D/E",
+          "AP/BD": "6E/10",
+          "RANGE": "125/450/900/1700",
+          "SHOTS": "15PPS",
+          "COST/RELOAD": "11,250/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "100 KG/†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER, ER (CLAN, SEMI-PORTABLE)",
+          "EQUIPMENT RATINGS": "F/X-X-C/E",
+          "AP/BD": "5E/8",
+          "RANGE": "100/350/775/1575",
+          "SHOTS": "10PPS",
+          "COST/RELOAD": "10,000/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "25 KG/†",
+          "NOTES": "CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT LASER, HEAVY",
+          "EQUIPMENT RATINGS": "D/D-F-D/E",
+          "AP/BD": "7E/12",
+          "RANGE": "150/500/900/1900",
+          "SHOTS": "20PPS",
+          "COST/RELOAD": "40,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "140 KG/†",
+          "NOTES": "CREW: 3, RECHARGE: 1 TURN",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT PULSE LASER",
+          "EQUIPMENT RATINGS": "E/D-F-D/E",
+          "AP/BD": "5E/5B",
+          "RANGE": "85/310/725/1500",
+          "SHOTS": "7PPS",
+          "COST/RELOAD": "16,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "150 KG/†",
+          "NOTES": "BURST 15; RECOIL: 0; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT PULSE LASER, HEAVY",
+          "EQUIPMENT RATINGS": "E/D-F-E/E",
+          "AP/BD": "6E/5B",
+          "RANGE": "120/425/850/1750",
+          "SHOTS": "8PPS",
+          "COST/RELOAD": "60,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "300 KG/†",
+          "NOTES": "BURST 15; RECOIL: 0; CREW: 4",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT PULSE LASER, SEMI-PORTABLE",
+          "EQUIPMENT RATINGS": "F/X-X-D/E",
+          "AP/BD": "5E/4B",
+          "RANGE": "70/250/600/1300",
+          "SHOTS": "6PPS",
+          "COST/RELOAD": "12,500/†",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "40 KG/†",
+          "NOTES": "BURST 10; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "FLAMER, MAN-PACK",
+          "EQUIPMENT RATINGS": "C/A-A-A/E",
+          "AP/BD": "3E/5CS",
+          "RANGE": "8/20/35/70",
+          "SHOTS": "12",
+          "COST/RELOAD": "100/2",
+          "AFF": "—",
+          "MASS/RELOAD": "15 KG/8.4 KG",
+          "NOTES": "ENCUMBERING; INCENDIARY",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "FLAMER, HEAVY",
+          "EQUIPMENT RATINGS": "C/A-B-B/E",
+          "AP/BD": "3E /7CS",
+          "RANGE": "8/20/35/70",
+          "SHOTS": "3",
+          "COST/RELOAD": "200/200",
+          "AFF": "—",
+          "MASS/RELOAD": "25 KG/2.9 KG",
+          "NOTES": "INCENDIARY; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "PARTICLE CANNON, SEMI-PORTABLE",
+          "EQUIPMENT RATINGS": "D/C-F-D/E",
+          "AP/BD": "4E/8S",
+          "RANGE": "60/225/475/1200",
+          "SHOTS": "6PPS",
+          "COST/RELOAD": "7,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "40 KG/†",
+          "NOTES": "CREW: 2; RECHARGE: 1 TURN",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "PARTICLE CANNON, SUPPORT",
+          "EQUIPMENT RATINGS": "D/C-F-C/E",
+          "AP/BD": "5E/14S",
+          "RANGE": "75/275/650/1400",
+          "SHOTS": "10PPS",
+          "COST/RELOAD": "45,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "1,800 KG/†",
+          "NOTES": "CREW: 5; RECHARGE: 2 TURNS",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "PLASMA RIFLE, MAN-PORTABLE",
+          "EQUIPMENT RATINGS": "E/X-X-D/F",
+          "AP/BD": "5E/10CS",
+          "RANGE": "60/250/500/1000",
+          "SHOTS": "10, 5PPS",
+          "COST/RELOAD": "7,500/10‡",
+          "AFF": "—",
+          "MASS/RELOAD": "30 KG/ 18 KG‡",
+          "NOTES": "ENCUMBERING, INCENDIARY",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "TAG, LIGHT (MAN-PORTABLE)",
+          "EQUIPMENT RATINGS": "E/F-X-E/D",
+          "AP/BD": "0E/0",
+          "RANGE": "150/500/950/1900",
+          "SHOTS": "5PPS",
+          "COST/RELOAD": "40,000/†",
+          "AFF": "—",
+          "MASS/RELOAD": "20 KG/†",
+          "NOTES": "ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        }
+      ],
+      "notes": [
+        "†Per power pack (see Power Packs, p. 306) ‡Plasma rifl es also require power packs (see Power Packs, p. 306)"
+      ]
+    }
+  ],
+  "row_count": 17
+}

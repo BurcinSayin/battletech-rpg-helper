@@ -1,0 +1,88 @@
+{
+  "table_name": "RECHARGERS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      307
+    ],
+    "pdf_pages": [
+      309
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 307,
+      "pdf_page": 309,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER GENERATION",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "FOSSIL FUEL RECHARGER",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "POWER GENERATION": "15 PPH",
+          "NOTES": "REFUELING COST: 2 C-BILLS PER HOUR OF OPERATION"
+        },
+        {
+          "ITEM": "FUSION RECHARGER",
+          "EQUIPMENT RATINGS": "D/D-X-E/B",
+          "COST": "5,000",
+          "AFF": "CLAN/CS",
+          "MASS": "40 KG",
+          "POWER GENERATION": "100 PPH",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "HEAVY-DUTY RECHARGER",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "400 G",
+          "POWER GENERATION": "200 PPH",
+          "NOTES": "PLUG-IN; MAY SERVICE UP TO 5 POWER PACKS AT ONCE"
+        },
+        {
+          "ITEM": "KINETIC RECHARGER",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER GENERATION": "5 PPH",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "SOLAR RECHARGER",
+          "EQUIPMENT RATINGS": "D/A-B-B/A",
+          "COST": "200",
+          "AFF": "—",
+          "MASS": "1.5 KG",
+          "POWER GENERATION": "45 PPH",
+          "NOTES": "—"
+        },
+        {
+          "ITEM": "STANDARD RECHARGER/ LOCAL GRID",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "150 G",
+          "POWER GENERATION": "50 PPH",
+          "NOTES": "PLUG-IN"
+        }
+      ],
+      "notes": [
+        "Note: PPH = Power Points per Hour"
+      ]
+    }
+  ],
+  "row_count": 6
+}

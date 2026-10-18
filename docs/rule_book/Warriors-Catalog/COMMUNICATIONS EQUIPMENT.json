@@ -1,0 +1,222 @@
+{
+  "table_name": "COMMUNICATIONS EQUIPMENT",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      301
+    ],
+    "pdf_pages": [
+      303
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 301,
+      "pdf_page": 303,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "RANGE",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "COMMUNICATIONS HEADSET",
+          "EQUIPMENT RATINGS": "D/A-C-C/A",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "10 G",
+          "RANGE": "100 M",
+          "POWER USE": "1 PPW",
+          "NOTES": "—",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "COMM. KIT, LONG-RANGE",
+          "EQUIPMENT RATINGS": "D/B-D-C/B",
+          "COST": "400",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "RANGE": "50 KM",
+          "POWER USE": "3 PPH",
+          "NOTES": "2,500 KM RANGE TO SATELLITE",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "CIVILIAN COMMUNICATOR",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "45",
+          "AFF": "—",
+          "MASS": "100 G",
+          "RANGE": "10 KM (LOS)",
+          "POWER USE": "0.2 PPH",
+          "NOTES": "—",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "CIVILIAN MICRO- COMMUNICATOR",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "175",
+          "AFF": "—",
+          "MASS": "5 G",
+          "RANGE": "2 KM (LOS)",
+          "POWER USE": "0.2 PPH",
+          "NOTES": "—",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "INTERCOM-LINK",
+          "EQUIPMENT RATINGS": "D.A-C-B/A",
+          "COST": "500",
+          "AFF": "—",
+          "MASS": "5 G",
+          "RANGE": "10 M",
+          "POWER USE": "0.2 PPH",
+          "NOTES": "USABLE ONLY IN NETWORK; RANGE TO NEAREST NETWORK ONLY; CANNOT BE EXTENDED WITH SATELLITES/RELAYS",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "SATNAV RECEIVER",
+          "EQUIPMENT RATINGS": "C/A-E-C/A",
+          "COST": "75",
+          "AFF": "—",
+          "MASS": "500 G",
+          "RANGE": "—",
+          "POWER USE": "1 PPH",
+          "NOTES": "RECEIVER ONLY; REQUIRES SATNAV NETWORK; +2 TO NAVIGATION SKILL ROLLS WHEN USED",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "VID-PHONE",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "35",
+          "AFF": "—",
+          "MASS": "400 G",
+          "RANGE": "—",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "CORDLESS “LAND-LINE” COMMUNICATOR (TIES INTO LOCAL NETWORKS)",
+          "_section": "CIVILIAN COMMUNICATIONS"
+        },
+        {
+          "ITEM": "FIELD COMM. KIT, ADVANCED",
+          "EQUIPMENT RATINGS": "D/B-E-D/B",
+          "COST": "100,000",
+          "AFF": "CS",
+          "MASS": "100 KG",
+          "RANGE": "1000 KM",
+          "POWER USE": "10 PPH",
+          "NOTES": "2,500 KM RANGE TO SATELLITE",
+          "_section": "MILITARY/INDUSTRIAL COMMUNICATIONS"
+        },
+        {
+          "ITEM": "FIELD COMMUNICATOR",
+          "EQUIPMENT RATINGS": "D/A-A-A/B",
+          "COST": "200",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "RANGE": "25 KM",
+          "POWER USE": "1 PPH",
+          "NOTES": "—",
+          "_section": "MILITARY/INDUSTRIAL COMMUNICATIONS"
+        },
+        {
+          "ITEM": "MILITARY COMMUNICATOR",
+          "EQUIPMENT RATINGS": "D/A-A-A/B",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "100 G",
+          "RANGE": "10 KM",
+          "POWER USE": "1 PPH",
+          "NOTES": "—",
+          "_section": "MILITARY/INDUSTRIAL COMMUNICATIONS"
+        },
+        {
+          "ITEM": "MILITARY MICRO- COMMUNICATOR",
+          "EQUIPMENT RATINGS": "C/A-E-C/A",
+          "COST": "75",
+          "AFF": "—",
+          "MASS": "1 G",
+          "RANGE": "5 KM",
+          "POWER USE": "1 PPH",
+          "NOTES": "USES MICRO POWER PACKS ONLY",
+          "_section": "MILITARY/INDUSTRIAL COMMUNICATIONS"
+        },
+        {
+          "ITEM": "SUBVOCAL MICROCOMMUNICATOR",
+          "EQUIPMENT RATINGS": "D/D-F-C/E",
+          "COST": "600",
+          "AFF": "—",
+          "MASS": "3.5 G",
+          "RANGE": "100 M",
+          "POWER USE": "1 PPH",
+          "NOTES": "USES MICRO POWER PACKS ONLY; REQUIRES COMMUNICATIONS/CONVENTIONAL LEVEL 2+ TO USE; -3 TO PERCEPTION TO EAVESDROP ON USER",
+          "_section": "MILITARY/INDUSTRIAL COMMUNICATIONS"
+        },
+        {
+          "ITEM": "CIVILIAN FIELD RELAY, SMALL",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "COST": "2,500",
+          "AFF": "—",
+          "MASS": "500 KG",
+          "RANGE": "2 KM",
+          "POWER USE": "—",
+          "NOTES": "FIXED ANTENNA/RELAY SET-UP",
+          "_section": "RELAYS/HUBS"
+        },
+        {
+          "ITEM": "CIVILIAN FIELD RELAY, LARGE",
+          "EQUIPMENT RATINGS": "C/D-F-C/B",
+          "COST": "4,000",
+          "AFF": "—",
+          "MASS": "1,000 KG",
+          "RANGE": "10 KM",
+          "POWER USE": "—",
+          "NOTES": "FIXED ANTENNA/RELAY SET-UP",
+          "_section": "RELAYS/HUBS"
+        },
+        {
+          "ITEM": "CIVILIAN COMM. HUB",
+          "EQUIPMENT RATINGS": "C/C-C-C/C",
+          "COST": "8,000",
+          "AFF": "—",
+          "MASS": "1,000 KG",
+          "RANGE": "5 KM",
+          "POWER USE": "—",
+          "NOTES": "FIXED COMMUNICATIONS HUB; USED TO COORDINATE UP TO 30 RELAYS",
+          "_section": "RELAYS/HUBS"
+        },
+        {
+          "ITEM": "MILITARY RELAY ANTENNA",
+          "EQUIPMENT RATINGS": "C/C-C-C/C",
+          "COST": "4,500",
+          "AFF": "—",
+          "MASS": "1,000 KG",
+          "RANGE": "5 KM",
+          "POWER USE": "1 PPD",
+          "NOTES": "SEMI-FIXED ANTENNA/RELAY; MAY BE CONNECTED TO LOCAL POWER GRID",
+          "_section": "RELAYS/HUBS"
+        },
+        {
+          "ITEM": "MILITARY COMM. HUB",
+          "EQUIPMENT RATINGS": "D/C-D-C/D",
+          "COST": "10,000",
+          "AFF": "—",
+          "MASS": "1,000 KG",
+          "RANGE": "25 KM",
+          "POWER USE": "3 PPD",
+          "NOTES": "MOBILE COMMUNICATIONS HUB; EXPANDABLE (SEE P. 121, TECHMANUAL, AND PP. 191-196, TACTICAL OPERATIONS FOR MORE INFO)",
+          "_section": "RELAYS/HUBS"
+        }
+      ],
+      "notes": [
+        "NOTE: PPH = Power Points per Hour; PPW = Power Points per Week"
+      ]
+    }
+  ],
+  "row_count": 17
+}

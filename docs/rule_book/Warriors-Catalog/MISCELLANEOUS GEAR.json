@@ -1,0 +1,231 @@
+{
+  "table_name": "MISCELLANEOUS GEAR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      312
+    ],
+    "pdf_pages": [
+      314
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 312,
+      "pdf_page": 314,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "ADVANCED FIELD KIT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "15 KG",
+          "POWER USE": "1 PPH*",
+          "NOTES": "INCLUDES: KNIFE, MULTI-TOOL, INFLATABLE MATTRESS, THERMAL BLANKETS, HEATING PLATE, LANTERN, 2 EMERGENCY FLARES, 5 CAMPFIRE-IGNITERS, CANTEEN, BASIC MEDICAL KIT; +2 TO SURVIVAL SKILL ROLLS",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "BASIC FIELD KIT",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "POWER USE": "—",
+          "NOTES": "INCLUDES: KNIFE, SLEEPING BAG, LANTERN, CANTEEN, BASIC MEDICAL KIT; +1 TO SURVIVAL SKILL ROLLS",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "COMPASS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "0.1 KG",
+          "POWER USE": "—",
+          "NOTES": "+1 TO NAVIGATION/GROUND SKILL ROLLS",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "ELECTRONIC COMPASS",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "30",
+          "AFF": "—",
+          "MASS": "0.1 KG",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "+2 TO NAVIGATION/GROUND SKILL ROLLS",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "EMERGENCY FLARES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "600 G",
+          "POWER USE": "—",
+          "NOTES": "VISIBLE UP TO 5 KM AWAY ON SUCCESSFUL PERCEPTION SKILL (AUTOMATICALLY VISIBLE AT 1 KM OR LESS)",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "EMERGENCY RATIONS",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "2",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "POWER USE": "—",
+          "NOTES": "—",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "PORTABLE LIFE SUPPORT UNIT",
+          "EQUIPMENT RATINGS": "D/B-C-B/A",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "POWER USE": "—",
+          "NOTES": "PROVIDES 90 TOTAL MAN-HOURS OF BREATHABLE AIR AND HEAT TO PROPERLY SEALED SUITS (INCLUDING SPACE SUITS AND ENVIRO-SUITS) OR SMALL, SEALED ROOMS. RECHARGE COST: 100 C-BILLS",
+          "_section": "GENERAL SURVIVAL GEAR"
+        },
+        {
+          "ITEM": "BUBBLE TENT",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "40**",
+          "AFF": "—",
+          "MASS": "1 KG**",
+          "POWER USE": "1 PPH",
+          "NOTES": "3 PPH IN POSITIVE PRESSURE MODE; AP 8 VS. INHALED TOXINS (AP 10 IN POSITIVE PRESSURE MODE)",
+          "_section": "TENTS AND SHELTERS"
+        },
+        {
+          "ITEM": "TENT",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "4**",
+          "AFF": "—",
+          "MASS": "2 KG**",
+          "POWER USE": "—",
+          "NOTES": "—",
+          "_section": "TENTS AND SHELTERS"
+        },
+        {
+          "ITEM": "PERSONAL ENVIRONMENT BAG",
+          "EQUIPMENT RATINGS": "D/B-B-A/A",
+          "COST": "300",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER USE": "1 PPH",
+          "NOTES": "MAX CAPACITY: 1 ADULT OCCUPANT; PATCH COST: 10; AP 8 VS. INHALED TOXINS",
+          "_section": "TENTS AND SHELTERS"
+        },
+        {
+          "ITEM": "POP-UP CAMPER",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "550",
+          "AFF": "—",
+          "MASS": "500 KG",
+          "POWER USE": "2 PPH",
+          "NOTES": "MAX CAPACITY: 6 ADULT OCCUPANTS (COST AND MASS +20 FOR EACH ADDITIONAL OCCUPANT TO A MAX OF 10); POWER USE ONLY TO USE INTEGRAL HEATING, REFRIGERATION AND HEATING PLATE; FEATURES ADVANCED FIELD KIT AND 50 EMERGENCY RATIONS.†",
+          "_section": "TENTS AND SHELTERS"
+        },
+        {
+          "ITEM": "CLIMBING/RAPPELLING KIT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "150",
+          "AFF": "—",
+          "MASS": "10.3 KG",
+          "POWER USE": "—",
+          "NOTES": "+1 TO CLIMBING SKILL ROLLS",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "EMERGENCY JET PACK",
+          "EQUIPMENT RATINGS": "D/D-X-E/C",
+          "COST": "5,000",
+          "AFF": "CS",
+          "MASS": "20 KG",
+          "POWER USE": "—",
+          "NOTES": "1,000 FUEL POINTS; 2 PTS BURNED PER 1 M OF FLIGHT; MAX FLIGHT = 150 M PER TURN; REQUIRES ACROBATICS/FREE-FALL SKILL TO LAUNCH AND LAND",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "HANG GLIDER, POWERED",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "COST": "240",
+          "AFF": "—",
+          "MASS": "105 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; ACROBATICS/FREEFALL SKILL REQUIRED TO TAKE OFF, LAND AND MAINTAIN CONTROL IN WEATHER; MAINTAINS ALTITUDE WITH ENGINE RUNNING (ENGINE HAS 1,000 FUEL POINTS; 2 PTS BURN PER 30 M FLOWN; MAX FLIGHT = 60 M PER TURN); WITH ENGINE OFF, OPERATES AS UNPOWERED GLIDER; BAR 2",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "HANG GLIDER, UNPOWERED",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "COST": "240",
+          "AFF": "—",
+          "MASS": "84 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; ACROBATICS/FREEFALL SKILL REQUIRED TO TAKE OFF, LAND AND MAINTAIN CONTROL IN WEATHER; LOSES 1 M OF ALTITUDE FOR EVERY (30 + ACROBATICS/FREEFALL SKILL LEVEL) M FLOWN; MAX FLIGHT = 30 M PER TURN; SKILL ROLL REQUIRED TO TAKE OFF, LAND OR EXECUTE TURNS; BAR 2",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "HULL-BREACHING FRAME",
+          "EQUIPMENT RATINGS": "C/X-X-C/D",
+          "COST": "250",
+          "AFF": "OA",
+          "MASS": "3 KG",
+          "POWER USE": "—",
+          "NOTES": "DEMOLITIONS SKILL TO USE (AP/BD: 10X/10A; –4X/–4A PER METER DISTANCE); ON SUCCESS, BREACHES ARMORED SPACECRAFT HULL ENOUGH TO PERMIT PASSAGE OF ONE LARGE-SIZED CREATURE OR ARMORED TROOPER.",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "JUMP PACK",
+          "EQUIPMENT RATINGS": "D/A-C-A/C",
+          "COST": "3,100",
+          "AFF": "—",
+          "MASS": "30 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; 1,000 FUEL POINTS; 2 PTS BURNED PER 1 M OF FLIGHT; MAX FLIGHT = 150 M PER TURN; JUMP MODE: 150 M MAX JUMP RANGE PER TURN (5 FUEL BURNED PER JUMP); ACROBATICS/FREE-FALL SKILL TO LAUNCH, LAND AND JUMP",
+          "_section": "GENERAL EQUIPMENT"
+        },
+        {
+          "ITEM": "PARACHUTE",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "78",
+          "AFF": "—",
+          "MASS": "8 KG",
+          "POWER USE": "—",
+          "NOTES": "ENCUMBERING; +4 TO ACROBATICS/FREE-FALL SKILL (REQUIRED TO LAND, TURN AND MAINTAIN CONTROL IN WEATHER); ONCE A CHUTE IS DEPLOYED, THE CHARACTER WILL FALL AT A RATE OF 20 M PER TURN, AND MAY MOVE LATERALLY IN ANY DIRECTION BY A NUMBER OF METERS EQUAL TO HIS ACROBATICS/FREE-FALL SKILL",
+          "_section": "GENERAL EQUIPMENT"
+        }
+      ],
+      "notes": [],
+      "shared_notes": [
+        {
+          "text": "*Power used by the heating plate only (which uses micro power packs)"
+        },
+        {
+          "text": "**Cost and weight is per occupant; Bubble Tents have a max capacity of 4 people; Standard Tents have a max capacity of 2 per square meter of ground area, but may be combined with additional"
+        },
+        {
+          "text": "tents for larger areas.",
+          "section": "GENERAL EQUIPMENT"
+        },
+        {
+          "text": "†The pop-up camper is a wheeled trailer that can be towed into position by another vehicle and set up. Set-up and collapse of a pop-up camper is a Complex Action that takes 5 minutes per"
+        },
+        {
+          "text": "camper occupant.",
+          "section": "GENERAL EQUIPMENT"
+        }
+      ]
+    }
+  ],
+  "row_count": 18
+}

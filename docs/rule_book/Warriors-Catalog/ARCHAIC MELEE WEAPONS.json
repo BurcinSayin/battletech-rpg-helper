@@ -1,0 +1,226 @@
+{
+  "table_name": "ARCHAIC MELEE WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      261
+    ],
+    "pdf_pages": [
+      263
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 261,
+      "pdf_page": 263,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "AXE",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "3M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "25",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/—",
+          "NOTES": "–2 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "BLACKJACK/SAP",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "0M/3D",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "5",
+          "AFF": "—",
+          "MASS/RELOAD": "200 G/—",
+          "NOTES": "–2 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "BOKKEN",
+          "EQUIPMENT RATINGS": "A/B-B-B/A",
+          "AP/BD": "0M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "15",
+          "AFF": "DC",
+          "MASS/RELOAD": "2 KG/—",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "CLUB OR IMPROVISED",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "1M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "—",
+          "AFF": "—",
+          "MASS/RELOAD": "2 KG /—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "DAO",
+          "EQUIPMENT RATINGS": "A/C-C-C/B",
+          "AP/BD": "1M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "200",
+          "AFF": "CC",
+          "MASS/RELOAD": "3 KG/—",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "FINGERNAILS,CARBON- FIBER REINFORCED",
+          "EQUIPMENT RATINGS": "D/X-D-D/C",
+          "AP/BD": "1M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "1000",
+          "AFF": "CC",
+          "MASS/RELOAD": "—/—",
+          "NOTES": "NO EFFECT VS. BAR 3+",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "HATCHET/TOMAHAWK",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "2M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "10",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/—",
+          "NOTES": "–2 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "KATANA",
+          "EQUIPMENT RATINGS": "A/C-C-D/B",
+          "AP/BD": "2M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "250",
+          "AFF": "—",
+          "MASS/RELOAD": "2.5 KG/—",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "KNIFE/DAGGER/BAYONET",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "1M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "8",
+          "AFF": "—",
+          "MASS/RELOAD": "250 G/—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "NO-DACHI",
+          "EQUIPMENT RATINGS": "A/C-C-C/B",
+          "AP/BD": "1M/3",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "300",
+          "AFF": "DC",
+          "MASS/RELOAD": "4.5 KG/—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "NUNCHAKU",
+          "EQUIPMENT RATINGS": "A/B-B-B/A",
+          "AP/BD": "1M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "10",
+          "AFF": "DC",
+          "MASS/RELOAD": "1.5 KG/—",
+          "NOTES": "OPPONENT –2 TO DEFENSE ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "POLE ARM",
+          "EQUIPMENT RATINGS": "A/B-B-B/B",
+          "AP/BD": "1M/2",
+          "RANGE": "2M",
+          "SHOTS": "—",
+          "COST/RELOAD": "50",
+          "AFF": "—",
+          "MASS/RELOAD": "6 KG/—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "SCIMITAR",
+          "EQUIPMENT RATINGS": "A/C-C-C/B",
+          "AP/BD": "2M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "250",
+          "AFF": "—",
+          "MASS/RELOAD": "2.5 KG/—",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "STAFF",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "AP/BD": "0M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "5",
+          "AFF": "—",
+          "MASS/RELOAD": "2.5 KG/—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "SWORD",
+          "EQUIPMENT RATINGS": "A/A-A-A/B",
+          "AP/BD": "2M/2",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "30",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/—",
+          "NOTES": "—",
+          "_section": "SKILL: MELEE WEAPONS"
+        },
+        {
+          "ITEM": "WAKIZASHI",
+          "EQUIPMENT RATINGS": "A/C-C-C/B",
+          "AP/BD": "1M/1",
+          "RANGE": "1M",
+          "SHOTS": "—",
+          "COST/RELOAD": "150",
+          "AFF": "DC",
+          "MASS/RELOAD": "1 KG/—",
+          "NOTES": "+1 TO ATTACK ROLL",
+          "_section": "SKILL: MELEE WEAPONS"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 16
+}

@@ -1,0 +1,144 @@
+{
+  "table_name": "MACHINE GUN SUPPORT WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      273
+    ],
+    "pdf_pages": [
+      275
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 273,
+      "pdf_page": 275,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "AUTOCANNON, BEARHUNTER",
+          "EQUIPMENT RATINGS": "D/X-X-D/F",
+          "AP/BD": "7B/7B",
+          "RANGE": "14/60/120/200",
+          "SHOTS": "180",
+          "COST/RELOAD": "3,000/200",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "40 KG/9 KG",
+          "NOTES": "BURST 30; RECOIL –3; CREW: 2; JAM ON FUMBLE",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "AUTOCANNON, SEMI-PORTABLE",
+          "EQUIPMENT RATINGS": "C/C-D-D/E",
+          "AP/BD": "6B/3B",
+          "RANGE": "25/75/200/550",
+          "SHOTS": "200",
+          "COST/RELOAD": "2,000/150",
+          "AFF": "—",
+          "MASS/RELOAD": "25 KG/8 KG",
+          "NOTES": "BURST 25; RECOIL –2; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "FEDERATED-BARRETT M42B",
+          "EQUIPMENT RATINGS": "C/X-X-D/E",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "1,385/—",
+          "AFF": "FS",
+          "MASS/RELOAD": "—",
+          "NOTES": "2 COMPLEX ACTIONS TO RECONFIGURE",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "(LT. MACHINE GUN MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "4B/5B",
+          "RANGE": "40/90/200/475",
+          "SHOTS": "300",
+          "COST/RELOAD": "—/60",
+          "AFF": "—",
+          "MASS/RELOAD": "7 KG/1.85 KG",
+          "NOTES": "BURST 15; RECOIL –2; SEE BALLISTIC WEAPONS (P. 266) FOR STANDARD AND CLOSE-IN CONFIGURATIONS",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MACHINE GUN, LIGHT",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "AP/BD": "5B/3B",
+          "RANGE": "30/80/190/450",
+          "SHOTS": "45",
+          "COST/RELOAD": "400/6",
+          "AFF": "—",
+          "MASS/RELOAD": "7 KG/2 KG",
+          "NOTES": "BURST 15; RECOIL –2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MACHINE GUN, PORTABLE",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "AP/BD": "5B/4B",
+          "RANGE": "30/85/200/460",
+          "SHOTS": "75",
+          "COST/RELOAD": "1,000/10",
+          "AFF": "—",
+          "MASS/RELOAD": "11.5 KG/3 KG",
+          "NOTES": "BURST 15; RECOIL –2; ENCUMBERING",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MACHINE GUN, SEMI-PORTABLE",
+          "EQUIPMENT RATINGS": "C/B-B-B/E",
+          "AP/BD": "5B/4B",
+          "RANGE": "40/95/225/500",
+          "SHOTS": "80",
+          "COST/RELOAD": "1,100/10",
+          "AFF": "—",
+          "MASS/RELOAD": "20 KG/4 KG",
+          "NOTES": "BURST 20; RECOIL –2; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "MACHINE GUN, SUPPORT",
+          "EQUIPMENT RATINGS": "C/C-C-C/E",
+          "AP/BD": "5B/5B",
+          "RANGE": "45/100/250/625",
+          "SHOTS": "100",
+          "COST/RELOAD": "1,750/50",
+          "AFF": "—",
+          "MASS/RELOAD": "44 KG/5 KG",
+          "NOTES": "BURST 20; RECOIL –2; CREW: 2",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "SUPPORT NEEDLER, FIREDRAKE",
+          "EQUIPMENT RATINGS": "D/X-X-C/F",
+          "AP/BD": "3B/7BCS",
+          "RANGE": "16/35/55/80",
+          "SHOTS": "30",
+          "COST/RELOAD": "500/10",
+          "AFF": "LA",
+          "MASS/RELOAD": "25 KG/3 KG",
+          "NOTES": "BURST 10; RECOIL –2; CREW: 2; NEEDLER*",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        }
+      ],
+      "notes": [
+        "*Though technically not a machine gun, the Firedrake Incendiary Support Needler follows the same essential rules for machine guns, while adding Needler effects (including suff ering a –2 AP modifier against barriers and tactical armor)."
+      ]
+    }
+  ],
+  "row_count": 9
+}

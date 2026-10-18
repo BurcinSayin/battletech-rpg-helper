@@ -1,0 +1,233 @@
+{
+  "table_name": "HOSTILE ENVIRONMENT GEAR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      296
+    ],
+    "pdf_pages": [
+      298
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 296,
+      "pdf_page": 298,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "FILTER MASK",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "5",
+          "AFF": "—",
+          "MASS": "420 G",
+          "COVERAGE": "—",
+          "NOTES": "RELOAD COST: 2 PER 5 FILTERS (MUST BE CHANGED EVERY 72 HOURS); BAR 5 VS. INHALED TOXINS/ POISONS",
+          "_section": "MASKS AND RESPIRATORS"
+        },
+        {
+          "ITEM": "RESPIRATOR",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "50",
+          "AFF": "—",
+          "MASS": "2.5 KG",
+          "COVERAGE": "—",
+          "NOTES": "PROVIDES 4 HOURS OF BREATHABLE AIR PER TANK (MAX 3 TANKS; TANK COST: 2); BAR 10 VS. INHALED TOXINS/POISONS IF USED AS A FILTER.",
+          "_section": "MASKS AND RESPIRATORS"
+        },
+        {
+          "ITEM": "HUMIDIFIER MASK",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "10",
+          "AFF": "—",
+          "MASS": "500 G",
+          "COVERAGE": "—",
+          "NOTES": "PROVIDES 8 HOURS OF COMFORTABLE BREATHING IN ARID CLIMATES (EQUIVALENT TO THICK-SKINNED TRAIT IN DESERT ENVIRONMENTS); 10 MINUTES TO REFILL AT WATER SOURCE",
+          "_section": "MASKS AND RESPIRATORS"
+        },
+        {
+          "ITEM": "HEAT SUIT",
+          "EQUIPMENT RATINGS": "D/C-C-C/A",
+          "BAR (M/B/E/X)": "0/0/1/0",
+          "COST/PATCH": "100",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "DESERT SURVIVAL GEAR; INCLUDES FILTER MASK AND PROTECTIVE GOGGLES; REQUIRES POWER PACK (1 PPD)",
+          "_section": "HOSTILE WEATHER GEAR"
+        },
+        {
+          "ITEM": "PARKA",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "1/0/0/0",
+          "COST/PATCH": "48",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "HEAD, TORSO, ARMS",
+          "NOTES": "COLD WEATHER GEAR; ENCUMBERING",
+          "_section": "HOSTILE WEATHER GEAR"
+        },
+        {
+          "ITEM": "SNOW SUIT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "BAR (M/B/E/X)": "1/0/0/0",
+          "COST/PATCH": "72",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "COLD WEATHER GEAR; ENCUMBERING",
+          "_section": "HOSTILE WEATHER GEAR"
+        },
+        {
+          "ITEM": "WETSUIT (SCUBA SUIT)",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/0/0/0",
+          "COST/PATCH": "55",
+          "AFF": "—",
+          "MASS": "5.5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "UNDERWATER GEAR; INCLUDES 4 HOURS OF LIFE SUPPORT (RELOAD COST: 2); IMMUNE VS. INHALED TOXINS; MAX DEPTH 150 METERS; ENCUMBERING ON LAND*",
+          "_section": "HOSTILE WEATHER GEAR"
+        },
+        {
+          "ITEM": "UNDERWATER OPERATIONS GEAR",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "125",
+          "AFF": "—",
+          "MASS": "30 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "UNDERWATER GEAR; INCLUDES 8 HOURS OF LIFE SUPPORT (RELOAD COST: 4); IMMUNE VS. INHALED TOXINS; MAX DEPTH 360 METERS; ENCUMBERING ON LAND*",
+          "_section": "HOSTILE WEATHER GEAR"
+        },
+        {
+          "ITEM": "ENGINEERING SUIT",
+          "EQUIPMENT RATINGS": "D/D-E-D/C",
+          "BAR (M/B/E/X)": "1/4/2/3",
+          "COST/PATCH": "7,500/10",
+          "AFF": "—",
+          "MASS": "14 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; INCLUDES CIVILIAN COMM., INTERCOM LINK, POLARIZED GOGGLES AND 36-HOUR LIFE SUPPORT; –2 TO DEX-RELATED ROLLS",
+          "_section": "ENVIRONMENT SUITS"
+        },
+        {
+          "ITEM": "ENVIRONMENT SUIT (HEAVY)",
+          "EQUIPMENT RATINGS": "D/C-E-C/B",
+          "BAR (M/B/E/X)": "5/4/3/3",
+          "COST/PATCH": "10,000/75",
+          "AFF": "—",
+          "MASS": "18 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; BAR 5 VS. FLASH; INCLUDES MILITARY COMM. AND 6-HOUR LIFE SUPPORT",
+          "_section": "ENVIRONMENT SUITS"
+        },
+        {
+          "ITEM": "ENVIRONMENT SUIT (LIGHT)",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "BAR (M/B/E/X)": "4/1/3/1",
+          "COST/PATCH": "200/35",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; INCLUDES 6-HOUR LIFE SUPPORT",
+          "_section": "ENVIRONMENT SUITS"
+        },
+        {
+          "ITEM": "SPACE SUIT",
+          "EQUIPMENT RATINGS": "C/B-B-B/B",
+          "BAR (M/B/E/X)": "1/2/1/1",
+          "COST/PATCH": "5,000/10",
+          "AFF": "—",
+          "MASS": "12 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; INCLUDES MILITARY COMM., THRUSTER PACK, POLARIZED VISOR AND 48-HOUR LIFE SUPPORT",
+          "_section": "ENVIRONMENT SUITS"
+        },
+        {
+          "ITEM": "PATCHWORK ENVIRO-SUIT",
+          "EQUIPMENT RATINGS": "C/X-X-C/B",
+          "BAR (M/B/E/X)": "3/2/3/2",
+          "COST/PATCH": "600/300",
+          "AFF": "MH",
+          "MASS": "20 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "ENCUMBERING; SELF-HEALING BIO-POLYMER SUIT CAN RECOVER 1 BAR POINT PER DAMAGE TYPE PER 10 TURNS (TO MAX LISTED BAR RATINGS). 30-YEAR “SHELF-LIFE” BEFORE HEALING SYSTEM FAILS",
+          "_section": "ENVIRONMENT SUITS"
+        },
+        {
+          "ITEM": "GRIP SHOES/SLIPS",
+          "EQUIPMENT RATINGS": "C/B-B-B/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "+1 TO ZERO-G OPERATIONS SKILL",
+          "_section": "ACCESSORIES"
+        },
+        {
+          "ITEM": "ENGINEER’S HELMET",
+          "EQUIPMENT RATINGS": "C/X-B-B/A",
+          "BAR (M/B/E/X)": "3/3/0/2",
+          "COST/PATCH": "2,000/200",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–2 TO PERCEPTION; BAR 5 VS. FLASH; INCLUDES INTERCOM LINK, IR SCANNER, AND RANGEFINDER; REQUIRES HC MICRO POWER PACK (2 PPH)",
+          "_section": "ACCESSORIES"
+        },
+        {
+          "ITEM": "PROTECTIVE GOGGLES/ VISOR",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "4",
+          "AFF": "—",
+          "MASS": "0.1-0.4 KG",
+          "COVERAGE": "—",
+          "NOTES": "BAR 0 VS. FLASH",
+          "_section": "ACCESSORIES"
+        },
+        {
+          "ITEM": "POLARIZED GOGGLES/ VISOR",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "10",
+          "AFF": "—",
+          "MASS": "0.1-0.4 KG",
+          "COVERAGE": "—",
+          "NOTES": "BAR 5 VS. FLASH",
+          "_section": "ACCESSORIES"
+        },
+        {
+          "ITEM": "SUNGLASSES",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "BAR (M/B/E/X)": "—",
+          "COST/PATCH": "3",
+          "AFF": "—",
+          "MASS": "0.1-0.4 KG",
+          "COVERAGE": "—",
+          "NOTES": "BAR 1 VS. FLASH",
+          "_section": "ACCESSORIES"
+        }
+      ],
+      "notes": [
+        "*The wetsuit remains functional if breached, but character may not dive more than 75 meters underwater."
+      ]
+    }
+  ],
+  "row_count": 18
+}

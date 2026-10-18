@@ -1,0 +1,83 @@
+{
+  "table_name": "EXOTIC ARMOR",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      295
+    ],
+    "pdf_pages": [
+      297
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 295,
+      "pdf_page": 297,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "BOGU (KENDO PRACTICE ARMOR)",
+          "EQUIPMENT RATINGS": "B/C-C-C/A",
+          "BAR (M/B/E/X)": "2/1/0/1",
+          "COST/PATCH": "75/5",
+          "AFF": "DC",
+          "MASS": "7 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "–1 TO PERCEPTION CHECK ROLLS"
+        },
+        {
+          "ITEM": "OYOROI (ANCIENT)",
+          "EQUIPMENT RATINGS": "A/F-F-F/A",
+          "BAR (M/B/E/X)": "3/1/1/2",
+          "COST/PATCH": "50,000/100",
+          "AFF": "DC",
+          "MASS": "20 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "–2 TO PERCEPTION; ENCUMBERING"
+        },
+        {
+          "ITEM": "OYOROI (MODERN)",
+          "EQUIPMENT RATINGS": "D/E-E-E/B",
+          "BAR (M/B/E/X)": "4/5/4/4",
+          "COST/PATCH": "2,000/50",
+          "AFF": "DC",
+          "MASS": "23 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "–2 TO PERCEPTION; ENCUMBERING"
+        },
+        {
+          "ITEM": "KNIGHT’S PLATE (ANCIENT)",
+          "EQUIPMENT RATINGS": "A/F-F-F/A",
+          "BAR (M/B/E/X)": "3/1/1/2",
+          "COST/PATCH": "49,000/100",
+          "AFF": "—",
+          "MASS": "19.5 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "–2 TO PERCEPTION; ENCUMBERING"
+        },
+        {
+          "ITEM": "KNIGHT’S PLATE (MODERN)",
+          "EQUIPMENT RATINGS": "C/E-F-E/B",
+          "BAR (M/B/E/X)": "4/5/3/3",
+          "COST/PATCH": "2,400/55",
+          "AFF": "—",
+          "MASS": "22 KG",
+          "COVERAGE": "FULL",
+          "NOTES": "–2 TO PERCEPTION; ENCUMBERING"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 5
+}

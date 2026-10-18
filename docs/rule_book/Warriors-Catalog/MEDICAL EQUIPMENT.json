@@ -1,0 +1,195 @@
+{
+  "table_name": "MEDICAL EQUIPMENT",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      313
+    ],
+    "pdf_pages": [
+      315
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 313,
+      "pdf_page": 315,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "ADVANCED MEDICAL KIT",
+          "EQUIPMENT RATINGS": "C/A-C-B/B",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER USE": "—",
+          "NOTES": "4 USES; +2 TO MEDTECH SKILL ROLLS",
+          "_section": "MEDICAL KITS"
+        },
+        {
+          "ITEM": "FIELD SURGICAL KIT",
+          "EQUIPMENT RATINGS": "D/A-B-A/B",
+          "COST": "800",
+          "AFF": "—",
+          "MASS": "11.5 KG",
+          "POWER USE": "—",
+          "NOTES": "2 USES; +1 TO SURGERY SKILL ROLLS; +2 TO MEDTECH SKILL ROLLS",
+          "_section": "MEDICAL KITS"
+        },
+        {
+          "ITEM": "MEDICAL KIT",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "250 G",
+          "POWER USE": "—",
+          "NOTES": "1 USE: +1 TO MEDTECH SKILL ROLLS",
+          "_section": "MEDICAL KITS"
+        },
+        {
+          "ITEM": "MEDIPATCH",
+          "EQUIPMENT RATINGS": "D/A-B-A/B",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "10 G",
+          "POWER USE": "—",
+          "NOTES": "+1 TO MEDTECH SKILL ROLLS (MAX, EVEN IF MULTIPLE MEDIPATCHES ARE USED)",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "PLASTIFLESH BANDAGE",
+          "EQUIPMENT RATINGS": "D/B-D-C/A",
+          "COST": "5",
+          "AFF": "—",
+          "MASS": "5 G",
+          "POWER USE": "—",
+          "NOTES": "STOPS 1 BLEEDING EFFECT; REDUCES HEALING TIME BY 50% IF APPLIED WITH A SUCCESSFUL MEDTECH SKILL ROLL",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "PRESERVING SLEEVE",
+          "EQUIPMENT RATINGS": "D/A-B-A/B",
+          "COST": "25",
+          "AFF": "—",
+          "MASS": "500 G",
+          "POWER USE": "—",
+          "NOTES": "+1 TO MEDTECH OR SURGERY SKILL ROLLS ON AFFECTED LIMB; HALTS ANY CONTINUOUS DAMAGE EFFECTS TO AFFECTED LIMB FOR UP TO 36 HOURS",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "SEDATIVE PATCH",
+          "EQUIPMENT RATINGS": "D/A-B-B/B",
+          "COST": "30",
+          "AFF": "—",
+          "MASS": "12 G",
+          "POWER USE": "—",
+          "NOTES": "INFLICTS 0S/4D “DAMAGE” TO TARGET; NO EFFECT IF NOT PLACED AGAINST SKIN.",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "STIMPATCH",
+          "EQUIPMENT RATINGS": "D/A-B-A/B",
+          "COST": "2",
+          "AFF": "—",
+          "MASS": "9 G",
+          "POWER USE": "—",
+          "NOTES": "REMOVES 2 FATIGUE (TO MINIMUM OF 0); +1 TO KNOCKOUT ROLLS; ADDICTIVE (DRUG STRENGTH 3)*",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "STIMPATCH, CLAN",
+          "EQUIPMENT RATINGS": "D/X-X-B/B",
+          "COST": "5",
+          "AFF": "CLAN",
+          "MASS": "10G",
+          "POWER USE": "—",
+          "NOTES": "REMOVES 3 FATIGUE (TO A MINIMUM OF 0) AND STUN; +2 TO KNOCKOUT ROLLS; ADDICTIVE (DRUG STRENGTH 4)*",
+          "_section": "FIRST AID CONSUMABLES"
+        },
+        {
+          "ITEM": "CLAN LSSU",
+          "EQUIPMENT RATINGS": "F/X-X-D/D",
+          "COST": "2,200",
+          "AFF": "CLAN",
+          "MASS": "325 G",
+          "POWER USE": "—",
+          "NOTES": "REMOVES 3 FATIGUE AND NEGATE STUN; INJURY MOD +2 (FOR 15 MINUTES AFTER EACH USE); 24 DOSES; RELOAD COST: 100; ADDICTIVE (DRUG STRENGTH 3)*†",
+          "_section": "MEDIPACKS"
+        },
+        {
+          "ITEM": "MEDIPACK",
+          "EQUIPMENT RATINGS": "E/C-E-C/D",
+          "COST": "400",
+          "AFF": "—",
+          "MASS": "400 G",
+          "POWER USE": "—",
+          "NOTES": "REMOVES 2 FATIGUE AND NEGATE STUN; INJURY MOD +1 (FOR 15 MINUTES AFTER EACH USE); 12 DOSES; RELOAD COST: 75; ADDICTIVE (DRUG STRENGTH 2)*†",
+          "_section": "MEDIPACKS"
+        },
+        {
+          "ITEM": "LASER SCALPEL",
+          "EQUIPMENT RATINGS": "D/A-B-A/C",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "100 G",
+          "POWER USE": "1 PPT",
+          "NOTES": "RANGE: 25 CM; INFLICTS 0E/3 DAMAGE IF USED OFFENSIVELY",
+          "_section": "MEDICAL TOOLS"
+        },
+        {
+          "ITEM": "LIFE-SUPPORT UNIT",
+          "EQUIPMENT RATINGS": "E/B-C-B/B",
+          "COST": "8,500",
+          "AFF": "CS",
+          "MASS": "22.5 KG",
+          "POWER USE": "3 PPS",
+          "NOTES": "STOPS ALL CONTINUOUS DAMAGE EFFECTS AND ALLOWS CRITICALLY INJURED PATIENTS TO BE MOVED; ALSO REDUCES HEALING TIME BY 20%; +2 TO MEDTECH SKILL ROLLS WHEN USED WITH PORTABLE MEDICAL MONITOR",
+          "_section": "MEDICAL TOOLS"
+        },
+        {
+          "ITEM": "MYOMER IMPLANTATION DEVICE",
+          "EQUIPMENT RATINGS": "E/D-X-F/C",
+          "COST": "175,000",
+          "AFF": "CS",
+          "MASS": "15 KG",
+          "POWER USE": "10 PPM",
+          "NOTES": "MALFUNCTION ON FUMBLE",
+          "_section": "MEDICAL TOOLS"
+        },
+        {
+          "ITEM": "PORTABLE MEDICAL MONITOR",
+          "EQUIPMENT RATINGS": "E/B-C-B/B",
+          "COST": "2,200",
+          "AFF": "—",
+          "MASS": "13.3 KG",
+          "POWER USE": "1 PPM",
+          "NOTES": "+1 TO MEDTECH SKILL ROLLS (+2 WHEN USED WITH LIFE- SUPPORT MONITOR)",
+          "_section": "MEDICAL TOOLS"
+        },
+        {
+          "ITEM": "STASIS TUBE",
+          "EQUIPMENT RATINGS": "D/D-F-E/D",
+          "COST": "500,000",
+          "AFF": "MC",
+          "MASS": "1,200 KG",
+          "POWER USE": "10 PPD",
+          "NOTES": "FREEZE/THAW 1 PERSON IN 24 HOURS; BOD CHECK –2 TO FREEZE/ THAW; BOD CHECK –1 PER YEAR (ROUND UP) TO STORE (ON ANY FAILURE, –1 TO BOD OR INT SCORE, DETERMINED RANDOMLY)",
+          "_section": "MEDICAL TOOLS"
+        }
+      ],
+      "notes": [
+        "*For Clan trueborns, the Drug Strength of stimpatches, medipacks and the Clan LSSU are 2 points lower when determining addiction.",
+        "†Injury modifiers not cumulative with multiple doses; injury modifiers cannot be raised above 0. Notes: PPT = Power Points per (5-second) Turn; PPS = Power Points per Shot (use); PPM = Power Points per Minute ; PPD = Power Points per Day."
+      ]
+    }
+  ],
+  "row_count": 16
+}

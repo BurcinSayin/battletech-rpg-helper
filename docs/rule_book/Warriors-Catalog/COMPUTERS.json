@@ -1,0 +1,132 @@
+{
+  "table_name": "COMPUTERS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      303
+    ],
+    "pdf_pages": [
+      305
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 303,
+      "pdf_page": 305,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "COMPAD",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "150",
+          "AFF": "—",
+          "MASS": "200 G",
+          "NOTES": "PORTABLE; REQUIRES MICRO POWER PACK (0.1 PPH), TEXT READER ONLY",
+          "_section": "PERSONAL COMPUTING"
+        },
+        {
+          "ITEM": "NOTEPUTER",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "500",
+          "AFF": "—",
+          "MASS": "500 G",
+          "NOTES": "PORTABLE; REQUIRES MICRO POWER PACK (0.1 PPH)",
+          "_section": "PERSONAL COMPUTING"
+        },
+        {
+          "ITEM": "PERSONAL COMPUTER",
+          "EQUIPMENT RATINGS": "C/A-B-A/A",
+          "COST": "250",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "NOTES": "DESKTOP; REQUIRES POWER PACK OR PLUG (1 PPH)",
+          "_section": "PERSONAL COMPUTING"
+        },
+        {
+          "ITEM": "POCKET TRANSCRIBER",
+          "EQUIPMENT RATINGS": "C/A-B-B/A",
+          "COST": "200",
+          "AFF": "—",
+          "MASS": "500 G",
+          "NOTES": "PORTABLE; REQUIRES MICRO POWER PACK (0.5 PPH); SPEECH-TO-TEXT TRANSCRIPTION AND PLAYBACK ONLY",
+          "_section": "PERSONAL COMPUTING"
+        },
+        {
+          "ITEM": "TELESCAN",
+          "EQUIPMENT RATINGS": "C/A-A-A/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "750 G",
+          "NOTES": "PORTABLE; REQUIRES MICRO POWER PACK (0.1 PPH); REQUIRES WORKING SATELLITE NET TO DOWNLOAD AND PLAY LOCAL NEWS AND WEATHER FEEDS.",
+          "_section": "PERSONAL COMPUTING"
+        },
+        {
+          "ITEM": "DESCARTES MK XXI",
+          "EQUIPMENT RATINGS": "D/C-E-C/B",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "7 KG",
+          "NOTES": "DIAGNOSTIC SCANNER; REQUIRES POWER PACK OR PLUG (2 PPH); +1 TO TECHNICIAN ROLLS (WHEN DIAGNOSING DAMAGE)",
+          "_section": "DIAGNOSTIC EQUIPMENT"
+        },
+        {
+          "ITEM": "DESCARTES MK XXV",
+          "EQUIPMENT RATINGS": "E/X-X-D/B",
+          "COST": "2,500",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "NOTES": "DIAGNOSTIC SCANNER; REQUIRES POWER PACK OR PLUG (3 PPH); +2 TO TECHNICIAN ROLLS (WHEN DIAGNOSING DAMAGE)",
+          "_section": "DIAGNOSTIC EQUIPMENT"
+        },
+        {
+          "ITEM": "SCANALYZER",
+          "EQUIPMENT RATINGS": "D/B-D-C/B",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "NOTES": "DESKTOP; REQUIRES POWER PACK OR PLUG (0.1 PPT); +2 TO SCIENCE ROLLS (WHEN ANALYZING SAMPLES)",
+          "_section": "DIAGNOSTIC EQUIPMENT"
+        },
+        {
+          "ITEM": "ENGINEER’S PORTABLE CONSOLE",
+          "EQUIPMENT RATINGS": "D/B-E-C/C",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "NOTES": "INTERFACE; REQUIRES POWER PACK OR PLUG (1 PPH); +1 TO SECURITY SYSTEMS/ ELECTRONIC; –1 TO PILOTING/SPACECRAFT",
+          "_section": "CONTROL INTERFACES"
+        },
+        {
+          "ITEM": "ENHANCED IMAGING DISPLAY",
+          "EQUIPMENT RATINGS": "F/X-X-D/F",
+          "COST": "400,000",
+          "AFF": "CLAN",
+          "MASS": "5 KG",
+          "NOTES": "INTERFACE; INTEGRATES WITH COCKPIT SYSTEMS (SEE EI NEURAL IMPLANTS, P. 316); +1 TO SENSOR OPERATIONS WITHOUT EI IMPLANTS",
+          "_section": "CONTROL INTERFACES"
+        },
+        {
+          "ITEM": "VERIGRAPH SCANNER/ READER",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "360",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "NOTES": "ENCRYPTS/READS GENETIC CODING OF OPERATOR FOR SECURE MESSAGE TRANSFER; –4 TO FORGERY",
+          "_section": "SPECIAL SYSTEMS"
+        }
+      ],
+      "notes": [
+        "Note: PPH = Power Points per Hour; PPT = Power Points per (5-second) Turn"
+      ]
+    }
+  ],
+  "row_count": 11
+}

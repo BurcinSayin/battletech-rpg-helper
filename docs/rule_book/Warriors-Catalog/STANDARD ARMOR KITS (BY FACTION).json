@@ -1,0 +1,603 @@
+{
+  "table_name": "STANDARD ARMOR KITS (BY FACTION)",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      292,
+      293,
+      294
+    ],
+    "pdf_pages": [
+      294,
+      295,
+      296
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 292,
+      "pdf_page": 294,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "3/4/5/3",
+          "COST/PATCH": "200",
+          "AFF": "CC",
+          "MASS": "2 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM.; –1 TO PERCEPTION CHECK ROLLS; AV 7 VS. FLASH",
+          "_section": "CAPELLAN CONFEDERATION"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "B/B-B-B/C",
+          "BAR (M/B/E/X)": "3/4/3/2",
+          "COST/PATCH": "200/10",
+          "AFF": "CC",
+          "MASS": "4.5 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "2/2/3/2 BAR FOR ARMS AND LEGS",
+          "_section": "CAPELLAN CONFEDERATION"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "CAPELLAN CONFEDERATION"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "E/E-E-E/F",
+          "BAR (M/B/E/X)": "5/6/5/3",
+          "COST/PATCH": "1,400",
+          "AFF": "CLAN",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER, NIGHT VISION AND RANGEFINDER; REQUIRES HC MICRO- POWER PACK (3 PPH); +1 TO PERCEPTION ROLLS; AV 8 VS. FLASH",
+          "_section": "CLANS (GENERIC)"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "E/E-E-E/F",
+          "BAR (M/B/E/X)": "3/6/5/3",
+          "COST/PATCH": "4,000/150",
+          "AFF": "CLAN",
+          "MASS": "6 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "CLANS (GENERIC)"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "C/E-E-E/F",
+          "BAR (M/B/E/X)": "3/5/5/3",
+          "COST/PATCH": "100/20",
+          "AFF": "CLAN",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "CLANS (GENERIC)"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "C/E-E-E/F",
+          "BAR (M/B/E/X)": "1/1/3/2",
+          "COST/PATCH": "60",
+          "AFF": "CLAN",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "CLANS (GENERIC)"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "F/D-D-D/F",
+          "BAR (M/B/E/X)": "4/5/5/3",
+          "COST/PATCH": "1,200",
+          "AFF": "CS",
+          "MASS": "2 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER, NIGHT VISION, RANGEFINDER, AND ULTRASONIC DETECTOR (5M RANGE); REQUIRES HC MICRO POWER PACK (3 PPH); +1 TO PERCEPTION ROLLS; AV 8 VS. FLASH",
+          "_section": "COMSTAR/WORD OF BLAKE"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "D/E-E-E/E",
+          "BAR (M/B/E/X)": "4/6/5/4",
+          "COST/PATCH": "3,000/120",
+          "AFF": "CS",
+          "MASS": "8 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "COMSTAR/WORD OF BLAKE"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "COMSTAR/WORD OF BLAKE"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "COMSTAR/WORD OF BLAKE"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "3/4/4/2",
+          "COST/PATCH": "200",
+          "AFF": "DC/FR",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM.; AV 7 VS. FLASH",
+          "_section": "DRACONIS COMBINE / FREE RASALHAGUE REPUBLIC"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "B/B-B-B/C",
+          "BAR (M/B/E/X)": "2/2/3/1",
+          "COST/PATCH": "100/8",
+          "AFF": "DC/FR",
+          "MASS": "5 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "—",
+          "_section": "DRACONIS COMBINE / FREE RASALHAGUE REPUBLIC"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "DRACONIS COMBINE / FREE RASALHAGUE REPUBLIC"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "DRACONIS COMBINE / FREE RASALHAGUE REPUBLIC"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "4/5/5/4",
+          "COST/PATCH": "500",
+          "AFF": "FS",
+          "MASS": "1.5 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER AND RANGEFINDER; REQUIRES HC MICRO POWER PACK (2 PPH); –1 TO PERCEPTION ROLLS; AV 7 VS. FLASH",
+          "_section": "FEDERATED SUNS"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "B/B-B-B/C",
+          "BAR (M/B/E/X)": "3/5/4/3",
+          "COST/PATCH": "450/10",
+          "AFF": "FS",
+          "MASS": "5 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "1/2/2/1 FOR ARMS",
+          "_section": "FEDERATED SUNS"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "A/B-B-B/B",
+          "BAR (M/B/E/X)": "2/2/2/2",
+          "COST/PATCH": "40",
+          "AFF": "FS",
+          "MASS": "1 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS"
+        }
+      ],
+      "notes": [
+        "Notes: PPH = Power Points per Hour"
+      ]
+    },
+    {
+      "printed_page": 293,
+      "pdf_page": 295,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "D/X-X-C/D",
+          "BAR (M/B/E/X)": "4/6/5/4",
+          "COST/PATCH": "800",
+          "AFF": "FS",
+          "MASS": "2 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER, NIGHT VISION, AND RANGEFINDER; REQUIRES HC MICRO POWER PACK (2 PPH); –1 TO PERCEPTION ROLLS; AV 7 VS. FLASH",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "D/X-X-C/D",
+          "BAR (M/B/E/X)": "4/6/5/4",
+          "COST/PATCH": "650/50",
+          "AFF": "FS",
+          "MASS": "7.5 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "ARM GUARDS",
+          "EQUIPMENT RATINGS": "C/X-X-C/C",
+          "BAR (M/B/E/X)": "2/4/3/3",
+          "COST/PATCH": "100",
+          "AFF": "FS",
+          "MASS": "2 KG",
+          "COVERAGE": "ARMS",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "LEG GUARDS",
+          "EQUIPMENT RATINGS": "C/X-X-C/C",
+          "BAR (M/B/E/X)": "2/4/4/3",
+          "COST/PATCH": "200",
+          "AFF": "FS",
+          "MASS": "3.5 KG",
+          "COVERAGE": "LEGS",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "C/X-X-D/C",
+          "BAR (M/B/E/X)": "2/4/4/3",
+          "COST/PATCH": "250",
+          "AFF": "FS",
+          "MASS": "2.5 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "C/X-X-D/C",
+          "BAR (M/B/E/X)": "2/2/3/3",
+          "COST/PATCH": "80",
+          "AFF": "FS",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "DEX –1",
+          "_section": "FEDERATED SUNS (PAB-27 ELITE KIT)"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "4/4/4/3",
+          "COST/PATCH": "250",
+          "AFF": "FW",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER; REQUIRES HC MICRO POWER PACK (1 PPH); –1 TO PERCEPTION CHECKS; AV 7 VS. FLASH",
+          "_section": "FREE WORLDS LEAGUE"
+        },
+        {
+          "ITEM": "SUIT",
+          "EQUIPMENT RATINGS": "B/B-B-B/D",
+          "BAR (M/B/E/X)": "5/6/4/3",
+          "COST/PATCH": "1,500/30",
+          "AFF": "FW",
+          "MASS": "15 KG",
+          "COVERAGE": "TORSO, ARMS, LEGS",
+          "NOTES": "ENCUMBERING; 3/4/2/1 FOR ARMS AND LEGS",
+          "_section": "FREE WORLDS LEAGUE"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "FREE WORLDS LEAGUE"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "FREE WORLDS LEAGUE"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "4/6/6/4",
+          "COST/PATCH": "300",
+          "AFF": "LA",
+          "MASS": "1.2 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., IR SCANNER AND NIGHT VISION; REQUIRES HC MICRO POWER PACK (1 PPH); –1 TO PERCEPTION ROLLS; AV 7 VS. FLASH",
+          "_section": "LYRAN ALLIANCE"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "B/B-B-B/D",
+          "BAR (M/B/E/X)": "3/5/4/3",
+          "COST/PATCH": "350/10",
+          "AFF": "LA",
+          "MASS": "3.5 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "2/4/3/2 FOR ARMS",
+          "_section": "LYRAN ALLIANCE"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "LYRAN ALLIANCE"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "LYRAN ALLIANCE"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "5/6/5/2",
+          "COST/PATCH": "250",
+          "AFF": "MC",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM. AND RANGEFINDER; REQUIRES HC MICRO POWER PACK (1 PPH); –2 TO PERCEPTION ROLLS; AV 7 VS. FLASH",
+          "_section": "MAGISTRACY OF CANOPUS"
+        },
+        {
+          "ITEM": "VEST",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "BAR (M/B/E/X)": "1/5/2/3",
+          "COST/PATCH": "75/10",
+          "AFF": "MC",
+          "MASS": "3 KG",
+          "COVERAGE": "TORSO",
+          "NOTES": "—",
+          "_section": "MAGISTRACY OF CANOPUS"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MAGISTRACY OF CANOPUS"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "MAGISTRACY OF CANOPUS"
+        }
+      ],
+      "notes": [
+        "Notes: PPH = Power Points per Hour"
+      ]
+    },
+    {
+      "printed_page": 294,
+      "pdf_page": 296,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "BAR (M/B/E/X)",
+        "COST/PATCH",
+        "AFF",
+        "MASS",
+        "COVERAGE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "5/6/5/2",
+          "COST/PATCH": "300",
+          "AFF": "MH",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "INCLUDES MILITARY COMM., NIGHT VISION AND RANGEFINDERS; REQUIRES HC MICRO POWER PACK (1 PPH); –1 TO PERCEPTION ROLLS; AV 6 VS. FLASH",
+          "_section": "MARIAN HEGEMONY"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "B/B-B-B/D",
+          "BAR (M/B/E/X)": "3/6/4/3",
+          "COST/PATCH": "1,200/25",
+          "AFF": "MH",
+          "MASS": "10 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "MARIAN HEGEMONY"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "MARIAN HEGEMONY"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "1/1/1/1",
+          "COST/PATCH": "30",
+          "AFF": "—",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "—",
+          "_section": "MARIAN HEGEMONY"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "BAR (M/B/E/X)": "3/5/5/3",
+          "COST/PATCH": "210",
+          "AFF": "TC",
+          "MASS": "1 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–1 TO PERCEPTION ROLLS; AV 7 VS. FLASH",
+          "_section": "TAURIAN CONCORDAT/CALDERON PROTECTORATE"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "B/B-B-B/D",
+          "BAR (M/B/E/X)": "2/3/3/2",
+          "COST/PATCH": "50/5",
+          "AFF": "TC",
+          "MASS": "3 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "TAURIAN CONCORDAT/CALDERON PROTECTORATE"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "1.2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "TAURIAN CONCORDAT/CALDERON PROTECTORATE"
+        },
+        {
+          "ITEM": "GLOVES",
+          "EQUIPMENT RATINGS": "B/B-B-B/B",
+          "BAR (M/B/E/X)": "2/2/2/2",
+          "COST/PATCH": "60",
+          "AFF": "TC",
+          "MASS": "0.5 KG",
+          "COVERAGE": "HANDS",
+          "NOTES": "INCLUDES MILITARY COMM.",
+          "_section": "TAURIAN CONCORDAT/CALDERON PROTECTORATE"
+        },
+        {
+          "ITEM": "HELMET",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "BAR (M/B/E/X)": "4/5/4/2",
+          "COST/PATCH": "180",
+          "AFF": "—",
+          "MASS": "1.8 KG",
+          "COVERAGE": "HEAD",
+          "NOTES": "–1 TO PERCEPTION ROLLS; AV 5 VS. FLASH",
+          "_section": "PERIPHERY/GENERIC"
+        },
+        {
+          "ITEM": "JACKET",
+          "EQUIPMENT RATINGS": "C/A-A-A/B",
+          "BAR (M/B/E/X)": "1/5/1/3",
+          "COST/PATCH": "100/10",
+          "AFF": "—",
+          "MASS": "3.5 KG",
+          "COVERAGE": "TORSO, ARMS",
+          "NOTES": "—",
+          "_section": "PERIPHERY/GENERIC"
+        },
+        {
+          "ITEM": "BOOTS",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "BAR (M/B/E/X)": "2/3/3/1",
+          "COST/PATCH": "48/10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "COVERAGE": "FEET",
+          "NOTES": "—",
+          "_section": "PERIPHERY/GENERIC"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 48
+}

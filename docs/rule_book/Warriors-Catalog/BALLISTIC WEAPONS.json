@@ -1,0 +1,526 @@
+{
+  "table_name": "BALLISTIC WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      265,
+      266
+    ],
+    "pdf_pages": [
+      267,
+      268
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 265,
+      "pdf_page": 267,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "AUTO-PISTOL",
+          "EQUIPMENT RATINGS": "C/A-A-A/C",
+          "AP/BD": "3B/4",
+          "RANGE": "5/20/45/105",
+          "SHOTS": "10",
+          "COST/RELOAD": "50/2",
+          "AFF": "—",
+          "MASS/RELOAD": "500 G/140 G",
+          "NOTES": "*",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (HAWK EAGLE)",
+          "EQUIPMENT RATINGS": "C/X-F-C/C",
+          "AP/BD": "4B/3B",
+          "RANGE": "5/20/50/100",
+          "SHOTS": "15",
+          "COST/RELOAD": "100/10",
+          "AFF": "FW",
+          "MASS/RELOAD": "500 G/110 G",
+          "NOTES": "BURST: 3; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (MAGNUM)",
+          "EQUIPMENT RATINGS": "C/A-A-B/D",
+          "AP/BD": "3B/5",
+          "RANGE": "5/20/50/120",
+          "SHOTS": "8",
+          "COST/RELOAD": "75/4",
+          "AFF": "—",
+          "MASS/RELOAD": "500 G/140 G",
+          "NOTES": "–1 TO ATTACK ROLL*",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (M&G SERVICE AUTO)",
+          "EQUIPMENT RATINGS": "C/C-B-C/C",
+          "AP/BD": "3B/4",
+          "RANGE": "5/20/40/85",
+          "SHOTS": "8",
+          "COST/RELOAD": "60/3",
+          "AFF": "LA",
+          "MASS/RELOAD": "650 G/110 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (NAMBU)",
+          "EQUIPMENT RATINGS": "C/B-C-C/C",
+          "AP/BD": "3B/4",
+          "RANGE": "5/25/50/110",
+          "SHOTS": "12",
+          "COST/RELOAD": "75/2",
+          "AFF": "DC",
+          "MASS/RELOAD": "450 G/160 G",
+          "NOTES": "*",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (SERREK 7875D)",
+          "EQUIPMENT RATINGS": "C/X-C-B/C",
+          "AP/BD": "3B/3",
+          "RANGE": "5/25/50/120",
+          "SHOTS": "16",
+          "COST/RELOAD": "185/3",
+          "AFF": "FS",
+          "MASS/RELOAD": "400 G/160G",
+          "NOTES": "+1 TO ATTACK AND SERVICE ROLLS",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (STERNSACHT PYTHON)",
+          "EQUIPMENT RATINGS": "C/X-X-C/D",
+          "AP/BD": "4B/4",
+          "RANGE": "5/15/40/80",
+          "SHOTS": "12",
+          "COST/RELOAD": "125/4",
+          "AFF": "—",
+          "MASS/RELOAD": "750 G/160 G",
+          "NOTES": "*",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "SEMI-AUTO (TK ENFORCER)",
+          "EQUIPMENT RATINGS": "C/X-X-B/C",
+          "AP/BD": "3B/3B",
+          "RANGE": "7/25/55/140",
+          "SHOTS": "20",
+          "COST/RELOAD": "110/3",
+          "AFF": "LA",
+          "MASS/RELOAD": "1.6 KG/200 G",
+          "NOTES": "BURST: 4; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "PISTOL (HOLD-OUT)",
+          "EQUIPMENT RATINGS": "B/A-A-B/E",
+          "AP/BD": "3B/3",
+          "RANGE": "2/5/8/20",
+          "SHOTS": "2",
+          "COST/RELOAD": "20/1",
+          "AFF": "—",
+          "MASS/RELOAD": "200 G/20 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "PISTOL (STERNSNACHT CLAYMORE)",
+          "EQUIPMENT RATINGS": "C/X-E-D/D",
+          "AP/BD": "3B/6",
+          "RANGE": "5/15/38/70",
+          "SHOTS": "3",
+          "COST/RELOAD": "200/1",
+          "AFF": "—",
+          "MASS/RELOAD": "2.5 KG/90 G",
+          "NOTES": "RANGE MODIFIERS: +0/–3/–6/–11",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "PISTOL (MAKESHIFT)",
+          "EQUIPMENT RATINGS": "B/A-A-A/C",
+          "AP/BD": "3B/4",
+          "RANGE": "5/15/30/65",
+          "SHOTS": "1",
+          "COST/RELOAD": "15/1",
+          "AFF": "PER",
+          "MASS/RELOAD": "1 KG/10G",
+          "NOTES": "–1 TO ATTACK ROLL**",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "REVOLVER",
+          "EQUIPMENT RATINGS": "C/A-A-A/C",
+          "AP/BD": "4B/4",
+          "RANGE": "8/18/40/90",
+          "SHOTS": "6",
+          "COST/RELOAD": "40/1",
+          "AFF": "—",
+          "MASS/RELOAD": "500 G/60 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "REVOLVER (MAGNUM)",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "AP/BD": "4B/5",
+          "RANGE": "8/18/45/100",
+          "SHOTS": "5",
+          "COST/RELOAD": "60/3",
+          "AFF": "—",
+          "MASS/RELOAD": "500 G/60 G",
+          "NOTES": "–1 TO ATTACK ROLL",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "HARPOON GUN (PEQUOD, MK. 1)",
+          "EQUIPMENT RATINGS": "B/D-C-B/C",
+          "AP/BD": "3B/3",
+          "RANGE": "8/12/25/30",
+          "SHOTS": "1",
+          "COST/RELOAD": "350/2",
+          "AFF": "TC",
+          "MASS/RELOAD": "2.3 KG/135 G",
+          "NOTES": "FIRES GRAPPLING CABLE; +4 TO CLIMBING SKILL W/ CABLE ENGAGED; SIMPLE ACTION TO DISENGAGE CABLE; NO MODIFIER TO USE UNDERWATER",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (MYDRON)",
+          "EQUIPMENT RATINGS": "C/C-B-B/E",
+          "AP/BD": "3B/2B",
+          "RANGE": "6/22/40/90",
+          "SHOTS": "20",
+          "COST/RELOAD": "100/4",
+          "AFF": "—",
+          "MASS/RELOAD": "1.5 KG/140 G",
+          "NOTES": "BURST: 6; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "AUTO-PISTOL (STETTA)",
+          "EQUIPMENT RATINGS": "D/X-F-C/E",
+          "AP/BD": "3B/2B",
+          "RANGE": "3/10/20/50",
+          "SHOTS": "100",
+          "COST/RELOAD": "150/10",
+          "AFF": "—",
+          "MASS/RELOAD": "2 KG/680 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "MACHINE PISTOL (MARTIAL EAGLE)",
+          "EQUIPMENT RATINGS": "D/X-F-D/E",
+          "AP/BD": "3B/3B",
+          "RANGE": "5/20/50/100",
+          "SHOTS": "30",
+          "COST/RELOAD": "180/20",
+          "AFF": "FW",
+          "MASS/RELOAD": "1.8 KG/250 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SUBMACHINE GUN",
+          "EQUIPMENT RATINGS": "C/A-A-A/D",
+          "AP/BD": "3B/3B",
+          "RANGE": "5/16/35/80",
+          "SHOTS": "50",
+          "COST/RELOAD": "80/5",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/570 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SMG (GUNTHER MP-20)",
+          "EQUIPMENT RATINGS": "C/X-E-C/D",
+          "AP/BD": "4B/3B",
+          "RANGE": "4/12/30/50",
+          "SHOTS": "30",
+          "COST/RELOAD": "125/5",
+          "AFF": "LA",
+          "MASS/RELOAD": "2.5 KG/340 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SMG (IMPERATOR 2894A1)",
+          "EQUIPMENT RATINGS": "C/X-C-B/D",
+          "AP/BD": "4B/2B",
+          "RANGE": "5/18/40/85",
+          "SHOTS": "50",
+          "COST/RELOAD": "100/5",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/380 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SMG (KA-23 SUBGUN)",
+          "EQUIPMENT RATINGS": "D/X-C-D/E",
+          "AP/BD": "4B/2B",
+          "RANGE": "6/20/45/100",
+          "SHOTS": "40",
+          "COST/RELOAD": "250/6",
+          "AFF": "DC",
+          "MASS/RELOAD": "2.5 KG/300 G",
+          "NOTES": "BURST: 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SMG (RORYNEX RM-3/ XXI)",
+          "EQUIPMENT RATINGS": "D/C-B-C/E",
+          "AP/BD": "3B/2B",
+          "RANGE": "3/12/28/60",
+          "SHOTS": "100",
+          "COST/RELOAD": "80/10",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/760 G",
+          "NOTES": "BURST: 15; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        },
+        {
+          "ITEM": "SMG (RUGAN)",
+          "EQUIPMENT RATINGS": "C/D-B-C/E",
+          "AP/BD": "3B/2B",
+          "RANGE": "4/15/30/70",
+          "SHOTS": "80",
+          "COST/RELOAD": "100/8",
+          "AFF": "—",
+          "MASS/RELOAD": "3.5 KG/610 G",
+          "NOTES": "BURST: 15; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (SMGs)"
+        }
+      ],
+      "notes": [
+        "*Jam on Fumble **Misfire on Fumble (delivers 1X/1S damage to user) †See Weapon Accessories, pp. 285-286 ††See Grenade Launchers, pp. 273-274"
+      ]
+    },
+    {
+      "printed_page": 266,
+      "pdf_page": 268,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "RIFLE (AUTOMATIC)",
+          "EQUIPMENT RATINGS": "C/A-A-A/D",
+          "AP/BD": "4B/4B",
+          "RANGE": "30/75/170/415",
+          "SHOTS": "30",
+          "COST/RELOAD": "80/2",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/480 G",
+          "NOTES": "BURST: 15; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (BOLT-ACTION)",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "AP/BD": "4B/4",
+          "RANGE": "40/115/225/500",
+          "SHOTS": "5",
+          "COST/RELOAD": "60/1",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/60 G",
+          "NOTES": "SIMPLE ACTION TO CHAMBER NEXT ROUND",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (FEDERATED LONG)",
+          "EQUIPMENT RATINGS": "C/X-C-A/D",
+          "AP/BD": "4B/5",
+          "RANGE": "35/85/205/450",
+          "SHOTS": "10",
+          "COST/RELOAD": "120/3",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/150 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (IMPERATOR AX-22 ASSAULT)",
+          "EQUIPMENT RATINGS": "C/X-X-B/D",
+          "AP/BD": "4B/4B",
+          "RANGE": "30/80/185/435",
+          "SHOTS": "15",
+          "COST/RELOAD": "200/3",
+          "AFF": "—",
+          "MASS/RELOAD": "3.5 KG/240 G",
+          "NOTES": "BURST: 15; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (M&G G-150)",
+          "EQUIPMENT RATINGS": "C/X-X-C/D",
+          "AP/BD": "4B/4B",
+          "RANGE": "45/95/215/460",
+          "SHOTS": "9",
+          "COST/RELOAD": "270/5",
+          "AFF": "LA",
+          "MASS/RELOAD": "3.5 KG/150 G",
+          "NOTES": "BURST: 3; DETACHABLE TELESCOPE†",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (MAKESHIFT)",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "AP/BD": "4B/4",
+          "RANGE": "20/65/140/300",
+          "SHOTS": "1",
+          "COST/RELOAD": "20/1",
+          "AFF": "PER",
+          "MASS/RELOAD": "6 KG/20 G",
+          "NOTES": "–1 TO ATTACK ROLL**",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (TK ASSAULT)",
+          "EQUIPMENT RATINGS": "C/X-C-A/D",
+          "AP/BD": "4B/4B",
+          "RANGE": "25/70/160/410",
+          "SHOTS": "20",
+          "COST/RELOAD": "150/3",
+          "AFF": "LA",
+          "MASS/RELOAD": "5.5 KG/320 G",
+          "NOTES": "BURST 10; RECOIL: –1",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RIFLE (ZEUS HEAVY)",
+          "EQUIPMENT RATINGS": "C/C-B-B/D",
+          "AP/BD": "5B/5",
+          "RANGE": "35/80/190/420",
+          "SHOTS": "5",
+          "COST/RELOAD": "200/3",
+          "AFF": "LA",
+          "MASS/RELOAD": "8 KG/80 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "ELEPHANT GUN",
+          "EQUIPMENT RATINGS": "B/B-C-C/C",
+          "AP/BD": "5B/6",
+          "RANGE": "20/60/160/400",
+          "SHOTS": "2",
+          "COST/RELOAD": "100/2",
+          "AFF": "PER",
+          "MASS/RELOAD": "5 KG/40 G",
+          "NOTES": "–2 TO ATTACK ROLL",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "FEDERATED-BARRETT M42B",
+          "EQUIPMENT RATINGS": "C/X-X-D/E",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "1,385/—",
+          "AFF": "FS",
+          "MASS/RELOAD": "—/—",
+          "NOTES": "2 COMPLEX ACTIONS AND SKILL CHECK TO RECONFIGURE",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(STANDARD MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "4B/5B",
+          "RANGE": "30/75/180/430",
+          "SHOTS": "50",
+          "COST/RELOAD": "—/12",
+          "AFF": "FS",
+          "MASS/RELOAD": "6 KG/300 G",
+          "NOTES": "BURST: 10; RECOIL –1; LASER SIGHT† AND GRENADE LAUNCHER††",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(CLOSE-IN MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "3B/4B",
+          "RANGE": "20/50/120/280",
+          "SHOTS": "50",
+          "COST/RELOAD": "—/12",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/300 G",
+          "NOTES": "BURST: 5; RECOIL –1; LASER SIGHT, SOUND/FLASH SUPPRESSOR† AND GRENADE LAUNCHER††",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "(LT. MACHINE GUN MODE)",
+          "EQUIPMENT RATINGS": "—",
+          "AP/BD": "—",
+          "RANGE": "—",
+          "SHOTS": "—",
+          "COST/RELOAD": "—",
+          "AFF": "—",
+          "MASS/RELOAD": "—/—",
+          "NOTES": "SEE SUPPORT WEAPONS",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "SNIPER RIFLE",
+          "EQUIPMENT RATINGS": "B/C-C-C/D",
+          "AP/BD": "5B/4",
+          "RANGE": "45/150/340/700",
+          "SHOTS": "5",
+          "COST/RELOAD": "350/4",
+          "AFF": "—",
+          "MASS/RELOAD": "10 KG/60 G",
+          "NOTES": "SIMPLE ACTION TO CHAMBER NEXT ROUND",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "SNIPER RIFLE (MINOLTA 9000)",
+          "EQUIPMENT RATINGS": "D/X-X-E/F",
+          "AP/BD": "5B/4",
+          "RANGE": "50/160/360/730",
+          "SHOTS": "10",
+          "COST/RELOAD": "1,000/5",
+          "AFF": "CC",
+          "MASS/RELOAD": "6 KG/120 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "HARPOON GUN (PEQUOD, MK. 2)",
+          "EQUIPMENT RATINGS": "C/F-D-B/D",
+          "AP/BD": "4B/4",
+          "RANGE": "18/35/65/90",
+          "SHOTS": "2",
+          "COST/RELOAD": "700/5",
+          "AFF": "TC",
+          "MASS/RELOAD": "4.1 KG/360 G",
+          "NOTES": "WIRELESS; NO MODIFIER TO USE UNDERWATER",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        }
+      ],
+      "notes": [
+        "*Jam on Fumble **Misfire on Fumble (delivers 1X/1S damage to user) †See Weapon Accessories, pp. 285-286 †† See Grenade Launchers, pp. 273-274"
+      ]
+    }
+  ],
+  "row_count": 39
+}

@@ -1,0 +1,97 @@
+{
+  "table_name": "OPTICS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      304
+    ],
+    "pdf_pages": [
+      306
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 304,
+      "pdf_page": 306,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "BINOX IMAGE INTENSIFIER",
+          "EQUIPMENT RATINGS": "B/A-A-A/A",
+          "COST": "25",
+          "AFF": "—",
+          "MASS": "250 G",
+          "POWER USE": "—",
+          "NOTES": "20X MAGNIFICATION (+1 TO PERCEPTION ROLLS AT M/L/E)"
+        },
+        {
+          "ITEM": "RANGEFINDER BINOCULARS",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "200",
+          "AFF": "—",
+          "MASS": "500 G",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "400X MAGNIFICATION (+4 TO PERCEPTION ROLLS AT M/L/E); ALSO WORKS AS NIGHT VISION GOGGLES"
+        },
+        {
+          "ITEM": "MICHEAUX ELECTRONIC BINOCULARS",
+          "EQUIPMENT RATINGS": "C/A-B-B/A",
+          "COST": "150",
+          "AFF": "LA",
+          "MASS": "750 G",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "400X MAGNIFICATION (+4 TO PERCEPTION ROLLS AT M/L/E)"
+        },
+        {
+          "ITEM": "IR SCANNER",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "400 G",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "DETECTS HEAT SIGNATURES ONLY (NO SURFACE DETAILS) AT 300X MAGNIFICATION (+3 TO PERCEPTION ROLLS AT M/L/E, IGNORING DARKNESS MODIFIERS)"
+        },
+        {
+          "ITEM": "NIGHT VISION GOGGLES",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "220",
+          "AFF": "—",
+          "MASS": "600 G",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "NEGATES DARKNESS MODIFIERS, BUT –1 TO PERCEPTION TO SPOT SURFACE DETAILS SUCH AS INSIGNIAS"
+        },
+        {
+          "ITEM": "CIRCLE-VISION VISOR",
+          "EQUIPMENT RATINGS": "D/D-F-E/B",
+          "COST": "5,000",
+          "AFF": "DC",
+          "MASS": "750 G",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "+4 TO PERCEPTION; ALSO WORKS AS RANGEFINDER BINOCULARS; USER CANNOT BE SURPRISED; BAR 10 VS. FLASH"
+        },
+        {
+          "ITEM": "ULTRASONIC DETECTOR",
+          "EQUIPMENT RATINGS": "E/D-F-E/B",
+          "COST": "2,500",
+          "AFF": "CS",
+          "MASS": "3 KG",
+          "POWER USE": "0.1 PPM",
+          "NOTES": "+3 TO PERCEPTION; CAN SPOT TARGETS UP TO 10 METERS AWAY THROUGH BAR 3 BARRIERS; IGNORES DARKNESS; BAR 3 VS. FLASH"
+        }
+      ],
+      "notes": [
+        "Note: PPH = Power Points per Hour; PPM = Power Points per Minute"
+      ]
+    }
+  ],
+  "row_count": 7
+}

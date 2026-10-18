@@ -1,0 +1,167 @@
+{
+  "table_name": "REMOTE SENSORS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      305
+    ],
+    "pdf_pages": [
+      307
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 305,
+      "pdf_page": 307,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "RANGE",
+        "POWER USE",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "HEAT SENSOR",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "COST": "200",
+          "AFF": "—",
+          "MASS": "500 G",
+          "RANGE": "1 KM",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "DETECTS VIA HEAT ONLY (AFFECTED BY IR STEALTH GEAR, SEE P. 297)",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "MOTION SENSOR",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "250 G",
+          "RANGE": "10 KM",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "DETECTS VIA MOTION ONLY (AFFECTED BY CAMO STEALTH GEAR, SEE P. 297)",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "RADAR SENSOR",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "COST": "2,000",
+          "AFF": "—",
+          "MASS": "5 KG",
+          "RANGE": "10 KM",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "DETECTS VIA EM ONLY (AFFECTED BY ECM STEALTH GEAR, SEE P. 297)",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "SEISMIC SENSOR",
+          "EQUIPMENT RATINGS": "D/B-D-C/B",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "RANGE": "5 KM",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "SENSOR OPERATIONS ROLL MODS: +6 FOR BATTLEMECHS, +5 FOR PROTOMECHS, +3 FOR GROUND/NAVAL VEHICLES, +2 FOR BATTLE ARMOR, +1 FOR INFANTRY",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "TRIP-LINE SENSOR (INFRARED)",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "COST": "100",
+          "AFF": "—",
+          "MASS": "500 G",
+          "RANGE": "10 M",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "–6 TO PERCEPTION TO SPOT; MAX 10M TRIPWIRE",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "TRIP-LINE SENSOR (LASER)",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "COST": "50",
+          "AFF": "—",
+          "MASS": "1 KG",
+          "RANGE": "10 M",
+          "POWER USE": "0.1 PPH",
+          "NOTES": "–4 TO PERCEPTION TO SPOT; MAX 10M TRIPWIRE",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "TRIP-LINE SENSOR (PHYSICAL)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "COST": "1",
+          "AFF": "—",
+          "MASS": "100 G",
+          "RANGE": "10 M",
+          "POWER USE": "—",
+          "NOTES": "–2 TO PERCEPTION TO SPOT; MAX 10M TRIPWIRE",
+          "_section": "REMOTE SENSORS"
+        },
+        {
+          "ITEM": "HEAT MONITOR, PORTABLE",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "COST": "1,000",
+          "AFF": "—",
+          "MASS": "15 KG",
+          "RANGE": "15 KM",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "MONITOR UP TO 10 SENSORS",
+          "_section": "SENSOR MONITORS"
+        },
+        {
+          "ITEM": "MOTION MONITOR, PORTABLE",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "COST": "500",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "RANGE": "10 KM",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "MONITOR UP TO 10 SENSORS",
+          "_section": "SENSOR MONITORS"
+        },
+        {
+          "ITEM": "RADAR MONITOR",
+          "EQUIPMENT RATINGS": "C/B-C-B/B",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "100 KG",
+          "RANGE": "50 KM",
+          "POWER USE": "1 PPH",
+          "NOTES": "MONITOR UP TO 10 SENSORS",
+          "_section": "SENSOR MONITORS"
+        },
+        {
+          "ITEM": "SEISMIC MONITOR",
+          "EQUIPMENT RATINGS": "D/B-D-C/B",
+          "COST": "5,000",
+          "AFF": "—",
+          "MASS": "100 KG",
+          "RANGE": "20 KM",
+          "POWER USE": "1 PPH",
+          "NOTES": "MONITOR UP TO 5 SENSORS",
+          "_section": "SENSOR MONITORS"
+        },
+        {
+          "ITEM": "TRIP-LINE MONITOR, PORTABLE",
+          "EQUIPMENT RATINGS": "C/A-B-A/B",
+          "COST": "500",
+          "AFF": "—",
+          "MASS": "10 KG",
+          "RANGE": "1 KM",
+          "POWER USE": "0.5 PPH",
+          "NOTES": "MONITOR UP TO 10 SENSORS",
+          "_section": "SENSOR MONITORS"
+        }
+      ],
+      "notes": [
+        "Note: PPH = Power Points per Hour"
+      ]
+    }
+  ],
+  "row_count": 12
+}

@@ -1,0 +1,180 @@
+{
+  "table_name": "FLECHETTE WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      268
+    ],
+    "pdf_pages": [
+      270
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 268,
+      "pdf_page": 270,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "NEEDLER PISTOL",
+          "EQUIPMENT RATINGS": "D/A-A-A/D",
+          "AP/BD": "2B/5BS",
+          "RANGE": "2/6/12/20",
+          "SHOTS": "10",
+          "COST/RELOAD": "50/1",
+          "AFF": "—",
+          "MASS/RELOAD": "300 G/70 G",
+          "NOTES": "NEEDLER; BURST 5; RECOIL –1",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "NEEDLER PISTOL (HOLD-OUT)",
+          "EQUIPMENT RATINGS": "D/C-B-B/E",
+          "AP/BD": "2B/5S",
+          "RANGE": "2/4/6/12",
+          "SHOTS": "5",
+          "COST/RELOAD": "20/—",
+          "AFF": "—",
+          "MASS/RELOAD": "50 G/—",
+          "NOTES": "NEEDLER; CANNOT BE RELOADED",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "NEEDLER PISTOL (SEA EAGLE)",
+          "EQUIPMENT RATINGS": "D/X-F-D/D",
+          "AP/BD": "1B/4BS",
+          "RANGE": "2/5/10/20",
+          "SHOTS": "10",
+          "COST/RELOAD": "110/5",
+          "AFF": "FW",
+          "MASS/RELOAD": "350 G/100 G",
+          "NOTES": "NEEDLER; BURST 5; RECOIL –1",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "M&G FLECHETTE PISTOL",
+          "EQUIPMENT RATINGS": "D/B-B-C/E",
+          "AP/BD": "1B/4BS",
+          "RANGE": "2/5/10/20",
+          "SHOTS": "15",
+          "COST/RELOAD": "100/4",
+          "AFF": "LA",
+          "MASS/RELOAD": "650 G/170 G",
+          "NOTES": "NEEDLER; BURST 5; RECOIL –1",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "AUTOMATIC SHOTGUN",
+          "EQUIPMENT RATINGS": "C/B-B-C/D",
+          "AP/BD": "2B/5BS",
+          "RANGE": "4/10/20/45",
+          "SHOTS": "12",
+          "COST/RELOAD": "200/2",
+          "AFF": "—",
+          "MASS/RELOAD": "5 KG/270 G",
+          "NOTES": "BURST 5; RECOIL –1",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "COMBAT SHOTGUN",
+          "EQUIPMENT RATINGS": "C/B-B-B/D",
+          "AP/BD": "3B/5S",
+          "RANGE": "5/12/24/50",
+          "SHOTS": "8",
+          "COST/RELOAD": "175/2",
+          "AFF": "—",
+          "MASS/RELOAD": "4.5 KG/140 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "DOUBLE-BARRELED SHOTGUN",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "AP/BD": "1B/6BS",
+          "RANGE": "3/8/16/45",
+          "SHOTS": "2",
+          "COST/RELOAD": "30/1",
+          "AFF": "—",
+          "MASS/RELOAD": "4 KG/40 G",
+          "NOTES": "BURST 2; RECOIL –1*",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "DOUBLE-BARRELED SHOTGUN (SAWED OFF)",
+          "EQUIPMENT RATINGS": "B/A-A-A/B",
+          "AP/BD": "1B/6BS",
+          "RANGE": "1/4/8/22",
+          "SHOTS": "2",
+          "COST/RELOAD": "30/1",
+          "AFF": "—",
+          "MASS/RELOAD": "3 KG/40 G",
+          "NOTES": "BURST 2; RECOIL –1; –1 TO ATTACK ROLL*",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "AVENGER CCW",
+          "EQUIPMENT RATINGS": "C/X-E-C/D",
+          "AP/BD": "2B/6BS",
+          "RANGE": "7/18/28/62",
+          "SHOTS": "15",
+          "COST/RELOAD": "345/4",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "5.5KG/400 G",
+          "NOTES": "BURST 3; RECOIL –1**",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "WITH SOLID AMMO",
+          "EQUIPMENT RATINGS": "C/X-E-C/D",
+          "AP/BD": "5B/6B",
+          "RANGE": "7/18/28/62",
+          "SHOTS": "15",
+          "COST/RELOAD": "345/16",
+          "AFF": "CLAN",
+          "MASS/RELOAD": "5.5KG/400 G",
+          "NOTES": "BURST 3; RECOIL –1**",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "NEEDLER RIFLE",
+          "EQUIPMENT RATINGS": "D/B-B-B/D",
+          "AP/BD": "2B/5S",
+          "RANGE": "5/14/30/40",
+          "SHOTS": "20",
+          "COST/RELOAD": "75/2",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/200 G",
+          "NOTES": "NEEDLER",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "SHREDDER HEAVY NEEDLER RIFLE",
+          "EQUIPMENT RATINGS": "D/X-X-C/D",
+          "AP/BD": "3B/5S",
+          "RANGE": "3/8/15/30",
+          "SHOTS": "10",
+          "COST/RELOAD": "150/3",
+          "AFF": "LA",
+          "MASS/RELOAD": "1 KG/240 G",
+          "NOTES": "NEEDLER",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        }
+      ],
+      "notes": [
+        "Note: Weapons identified as Needler suff er a –2 AP modifier against barriers and tactical armor. *Complex Action to Reload. **Jam on fumble."
+      ]
+    }
+  ],
+  "row_count": 12
+}

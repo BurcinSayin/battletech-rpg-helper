@@ -1,0 +1,230 @@
+{
+  "table_name": "LIMB AND ORGAN REPLACEMENTS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      315
+    ],
+    "pdf_pages": [
+      317
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 315,
+      "pdf_page": 317,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "TYPE 1: SIMPLE LIMB (ARM/LEG)",
+          "EQUIPMENT RATINGS": "A/A-A-A/A",
+          "COST": "75",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 2/2/1/2; STR –2",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 2: USEFUL LIMB (ARM/HAND)",
+          "EQUIPMENT RATINGS": "B/A-B-A/A",
+          "COST": "750",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 2/3/2/2; STR –1",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 2: USEFUL LIMB (LEG/FOOT)",
+          "EQUIPMENT RATINGS": "B/A-B-A/A",
+          "COST": "250",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 2/3/2/2; STR –1",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 3: STANDARD PROSTHETIC (ARM/HAND)",
+          "EQUIPMENT RATINGS": "C/B-C-B/A",
+          "COST": "7,500",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 3/3/2/3",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 3: STANDARD PROSTHETIC (LEG/FOOT)",
+          "EQUIPMENT RATINGS": "C/B-C-B/A",
+          "COST": "10,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 3/3/2/3",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 4: ADVANCED PROSTHETIC (ARM/HAND)",
+          "EQUIPMENT RATINGS": "D/C-D-C/A",
+          "COST": "25,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 3/4/3/3; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 4: ADVANCED PROSTHETIC (LEG/FOOT)",
+          "EQUIPMENT RATINGS": "D/C-D-C/A",
+          "COST": "17,500",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; BAR 3/4/3/3; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 5: MYOMER REPLACEMENT (ARM)",
+          "EQUIPMENT RATINGS": "E/D-F-E/A",
+          "COST": "200,000",
+          "AFF": "CS",
+          "NOTES": "REMOVABLE; BAR 3/4/4/3; STR +1; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 5: MYOMER REPLACEMENT (FOOT)",
+          "EQUIPMENT RATINGS": "E/D-F-E/A",
+          "COST": "50,000",
+          "AFF": "CS",
+          "NOTES": "REMOVABLE; BAR 3/4/4/3; STR +1; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 5: MYOMER REPLACEMENT (HAND)",
+          "EQUIPMENT RATINGS": "E/D-F-E/A",
+          "COST": "100,000",
+          "AFF": "CS",
+          "NOTES": "REMOVABLE; BAR 3/4/4/3; STR +1; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 5: MYOMER REPLACEMENT (LEG)",
+          "EQUIPMENT RATINGS": "E/D-F-E/A",
+          "COST": "125,000",
+          "AFF": "CS",
+          "NOTES": "REMOVABLE; BAR 3/4/4/3; STR +1; +1 MELEE AP (UNARMED ONLY)",
+          "_section": "PROSTHETICS"
+        },
+        {
+          "ITEM": "TYPE 6: CLONED REPLACEMENT (ARM)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "500,000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; NEGATES RELATED LOST LIMB TRAIT",
+          "_section": "CLONED REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 6: CLONED REPLACEMENT (FOOT)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "150,000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; NEGATES RELATED LOST LIMB TRAIT",
+          "_section": "CLONED REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 6: CLONED REPLACEMENT (HAND)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "300,000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; NEGATES RELATED LOST LIMB TRAIT",
+          "_section": "CLONED REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 6: CLONED REPLACEMENT (LEG)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "350,000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; NEGATES RELATED LOST LIMB TRAIT",
+          "_section": "CLONED REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 6: CLONED REPLACEMENT (ORGAN)",
+          "EQUIPMENT RATINGS": "E/X-F-E/A",
+          "COST": "200,000",
+          "AFF": "CLAN",
+          "NOTES": "GRAFTED; NEGATES RELATED LOST LIMB/HANDICAP/POOR VISION/POOR HEARING TRAIT",
+          "_section": "CLONED REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 5: BIONIC EAR REPLACEMENT",
+          "EQUIPMENT RATINGS": "C/A-C-A/A",
+          "COST": "100,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; REDUCES EFFECTS OF RELATED POOR HEARING TRAIT TO –1 TP",
+          "_section": "BIONIC REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 4: BIONIC EYE REPLACEMENT",
+          "EQUIPMENT RATINGS": "C/A-C-A/A",
+          "COST": "220,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE; REDUCES EFFECTS OF RELATED POOR VISION TRAIT TO –1 TP",
+          "_section": "BIONIC REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 3: BIONIC ORGAN (ARTIFICIAL HEART)",
+          "EQUIPMENT RATINGS": "C/B-C-B/A",
+          "COST": "500,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE WITH SURGERY SKILL; REDUCES HEART-RELATED HANDICAP TRAIT EFFECTS TO –1 TP LEVEL.",
+          "_section": "BIONIC REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 4: BIONIC ORGAN (ARTIFICIAL LIVER/ KIDNEY)",
+          "EQUIPMENT RATINGS": "C/B-C-C/A",
+          "COST": "750,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE WITH SURGERY SKILL; REDUCES LIVER OR KIDNEY-RELATED HANDICAP TRAIT EFFECTS TO –1 TP LEVEL.",
+          "_section": "BIONIC REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 4: BIONIC ORGAN (ARTIFICIAL LUNG)",
+          "EQUIPMENT RATINGS": "C/C-D-C/A",
+          "COST": "800,000",
+          "AFF": "—",
+          "NOTES": "REMOVABLE WITH SURGERY SKILL; REDUCES LUNG-RELATED HANDICAP TRAIT EFFECTS TO –1 TP LEVEL.",
+          "_section": "BIONIC REPLACEMENTS"
+        },
+        {
+          "ITEM": "TYPE 4 LIMB: COSMETIC TREATMENT",
+          "EQUIPMENT RATINGS": "AS ITEM",
+          "COST": "+1,750",
+          "AFF": "—",
+          "NOTES": "–2 TO PERCEPTION ROLLS TO NOTICE THE DIFFERENCE",
+          "_section": "COSMETIC MODIFICATIONS"
+        },
+        {
+          "ITEM": "TYPE 5 LIMB: COSMETIC TREATMENT",
+          "EQUIPMENT RATINGS": "AS ITEM",
+          "COST": "+5,000",
+          "AFF": "—",
+          "NOTES": "–4 TO PERCEPTION ROLLS TO NOTICE THE DIFFERENCE",
+          "_section": "COSMETIC MODIFICATIONS"
+        },
+        {
+          "ITEM": "BIONIC EAR COSMETIC TREATMENT",
+          "EQUIPMENT RATINGS": "AS ITEM",
+          "COST": "+1,000",
+          "AFF": "—",
+          "NOTES": "–2 TO PERCEPTION ROLLS TO NOTICE THE DIFFERENCE",
+          "_section": "COSMETIC MODIFICATIONS"
+        },
+        {
+          "ITEM": "BIONIC EYE COSMETIC TREATMENT",
+          "EQUIPMENT RATINGS": "AS ITEM",
+          "COST": "+3,000",
+          "AFF": "—",
+          "NOTES": "–2 TO PERCEPTION ROLLS TO NOTICE THE DIFFERENCE",
+          "_section": "COSMETIC MODIFICATIONS"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "row_count": 25
+}

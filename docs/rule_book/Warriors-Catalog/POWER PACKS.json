@@ -1,0 +1,214 @@
+{
+  "table_name": "POWER PACKS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      306
+    ],
+    "pdf_pages": [
+      308
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 306,
+      "pdf_page": 308,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "COST",
+        "AFF",
+        "MASS",
+        "POWER CAPACITY",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "POWER PACK",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "5",
+          "AFF": "—",
+          "MASS": "250 G",
+          "POWER CAPACITY": "20 PP",
+          "NOTES": "—",
+          "_section": "STANDARD PACKS"
+        },
+        {
+          "ITEM": "MICRO POWER PACK",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "15 G",
+          "POWER CAPACITY": "15 PP",
+          "NOTES": "—",
+          "_section": "STANDARD PACKS"
+        },
+        {
+          "ITEM": "MILITARY POWER PACK",
+          "EQUIPMENT RATINGS": "D/A-B-A/B",
+          "COST": "40",
+          "AFF": "—",
+          "MASS": "4 KG",
+          "POWER CAPACITY": "200 PP",
+          "NOTES": "—",
+          "_section": "STANDARD PACKS"
+        },
+        {
+          "ITEM": "SATCHEL BATTERY",
+          "EQUIPMENT RATINGS": "D/A-B-A/A",
+          "COST": "20",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER CAPACITY": "100 PP",
+          "NOTES": "—",
+          "_section": "STANDARD PACKS"
+        },
+        {
+          "ITEM": "POWER PACK",
+          "EQUIPMENT RATINGS": "F/X-D-B/A",
+          "COST": "25",
+          "AFF": "CLAN",
+          "MASS": "275 G",
+          "POWER CAPACITY": "30 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "CLAN PACKS"
+        },
+        {
+          "ITEM": "MICRO POWER PACK",
+          "EQUIPMENT RATINGS": "F/X-E-C/A",
+          "COST": "50",
+          "AFF": "CLAN",
+          "MASS": "15 G",
+          "POWER CAPACITY": "20 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "CLAN PACKS"
+        },
+        {
+          "ITEM": "MILITARY POWER PACK",
+          "EQUIPMENT RATINGS": "F/X-E-C/B",
+          "COST": "200",
+          "AFF": "CLAN",
+          "MASS": "5 KG",
+          "POWER CAPACITY": "300 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "CLAN PACKS"
+        },
+        {
+          "ITEM": "SATCHEL BATTERY",
+          "EQUIPMENT RATINGS": "F/X-E-C/A",
+          "COST": "100",
+          "AFF": "CLAN",
+          "MASS": "2.5 KG",
+          "POWER CAPACITY": "150 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "CLAN PACKS"
+        },
+        {
+          "ITEM": "POWER PACK",
+          "EQUIPMENT RATINGS": "D/A-C-B/A",
+          "COST": "15",
+          "AFF": "—",
+          "MASS": "300 G",
+          "POWER CAPACITY": "30 PP",
+          "NOTES": "—",
+          "_section": "HIGH-CAPACITY (HC)"
+        },
+        {
+          "ITEM": "MICRO POWER PACK",
+          "EQUIPMENT RATINGS": "E/B-C-C/A",
+          "COST": "30",
+          "AFF": "—",
+          "MASS": "20 G",
+          "POWER CAPACITY": "20 PP",
+          "NOTES": "—",
+          "_section": "HIGH-CAPACITY (HC)"
+        },
+        {
+          "ITEM": "MILITARY POWER PACK",
+          "EQUIPMENT RATINGS": "D/C-C-B/B",
+          "COST": "120",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "POWER CAPACITY": "300 PP",
+          "NOTES": "—",
+          "_section": "HIGH-CAPACITY (HC)"
+        },
+        {
+          "ITEM": "SATCHEL BATTERY",
+          "EQUIPMENT RATINGS": "D/B-C-B/A",
+          "COST": "60",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER CAPACITY": "150 PP",
+          "NOTES": "—",
+          "_section": "HIGH-CAPACITY (HC)"
+        },
+        {
+          "ITEM": "POWER PACK",
+          "EQUIPMENT RATINGS": "D/B-C-B/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "300 G",
+          "POWER CAPACITY": "10 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "QUICK-CHARGE (QC)"
+        },
+        {
+          "ITEM": "MICRO POWER PACK",
+          "EQUIPMENT RATINGS": "D/B-C-C/A",
+          "COST": "20",
+          "AFF": "—",
+          "MASS": "20 G",
+          "POWER CAPACITY": "10 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "QUICK-CHARGE (QC)"
+        },
+        {
+          "ITEM": "MILITARY POWER PACK",
+          "EQUIPMENT RATINGS": "D/A-C-B/B",
+          "COST": "80",
+          "AFF": "—",
+          "MASS": "6 KG",
+          "POWER CAPACITY": "100 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "QUICK-CHARGE (QC)"
+        },
+        {
+          "ITEM": "SATCHEL BATTERY",
+          "EQUIPMENT RATINGS": "D/C-C-B/A",
+          "COST": "40",
+          "AFF": "—",
+          "MASS": "3 KG",
+          "POWER CAPACITY": "50 PP",
+          "NOTES": "QUICK-CHARGE",
+          "_section": "QUICK-CHARGE (QC)"
+        },
+        {
+          "ITEM": "PORTABLE POWER UNIT",
+          "EQUIPMENT RATINGS": "C/A-C-B/A",
+          "COST": "10",
+          "AFF": "—",
+          "MASS": "2 KG",
+          "POWER CAPACITY": "80 PP",
+          "NOTES": "SLOW-CHARGE",
+          "_section": "QUICK-CHARGE (QC)"
+        },
+        {
+          "ITEM": "SUPPORT PPC POWER PACK",
+          "EQUIPMENT RATINGS": "D/B-D-C/C",
+          "COST": "750",
+          "AFF": "—",
+          "MASS": "25 KG",
+          "POWER CAPACITY": "1,500 PP",
+          "NOTES": "ENCUMBERING; MAY POWER 1 SUPPORT PPC OR UP TO 6 SMALLER ITEMS VIA DETACHABLE EXTENSION CABLES.",
+          "_section": "QUICK-CHARGE (QC)"
+        }
+      ],
+      "notes": [
+        "Note: PP = Power Points"
+      ]
+    }
+  ],
+  "row_count": 18
+}

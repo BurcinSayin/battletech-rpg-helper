@@ -1,0 +1,72 @@
+{
+  "table_name": "RECOILLESS RIFLES",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      274
+    ],
+    "pdf_pages": [
+      276
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 274,
+      "pdf_page": 276,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "RECOILLESS RIFLE, LIGHT",
+          "EQUIPMENT RATINGS": "C/B-B-A/E",
+          "AP/BD": "(C)",
+          "RANGE": "50/180/375/600",
+          "SHOTS": "1",
+          "COST/RELOAD": "300/*",
+          "AFF": "—",
+          "MASS/RELOAD": "8 KG/600 G",
+          "NOTES": "ENCUMBERING; BACK-BLAST 2M",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "RECOILLESS RIFLE, MEDIUM",
+          "EQUIPMENT RATINGS": "C/B-B-A/E",
+          "AP/BD": "(D)",
+          "RANGE": "60/200/390/640",
+          "SHOTS": "1",
+          "COST/RELOAD": "2,000/*",
+          "AFF": "—",
+          "MASS/RELOAD": "32 KG/2 KG",
+          "NOTES": "CREW: 2; BACK-BLAST 5M",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        },
+        {
+          "ITEM": "RECOILLESS RIFLE, HEAVY",
+          "EQUIPMENT RATINGS": "C/B-B-A/E",
+          "AP/BD": "(E)",
+          "RANGE": "70/225/450/700",
+          "SHOTS": "1",
+          "COST/RELOAD": "4,000/*",
+          "AFF": "—",
+          "MASS/RELOAD": "60 KG/4 KG",
+          "NOTES": "CREW: 3; BACK-BLAST 10M",
+          "_section": "SKILL: SUPPORT WEAPONS"
+        }
+      ],
+      "notes": [
+        "*Per ordnance type (see Ordnance, pp. 282-284)"
+      ]
+    }
+  ],
+  "row_count": 3
+}

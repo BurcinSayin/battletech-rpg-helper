@@ -1,0 +1,134 @@
+{
+  "table_name": "MISCELLANEOUS RANGED WEAPONS",
+  "source": {
+    "file": "Battletech a Time of War.pdf",
+    "chapter": "The Warrior’s Catalog",
+    "printed_pages": [
+      269
+    ],
+    "pdf_pages": [
+      271
+    ]
+  },
+  "parts": [
+    {
+      "printed_page": 269,
+      "pdf_page": 271,
+      "columns": [
+        "ITEM",
+        "EQUIPMENT RATINGS",
+        "AP/BD",
+        "RANGE",
+        "SHOTS",
+        "COST/RELOAD",
+        "AFF",
+        "MASS/RELOAD",
+        "NOTES"
+      ],
+      "rows": [
+        {
+          "ITEM": "DART GUN",
+          "EQUIPMENT RATINGS": "C/A-A-A/C",
+          "AP/BD": "1B/3D",
+          "RANGE": "1/4/6/10",
+          "SHOTS": "1",
+          "COST/RELOAD": "40/1",
+          "AFF": "—",
+          "MASS/RELOAD": "650 G/10 G",
+          "NOTES": "—",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "GAS CAPSULE PISTOL (“SPITBALL”)",
+          "EQUIPMENT RATINGS": "C/E-D-C/B",
+          "AP/BD": "0B/*",
+          "RANGE": "4/11/19/27",
+          "SHOTS": "25",
+          "COST/RELOAD": "6/2",
+          "AFF": "—",
+          "MASS/RELOAD": "1 KG/40 G",
+          "NOTES": "–1 TO ATTACK ROLL; GAS CARTRIDGES MUST BE REPLACED AFTER 200 SHOTS (1 C-BILL PER GAS CARTRIDGE)",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "LGB-46R “PAINT” GUN",
+          "EQUIPMENT RATINGS": "C/A-A-B/B",
+          "AP/BD": "0B/0",
+          "RANGE": "1/2/3/4",
+          "SHOTS": "15",
+          "COST/RELOAD": "50/10",
+          "AFF": "—",
+          "MASS/RELOAD": "1.8 KG/ 640 G",
+          "NOTES": "FIRES LIQUID PAYLOAD (TYPICALLY PAINT OR WATER)",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "SONIC STUNNER",
+          "EQUIPMENT RATINGS": "D/B-C-B/B",
+          "AP/BD": "0S/4D",
+          "RANGE": "2/5/7/10",
+          "SHOTS": "1PPS",
+          "COST/RELOAD": "100/†",
+          "AFF": "—",
+          "MASS/RELOAD": "600 G/†",
+          "NOTES": "**",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "TRANQ GUN",
+          "EQUIPMENT RATINGS": "C/A-A-A/C",
+          "AP/BD": "2B/4D",
+          "RANGE": "3/10/18/25",
+          "SHOTS": "10",
+          "COST/RELOAD": "30/1",
+          "AFF": "—",
+          "MASS/RELOAD": "1.5 KG/40 G",
+          "NOTES": "ONLY DELIVERS ITS BD IF THE WEAPON’S AP (PLUS THE ATTACK’S MOS ÷ 4, ROUND DOWN) EXCEEDS THE TARGET’S BAR. OTHERWISE, NO BD IS APPLIED.",
+          "_section": "SKILL: SMALL ARMS (PISTOLS)"
+        },
+        {
+          "ITEM": "BUCCANEER GEL GUN",
+          "EQUIPMENT RATINGS": "C/X-X-D/C",
+          "AP/BD": "2B/4D",
+          "RANGE": "3/10/18/25",
+          "SHOTS": "5",
+          "COST/RELOAD": "200/20",
+          "AFF": "FW",
+          "MASS/RELOAD": "2.5 KG/ 850 G",
+          "NOTES": "AP 0 VS. BARRIERS/TACTICAL ARMOR; NO RECOIL IN ZERO-G; ON HIT, –2 TO KNOCKDOWN CHECK",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "CERES ARMS CROWDBUSTER",
+          "EQUIPMENT RATINGS": "D/X-F-D/C",
+          "AP/BD": "0S/5D",
+          "RANGE": "2/6/10/15",
+          "SHOTS": "2PPS",
+          "COST/RELOAD": "150/†",
+          "AFF": "CC",
+          "MASS/RELOAD": "1 KG/†",
+          "NOTES": "**",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        },
+        {
+          "ITEM": "RADIUM SNIPER RIFLE",
+          "EQUIPMENT RATINGS": "E/F-X-F/F",
+          "AP/BD": "4S/5C",
+          "RANGE": "95/350/750/1500",
+          "SHOTS": "5, 10PPS",
+          "COST/RELOAD": "9,500/650",
+          "AFF": "TC",
+          "MASS/RELOAD": "12 KG/ 330 G",
+          "NOTES": "ON SUCCESSFUL HIT THAT PENETRATES ARMOR, INJECTS TARGET WITH 1 DOSE OF RADIUM POISON (SEE DRUGS AND POISONS, P. 317)",
+          "_section": "SKILL: SMALL ARMS (RIFLES)"
+        }
+      ],
+      "notes": [
+        "*The BD for this weapon depends on its payload; gas capsules may contain contact/inhalation poisons up to 3 BD in damage (see Drugs and Poisons, p. 317).",
+        "**Sonic-based stun weapons are only effective at Atmospheric pressures of Thin or higher; Helmets provide BAR 1 protection vs sonic weapons; Fully-enclosed armor (such as battlesuits and enviro-suits) and earplugs provide BAR 5; Vehicle armor (and full deafness) provide BAR 10 vs sonic weapons",
+        "†Per power pack (see Power Packs, p. 306)"
+      ]
+    }
+  ],
+  "row_count": 8
+}
