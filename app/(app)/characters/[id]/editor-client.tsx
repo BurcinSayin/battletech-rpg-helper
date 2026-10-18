@@ -38,6 +38,8 @@ import {
 import { saveCharacter } from "@/app/(app)/characters/actions";
 import { CharacterSheet } from "@/components/characters/character-sheet";
 import { MechTab, MechView } from "@/components/characters/mech-tab";
+import { EquipmentTab } from "@/components/characters/equipment-tab";
+import { CombatLoadout } from "@/components/characters/combat-loadout";
 import {
   MechDamageBar,
   MechDamageResetWarning,
@@ -73,7 +75,7 @@ function pendingDamage(draft: DamageDraft): boolean {
   return !sameMechDamage(draft.base, draft.value);
 }
 
-type TabId = "sheet" | "mech";
+type TabId = "sheet" | "equipment" | "mech";
 
 const EMPTY_DAMAGE = emptyMechDamage();
 
@@ -175,6 +177,7 @@ export function CharacterEditor({
     handleSubmit,
     reset,
     watch,
+    setValue,
     formState: { errors },
   } = form;
 
@@ -293,10 +296,17 @@ export function CharacterEditor({
         }
       });
     },
-    // Invalid fields live on the Sheet panel, which is hidden while the Mech tab
-    // is open; bring it forward so the validation message is visible.
-    () => setTab("sheet"),
+    (invalid) => setTab(
+      invalid.equip || invalid.weapons || invalid.equipLoc || invalid.chrWeapons
+        ? "equipment"
+        : "sheet",
+    ),
   );
+
+  function openEquipment(): void {
+    setTab("equipment");
+    document.getElementById(tabIds(baseId, "equipment").tab)?.focus();
+  }
 
   function beginEdit(): void {
     if (
@@ -436,10 +446,19 @@ export function CharacterEditor({
             draft={snapshot.draft}
             xp={xp}
             warnings={warnings}
+            onOpenEquipment={openEquipment}
             // The header action lives in the tab bar so Edit stays reachable on
             // the Mech tab; an empty fragment suppresses the sheet's own button.
             actions={<></>}
           />
+        </div>
+        <div
+          role="tabpanel"
+          id={tabIds(baseId, "equipment").panel}
+          aria-labelledby={tabIds(baseId, "equipment").tab}
+          hidden={tab !== "equipment"}
+        >
+          <EquipmentTab value={snapshot.draft} />
         </div>
         <div
           role="tabpanel"
@@ -505,8 +524,8 @@ export function CharacterEditor({
       <TabList baseId={baseId} value={tab} onChange={setTab} />
 
       {/*
-        Hidden, not unmounted: the RHF fields must stay registered while the Mech
-        tab is open so their unsaved values survive tab switches.
+        Hidden, not unmounted: RHF fields and staged inventory inputs survive
+        tab switches without committing or canceling the draft.
       */}
       <div
         role="tabpanel"
@@ -514,6 +533,9 @@ export function CharacterEditor({
         aria-labelledby={tabIds(baseId, "sheet").tab}
         hidden={tab !== "sheet"}
       >
+        <div className="mb-4">
+          <CombatLoadout value={liveDraft} onOpenEquipment={openEquipment} />
+        </div>
         <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
           <div className="flex flex-col gap-4">
             <Panel title="Experience">
@@ -706,6 +728,30 @@ export function CharacterEditor({
 
       <div
         role="tabpanel"
+        id={tabIds(baseId, "equipment").panel}
+        aria-labelledby={tabIds(baseId, "equipment").tab}
+        hidden={tab !== "equipment"}
+      >
+        {(errors.equip || errors.weapons || errors.equipLoc || errors.chrWeapons) && (
+          <p role="alert" className="mb-3 text-sm text-hud-red">
+            Inventory fields are invalid. Reload the character or correct the inventory before saving.
+          </p>
+        )}
+        <EquipmentTab
+          value={liveDraft}
+          disabled={isPending}
+          onChange={(next) => {
+            const options = { shouldDirty: true, shouldValidate: true };
+            setValue("equip", next.equip, options);
+            setValue("weapons", next.weapons, options);
+            setValue("equipLoc", next.equipLoc, options);
+            setValue("chrWeapons", next.chrWeapons, options);
+          }}
+        />
+      </div>
+
+      <div
+        role="tabpanel"
         id={tabIds(baseId, "mech").panel}
         aria-labelledby={tabIds(baseId, "mech").tab}
         hidden={tab !== "mech"}
@@ -734,10 +780,10 @@ function tabIds(baseId: string, tab: TabId) {
   return { tab: `${baseId}-tab-${tab}`, panel: `${baseId}-panel-${tab}` };
 }
 
-const TAB_IDS: readonly TabId[] = ["sheet", "mech"];
-const TAB_LABELS: Record<TabId, string> = { sheet: "Sheet", mech: "Mech" };
+const TAB_IDS: readonly TabId[] = ["sheet", "equipment", "mech"];
+const TAB_LABELS: Record<TabId, string> = { sheet: "Sheet", equipment: "Equipment", mech: "Mech" };
 
-/** Two-tab switcher. Roving tabindex with arrow/Home/End keys (WAI-ARIA tabs). */
+/** Roving tabindex with arrow/Home/End keys (WAI-ARIA tabs). */
 function TabList({
   baseId,
   value,

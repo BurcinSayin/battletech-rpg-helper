@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseBtcc } from "@/lib/btcc";
+import { parseBtcc, serializeBtcc } from "@/lib/btcc";
 import { readFixture } from "@/lib/btcc/test-fixtures";
 import {
   catalogWarnings,
@@ -48,6 +48,38 @@ describe("character form schema", () => {
     expect(next.equip).toEqual(draft.equip);
     expect(next.weapons).toEqual(draft.weapons);
     expect(next.preAttrs).toEqual(draft.preAttrs);
+  });
+
+  it("edits all inventory fields losslessly while retaining unrelated sections", () => {
+    const base = { ...draft, equip: ["unsupported raw : row"] };
+    const values = draftToForm(base);
+    values.equip.push("Custom;20;2;N;0/0/0/0; note : keep ;2");
+    values.weapons = ["unknown weapon"];
+    values.equipLoc = { strange: "Custom" };
+    values.chrWeapons = ["missing", "missing"];
+    const next = formToDraft(base, characterFormSchema.parse(values));
+    expect(next.equip).toEqual(values.equip);
+    expect(next.weapons).toEqual(values.weapons);
+    expect(next.equipLoc).toEqual(values.equipLoc);
+    expect(next.chrWeapons).toEqual(values.chrWeapons);
+    expect(next.preAttrs).toEqual(base.preAttrs);
+    expect(next.preSkills).toEqual(base.preSkills);
+    expect(base.equip).toEqual(["unsupported raw : row"]);
+    expect(characterFormSchema.safeParse({ ...values, equip: [3] }).success).toBe(false);
+    expect(characterFormSchema.safeParse({ ...values, equipLoc: [] }).success).toBe(false);
+  });
+
+  it("keeps desktop inventory and loadout bytes through an unrelated name edit", () => {
+    const imported = parseBtcc(readFixture("test.btcc"));
+    const values = draftToForm(imported);
+    values.scalars.name = "Renamed inventory carrier";
+    const next = formToDraft(imported, characterFormSchema.parse(values));
+    expect(next.equip).toEqual(imported.equip);
+    expect(next.weapons).toEqual(imported.weapons);
+    expect(next.equipLoc).toEqual(imported.equipLoc);
+    expect(next.chrWeapons).toEqual(imported.chrWeapons);
+    next.scalars.name = imported.scalars.name;
+    expect(serializeBtcc(next)).toBe(serializeBtcc(imported));
   });
 });
 

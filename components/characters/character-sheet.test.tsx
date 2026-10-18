@@ -443,4 +443,74 @@ describe("CharacterSheet", () => {
     expect(screen.getByText("MedTech/General")).toBeTruthy();
     expect(screen.getByText("Surgery/General")).toBeTruthy();
   });
+
+  it("shows only active combat gear in stored order without changing imported data", () => {
+    const draft = {
+      ...emptyDraft(),
+      weapons: [
+        "Small Arms;Ready pistol;3B/4;5/20/45/105;100;1;10;0;0; notes ;2",
+        "Small Arms;Carried rifle;5B/4;10/20;200;2;20;0;0;carried;1",
+      ],
+      equip: [
+        "Worn jacket;100;3.5;TA;1/5/1/3;notes;1",
+        "Spare armor;50;1;H;1/1/1/1;notes;1",
+      ],
+      chrWeapons: ["Ready pistol", "Ready pistol"],
+      equipLoc: { Torso: "Worn jacket", Arms: "Worn jacket" },
+    };
+    const before = serializeBtcc(draft);
+    const onOpenEquipment = vi.fn();
+    render(<CharacterSheet draft={draft} xp={xp} warnings={noWarnings} onOpenEquipment={onOpenEquipment} />);
+    const panel = within(screen.getByRole("heading", { name: "// Combat loadout" }).closest("section")!);
+    expect(panel.getByText("1. Ready pistol")).toBeTruthy();
+    expect(panel.getByText("2. Ready pistol")).toBeTruthy();
+    expect(panel.getAllByText("3B/4")).toHaveLength(2);
+    expect(panel.getByText("Locations: Torso, Arms")).toBeTruthy();
+    expect(panel.getByText("BAR (M/B/E/X): 1/5/1/3")).toBeTruthy();
+    expect(panel.queryByText("Carried rifle")).toBeNull();
+    expect(panel.queryByText("Spare armor")).toBeNull();
+    fireEvent.click(panel.getByRole("button", { name: "View equipment" }));
+    expect(onOpenEquipment).toHaveBeenCalledTimes(1);
+    expect(panel.queryByRole("button", { name: "Unready" })).toBeNull();
+    expect(panel.queryByRole("button", { name: "Take off" })).toBeNull();
+    expect(serializeBtcc(draft)).toBe(before);
+  });
+
+  it("retains missing, ambiguous and overlapping imported loadout references in a read-only preview", () => {
+    const draft = {
+      ...emptyDraft(),
+      weapons: [
+        "Small Arms;Duplicate;3B/4;5/20;50;0.5;10;0;0;first;1",
+        "Small Arms;Duplicate;6B/4;10/40;75;1;5;0;0;second;1",
+      ],
+      equip: [
+        "Duplicate armor;20;1;FUL;1/1/1/1;first;1",
+        "Duplicate armor;40;2;FUL;2/2/2/2;second;1",
+      ],
+      chrWeapons: ["Missing weapon", "Duplicate"],
+      equipLoc: { Full: "Duplicate armor", Torso: "Missing armor", Alien: "Missing armor" },
+    };
+    const before = serializeBtcc(draft);
+    render(<CharacterSheet draft={draft} xp={xp} warnings={noWarnings} actions={<span>Import preview</span>} />);
+    const panel = within(screen.getByRole("heading", { name: "// Combat loadout" }).closest("section")!);
+    expect(panel.getAllByText(/Missing inventory item/)).toHaveLength(2);
+    expect(panel.getAllByText(/Ambiguous reference/)).toHaveLength(2);
+    expect(panel.getByText(/Overlapping imported Full/)).toBeTruthy();
+    expect(panel.getByText("Locations: Full")).toBeTruthy();
+    expect(panel.getByText("Locations: Torso, Alien")).toBeTruthy();
+    const variants = panel.getByText("Available variants for Duplicate").closest("details")!;
+    expect(variants.hasAttribute("open")).toBe(false);
+    variants.setAttribute("open", "");
+    expect(within(variants).getByText("3B/4")).toBeTruthy();
+    expect(within(variants).getByText("6B/4")).toBeTruthy();
+    expect(panel.queryByRole("button")).toBeNull();
+    expect(serializeBtcc(draft)).toBe(before);
+  });
+
+  it("distinguishes empty weapon and armor loadouts", () => {
+    render(<CharacterSheet draft={emptyDraft()} xp={xp} warnings={noWarnings} />);
+    expect(screen.getByText("No readied weapons.")).toBeTruthy();
+    expect(screen.getByText("No worn armor.")).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "View equipment" })).toBeNull();
+  });
 });

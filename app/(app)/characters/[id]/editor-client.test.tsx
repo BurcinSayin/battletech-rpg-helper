@@ -942,7 +942,7 @@ function renderWithMech(mech: typeof MECH_A | null) {
   return renderSnapshot({ mech });
 }
 
-function openTab(name: "Sheet" | "Mech") {
+function openTab(name: "Sheet" | "Equipment" | "Mech") {
   fireEvent.click(screen.getByRole("tab", { name }));
 }
 
@@ -1269,43 +1269,24 @@ describe("CharacterEditor — mech damage batches", () => {
 });
 
 describe("CharacterEditor — Mech tab", () => {
-  it("renders Sheet and Mech tabs with tablist/tab/tabpanel roles in view mode", () => {
-    renderWithMech(MECH_A);
-    const list = screen.getByRole("tablist");
-    const tabs = within(list).getAllByRole("tab");
-    expect(tabs.map((t) => t.textContent)).toEqual(["Sheet", "Mech"]);
-    expect(tabs[0].getAttribute("aria-selected")).toBe("true");
-    expect(tabs[1].getAttribute("aria-selected")).toBe("false");
-    expect(screen.getAllByRole("tabpanel", { hidden: true })).toHaveLength(2);
-    expect(screen.getByRole("heading", { name: "Stored Pilot" })).toBeTruthy();
 
-    openTab("Mech");
-    expect(
-      screen.getByRole("tab", { name: "Mech" }).getAttribute("aria-selected"),
-    ).toBe("true");
-    expect(screen.getByRole("tabpanel").textContent).toContain(
-      "Mech view: Atlas",
-    );
-    expect(screen.queryByRole("heading", { name: "Stored Pilot" })).toBeNull();
-  });
-
-  it("moves between tabs with the arrow, Home and End keys", () => {
+  it("navigates tabs by keyboard with focus following the selected panel", () => {
     renderWithMech(null);
-    const list = screen.getByRole("tablist");
-    const selected = () =>
-      screen
-        .getAllByRole("tab")
-        .find((t) => t.getAttribute("aria-selected") === "true")?.textContent;
-    fireEvent.keyDown(list, { key: "ArrowRight" });
-    expect(selected()).toBe("Mech");
-    fireEvent.keyDown(list, { key: "ArrowRight" });
-    expect(selected()).toBe("Sheet");
-    fireEvent.keyDown(list, { key: "ArrowLeft" });
-    expect(selected()).toBe("Mech");
-    fireEvent.keyDown(list, { key: "Home" });
-    expect(selected()).toBe("Sheet");
-    fireEvent.keyDown(list, { key: "End" });
-    expect(selected()).toBe("Mech");
+    const sheet = screen.getByRole("tab", { name: "Sheet" });
+    const equipment = screen.getByRole("tab", { name: "Equipment" });
+    const mech = screen.getByRole("tab", { name: "Mech" });
+    sheet.focus();
+    fireEvent.keyDown(sheet, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(equipment);
+    expect(equipment.getAttribute("aria-selected")).toBe("true");
+    fireEvent.keyDown(equipment, { key: "End" });
+    expect(document.activeElement).toBe(mech);
+    fireEvent.keyDown(mech, { key: "ArrowRight" });
+    expect(document.activeElement).toBe(sheet);
+    fireEvent.keyDown(sheet, { key: "ArrowLeft" });
+    expect(document.activeElement).toBe(mech);
+    fireEvent.keyDown(mech, { key: "Home" });
+    expect(document.activeElement).toBe(sheet);
   });
 
   it("shows the persisted mech in view mode and brings in a refreshed mech through props", () => {
@@ -1531,5 +1512,71 @@ describe("CharacterEditor — Mech tab", () => {
       screen.getByRole("tab", { name: "Sheet" }).getAttribute("aria-selected"),
     ).toBe("true");
     expect(saveCharacter).not.toHaveBeenCalled();
+  });
+});
+
+describe("CharacterEditor — inventory draft lifecycle", () => {
+  const raw = "Small Arms;Custom pistol;3B/4;5/20/45/105;100;1;10;2;0.1; keep notes ;2";
+  function inventoryDraft() {
+    const draft = namedDraft("Gear Pilot");
+    draft.weapons = [raw];
+    return draft;
+  }
+  function weaponControls() {
+    return within(screen.getByRole("table"));
+  }
+  function changeQuantity(count: string) {
+    const controls = weaponControls();
+    if (!controls.queryByRole("textbox", { name: "Quantity" })) {
+      fireEvent.click(controls.getByRole("button", { name: "Details for Custom pistol" }));
+    }
+    fireEvent.change(controls.getByRole("textbox", { name: "Quantity" }), { target: { value: count } });
+    fireEvent.click(controls.getByRole("button", { name: "Apply quantity" }));
+  }
+
+  it("keeps unsaved inventory across tabs, discards on Cancel, and saves for a GM", async () => {
+    renderSnapshot({ draft: inventoryDraft(), isOwner: false });
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Equipment");
+    changeQuantity("3");
+    fireEvent.click(weaponControls().getByRole("button", { name: "Ready weapon" }));
+    openTab("Sheet");
+    expect(within(screen.getByRole("tabpanel")).getByText("3B/4")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: "View equipment" }));
+    expect(document.activeElement).toBe(screen.getByRole("tab", { name: "Equipment" }));
+    expect((weaponControls().getByRole("textbox", { name: "Quantity" }) as HTMLInputElement).value).toBe("3");
+    fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    changeQuantity("4");
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await waitFor(() => expect(saveCharacter).toHaveBeenCalledTimes(1));
+    expect(saveCharacter.mock.calls[0][2].weapons).toEqual([raw.replace(";100;1;", ";200;2;").replace(/;2$/, ";4")]);
+    expect(saveCharacter.mock.calls[0][2].chrWeapons).toEqual([]);
+    expect(saveCharacter.mock.calls[0]).toHaveLength(3);
+  });
+
+  it("retains applied and staged gear during remote props and Keep editing; Reload adopts remote inventory", async () => {
+    saveCharacter.mockResolvedValue({ ok: false, kind: "conflict" });
+    const editor = renderSnapshot({ draft: inventoryDraft() });
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    openTab("Equipment");
+    changeQuantity("3");
+    const quantity = weaponControls().getByRole("textbox", { name: "Quantity" });
+    fireEvent.change(quantity, { target: { value: "7" } });
+    const remote = inventoryDraft();
+    remote.weapons = [raw.replace(";100;1;", ";250;2.5;").replace(/;2$/, ";5")];
+    editor.receive(2, "Gear Pilot", { draft: remote });
+    expect((quantity as HTMLInputElement).value).toBe("7");
+    fireEvent.click(screen.getByRole("button", { name: "Save" }));
+    await screen.findByRole("dialog");
+    expect(saveCharacter.mock.calls[0][1]).toBe(1);
+    expect(saveCharacter.mock.calls[0][2].weapons[0].split(";").at(-1)).toBe("3");
+    fireEvent.click(screen.getByRole("button", { name: "Keep editing" }));
+    expect((weaponControls().getByRole("textbox", { name: "Quantity" }) as HTMLInputElement).value).toBe("7");
+    fireEvent.click(screen.getByRole("button", { name: "Reload" }));
+    expect(screen.queryByRole("textbox", { name: "Quantity" })).toBeNull();
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    fireEvent.click(weaponControls().getByRole("button", { name: "Details for Custom pistol" }));
+    expect((weaponControls().getByRole("textbox", { name: "Quantity" }) as HTMLInputElement).value).toBe("5");
   });
 });

@@ -1,6 +1,6 @@
 // Zod schema for the editable character form plus form <-> draft mapping. The
-// form edits scalars, the 8 attributes, skills, traits, and notes; every other
-// draft section (equip/weapons/pre*) is preserved verbatim through the round-trip.
+// form edits scalars, attributes, skills, traits, notes and raw inventory.
+// Other draft sections (pre*) are preserved verbatim through the round-trip.
 //
 // Catalog membership is a WARN-not-fail check (per PLAN.md / the `.btcc` import
 // rule): `.btcc` names are version-drifted (backticks, plural "Interests",
@@ -75,6 +75,10 @@ export const characterFormSchema = z.object({
   skills: z.array(rowSchema),
   traits: z.array(rowSchema),
   notes: z.string(),
+  equip: z.array(z.string()),
+  weapons: z.array(z.string()),
+  equipLoc: z.record(z.string(), z.string()),
+  chrWeapons: z.array(z.string()),
 });
 
 export type CharacterFormValues = z.infer<typeof characterFormSchema>;
@@ -90,6 +94,10 @@ export function draftToForm(draft: BtccDraft): CharacterFormValues {
     skills: draft.skills.map((row) => ({ ...row })),
     traits: draft.traits.map((row) => ({ ...row })),
     notes: draft.notes,
+    equip: [...draft.equip],
+    weapons: [...draft.weapons],
+    equipLoc: { ...draft.equipLoc },
+    chrWeapons: [...draft.chrWeapons],
   };
 }
 
@@ -102,6 +110,10 @@ export function formToDraft(base: BtccDraft, values: CharacterFormValues): BtccD
     skills: values.skills.map((row) => ({ ...row })),
     traits: values.traits.map((row) => ({ ...row })),
     notes: values.notes,
+    equip: [...values.equip],
+    weapons: [...values.weapons],
+    equipLoc: { ...values.equipLoc },
+    chrWeapons: [...values.chrWeapons],
   };
 }
 

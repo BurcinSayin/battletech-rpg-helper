@@ -80,7 +80,17 @@ Consumers import `lib/btcc/inventory` directly for lossless 7/11-field views and
 
 Book and desktop defaults can differ: the Clan pulse laser pistol's book reload cells are `†` (unresolved), while the desktop fixture stores reload purchase values `5`/`0.25`. Preserve both representations in their respective paths; the imported Power Pack's trailing `2`/`0.14` fields are separate legacy ammo metadata, not its purchase price/mass.
 
-Imported inventory remains raw and byte-preserving, including unknown/custom names, malformed positional rows, historical ammo metadata, and Marian Suit coverage. Alias resolution identifies a catalog entry; it never replaces imported statistics. New notes include labeled table/shared context, flatten whitespace, and replace colon/semicolon delimiters; source notes and imported rows stay verbatim. No Equipment-tab UI is added by these APIs.
+Imported inventory remains raw and byte-preserving, including unknown/custom names, malformed positional rows, historical ammo metadata, and Marian Suit coverage. Alias resolution identifies a catalog entry; it never replaces imported statistics. New notes include labeled table/shared context, flatten whitespace, and replace colon/semicolon delimiters; source notes and imported rows stay verbatim.
+
+### Inventory and combat loadout
+
+The character editor has **Sheet**, **Equipment**, and **Mech** tabs. Equipment lists Weapons, Armor, and Other Gear with stored details and carried-mass/inventory-value totals. Unknown amounts produce partial totals, not zero-valued assumptions. Stack cost and mass already include quantity; reload columns are not added again.
+
+In Edit mode, search the bundled equipment/weapon catalogs and stage a separate stack. Resolve any requested manual amounts or armor ratings, then choose **Add item**. Quantity text commits only with **Apply quantity**. Additions never debit C-Bills or automatically ready/wear an item. Modifiers are not standalone purchases. Owners and campaign GMs use the same version-checked Save, Cancel, and conflict workflow; switching tabs retains the draft.
+
+Ready up to three weapon copies, subject to known owned quantity. Armor placement uses stored coverage, previews displaced garments, and takes off the entire displaced garment. **Unready** removes one ordered ready entry; **Take off** removes all placements of that garment. Imported excess, missing names, duplicate-name ambiguity, unknown slots, and unsupported rows remain visible and repairable rather than silently normalized. Removing the last parsed exact-name inventory row clears its references; remaining same-name stacks keep them.
+
+The Sheet's read-only **Combat loadout** shows only readied weapons and worn armor, including in local-file import previews. Duplicate-name references display variants instead of guessed stats; armor BAR stays per garment, never summed across layers. Quantity changes preserve unrelated stored fields and notes. Unsupported rows can be inspected and explicitly removed but cannot have their quantities recalculated.
 
 ---
 

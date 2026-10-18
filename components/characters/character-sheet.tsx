@@ -14,6 +14,7 @@ import { findSkill, findTrait, resolveSkillName } from "@/lib/rules/load";
 import { skillComplexity, skillTargetNumber } from "@/lib/rules/skill-complexity";
 import { CatalogWarningBanner } from "./warnings";
 import { HudButton, Panel } from "./ui";
+import { CombatLoadout } from "./combat-loadout";
 
 const TOP_SKILLS = 5;
 
@@ -32,12 +33,14 @@ export function CharacterSheet({
   warnings,
   onEdit,
   actions,
+  onOpenEquipment,
 }: {
   draft: BtccDraft;
   xp: XpSummary;
   warnings: CatalogWarnings;
   onEdit?: () => void;
   actions?: ReactNode;
+  onOpenEquipment?: () => void;
 }) {
   const { scalars } = draft;
   const [showAllSkills, setShowAllSkills] = useState(false);
@@ -73,6 +76,8 @@ export function CharacterSheet({
       </header>
 
       <CatalogWarningBanner warnings={warnings} />
+
+      <CombatLoadout value={draft} onOpenEquipment={onOpenEquipment} />
 
       <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
         <div className="flex flex-col gap-4">

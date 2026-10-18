@@ -145,8 +145,8 @@ export async function createWizardCharacter(
 /**
  * Save edits through the version-guarded `update_character` RPC. We re-fetch the
  * stored row server-side and merge the editable form fields onto it, so untouched
- * sections (equip/weapons/pre*) are preserved and the client only sends what it
- * edits. A stale `expectedVersion` collapses to PT409 → conflict.
+ * sections (pre*) are preserved. Raw inventory fields are shape-validated, not
+ * catalog-normalized. A stale `expectedVersion` collapses to PT409 → conflict.
  *
  * `mech` follows the same presence rule as `campaign`: `undefined` leaves the
  * stored mech untouched (no key is sent), `null` removes it, and an object

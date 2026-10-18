@@ -198,6 +198,40 @@ function sentPayload(rpc: ReturnType<typeof vi.fn>): Record<string, unknown> {
   return rpc.mock.calls[0]?.[1]?.p_payload as Record<string, unknown>;
 }
 
+describe("saveCharacter — inventory preservation", () => {
+  it("rejects invalid inventory shapes before database access", async () => {
+    const db = updateClient();
+    for (const invalid of [{ equip: [4] }, { weapons: "raw" }, { equipLoc: [] }, { chrWeapons: [null] }]) {
+      expect(await saveCharacter("c1", 1, { ...values(), ...invalid })).toMatchObject({ ok: false, kind: "error" });
+    }
+    expect(db.from).not.toHaveBeenCalled();
+    expect(db.rpc).not.toHaveBeenCalled();
+  });
+
+  it("merges edited raw inventory with stored unrelated sections", async () => {
+    const stored = emptyDraft();
+    stored.scalars.name = "Stored Pilot";
+    stored.preAttrs = { STR: 177 };
+    stored.preSkills = [{ name: "Art", xp: 30 }];
+    stored.equip = ["unrecognized : imported"];
+    const row = { ...storedRow(), ...draftToColumns(stored) } as unknown as CharacterRow;
+    const db = updateClient(undefined, row);
+    const edited = draftToForm(stored);
+    edited.equip.push("Custom;20;2;N;0/0/0/0; keep : notes ;2");
+    edited.weapons = ["legacy unsupported"];
+    edited.chrWeapons = ["missing"];
+    edited.equipLoc = { unknown: "Custom" };
+    expect(await saveCharacter("c1", 1, edited)).toMatchObject({ ok: true });
+    const saved = rowToDraft({ ...row, ...sentPayload(db.rpc) } as CharacterRow);
+    expect(saved.equip).toEqual(edited.equip);
+    expect(saved.weapons).toEqual(edited.weapons);
+    expect(saved.chrWeapons).toEqual(edited.chrWeapons);
+    expect(saved.equipLoc).toEqual(edited.equipLoc);
+    expect(saved.preAttrs).toEqual(stored.preAttrs);
+    expect(saved.preSkills).toEqual(stored.preSkills);
+  });
+});
+
 describe("saveCharacter — mech argument", () => {
   it("leaves the stored mech alone when the mech argument is absent", async () => {
     const db = updateClient();
