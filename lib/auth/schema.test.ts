@@ -1,5 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { signInSchema, signUpSchema } from "./schema";
+import {
+  forgotPasswordSchema,
+  resetPasswordSchema,
+  signInSchema,
+  signUpSchema,
+} from "./schema";
 
 describe("signInSchema", () => {
   it("accepts a valid email and password", () => {
@@ -48,6 +53,52 @@ describe("signUpSchema", () => {
     expect(
       signUpSchema.safeParse({ email: "pilot@example.com", password: "no" })
         .success,
+    ).toBe(false);
+  });
+});
+
+describe("forgotPasswordSchema", () => {
+  it("accepts a valid email", () => {
+    expect(
+      forgotPasswordSchema.safeParse({ email: "pilot@example.com" }).success,
+    ).toBe(true);
+  });
+
+  it("rejects an invalid email", () => {
+    expect(
+      forgotPasswordSchema.safeParse({ email: "not-an-email" }).success,
+    ).toBe(false);
+  });
+});
+
+describe("resetPasswordSchema", () => {
+  it("accepts matching passwords of valid length", () => {
+    expect(
+      resetPasswordSchema.safeParse({
+        password: "newsecret123",
+        confirmPassword: "newsecret123",
+      }).success,
+    ).toBe(true);
+  });
+
+  it("rejects when passwords do not match", () => {
+    const res = resetPasswordSchema.safeParse({
+      password: "newsecret123",
+      confirmPassword: "differentsecret",
+    });
+    expect(res.success).toBe(false);
+    if (!res.success) {
+      expect(res.error.issues[0]?.message).toBe("Passwords do not match");
+      expect(res.error.issues[0]?.path).toEqual(["confirmPassword"]);
+    }
+  });
+
+  it("rejects password shorter than 6 characters", () => {
+    expect(
+      resetPasswordSchema.safeParse({
+        password: "12345",
+        confirmPassword: "12345",
+      }).success,
     ).toBe(false);
   });
 });
