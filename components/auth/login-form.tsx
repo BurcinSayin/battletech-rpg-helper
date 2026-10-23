@@ -46,6 +46,15 @@ export function LoginForm() {
         error={errors.password?.message}
       />
 
+      <div className="-mt-2 flex justify-end">
+        <Link
+          href="/forgot-password"
+          className="text-xs text-foreground/70 underline"
+        >
+          Forgot password?
+        </Link>
+      </div>
+
       {serverError && <p className="text-sm text-red-600">{serverError}</p>}
 
       <button
