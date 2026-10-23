@@ -265,6 +265,7 @@ describe("structure", () => {
   it("needs a manual max before damage, and blank stops tracking", () => {
     const onChange = vi.fn();
     render(<Harness onChange={onChange} />);
+    fireEvent.click(btn("Track structure"));
     expect(isDisabled(btn("Damage structure Left Arm"))).toBe(true);
     expect(screen.getAllByText("Not tracked")).toHaveLength(2);
 
@@ -293,6 +294,7 @@ describe("structure", () => {
   it("clamps typed maxima and keeps other sections untouched", () => {
     const onChange = vi.fn();
     render(<Harness onChange={onChange} />);
+    fireEvent.click(btn("Track structure"));
     fireEvent.change(screen.getByLabelText("Structure max Right Arm"), {
       target: { value: "5000" },
     });
@@ -301,10 +303,153 @@ describe("structure", () => {
     ]);
   });
 
-  it("explains how to enable structure when there are no sections", () => {
-    render(<Harness value={{ ...mech(), criticalSlots: [] }} />);
-    expect(screen.getByText(/Add locations in Edit/)).toBeTruthy();
+  it.each([false, true])(
+    "omits setup with no locations (interactive: %s)",
+    (interactive) => {
+      render(
+        <MechView
+          mech={{ ...mech(), criticalSlots: [] }}
+          damage={{
+            ...emptyMechDamage(),
+            structure: [{ index: 0, max: 12, lost: 5 }],
+          }}
+          onDamageChange={interactive ? vi.fn() : undefined}
+        />,
+      );
+      expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+      expect(screen.queryByRole("button", { name: /structure/i })).toBeNull();
+      expect(screen.queryByLabelText(/^Structure max/)).toBeNull();
+    },
+  );
+
+  it.each([
+    undefined,
+    emptyMechDamage(),
+    {
+      ...emptyMechDamage(),
+      structure: [{ index: 0, max: 0, lost: 0 }],
+    },
+    {
+      ...emptyMechDamage(),
+      structure: [{ index: 2, max: 12, lost: 0 }],
+    },
+  ])("hides normalized empty structure by default: %j", (damage) => {
+    const { rerender } = render(<MechView mech={mech()} damage={damage} />);
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Track structure" }),
+    ).toBeNull();
+    rerender(
+      <MechView mech={mech()} damage={damage} onDamageChange={vi.fn()} />,
+    );
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+    expect(btn("Track structure").getAttribute("aria-expanded")).toBe("false");
+  });
+
+  it("keeps tracked location identity, meters and damage controls outside setup", () => {
+    const onChange = vi.fn();
+    render(
+      <Harness
+        initial={{
+          ...emptyMechDamage(),
+          structure: [{ index: 1, max: 8, lost: 3 }],
+        }}
+        onChange={onChange}
+      />,
+    );
+    const panel = screen
+      .getByText("// STRUCTURE", { exact: true })
+      .closest("section")!;
+    expect(within(panel).queryByText("Left Arm")).toBeNull();
+    const card = within(panel).getByText("Right Arm").closest("li")!;
+    expect(card.textContent).toContain("5/8");
+    expect(card.querySelector('[style="width: 63%;"]')).toBeTruthy();
     expect(screen.queryByLabelText(/^Structure max/)).toBeNull();
+    fireEvent.click(btn("Damage structure Right Arm"));
+    expect(onChange.mock.lastCall![0].structure).toEqual([
+      { index: 1, max: 8, lost: 4 },
+    ]);
+    for (let i = 0; i < 4; i++)
+      fireEvent.click(btn("Damage structure Right Arm"));
+    expect(within(panel).getByText("Destroyed")).toBeTruthy();
+    expect(card.textContent).toContain("0/8");
+  });
+
+  it("opens and closes setup without damage changes, then retains configured tracks", () => {
+    const onChange = vi.fn();
+    render(<Harness onChange={onChange} />);
+    const toggle = btn("Track structure");
+    toggle.focus();
+    fireEvent.click(toggle);
+    expect(btn("Done configuring structure")).toBe(toggle);
+    expect(document.activeElement).toBe(toggle);
+    expect(screen.getAllByText("Not tracked")).toHaveLength(2);
+    fireEvent.click(toggle);
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+    expect(onChange).not.toHaveBeenCalled();
+    fireEvent.click(toggle);
+    fireEvent.change(screen.getByLabelText("Structure max Left Arm"), {
+      target: { value: "12" },
+    });
+    fireEvent.click(toggle);
+    expect(screen.queryByLabelText(/^Structure max/)).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Damage structure Right Arm" }),
+    ).toBeNull();
+    expect(btn("Damage structure Left Arm")).toBeTruthy();
+    fireEvent.click(btn("Configure structure"));
+    fireEvent.change(screen.getByLabelText("Structure max Right Arm"), {
+      target: { value: "8" },
+    });
+    expect(onChange.mock.lastCall![0].structure).toEqual([
+      { index: 0, max: 12, lost: 0 },
+      { index: 1, max: 8, lost: 0 },
+    ]);
+  });
+
+  it("keeps the final track input mounted and focused through clearing and retyping", () => {
+    const onChange = vi.fn();
+    render(
+      <Harness
+        initial={{
+          ...emptyMechDamage(),
+          structure: [{ index: 0, max: 12, lost: 5 }],
+        }}
+        onChange={onChange}
+      />,
+    );
+    fireEvent.click(btn("Configure structure"));
+    const input = screen.getByLabelText("Structure max Left Arm");
+    input.focus();
+    fireEvent.change(input, { target: { value: "" } });
+    expect(screen.getByLabelText("Structure max Left Arm")).toBe(input);
+    expect(document.activeElement).toBe(input);
+    fireEvent.change(input, { target: { value: "1" } });
+    fireEvent.change(input, { target: { value: "15" } });
+    expect(document.activeElement).toBe(input);
+    expect(onChange.mock.lastCall![0].structure).toEqual([
+      { index: 0, max: 15, lost: 5 },
+    ]);
+    fireEvent.change(input, { target: { value: "" } });
+    fireEvent.click(btn("Done configuring structure"));
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+  });
+
+  it("follows current read-only props through empty, tracked and null mechs", () => {
+    const { rerender } = render(<MechView mech={mech()} />);
+    const tracked = {
+      ...emptyMechDamage(),
+      structure: [{ index: 1, max: 8, lost: 3 }],
+    };
+    rerender(<MechView mech={mech()} damage={tracked} />);
+    expect(screen.getByText("// STRUCTURE", { exact: true })).toBeTruthy();
+    rerender(<MechView mech={mech()} damage={emptyMechDamage()} />);
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+    rerender(<MechView mech={null} damage={tracked} />);
+    expect(screen.getByText("No mech")).toBeTruthy();
+    rerender(<MechView mech={mech()} damage={tracked} />);
+    expect(screen.getByText("// STRUCTURE", { exact: true })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /structure/i })).toBeNull();
   });
 });
 
@@ -327,6 +472,7 @@ describe("structure max typing session", () => {
   it("keeps the original loss through intermediate values", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("1");
     expect(leftArm(onChange)).toEqual({ index: 0, max: 1, lost: 1 });
@@ -337,6 +483,7 @@ describe("structure max typing session", () => {
   it("survives clearing the field before typing a new max", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("");
     expect(leftArm(onChange)).toBeUndefined();
@@ -347,6 +494,7 @@ describe("structure max typing session", () => {
   it("clamps only the final value against the original loss", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("");
     type("3");
@@ -356,6 +504,7 @@ describe("structure max typing session", () => {
   it("removes the track when left blank", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("");
     fireEvent.blur(maxInput());
@@ -366,6 +515,7 @@ describe("structure max typing session", () => {
   it("starts a new baseline after blur", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("3");
     fireEvent.blur(maxInput());
@@ -377,6 +527,7 @@ describe("structure max typing session", () => {
   it("keeps changes made elsewhere while the field is focused", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("1");
     // Other locations and counters change mid-session.
@@ -398,6 +549,7 @@ describe("structure max typing session", () => {
   it("treats a -/+ tap on the same location as the new baseline", () => {
     const onChange = vi.fn();
     render(<Harness initial={tracked} onChange={onChange} />);
+    fireEvent.click(btn("Configure structure"));
     fireEvent.focus(maxInput());
     type("10"); // lost stays 5
     // jsdom keeps focus on the input during clicks, like a touch browser might.
@@ -453,6 +605,7 @@ describe("critical hits", () => {
     expect(onChange.mock.lastCall![0].criticals).toEqual([
       { section: 1, slot: 0 },
     ]);
+    fireEvent.click(btn("Track structure"));
     expect(screen.getByLabelText("Structure max Left Arm #1")).toBeTruthy();
   });
 
@@ -576,15 +729,46 @@ describe("controls", () => {
       .filter((b) => !b.hasAttribute("aria-expanded"));
     expect(damageControls.length).toBeGreaterThan(0);
     for (const b of damageControls) expect(isDisabled(b)).toBe(true);
-    for (const input of screen.getAllByRole("spinbutton")) {
-      expect(isDisabled(input)).toBe(true);
-    }
+    expect(screen.queryByText("// STRUCTURE", { exact: true })).toBeNull();
+    expect(isDisabled(btn("Track structure"))).toBe(true);
+    fireEvent.click(btn("Track structure"));
+    expect(screen.queryByLabelText(/^Structure max/)).toBeNull();
     fireEvent.click(btn("Increase heat"));
     fireEvent.click(btn("Cool heat"));
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it("uses touch-sized targets and never submits an enclosing form", () => {
+  it("locks open setup and damage controls without closing or mutating damage", () => {
+    const onChange = vi.fn();
+    const initial = {
+      ...emptyMechDamage(),
+      structure: [{ index: 0, max: 12, lost: 5 }],
+    };
+    const { rerender } = render(
+      <Harness initial={initial} onChange={onChange} />,
+    );
+    fireEvent.click(btn("Configure structure"));
+    rerender(
+      <Harness initial={initial} onChange={onChange} controlsDisabled />,
+    );
+    const input = screen.getByLabelText("Structure max Left Arm");
+    expect(isDisabled(input)).toBe(true);
+    for (const name of [
+      "Done configuring structure",
+      "Damage structure Left Arm",
+      "Repair structure Left Arm",
+    ]) {
+      expect(isDisabled(btn(name))).toBe(true);
+      fireEvent.click(btn(name));
+    }
+    expect(
+      btn("Done configuring structure").getAttribute("aria-expanded"),
+    ).toBe("true");
+    expect((input as HTMLInputElement).value).toBe("12");
+    expect(onChange).not.toHaveBeenCalled();
+  });
+
+  it("never submits an enclosing form from setup or damage controls", () => {
     const onChange = vi.fn();
     const onSubmit = vi.fn((event) => event.preventDefault());
     render(
@@ -595,22 +779,13 @@ describe("controls", () => {
         />
       </form>,
     );
-    for (const name of [
-      "Damage armor LA #1",
-      "Repair armor LA #1",
-      "Damage structure Left Arm",
-      "Increase heat",
-      "Add pilot hit",
-      "Cool heat",
-    ]) {
-      expect(btn(name).className).toMatch(/\bh-11\b/);
-    }
-    expect(btn("Critical hit Left Arm slot 1").className).toMatch(
-      /\bmin-h-11\b/,
-    );
-    expect(screen.getByLabelText("Structure max Left Arm").className).toMatch(
-      /\bh-11\b/,
-    );
+    fireEvent.click(btn("Track structure"));
+    fireEvent.change(screen.getByLabelText("Structure max Left Arm"), {
+      target: { value: "12" },
+    });
+    fireEvent.click(btn("Damage structure Left Arm"));
+    fireEvent.click(btn("Done configuring structure"));
+    fireEvent.click(btn("Configure structure"));
     for (const b of screen.getAllByRole("button")) {
       expect(b.getAttribute("type")).toBe("button");
     }

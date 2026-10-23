@@ -462,6 +462,7 @@ export function MechView({
   onDamageChange,
   controlsDisabled = false,
 }: MechViewProps) {
+  const [structureSetupOpen, setStructureSetupOpen] = useState(false);
   if (!mech) {
     return (
       <Panel title="MECH">
@@ -474,6 +475,9 @@ export function MechView({
   const sinkCount = parseHeatSinkCount(mech.heatSinks);
   const d = normalizeMechDamage(damage, mech);
   const interactive = onDamageChange !== undefined;
+  const hasStructure = d.structure.length > 0;
+  const configuringStructure =
+    interactive && mech.criticalSlots.length > 0 && structureSetupOpen;
   const off = controlsDisabled;
   const change = (next: MechDamage) => onDamageChange?.(next);
 
@@ -653,65 +657,75 @@ export function MechView({
         )}
       </Panel>
 
-      <Panel title="STRUCTURE">
-        {mech.criticalSlots.length === 0 ? (
-          <p className="text-sm text-hud-muted">
-            Structure is tracked per critical-slot location. Add locations in
-            Edit to track it.
-          </p>
-        ) : (
-          <>
-            {interactive && (
-              <p className="mb-3 text-xs text-hud-muted">
-                Enter each location&apos;s internal structure to track it. Leave
-                it blank to skip a location.
-              </p>
-            )}
-            <ul className="grid gap-2 lg:grid-cols-2">
-              {mech.criticalSlots.map((section, si) => {
-                const label = sectionLabels[si];
-                const track = structureTrack(d, si);
-                const max = track?.max ?? 0;
-                const lost = track?.lost ?? 0;
-                const remaining = Math.max(0, max - lost);
-                const tone = track ? toneOf(remaining, max) : "none";
-                return (
-                  <li
-                    key={`${section.location}-${si}`}
-                    className={cn(
-                      "flex flex-wrap items-center gap-x-3 gap-y-2 rounded-md border bg-hud-raised p-2 sm:px-3",
-                      toneBorder[tone],
-                    )}
-                  >
-                    <div className="min-w-0 flex-1 basis-36">
-                      <div className="flex items-baseline justify-between gap-2">
-                        <span className="truncate font-mono text-[10px] uppercase tracking-widest text-hud-muted">
-                          {label}
+      {interactive && mech.criticalSlots.length > 0 && (
+        <HudButton
+          type="button"
+          className="h-11"
+          disabled={off}
+          aria-expanded={configuringStructure}
+          onClick={() => setStructureSetupOpen((open) => !open)}
+        >
+          {configuringStructure
+            ? "Done configuring structure"
+            : hasStructure
+              ? "Configure structure"
+              : "Track structure"}
+        </HudButton>
+      )}
+
+      {(hasStructure || configuringStructure) && (
+        <Panel title="STRUCTURE">
+          {configuringStructure && (
+            <p className="mb-3 text-xs text-hud-muted">
+              Enter each location&apos;s internal structure to track it. Leave
+              it blank to skip a location.
+            </p>
+          )}
+          <ul className="grid gap-2 lg:grid-cols-2">
+            {mech.criticalSlots.map((section, si) => {
+              const label = sectionLabels[si];
+              const track = structureTrack(d, si);
+              if (!configuringStructure && !track) return null;
+              const max = track?.max ?? 0;
+              const lost = track?.lost ?? 0;
+              const remaining = Math.max(0, max - lost);
+              const tone = track ? toneOf(remaining, max) : "none";
+              return (
+                <li
+                  key={`${section.location}-${si}`}
+                  className={cn(
+                    "flex flex-wrap items-center gap-x-3 gap-y-2 rounded-md border bg-hud-raised p-2 sm:px-3",
+                    toneBorder[tone],
+                  )}
+                >
+                  <div className="min-w-0 flex-1 basis-36">
+                    <div className="flex items-baseline justify-between gap-2">
+                      <span className="truncate font-mono text-[10px] uppercase tracking-widest text-hud-muted">
+                        {label}
+                      </span>
+                      {track ? (
+                        <span className="font-mono tabular-nums">
+                          <span className={cn("text-lg", toneText[tone])}>
+                            {remaining}
+                          </span>
+                          <span className="text-xs text-hud-muted">/{max}</span>
                         </span>
-                        {track ? (
-                          <span className="font-mono tabular-nums">
-                            <span className={cn("text-lg", toneText[tone])}>
-                              {remaining}
-                            </span>
-                            <span className="text-xs text-hud-muted">
-                              /{max}
-                            </span>
-                          </span>
-                        ) : (
-                          <span className="font-mono text-xs text-hud-muted/70">
-                            Not tracked
-                          </span>
-                        )}
-                      </div>
-                      <div className="mt-1">
-                        <Meter remaining={remaining} max={max} />
-                      </div>
-                      <div className="mt-1 h-3.5">
-                        <StatusWord tone={tone} depleted="Destroyed" />
-                      </div>
+                      ) : (
+                        <span className="font-mono text-xs text-hud-muted/70">
+                          Not tracked
+                        </span>
+                      )}
                     </div>
-                    {interactive && (
-                      <div className="flex items-center gap-2">
+                    <div className="mt-1">
+                      <Meter remaining={remaining} max={max} />
+                    </div>
+                    <div className="mt-1 h-3.5">
+                      <StatusWord tone={tone} depleted="Destroyed" />
+                    </div>
+                  </div>
+                  {interactive && (
+                    <div className="flex items-center gap-2">
+                      {configuringStructure && (
                         <StructureMaxInput
                           label={`Structure max ${label}`}
                           max={track?.max ?? null}
@@ -733,27 +747,27 @@ export function MechView({
                             );
                           }}
                         />
-                        <StepButtons
-                          minusLabel={`Damage structure ${label}`}
-                          plusLabel={`Repair structure ${label}`}
-                          minusDisabled={off || !track || remaining <= 0}
-                          plusDisabled={off || !track || lost <= 0}
-                          onMinus={() =>
-                            change(setStructureLost(d, mech, si, lost + 1))
-                          }
-                          onPlus={() =>
-                            change(setStructureLost(d, mech, si, lost - 1))
-                          }
-                        />
-                      </div>
-                    )}
-                  </li>
-                );
-              })}
-            </ul>
-          </>
-        )}
-      </Panel>
+                      )}
+                      <StepButtons
+                        minusLabel={`Damage structure ${label}`}
+                        plusLabel={`Repair structure ${label}`}
+                        minusDisabled={off || !track || remaining <= 0}
+                        plusDisabled={off || !track || lost <= 0}
+                        onMinus={() =>
+                          change(setStructureLost(d, mech, si, lost + 1))
+                        }
+                        onPlus={() =>
+                          change(setStructureLost(d, mech, si, lost - 1))
+                        }
+                      />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </Panel>
+      )}
 
       <Panel
         title="CRITICAL SLOTS"

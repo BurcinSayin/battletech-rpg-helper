@@ -209,6 +209,7 @@ async function apply(page: Page): Promise<void> {
 
 async function seedDamage(page: Page): Promise<void> {
   await tap(page, "Damage armor CT");
+  await button(page, "Track structure").click();
   await mechPanel(page)
     .getByRole("spinbutton", { name: "Structure max Left Arm", exact: true })
     .fill("7");
@@ -228,11 +229,9 @@ async function expectMechReset(
     `${armorMaximum}/${armorMaximum}`,
   );
   await expect(
-    mechPanel(page).getByRole("spinbutton", {
-      name: "Structure max Left Arm",
-      exact: true,
-    }),
-  ).toHaveValue("");
+    mechPanel(page).getByRole("heading", { name: "// STRUCTURE", exact: true }),
+  ).toHaveCount(0);
+  await expect(button(page, "Track structure")).toBeVisible();
   await expect(counterValue(page, "Heat")).toHaveText("0");
   await expect(counterValue(page, "Pilot hits")).toHaveText("1");
   await expandViewSlots(page, "Left Arm");
@@ -320,6 +319,10 @@ test("view-mode armor bounds and sequential structure-max typing preserve loss a
   await expect(
     page.getByRole("heading", { name: "Edit character" }),
   ).toHaveCount(0);
+  await expect(
+    mechPanel(page).getByRole("heading", { name: "// STRUCTURE", exact: true }),
+  ).toHaveCount(0);
+  await button(page, "Track structure").click();
   await expect(button(page, "Repair armor CT")).toBeDisabled();
   await expect(button(page, "Damage armor LA")).toBeDisabled();
   await expect(button(page, "Repair armor LA")).toBeDisabled();
@@ -370,6 +373,11 @@ test("view-mode armor bounds and sequential structure-max typing preserve loss a
   await apply(page);
   await reloadMech(page);
   await expect(structure).toContainText("13/18");
+  await expect(pointsCard(page, "Damage structure Right Arm")).toContainText(
+    "999/999",
+  );
+  await expect(max).toHaveCount(0);
+  await button(page, "Configure structure").click();
   await expect(max).toHaveValue("18");
   await expect(otherMax).toHaveValue("999");
   await expect(pointsCard(page, "Damage armor CT")).toContainText("0/3");
@@ -392,6 +400,8 @@ test("view-mode armor bounds and sequential structure-max typing preserve loss a
   await apply(page);
   await reloadMech(page);
   await expect(structure).toContainText("3/3");
+  await expect(pointsCard(page, "Damage structure Right Arm")).toHaveCount(0);
+  await button(page, "Configure structure").click();
   await expect(otherMax).toHaveValue("");
   await expect(pointsCard(page, "Damage armor CT")).toContainText("3/3");
   await expect(pointsCard(page, "Damage armor RTC")).toContainText("2/2");
@@ -474,6 +484,7 @@ test("critical repeats/empties stay indexed and base unchanged; counters and Res
     ).toHaveAttribute("aria-pressed", "false");
   await apply(page);
   await reloadMech(page);
+  await button(page, "Configure structure").click();
   await expect(
     mechPanel(page).getByRole("spinbutton", {
       name: "Structure max Left Arm",
@@ -512,6 +523,7 @@ test("base lowering/removal warns and resets persistently, keeping pilot hits hi
   await reloadMech(page);
   await expectMechReset(page, 2);
 
+  await button(page, "Track structure").click();
   await mechPanel(page)
     .getByRole("spinbutton", { name: "Structure max Left Arm", exact: true })
     .fill("7");
@@ -536,6 +548,7 @@ test("base lowering/removal warns and resets persistently, keeping pilot hits hi
       exact: true,
     }),
   ).toHaveCount(0);
+  await button(page, "Track structure").click();
   await expect(
     mechPanel(page).getByRole("spinbutton", {
       name: "Structure max Left Arm",
@@ -569,6 +582,7 @@ test("base lowering/removal warns and resets persistently, keeping pilot hits hi
   await expect(button(page, "Add pilot hit")).toHaveCount(0);
   // Hidden pilot state also survives an ordinary character save with no mech.
   await enterEdit(page);
+  await page.getByRole("tab", { name: "Sheet", exact: true }).click();
   await page.getByLabel("Name", { exact: true }).fill("Retained pilot");
   await save(page);
   await addManualMech(page);
@@ -607,6 +621,7 @@ test("live catalog replacement clears damage/maxima/heat and preserves pilot hit
     mechPanel(page).getByRole("heading", { name: "Firestarter FS9-H" }),
   ).toBeVisible();
   await expectMechReset(page, 13);
+  await button(page, "Track structure").click();
   const maxima = mechPanel(page).getByRole("spinbutton");
   await expect(maxima).toHaveCount(8);
   for (const input of await maxima.all()) await expect(input).toHaveValue("");
@@ -678,6 +693,7 @@ test("separate contexts adopt realtime, pin stale batches, and refuse stale full
     await expect(counterValue(page, "Heat")).toHaveText("1");
     // A fresh ordinary full save must not resend/clear separately stored damage.
     await enterEdit(page);
+    await page.getByRole("tab", { name: "Sheet", exact: true }).click();
     await page
       .getByLabel("Name", { exact: true })
       .fill("Full save keeps damage");
@@ -721,6 +737,7 @@ test("no-mech saves have no controls; mobile damage targets, expansion and stick
     await expect(region.getByRole("button", { expanded: true })).toBeVisible();
   }
   await expect(button(page, "Critical hit Left Arm slot 1")).toBeVisible();
+  await button(page, "Track structure").click();
   await mechPanel(page)
     .getByRole("spinbutton", { name: "Structure max Left Arm", exact: true })
     .fill("7");
@@ -739,6 +756,7 @@ test("no-mech saves have no controls; mobile damage targets, expansion and stick
       "Apply damage",
       "Discard damage changes",
       "Reset all damage",
+      "Done configuring structure",
     ];
     for (const name of names) {
       const box = await button(page, name).boundingBox();

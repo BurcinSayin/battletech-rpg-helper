@@ -5,12 +5,14 @@ Open a character's **Mech** tab in view mode to track damage without entering **
 ## Mark a batch, then Apply
 
 - **Armor:** use − to damage and + to repair. Each front or rear armor entry shows remaining points / its saved maximum. Remaining armor cannot fall below zero or exceed that maximum.
-- **Structure:** enter a maximum manually for each critical-slot section, then use −/+ to record damage or repairs. Structure values are not supplied by the catalog or inferred from tonnage. A blank or zero maximum leaves that section untracked. Lowering a maximum clamps its damage to the new maximum; raising it keeps the recorded loss. Rear armor entries do not create extra structure tracks.
+- **Structure:** choose **Track structure** to enter a maximum manually for each critical-slot section, then use −/+ to record damage or repairs. **Done configuring structure** hides maximum inputs and untracked locations; **Configure structure** reopens setup. With no positive maxima, the STRUCTURE panel is hidden unless setup is open. No setup action appears without critical-slot locations or in a read-only view. Structure values are not supplied by the catalog or inferred from tonnage. A blank or zero maximum leaves that section untracked. Lowering a maximum clamps its damage to the new maximum; raising it keeps the recorded loss. Rear armor entries do not create extra structure tracks.
 - **Critical slots:** tap a slot to mark or clear a hit. Repeated equipment names, empty slots and their order remain distinct; marking a hit does not change the base equipment list. On phones, expand a location to reach its slots.
 - **Heat and pilot hits:** use their −/+ controls to adjust the counters manually.
 - **Cool heat:** subtract the leading positive whole-number heat-sink count, stopping at zero. `10 Single` removes 10 heat; `11 IS Double` removes 11, not 22. Cooling does not model sink type, critical damage or combat dissipation rules. Missing, malformed, nonpositive or unsafe-size counts disable cooling but leave the manual counters available. Cooling joins the same Apply/Discard batch and is locked while applying or stale.
 
 Changes stay local until **Apply**. You can mark several locations and counters before applying one batch. **Discard** returns to the stored state. Apply or discard pending damage before entering Edit. Reloading before Apply loses the local batch.
+
+Opening or closing structure setup does not change, apply or discard damage. Setup stays open through Apply, Discard and incoming damage updates until you close it or leave the view. Clearing and retyping a maximum during one focused typing session preserves the original recorded loss, bounded by the new maximum.
 
 After Apply, the server stores the batch and other open views receive the update. If anyone changes the character after you begin a batch—even an unrelated character edit—your pending batch becomes stale and cannot be applied. **Discard, load latest** loads the current record; then mark a new batch. Pending damage is never silently merged with someone else's changes. A stale full character save also conflicts instead of overwriting damage.
 
