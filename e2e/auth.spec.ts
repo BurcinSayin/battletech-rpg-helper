@@ -46,3 +46,18 @@ test("navigates to forgot password and back to sign in", async ({ page }) => {
   await page.getByRole("link", { name: "Sign in" }).click();
   await expect(page).toHaveURL(/\/login$/);
 });
+
+test("handles a recovery code returned to the homepage", async ({ page }) => {
+  const callbackRequest = page.waitForRequest(
+    (request) =>
+      new URL(request.url()).pathname === "/auth/callback" &&
+      new URL(request.url()).searchParams.get("code") ===
+        "invalid-recovery-code",
+  );
+
+  await page.goto("/?code=invalid-recovery-code");
+  await callbackRequest;
+  // An invalid code must reach the callback's error handling, rather than
+  // disappearing in the normal homepage -> dashboard -> login redirects.
+  await expect(page).toHaveURL(/\/login\?error=invalid-reset-link$/);
+});

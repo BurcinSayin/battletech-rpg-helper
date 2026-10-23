@@ -152,6 +152,30 @@ The Sheet's read-only **Combat loadout** shows only readied weapons and worn arm
 
 ---
 
+## Password recovery deployment
+
+In the hosted Supabase project's **Authentication → URL Configuration**, set
+**Site URL** to the production HTTPS origin. Add the full recovery callback to
+**Redirect URLs** for each domain where users can request a reset:
+
+```text
+https://battletech-rpg-helper.vercel.app/auth/callback?next=/reset-password
+```
+
+Vercel preview domains need their own allowed callbacks if recovery is tested
+there. The repository's `supabase/config.toml` configures the local stack only;
+deploying the app does not update hosted Auth settings.
+
+The Supabase **Reset Password** email template should link to
+`{{ .ConfirmationURL }}` so verification preserves the requested callback.
+Request a fresh email after changing settings, and open it in the browser that
+requested the reset: the PKCE verifier is stored in that browser's cookies.
+
+The homepage also forwards a returned `?code=…` to `/auth/callback` when Supabase
+falls back to the Site URL. The callback exchanges the code before opening
+`/reset-password`; missing, expired, or unverifiable codes return to login with
+an invalid-link error.
+
 ## 🧪 Testing
 
 The test suite runs using Vitest for logic checks and Playwright for cross-device verification.
