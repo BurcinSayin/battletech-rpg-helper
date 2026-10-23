@@ -296,11 +296,15 @@ export function CharacterEditor({
         }
       });
     },
-    (invalid) => setTab(
-      invalid.equip || invalid.weapons || invalid.equipLoc || invalid.chrWeapons
-        ? "equipment"
-        : "sheet",
-    ),
+    (invalid) =>
+      setTab(
+        invalid.equip ||
+          invalid.weapons ||
+          invalid.equipLoc ||
+          invalid.chrWeapons
+          ? "equipment"
+          : "sheet",
+      ),
   );
 
   function openEquipment(): void {
@@ -468,6 +472,7 @@ export function CharacterEditor({
         >
           <MechView
             mech={viewMech}
+            pilot={snapshot.draft}
             damage={viewDamage}
             onDamageChange={viewMech === null ? undefined : changeDamage}
             controlsDisabled={damageControlsDisabled}
@@ -732,9 +737,13 @@ export function CharacterEditor({
         aria-labelledby={tabIds(baseId, "equipment").tab}
         hidden={tab !== "equipment"}
       >
-        {(errors.equip || errors.weapons || errors.equipLoc || errors.chrWeapons) && (
+        {(errors.equip ||
+          errors.weapons ||
+          errors.equipLoc ||
+          errors.chrWeapons) && (
           <p role="alert" className="mb-3 text-sm text-hud-red">
-            Inventory fields are invalid. Reload the character or correct the inventory before saving.
+            Inventory fields are invalid. Reload the character or correct the
+            inventory before saving.
           </p>
         )}
         <EquipmentTab
@@ -781,7 +790,11 @@ function tabIds(baseId: string, tab: TabId) {
 }
 
 const TAB_IDS: readonly TabId[] = ["sheet", "equipment", "mech"];
-const TAB_LABELS: Record<TabId, string> = { sheet: "Sheet", equipment: "Equipment", mech: "Mech" };
+const TAB_LABELS: Record<TabId, string> = {
+  sheet: "Sheet",
+  equipment: "Equipment",
+  mech: "Mech",
+};
 
 /** Roving tabindex with arrow/Home/End keys (WAI-ARIA tabs). */
 function TabList({

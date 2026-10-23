@@ -11,7 +11,7 @@ import {
 import { emptyMechDamage, type MechDamage } from "@/lib/mech/damage";
 import { emptyMech } from "@/lib/mech/schema";
 import type { MechData } from "@/lib/mech/types";
-import { MechView } from "./mech-view";
+import { MechView, type MechViewProps } from "./mech-view";
 
 afterEach(cleanup);
 
@@ -40,16 +40,19 @@ function Harness({
   onChange = () => {},
   value = mech(),
   controlsDisabled,
+  pilot,
 }: {
   initial?: MechDamage;
   onChange?: (next: MechDamage) => void;
   value?: MechData | null;
   controlsDisabled?: boolean;
+  pilot?: MechViewProps["pilot"];
 }) {
   const [damage, setDamage] = useState(initial);
   return (
     <MechView
       mech={value}
+      pilot={pilot}
       damage={damage}
       controlsDisabled={controlsDisabled}
       onDamageChange={(next) => {
@@ -70,6 +73,7 @@ describe("MechView without a mech", () => {
       <MechView
         mech={null}
         damage={{ ...emptyMechDamage(), pilotHits: 3 }}
+        pilot={{ skills: [{ name: "Piloting/'Mech", xp: 30 }], traits: [] }}
         onDamageChange={onChange}
       />,
     );
@@ -86,6 +90,7 @@ describe("MechView read-only", () => {
     render(
       <MechView
         mech={mech()}
+        pilot={{ skills: [{ name: "Piloting/'Mech", xp: 30 }], traits: [] }}
         damage={{
           ...emptyMechDamage(),
           armor: [{ index: 1, lost: 2 }],
@@ -96,11 +101,114 @@ describe("MechView read-only", () => {
     );
     expect(screen.queryAllByRole("button")).toHaveLength(0);
     expect(screen.queryAllByRole("spinbutton")).toHaveLength(0);
+    expect(skillValue("Mech piloting")).toBe("Lvl 1 · SA/8");
+    expect(skillValue("Mech gunnery")).toBe("N/A");
     expect(screen.getByText("Damaged")).toBeTruthy();
     const section = screen.getByLabelText("Left Arm critical slots");
     const items = within(section).getAllByRole("listitem");
     expect(items[2].textContent).toContain("(critical hit)");
     expect(items[0].textContent).toBe("1Shoulder");
+  });
+});
+
+function skillValue(label: string): string | null {
+  return screen
+    .getByText(label, { selector: "dt" })
+    .parentElement!.querySelector("dd")!.textContent;
+}
+
+describe("pilot skill information", () => {
+  it("shows character levels and sheet metadata even when damage is locked", () => {
+    render(
+      <Harness
+        controlsDisabled
+        pilot={{
+          skills: [
+            { name: "Gunnery/'Mech", xp: 80 },
+            { name: "Piloting/'Mech", xp: 30 },
+          ],
+          traits: [],
+        }}
+      />,
+    );
+    expect(skillValue("Mech piloting")).toBe("Lvl 1 · SA/8");
+    expect(skillValue("Mech gunnery")).toBe("Lvl 3 · SA/8");
+    expect(isDisabled(btn("Increase heat"))).toBe(true);
+  });
+
+  it("recalculates when learner traits change", () => {
+    const skills = [{ name: "Piloting/'Mech", xp: 24 }];
+    const { rerender } = render(
+      <Harness
+        pilot={{ skills, traits: [{ name: "Fast Learner", xp: 300 }] }}
+      />,
+    );
+    expect(skillValue("Mech piloting")).toBe("Lvl 1 · SA/8");
+    rerender(<Harness pilot={{ skills, traits: [] }} />);
+    expect(skillValue("Mech piloting")).toBe("Lvl 0 · SA/8");
+  });
+
+  it.each([
+    ["Piloting/`Mech", "Gunnery/Mech"],
+    ["Piloting/Mech", "Gunnery/`Mech"],
+  ])("resolves legacy aliases %s and %s", (piloting, gunnery) => {
+    render(
+      <Harness
+        pilot={{
+          skills: [
+            { name: piloting, xp: 30 },
+            { name: gunnery, xp: 80 },
+          ],
+          traits: [],
+        }}
+      />,
+    );
+    expect(skillValue("Mech piloting")).toBe("Lvl 1 · SA/8");
+    expect(skillValue("Mech gunnery")).toBe("Lvl 3 · SA/8");
+  });
+
+  it("ignores other specialties and parent names but displays zero XP", () => {
+    render(
+      <Harness
+        pilot={{
+          skills: [
+            { name: "Piloting/Aerospace", xp: 80 },
+            { name: "Piloting", xp: 80 },
+            { name: "Gunnery", xp: 80 },
+            { name: "Gunnery/Aerospace", xp: 80 },
+            { name: "Gunnery/'Mech", xp: 0 },
+          ],
+          traits: [],
+        }}
+      />,
+    );
+    expect(skillValue("Mech piloting")).toBe("N/A");
+    expect(skillValue("Mech gunnery")).toBe("Lvl 0 · SA/8");
+  });
+
+  it("shows every colliding canonical and alias row in input order", () => {
+    render(
+      <Harness
+        pilot={{
+          skills: [
+            { name: "Gunnery/Mech", xp: 80 },
+            { name: "Gunnery/'Mech", xp: 30 },
+            { name: "Gunnery/`Mech", xp: 120 },
+          ],
+          traits: [],
+        }}
+      />,
+    );
+    const card = screen.getByText("Mech gunnery").parentElement!;
+    expect(
+      Array.from(card.querySelector("dd")!.children, (row) => row.textContent),
+    ).toEqual(["Lvl 3 · SA/8", "Lvl 1 · SA/8", "Lvl 4 · SA/8"]);
+  });
+
+  it("shows unavailable information without a character", () => {
+    render(<Harness />);
+    expect(skillValue("Mech piloting")).toBe("N/A");
+    expect(skillValue("Mech gunnery")).toBe("N/A");
   });
 });
 
@@ -378,6 +486,75 @@ describe("heat and pilot hits", () => {
     expect(isDisabled(btn("Add pilot hit"))).toBe(true);
     expect(isDisabled(btn("Decrease heat"))).toBe(false);
   });
+  it("cools repeatedly to zero without changing other damage", () => {
+    const onChange = vi.fn();
+    const initial: MechDamage = {
+      heat: 25,
+      pilotHits: 2,
+      armor: [{ index: 1, lost: 2 }],
+      structure: [{ index: 0, max: 12, lost: 3 }],
+      criticals: [{ section: 0, slot: 2 }],
+    };
+    render(<Harness initial={initial} onChange={onChange} />);
+    for (const heat of [15, 5, 0]) {
+      fireEvent.click(btn("Cool heat"));
+      expect(onChange).toHaveBeenLastCalledWith({ ...initial, heat });
+      const counter = screen.getByText("Heat").parentElement!;
+      expect(within(counter).getByText(String(heat))).toBeTruthy();
+    }
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenCalledTimes(3);
+  });
+
+  it.each([
+    ["11 IS Double", 14],
+    ["10", 15],
+    [" 11 IS Double ", 14],
+  ])("uses the raw sink count from %j", (heatSinks, heat) => {
+    const onChange = vi.fn();
+    render(
+      <Harness
+        value={{ ...mech(), heatSinks }}
+        initial={{ ...emptyMechDamage(), heat: 25 }}
+        onChange={onChange}
+      />,
+    );
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange.mock.lastCall![0].heat).toBe(heat);
+  });
+
+  it.each([
+    "",
+    "Single",
+    "0 Single",
+    "-1 Single",
+    "10.5 Single",
+    "1e2 Single",
+    "10Single",
+    "9007199254740992 Single",
+  ])("disables cooling for invalid sinks %j", (heatSinks) => {
+    const onChange = vi.fn();
+    render(
+      <Harness
+        value={{ ...mech(), heatSinks }}
+        initial={{ ...emptyMechDamage(), heat: 25 }}
+        onChange={onChange}
+      />,
+    );
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).not.toHaveBeenCalled();
+    expect(isDisabled(btn("Decrease heat"))).toBe(false);
+  });
+
+  it("cannot cool at zero heat", () => {
+    const onChange = vi.fn();
+    render(<Harness onChange={onChange} />);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).not.toHaveBeenCalled();
+  });
 });
 
 describe("controls", () => {
@@ -403,13 +580,19 @@ describe("controls", () => {
       expect(isDisabled(input)).toBe(true);
     }
     fireEvent.click(btn("Increase heat"));
+    fireEvent.click(btn("Cool heat"));
     expect(onChange).not.toHaveBeenCalled();
   });
 
   it("uses touch-sized targets and never submits an enclosing form", () => {
+    const onChange = vi.fn();
+    const onSubmit = vi.fn((event) => event.preventDefault());
     render(
-      <form>
-        <Harness />
+      <form onSubmit={onSubmit}>
+        <Harness
+          initial={{ ...emptyMechDamage(), heat: 25 }}
+          onChange={onChange}
+        />
       </form>,
     );
     for (const name of [
@@ -418,6 +601,7 @@ describe("controls", () => {
       "Damage structure Left Arm",
       "Increase heat",
       "Add pilot hit",
+      "Cool heat",
     ]) {
       expect(btn(name).className).toMatch(/\bh-11\b/);
     }
@@ -430,5 +614,8 @@ describe("controls", () => {
     for (const b of screen.getAllByRole("button")) {
       expect(b.getAttribute("type")).toBe("button");
     }
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange.mock.lastCall![0].heat).toBe(15);
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });

@@ -1,6 +1,13 @@
 "use client";
 
 import { useId, useRef, useState, type ReactNode } from "react";
+import type { BtccDraft } from "@/lib/btcc/types";
+import { skillLevel } from "@/lib/characters/skill-level";
+import { resolveSkillName } from "@/lib/rules/load";
+import {
+  skillComplexity,
+  skillTargetNumber,
+} from "@/lib/rules/skill-complexity";
 import {
   MECH_DAMAGE_LIMITS,
   armorLost,
@@ -20,7 +27,7 @@ import {
 import type { MechData } from "@/lib/mech/types";
 import { EMPTY_SLOT } from "@/lib/mech/types";
 import { cn } from "@/lib/utils";
-import { Panel } from "./ui";
+import { HudButton, Panel } from "./ui";
 
 const NO_DAMAGE: MechDamage = emptyMechDamage();
 const COUNTER_MAX = MECH_DAMAGE_LIMITS.counter;
@@ -160,6 +167,13 @@ function StepButtons({
 
 // ---------------------------------------------------------------------------
 // Heat & pilot
+
+function parseHeatSinkCount(raw: string): number | null {
+  const match = /^\s*(\d+)(?=\s|$)/.exec(raw);
+  if (!match) return null;
+  const count = Number(match[1]);
+  return Number.isSafeInteger(count) && count > 0 ? count : null;
+}
 
 function Counter({
   label,
@@ -431,6 +445,7 @@ function CriticalSection({
 
 export type MechViewProps = {
   mech: MechData | null;
+  pilot?: Pick<BtccDraft, "skills" | "traits">;
   /** Damage to display against `mech`. Defaults to none. */
   damage?: MechDamage;
   /** Enables damage controls. Without it the view is read-only. */
@@ -442,6 +457,7 @@ export type MechViewProps = {
 /** Mech display for view mode, with optional damage tracking controls. */
 export function MechView({
   mech,
+  pilot,
   damage = NO_DAMAGE,
   onDamageChange,
   controlsDisabled = false,
@@ -455,6 +471,7 @@ export function MechView({
   }
 
   const name = [mech.chassis, mech.model].filter(Boolean).join(" ");
+  const sinkCount = parseHeatSinkCount(mech.heatSinks);
   const d = normalizeMechDamage(damage, mech);
   const interactive = onDamageChange !== undefined;
   const off = controlsDisabled;
@@ -465,6 +482,20 @@ export function MechView({
     mech.criticalSlots.map((s) => s.location),
   );
   const totalHits = d.criticals.length;
+  const pilotSkill = (canonicalName: string) => {
+    const rows = pilot?.skills.flatMap((row, index) => {
+      if (resolveSkillName(row.name) !== canonicalName) return [];
+      const level = skillLevel(row.xp, pilot.traits);
+      const complexity = skillComplexity(row.name, level);
+      const targetNumber = skillTargetNumber(row.name, level);
+      return [
+        <div key={index}>
+          Lvl {level} · {complexity ?? "unknown"}/{targetNumber ?? "N/A"}
+        </div>,
+      ];
+    });
+    return rows?.length ? rows : "N/A";
+  };
 
   return (
     <div className="space-y-4">
@@ -509,41 +540,60 @@ export function MechView({
       </Panel>
 
       <Panel title="HEAT & PILOT">
-        <div className="grid grid-cols-2 gap-2 sm:max-w-md">
-          <Counter
-            label="Heat"
-            value={d.heat}
-            hint={mech.heatSinks ? `Sinks: ${mech.heatSinks}` : undefined}
-            controls={
-              interactive && (
-                <StepButtons
-                  minusLabel="Decrease heat"
-                  plusLabel="Increase heat"
-                  minusDisabled={off || d.heat <= 0}
-                  plusDisabled={off || d.heat >= COUNTER_MAX}
-                  onMinus={() => change(setHeat(d, d.heat - 1))}
-                  onPlus={() => change(setHeat(d, d.heat + 1))}
-                />
-              )
-            }
-          />
-          <Counter
-            label="Pilot hits"
-            value={d.pilotHits}
-            controls={
-              interactive && (
-                <StepButtons
-                  minusLabel="Remove pilot hit"
-                  plusLabel="Add pilot hit"
-                  minusDisabled={off || d.pilotHits <= 0}
-                  plusDisabled={off || d.pilotHits >= COUNTER_MAX}
-                  onMinus={() => change(setPilotHits(d, d.pilotHits - 1))}
-                  onPlus={() => change(setPilotHits(d, d.pilotHits + 1))}
-                />
-              )
-            }
-          />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+          <div className="grid w-full grid-cols-2 gap-2 sm:max-w-md">
+            <Counter
+              label="Heat"
+              value={d.heat}
+              hint={mech.heatSinks ? `Sinks: ${mech.heatSinks}` : undefined}
+              controls={
+                interactive && (
+                  <StepButtons
+                    minusLabel="Decrease heat"
+                    plusLabel="Increase heat"
+                    minusDisabled={off || d.heat <= 0}
+                    plusDisabled={off || d.heat >= COUNTER_MAX}
+                    onMinus={() => change(setHeat(d, d.heat - 1))}
+                    onPlus={() => change(setHeat(d, d.heat + 1))}
+                  />
+                )
+              }
+            />
+            <Counter
+              label="Pilot hits"
+              value={d.pilotHits}
+              controls={
+                interactive && (
+                  <StepButtons
+                    minusLabel="Remove pilot hit"
+                    plusLabel="Add pilot hit"
+                    minusDisabled={off || d.pilotHits <= 0}
+                    plusDisabled={off || d.pilotHits >= COUNTER_MAX}
+                    onMinus={() => change(setPilotHits(d, d.pilotHits - 1))}
+                    onPlus={() => change(setPilotHits(d, d.pilotHits + 1))}
+                  />
+                )
+              }
+            />
+          </div>
+          {interactive && (
+            <HudButton
+              type="button"
+              className="h-11 w-full shrink-0 sm:w-auto"
+              disabled={off || d.heat <= 0 || sinkCount === null}
+              onClick={() => {
+                if (off || d.heat <= 0 || sinkCount === null) return;
+                change(setHeat(d, d.heat - sinkCount));
+              }}
+            >
+              Cool heat
+            </HudButton>
+          )}
         </div>
+        <dl className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <Stat label="Mech piloting" value={pilotSkill("Piloting/'Mech")} />
+          <Stat label="Mech gunnery" value={pilotSkill("Gunnery/'Mech")} />
+        </dl>
       </Panel>
 
       <Panel title="ARMOR" count={mech.armorType || undefined}>

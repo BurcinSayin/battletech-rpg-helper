@@ -8,10 +8,13 @@ Open a character's **Mech** tab in view mode to track damage without entering **
 - **Structure:** enter a maximum manually for each critical-slot section, then use −/+ to record damage or repairs. Structure values are not supplied by the catalog or inferred from tonnage. A blank or zero maximum leaves that section untracked. Lowering a maximum clamps its damage to the new maximum; raising it keeps the recorded loss. Rear armor entries do not create extra structure tracks.
 - **Critical slots:** tap a slot to mark or clear a hit. Repeated equipment names, empty slots and their order remain distinct; marking a hit does not change the base equipment list. On phones, expand a location to reach its slots.
 - **Heat and pilot hits:** use their −/+ controls to adjust the counters manually.
+- **Cool heat:** subtract the leading positive whole-number heat-sink count, stopping at zero. `10 Single` removes 10 heat; `11 IS Double` removes 11, not 22. Cooling does not model sink type, critical damage or combat dissipation rules. Missing, malformed, nonpositive or unsafe-size counts disable cooling but leave the manual counters available. Cooling joins the same Apply/Discard batch and is locked while applying or stale.
 
 Changes stay local until **Apply**. You can mark several locations and counters before applying one batch. **Discard** returns to the stored state. Apply or discard pending damage before entering Edit. Reloading before Apply loses the local batch.
 
 After Apply, the server stores the batch and other open views receive the update. If anyone changes the character after you begin a batch—even an unrelated character edit—your pending batch becomes stale and cannot be applied. **Discard, load latest** loads the current record; then mark a new batch. Pending damage is never silently merged with someone else's changes. A stale full character save also conflicts instead of overwriting damage.
+
+The **Heat & Pilot** panel also shows read-only **Mech piloting** and **Mech gunnery** information from the acknowledged character sheet: trait-adjusted RPG level and the same complexity/target metadata as Sheet. This is not a tabletop combat-roll conversion. Legacy Mech skill aliases are recognized; multiple matching rows remain separate and in their original order. An absent skill shows **N/A**, while a present zero-XP skill shows **Lvl 0**. Edit skills and learner traits on Sheet, then Save to refresh these cards; damage-control locks do not hide them.
 
 ## Repair and Reset all
 
