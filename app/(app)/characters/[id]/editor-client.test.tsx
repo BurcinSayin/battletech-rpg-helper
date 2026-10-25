@@ -350,12 +350,21 @@ function renderSnapshot(overrides: Partial<EditorProps> = {}) {
 }
 
 describe("CharacterEditor — trait XP and displayed levels", () => {
-  function traitXp(name: string) {
+  function traitRow(name: string) {
     const panel = screen
       .getByRole("heading", { name: "// Traits" })
       .closest("section")!;
-    const row = within(panel).getByDisplayValue(name).parentElement!;
-    return within(row).getByRole("spinbutton", {
+    return within(panel).getByDisplayValue(name).parentElement!;
+  }
+
+  function expectEditingTrait(name: string, indicator: string) {
+    expect(
+      within(traitRow(name)).getByText(indicator, { exact: true }),
+    ).toBeTruthy();
+  }
+
+  function traitXp(name: string) {
+    return within(traitRow(name)).getByRole("spinbutton", {
       name: "XP",
     }) as HTMLInputElement;
   }
@@ -382,21 +391,29 @@ describe("CharacterEditor — trait XP and displayed levels", () => {
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expect(traitXp("Rank").value).toBe("270");
     expect(traitXp("Compulsion").value).toBe("-125");
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
     fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
     expectTraitLevels();
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expect(traitXp("Rank").value).toBe("270");
     expect(traitXp("Compulsion").value).toBe("-125");
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
 
     fireEvent.change(traitXp("Rank"), { target: { value: "299" } });
     fireEvent.change(traitXp("Compulsion"), { target: { value: "-199" } });
     expect(traitXp("Rank").value).toBe("299");
     expect(traitXp("Compulsion").value).toBe("-199");
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
     fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
     expectTraitLevels();
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expect(traitXp("Rank").value).toBe("270");
     expect(traitXp("Compulsion").value).toBe("-125");
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
     expect(saveCharacter).not.toHaveBeenCalled();
   });
 
@@ -410,6 +427,8 @@ describe("CharacterEditor — trait XP and displayed levels", () => {
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     fireEvent.change(traitXp("Rank"), { target: { value: "270" } });
     fireEvent.change(traitXp("Compulsion"), { target: { value: "-125" } });
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
     fireEvent.click(screen.getByRole("button", { name: "Save" }));
 
     await screen.findByRole("button", { name: "Refreshing…" });
@@ -437,6 +456,81 @@ describe("CharacterEditor — trait XP and displayed levels", () => {
     fireEvent.click(screen.getByRole("button", { name: "Edit" }));
     expect(traitXp("Rank").value).toBe("270");
     expect(traitXp("Compulsion").value).toBe("-125");
+    expectEditingTrait("Rank", "+2 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
+  });
+
+  it("updates attained TP from live XP and names, including an empty XP input", () => {
+    const draft = namedDraft("Trait Pilot");
+    draft.traits = [{ name: "Toughness", xp: 299 }];
+    renderSnapshot({ draft });
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expectEditingTrait("Toughness", "0 TP");
+
+    fireEvent.change(traitXp("Toughness"), { target: { value: "300" } });
+    expectEditingTrait("Toughness", "+3 TP");
+    fireEvent.change(traitXp("Toughness"), { target: { value: "299" } });
+    expectEditingTrait("Toughness", "0 TP");
+
+    fireEvent.change(within(traitRow("Toughness")).getByRole("combobox"), {
+      target: { value: "Rank" },
+    });
+    expectEditingTrait("Rank", "+2 TP");
+    expect(traitXp("Rank").value).toBe("299");
+    fireEvent.change(within(traitRow("Rank")).getByRole("combobox"), {
+      target: { value: "Toughness" },
+    });
+    expectEditingTrait("Toughness", "0 TP");
+    expect(traitXp("Toughness").value).toBe("299");
+
+    fireEvent.change(traitXp("Toughness"), { target: { value: "" } });
+    expectEditingTrait("Toughness", "0 TP");
+    expect(traitXp("Toughness").value).toBe("");
+    fireEvent.change(traitXp("Toughness"), { target: { value: "300" } });
+    expectEditingTrait("Toughness", "+3 TP");
+    expect(traitXp("Toughness").value).toBe("300");
+  });
+
+  it("recalculates opponents and preserves row alignment after removing and adding traits", () => {
+    const draft = namedDraft("Trait Pilot");
+    draft.traits = [
+      { name: "Toughness", xp: 300 },
+      { name: "Glass Jaw", xp: -300 },
+      { name: "Compulsion", xp: -125 },
+    ];
+    renderSnapshot({ draft });
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expectEditingTrait("Toughness", "0 TP");
+    expectEditingTrait("Glass Jaw", "0 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
+
+    fireEvent.change(traitXp("Toughness"), { target: { value: "650" } });
+    expectEditingTrait("Toughness", "+3 TP");
+    expectEditingTrait("Glass Jaw", "0 TP");
+    expect(traitXp("Toughness").value).toBe("650");
+    expect(traitXp("Glass Jaw").value).toBe("-300");
+    fireEvent.change(traitXp("Toughness"), { target: { value: "300" } });
+    expectEditingTrait("Toughness", "0 TP");
+    expectEditingTrait("Glass Jaw", "0 TP");
+
+    fireEvent.click(
+      within(traitRow("Toughness")).getByRole("button", { name: "Remove" }),
+    );
+    expectEditingTrait("Glass Jaw", "-3 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
+    expect(traitXp("Glass Jaw").value).toBe("-300");
+    expect(traitXp("Compulsion").value).toBe("-125");
+
+    fireEvent.click(screen.getByRole("button", { name: "+ Add trait" }));
+    expectEditingTrait("", "0 TP");
+    expect(traitXp("").value).toBe("0");
+    fireEvent.change(within(traitRow("")).getByRole("combobox"), {
+      target: { value: "Toughness" },
+    });
+    fireEvent.change(traitXp("Toughness"), { target: { value: "300" } });
+    expectEditingTrait("Toughness", "0 TP");
+    expectEditingTrait("Glass Jaw", "0 TP");
+    expectEditingTrait("Compulsion", "-1 TP");
   });
 });
 

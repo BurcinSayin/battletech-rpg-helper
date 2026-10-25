@@ -25,6 +25,7 @@ import {
   draftToForm,
   formToDraft,
   skillLevel,
+  traitLevels,
   type CharacterFormValues,
 } from "@/lib/characters";
 import type { MechData } from "@/lib/mech/types";
@@ -679,6 +680,7 @@ export function CharacterEditor({
                 datalistId="trait-options"
                 options={traitOptions}
                 errors={errors.traits as unknown as RowError[] | undefined}
+                levels={traitLevels(liveDraft.traits)}
               />
             </Panel>
 
@@ -972,8 +974,19 @@ function RowList({
             {...register(`${name}.${index}.xp`, { valueAsNumber: true })}
           />
           {levels && (
-            <span className="whitespace-nowrap font-mono text-sm text-hud-muted">
-              Level {levels[index]}
+            <span
+              className={cn(
+                "whitespace-nowrap font-mono text-sm",
+                name === "skills" || levels[index] === 0
+                  ? "text-hud-muted"
+                  : levels[index] > 0
+                    ? "text-hud-green"
+                    : "text-hud-red",
+              )}
+            >
+              {name === "skills"
+                ? `Level ${levels[index]}`
+                : `${levels[index] > 0 ? "+" : ""}${levels[index]} TP`}
             </span>
           )}
           <button

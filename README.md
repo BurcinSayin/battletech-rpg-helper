@@ -68,6 +68,10 @@ Saved character sheets and import previews show attribute **Level** (`floor(XP /
 
 Missing attribute XP displays `N/A` for both values. Zero and negative levels remain visible, with Link Modifier `N/A` below Level 1. The modifier is −2 at Level 1, −1 at Levels 2–3, +0 at 4–6, +1 at 7–9, +2 at 10, and `floor(level / 3)` at 11 and above.
 
+### Trait display
+
+Edit mode shows live attained Trait Points beside each trait's raw XP input: positive TP in green, negative TP in red, and `0 TP` in muted text. The saved sheet additionally labels zero TP as `Inactive`. Indicators recalculate when names or XP change and when traits are added or removed, including cancellation between explicit opponents. Inputs and saves retain exact signed XP; displayed TP never replaces stored XP or changes `.btcc` serialization.
+
 ### Equipment and weapon catalogs
 
 `lib/rules/load.ts` statically bundles the Warrior's Catalog, with canonical/legacy-name lookup (`findEquipment`, `findWeapon`), exact-ID lookup, and category/weapon-skill filters. Costs and masses are normalized only when unambiguous; multipliers, conditional expressions, original cells, scoped notes, and source page references remain available. This is inventory data, not a combat rules evaluator.
