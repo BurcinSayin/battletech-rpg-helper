@@ -78,6 +78,8 @@ Edit mode shows live attained Trait Points beside each trait's raw XP input: pos
 
 Generate `data/rules/equipment.json` and `weapons.json` with `npm run equipment:ingest`. It reads the 50 transcribed tables in `docs/rule_book/Warriors-Catalog/` and the curated `docs/rule_book/equipment-mapping.json`; no desktop checkout or environment variable is needed. Add new tables/layouts and reviewed aliases to the manifest; stale selectors, unmapped collisions, or changed explicit duplicates fail generation before replacing either artifact. Never edit generated catalogs directly.
 
+`docs/rule_book/mech_weapons.json` was downloaded from Solaris Skunk Werks' [`Data/Equipment/weapons.json`](https://github.com/Solaris-Skunk-Werks/solarisskunkwerks/blob/master/Data/Equipment/weapons.json).
+
 Each ingestion invocation reads the current generated `data/rules/skills.json` for weapon-skill validation; aggregate ingestion regenerates skills first. The pure `buildEquipmentCatalog(tables, mapping, skillNames)` API takes its canonical skill names explicitly, so repeated builds cannot reuse a stale module-level skill snapshot.
 
 Consumers import `lib/btcc/inventory` directly for lossless 7/11-field views and new equipment, weapon, or physical-ammunition rows. Creators return typed failures for unresolved amounts/coverage, invalid values, or desktop-unsafe delimiters. Purchase cost/mass are stack totals; shots and reload values remain per unit. Monetary values/counts must fit desktop signed-32-bit integer arithmetic; fractional catalog prices require an explicit integer price override, never silent rounding. Pure-PPS weapons require a separately selected power pack.
