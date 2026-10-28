@@ -794,3 +794,115 @@ describe("controls", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
 });
+
+describe("weapon reference values", () => {
+  it("shows band order, valid zeroes, unavailable matches, and repeated source mounts", () => {
+    const value = {
+      ...mech(),
+      techBase: "Inner Sphere",
+      weapons: [
+        {
+          name: "(IS) Heavy Gauss Rifle",
+          location: "Right Arm",
+          detail: "Ammo:4",
+        },
+        { name: "(IS) Machine Gun", location: "Left Arm", detail: "" },
+        {
+          name: "ISMediumLaser",
+          location: "Right Torso",
+          detail: "Original ambiguity",
+        },
+        { name: "Custom weapon", location: "Center Torso", detail: "Keep me" },
+        {
+          name: "(IS) Machine Gun",
+          location: "Left Torso",
+          detail: "Second mount",
+        },
+      ],
+    };
+    render(<MechView mech={value} />);
+    const table = screen.getByRole("table", { name: /S\/M\/L = short/ });
+    const rows = within(table).getAllByRole("row").slice(1);
+    const cells = rows.map((row) =>
+      within(row)
+        .getAllByRole("cell")
+        .map((cell) => cell.textContent),
+    );
+    expect(cells).toEqual([
+      [
+        "(IS) Heavy Gauss Rifle",
+        "Right Arm",
+        "2",
+        "25 / 20 / 10",
+        "4 / 6 / 13 / 20",
+        "Ammo:4",
+      ],
+      ["(IS) Machine Gun", "Left Arm", "0", "2 / 2 / 2", "0 / 1 / 2 / 3", ""],
+      [
+        "ISMediumLaserAmbiguous catalog match",
+        "Right Torso",
+        "—",
+        "—",
+        "—",
+        "Original ambiguity",
+      ],
+      [
+        "Custom weaponNo catalog match",
+        "Center Torso",
+        "—",
+        "—",
+        "—",
+        "Keep me",
+      ],
+      [
+        "(IS) Machine Gun",
+        "Left Torso",
+        "0",
+        "2 / 2 / 2",
+        "0 / 1 / 2 / 3",
+        "Second mount",
+      ],
+    ]);
+  });
+
+  it("updates references with declared technology while damage controls are disabled", () => {
+    const value = {
+      ...mech(),
+      techBase: "Inner Sphere",
+      weapons: [
+        { name: "ER Large Laser", location: "Left Arm", detail: "" },
+        { name: "2 LRM 20 (R)", location: "Left Torso", detail: "Ammo:20" },
+      ],
+    };
+    const onChange = vi.fn();
+    const { rerender } = render(
+      <MechView mech={value} controlsDisabled onDamageChange={onChange} />,
+    );
+    const table = screen.getByRole("table", { name: /S\/M\/L = short/ });
+    expect(within(table).getByText("8 / 8 / 8")).toBeTruthy();
+    expect(within(table).getByText("0 / 7 / 14 / 19")).toBeTruthy();
+    expect(within(table).getByText("1 / 1 / 1")).toBeTruthy();
+    expect(within(table).getByText("6 / 7 / 14 / 21")).toBeTruthy();
+    expect(
+      within(table).getByText("Cluster weapon; not calculated salvo damage."),
+    ).toBeTruthy();
+    expect(isDisabled(btn("Increase heat"))).toBe(true);
+    rerender(
+      <MechView
+        mech={{ ...value, techBase: "Clan" }}
+        controlsDisabled
+        onDamageChange={onChange}
+      />,
+    );
+    expect(within(table).getByText("10 / 10 / 10")).toBeTruthy();
+    expect(within(table).getByText("0 / 8 / 15 / 25")).toBeTruthy();
+    expect(within(table).getByText("ER Large Laser")).toBeTruthy();
+    expect(within(table).getByText("Ammo:20")).toBeTruthy();
+    expect(onChange).not.toHaveBeenCalled();
+    rerender(<MechView mech={{ ...value, techBase: "Mixed (IS Chassis)" }} />);
+    expect(within(table).getAllByText("Ambiguous catalog match")).toHaveLength(
+      2,
+    );
+    expect(within(table).queryByText("10 / 10 / 10")).toBeNull();
+  });
+});

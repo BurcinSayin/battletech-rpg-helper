@@ -26,6 +26,7 @@ import {
 } from "@/lib/mech/damage";
 import type { MechData } from "@/lib/mech/types";
 import { EMPTY_SLOT } from "@/lib/mech/types";
+import { resolveMechWeaponReference } from "@/lib/mech/weapon-reference";
 import { cn } from "@/lib/utils";
 import { HudButton, Panel } from "./ui";
 
@@ -855,6 +856,11 @@ export function MechView({
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
+              <caption className="pb-3 text-left text-xs text-hud-muted">
+                S/M/L = short/medium/long; Min = minimum. Base catalog values;
+                ammunition, firing modes, cluster hits, and special effects are
+                not calculated.
+              </caption>
               <thead>
                 <tr className="font-mono text-[10px] uppercase tracking-widest text-hud-muted">
                   <th scope="col" className="py-1 pr-3 font-normal">
@@ -863,21 +869,69 @@ export function MechView({
                   <th scope="col" className="py-1 pr-3 font-normal">
                     Location
                   </th>
+                  <th scope="col" className="py-1 pr-3 font-normal">
+                    Heat
+                  </th>
+                  <th
+                    scope="col"
+                    className="whitespace-nowrap py-1 pr-3 font-normal"
+                  >
+                    Damage (S/M/L)
+                  </th>
+                  <th
+                    scope="col"
+                    className="whitespace-nowrap py-1 pr-3 font-normal"
+                  >
+                    Range (Min/S/M/L)
+                  </th>
                   <th scope="col" className="py-1 font-normal">
                     Detail
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {mech.weapons.map((w, i) => (
-                  <tr key={i} className="border-t border-hud-line">
-                    <td className="py-1.5 pr-3 text-hud-text">{w.name}</td>
-                    <td className="py-1.5 pr-3 text-hud-muted">{w.location}</td>
-                    <td className="py-1.5 font-mono text-xs text-hud-muted">
-                      {w.detail}
-                    </td>
-                  </tr>
-                ))}
+                {mech.weapons.map((w, i) => {
+                  const result = resolveMechWeaponReference(
+                    w.name,
+                    mech.techBase,
+                  );
+                  const reference =
+                    result.status === "matched" ? result.reference : null;
+                  return (
+                    <tr key={i} className="border-t border-hud-line">
+                      <td className="py-1.5 pr-3 text-hud-text">
+                        {w.name}
+                        {result.status !== "matched" && (
+                          <span className="mt-1 block text-xs text-hud-muted">
+                            {result.status === "ambiguous"
+                              ? "Ambiguous catalog match"
+                              : "No catalog match"}
+                          </span>
+                        )}
+                      </td>
+                      <td className="py-1.5 pr-3 text-hud-muted">
+                        {w.location}
+                      </td>
+                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
+                        {reference ? reference.heat : "—"}
+                      </td>
+                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
+                        {reference ? reference.damage.join(" / ") : "—"}
+                        {reference?.isCluster && (
+                          <span className="mt-1 block whitespace-normal text-xs text-hud-muted">
+                            Cluster weapon; not calculated salvo damage.
+                          </span>
+                        )}
+                      </td>
+                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
+                        {reference ? reference.ranges.join(" / ") : "—"}
+                      </td>
+                      <td className="py-1.5 font-mono text-xs text-hud-muted">
+                        {w.detail}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

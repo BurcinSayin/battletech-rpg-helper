@@ -1,0 +1,7934 @@
+[
+  {
+    "id": "(IS) Autocannon/2",
+    "aliases": [
+      "Autocannon/2",
+      "AC2"
+    ],
+    "megaMekName": "ISAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      8,
+      16,
+      24
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Autocannon/5",
+    "aliases": [
+      "Autocannon/5",
+      "AC5"
+    ],
+    "megaMekName": "ISAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Autocannon/10",
+    "aliases": [
+      "Autocannon/10",
+      "AC10"
+    ],
+    "megaMekName": "ISAC10",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Autocannon/20",
+    "aliases": [
+      "Autocannon/20",
+      "AC20"
+    ],
+    "megaMekName": "ISAC20",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Autocannon/2",
+    "aliases": [
+      "Prototype Autocannon/2",
+      "Prototype AC/2",
+      "PTAC2"
+    ],
+    "megaMekName": "ISAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      8,
+      16,
+      24
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Autocannon/5",
+    "aliases": [
+      "Prototype Autocannon/5",
+      "Prototype AC/5",
+      "PTAC5"
+    ],
+    "megaMekName": "ISAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Autocannon/10",
+    "aliases": [
+      "Prototype Autocannon/10",
+      "Prototype AC/10",
+      "PTAC10"
+    ],
+    "megaMekName": "ISAC10",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Autocannon/20",
+    "aliases": [
+      "Prototype Autocannon/20",
+      "Prototype AC/20",
+      "PTAC20"
+    ],
+    "megaMekName": "ISAC20",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) LB 2-X AC",
+    "aliases": [
+      "LB 2-X Autocannon",
+      "LB 2-X AC",
+      "LB2"
+    ],
+    "megaMekName": "ISLBXAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      9,
+      18,
+      27
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 2-X CP AC",
+    "aliases": [
+      "Clan Prototype LB 2-X Autocannon",
+      "LB2-CP"
+    ],
+    "megaMekName": "ISLBXAC2",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      9,
+      18,
+      27
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 2-X CI AC",
+    "aliases": [
+      "Clan Interim LB 2-X Autocannon",
+      "LB2-CI"
+    ],
+    "megaMekName": "ISLBXAC2",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      9,
+      18,
+      27
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LB 2-X AC",
+    "aliases": [
+      "LB 2-X Autocannon",
+      "LB 2-X AC",
+      "LB2"
+    ],
+    "megaMekName": "CLLBXAC2",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      10,
+      20,
+      30
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LB 5-X AC",
+    "aliases": [
+      "LB 5-X Autocannon",
+      "LB 5-X AC",
+      "LB5"
+    ],
+    "megaMekName": "ISLBXAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 5-X CP AC",
+    "aliases": [
+      "Clan Prototype LB 5-X Autocannon",
+      "LB5-CP"
+    ],
+    "megaMekName": "ISLBXAC5",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 5-X CI AC",
+    "aliases": [
+      "Clan Interim LB 5-X Autocannon",
+      "LB5-CI"
+    ],
+    "megaMekName": "ISLBXAC5",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LB 5-X AC",
+    "aliases": [
+      "LB 5-X Autocannon",
+      "LB 5-X AC",
+      "LB5"
+    ],
+    "megaMekName": "CLLBXAC5",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      8,
+      15,
+      24
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LB 10-X AC",
+    "aliases": [
+      "LB 10-X Autocannon",
+      "LB 10-X AC",
+      "LB10"
+    ],
+    "megaMekName": "ISLBXAC10",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LB 10-X AC",
+    "aliases": [
+      "LB 10-X Autocannon",
+      "LB 10-X AC",
+      "LB10"
+    ],
+    "megaMekName": "CLLBXAC10",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LB 20-X AC",
+    "aliases": [
+      "LB 20-X Autocannon",
+      "LB 20-X AC",
+      "LB20"
+    ],
+    "megaMekName": "ISLBXAC20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 20-X CP AC",
+    "aliases": [
+      "Clan Prototype LB 20-X Autocannon",
+      "LB20-CP"
+    ],
+    "megaMekName": "ISLBXAC20",
+    "techBase": null,
+    "heat": 6,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "LB 20-X CI AC",
+    "aliases": [
+      "Clan Interim LB 20-X Autocannon",
+      "LB20-CI"
+    ],
+    "megaMekName": "ISLBXAC20",
+    "techBase": null,
+    "heat": 6,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LB 20-X AC",
+    "aliases": [
+      "LB 20-X Autocannon",
+      "LB 20-X AC",
+      "LB20"
+    ],
+    "megaMekName": "CLLBXAC20",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Light AC/2",
+    "aliases": [
+      "Light Autocannon/2",
+      "Light AC/2",
+      "LAC2"
+    ],
+    "megaMekName": "ISLAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Light AC/5",
+    "aliases": [
+      "Light Autocannon/5",
+      "Light AC/5",
+      "LAC5"
+    ],
+    "megaMekName": "ISLAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Protomech AC/2",
+    "aliases": [
+      "Protomech Autocannon/2",
+      "Protomech AC/2",
+      "PrmAC2"
+    ],
+    "megaMekName": "CLProtoAC2",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      20
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Protomech AC/4",
+    "aliases": [
+      "Protomech Autocannon/4",
+      "Protomech AC/4",
+      "PrmAC4"
+    ],
+    "megaMekName": "CLProtoAC4",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      4,
+      4,
+      4
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Protomech AC/8",
+    "aliases": [
+      "Protomech Autocannon/8",
+      "Protomech AC/8",
+      "PrmAC8"
+    ],
+    "megaMekName": "CLProtoAC8",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Rotary AC/2",
+    "aliases": [
+      "Rotary Autocannon/2",
+      "Rotary AC/2",
+      "RAC2"
+    ],
+    "megaMekName": "ISRotaryAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Rotary AC/2",
+    "aliases": [
+      "Rotary Autocannon/2",
+      "Rotary AC/2",
+      "RAC2"
+    ],
+    "megaMekName": "CLRotaryAC2",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      8,
+      17,
+      25
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Rotary AC/5",
+    "aliases": [
+      "Rotary Autocannon/5",
+      "Rotary AC/5",
+      "RAC5"
+    ],
+    "megaMekName": "ISRotaryAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Rotary AC/5",
+    "aliases": [
+      "Rotary Autocannon/5",
+      "Rotary AC/5",
+      "RAC5"
+    ],
+    "megaMekName": "CLRotaryAC5",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Ultra AC/2",
+    "aliases": [
+      "Ultra Autocannon/2",
+      "Ultra AC/2",
+      "UAC2"
+    ],
+    "megaMekName": "ISUltraAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      3,
+      8,
+      17,
+      25
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/2 CP",
+    "aliases": [
+      "Clan Prototype Ultra Autocannon/2",
+      "UAC2-CP"
+    ],
+    "megaMekName": "ISUltraAC2",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      3,
+      8,
+      17,
+      25
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/2 CI",
+    "aliases": [
+      "Clan Interim Ultra Autocannon/2",
+      "UAC2-CI"
+    ],
+    "megaMekName": "ISUltraAC2",
+    "techBase": null,
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      3,
+      8,
+      17,
+      25
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Ultra AC/2",
+    "aliases": [
+      "Ultra Autocannon/2",
+      "Ultra AC/2",
+      "UAC2"
+    ],
+    "megaMekName": "CLUltraAC2",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      2,
+      9,
+      18,
+      27
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Ultra AC/5",
+    "aliases": [
+      "Ultra Autocannon/5",
+      "Ultra AC/5",
+      "UAC5"
+    ],
+    "megaMekName": "ISUltraAC5",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      2,
+      6,
+      13,
+      20
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Ultra AC/5",
+    "aliases": [
+      "Ultra Autocannon/5",
+      "Ultra AC/5",
+      "UAC5"
+    ],
+    "megaMekName": "CLUltraAC5",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Ultra AC/10",
+    "aliases": [
+      "Ultra Autocannon/10",
+      "Ultra AC/10",
+      "UAC10"
+    ],
+    "megaMekName": "ISUltraAC10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/10 CP",
+    "aliases": [
+      "Clan Prototype Ultra Autocannon/10",
+      "UAC10-CP"
+    ],
+    "megaMekName": "ISUltraAC10",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/10 CI",
+    "aliases": [
+      "Clan Interim Ultra Autocannon/10",
+      "UAC10-CI"
+    ],
+    "megaMekName": "ISUltraAC10",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Ultra AC/10",
+    "aliases": [
+      "Ultra Autocannon/10",
+      "Ultra AC/10",
+      "UAC/10"
+    ],
+    "megaMekName": "CLUltraAC10",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Ultra AC/20",
+    "aliases": [
+      "Ultra Autocannon/20",
+      "Ultra AC/20",
+      "UAC20"
+    ],
+    "megaMekName": "ISUltraAC20",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/20 CP",
+    "aliases": [
+      "Clan Prototype Ultra Autocannon/20",
+      "UAC20-CP"
+    ],
+    "megaMekName": "ISUltraAC20",
+    "techBase": null,
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Ultra AC/20 CI",
+    "aliases": [
+      "Clan Interim Ultra Autocannon/20",
+      "UAC20-CI"
+    ],
+    "megaMekName": "ISUltraAC20",
+    "techBase": null,
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Ultra AC/20",
+    "aliases": [
+      "Ultra Autocannon/20",
+      "Ultra AC/20",
+      "UAC20"
+    ],
+    "megaMekName": "CLUltraAC20",
+    "techBase": "CL",
+    "heat": 7,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Hyper-Velocity Autocannon/2",
+    "aliases": [
+      "Hyper-Velocity Autocannon/2",
+      "HV AC/2",
+      "HVAC2"
+    ],
+    "megaMekName": "ISHVAC2",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      3,
+      10,
+      20,
+      35
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Hyper-Velocity Autocannon/5",
+    "aliases": [
+      "Hyper-Velocity Autocannon/5",
+      "HV AC/5",
+      "HVAC5"
+    ],
+    "megaMekName": "ISHVAC5",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      8,
+      16,
+      28
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Hyper-Velocity Autocannon/10",
+    "aliases": [
+      "Hyper-Velocity Autocannon/10",
+      "HV AC/10",
+      "HVAC10"
+    ],
+    "megaMekName": "ISHVAC10",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      20
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) AP Gauss Rifle",
+    "aliases": [
+      "Anti-Personnel Gauss Rifle",
+      "AP Gauss Rifle",
+      "APGR"
+    ],
+    "megaMekName": "CLAPGaussRifle",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Light Gauss Rifle",
+    "aliases": [
+      "Light Gauss Rifle",
+      "LGR"
+    ],
+    "megaMekName": "ISLightGaussRifle",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      3,
+      8,
+      17,
+      25
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Gauss Rifle",
+    "aliases": [
+      "Gauss Rifle",
+      "GR"
+    ],
+    "megaMekName": "ISGaussRifle",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Gauss Rifle",
+    "aliases": [
+      "Prototype Gauss Rifle",
+      "GR-P"
+    ],
+    "megaMekName": "IS Gauss Rifle Prototype",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Gauss Rifle-X",
+    "aliases": [
+      "Prototype Gauss Rifle-X",
+      "GR-X"
+    ],
+    "megaMekName": "IS Gauss Rifle Prototype",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Gauss Rifle",
+    "aliases": [
+      "Gauss Rifle",
+      "GR"
+    ],
+    "megaMekName": "CLGaussRifle",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Heavy Gauss Rifle",
+    "aliases": [
+      "Heavy Gauss Rifle",
+      "HGR"
+    ],
+    "megaMekName": "ISHeavyGaussRifle",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      25,
+      20,
+      10
+    ],
+    "ranges": [
+      4,
+      6,
+      13,
+      20
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Improved Heavy Gauss Rifle",
+    "aliases": [
+      "Improved Heavy Gauss Rifle",
+      "Imp. Heavy Gauss Rifle",
+      "iHGR"
+    ],
+    "megaMekName": "ISImprovedHeavyGaussRifle",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      22,
+      22,
+      22
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      19
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Magshot Gauss Rifle",
+    "aliases": [
+      "Magshot Gauss Rifle",
+      "Magshot",
+      "MSGR"
+    ],
+    "megaMekName": "ISMagshotGR",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Silver Bullet Gauss",
+    "aliases": [
+      "Silver Bullet Gauss",
+      "SBGR"
+    ],
+    "megaMekName": "ISSBGR",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Hyper Assault Gauss 20",
+    "aliases": [
+      "Hyper Assault Gauss 20",
+      "HAG-20",
+      "HAG20"
+    ],
+    "megaMekName": "CLHAG20",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      2,
+      8,
+      16,
+      24
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Hyper Assault Gauss 30",
+    "aliases": [
+      "Hyper Assault Gauss 30",
+      "HAG-30",
+      "HAG30"
+    ],
+    "megaMekName": "CLHAG30",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      30,
+      30,
+      30
+    ],
+    "ranges": [
+      2,
+      8,
+      16,
+      24
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Hyper Assault Gauss 40",
+    "aliases": [
+      "Hyper Assault Gauss 40",
+      "HAG-40",
+      "HAG40"
+    ],
+    "megaMekName": "CLHAG40",
+    "techBase": "CL",
+    "heat": 8,
+    "damage": [
+      40,
+      40,
+      40
+    ],
+    "ranges": [
+      2,
+      8,
+      16,
+      24
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) BattleMech Taser",
+    "aliases": [
+      "BattleMech Taser",
+      "Mech Taser",
+      "TSR"
+    ],
+    "megaMekName": "ISMekTaser",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Light Rifle",
+    "aliases": [
+      "Light Rifle",
+      "LtRfl"
+    ],
+    "megaMekName": "ISLightRifle",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium Rifle",
+    "aliases": [
+      "Medium Rifle",
+      "MedRfl"
+    ],
+    "megaMekName": "ISMediumRifle",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      1,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Heavy Rifle",
+    "aliases": [
+      "Heavy Rifle",
+      "HvRfl"
+    ],
+    "megaMekName": "ISHeavyRifle",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      9,
+      9,
+      9
+    ],
+    "ranges": [
+      2,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Light Machine Gun",
+    "aliases": [
+      "Light Machine Gun",
+      "LMG"
+    ],
+    "megaMekName": "ISLightMG",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Light Machine Gun",
+    "aliases": [
+      "Light Machine Gun",
+      "LMG"
+    ],
+    "megaMekName": "CLLightMG",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Machine Gun",
+    "aliases": [
+      "Machine Gun",
+      "MG"
+    ],
+    "megaMekName": "ISMachine Gun",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Machine Gun",
+    "aliases": [
+      "Machine Gun",
+      "MG"
+    ],
+    "megaMekName": "CLMG",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Heavy Machine Gun",
+    "aliases": [
+      "Heavy Machine Gun",
+      "HMG"
+    ],
+    "megaMekName": "ISHeavyMG",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Heavy Machine Gun",
+    "aliases": [
+      "Heavy Machine Gun",
+      "HMG"
+    ],
+    "megaMekName": "CLHeavyMG",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Fluid Gun",
+    "aliases": [
+      "Fluid Gun",
+      "FldGn"
+    ],
+    "megaMekName": "ISFluidGun",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "Long Tom Artillery Cannon",
+    "aliases": [
+      "Long Tom Art. Cannon",
+      "LngTomCnn"
+    ],
+    "megaMekName": "LongTomCannon",
+    "techBase": null,
+    "heat": 20,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      4,
+      6,
+      13,
+      20
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "Sniper Artillery Cannon",
+    "aliases": [
+      "Sniper Art. Cannon",
+      "SnpCnn"
+    ],
+    "megaMekName": "SniperCannon",
+    "techBase": null,
+    "heat": 10,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      2,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "Thumper Artillery Cannon",
+    "aliases": [
+      "Thumper Art. Cannon",
+      "ThmpCnn"
+    ],
+    "megaMekName": "ThumperCannon",
+    "techBase": null,
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      4,
+      9,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Small Laser",
+    "aliases": [
+      "Small Laser",
+      "SL"
+    ],
+    "megaMekName": "ISSmallLaser",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium Laser",
+    "aliases": [
+      "Medium Laser",
+      "ML"
+    ],
+    "megaMekName": "ISMediumLaser",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Large Laser",
+    "aliases": [
+      "Large Laser",
+      "LL"
+    ],
+    "megaMekName": "ISLargeLaser",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Small Laser",
+    "aliases": [
+      "Prototype Small Laser",
+      "PTSL"
+    ],
+    "megaMekName": "ISSmallLaser",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Medium Laser",
+    "aliases": [
+      "Prototype Medium Laser",
+      "PTML"
+    ],
+    "megaMekName": "ISMediumLaser",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype Large Laser",
+    "aliases": [
+      "Prototype Large Laser",
+      "PTLL"
+    ],
+    "megaMekName": "ISLargeLaser",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Binary Laser Cannon",
+    "aliases": [
+      "Binary Laser Cannon",
+      "BLC"
+    ],
+    "megaMekName": "ISBlazer",
+    "techBase": "IS",
+    "heat": 16,
+    "damage": [
+      12,
+      12,
+      12
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Bombast Laser",
+    "aliases": [
+      "Bombast Laser",
+      "BmbstLsr"
+    ],
+    "megaMekName": "ISBombastLaser",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      12,
+      12,
+      12
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Micro Laser",
+    "aliases": [
+      "Extended Range Micro Laser",
+      "ER Micro Laser",
+      "ERMcL"
+    ],
+    "megaMekName": "CLERMicroLaser",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) ER Small Laser",
+    "aliases": [
+      "Extended Range Small Laser",
+      "ER Small Laser",
+      "ERSL"
+    ],
+    "megaMekName": "ISERSmallLaser",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "ER Small Laser CP",
+    "aliases": [
+      "Clan Prototype Extended Range Small Laser",
+      "ERSL-CP"
+    ],
+    "megaMekName": "ISERSmallLaser",
+    "techBase": null,
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "ER Small Laser CI",
+    "aliases": [
+      "Clan Interim Extended Range Small Laser",
+      "ERSL-CI"
+    ],
+    "megaMekName": "ISERSmallLaser",
+    "techBase": null,
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Small Laser",
+    "aliases": [
+      "Extended Range Small Laser",
+      "ER Small Laser",
+      "ERSL"
+    ],
+    "megaMekName": "CLERSmallLaser",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) ER Medium Laser",
+    "aliases": [
+      "Extended Range Medium Laser",
+      "ER Medium Laser",
+      "ERML"
+    ],
+    "megaMekName": "ISERMediumLaser",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "ER Medium Laser CP",
+    "aliases": [
+      "Clan Prototype Extended Range Medium Laser",
+      "ERML-CP"
+    ],
+    "megaMekName": "ISERMediumLaser",
+    "techBase": null,
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "ER Medium Laser CI",
+    "aliases": [
+      "Clan Interim Extended Range Medium Laser",
+      "ERML-CI"
+    ],
+    "megaMekName": "ISERMediumLaser",
+    "techBase": null,
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Medium Laser",
+    "aliases": [
+      "Extended Range Medium Laser",
+      "ER Medium Laser",
+      "ERML"
+    ],
+    "megaMekName": "CLERMediumLaser",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      7,
+      7,
+      7
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) ER Large Laser",
+    "aliases": [
+      "Extended Range Large Laser",
+      "ER Large Laser",
+      "ERLL"
+    ],
+    "megaMekName": "ISERLargeLaser",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      19
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Large Laser",
+    "aliases": [
+      "Extended Range Large Laser",
+      "ER Large Laser",
+      "ERLL"
+    ],
+    "megaMekName": "CLERLargeLaser",
+    "techBase": "CL",
+    "heat": 12,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      8,
+      15,
+      25
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Micro Pulse Laser",
+    "aliases": [
+      "Micro Pulse Laser",
+      "McPL"
+    ],
+    "megaMekName": "CLMicroPulseLaser",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Small Pulse Laser",
+    "aliases": [
+      "Small Pulse Laser",
+      "SPL"
+    ],
+    "megaMekName": "ISSmallPulseLaser",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Small Pulse Laser",
+    "aliases": [
+      "Small Pulse Laser",
+      "SPL"
+    ],
+    "megaMekName": "CLSmallPulseLaser",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium Pulse Laser",
+    "aliases": [
+      "Medium Pulse Laser",
+      "MPL"
+    ],
+    "megaMekName": "ISMediumPulseLaser",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Medium Pulse Laser",
+    "aliases": [
+      "Medium Pulse Laser",
+      "MPL"
+    ],
+    "megaMekName": "CLMediumPulseLaser",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      7,
+      7,
+      7
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Large Pulse Laser",
+    "aliases": [
+      "Large Pulse Laser",
+      "LPL"
+    ],
+    "megaMekName": "ISLargePulseLaser",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      9,
+      9,
+      9
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Large Pulse Laser",
+    "aliases": [
+      "Large Pulse Laser",
+      "LPL"
+    ],
+    "megaMekName": "CLLargePulseLaser",
+    "techBase": "CL",
+    "heat": 10,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      6,
+      14,
+      20
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Small X-Pulse Laser",
+    "aliases": [
+      "Small X-Pulse Laser",
+      "SXPL"
+    ],
+    "megaMekName": "ISSmallXPulseLaser",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      5
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium X-Pulse Laser",
+    "aliases": [
+      "Medium X-Pulse Laser",
+      "MXPL"
+    ],
+    "megaMekName": "ISMediumXPulseLaser",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Large X-Pulse Laser",
+    "aliases": [
+      "Large X-Pulse Laser",
+      "LXPL"
+    ],
+    "megaMekName": "ISLargeXPulseLaser",
+    "techBase": "IS",
+    "heat": 14,
+    "damage": [
+      9,
+      9,
+      9
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Small Pulse Laser",
+    "aliases": [
+      "Extended Range Small Pulse Laser",
+      "ER Small Pulse Laser",
+      "ERSPL"
+    ],
+    "megaMekName": "CLERSmallPulseLaser",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Medium Pulse Laser",
+    "aliases": [
+      "Extended Range Medium Pulse Laser",
+      "ER Medium Pulse Laser",
+      "ERMPL"
+    ],
+    "megaMekName": "CLERMediumPulseLaser",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      7,
+      7,
+      7
+    ],
+    "ranges": [
+      0,
+      5,
+      9,
+      14
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER Large Pulse Laser",
+    "aliases": [
+      "Extended Range Large Pulse Laser",
+      "ER Large Pulse Laser",
+      "ERLPL"
+    ],
+    "megaMekName": "CLERLargePulseLaser",
+    "techBase": "CL",
+    "heat": 13,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      7,
+      15,
+      23
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Small Variable Speed Pulse Laser",
+    "aliases": [
+      "Small Variable Speed Pulse Laser",
+      "Small VSPL",
+      "SVSPL"
+    ],
+    "megaMekName": "ISSmallVSPLaser",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      4,
+      3
+    ],
+    "ranges": [
+      0,
+      2,
+      4,
+      6
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium Variable Speed Pulse Laser",
+    "aliases": [
+      "Medium Variable Speed Pulse Laser",
+      "Medium VSPL",
+      "MVSPL"
+    ],
+    "megaMekName": "ISMediumVSPLaser",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      9,
+      7,
+      5
+    ],
+    "ranges": [
+      0,
+      2,
+      5,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Large Variable Speed Pulse Laser",
+    "aliases": [
+      "Large Variable Speed Pulse Laser",
+      "Large VSPL",
+      "LVSPL"
+    ],
+    "megaMekName": "ISLargeVSPLaser",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      11,
+      9,
+      7
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Heavy Small Laser",
+    "aliases": [
+      "Heavy Small Laser",
+      "HSL"
+    ],
+    "megaMekName": "CLHeavySmallLaser",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Heavy Medium Laser",
+    "aliases": [
+      "Heavy Medium Laser",
+      "HML"
+    ],
+    "megaMekName": "CLHeavyMediumLaser",
+    "techBase": "CL",
+    "heat": 7,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Heavy Large Laser",
+    "aliases": [
+      "Heavy Large Laser",
+      "HLL"
+    ],
+    "megaMekName": "CLHeavyLargeLaser",
+    "techBase": "CL",
+    "heat": 18,
+    "damage": [
+      16,
+      16,
+      16
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Heavy Small Laser",
+    "aliases": [
+      "Improved Heavy Small Laser",
+      "Imp. Hvy Small Laser",
+      "iHSL"
+    ],
+    "megaMekName": "CLImprovedHeavySmallLaser",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Heavy Medium Laser",
+    "aliases": [
+      "Improved Heavy Medium Laser",
+      "Imp. Hvy Medium Laser",
+      "iHML"
+    ],
+    "megaMekName": "CLImprovedHeavyMediumLaser",
+    "techBase": "CL",
+    "heat": 7,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Heavy Large Laser",
+    "aliases": [
+      "Improved Heavy Large Laser",
+      "Imp. Hvy Large Laser",
+      "iHLL"
+    ],
+    "megaMekName": "CLImprovedHeavyLargeLaser",
+    "techBase": "CL",
+    "heat": 18,
+    "damage": [
+      16,
+      16,
+      16
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Small Chemical Laser",
+    "aliases": [
+      "Small Chemical Laser",
+      "Small Chem Laser",
+      "SCL"
+    ],
+    "megaMekName": "CLSmallChemLaser",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      3,
+      3,
+      3
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Medium Chemical Laser",
+    "aliases": [
+      "Medium Chemical Laser",
+      "Medium Chem Laser",
+      "MCL"
+    ],
+    "megaMekName": "CLMediumChemLaser",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Large Chemical Laser",
+    "aliases": [
+      "Large Chemical Laser",
+      "Large Chem Laser",
+      "LCL"
+    ],
+    "megaMekName": "CLLargeChemLaser",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Small R-e Laser",
+    "aliases": [
+      "Small Re-engineered Laser",
+      "Small R-e Laser",
+      "RESL"
+    ],
+    "megaMekName": "ISSmallRELaser",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      4,
+      4,
+      4
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Medium R-e Laser",
+    "aliases": [
+      "Medium Re-engineered Laser",
+      "Medium R-e Laser",
+      "REML"
+    ],
+    "megaMekName": "ISMediumRELaser",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      6,
+      6,
+      6
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Large R-e Laser",
+    "aliases": [
+      "Large Re-engineered Laser",
+      "Large R-e Laser",
+      "RELL"
+    ],
+    "megaMekName": "ISLargeRELaser",
+    "techBase": "IS",
+    "heat": 9,
+    "damage": [
+      9,
+      9,
+      9
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Light PPC",
+    "aliases": [
+      "Light Particle Projection Cannon",
+      "Light PPC",
+      "LPPC"
+    ],
+    "megaMekName": "ISLightPPC",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Snub-Nose PPC",
+    "aliases": [
+      "Snub-Nose Particle Projection Cannon",
+      "Snub-Nose PPC",
+      "SNPPC"
+    ],
+    "megaMekName": "ISSNPPC",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      10,
+      8,
+      5
+    ],
+    "ranges": [
+      0,
+      9,
+      13,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) PPC",
+    "aliases": [
+      "Particle Projection Cannon",
+      "PPC"
+    ],
+    "megaMekName": "ISPPC",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Prototype PPC",
+    "aliases": [
+      "Prototype Particle Projection Cannon",
+      "Prototype PPC",
+      "PTPPC"
+    ],
+    "megaMekName": "ISPPC",
+    "techBase": "IS",
+    "heat": 15,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Heavy PPC",
+    "aliases": [
+      "Heavy Particle Projection Cannon",
+      "Heavy PPC",
+      "HPPC"
+    ],
+    "megaMekName": "ISHeavyPPC",
+    "techBase": "IS",
+    "heat": 15,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) ER PPC",
+    "aliases": [
+      "Extended Range Particle Projection Cannon",
+      "ER PPC",
+      "ERPPC"
+    ],
+    "megaMekName": "ISERPPC",
+    "techBase": "IS",
+    "heat": 15,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      23
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ER PPC",
+    "aliases": [
+      "Extended Range Particle Projection Cannon",
+      "ER PPC",
+      "ERPPC"
+    ],
+    "megaMekName": "CLERPPC",
+    "techBase": "CL",
+    "heat": 15,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      23
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Enhanced ER PPC",
+    "aliases": [
+      "Enhanced Extended Range Particle Projection Cannon",
+      "Enhanced ER PPC",
+      "EnERPPC"
+    ],
+    "megaMekName": "ISEHERPPC",
+    "techBase": "IS",
+    "heat": 15,
+    "damage": [
+      12,
+      12,
+      12
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      23
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved PPC",
+    "aliases": [
+      "Improved Particle Projection Cannon",
+      "Improved PPC",
+      "ImpPPC"
+    ],
+    "megaMekName": "CLIMPPPC",
+    "techBase": "CL",
+    "heat": 10,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Plasma Rifle",
+    "aliases": [
+      "Plasma Rifle",
+      "PR"
+    ],
+    "megaMekName": "ISPlasmaRifle",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Plasma Cannon",
+    "aliases": [
+      "Plasma Cannon",
+      "PC"
+    ],
+    "megaMekName": "CLPlasmaCannon",
+    "techBase": "CL",
+    "heat": 7,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) TSEMP",
+    "aliases": [
+      "TSEMP"
+    ],
+    "megaMekName": "ISTSEMP",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) TSEMPOS",
+    "aliases": [
+      "TSEMP (OS)",
+      "TSEMPOS"
+    ],
+    "megaMekName": "ISTSEMPOS",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Flamer",
+    "aliases": [
+      "Flamer",
+      "Flmr"
+    ],
+    "megaMekName": "ISFlamer",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Flamer",
+    "aliases": [
+      "Flamer",
+      "Flmr"
+    ],
+    "megaMekName": "CLFlamer",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "Vehicle Flamer",
+    "aliases": [
+      "Vflmr"
+    ],
+    "megaMekName": "VehicleFlamer",
+    "techBase": null,
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "ER Flamer",
+    "aliases": [
+      "ERFlmr"
+    ],
+    "megaMekName": "ERFlamer",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      5,
+      7
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "Heavy Flamer",
+    "aliases": [
+      "Hflmr"
+    ],
+    "megaMekName": "HeavyFlamer",
+    "techBase": null,
+    "heat": 5,
+    "damage": [
+      4,
+      4,
+      4
+    ],
+    "ranges": [
+      0,
+      2,
+      3,
+      4
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) ATM-3",
+    "aliases": [
+      "Advanced Tactical Missile-3",
+      "ATM-3",
+      "ATM3"
+    ],
+    "megaMekName": "CLATM3",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) ATM-6",
+    "aliases": [
+      "Advanced Tactical Missile-6",
+      "ATM-6",
+      "ATM6"
+    ],
+    "megaMekName": "CLATM6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) ATM-9",
+    "aliases": [
+      "Advanced Tactical Missile-9",
+      "ATM-9",
+      "ATM9"
+    ],
+    "megaMekName": "CLATM9",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) ATM-12",
+    "aliases": [
+      "Advanced Tactical Missile-12",
+      "ATM-12",
+      "ATM12"
+    ],
+    "megaMekName": "CLATM12",
+    "techBase": "CL",
+    "heat": 8,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) iATM-3",
+    "aliases": [
+      "Improved Advanced Tactical Missile-3",
+      "iATM-3",
+      "iATM3"
+    ],
+    "megaMekName": "CLiATM3",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) iATM-6",
+    "aliases": [
+      "Improved Advanced Tactical Missile-6",
+      "iATM-6",
+      "iATM6"
+    ],
+    "megaMekName": "CLiATM6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) iATM-9",
+    "aliases": [
+      "Improved Advanced Tactical Missile-9",
+      "iATM-9",
+      "iATM9"
+    ],
+    "megaMekName": "CLiATM9",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) iATM-12",
+    "aliases": [
+      "Improved Advanced Tactical Missile-12",
+      "iATM-12",
+      "iATM12"
+    ],
+    "megaMekName": "CLiATM12",
+    "techBase": "CL",
+    "heat": 8,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      5,
+      10,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-5",
+    "aliases": [
+      "Enhanced Long Range Missile-5",
+      "Enhanced LRM-5",
+      "EnLRM5"
+    ],
+    "megaMekName": "ISEnhancedLRM5",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-10",
+    "aliases": [
+      "Enhanced Long Range Missile-10",
+      "Enhanced LRM-10",
+      "EnLRM10"
+    ],
+    "megaMekName": "ISEnhancedLRM10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-15",
+    "aliases": [
+      "Enhanced Long Range Missile-15",
+      "Enhanced LRM-15",
+      "EnLRM15"
+    ],
+    "megaMekName": "ISEnhancedLRM15",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-20",
+    "aliases": [
+      "Enhanced Long Range Missile-20",
+      "Enhanced LRM-20",
+      "EnLRM20"
+    ],
+    "megaMekName": "ISEnhancedLRM20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-5",
+    "aliases": [
+      "Extended Long Range Missile-5",
+      "Extended LRM-5",
+      "ExLRM5"
+    ],
+    "megaMekName": "ISExtendedLRM5",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-10",
+    "aliases": [
+      "Extended Long Range Missile-10",
+      "Extended LRM-10",
+      "ExLRM10"
+    ],
+    "megaMekName": "ISExtendedLRM10",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-15",
+    "aliases": [
+      "Extended Long Range Missile-15",
+      "Extended LRM-15",
+      "ExLRM15"
+    ],
+    "megaMekName": "ISExtendedLRM15",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-20",
+    "aliases": [
+      "Extended Long Range Missile-20",
+      "Extended LRM-20",
+      "ExLRM20"
+    ],
+    "megaMekName": "ISExtendedLRM20",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-5",
+    "aliases": [
+      "Long Range Missile-5",
+      "LRM-5",
+      "LRM5"
+    ],
+    "megaMekName": "ISLRM5",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-5",
+    "aliases": [
+      "Long Range Missile-5",
+      "LRM-5",
+      "LRM5"
+    ],
+    "megaMekName": "CLLRM5",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-10",
+    "aliases": [
+      "Long Range Missile-10",
+      "LRM-10",
+      "LRM10"
+    ],
+    "megaMekName": "ISLRM10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-10",
+    "aliases": [
+      "Long Range Missile-10",
+      "LRM-10",
+      "LRM10"
+    ],
+    "megaMekName": "CLLRM10",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-15",
+    "aliases": [
+      "Long Range Missile-15",
+      "LRM-15",
+      "LRM15"
+    ],
+    "megaMekName": "ISLRM15",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-15",
+    "aliases": [
+      "Long Range Missile-15",
+      "LRM-15",
+      "LRM15"
+    ],
+    "megaMekName": "CLLRM15",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-20",
+    "aliases": [
+      "Long Range Missile-20",
+      "LRM-20",
+      "LRM20"
+    ],
+    "megaMekName": "ISLRM20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-20",
+    "aliases": [
+      "Long Range Missile-20",
+      "LRM-20",
+      "LRM20"
+    ],
+    "megaMekName": "CLLRM20",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-3",
+    "aliases": [
+      "Multi-Missile Launcher-3",
+      "MML-3",
+      "MML3"
+    ],
+    "megaMekName": "ISMML3",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-5",
+    "aliases": [
+      "Multi-Missile Launcher-5",
+      "MML-5",
+      "MML5"
+    ],
+    "megaMekName": "ISMML5",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-7",
+    "aliases": [
+      "Multi-Missile Launcher-7",
+      "MML-7",
+      "MML7"
+    ],
+    "megaMekName": "ISMML7",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-9",
+    "aliases": [
+      "Multi-Missile Launcher-9",
+      "MML-9",
+      "MML9"
+    ],
+    "megaMekName": "ISMML9",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-10",
+    "aliases": [
+      "Medium Range Missile-10",
+      "MRM-10",
+      "MRM10"
+    ],
+    "megaMekName": "ISMRM10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-20",
+    "aliases": [
+      "Medium Range Missile-20",
+      "MRM-20",
+      "MRM20"
+    ],
+    "megaMekName": "ISMRM20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-30",
+    "aliases": [
+      "Medium Range Missile-30",
+      "MRM-30",
+      "MRM30"
+    ],
+    "megaMekName": "ISMRM30",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-40",
+    "aliases": [
+      "Medium Range Missile-40",
+      "MRM-40",
+      "MRM40"
+    ],
+    "megaMekName": "ISMRM40",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-2",
+    "aliases": [
+      "Short Range Missile-2",
+      "SRM-2",
+      "SRM2"
+    ],
+    "megaMekName": "ISSRM2",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-2",
+    "aliases": [
+      "Short Range Missile-2",
+      "SRM-2",
+      "SRM2"
+    ],
+    "megaMekName": "CLSRM2",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-4",
+    "aliases": [
+      "Short Range Missile-4",
+      "SRM-4",
+      "SRM4"
+    ],
+    "megaMekName": "ISSRM4",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-4",
+    "aliases": [
+      "Short Range Missile-4",
+      "SRM-4",
+      "SRM4"
+    ],
+    "megaMekName": "CLSRM4",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-6",
+    "aliases": [
+      "Short Range Missile-6",
+      "SRM-6",
+      "SRM6"
+    ],
+    "megaMekName": "ISSRM6",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-6",
+    "aliases": [
+      "Short Range Missile-6",
+      "SRM-6",
+      "SRM6"
+    ],
+    "megaMekName": "CLSRM6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-5",
+    "aliases": [
+      "Streak Long Range Missile-5",
+      "Streak LRM-5",
+      "SLRM5"
+    ],
+    "megaMekName": "CLStreakLRM5",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-10",
+    "aliases": [
+      "Streak Long Range Missile-10",
+      "Streak LRM-10",
+      "SLRM10"
+    ],
+    "megaMekName": "CLStreakLRM10",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-15",
+    "aliases": [
+      "Streak Long Range Missile-15",
+      "Streak LRM-15",
+      "SLRM15"
+    ],
+    "megaMekName": "CLStreakLRM15",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-20",
+    "aliases": [
+      "Streak Long Range Missile-20",
+      "Streak LRM-20",
+      "SLRM20"
+    ],
+    "megaMekName": "CLStreakLRM20",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-2",
+    "aliases": [
+      "Streak Short Range Missile-2",
+      "Streak SRM-2",
+      "SSRM2"
+    ],
+    "megaMekName": "ISStreakSRM2",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-2",
+    "aliases": [
+      "Streak Short Range Missile-2",
+      "Streak SRM-2",
+      "SSRM2"
+    ],
+    "megaMekName": "CLStreakSRM2",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-4",
+    "aliases": [
+      "Streak Short Range Missile-4",
+      "Streak SRM-4",
+      "SSRM4"
+    ],
+    "megaMekName": "ISStreakSRM4",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Streak SRM-4 CP",
+    "aliases": [
+      "Clan Prototype Streak Short Range Missile-4",
+      "SSRM4-CP"
+    ],
+    "megaMekName": "ISStreakSRM4",
+    "techBase": null,
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Streak SRM-4 CI",
+    "aliases": [
+      "Clan Interim Streak Short Range Missile-4",
+      "SSRM4-CI"
+    ],
+    "megaMekName": "ISStreakSRM4",
+    "techBase": null,
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-4",
+    "aliases": [
+      "Streak Short Range Missile-4",
+      "Streak SRM-4",
+      "SSRM4"
+    ],
+    "megaMekName": "CLStreakSRM4",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-6",
+    "aliases": [
+      "Streak Short Range Missile-6",
+      "Streak SRM-6",
+      "SSRM6"
+    ],
+    "megaMekName": "ISStreakSRM6",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Streak SRM-6 CP",
+    "aliases": [
+      "Clan Prototype Streak Short Range Missile-6",
+      "SSRM6-CP"
+    ],
+    "megaMekName": "ISStreakSRM6",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Streak SRM-6 CI",
+    "aliases": [
+      "Clan Interim Streak Short Range Missile-6",
+      "SSRM6-CI"
+    ],
+    "megaMekName": "ISStreakSRM6",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-6",
+    "aliases": [
+      "Streak Short Range Missile-6",
+      "Streak SRM-6",
+      "SSRM6"
+    ],
+    "megaMekName": "CLStreakSRM6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Rocket Launcher 10",
+    "aliases": [
+      "Rocket Launcher 10",
+      "RL10"
+    ],
+    "megaMekName": "ISRocketLauncher10",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      5,
+      11,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Rocket Launcher 15",
+    "aliases": [
+      "Rocket Launcher 15",
+      "RL15"
+    ],
+    "megaMekName": "ISRocketLauncher15",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Rocket Launcher 20",
+    "aliases": [
+      "Rocket Launcher 20",
+      "RL20"
+    ],
+    "megaMekName": "ISRocketLauncher20",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Rocket Launcher 10 PP",
+    "aliases": [
+      "Pentagon Power's Rocket Launcher 10",
+      "RL10-PP"
+    ],
+    "megaMekName": "ISRocketLauncher10",
+    "techBase": null,
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      5,
+      11,
+      18
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Rocket Launcher 15 PP",
+    "aliases": [
+      "Pentagon Power's Rocket Launcher 15",
+      "RL15-PP"
+    ],
+    "megaMekName": "ISRocketLauncher15",
+    "techBase": null,
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "Rocket Launcher 20 PP",
+    "aliases": [
+      "Pentagon Power's Rocket Launcher 20",
+      "RL20-PP"
+    ],
+    "megaMekName": "ISRocketLauncher20",
+    "techBase": null,
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Narc Missile Beacon",
+    "aliases": [
+      "Narc Missile Beacon",
+      "Narc Launcher",
+      "Narc"
+    ],
+    "megaMekName": "ISNarcBeacon",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Narc Missile Beacon",
+    "aliases": [
+      "Narc Missile Beacon",
+      "Narc Launcher",
+      "Narc"
+    ],
+    "megaMekName": "CLNarcBeacon",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) iNarc Launcher",
+    "aliases": [
+      "Improved Narc Launcher",
+      "iNarc Launcher"
+    ],
+    "megaMekName": "iNarc",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Mech Mortar 1",
+    "aliases": [
+      "Mech Mortar 1",
+      "Mrtr1"
+    ],
+    "megaMekName": "ISMekMortar1",
+    "techBase": "IS",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Mech Mortar 1",
+    "aliases": [
+      "Mech Mortar 1",
+      "Mrtr1"
+    ],
+    "megaMekName": "CLMekMortar1",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Mech Mortar 2",
+    "aliases": [
+      "Mech Mortar 2",
+      "Mrtr2"
+    ],
+    "megaMekName": "ISMekMortar2",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Mech Mortar 2",
+    "aliases": [
+      "Mech Mortar 2",
+      "Mrtr2"
+    ],
+    "megaMekName": "CLMekMortar2",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Mech Mortar 4",
+    "aliases": [
+      "Mech Mortar 4",
+      "Mrtr4"
+    ],
+    "megaMekName": "ISMekMortar4",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Mech Mortar 4",
+    "aliases": [
+      "Mech Mortar 4",
+      "Mrtr4"
+    ],
+    "megaMekName": "CLMekMortar4",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Mech Mortar 8",
+    "aliases": [
+      "Mech Mortar 8",
+      "Mrtr8"
+    ],
+    "megaMekName": "ISMekMortar8",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Mech Mortar 8",
+    "aliases": [
+      "Mech Mortar 8",
+      "Mrtr8"
+    ],
+    "megaMekName": "CLMekMortar8",
+    "techBase": "CL",
+    "heat": 10,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Thunderbolt-5",
+    "aliases": [
+      "Thunderbolt-5",
+      "Tbolt5"
+    ],
+    "megaMekName": "ISThunderbolt5",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-10",
+    "aliases": [
+      "Thunderbolt-10",
+      "Tbolt10"
+    ],
+    "megaMekName": "ISThunderbolt10",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-15",
+    "aliases": [
+      "Thunderbolt-15",
+      "Tbolt15"
+    ],
+    "megaMekName": "ISThunderbolt15",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-20",
+    "aliases": [
+      "Thunderbolt-20",
+      "Tbolt20"
+    ],
+    "megaMekName": "ISThunderbolt20",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Enhanced LRT-5",
+    "aliases": [
+      "Enhanced Long Range Torpedo-5",
+      "Enhanced LRT-5",
+      "EnLRT5"
+    ],
+    "megaMekName": "ISNLRT5",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRT-10",
+    "aliases": [
+      "Enhanced Long Range Torpedo-10",
+      "Enhanced LRT-10",
+      "EnLRT10"
+    ],
+    "megaMekName": "ISNLRT10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRT-15",
+    "aliases": [
+      "Enhanced Long Range Torpedo-15",
+      "Enhanced LRT-15",
+      "EnLRT15"
+    ],
+    "megaMekName": "ISNLRT15",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRT-20",
+    "aliases": [
+      "Enhanced Long Range Torpedo-20",
+      "Enhanced LRT-20",
+      "EnLRT20"
+    ],
+    "megaMekName": "ISNLRT20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRT-5",
+    "aliases": [
+      "Long Range Torpedo-5",
+      "LRT-5",
+      "LRT5"
+    ],
+    "megaMekName": "ISLRT5",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRT-5",
+    "aliases": [
+      "Long Range Torpedo-5",
+      "LRT-5",
+      "LRT5"
+    ],
+    "megaMekName": "CLLRT5",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRT-10",
+    "aliases": [
+      "Long Range Torpedo-10",
+      "LRT-10",
+      "LRT10"
+    ],
+    "megaMekName": "ISLRT10",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRT-10",
+    "aliases": [
+      "Long Range Torpedo-10",
+      "LRT-10",
+      "LRT10"
+    ],
+    "megaMekName": "CLLRT10",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRT-15",
+    "aliases": [
+      "Long Range Torpedo-15",
+      "LRT-15",
+      "LRT15"
+    ],
+    "megaMekName": "ISLRT15",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRT-15",
+    "aliases": [
+      "Long Range Torpedo-15",
+      "LRT-15",
+      "LRT15"
+    ],
+    "megaMekName": "CLLRT15",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRT-20",
+    "aliases": [
+      "Long Range Torpedo-20",
+      "LRT-20",
+      "LRT20"
+    ],
+    "megaMekName": "ISLRT20",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRT-20",
+    "aliases": [
+      "Long Range Torpedo-20",
+      "LRT-20",
+      "LRT20"
+    ],
+    "megaMekName": "CLLRT20",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRT-2",
+    "aliases": [
+      "Short Range Torpedo-2",
+      "SRT-2",
+      "SRT2"
+    ],
+    "megaMekName": "ISSRT2",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRT-2",
+    "aliases": [
+      "Short Range Torpedo-2",
+      "SRT-2",
+      "SRT2"
+    ],
+    "megaMekName": "CLSRT2",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRT-4",
+    "aliases": [
+      "Short Range Torpedo-4",
+      "SRT-4",
+      "SRT4"
+    ],
+    "megaMekName": "ISSRT4",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRT-4",
+    "aliases": [
+      "Short Range Torpedo-4",
+      "SRT-4",
+      "SRT4"
+    ],
+    "megaMekName": "CLSRT4",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRT-6",
+    "aliases": [
+      "Short Range Torpedo-6",
+      "SRT-6",
+      "SRT6"
+    ],
+    "megaMekName": "ISSRT6",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRT-6",
+    "aliases": [
+      "Short Range Torpedo-6",
+      "SRT-6",
+      "SRT6"
+    ],
+    "megaMekName": "CLSRT6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Arrow IV Missile",
+    "aliases": [
+      "Arrow IV Missile",
+      "ArwIV"
+    ],
+    "megaMekName": "ISArrowIV",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      8,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Arrow IV Missile",
+    "aliases": [
+      "Arrow IV Missile",
+      "ArwIV"
+    ],
+    "megaMekName": "CLArrowIV",
+    "techBase": "CL",
+    "heat": 10,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      9,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thumper",
+    "aliases": [
+      "Thumper",
+      "Thmpr"
+    ],
+    "megaMekName": "ISThumper",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      0,
+      21,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Sniper",
+    "aliases": [
+      "Sniper",
+      "Snpr"
+    ],
+    "megaMekName": "ISSniper",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      18,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Long Tom",
+    "aliases": [
+      "Long Tom",
+      "LngTm"
+    ],
+    "megaMekName": "ISLongTom",
+    "techBase": "IS",
+    "heat": 20,
+    "damage": [
+      25,
+      25,
+      25
+    ],
+    "ranges": [
+      0,
+      30,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Cruise Missile/50",
+    "aliases": [
+      "Cruise Missile/50",
+      "Crm/50"
+    ],
+    "megaMekName": "ISCruiseMissle50",
+    "techBase": "IS",
+    "heat": 50,
+    "damage": [
+      50,
+      50,
+      50
+    ],
+    "ranges": [
+      0,
+      50,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Cruise Missile/70",
+    "aliases": [
+      "Cruise Missile/70",
+      "Crm/70"
+    ],
+    "megaMekName": "ISCruiseMissle70",
+    "techBase": "IS",
+    "heat": 70,
+    "damage": [
+      70,
+      70,
+      70
+    ],
+    "ranges": [
+      0,
+      90,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Cruise Missile/90",
+    "aliases": [
+      "Cruise Missile/90",
+      "Crm/70"
+    ],
+    "megaMekName": "ISCruiseMissle90",
+    "techBase": "IS",
+    "heat": 90,
+    "damage": [
+      90,
+      90,
+      90
+    ],
+    "ranges": [
+      0,
+      120,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Cruise Missile/120",
+    "aliases": [
+      "Cruise Missile/120",
+      "Crm/70"
+    ],
+    "megaMekName": "ISCruiseMissle120",
+    "techBase": "IS",
+    "heat": 120,
+    "damage": [
+      120,
+      120,
+      120
+    ],
+    "ranges": [
+      0,
+      150,
+      0,
+      0
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Autocannon/2",
+    "aliases": [
+      "Improved AC/2",
+      "iAC2"
+    ],
+    "megaMekName": "Improved Autocannon/2",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      4,
+      8,
+      16,
+      24
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Autocannon/5",
+    "aliases": [
+      "Improved AC/5",
+      "iAC5"
+    ],
+    "megaMekName": "Improved Autocannon/5",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      3,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Autocannon/10",
+    "aliases": [
+      "Improved AC/10",
+      "iAC10"
+    ],
+    "megaMekName": "Improved Autocannon/10",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Autocannon/20",
+    "aliases": [
+      "Improved AC/20",
+      "iAC20"
+    ],
+    "megaMekName": "Improved Autocannon/20",
+    "techBase": "CL",
+    "heat": 7,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Gauss Rifle",
+    "aliases": [
+      "iGR"
+    ],
+    "megaMekName": "Improved Gauss Rifle",
+    "techBase": "CL",
+    "heat": 1,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      2,
+      7,
+      15,
+      22
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Large Laser",
+    "aliases": [
+      "iLL"
+    ],
+    "megaMekName": "Improved Large Laser",
+    "techBase": "CL",
+    "heat": 8,
+    "damage": [
+      8,
+      8,
+      8
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved Large Pulse Laser",
+    "aliases": [
+      "Improved Large Pulse Laser",
+      "iLPL"
+    ],
+    "megaMekName": "ImprovedLargePulseLaser",
+    "techBase": "CL",
+    "heat": 10,
+    "damage": [
+      9,
+      9,
+      9
+    ],
+    "ranges": [
+      0,
+      3,
+      7,
+      10
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Improved LRM-5",
+    "aliases": [
+      "Improved Long Range Missile-5",
+      "Improved LRM-5",
+      "iLRM5"
+    ],
+    "megaMekName": "Improved LRM 5",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved LRM-10",
+    "aliases": [
+      "Improved Long Range Missile-10",
+      "Improved LRM-10",
+      "iLRM10"
+    ],
+    "megaMekName": "Improved LRM 10",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved LRM-15",
+    "aliases": [
+      "Improved Long Range Missile-15",
+      "Improved LRM-15",
+      "iLRM15"
+    ],
+    "megaMekName": "Improved LRM 15",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved LRM-20",
+    "aliases": [
+      "Improved Long Range Missile-20",
+      "Improved LRM-20",
+      "iLRM20"
+    ],
+    "megaMekName": "Improved LRM 20",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved SRM-2",
+    "aliases": [
+      "Improved Short Range Missile-2",
+      "Improved SRM-2",
+      "iSRM2"
+    ],
+    "megaMekName": "Improved SRM 2",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved SRM-4",
+    "aliases": [
+      "Improved Short Range Missile-4",
+      "Improved SRM-4",
+      "iSRM4"
+    ],
+    "megaMekName": "Improved SRM 4",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Improved SRM-6",
+    "aliases": [
+      "Improved Short Range Missile-6",
+      "Improved SRM-6",
+      "iSRM6"
+    ],
+    "megaMekName": "Improved SRM 6",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) RISC Hyper Laser",
+    "aliases": [
+      "RISC Hyper Laser",
+      "RSCHL "
+    ],
+    "megaMekName": "ISRISCHyperLaser ",
+    "techBase": "IS",
+    "heat": 24,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      0,
+      8,
+      15,
+      25
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) RISC Repeating TSEMP",
+    "aliases": [
+      "RISC Repeating TSEMP",
+      "RTSEMP"
+    ],
+    "megaMekName": "ISRISCREPTSEMP",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Enhanced LRM-5 (OS)",
+    "aliases": [
+      "Enhanced Long Range Missile-5 (One-Shot)",
+      "NLRM-5 (OS)",
+      "EnLRM5OS"
+    ],
+    "megaMekName": "ISNLRM5 (OS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-10 (OS)",
+    "aliases": [
+      "Enhanced Long Range Missile-10 (One-Shot)",
+      "NLRM-10 (OS)",
+      "EnLRM10OS"
+    ],
+    "megaMekName": "ISNLRM10 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-15 (OS)",
+    "aliases": [
+      "Enhanced Long Range Missile-15 (One-Shot)",
+      "NLRM-15 (OS)",
+      "EnLRM15OS"
+    ],
+    "megaMekName": "ISNLRM15 (OS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-20 (OS)",
+    "aliases": [
+      "Enhanced Long Range Missile-20 (One-Shot)",
+      "NLRM-20 (OS)",
+      "EnLRM20OS"
+    ],
+    "megaMekName": "ISNLRM20 (OS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-5 (OS)",
+    "aliases": [
+      "Extended Long Range Missile-5 (One-Shot)",
+      "ELRM-5  (OS)",
+      "ExLRM5OS"
+    ],
+    "megaMekName": "ISELRM5 (OS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-10 (OS)",
+    "aliases": [
+      "Extended Long Range Missile-10 (One-Shot)",
+      "ELRM-10 (OS)",
+      "ExLRM10OS"
+    ],
+    "megaMekName": "ISELRM10 (OS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-15 (OS)",
+    "aliases": [
+      "Extended Long Range Missile-15 (One-Shot)",
+      "ELRM-15 (OS)",
+      "ExLRM15OS"
+    ],
+    "megaMekName": "ISELRM15 (OS)",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-20 (OS)",
+    "aliases": [
+      "Extended Long Range Missile-20 (One-Shot)",
+      "ELRM-20 (OS)",
+      "ExLRM20OS"
+    ],
+    "megaMekName": "ISELRM20 (OS)",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-5 (OS)",
+    "aliases": [
+      "Long Range Missile-5 (One-Shot)",
+      "LRM-5 (OS)",
+      "LRM5OS"
+    ],
+    "megaMekName": "ISLRM5 (OS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-5 (OS)",
+    "aliases": [
+      "Long Range Missile-5 (One-Shot)",
+      "LRM-5 (OS)",
+      "LRM5OS"
+    ],
+    "megaMekName": "CLLRM5 (OS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-10 (OS)",
+    "aliases": [
+      "Long Range Missile-10 (One-Shot)",
+      "LRM-10 (OS)",
+      "LRM10OS"
+    ],
+    "megaMekName": "ISLRM10 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-10 (OS)",
+    "aliases": [
+      "Long Range Missile-10 (One-Shot)",
+      "LRM-10 (OS)",
+      "LRM10OS"
+    ],
+    "megaMekName": "CLLRM10 (OS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-15 (OS)",
+    "aliases": [
+      "Long Range Missile-15 (One-Shot)",
+      "LRM-15 (OS)",
+      "LRM15OS"
+    ],
+    "megaMekName": "ISLRM15 (OS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-15 (OS)",
+    "aliases": [
+      "Long Range Missile-15 (One-Shot)",
+      "LRM-15 (OS)",
+      "LRM15OS"
+    ],
+    "megaMekName": "CLLRM15 (OS)",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-20 (OS)",
+    "aliases": [
+      "Long Range Missile-20 (One-Shot)",
+      "LRM-20 (OS)",
+      "LRM20OS"
+    ],
+    "megaMekName": "ISLRM20 (OS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-20 (OS)",
+    "aliases": [
+      "Long Range Missile-20 (One-Shot)",
+      "LRM-20 (OS)",
+      "LRM20OS"
+    ],
+    "megaMekName": "CLLRM20 (OS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-3 (OS)",
+    "aliases": [
+      "Multi-Missile Launcher-3 (One-Shot)",
+      "MML-3 (OS)",
+      "MML3OS"
+    ],
+    "megaMekName": "ISMML3 (OS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-5 (OS)",
+    "aliases": [
+      "Multi-Missile Launcher-5 (One-Shot)",
+      "MML-5 (OS)",
+      "MML5OS"
+    ],
+    "megaMekName": "ISMML5 (OS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-7 (OS)",
+    "aliases": [
+      "Multi-Missile Launcher-7 (One-Shot)",
+      "MML-7 (OS)",
+      "MML7OS"
+    ],
+    "megaMekName": "ISMML7 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-9 (OS)",
+    "aliases": [
+      "Multi-Missile Launcher-9 (One-Shot)",
+      "MML-9 (OS)",
+      "MML9OS"
+    ],
+    "megaMekName": "ISMML9 (OS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-10 (OS)",
+    "aliases": [
+      "Medium Range Missile-10 (One-Shot)",
+      "MRM-10 (OS)",
+      "MRM10OS"
+    ],
+    "megaMekName": "ISMRM10 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-20 (OS)",
+    "aliases": [
+      "Medium Range Missile-20 (One-Shot)",
+      "MRM-20 (OS)",
+      "MRM20OS"
+    ],
+    "megaMekName": "ISMRM20 (OS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-30 (OS)",
+    "aliases": [
+      "Medium Range Missile-30 (One-Shot)",
+      "MRM-30 (OS)",
+      "MRM30OS"
+    ],
+    "megaMekName": "ISMRM30 (OS)",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-40 (OS)",
+    "aliases": [
+      "Medium Range Missile-40 (One-Shot)",
+      "MRM-40 (OS)",
+      "MRM40OS"
+    ],
+    "megaMekName": "ISMRM40 (OS)",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-2 (OS)",
+    "aliases": [
+      "Short Range Missile-2 (One-Shot)",
+      "SRM-2 (OS)",
+      "SRM2OS"
+    ],
+    "megaMekName": "ISSRM2 (OS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-2 (OS)",
+    "aliases": [
+      "Short Range Missile-2 (One-Shot)",
+      "SRM-2 (OS)",
+      "SRM2OS"
+    ],
+    "megaMekName": "CLSRM2 (OS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-4 (OS)",
+    "aliases": [
+      "Short Range Missile-4 (One-Shot)",
+      "SRM-4 (OS)",
+      "SRM4OS"
+    ],
+    "megaMekName": "ISSRM4 (OS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-4 (OS)",
+    "aliases": [
+      "Short Range Missile-4 (One-Shot)",
+      "SRM-4 (OS)",
+      "SRM4OS"
+    ],
+    "megaMekName": "CLSRM4 (OS)",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-6 (OS)",
+    "aliases": [
+      "Short Range Missile-6 (One-Shot)",
+      "SRM-6 (OS)",
+      "SRM6OS"
+    ],
+    "megaMekName": "ISSRM6 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-6 (OS)",
+    "aliases": [
+      "Short Range Missile-6 (One-Shot)",
+      "SRM-6 (OS)",
+      "SRM6OS"
+    ],
+    "megaMekName": "CLSRM6 (OS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-5 (OS)",
+    "aliases": [
+      "Streak Long Range Missile-5 (One-Shot)",
+      "Streak LRM-5 (OS)",
+      "SLRM5OS"
+    ],
+    "megaMekName": "CLStreakLRM5 (OS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-10 (OS)",
+    "aliases": [
+      "Streak Long Range Missile-10 (One-Shot)",
+      "Streak LRM-10 (OS)",
+      "SLRM10OS"
+    ],
+    "megaMekName": "CLStreakLRM10 (OS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-15 (OS)",
+    "aliases": [
+      "Streak Long Range Missile-15 (One-Shot)",
+      "Streak LRM-15 (OS)",
+      "SLRM15OS"
+    ],
+    "megaMekName": "CLStreakLRM15 (OS)",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-20 (OS)",
+    "aliases": [
+      "Streak Long Range Missile-20 (One-Shot)",
+      "Streak LRM-20 (OS)",
+      "SLRM20OS"
+    ],
+    "megaMekName": "CLStreakLRM20 (OS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-2 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-2 (One-Shot)",
+      "Streak SRM-2 (OS)",
+      "SSRM2OS"
+    ],
+    "megaMekName": "ISStreakSRM2 (OS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-2 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-2 (One-Shot)",
+      "Streak SRM-2 (OS)",
+      "SSRM2OS"
+    ],
+    "megaMekName": "CLStreakSRM2 (OS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-4 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-4 (One-Shot)",
+      "Streak SRM-4 (OS)",
+      "SSRM4OS"
+    ],
+    "megaMekName": "ISStreakSRM4 (OS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-4 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-4 (One-Shot)",
+      "Streak SRM-4 (OS)",
+      "SSRM4OS"
+    ],
+    "megaMekName": "CLStreakSRM4 (OS)",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-6 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-6 (One-Shot)",
+      "Streak SRM-6 (OS)",
+      "SSRM6OS"
+    ],
+    "megaMekName": "ISStreakSRM6 (OS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-6 (OS)",
+    "aliases": [
+      "Streak Short Range Missile-6 (One-Shot)",
+      "Streak SRM-6 (OS)",
+      "SSRM6OS"
+    ],
+    "megaMekName": "CLStreakSRM6 (OS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Narc Missile Beacon (OS)",
+    "aliases": [
+      "Narc Missile Beacon (One-Shot)",
+      "Narc Launcher (OS)",
+      "NarcOS"
+    ],
+    "megaMekName": "ISNarcBeacon (OS)",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Narc Missile Beacon (OS)",
+    "aliases": [
+      "Narc Missile Beacon (One-Shot)",
+      "Narc Launcher (OS)",
+      "NarcOS"
+    ],
+    "megaMekName": "CLNarcBeacon (OS)",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) iNarc Launcher (OS)",
+    "aliases": [
+      "Improved Narc Launcher (One-Shot)",
+      "iNarc Launcher (OS)",
+      "iNarcOS"
+    ],
+    "megaMekName": "ISImprovedNarc (OS)",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-5 (OS)",
+    "aliases": [
+      "Thunderbolt-5 (One-Shot)",
+      "Thunderbolt-5 (OS)",
+      "Tbolt5OS"
+    ],
+    "megaMekName": "ISThunderbolt5 (OS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-10 (OS)",
+    "aliases": [
+      "Thunderbolt-10 (One-Shot)",
+      "Thunderbolt-10 (OS)",
+      "Tbolt10OS"
+    ],
+    "megaMekName": "ISThunderbolt10 (OS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-15 (OS)",
+    "aliases": [
+      "Thunderbolt-15 (One-Shot)",
+      "Thunderbolt-15 (OS)",
+      "Tbolt15OS"
+    ],
+    "megaMekName": "ISThunderbolt15 (OS)",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-20 (OS)",
+    "aliases": [
+      "Thunderbolt-20 (One-Shot)",
+      "Thunderbolt-20 (OS)",
+      "Tbolt20OS"
+    ],
+    "megaMekName": "ISThunderbolt20 (OS)",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Enhanced LRM-5 (iOS)",
+    "aliases": [
+      "Enhanced Long Range Missile-5 (Improved One-Shot)",
+      "NLRM-5 (iOS)",
+      "EnLRM5iOS"
+    ],
+    "megaMekName": "ISNLRM5 (iOS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-10 (iOS)",
+    "aliases": [
+      "Enhanced Long Range Missile-10 (Improved One-Shot)",
+      "NLRM-10 (iOS)",
+      "EnLRM10iOS"
+    ],
+    "megaMekName": "ISNLRM10 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-15 (iOS)",
+    "aliases": [
+      "Enhanced Long Range Missile-15 (Improved One-Shot)",
+      "NLRM-15 (iOS)",
+      "EnLRM15iOS"
+    ],
+    "megaMekName": "ISNLRM15 (iOS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Enhanced LRM-20 (iOS)",
+    "aliases": [
+      "Enhanced Long Range Missile-20 (Improved One-Shot)",
+      "NLRM-20 (iOS)",
+      "EnLRM20iOS"
+    ],
+    "megaMekName": "ISNLRM20 (iOS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      3,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-5 (iOS)",
+    "aliases": [
+      "Extended Long Range Missile-5 (Improved One-Shot)",
+      "ELRM-5  (iOS)",
+      "ExLRM5iOS"
+    ],
+    "megaMekName": "ISELRM5 (iOS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-10 (iOS)",
+    "aliases": [
+      "Extended Long Range Missile-10 (Improved One-Shot)",
+      "ELRM-10 (iOS)",
+      "ExLRM10iOS"
+    ],
+    "megaMekName": "ISELRM10 (iOS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-15 (iOS)",
+    "aliases": [
+      "Extended Long Range Missile-15 (Improved One-Shot)",
+      "ELRM-15 (iOS)",
+      "ExLRM15iOS"
+    ],
+    "megaMekName": "ISELRM15 (iOS)",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Extended LRM-20 (iOS)",
+    "aliases": [
+      "Extended Long Range Missile-20 (Improved One-Shot)",
+      "ELRM-20 (iOS)",
+      "ExLRM20iOS"
+    ],
+    "megaMekName": "ISELRM20 (iOS)",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      10,
+      12,
+      22,
+      38
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-5 (iOS)",
+    "aliases": [
+      "Long Range Missile-5 (Improved One-Shot)",
+      "LRM-5 (iOS)",
+      "LRM5iOS"
+    ],
+    "megaMekName": "ISLRM5 (iOS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-5 (iOS)",
+    "aliases": [
+      "Long Range Missile-5 (Improved One-Shot)",
+      "LRM-5 (iOS)",
+      "LRM5iOS"
+    ],
+    "megaMekName": "CLLRM5 (iOS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-10 (iOS)",
+    "aliases": [
+      "Long Range Missile-10 (Improved One-Shot)",
+      "LRM-10 (iOS)",
+      "LRM10iOS"
+    ],
+    "megaMekName": "ISLRM10 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-10 (iOS)",
+    "aliases": [
+      "Long Range Missile-10 (Improved One-Shot)",
+      "LRM-10 (iOS)",
+      "LRM10iOS"
+    ],
+    "megaMekName": "CLLRM10 (iOS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-15 (iOS)",
+    "aliases": [
+      "Long Range Missile-15 (Improved One-Shot)",
+      "LRM-15 (iOS)",
+      "LRM15iOS"
+    ],
+    "megaMekName": "ISLRM15 (iOS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-15 (iOS)",
+    "aliases": [
+      "Long Range Missile-15 (Improved One-Shot)",
+      "LRM-15 (iOS)",
+      "LRM15iOS"
+    ],
+    "megaMekName": "CLLRM15 (iOS)",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) LRM-20 (iOS)",
+    "aliases": [
+      "Long Range Missile-20 (Improved One-Shot)",
+      "LRM-20 (iOS)",
+      "LRM20iOS"
+    ],
+    "megaMekName": "ISLRM20 (iOS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) LRM-20 (iOS)",
+    "aliases": [
+      "Long Range Missile-20 (Improved One-Shot)",
+      "LRM-20 (iOS)",
+      "LRM20iOS"
+    ],
+    "megaMekName": "CLLRM20 (iOS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-3 (iOS)",
+    "aliases": [
+      "Multi-Missile Launcher-3 (Improved One-Shot)",
+      "MML-3 (iOS)",
+      "MML3iOS"
+    ],
+    "megaMekName": "ISMML3 (iOS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-5 (iOS)",
+    "aliases": [
+      "Multi-Missile Launcher-5 (Improved One-Shot)",
+      "MML-5 (iOS)",
+      "MML5iOS"
+    ],
+    "megaMekName": "ISMML5 (iOS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-7 (iOS)",
+    "aliases": [
+      "Multi-Missile Launcher-7 (Improved One-Shot)",
+      "MML-7 (iOS)",
+      "MML7iOS"
+    ],
+    "megaMekName": "ISMML7 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MML-9 (iOS)",
+    "aliases": [
+      "Multi-Missile Launcher-9 (Improved One-Shot)",
+      "MML-9 (iOS)",
+      "MML9iOS"
+    ],
+    "megaMekName": "ISMML9 (iOS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      6,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-10 (iOS)",
+    "aliases": [
+      "Medium Range Missile-10 (Improved One-Shot)",
+      "MRM-10 (iOS)",
+      "MRM10iOS"
+    ],
+    "megaMekName": "ISMRM10 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-20 (iOS)",
+    "aliases": [
+      "Medium Range Missile-20 (Improved One-Shot)",
+      "MRM-20 (iOS)",
+      "MRM20iOS"
+    ],
+    "megaMekName": "ISMRM20 (iOS)",
+    "techBase": "IS",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-30 (iOS)",
+    "aliases": [
+      "Medium Range Missile-30 (Improved One-Shot)",
+      "MRM-30 (iOS)",
+      "MRM30iOS"
+    ],
+    "megaMekName": "ISMRM30 (iOS)",
+    "techBase": "IS",
+    "heat": 10,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) MRM-40 (iOS)",
+    "aliases": [
+      "Medium Range Missile-40 (Improved One-Shot)",
+      "MRM-40 (iOS)",
+      "MRM40iOS"
+    ],
+    "megaMekName": "ISMRM40 (iOS)",
+    "techBase": "IS",
+    "heat": 12,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      3,
+      8,
+      15
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-2 (iOS)",
+    "aliases": [
+      "Short Range Missile-2 (Improved One-Shot)",
+      "SRM-2 (iOS)",
+      "SRM2iOS"
+    ],
+    "megaMekName": "ISSRM2 (iOS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-2 (iOS)",
+    "aliases": [
+      "Short Range Missile-2 (Improved One-Shot)",
+      "SRM-2 (iOS)",
+      "SRM2iOS"
+    ],
+    "megaMekName": "CLSRM2 (iOS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-4 (iOS)",
+    "aliases": [
+      "Short Range Missile-4 (Improved One-Shot)",
+      "SRM-4 (iOS)",
+      "SRM4iOS"
+    ],
+    "megaMekName": "ISSRM4 (iOS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-4 (iOS)",
+    "aliases": [
+      "Short Range Missile-4 (Improved One-Shot)",
+      "SRM-4 (iOS)",
+      "SRM4iOS"
+    ],
+    "megaMekName": "CLSRM4 (iOS)",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) SRM-6 (iOS)",
+    "aliases": [
+      "Short Range Missile-6 (Improved One-Shot)",
+      "SRM-6 (iOS)",
+      "SRM6iOS"
+    ],
+    "megaMekName": "ISSRM6 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) SRM-6 (iOS)",
+    "aliases": [
+      "Short Range Missile-6 (Improved One-Shot)",
+      "SRM-6 (iOS)",
+      "SRM6iOS"
+    ],
+    "megaMekName": "CLSRM6 (iOS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-5 (iOS)",
+    "aliases": [
+      "Streak Long Range Missile-5 (Improved One-Shot)",
+      "Streak LRM-5 (iOS)",
+      "SLRM5iOS"
+    ],
+    "megaMekName": "CLStreakLRM5 (iOS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-10 (iOS)",
+    "aliases": [
+      "Streak Long Range Missile-10 (Improved One-Shot)",
+      "Streak LRM-10 (iOS)",
+      "SLRM10iOS"
+    ],
+    "megaMekName": "CLStreakLRM10 (iOS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-15 (iOS)",
+    "aliases": [
+      "Streak Long Range Missile-15 (Improved One-Shot)",
+      "Streak LRM-15 (iOS)",
+      "SLRM15iOS"
+    ],
+    "megaMekName": "CLStreakLRM15 (iOS)",
+    "techBase": "CL",
+    "heat": 5,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak LRM-20 (iOS)",
+    "aliases": [
+      "Streak Long Range Missile-20 (Improved One-Shot)",
+      "Streak LRM-20 (iOS)",
+      "SLRM20iOS"
+    ],
+    "megaMekName": "CLStreakLRM20 (iOS)",
+    "techBase": "CL",
+    "heat": 6,
+    "damage": [
+      1,
+      1,
+      1
+    ],
+    "ranges": [
+      0,
+      7,
+      14,
+      21
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-2 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-2 (Improved One-Shot)",
+      "Streak SRM-2 (iOS)",
+      "SSRM2iOS"
+    ],
+    "megaMekName": "ISStreakSRM2 (iOS)",
+    "techBase": "IS",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-2 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-2 (Improved One-Shot)",
+      "Streak SRM-2 (iOS)",
+      "SSRM2iOS"
+    ],
+    "megaMekName": "CLStreakSRM2 (iOS)",
+    "techBase": "CL",
+    "heat": 2,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-4 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-4 (Improved One-Shot)",
+      "Streak SRM-4 (iOS)",
+      "SSRM4iOS"
+    ],
+    "megaMekName": "ISStreakSRM4 (iOS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-4 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-4 (Improved One-Shot)",
+      "Streak SRM-4 (iOS)",
+      "SSRM4iOS"
+    ],
+    "megaMekName": "CLStreakSRM4 (iOS)",
+    "techBase": "CL",
+    "heat": 3,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Streak SRM-6 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-6 (Improved One-Shot)",
+      "Streak SRM-6 (iOS)",
+      "SSRM6iOS"
+    ],
+    "megaMekName": "ISStreakSRM6 (iOS)",
+    "techBase": "IS",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(CL) Streak SRM-6 (iOS)",
+    "aliases": [
+      "Streak Short Range Missile-6 (Improved One-Shot)",
+      "Streak SRM-6 (iOS)",
+      "SSRM6iOS"
+    ],
+    "megaMekName": "CLStreakSRM6 (iOS)",
+    "techBase": "CL",
+    "heat": 4,
+    "damage": [
+      2,
+      2,
+      2
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": true
+  },
+  {
+    "id": "(IS) Narc Missile Beacon (iOS)",
+    "aliases": [
+      "Narc Missile Beacon (Improved One-Shot)",
+      "Narc Launcher (iOS)",
+      "NarciOS"
+    ],
+    "megaMekName": "ISNarcBeacon (iOS)",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      3,
+      6,
+      9
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(CL) Narc Missile Beacon (iOS)",
+    "aliases": [
+      "Narc Missile Beacon (Improved One-Shot)",
+      "Narc Launcher (iOS)",
+      "NarciOS"
+    ],
+    "megaMekName": "CLNarcBeacon (iOS)",
+    "techBase": "CL",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) iNarc Launcher (iOS)",
+    "aliases": [
+      "Improved Narc Launcher (Improved One-Shot)",
+      "iNarc Launcher (iOS)",
+      "iNarciOS"
+    ],
+    "megaMekName": "ISImprovedNarc (iOS)",
+    "techBase": "IS",
+    "heat": 0,
+    "damage": [
+      0,
+      0,
+      0
+    ],
+    "ranges": [
+      0,
+      4,
+      9,
+      15
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-5 (iOS)",
+    "aliases": [
+      "Thunderbolt-5 (Improved One-Shot)",
+      "Thunderbolt-5 (iOS)",
+      "Tbolt5iOS"
+    ],
+    "megaMekName": "ISThunderbolt5 (iOS)",
+    "techBase": "IS",
+    "heat": 3,
+    "damage": [
+      5,
+      5,
+      5
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-10 (iOS)",
+    "aliases": [
+      "Thunderbolt-10 (Improved One-Shot)",
+      "Thunderbolt-10 (iOS)",
+      "Tbolt10iOS"
+    ],
+    "megaMekName": "ISThunderbolt10 (iOS)",
+    "techBase": "IS",
+    "heat": 5,
+    "damage": [
+      10,
+      10,
+      10
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-15 (iOS)",
+    "aliases": [
+      "Thunderbolt-15 (Improved One-Shot)",
+      "Thunderbolt-15 (iOS)",
+      "Tbolt15iOS"
+    ],
+    "megaMekName": "ISThunderbolt15 (iOS)",
+    "techBase": "IS",
+    "heat": 7,
+    "damage": [
+      15,
+      15,
+      15
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  },
+  {
+    "id": "(IS) Thunderbolt-20 (iOS)",
+    "aliases": [
+      "Thunderbolt-20 (Improved One-Shot)",
+      "Thunderbolt-20 (iOS)",
+      "Tbolt20iOS"
+    ],
+    "megaMekName": "ISThunderbolt20 (iOS)",
+    "techBase": "IS",
+    "heat": 8,
+    "damage": [
+      20,
+      20,
+      20
+    ],
+    "ranges": [
+      5,
+      6,
+      12,
+      18
+    ],
+    "isCluster": false
+  }
+]

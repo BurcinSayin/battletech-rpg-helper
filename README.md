@@ -88,6 +88,14 @@ Book and desktop defaults can differ: the Clan pulse laser pistol's book reload 
 
 Imported inventory remains raw and byte-preserving, including unknown/custom names, malformed positional rows, historical ammo metadata, and Marian Suit coverage. Alias resolution identifies a catalog entry; it never replaces imported statistics. New notes include labeled table/shared context, flatten whitespace, and replace colon/semicolon delimiters; source notes and imported rows stay verbatim.
 
+### Mech weapon references
+
+The read-only Mech weapon table shows base Heat, Damage (short/medium/long), and Range (minimum/short/medium/long) from a separate bundled reference catalog. Regenerate `data/rules/mech-weapons.json` with `npm run mech-weapons:ingest`; `npm run rules:ingest` also invokes it. The dedicated generator validates the downloaded source above before replacing the artifact and needs no desktop checkout, database, network, or environment variables.
+
+Exact catalog identities take precedence. Bare names may use a declared `Inner Sphere` or `Clan` tech base to disambiguate; mixed/unknown technology supplies no preference. Duplicate identifiers such as `ISMediumLaser` remain ambiguous; use `(IS) Medium Laser` or `(IS) Prototype Medium Laser` in the existing editor to identify the variant. Ambiguous/custom names keep their saved text and details and show unavailable stats rather than guessed values.
+
+Values do not account for ammunition, firing modes, cluster hits, or special effects. Cluster numbers are not calculated salvo damage. Quantity/rear markers affect lookup only; repeated mounts stay separate and no statistics are multiplied. Reference enrichment never writes weapon stats, changes `.btcc`, or updates the live heat/damage tracker.
+
 ### Inventory and combat loadout
 
 The character editor has **Sheet**, **Equipment**, and **Mech** tabs. Equipment lists Weapons, Armor, and Other Gear with stored details and carried-mass/inventory-value totals. Unknown amounts produce partial totals, not zero-valued assumptions. Stack cost and mass already include quantity; reload columns are not added again.

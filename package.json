@@ -20,6 +20,7 @@
     "traits:ingest": "tsx scripts/parse-rulebook-traits.ts",
     "skills:ingest": "tsx scripts/parse-rulebook-skills.ts",
     "equipment:ingest": "tsx scripts/parse-rulebook-equipment.ts",
+    "mech-weapons:ingest": "tsx scripts/parse-mech-weapons.ts",
     "rules:extract": "tsx scripts/extract-rules.ts",
     "supabase:types": "supabase gen types typescript --local > lib/supabase/database.types.ts",
     "supabase:start": "supabase stop --all && supabase start",

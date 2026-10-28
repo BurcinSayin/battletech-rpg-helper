@@ -22,6 +22,7 @@ import { fileURLToPath } from "node:url";
 import { parseRulebookTraits } from "./parse-rulebook-traits";
 import { parseRulebookSkills } from "./parse-rulebook-skills";
 import { parseRulebookEquipment } from "./parse-rulebook-equipment";
+import { parseMechWeapons } from "./parse-mech-weapons";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(here, "..");
@@ -60,6 +61,7 @@ function main(): void {
   parseRulebookTraits();
   parseRulebookSkills();
   parseRulebookEquipment();
+  parseMechWeapons();
   writeJson("affiliations.json", parseList("affilations.dat"));
   writeJson("careers.json", parseList("career.dat"));
   writeJson("eyeColors.json", parseList("eyecolor.dat"));
