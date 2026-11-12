@@ -226,11 +226,11 @@ export function draftToInsert(
   return {
     owner_id: ownerId,
     name: cols.name,
-    info: cols.info as unknown as Json,
-    attributes: cols.attributes as unknown as Json,
-    skills: cols.skills as unknown as Json,
-    traits: cols.traits as unknown as Json,
-    prerequisites: cols.prerequisites as unknown as Json,
+    info: cols.info as unknown as NonNullable<Json>,
+    attributes: cols.attributes as unknown as NonNullable<Json>,
+    skills: cols.skills as unknown as NonNullable<Json>,
+    traits: cols.traits as unknown as NonNullable<Json>,
+    prerequisites: cols.prerequisites as unknown as NonNullable<Json>,
     notes: cols.notes,
   };
 }

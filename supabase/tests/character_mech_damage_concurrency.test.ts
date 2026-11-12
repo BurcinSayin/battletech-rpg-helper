@@ -73,6 +73,10 @@ const baseMech = {
   model: "Base",
   armor: [{ location: "LA", value: 10 }],
   criticalSlots: [{ location: "LA", slots: ["Laser"] }],
+  weapons: [
+    { name: "Laser", location: "LA" },
+    { name: "Laser", location: "RA" },
+  ],
 };
 const initialDamage = {
   armor: [{ index: 0, lost: 1 }],
@@ -80,11 +84,13 @@ const initialDamage = {
   criticals: [{ section: 0, slot: 0 }],
   heat: 4,
   pilotHits: 2,
+  firedWeapons: [0],
 };
 const nextDamage = {
   ...initialDamage,
   armor: [{ index: 0, lost: 3 }],
   heat: 6,
+  firedWeapons: [0, 1],
 };
 const changedMech = { ...baseMech, model: "Changed" };
 const pilotOnly = {
@@ -93,6 +99,7 @@ const pilotOnly = {
   criticals: [],
   heat: 0,
   pilotHits: 2,
+  firedWeapons: [],
 };
 type Writer = "damage" | "base";
 function write(db: Client, id: string, kind: Writer, damage = nextDamage) {

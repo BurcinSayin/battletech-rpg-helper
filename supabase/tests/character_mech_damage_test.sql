@@ -32,10 +32,10 @@ insert into public.campaigns(id,gm_id,name,invite_code) values
 insert into public.campaign_members(campaign_id,user_id,role) values
   ('64646464-6464-6464-6464-646464646464','61616161-6161-6161-6161-616161616161','player');
 create temp table fixture as select
-  '{"model":"Base","armor":[{"location":"LA","value":10}],"criticalSlots":[{"location":"Odd","slots":["-Empty-","Laser"]}]}'::jsonb as mech,
-  '{"armor":[{"index":0,"lost":4}],"structure":[{"index":0,"max":10,"lost":3}],"criticals":[{"section":0,"slot":0}],"heat":7,"pilotHits":2}'::jsonb as damage,
-  '{"armor":[],"structure":[],"criticals":[],"heat":0,"pilotHits":2}'::jsonb as pilot_only,
-  '{"armor":[],"structure":[],"criticals":[],"heat":0,"pilotHits":0}'::jsonb as empty_damage;
+  '{"model":"Base","armor":[{"location":"LA","value":10}],"criticalSlots":[{"location":"Odd","slots":["-Empty-","Laser"]}],"weapons":[{"name":"Laser","location":"LA"},{"name":"Laser","location":"RA"}]}'::jsonb as mech,
+  '{"armor":[{"index":0,"lost":4}],"structure":[{"index":0,"max":10,"lost":3}],"criticals":[{"section":0,"slot":0}],"heat":7,"pilotHits":2,"firedWeapons":[0]}'::jsonb as damage,
+  '{"armor":[],"structure":[],"criticals":[],"heat":0,"pilotHits":2,"firedWeapons":[]}'::jsonb as pilot_only,
+  '{"armor":[],"structure":[],"criticals":[],"heat":0,"pilotHits":0,"firedWeapons":[]}'::jsonb as empty_damage;
 insert into public.characters(id,owner_id,campaign_id,name,mech)
 select '65656565-6565-6565-6565-656565656565','61616161-6161-6161-6161-616161616161',
   '64646464-6464-6464-6464-646464646464','Damage subject',mech from fixture;
@@ -83,6 +83,8 @@ select is(pg_temp.damage_sql(damage), 'NOERROR','owner applies damage') from fix
 select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'owner damage persisted') from fixture;
 select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),2,'damage write bumps version exactly once');
 select is(pg_temp.damage_sql(damage,null,'62626262-6262-6262-6262-626262626262'),'NOERROR','campaign GM applies damage') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'GM damage and firing locks persisted') from fixture;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),3,'GM damage write bumps version exactly once');
 select is(pg_temp.damage_sql(damage,null,'63636363-6363-6363-6363-636363636363'),'PT409','stranger gets opaque conflict') from fixture;
 select is(pg_temp.damage_sql('{"extra":true}',null,'63636363-6363-6363-6363-636363636363'),'PT409','unauthorized object never reaches CHECK');
 select is(pg_temp.damage_sql(damage,1),'PT409','stale version conflicts') from fixture;
@@ -129,9 +131,41 @@ insert into invalid_cases select 'too many ' || field,jsonb_set(damage,array[fie
   (select jsonb_agg(damage->field->0 order by ord) from generate_series(1,case when field = 'criticals' then 257 else 17 end) ord))
 from fixture cross join unnest(array['armor','structure','criticals']) field;
 insert into invalid_cases select 'oversize',damage || jsonb_build_object('blob',repeat('x',16385)) from fixture;
+insert into invalid_cases select 'fired missing key',damage - 'firedWeapons' from fixture;
+insert into invalid_cases select 'fired ' || label,jsonb_set(damage,'{firedWeapons}',v)
+from fixture cross join (values
+  ('null array','null'::jsonb),
+  ('object array','{}'::jsonb),
+  ('string array','"0"'::jsonb),
+  ('number array','0'::jsonb),
+  ('boolean array','true'::jsonb),
+  ('string entry','["0"]'::jsonb),
+  ('boolean entry','[true]'::jsonb),
+  ('null entry','[null]'::jsonb),
+  ('object entry','[{}]'::jsonb),
+  ('array entry','[[]]'::jsonb),
+  ('negative index','[-1]'::jsonb),
+  ('fractional index','[0.5]'::jsonb),
+  ('duplicate index','[0,0]'::jsonb),
+  ('decimal duplicate index','[0,0.0]'::jsonb),
+  ('index beyond weapons','[2]'::jsonb),
+  ('in-range index beyond weapons','[63]'::jsonb),
+  ('index beyond limit','[64]'::jsonb),
+  ('huge index','[1e400]'::jsonb),
+  ('huge negative index','[-1e400]'::jsonb)
+) x(label,v);
+insert into invalid_cases select 'fired more than 64 entries',jsonb_set(damage,'{firedWeapons}',
+  (select jsonb_agg(i order by i) from generate_series(0,64) i)) from fixture;
 select is(pg_temp.damage_sql(damage),'PT422','hostile input rejected safely: ' || label) from invalid_cases;
 select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),3,'all invalid RPC calls are atomic');
 select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'all invalid RPC calls preserve damage') from fixture;
+select is(pg_temp.actor_sql('61616161-6161-6161-6161-616161616161',
+  format('insert into public.characters(owner_id,name,mech,mech_damage) values (%L,%L,%L::jsonb,%L::jsonb)',
+    '61616161-6161-6161-6161-616161616161','Direct invalid ' || c.label,f.mech,c.damage)),
+  '23514','authenticated INSERT rejects ' || c.label)
+from invalid_cases c cross join fixture f where c.label like 'fired %';
+select is((select count(*) from public.characters where name like 'Direct invalid fired %'),0::bigint,
+  'invalid firing INSERTs create no rows');
 
 -- Exercise the pure validator with raw mech shapes that cannot be stored by the mech CHECK.
 select is(public.mech_damage_is_valid('{"armor":{},"criticalSlots":false}',damage),false,'non-array mech fields return false, never raise') from fixture;
@@ -143,21 +177,46 @@ select is(public.mech_damage_is_valid('{"armor":[{"value":"10"}]}',jsonb_set(emp
 select is(public.mech_damage_is_valid('{"criticalSlots":[{"slots":{}}]}',jsonb_set(empty_damage,'{criticals}','[{"section":0,"slot":0}]')),false,'non-array slots return false') from fixture;
 select is(public.mech_damage_is_valid(null,null),true,'SQL NULL damage is always valid');
 select is(public.mech_damage_is_valid(null,'null'),false,'JSON null is not a stored object');
+select is(public.mech_damage_is_valid(raw.mech,empty_damage),true,
+  'empty firing array accepted for raw mech: ' || raw.label)
+from fixture cross join (values
+  ('SQL null',null::jsonb),('JSON null','null'::jsonb),('array','[]'::jsonb),
+  ('string','"bad"'::jsonb),('boolean','false'::jsonb),('number','1'::jsonb),
+  ('missing weapons','{}'::jsonb),('null weapons','{"weapons":null}'::jsonb),
+  ('object weapons','{"weapons":{}}'::jsonb),('boolean weapons','{"weapons":false}'::jsonb),
+  ('empty weapons','{"weapons":[]}'::jsonb)
+) raw(label,mech);
+select is(public.mech_damage_is_valid(raw.mech,jsonb_set(empty_damage,'{firedWeapons}','[0]')),false,
+  'nonempty firing array rejected safely for raw mech: ' || raw.label)
+from fixture cross join (values
+  ('SQL null',null::jsonb),('JSON null','null'::jsonb),('array','[]'::jsonb),
+  ('string','"bad"'::jsonb),('boolean','false'::jsonb),('number','1'::jsonb),
+  ('missing weapons','{}'::jsonb),('null weapons','{"weapons":null}'::jsonb),
+  ('object weapons','{"weapons":{}}'::jsonb),('boolean weapons','{"weapons":false}'::jsonb),
+  ('empty weapons','{"weapons":[]}'::jsonb)
+) raw(label,mech);
 
 select is(pg_temp.base_sql('{"name":"Renamed","mech_damage":null}'),'NOERROR','full save omitting mech ignores supplied mech_damage');
-select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'omitted mech preserves damage') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'omitted mech preserves damage and firing locks') from fixture;
 select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),4,'omitted mech save bumps once');
-select is(pg_temp.base_sql('{"mech":{"criticalSlots":[{"slots":["-Empty-","Laser"],"location":"Odd"}],"armor":[{"value":10,"location":"LA"}],"model":"Base"}}'),
+select is(pg_temp.base_sql('{"mech":{"weapons":[{"location":"LA","name":"Laser"},{"location":"RA","name":"Laser"}],"criticalSlots":[{"slots":["-Empty-","Laser"],"location":"Odd"}],"armor":[{"value":10,"location":"LA"}],"model":"Base"}}'),
   'NOERROR','reordered identical mech saves');
-select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'jsonb-equal mech preserves damage') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),damage,'jsonb-equal mech preserves damage and firing locks') from fixture;
 select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),5,'equal mech save bumps once');
 select is(pg_temp.base_sql(jsonb_build_object('mech',mech || '{"model":"Changed"}')),'NOERROR','distinct mech edit saves') from fixture;
-select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),pilot_only,'edit clears damage, maxima, criticals and heat, preserving pilot') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),pilot_only,'edit clears damage, maxima, criticals, heat and firing locks, preserving pilot') from fixture;
 select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),6,'distinct mech save bumps once');
 select is(pg_temp.damage_sql(damage),'NOERROR','reapply damage before removal') from fixture;
 select is(pg_temp.base_sql('{"mech":null}'),'NOERROR','mech removal saves');
-select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),pilot_only,'removal preserves pilot and clears mech state') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),pilot_only,'removal preserves pilot and clears mech state and firing locks') from fixture;
+create temp table before_no_mech_failure as
+  select version,mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565';
 select is(pg_temp.damage_sql(jsonb_set(pilot_only,'{heat}','1')),'PT422','RPC rejects nonzero heat without mech') from fixture;
+select is(pg_temp.damage_sql(jsonb_set(pilot_only,'{firedWeapons}','[0]')),'PT422','RPC rejects firing locks without mech') from fixture;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version,'no-mech rejected writes preserve version') from before_no_mech_failure;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  mech_damage,'no-mech rejected writes preserve pilot and empty firing state') from before_no_mech_failure;
 select is(pg_temp.base_sql(jsonb_build_object('mech',mech)),'NOERROR','mech addition saves') from fixture;
 select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),pilot_only,'addition preserves pilot') from fixture;
 select is(pg_temp.damage_sql(jsonb_set(damage,'{pilotHits}','0')),'NOERROR','damage with zero pilot applies') from fixture;
@@ -179,6 +238,60 @@ select is((select mech_damage->>'pilotHits' from public.characters where id = '6
 select is(pg_temp.damage_sql(jsonb_set(empty_damage,'{pilotHits}','0.00')),'NOERROR','RPC accepts pilotHits 0.00') from fixture;
 select is(pg_temp.base_sql('{"mech":{"model":"Decimal zero"}}'),'NOERROR','distinct mech save after pilotHits 0.00 succeeds');
 select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),null::jsonb,'decimal zero pilot resets to SQL NULL');
+
+-- Isolate successful firing writes after the fixed-version regression assertions.
+select is(pg_temp.base_sql(jsonb_build_object('mech',mech)),'NOERROR','restore two-weapon mech for firing writes') from fixture;
+create temp table before_firing_writes as
+  select version from public.characters where id = '65656565-6565-6565-6565-656565656565';
+select is(pg_temp.damage_sql(empty_damage),'NOERROR','RPC accepts empty firing array') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  empty_damage,'empty firing array is persisted') from fixture;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version + 1,'empty firing write bumps version exactly once') from before_firing_writes;
+select is(pg_temp.damage_sql(jsonb_set(damage,'{firedWeapons}','[1,0]')),'NOERROR','RPC accepts multiple independent firing indices') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  jsonb_set(damage,'{firedWeapons}','[1,0]'),'multiple firing indices and other damage persist unchanged') from fixture;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version + 2,'multiple firing write bumps version exactly once') from before_firing_writes;
+select is(pg_temp.damage_sql(jsonb_set(damage,'{firedWeapons}','[0.0,1.00]')),'NOERROR','RPC accepts decimal-scale firing integers') from fixture;
+select is((select (mech_damage->'firedWeapons')::text from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  '[0.0, 1.00]','decimal-scale firing integers are stored unchanged');
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version + 3,'decimal firing write bumps version exactly once') from before_firing_writes;
+select is(pg_temp.damage_sql(jsonb_set(empty_damage,'{firedWeapons}','[0]')),'NOERROR','RPC accepts fired-only zero-heat state') from fixture;
+select is((select mech_damage from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  jsonb_set(empty_damage,'{firedWeapons}','[0]'),'fired-only state remains non-NULL') from fixture;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version + 4,'fired-only write bumps version exactly once') from before_firing_writes;
+
+select is(pg_temp.actor_sql('61616161-6161-6161-6161-616161616161',
+  format('insert into public.characters(owner_id,name,mech,mech_damage) values (%L,%L,%L::jsonb,%L::jsonb)',
+    '61616161-6161-6161-6161-616161616161','Direct firing ' || x.label,mech,jsonb_set(empty_damage,'{firedWeapons}',x.indices))),
+  'NOERROR','authenticated INSERT accepts firing ' || x.label)
+from fixture cross join (values ('empty','[]'::jsonb),('multiple','[0,1]'::jsonb),('decimal','[0.0,1.00]'::jsonb)) x(label,indices);
+select is((select mech_damage from public.characters where name = 'Direct firing ' || x.label),
+  jsonb_set(empty_damage,'{firedWeapons}',x.indices),'direct INSERT persists firing ' || x.label)
+from fixture cross join (values ('empty','[]'::jsonb),('multiple','[0,1]'::jsonb),('decimal','[0.0,1.00]'::jsonb)) x(label,indices);
+select is(pg_temp.actor_sql('61616161-6161-6161-6161-616161616161',
+  format('insert into public.characters(owner_id,name,mech_damage) values (%L,%L,%L::jsonb)',
+    '61616161-6161-6161-6161-616161616161','Direct firing without mech',jsonb_set(empty_damage,'{firedWeapons}','[0]'))),
+  '23514','authenticated INSERT rejects firing without mech') from fixture;
+select is((select count(*) from public.characters where name = 'Direct firing without mech'),0::bigint,
+  'firing INSERT without mech creates no row');
+
+-- Exercise both global bounds and the maximum array length independently of the two-row fixture.
+create temp table firing_limit_fixture as select
+  jsonb_build_object('weapons',(select jsonb_agg(jsonb_build_object('name','Laser','location','LA')) from generate_series(1,64))) as mech,
+  (select jsonb_agg(i order by i) from generate_series(0,63) i) as indices;
+select is(public.mech_damage_is_valid(l.mech,jsonb_set(f.empty_damage,'{firedWeapons}','[0,63]')),true,
+  'global boundary indices 0 and 63 are valid for 64 weapons') from fixture f cross join firing_limit_fixture l;
+select is(public.mech_damage_is_valid(l.mech,jsonb_set(f.empty_damage,'{firedWeapons}',l.indices)),true,
+  '64 unique firing indices are valid for 64 weapons') from fixture f cross join firing_limit_fixture l;
+select is(public.mech_damage_is_valid(l.mech,jsonb_set(f.empty_damage,'{firedWeapons}',l.indices || '[0]')),false,
+  '65 firing entries rejected with all indices within mech bounds') from fixture f cross join firing_limit_fixture l;
+select is(public.mech_damage_is_valid(jsonb_set(l.mech,'{weapons}',(l.mech->'weapons') || '[{"name":"Laser","location":"LA"}]'),
+  jsonb_set(f.empty_damage,'{firedWeapons}','[64]')),false,
+  'index 64 rejected even when raw mech contains 65 weapons') from fixture f cross join firing_limit_fixture l;
 
 select * from finish();
 rollback;

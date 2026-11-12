@@ -180,11 +180,13 @@ describe("rowToMechDamage", () => {
         criticals: [],
         heat: 2,
         pilotHits: 3,
+        firedWeapons: [0],
       },
     };
     const mech = {
       ...emptyMech(),
       armor: [{ location: "LA", value: 4 }],
+      weapons: [{ name: "Machine Gun", location: "LA" }],
       criticalSlots: [],
     };
     expect(rowToMechDamage(row, mech)).toEqual({
@@ -192,11 +194,45 @@ describe("rowToMechDamage", () => {
       armor: [{ index: 0, lost: 4 }],
       heat: 2,
       pilotHits: 3,
+      firedWeapons: [0],
     });
     expect(rowToMechDamage(row, null)).toEqual({
       ...emptyMechDamage(),
       pilotHits: 3,
     });
+  });
+  it("retains stored firing locks and prunes removed weapon rows", () => {
+    const mech = {
+      ...emptyMech(),
+      weapons: [
+        { name: "Heavy Gauss Rifle", location: "RA" },
+        { name: "Heavy Gauss Rifle", location: "RA" },
+        { name: "Machine Gun", location: "LA" },
+      ],
+    };
+    const row: CharacterRow = {
+      ...columnsToRow(emptyDraft()),
+      mech_damage: {
+        armor: [],
+        structure: [],
+        criticals: [],
+        heat: 0,
+        pilotHits: 0,
+        firedWeapons: [2, 0, 1],
+      },
+    };
+    const before = structuredClone(row);
+    expect(rowToMechDamage(row, mech)).toEqual({
+      ...emptyMechDamage(),
+      firedWeapons: [0, 1, 2],
+    });
+    expect(
+      rowToMechDamage(row, { ...mech, weapons: mech.weapons.slice(0, 1) }),
+    ).toEqual({ ...emptyMechDamage(), firedWeapons: [0] });
+    expect(rowToMechDamage(row, { ...mech, weapons: [] })).toEqual(
+      emptyMechDamage(),
+    );
+    expect(row).toEqual(before);
   });
   it("invalid stored damage logs row id and paths, not values, then returns empty", () => {
     const log = vi.spyOn(console, "error").mockImplementation(() => {});
@@ -209,6 +245,7 @@ describe("rowToMechDamage", () => {
           criticals: [],
           heat: "SECRET_PAYLOAD",
           pilotHits: 0,
+          firedWeapons: [],
         },
       };
       expect(rowToMechDamage(row, emptyMech())).toEqual(emptyMechDamage());

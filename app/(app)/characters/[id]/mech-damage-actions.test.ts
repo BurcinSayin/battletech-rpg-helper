@@ -50,6 +50,11 @@ describe("applyMechDamage", () => {
     [
       id,
       1,
+      { armor: [], structure: [], criticals: [], heat: 0, pilotHits: 0 },
+    ],
+    [
+      id,
+      1,
       {
         ...emptyMechDamage(),
         armor: [
@@ -62,6 +67,37 @@ describe("applyMechDamage", () => {
     "rejects unknown invalid input %# without creating a client or calling RPC",
     async (id, version, damage) => {
       expect(await applyMechDamage(id, version, damage)).toEqual({
+        ok: false,
+        kind: "invalid",
+        message: "Damage values are invalid.",
+      });
+      expect(createClient).not.toHaveBeenCalled();
+      expect(rpc).not.toHaveBeenCalled();
+      expect(revalidatePath).not.toHaveBeenCalled();
+    },
+  );
+  it.each([
+    null,
+    {},
+    "0",
+    0,
+    [null],
+    ["0"],
+    [true],
+    [-1],
+    [0.5],
+    [64],
+    [Number.MAX_SAFE_INTEGER],
+    [Number.NaN],
+    [Number.POSITIVE_INFINITY],
+    [0, 0],
+    Array.from({ length: 65 }, (_, index) => index),
+  ].map((firedWeapons) => ({ firedWeapons })))(
+    "rejects invalid firing state %# before creating a client or calling RPC",
+    async ({ firedWeapons }) => {
+      expect(
+        await applyMechDamage(id, 7, { ...emptyMechDamage(), firedWeapons }),
+      ).toEqual({
         ok: false,
         kind: "invalid",
         message: "Damage values are invalid.",
@@ -85,6 +121,31 @@ describe("applyMechDamage", () => {
     });
     expect(revalidatePath).toHaveBeenCalledWith(`/characters/${id}`);
   });
+  it("persists fired-only zero-heat damage rather than SQL null", async () => {
+    const damage = { ...emptyMechDamage(), firedWeapons: [0] };
+    rpc.mockResolvedValue({
+      data: {
+        ...row(),
+        mech: {
+          ...emptyMech(),
+          weapons: [{ name: "Machine Gun", location: "LA" }],
+        },
+        mech_damage: damage,
+      },
+      error: null,
+    });
+    expect(await applyMechDamage(id, 7, damage)).toEqual({
+      ok: true,
+      version: 8,
+      damage,
+    });
+    expect(rpc).toHaveBeenCalledTimes(1);
+    expect(rpc).toHaveBeenCalledWith("update_character_mech_damage", {
+      p_id: id,
+      p_expected_version: 7,
+      p_damage: damage,
+    });
+  });
   it("sorts valid input and strips extras without cross-record repair or mutation", async () => {
     const damage = {
       ...emptyMechDamage(),
@@ -102,6 +163,7 @@ describe("applyMechDamage", () => {
         { section: 0, slot: 1 },
       ],
       heat: 4,
+      firedWeapons: [63, 10, 2, 0],
       extra: "strip",
     };
     const before = structuredClone(damage);
@@ -122,23 +184,36 @@ describe("applyMechDamage", () => {
       ],
       heat: 4,
       pilotHits: 0,
+      firedWeapons: [0, 2, 10, 63],
     });
     expect(damage).toEqual(before);
   });
   it("returns authoritative row damage and version, not submitted values", async () => {
     const returned = {
       ...row(),
-      mech: { ...emptyMech(), armor: [{ location: "LA", value: 5 }] },
+      mech: {
+        ...emptyMech(),
+        armor: [{ location: "LA", value: 5 }],
+        weapons: [
+          { name: "Heavy Gauss Rifle", location: "RA" },
+          { name: "Heavy Gauss Rifle", location: "RA" },
+        ],
+      },
       mech_damage: {
         ...emptyMechDamage(),
         armor: [{ index: 0, lost: 2 }],
         pilotHits: 3,
+        firedWeapons: [1],
       },
       version: 13,
     };
     rpc.mockResolvedValue({ data: returned, error: null });
     expect(
-      await applyMechDamage(id, 7, { ...emptyMechDamage(), heat: 10 }),
+      await applyMechDamage(id, 7, {
+        ...emptyMechDamage(),
+        heat: 10,
+        firedWeapons: [0],
+      }),
     ).toEqual({ ok: true, version: 13, damage: returned.mech_damage });
   });
   it.each([{ code: "PT409" }, { message: "raised PT409" }])(

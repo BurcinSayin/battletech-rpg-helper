@@ -642,6 +642,7 @@ describe("heat and pilot hits", () => {
   it("cools repeatedly to zero without changing other damage", () => {
     const onChange = vi.fn();
     const initial: MechDamage = {
+      ...emptyMechDamage(),
       heat: 25,
       pilotHits: 2,
       armor: [{ index: 1, lost: 2 }],
@@ -835,16 +836,16 @@ describe("weapon reference values", () => {
         "2",
         "25 / 20 / 10",
         "4 / 6 / 13 / 20",
-        "Ammo:4",
+        "—",
       ],
-      ["(IS) Machine Gun", "Left Arm", "0", "2 / 2 / 2", "0 / 1 / 2 / 3", ""],
+      ["(IS) Machine Gun", "Left Arm", "0", "2 / 2 / 2", "0 / 1 / 2 / 3", "—"],
       [
         "ISMediumLaserAmbiguous catalog match",
         "Right Torso",
         "—",
         "—",
         "—",
-        "Original ambiguity",
+        "—",
       ],
       [
         "Custom weaponNo catalog match",
@@ -852,7 +853,7 @@ describe("weapon reference values", () => {
         "—",
         "—",
         "—",
-        "Keep me",
+        "—",
       ],
       [
         "(IS) Machine Gun",
@@ -860,7 +861,7 @@ describe("weapon reference values", () => {
         "0",
         "2 / 2 / 2",
         "0 / 1 / 2 / 3",
-        "Second mount",
+        "—",
       ],
     ]);
   });
@@ -897,12 +898,284 @@ describe("weapon reference values", () => {
     expect(within(table).getByText("10 / 10 / 10")).toBeTruthy();
     expect(within(table).getByText("0 / 8 / 15 / 25")).toBeTruthy();
     expect(within(table).getByText("ER Large Laser")).toBeTruthy();
-    expect(within(table).getByText("Ammo:20")).toBeTruthy();
+    expect(
+      within(table).getByRole("columnheader", { name: "Fire" }),
+    ).toBeTruthy();
+    expect(within(table).queryByRole("columnheader", { name: "Detail" })).toBeNull();
+    expect(isDisabled(btn("Fire weapon 2: 2 LRM 20 (R)"))).toBe(true);
     expect(onChange).not.toHaveBeenCalled();
     rerender(<MechView mech={{ ...value, techBase: "Mixed (IS Chassis)" }} />);
     expect(within(table).getAllByText("Ambiguous catalog match")).toHaveLength(
       2,
     );
     expect(within(table).queryByText("10 / 10 / 10")).toBeNull();
+  });
+});
+
+describe("weapon firing", () => {
+  function armedMech(): MechData {
+    return {
+      ...mech(),
+      techBase: "Inner Sphere",
+      weapons: [
+        { name: "(IS) Heavy Gauss Rifle", location: "Right Arm", detail: "Ammo:4" },
+        { name: "(IS) Heavy Gauss Rifle", location: "Right Arm", detail: "Ammo:4" },
+        { name: "(IS) Machine Gun", location: "Left Arm", detail: "" },
+        { name: "ISMediumLaser", location: "Right Torso", detail: "" },
+        { name: "Custom weapon", location: "Center Torso", detail: "" },
+      ],
+    };
+  }
+
+  const fire = (row: number) =>
+    btn(`Fire weapon ${row}: ${armedMech().weapons[row - 1].name}`);
+  const expectHeat = (heat: number) => {
+    const counter = screen.getByText("Heat", { selector: "span" }).parentElement!;
+    expect(within(counter).getByText(String(heat))).toBeTruthy();
+  };
+  const expectFired = (row: number, fired: boolean) => {
+    const button = fire(row);
+    expect(button.textContent).toBe(fired ? "Fired" : "Fire");
+    expect(button.getAttribute("aria-pressed")).toBe(String(fired));
+    expect(isDisabled(button)).toBe(fired);
+  };
+
+  it("fires duplicate mounts independently once per cooling cycle using displayed heat", () => {
+    const onChange = vi.fn();
+    const initial = {
+      ...emptyMechDamage(),
+      heat: 5,
+      pilotHits: 2,
+      armor: [{ index: 1, lost: 2 }],
+      structure: [{ index: 0, max: 12, lost: 3 }],
+      criticals: [{ section: 0, slot: 2 }],
+    };
+    render(<Harness value={armedMech()} initial={initial} onChange={onChange} />);
+    const table = screen.getByRole("table", { name: /S\/M\/L = short/ });
+    expect(within(table).getByRole("columnheader", { name: "Fire" })).toBeTruthy();
+    expect(within(table).queryByRole("columnheader", { name: "Detail" })).toBeNull();
+    const firstRow = within(table).getAllByRole("row")[1];
+    expect(within(firstRow).getAllByRole("cell")[2].textContent).toBe("2");
+    expectHeat(5);
+    expectFired(1, false);
+    expectFired(2, false);
+    fireEvent.click(fire(1));
+    expect(onChange).toHaveBeenLastCalledWith({
+      ...initial,
+      heat: 7,
+      firedWeapons: [0],
+    });
+    expectHeat(7);
+    expectFired(1, true);
+    expectFired(2, false);
+    fireEvent.click(fire(1));
+    fireEvent.doubleClick(fire(1));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expectHeat(7);
+    fireEvent.click(fire(2));
+    expect(onChange).toHaveBeenLastCalledWith({
+      ...initial,
+      heat: 9,
+      firedWeapons: [0, 1],
+    });
+    expectHeat(9);
+    expectFired(1, true);
+    expectFired(2, true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenLastCalledWith({
+      ...initial,
+      heat: 0,
+      firedWeapons: [],
+    });
+    expectHeat(0);
+    expectFired(1, false);
+    expectFired(2, false);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(fire(1));
+    expectHeat(2);
+    expectFired(1, true);
+    expect(onChange).toHaveBeenCalledTimes(4);
+  });
+
+  it("locks a matched zero-heat weapon and enables cooling at zero to rearm it", () => {
+    const onChange = vi.fn();
+    render(<Harness value={armedMech()} onChange={onChange} />);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    expectFired(3, false);
+    fireEvent.click(fire(3));
+    expect(onChange).toHaveBeenLastCalledWith({
+      ...emptyMechDamage(),
+      firedWeapons: [2],
+    });
+    expectHeat(0);
+    expectFired(3, true);
+    expect(isDisabled(btn("Cool heat"))).toBe(false);
+    fireEvent.click(fire(3));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenLastCalledWith(emptyMechDamage());
+    expectFired(3, false);
+    expectHeat(0);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+  });
+
+  it("never substitutes zero heat for unmatched or ambiguous catalog references", () => {
+    const onChange = vi.fn();
+    render(<Harness value={armedMech()} onChange={onChange} />);
+    expect(screen.getByText("Ambiguous catalog match")).toBeTruthy();
+    expect(screen.getByText("No catalog match")).toBeTruthy();
+    for (const row of [4, 5]) {
+      expect(isDisabled(fire(row))).toBe(true);
+      expect(fire(row).getAttribute("aria-pressed")).toBe("false");
+      expect(fire(row).textContent).toBe("Fire");
+      fireEvent.click(fire(row));
+    }
+    expect(onChange).not.toHaveBeenCalled();
+    expectHeat(0);
+    expectFired(3, false);
+  });
+
+  it.each([
+    "",
+    "Single",
+    "0 Single",
+    "-1 Single",
+    "10.5 Single",
+    "1e2 Single",
+    "10Single",
+    "9007199254740992 Single",
+  ])("cannot rearm fired weapons with invalid sinks %j, even at zero heat", (heatSinks) => {
+    const onChange = vi.fn();
+    const value = { ...armedMech(), heatSinks };
+    render(<Harness value={value} onChange={onChange} />);
+    fireEvent.click(fire(3));
+    expectFired(3, true);
+    expectHeat(0);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expectFired(3, true);
+    fireEvent.click(fire(1));
+    expectHeat(2);
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenCalledTimes(2);
+    expect(onChange.mock.lastCall![0].firedWeapons).toEqual([0, 2]);
+  });
+
+  it("retains firing locks when heat is manually reduced to zero", () => {
+    const onChange = vi.fn();
+    render(<Harness value={armedMech()} onChange={onChange} />);
+    fireEvent.click(fire(1));
+    fireEvent.click(btn("Decrease heat"));
+    fireEvent.click(btn("Decrease heat"));
+    expectHeat(0);
+    expectFired(1, true);
+    expect(onChange.mock.lastCall![0].firedWeapons).toEqual([0]);
+    expect(isDisabled(btn("Cool heat"))).toBe(false);
+    fireEvent.click(btn("Cool heat"));
+    expectFired(1, false);
+  });
+
+  it("caps heat at 999 but still locks the fired weapon", () => {
+    const onChange = vi.fn();
+    render(
+      <Harness
+        value={armedMech()}
+        initial={{ ...emptyMechDamage(), heat: 998 }}
+        onChange={onChange}
+      />,
+    );
+    fireEvent.click(fire(1));
+    expectHeat(999);
+    expectFired(1, true);
+    expect(onChange).toHaveBeenLastCalledWith({
+      ...emptyMechDamage(),
+      heat: 999,
+      firedWeapons: [0],
+    });
+  });
+
+  it("disables firing and cooling while controls are locked without losing fired state", () => {
+    const onChange = vi.fn();
+    const value = armedMech();
+    const { rerender } = render(<Harness value={value} onChange={onChange} />);
+    fireEvent.click(fire(1));
+    rerender(<Harness value={value} onChange={onChange} controlsDisabled />);
+    for (const row of [1, 2, 3, 4, 5]) {
+      expect(isDisabled(fire(row))).toBe(true);
+      fireEvent.click(fire(row));
+    }
+    expect(isDisabled(btn("Cool heat"))).toBe(true);
+    fireEvent.click(btn("Cool heat"));
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expectHeat(2);
+    expect(fire(1).getAttribute("aria-pressed")).toBe("true");
+    expect(fire(2).getAttribute("aria-pressed")).toBe("false");
+    rerender(<Harness value={value} onChange={onChange} />);
+    expectFired(1, true);
+    expectFired(2, false);
+    expect(isDisabled(btn("Cool heat"))).toBe(false);
+  });
+
+  it("renders stored firing status without any controls in read-only views", () => {
+    render(
+      <MechView
+        mech={armedMech()}
+        damage={{ ...emptyMechDamage(), heat: 2, firedWeapons: [0, 2] }}
+      />,
+    );
+    expect(screen.queryAllByRole("button")).toHaveLength(0);
+    expect(screen.queryAllByRole("spinbutton")).toHaveLength(0);
+    const table = screen.getByRole("table", { name: /S\/M\/L = short/ });
+    const statuses = within(table).getAllByRole("row").slice(1).map((row) =>
+      within(row).getAllByRole("cell").at(-1)!.textContent,
+    );
+    expect(statuses).toEqual(["Fired", "—", "Fired", "—", "—"]);
+  });
+
+  it("adopts firing state from controlled damage updates rather than local flags", () => {
+    const onChange = vi.fn();
+    const value = armedMech();
+    const { rerender } = render(
+      <MechView mech={value} damage={emptyMechDamage()} onDamageChange={onChange} />,
+    );
+    rerender(
+      <MechView
+        mech={value}
+        damage={{ ...emptyMechDamage(), heat: 2, firedWeapons: [1] }}
+        onDamageChange={onChange}
+      />,
+    );
+    expectFired(1, false);
+    expectFired(2, true);
+    expectHeat(2);
+    fireEvent.click(fire(2));
+    expect(onChange).not.toHaveBeenCalled();
+    rerender(
+      <MechView mech={value} damage={emptyMechDamage()} onDamageChange={onChange} />,
+    );
+    expectFired(2, false);
+    expectHeat(0);
+  });
+
+  it("uses non-submit buttons for firing and cooling inside a form", () => {
+    const onSubmit = vi.fn((event) => event.preventDefault());
+    render(
+      <form onSubmit={onSubmit}>
+        <Harness value={armedMech()} />
+      </form>,
+    );
+    for (const row of [1, 2, 3, 4, 5]) {
+      expect(fire(row).getAttribute("type")).toBe("button");
+    }
+    expect(btn("Cool heat").getAttribute("type")).toBe("button");
+    fireEvent.click(fire(1));
+    fireEvent.click(fire(3));
+    fireEvent.click(btn("Cool heat"));
+    expectHeat(0);
+    expectFired(1, false);
+    expectFired(3, false);
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });

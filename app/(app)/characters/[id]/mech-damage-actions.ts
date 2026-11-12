@@ -48,6 +48,7 @@ export async function applyMechDamage(
     criticals: [...input.damage.criticals].sort(
       (a, b) => a.section - b.section || a.slot - b.slot,
     ),
+    firedWeapons: [...input.damage.firedWeapons].sort((a, b) => a - b),
   };
   try {
     const supabase = await createClient();

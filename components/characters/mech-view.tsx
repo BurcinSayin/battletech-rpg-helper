@@ -11,7 +11,9 @@ import {
 import {
   MECH_DAMAGE_LIMITS,
   armorLost,
+  coolMechHeat,
   emptyMechDamage,
+  fireWeapon,
   isCriticalHit,
   locationLabels,
   normalizeMechDamage,
@@ -585,10 +587,19 @@ export function MechView({
             <HudButton
               type="button"
               className="h-11 w-full shrink-0 sm:w-auto"
-              disabled={off || d.heat <= 0 || sinkCount === null}
+              disabled={
+                off ||
+                sinkCount === null ||
+                (d.heat <= 0 && d.firedWeapons.length === 0)
+              }
               onClick={() => {
-                if (off || d.heat <= 0 || sinkCount === null) return;
-                change(setHeat(d, d.heat - sinkCount));
+                if (
+                  off ||
+                  sinkCount === null ||
+                  (d.heat <= 0 && d.firedWeapons.length === 0)
+                )
+                  return;
+                change(coolMechHeat(d, sinkCount));
               }}
             >
               Cool heat
@@ -805,7 +816,7 @@ export function MechView({
                     Range (Min/S/M/L)
                   </th>
                   <th scope="col" className="py-1 font-normal">
-                    Detail
+                    Fire
                   </th>
                 </tr>
               </thead>
@@ -817,6 +828,7 @@ export function MechView({
                   );
                   const reference =
                     result.status === "matched" ? result.reference : null;
+                  const fired = d.firedWeapons.includes(i);
                   return (
                     <tr key={i} className="border-t border-hud-line">
                       <td className="py-1.5 pr-3 text-hud-text">
@@ -847,7 +859,25 @@ export function MechView({
                         {reference ? reference.ranges.join(" / ") : "—"}
                       </td>
                       <td className="py-1.5 font-mono text-xs text-hud-muted">
-                        {w.detail}
+                        {interactive ? (
+                          <HudButton
+                            type="button"
+                            className="min-h-11"
+                            aria-label={`Fire weapon ${i + 1}: ${w.name}`}
+                            aria-pressed={fired}
+                            disabled={off || fired || reference === null}
+                            onClick={() => {
+                              if (off || fired || reference === null) return;
+                              change(fireWeapon(d, mech, i, reference.heat));
+                            }}
+                          >
+                            {fired ? "Fired" : "Fire"}
+                          </HudButton>
+                        ) : fired ? (
+                          "Fired"
+                        ) : (
+                          "—"
+                        )}
                       </td>
                     </tr>
                   );

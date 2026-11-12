@@ -23,6 +23,7 @@ export interface MechDamage {
   criticals: CriticalHit[];
   heat: number;
   pilotHits: number;
+  firedWeapons: number[];
 }
 
 export const MECH_DAMAGE_LIMITS = {
@@ -61,6 +62,7 @@ export const mechDamageSchema: z.ZodType<MechDamage> = z
       .max(MECH_DAMAGE_LIMITS.criticals),
     heat: whole(MECH_DAMAGE_LIMITS.counter),
     pilotHits: whole(MECH_DAMAGE_LIMITS.counter),
+    firedWeapons: whole(MECH_LIMITS.weapons - 1).array().max(MECH_LIMITS.weapons),
   })
   .superRefine((d, ctx) => {
     const unique = (keys: (number | string)[], path: string) => {
@@ -84,6 +86,7 @@ export const mechDamageSchema: z.ZodType<MechDamage> = z
       d.criticals.map((c) => `${c.section}:${c.slot}`),
       "criticals",
     );
+    unique(d.firedWeapons, "firedWeapons");
     d.structure.forEach((s, i) => {
       if (s.lost > s.max) {
         ctx.addIssue({
@@ -99,7 +102,14 @@ export const mechDamageSchema: z.ZodType<MechDamage> = z
   });
 
 export function emptyMechDamage(): MechDamage {
-  return { armor: [], structure: [], criticals: [], heat: 0, pilotHits: 0 };
+  return {
+    armor: [],
+    structure: [],
+    criticals: [],
+    heat: 0,
+    pilotHits: 0,
+    firedWeapons: [],
+  };
 }
 
 function counter(n: number, max: number = MECH_DAMAGE_LIMITS.counter): number {
@@ -158,6 +168,9 @@ function canonical(d: MechDamage | null): MechDamage {
     ),
     heat: counter(d.heat),
     pilotHits: counter(d.pilotHits),
+    firedWeapons: [
+      ...new Set(d.firedWeapons.filter((i) => validIndex(i, MECH_LIMITS.weapons))),
+    ].sort((a, b) => a - b),
   };
 }
 
@@ -184,6 +197,7 @@ export function normalizeMechDamage(
         validIndex(c.section, mech.criticalSlots.length) &&
         validIndex(c.slot, mech.criticalSlots[c.section].slots.length),
     ),
+    firedWeapons: d.firedWeapons.filter((i) => validIndex(i, mech.weapons.length)),
   };
 }
 
@@ -306,6 +320,35 @@ export function setHeat(d: MechDamage, heat: number): MechDamage {
 export function setPilotHits(d: MechDamage, pilotHits: number): MechDamage {
   return canonical({ ...d, pilotHits });
 }
+export function fireWeapon(
+  d: MechDamage,
+  mech: MechData,
+  index: number,
+  heat: number,
+): MechDamage {
+  const next = normalizeMechDamage(d, mech);
+  if (
+    !validIndex(index, Math.min(mech.weapons.length, MECH_LIMITS.weapons)) ||
+    !Number.isSafeInteger(heat) ||
+    heat < 0 ||
+    next.firedWeapons.includes(index)
+  )
+    return next;
+  return setHeat(
+    { ...next, firedWeapons: [...next.firedWeapons, index] },
+    next.heat + heat,
+  );
+}
+
+export function coolMechHeat(
+  d: MechDamage,
+  sinkCount: number | null,
+): MechDamage {
+  if (sinkCount === null || !Number.isSafeInteger(sinkCount) || sinkCount <= 0)
+    return d;
+  return setHeat({ ...d, firedWeapons: [] }, d.heat - sinkCount);
+}
+
 export function resetMechDamage(d: MechDamage): MechDamage {
   return {
     ...emptyMechDamage(),
@@ -324,7 +367,8 @@ export function hasMechSpecificDamage(d: MechDamage): boolean {
     next.armor.length > 0 ||
     next.structure.length > 0 ||
     next.criticals.length > 0 ||
-    next.heat > 0
+    next.heat > 0 ||
+    next.firedWeapons.length > 0
   );
 }
 export function locationLabels(names: readonly string[]): string[] {

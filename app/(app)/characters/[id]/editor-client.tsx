@@ -409,7 +409,7 @@ export function CharacterEditor({
   if (!isEditing) {
     return (
       <div className="flex flex-col gap-4">
-        <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <TabList baseId={baseId} value={tab} onChange={setTab} />
           <div className="flex items-center gap-2">
             {(damagePending || isApplying) && (

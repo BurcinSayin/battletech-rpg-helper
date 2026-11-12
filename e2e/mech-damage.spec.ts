@@ -8,7 +8,7 @@ import {
 } from "@playwright/test";
 
 // Same disposable signup/blank/manual setup as mech.spec.ts. Requires local
-// Supabase through 20261016130000_character_mech_damage, confirmations disabled,
+// Supabase through 20261112120000_mech_weapon_firing, confirmations disabled,
 // and realtime enabled. The catalog replacement uses live server actions/MTF.
 const PASSWORD = "secret123";
 const RESET_WARNING =
@@ -128,6 +128,50 @@ async function setupManual(page: Page, tag: string): Promise<string> {
   const characterPath = await createBlankCharacter(page);
   await addManualMech(page);
   return characterPath;
+}
+
+async function configureFiringWeapons(page: Page): Promise<void> {
+  await enterEdit(page);
+  await openMechTab(page);
+  const panel = mechPanel(page);
+  await panel.getByLabel("Heat sinks", { exact: true }).fill("10 Single");
+  await panel
+    .getByLabel("Weapon 1 name", { exact: true })
+    .fill("(IS) Heavy Gauss Rifle");
+  for (const [row, name] of [
+    [2, "(IS) Heavy Gauss Rifle"],
+    [3, "(IS) Machine Gun"],
+  ] as const) {
+    await panel.getByRole("button", { name: "Add weapon" }).click();
+    await panel.getByLabel(`Weapon ${row} name`, { exact: true }).fill(name);
+    await panel
+      .getByLabel(`Weapon ${row} location`, { exact: true })
+      .fill("Left Arm");
+  }
+  await save(page);
+}
+
+function fireButton(page: Page, row: number): Locator {
+  const name = row === 3 ? "(IS) Machine Gun" : "(IS) Heavy Gauss Rifle";
+  return button(page, `Fire weapon ${row}: ${name}`);
+}
+
+async function expectFiringState(
+  page: Page,
+  heat: number,
+  firedRows: number[],
+): Promise<void> {
+  await expect(counterValue(page, "Heat")).toHaveText(String(heat));
+  for (const row of [1, 2, 3]) {
+    const fired = firedRows.includes(row);
+    await expect(fireButton(page, row)).toHaveAttribute(
+      "aria-pressed",
+      String(fired),
+    );
+    await expect(fireButton(page, row)).toHaveText(fired ? "Fired" : "Fire");
+    if (fired) await expect(fireButton(page, row)).toBeDisabled();
+    else await expect(fireButton(page, row)).toBeEnabled();
+  }
 }
 
 function pointsCard(page: Page, name: string): Locator {
@@ -803,4 +847,193 @@ test("no-mech saves have no controls; mobile damage targets, expansion and stick
     "aria-pressed",
     "true",
   );
+});
+
+test("weapon firing persists Apply/Discard, tabs, cooling, zero heat, Sheet saves and Reset all", async ({
+  page,
+}, testInfo) => {
+  test.setTimeout(240_000);
+  await setupManual(page, "weapon-lifecycle");
+  await configureFiringWeapons(page);
+  await expectFiringState(page, 0, []);
+  await expect(button(page, "Cool heat")).toBeDisabled();
+
+  await fireButton(page, 1).click();
+  await expectFiringState(page, 2, [1]);
+  await page.getByRole("tab", { name: "Sheet", exact: true }).click();
+  await openMechTab(page);
+  await expectFiringState(page, 2, [1]);
+  await tap(page, "Discard damage changes");
+  await expectFiringState(page, 0, []);
+
+  await fireButton(page, 1).click();
+  await apply(page);
+  await reloadMech(page);
+  await expectFiringState(page, 2, [1]);
+
+  const panel = mechPanel(page);
+  const table = panel.getByRole("table").filter({
+    has: page.getByRole("columnheader", { name: "Fire", exact: true }),
+  });
+  await expect(table.getByRole("columnheader", { name: "Detail" })).toHaveCount(
+    0,
+  );
+  const criticalHeading = panel.getByRole("heading", {
+    name: "// CRITICAL SLOTS",
+    exact: true,
+  });
+  await expect(criticalHeading).toBeVisible();
+  // Scroll the actual overflow container, not the page, to expose Fire on phones.
+  const scrollArea = table.locator("..");
+  await scrollArea.evaluate((element) => {
+    element.scrollIntoView({ block: "start" });
+    element.scrollLeft = element.scrollWidth;
+  });
+  for (const row of [1, 2, 3]) {
+    const target = fireButton(page, row);
+    await expect(target).toBeInViewport();
+    const box = await target.boundingBox();
+    expect(box, `weapon ${row} Fire target`).not.toBeNull();
+    expect(box!.height).toBeGreaterThanOrEqual(44);
+    expect(box!.x).toBeGreaterThanOrEqual(0);
+    expect(box!.x + box!.width).toBeLessThanOrEqual(
+      page.viewportSize()!.width + 1,
+    );
+  }
+  const tableBox = await table.boundingBox();
+  const criticalBox = await criticalHeading.boundingBox();
+  expect(tableBox).not.toBeNull();
+  expect(criticalBox).not.toBeNull();
+  expect(criticalBox!.y).toBeGreaterThanOrEqual(
+    tableBox!.y + tableBox!.height,
+  );
+  if ((page.viewportSize()?.width ?? 1280) < 1024) {
+    expect(
+      await scrollArea.evaluate(
+        (element) => element.scrollWidth > element.clientWidth,
+      ),
+    ).toBe(true);
+    expect(await scrollArea.evaluate((element) => element.scrollLeft)).toBeGreaterThan(
+      0,
+    );
+  }
+  await page.screenshot({
+    path: testInfo.outputPath("weapon-firing-surface.png"),
+    fullPage: true,
+  });
+
+  await tap(page, "Cool heat");
+  await expectFiringState(page, 0, []);
+  await tap(page, "Discard damage changes");
+  await expectFiringState(page, 2, [1]);
+  await tap(page, "Cool heat");
+  await apply(page);
+  await reloadMech(page);
+  await expectFiringState(page, 0, []);
+
+  await fireButton(page, 3).click();
+  await expectFiringState(page, 0, [3]);
+  await expect(button(page, "Apply damage")).toBeEnabled();
+  await expect(button(page, "Cool heat")).toBeEnabled();
+  await apply(page);
+  await reloadMech(page);
+  await expectFiringState(page, 0, [3]);
+  await expect(button(page, "Cool heat")).toBeEnabled();
+  await tap(page, "Cool heat");
+  await apply(page);
+  await reloadMech(page);
+  await expectFiringState(page, 0, []);
+
+  await fireButton(page, 1).click();
+  await apply(page);
+  await enterEdit(page);
+  await page.getByRole("tab", { name: "Sheet", exact: true }).click();
+  await page
+    .getByLabel("Name", { exact: true })
+    .fill("Sheet save keeps weapon firing");
+  await save(page);
+  await reloadMech(page);
+  await expectFiringState(page, 2, [1]);
+  await tap(page, "Reset all damage");
+  await expectFiringState(page, 0, []);
+  await apply(page);
+  await reloadMech(page);
+  await expectFiringState(page, 0, []);
+});
+
+test("weapon firing realtime adopts locks, pins stale heat and locks, and resets on mech replacement", async ({
+  page,
+  browser,
+}) => {
+  test.setTimeout(240_000);
+  const characterPath = await setupManual(page, "weapon-realtime");
+  await configureFiringWeapons(page);
+  const { context, page: other } = await sharedSessionPage(browser, page);
+  try {
+    const joined = observeRealtimeJoin(other, characterPath);
+    await other.goto(new URL(characterPath, page.url()).toString());
+    await openMechTab(other);
+    await joined();
+    await expectFiringState(other, 0, []);
+
+    await fireButton(page, 1).click();
+    await apply(page);
+    // B never navigates or reloads: only authenticated realtime can adopt this.
+    await expect(counterValue(other, "Heat")).toHaveText("2", {
+      timeout: 30_000,
+    });
+    await expectFiringState(other, 2, [1]);
+    await expect(mechPanel(other).getByRole("status")).toHaveText(
+      "Damage is up to date.",
+    );
+
+    await fireButton(other, 2).click();
+    await expectFiringState(other, 4, [1, 2]);
+    await tap(page, "Cool heat");
+    await apply(page);
+    await expectFiringState(page, 0, []);
+    await expect(mechPanel(other).getByRole("status")).toContainText(STALE, {
+      timeout: 30_000,
+    });
+    await expect(counterValue(other, "Heat")).toHaveText("4");
+    for (const row of [1, 2, 3]) {
+      await expect(fireButton(other, row)).toHaveAttribute(
+        "aria-pressed",
+        String(row !== 3),
+      );
+      await expect(fireButton(other, row)).toHaveText(
+        row === 3 ? "Fire" : "Fired",
+      );
+      await expect(fireButton(other, row)).toBeDisabled();
+    }
+    await expect(button(other, "Cool heat")).toBeDisabled();
+    await expect(button(other, "Apply damage")).toBeDisabled();
+    await tap(other, "Discard damage changes");
+    await expect(mechPanel(other).getByRole("status")).toHaveText(
+      "Damage is up to date.",
+      { timeout: 30_000 },
+    );
+    await expectFiringState(other, 0, []);
+
+    await fireButton(other, 1).click();
+    await apply(other);
+    await expectFiringState(other, 2, [1]);
+    await enterEdit(other);
+    await openMechTab(other);
+    await mechPanel(other)
+      .getByLabel("Model", { exact: true })
+      .fill("DC-Weapon-Replacement");
+    await save(other);
+    await reloadMech(other);
+    await expect(
+      mechPanel(other).getByRole("heading", {
+        name: "Damage Chassis DC-Weapon-Replacement",
+        exact: true,
+      }),
+    ).toBeVisible();
+    await expectFiringState(other, 0, []);
+    await expect(button(other, "Cool heat")).toBeDisabled();
+  } finally {
+    await context.close();
+  }
 });

@@ -4,287 +4,297 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export type Database = {
   graphql_public: {
     Tables: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
       graphql: {
         Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
+          extensions?: Json;
+          operationName?: string;
+          query?: string;
+          variables?: Json;
+        };
+        Returns: Json;
+      };
+    };
     Enums: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
   public: {
     Tables: {
       campaign_members: {
         Row: {
-          campaign_id: string
-          created_at: string
-          role: Database["public"]["Enums"]["campaign_role"]
-          user_id: string
-        }
+          campaign_id: string;
+          created_at: string;
+          role: Database["public"]["Enums"]["campaign_role"];
+          user_id: string;
+        };
+        ComputedFields: never;
         Insert: {
-          campaign_id: string
-          created_at?: string
-          role?: Database["public"]["Enums"]["campaign_role"]
-          user_id: string
-        }
+          campaign_id: string;
+          created_at?: string;
+          role?: Database["public"]["Enums"]["campaign_role"];
+          user_id: string;
+        };
         Update: {
-          campaign_id?: string
-          created_at?: string
-          role?: Database["public"]["Enums"]["campaign_role"]
-          user_id?: string
-        }
+          campaign_id?: string;
+          created_at?: string;
+          role?: Database["public"]["Enums"]["campaign_role"];
+          user_id?: string;
+        };
         Relationships: [
           {
-            foreignKeyName: "campaign_members_campaign_id_fkey"
-            columns: ["campaign_id"]
-            isOneToOne: false
-            referencedRelation: "campaigns"
-            referencedColumns: ["id"]
+            foreignKeyName: "campaign_members_campaign_id_fkey";
+            columns: ["campaign_id"];
+            isOneToOne: false;
+            referencedRelation: "campaigns";
+            referencedColumns: ["id"];
           },
-        ]
-      }
+        ];
+      };
       campaigns: {
         Row: {
-          created_at: string
-          gm_id: string
-          id: string
-          invite_code: string
-          name: string
-        }
+          created_at: string;
+          gm_id: string;
+          id: string;
+          invite_code: string;
+          name: string;
+        };
+        ComputedFields: never;
         Insert: {
-          created_at?: string
-          gm_id: string
-          id?: string
-          invite_code?: string
-          name: string
-        }
+          created_at?: string;
+          gm_id: string;
+          id?: string;
+          invite_code?: string;
+          name: string;
+        };
         Update: {
-          created_at?: string
-          gm_id?: string
-          id?: string
-          invite_code?: string
-          name?: string
-        }
-        Relationships: []
-      }
+          created_at?: string;
+          gm_id?: string;
+          id?: string;
+          invite_code?: string;
+          name?: string;
+        };
+        Relationships: [];
+      };
       characters: {
         Row: {
-          attributes: Json
-          campaign_id: string | null
-          created_at: string
-          id: string
-          info: Json
-          mech: Json | null
-          mech_damage: Json | null
-          name: string
-          notes: string
-          owner_id: string
-          prerequisites: Json
-          skills: Json
-          traits: Json
-          updated_at: string
-          version: number
-        }
+          attributes: NonNullable<Json>;
+          campaign_id: string | null;
+          created_at: string;
+          id: string;
+          info: NonNullable<Json>;
+          mech: Json | null;
+          mech_damage: Json | null;
+          name: string;
+          notes: string;
+          owner_id: string;
+          prerequisites: NonNullable<Json>;
+          skills: NonNullable<Json>;
+          traits: NonNullable<Json>;
+          updated_at: string;
+          version: number;
+        };
+        ComputedFields: never;
         Insert: {
-          attributes?: Json
-          campaign_id?: string | null
-          created_at?: string
-          id?: string
-          info?: Json
-          mech?: Json | null
-          mech_damage?: Json | null
-          name: string
-          notes?: string
-          owner_id: string
-          prerequisites?: Json
-          skills?: Json
-          traits?: Json
-          updated_at?: string
-          version?: number
-        }
+          attributes?: NonNullable<Json>;
+          campaign_id?: string | null;
+          created_at?: string;
+          id?: string;
+          info?: NonNullable<Json>;
+          mech?: Json | null;
+          mech_damage?: Json | null;
+          name: string;
+          notes?: string;
+          owner_id: string;
+          prerequisites?: NonNullable<Json>;
+          skills?: NonNullable<Json>;
+          traits?: NonNullable<Json>;
+          updated_at?: string;
+          version?: number;
+        };
         Update: {
-          attributes?: Json
-          campaign_id?: string | null
-          created_at?: string
-          id?: string
-          info?: Json
-          mech?: Json | null
-          mech_damage?: Json | null
-          name?: string
-          notes?: string
-          owner_id?: string
-          prerequisites?: Json
-          skills?: Json
-          traits?: Json
-          updated_at?: string
-          version?: number
-        }
+          attributes?: NonNullable<Json>;
+          campaign_id?: string | null;
+          created_at?: string;
+          id?: string;
+          info?: NonNullable<Json>;
+          mech?: Json | null;
+          mech_damage?: Json | null;
+          name?: string;
+          notes?: string;
+          owner_id?: string;
+          prerequisites?: NonNullable<Json>;
+          skills?: NonNullable<Json>;
+          traits?: NonNullable<Json>;
+          updated_at?: string;
+          version?: number;
+        };
         Relationships: [
           {
-            foreignKeyName: "characters_campaign_id_fkey"
-            columns: ["campaign_id"]
-            isOneToOne: false
-            referencedRelation: "campaigns"
-            referencedColumns: ["id"]
+            foreignKeyName: "characters_campaign_id_fkey";
+            columns: ["campaign_id"];
+            isOneToOne: false;
+            referencedRelation: "campaigns";
+            referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "characters_campaign_owner_membership_fkey"
-            columns: ["campaign_id", "owner_id"]
-            isOneToOne: false
-            referencedRelation: "campaign_members"
-            referencedColumns: ["campaign_id", "user_id"]
+            foreignKeyName: "characters_campaign_owner_membership_fkey";
+            columns: ["campaign_id", "owner_id"];
+            isOneToOne: false;
+            referencedRelation: "campaign_members";
+            referencedColumns: ["campaign_id", "user_id"];
           },
-        ]
-      }
+        ];
+      };
       profiles: {
         Row: {
-          created_at: string
-          display_name: string | null
-          id: string
-        }
+          created_at: string;
+          display_name: string | null;
+          id: string;
+        };
+        ComputedFields: never;
         Insert: {
-          created_at?: string
-          display_name?: string | null
-          id: string
-        }
+          created_at?: string;
+          display_name?: string | null;
+          id: string;
+        };
         Update: {
-          created_at?: string
-          display_name?: string | null
-          id?: string
-        }
-        Relationships: []
-      }
-    }
+          created_at?: string;
+          display_name?: string | null;
+          id?: string;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
-      generate_invite_code: { Args: never; Returns: string }
-      is_campaign_gm: { Args: { p_campaign_id: string }; Returns: boolean }
-      is_campaign_member: { Args: { p_campaign_id: string }; Returns: boolean }
+      generate_invite_code: {
+        Args: Record<PropertyKey, never>;
+        Returns: string;
+      };
+      is_campaign_gm: { Args: { p_campaign_id: string }; Returns: boolean };
+      is_campaign_member: { Args: { p_campaign_id: string }; Returns: boolean };
       join_campaign: {
-        Args: { p_invite_code: string }
+        Args: { p_invite_code: string };
         Returns: {
-          created_at: string
-          gm_id: string
-          id: string
-          invite_code: string
-          name: string
-        }
+          created_at: string;
+          gm_id: string;
+          id: string;
+          invite_code: string;
+          name: string;
+        };
         SetofOptions: {
-          from: "*"
-          to: "campaigns"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
+          from: "*";
+          to: "campaigns";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       mech_damage_is_valid: {
-        Args: { p_damage: Json; p_mech: Json }
-        Returns: boolean
-      }
-      shares_campaign: { Args: { p_user_id: string }; Returns: boolean }
+        Args: { p_damage: Json; p_mech: Json };
+        Returns: boolean;
+      };
+      shares_campaign: { Args: { p_user_id: string }; Returns: boolean };
       update_character: {
-        Args: { p_expected_version: number; p_id: string; p_payload: Json }
+        Args: { p_expected_version: number; p_id: string; p_payload: Json };
         Returns: {
-          attributes: Json
-          campaign_id: string | null
-          created_at: string
-          id: string
-          info: Json
-          mech: Json | null
-          mech_damage: Json | null
-          name: string
-          notes: string
-          owner_id: string
-          prerequisites: Json
-          skills: Json
-          traits: Json
-          updated_at: string
-          version: number
-        }
+          attributes: NonNullable<Json>;
+          campaign_id: string | null;
+          created_at: string;
+          id: string;
+          info: NonNullable<Json>;
+          mech: Json | null;
+          mech_damage: Json | null;
+          name: string;
+          notes: string;
+          owner_id: string;
+          prerequisites: NonNullable<Json>;
+          skills: NonNullable<Json>;
+          traits: NonNullable<Json>;
+          updated_at: string;
+          version: number;
+        };
         SetofOptions: {
-          from: "*"
-          to: "characters"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
+          from: "*";
+          to: "characters";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
       update_character_mech_damage: {
-        Args: { p_damage: Json; p_expected_version: number; p_id: string }
+        Args: { p_damage: Json; p_expected_version: number; p_id: string };
         Returns: {
-          attributes: Json
-          campaign_id: string | null
-          created_at: string
-          id: string
-          info: Json
-          mech: Json | null
-          mech_damage: Json | null
-          name: string
-          notes: string
-          owner_id: string
-          prerequisites: Json
-          skills: Json
-          traits: Json
-          updated_at: string
-          version: number
-        }
+          attributes: NonNullable<Json>;
+          campaign_id: string | null;
+          created_at: string;
+          id: string;
+          info: NonNullable<Json>;
+          mech: Json | null;
+          mech_damage: Json | null;
+          name: string;
+          notes: string;
+          owner_id: string;
+          prerequisites: NonNullable<Json>;
+          skills: NonNullable<Json>;
+          traits: NonNullable<Json>;
+          updated_at: string;
+          version: number;
+        };
         SetofOptions: {
-          from: "*"
-          to: "characters"
-          isOneToOne: true
-          isSetofReturn: false
-        }
-      }
-    }
+          from: "*";
+          to: "characters";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+    };
     Enums: {
-      campaign_role: "gm" | "player"
-    }
+      campaign_role: "gm" | "player";
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
-type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">;
 
-type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+type DefaultSchema = DatabaseWithoutInternals[Extract<
+  keyof Database,
+  "public"
+>];
 
 export type Tables<
   DefaultSchemaTableNameOrOptions extends
     | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
     | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
         DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
       DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
@@ -292,95 +302,92 @@ export type Tables<
         DefaultSchema["Views"])
     ? (DefaultSchema["Tables"] &
         DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
-        Row: infer R
+        Row: infer R;
       }
       ? R
       : never
-    : never
+    : never;
 
 export type TablesInsert<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Insert: infer I
+        Insert: infer I;
       }
       ? I
       : never
-    : never
+    : never;
 
 export type TablesUpdate<
   DefaultSchemaTableNameOrOptions extends
-    | keyof DefaultSchema["Tables"]
-    | { schema: keyof DatabaseWithoutInternals },
-  TableName extends DefaultSchemaTableNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    keyof DefaultSchema["Tables"] | { schema: keyof DatabaseWithoutInternals },
+  TableName extends (DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaTableNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
     ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
-        Update: infer U
+        Update: infer U;
       }
       ? U
       : never
-    : never
+    : never;
 
 export type Enums<
   DefaultSchemaEnumNameOrOptions extends
-    | keyof DefaultSchema["Enums"]
-    | { schema: keyof DatabaseWithoutInternals },
-  EnumName extends DefaultSchemaEnumNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+    keyof DefaultSchema["Enums"] | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends (DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
-    : never = never,
+    : never) = never,
 > = DefaultSchemaEnumNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
     ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
-    : never
+    : never;
 
 export type CompositeTypes<
   PublicCompositeTypeNameOrOptions extends
     | keyof DefaultSchema["CompositeTypes"]
     | { schema: keyof DatabaseWithoutInternals },
-  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
-    schema: keyof DatabaseWithoutInternals
+  CompositeTypeName extends (PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals;
   }
     ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
-    : never = never,
+    : never) = never,
 > = PublicCompositeTypeNameOrOptions extends {
-  schema: keyof DatabaseWithoutInternals
+  schema: keyof DatabaseWithoutInternals;
 }
   ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
+    : never;
 
 export const Constants = {
   graphql_public: {
@@ -391,5 +398,4 @@ export const Constants = {
       campaign_role: ["gm", "player"],
     },
   },
-} as const
-
+} as const;
