@@ -293,5 +293,55 @@ select is(public.mech_damage_is_valid(jsonb_set(l.mech,'{weapons}',(l.mech->'wea
   jsonb_set(f.empty_damage,'{firedWeapons}','[64]')),false,
   'index 64 rejected even when raw mech contains 65 weapons') from fixture f cross join firing_limit_fixture l;
 
+-- Keep decimal padding in PostgreSQL: JavaScript number parsing erases this boundary.
+create temp table damage_size_fixture as
+with base as (select empty_damage - 'firedWeapons' as damage from fixture),
+legacy as (
+  select target_bytes,jsonb_set(damage,'{heat}',
+    ('0.' || repeat('0',target_bytes - octet_length(damage::text) - 1))::jsonb) as damage
+  from base cross join (values (16375),(16384),(16385)) targets(target_bytes)
+)
+select target_bytes,damage as legacy_damage,damage || '{"firedWeapons":[]}'::jsonb as damage from legacy;
+select is(octet_length(legacy_damage::text),target_bytes,
+  'legacy damage has exactly ' || target_bytes || ' bytes') from damage_size_fixture;
+select is(octet_length(damage::text) - octet_length(legacy_damage::text),20,
+  'empty firedWeapons adds exactly 20 bytes at legacy size ' || target_bytes) from damage_size_fixture;
+select is(public.mech_damage_is_valid('{}',damage),target_bytes <= 16384,
+  'valid-shape damage size boundary: ' || (target_bytes + 20) || ' bytes') from damage_size_fixture;
+
+create temp table before_size_write as
+  select version from public.characters where id = '65656565-6565-6565-6565-656565656565';
+select is(pg_temp.damage_sql(damage),'NOERROR','RPC accepts exactly 16404 bytes')
+from damage_size_fixture where target_bytes = 16384;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version + 1,'maximum-size RPC write bumps version exactly once') from before_size_write;
+select is((select mech_damage::text from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  damage::text,'maximum-size RPC write preserves text including decimal scale')
+from damage_size_fixture where target_bytes = 16384;
+create temp table before_oversize_write as
+  select version,mech_damage::text as damage_text from public.characters where id = '65656565-6565-6565-6565-656565656565';
+select is(pg_temp.damage_sql(damage),'PT422','RPC rejects 16405 bytes with current version')
+from damage_size_fixture where target_bytes = 16385;
+select is((select version from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  version,'oversize RPC rejection preserves version') from before_oversize_write;
+select is((select mech_damage::text from public.characters where id = '65656565-6565-6565-6565-656565656565'),
+  damage_text,'oversize RPC rejection preserves stored text') from before_oversize_write;
+
+select is(pg_temp.actor_sql('61616161-6161-6161-6161-616161616161',
+  format('insert into public.characters(owner_id,name,mech,mech_damage) values (%L,%L,%L::jsonb,%L::jsonb)',
+    '61616161-6161-6161-6161-616161616161','Direct size 16404','{}',damage)),
+  'NOERROR','authenticated INSERT accepts exactly 16404 bytes')
+from damage_size_fixture where target_bytes = 16384;
+select is((select mech_damage::text from public.characters where name = 'Direct size 16404'),
+  damage::text,'maximum-size INSERT preserves text including decimal scale')
+from damage_size_fixture where target_bytes = 16384;
+select is(pg_temp.actor_sql('61616161-6161-6161-6161-616161616161',
+  format('insert into public.characters(owner_id,name,mech,mech_damage) values (%L,%L,%L::jsonb,%L::jsonb)',
+    '61616161-6161-6161-6161-616161616161','Direct size 16405','{}',damage)),
+  '23514','authenticated INSERT rejects 16405 bytes by CHECK')
+from damage_size_fixture where target_bytes = 16385;
+select is((select count(*) from public.characters where name = 'Direct size 16405'),0::bigint,
+  'oversize INSERT creates no row');
+
 select * from finish();
 rollback;

@@ -22,7 +22,8 @@ declare
 begin
   if p_damage is null then return true; end if;
   if jsonb_typeof(p_damage) is distinct from 'object' then return false; end if;
-  if octet_length(p_damage::text) > 16384
+  -- Empty firedWeapons adds 20 bytes to PostgreSQL JSONB text; cap the whole document.
+  if octet_length(p_damage::text) > 16384 + 20
      or not (p_damage ?& array['armor','structure','criticals','heat','pilotHits','firedWeapons'])
      or (select count(*) from jsonb_object_keys(p_damage)) <> 6 then
     return false;
