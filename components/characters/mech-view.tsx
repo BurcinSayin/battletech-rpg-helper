@@ -770,86 +770,6 @@ export function MechView({
         </Panel>
       )}
 
-      <Panel
-        title="CRITICAL SLOTS"
-        count={
-          totalHits > 0 ? (
-            <span className="text-hud-red">
-              {totalHits} {totalHits === 1 ? "hit" : "hits"}
-            </span>
-          ) : undefined
-        }
-      >
-        {mech.criticalSlots.length === 0 ? (
-          <p className="text-sm text-hud-muted">No critical slots recorded.</p>
-        ) : interactive ? (
-          <>
-            <p className="mb-3 text-xs text-hud-muted">
-              Tap a slot to mark or clear a critical hit.
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3">
-              {mech.criticalSlots.map((section, si) => (
-                <CriticalSection
-                  key={`${section.location}-${si}`}
-                  label={sectionLabels[si]}
-                  slots={section.slots}
-                  isHit={(slot) => isCriticalHit(d, si, slot)}
-                  onToggle={(slot) => change(toggleCritical(d, mech, si, slot))}
-                  disabled={off}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {mech.criticalSlots.map((section, si) => (
-              <section
-                key={`${section.location}-${si}`}
-                aria-label={`${sectionLabels[si]} critical slots`}
-                className="rounded-md border border-hud-line bg-hud-raised p-3"
-              >
-                <h4 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-hud-amber">
-                  {sectionLabels[si]}
-                </h4>
-                <ol className="space-y-0.5 font-mono text-xs">
-                  {section.slots.map((slot, i) => {
-                    const hit = isCriticalHit(d, si, i);
-                    return (
-                      <li
-                        key={i}
-                        className={cn(
-                          "flex gap-2",
-                          hit
-                            ? "text-hud-red"
-                            : isEmptySlot(slot)
-                              ? "text-hud-muted/50"
-                              : "text-hud-text",
-                        )}
-                      >
-                        <span className="w-5 shrink-0 text-right text-hud-muted">
-                          {i + 1}
-                        </span>
-                        <span
-                          className={cn(
-                            "min-w-0 break-words",
-                            hit && "line-through decoration-2",
-                          )}
-                        >
-                          {slot}
-                        </span>
-                        {hit && (
-                          <span className="sr-only"> (critical hit)</span>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              </section>
-            ))}
-          </div>
-        )}
-      </Panel>
-
       <Panel title="WEAPONS" count={mech.weapons.length}>
         {mech.weapons.length === 0 ? (
           <p className="text-sm text-hud-muted">No weapons recorded.</p>
@@ -934,6 +854,86 @@ export function MechView({
                 })}
               </tbody>
             </table>
+          </div>
+        )}
+      </Panel>
+
+      <Panel
+        title="CRITICAL SLOTS"
+        count={
+          totalHits > 0 ? (
+            <span className="text-hud-red">
+              {totalHits} {totalHits === 1 ? "hit" : "hits"}
+            </span>
+          ) : undefined
+        }
+      >
+        {mech.criticalSlots.length === 0 ? (
+          <p className="text-sm text-hud-muted">No critical slots recorded.</p>
+        ) : interactive ? (
+          <>
+            <p className="mb-3 text-xs text-hud-muted">
+              Tap a slot to mark or clear a critical hit.
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3">
+              {mech.criticalSlots.map((section, si) => (
+                <CriticalSection
+                  key={`${section.location}-${si}`}
+                  label={sectionLabels[si]}
+                  slots={section.slots}
+                  isHit={(slot) => isCriticalHit(d, si, slot)}
+                  onToggle={(slot) => change(toggleCritical(d, mech, si, slot))}
+                  disabled={off}
+                />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {mech.criticalSlots.map((section, si) => (
+              <section
+                key={`${section.location}-${si}`}
+                aria-label={`${sectionLabels[si]} critical slots`}
+                className="rounded-md border border-hud-line bg-hud-raised p-3"
+              >
+                <h4 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-hud-amber">
+                  {sectionLabels[si]}
+                </h4>
+                <ol className="space-y-0.5 font-mono text-xs">
+                  {section.slots.map((slot, i) => {
+                    const hit = isCriticalHit(d, si, i);
+                    return (
+                      <li
+                        key={i}
+                        className={cn(
+                          "flex gap-2",
+                          hit
+                            ? "text-hud-red"
+                            : isEmptySlot(slot)
+                              ? "text-hud-muted/50"
+                              : "text-hud-text",
+                        )}
+                      >
+                        <span className="w-5 shrink-0 text-right text-hud-muted">
+                          {i + 1}
+                        </span>
+                        <span
+                          className={cn(
+                            "min-w-0 break-words",
+                            hit && "line-through decoration-2",
+                          )}
+                        >
+                          {slot}
+                        </span>
+                        {hit && (
+                          <span className="sr-only"> (critical hit)</span>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              </section>
+            ))}
           </div>
         )}
       </Panel>

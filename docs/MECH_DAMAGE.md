@@ -1,6 +1,6 @@
 # Mech damage tracking
 
-Open a character's **Mech** tab in view mode to track damage without entering **Edit**. The character owner and its campaign GM can update it; database authorization enforces that access.
+Open a character's **Mech** tab in view mode to track damage without entering **Edit**. The character owner and its campaign GM can update it; database authorization enforces that access. **Critical slots** appears immediately after **Weapons**.
 
 ## Mark a batch, then Apply
 
