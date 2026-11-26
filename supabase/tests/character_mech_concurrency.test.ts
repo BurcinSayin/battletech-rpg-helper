@@ -3,10 +3,6 @@ import { setTimeout as delay } from "node:timers/promises";
 import { Client, type QueryResult } from "pg";
 import { describe, expect, it } from "vitest";
 
-// Issue #65: optimistic concurrency for the mech column. Two writers that both
-// read version 1 race to set mech; the loser must be PT409 and must not overwrite
-// the winner's mech (no lost update).
-
 const connectionString = process.env.SUPABASE_TEST_DB_URL;
 if (!connectionString) {
   throw new Error(
@@ -81,76 +77,98 @@ async function waitForBlocker(
   );
 }
 
-describe("character mech optimistic concurrency", () => {
-  it("a stale same-version mech write is PT409 after the winner commits, with no lost update", async () => {
-    const observer = client();
-    const first = client();
-    const second = client();
-    const ownerId = randomUUID();
-    const characterId = randomUUID();
-    let pending: PendingQuery | undefined;
-    let secondPid: number | undefined;
+describe("character optimistic concurrency", () => {
+  it.each([
+    {
+      field: "mech",
+      writeSql: "SELECT * FROM public.update_character($1, 1, $2::jsonb)",
+      firstPayload: { mech: { model: "First" } },
+      secondPayload: { mech: { model: "Second" } },
+      expected: { mech: { model: "First" } },
+    },
+    {
+      field: "personal_combat",
+      writeSql:
+        "SELECT * FROM public.update_character_personal_combat($1, 1, $2::jsonb)",
+      firstPayload: { damage: 3, conditions: ["Dazed"] },
+      secondPayload: { damage: 5, conditions: ["Limping"] },
+      expected: { personal_combat: { damage: 3, conditions: ["Dazed"] } },
+    },
+  ])(
+    "rejects an overlapping same-version $field write with PT409",
+    async ({ writeSql, firstPayload, secondPayload, expected }) => {
+      const observer = client();
+      const first = client();
+      const second = client();
+      const ownerId = randomUUID();
+      const characterId = randomUUID();
+      let pending: PendingQuery | undefined;
+      let secondPid: number | undefined;
 
-    const writeSql =
-      "SELECT * FROM public.update_character($1, 1, $2::jsonb)";
-
-    try {
-      await Promise.all([observer.connect(), first.connect(), second.connect()]);
-      const firstPid = (await first.query("SELECT pg_backend_pid() AS pid"))
-        .rows[0].pid as number;
-      secondPid = (await second.query("SELECT pg_backend_pid() AS pid"))
-        .rows[0].pid as number;
-
-      await observer.query(
-        "INSERT INTO auth.users(id, email) VALUES ($1, $2)",
-        [ownerId, `${ownerId}@mech-concurrency.local`],
-      );
-      await observer.query(
-        "INSERT INTO public.characters(id, owner_id, name, mech) VALUES ($1, $2, $3, $4)",
-        [characterId, ownerId, `Mech ${randomUUID()}`, { model: "Base" }],
-      );
-
-      // Winner: takes the row lock at version 1 and holds it uncommitted.
-      await authenticate(first, ownerId);
-      await first.query(writeSql, [
-        characterId,
-        JSON.stringify({ mech: { model: "First" } }),
-      ]);
-
-      // Loser: also read version 1; blocks on the winner's row lock.
-      await authenticate(second, ownerId);
-      pending = track(
-        second.query(writeSql, [
-          characterId,
-          JSON.stringify({ mech: { model: "Second" } }),
-        ]),
-      );
-      await waitForBlocker(observer, secondPid, firstPid, pending);
-
-      await first.query("COMMIT");
-      const outcome = await pending.settled;
-      expect(outcome.error).toMatchObject({ code: "PT409" });
-      await second.query("ROLLBACK");
-
-      const { rows } = await observer.query(
-        "SELECT mech, version FROM public.characters WHERE id = $1",
-        [characterId],
-      );
-      expect(rows[0]).toMatchObject({ mech: { model: "First" }, version: 2 });
-    } finally {
       try {
-        if (pending && !pending.outcome && secondPid) {
-          await observer.query("SELECT pg_cancel_backend($1)", [secondPid]);
-        }
-        await Promise.allSettled([first.query("ROLLBACK"), second.query("ROLLBACK")]);
-        if (pending) await pending.settled;
-        await observer.query("DELETE FROM public.characters WHERE id = $1", [
-          characterId,
+        await Promise.all([
+          observer.connect(),
+          first.connect(),
+          second.connect(),
         ]);
-        await observer.query("DELETE FROM auth.users WHERE id = $1", [ownerId]);
+        const firstPid = (await first.query("SELECT pg_backend_pid() AS pid"))
+          .rows[0].pid as number;
+        secondPid = (await second.query("SELECT pg_backend_pid() AS pid"))
+          .rows[0].pid as number;
+
+        await observer.query(
+          "INSERT INTO auth.users(id, email) VALUES ($1, $2)",
+          [ownerId, `${ownerId}@mech-concurrency.local`],
+        );
+        await observer.query(
+          "INSERT INTO public.characters(id, owner_id, name, mech) VALUES ($1, $2, $3, $4)",
+          [characterId, ownerId, `Mech ${randomUUID()}`, { model: "Base" }],
+        );
+
+        // Winner: takes the row lock at version 1 and holds it uncommitted.
+        await authenticate(first, ownerId);
+        await first.query(writeSql, [
+          characterId,
+          JSON.stringify(firstPayload),
+        ]);
+
+        // Loser: also read version 1; blocks on the winner's row lock.
+        await authenticate(second, ownerId);
+        pending = track(
+          second.query(writeSql, [characterId, JSON.stringify(secondPayload)]),
+        );
+        await waitForBlocker(observer, secondPid, firstPid, pending);
+
+        await first.query("COMMIT");
+        const outcome = await pending.settled;
+        expect(outcome.error).toMatchObject({ code: "PT409" });
+        await second.query("ROLLBACK");
+
+        const { rows } = await observer.query(
+          "SELECT mech, personal_combat, version FROM public.characters WHERE id = $1",
+          [characterId],
+        );
+        expect(rows[0]).toMatchObject({ ...expected, version: 2 });
       } finally {
-        await Promise.allSettled([observer.end(), first.end(), second.end()]);
+        try {
+          if (pending && !pending.outcome && secondPid) {
+            await observer.query("SELECT pg_cancel_backend($1)", [secondPid]);
+          }
+          await Promise.allSettled([
+            first.query("ROLLBACK"),
+            second.query("ROLLBACK"),
+          ]);
+          if (pending) await pending.settled;
+          await observer.query("DELETE FROM public.characters WHERE id = $1", [
+            characterId,
+          ]);
+          await observer.query("DELETE FROM auth.users WHERE id = $1", [
+            ownerId,
+          ]);
+        } finally {
+          await Promise.allSettled([observer.end(), first.end(), second.end()]);
+        }
       }
-    }
-  });
+    },
+  );
 });

@@ -101,6 +101,7 @@ export type Database = {
           name: string;
           notes: string;
           owner_id: string;
+          personal_combat: NonNullable<Json>;
           prerequisites: NonNullable<Json>;
           skills: NonNullable<Json>;
           traits: NonNullable<Json>;
@@ -119,6 +120,7 @@ export type Database = {
           name: string;
           notes?: string;
           owner_id: string;
+          personal_combat?: NonNullable<Json>;
           prerequisites?: NonNullable<Json>;
           skills?: NonNullable<Json>;
           traits?: NonNullable<Json>;
@@ -136,6 +138,7 @@ export type Database = {
           name?: string;
           notes?: string;
           owner_id?: string;
+          personal_combat?: NonNullable<Json>;
           prerequisites?: NonNullable<Json>;
           skills?: NonNullable<Json>;
           traits?: NonNullable<Json>;
@@ -209,6 +212,7 @@ export type Database = {
         Args: { p_damage: Json; p_mech: Json };
         Returns: boolean;
       };
+      personal_combat_is_valid: { Args: { status: Json }; Returns: boolean };
       shares_campaign: { Args: { p_user_id: string }; Returns: boolean };
       update_character: {
         Args: { p_expected_version: number; p_id: string; p_payload: Json };
@@ -223,6 +227,7 @@ export type Database = {
           name: string;
           notes: string;
           owner_id: string;
+          personal_combat: NonNullable<Json>;
           prerequisites: NonNullable<Json>;
           skills: NonNullable<Json>;
           traits: NonNullable<Json>;
@@ -249,6 +254,34 @@ export type Database = {
           name: string;
           notes: string;
           owner_id: string;
+          personal_combat: NonNullable<Json>;
+          prerequisites: NonNullable<Json>;
+          skills: NonNullable<Json>;
+          traits: NonNullable<Json>;
+          updated_at: string;
+          version: number;
+        };
+        SetofOptions: {
+          from: "*";
+          to: "characters";
+          isOneToOne: true;
+          isSetofReturn: false;
+        };
+      };
+      update_character_personal_combat: {
+        Args: { p_expected_version: number; p_id: string; p_status: Json };
+        Returns: {
+          attributes: NonNullable<Json>;
+          campaign_id: string | null;
+          created_at: string;
+          id: string;
+          info: NonNullable<Json>;
+          mech: Json | null;
+          mech_damage: Json | null;
+          name: string;
+          notes: string;
+          owner_id: string;
+          personal_combat: NonNullable<Json>;
           prerequisites: NonNullable<Json>;
           skills: NonNullable<Json>;
           traits: NonNullable<Json>;

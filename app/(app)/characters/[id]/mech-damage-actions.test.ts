@@ -27,6 +27,7 @@ function row(): CharacterRow {
     notes: "",
     mech: null,
     mech_damage: null,
+    personal_combat: { damage: 0, conditions: [] },
     version: 8,
     created_at: "",
     updated_at: "",
