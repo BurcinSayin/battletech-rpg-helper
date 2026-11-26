@@ -1,6 +1,11 @@
 import { notFound, redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { rowToDraft, rowToMech, rowToMechDamage } from "@/lib/characters";
+import {
+  rowToDraft,
+  rowToMech,
+  rowToMechDamage,
+  rowToPersonalCombat,
+} from "@/lib/characters";
 import { PageContainer } from "@/components/layout/page-container";
 import { CharacterEditor } from "./editor-client";
 
@@ -51,6 +56,7 @@ export default async function CharacterPage({
           draft={rowToDraft(row)}
           mech={mech}
           mechDamage={rowToMechDamage(row, mech)}
+          personalCombat={rowToPersonalCombat(row)}
           campaigns={campaigns}
           campaignId={row.campaign_id}
           isOwner={row.owner_id === user.id}

@@ -28,6 +28,7 @@ import {
   traitLevels,
   type CharacterFormValues,
 } from "@/lib/characters";
+import type { PersonalCombat } from "@/lib/characters/personal-combat";
 import type { MechData } from "@/lib/mech/types";
 import {
   emptyMechDamage,
@@ -63,6 +64,7 @@ type CharacterSnapshot = {
   campaignId: string | null;
   mech: MechData | null;
   damage: MechDamage;
+  personalCombat: PersonalCombat | null;
 };
 
 type DamageDraft = {
@@ -86,6 +88,7 @@ export function CharacterEditor({
   draft,
   mech,
   mechDamage = EMPTY_DAMAGE,
+  personalCombat,
   campaigns,
   campaignId,
   isOwner,
@@ -95,6 +98,7 @@ export function CharacterEditor({
   draft: BtccDraft;
   mech: MechData | null;
   mechDamage?: MechDamage;
+  personalCombat: PersonalCombat | null;
   campaigns: { id: string; name: string }[];
   campaignId: string | null;
   isOwner: boolean;
@@ -107,6 +111,7 @@ export function CharacterEditor({
     campaignId,
     mech,
     damage: mechDamage,
+    personalCombat,
   });
   const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
@@ -238,6 +243,7 @@ export function CharacterEditor({
         campaignId,
         mech,
         damage: mechDamage,
+        personalCombat,
       };
     }
     const next = latestSnapshotRef.current;
@@ -257,6 +263,7 @@ export function CharacterEditor({
     campaignId,
     mech,
     mechDamage,
+    personalCombat,
     isEditing,
     snapshot.version,
     knownVersion,

@@ -6,10 +6,12 @@ import { emptyMech } from "@/lib/mech/schema";
 import { emptyMechDamage } from "@/lib/mech/damage";
 import {
   draftToColumns,
+  draftToInsert,
   draftToPayload,
   rowToDraft,
   rowToMech,
   rowToMechDamage,
+  rowToPersonalCombat,
   withMechPayload,
 } from "./mapping";
 import type { CharacterRow } from "./types";
@@ -257,6 +259,42 @@ describe("rowToMechDamage", () => {
         ["heat"],
       );
       expect(JSON.stringify(log.mock.calls)).not.toContain("SECRET_PAYLOAD");
+    } finally {
+      log.mockRestore();
+    }
+  });
+});
+
+describe("rowToPersonalCombat", () => {
+  it("reads the database default as an available, empty status", () => {
+    expect(rowToPersonalCombat(columnsToRow(emptyDraft()))).toEqual({
+      damage: 0,
+      conditions: [],
+    });
+  });
+
+  it("preserves ordered duplicate labels and keeps status out of sheet writes", () => {
+    const status = { damage: 2, conditions: ["Prone", "Dazed", "Prone"] };
+    const row = { ...columnsToRow(emptyDraft()), personal_combat: status };
+    expect(rowToPersonalCombat(row)).toEqual(status);
+    const draft = rowToDraft(row);
+    expect(draft).toEqual(emptyDraft());
+    expect(draftToPayload(draft)).not.toHaveProperty("personal_combat");
+    expect(draftToInsert(draft, row.owner_id)).not.toHaveProperty(
+      "personal_combat",
+    );
+  });
+
+  it("marks corrupt status unavailable and logs without its contents", () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    try {
+      const row = {
+        ...columnsToRow(emptyDraft()),
+        personal_combat: { damage: -1, conditions: ["private label"] },
+      };
+      expect(rowToPersonalCombat(row)).toBeNull();
+      expect(log).toHaveBeenCalled();
+      expect(JSON.stringify(log.mock.calls)).not.toContain("private label");
     } finally {
       log.mockRestore();
     }

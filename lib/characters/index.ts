@@ -16,6 +16,7 @@ export {
   rowToDraft,
   rowToMech,
   rowToMechDamage,
+  rowToPersonalCombat,
   draftToColumns,
   draftToPayload,
   draftToInsert,

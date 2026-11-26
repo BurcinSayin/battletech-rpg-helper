@@ -23,6 +23,7 @@ import type {
   CharacterRow,
   PreSnapshot,
 } from "./types";
+import { personalCombatSchema, type PersonalCombat } from "./personal-combat";
 
 type JsonObject = { [key: string]: Json | undefined };
 
@@ -143,6 +144,13 @@ export function rowToMechDamage(
     parsed.error.issues.map((issue) => issue.path.join(".")),
   );
   return emptyMechDamage();
+}
+
+export function rowToPersonalCombat(row: CharacterRow): PersonalCombat | null {
+  const parsed = personalCombatSchema.safeParse(row.personal_combat);
+  if (parsed.success) return parsed.data;
+  console.error("[characters] stored personal combat status is invalid", row.id);
+  return null;
 }
 
 function draftToInfo(draft: BtccDraft): CharacterInfo {

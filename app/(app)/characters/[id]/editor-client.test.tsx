@@ -202,6 +202,7 @@ function renderEditor(props: {
       version={1}
       draft={draft}
       mech={null}
+      personalCombat={{ damage: 0, conditions: [] }}
       campaigns={props.campaigns ?? [CAMP]}
       campaignId={props.campaignId ?? null}
       isOwner={props.isOwner ?? true}
@@ -270,6 +271,7 @@ describe("CharacterEditor — skill levels", () => {
         version={1}
         draft={draft}
         mech={null}
+        personalCombat={{ damage: 0, conditions: [] }}
         campaigns={[]}
         campaignId={null}
         isOwner
@@ -335,6 +337,7 @@ function renderSnapshot(overrides: Partial<EditorProps> = {}) {
     version: 1,
     draft: namedDraft("Stored Pilot"),
     mech: null,
+    personalCombat: { damage: 0, conditions: [] },
     campaigns: [CAMP, CAMP_B],
     campaignId: CAMP.id,
     isOwner: true,
@@ -1424,6 +1427,7 @@ describe("CharacterEditor — Mech tab", () => {
         version={1}
         draft={namedDraft("Stored Pilot")}
         mech={MECH_A}
+        personalCombat={{ damage: 0, conditions: [] }}
         campaigns={[CAMP]}
         campaignId={CAMP.id}
         isOwner={false}
