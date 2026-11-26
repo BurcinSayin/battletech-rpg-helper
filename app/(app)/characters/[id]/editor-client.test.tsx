@@ -1744,28 +1744,29 @@ describe("CharacterEditor — On Foot Play", () => {
     expect(screen.queryByRole("button", { name: "Enter Play" })).toBeNull();
   });
 
-  it("blocks Play until pending mech damage is discarded", () => {
+  it("pins a removed mech across Play modes and reference tabs until discard", () => {
     const editor = renderSnapshot({ mech: MECH_A });
-    openTab("Mech");
-    fireEvent.click(screen.getByRole("button", { name: "Increase heat" }));
-    const enterPlay = screen.getByRole<HTMLButtonElement>("button", {
-      name: "Enter Play",
-      description: "Apply or discard damage first",
-    });
-    expect(enterPlay.disabled).toBe(true);
-
-    editor.receive(2, "Stored Pilot");
-    expect(screen.getByRole("status").textContent).toBe("Damage draft is stale");
-    expect(enterPlay.disabled).toBe(true);
-    fireEvent.click(enterPlay);
-    expect(screen.queryByRole("heading", { name: "Play" })).toBeNull();
+    const button = (name: string) =>
+      screen.getByRole<HTMLButtonElement>("button", { name });
+    fireEvent.click(button("Enter Play"));
+    expect(button("In Mech").getAttribute("aria-pressed")).toBe("true");
+    fireEvent.click(button("Increase heat"));
+    editor.receive(2, "Stored Pilot", { mech: null });
     expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    fireEvent.click(button("On Foot"));
+    expect(screen.queryByText("Heat: 1; pilot hits: 0")).toBeNull();
+    expect(button("Apply damage").disabled).toBe(true);
+    fireEvent.click(button("Back to character"));
+    openTab("Equipment");
+    expect(button("Edit").disabled).toBe(true);
+    expect(button("Apply damage").disabled).toBe(true);
+    fireEvent.click(button("Enter Play"));
+    expect(button("On Foot").getAttribute("aria-pressed")).toBe("true");
+    fireEvent.click(button("In Mech"));
+    expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    fireEvent.click(button("Discard damage changes"));
+    expect(button("In Mech").disabled).toBe(true);
+    expect(button("On Foot").getAttribute("aria-pressed")).toBe("true");
     expect(applyMechDamage).not.toHaveBeenCalled();
-
-    fireEvent.click(screen.getByRole("button", { name: "Discard damage changes" }));
-    expect(screen.getByText("Heat: 0; pilot hits: 0")).toBeTruthy();
-    expect(enterPlay.disabled).toBe(false);
-    fireEvent.click(enterPlay);
-    expect(screen.getByRole("heading", { name: "Play" })).toBeTruthy();
   });
 });

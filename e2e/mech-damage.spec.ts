@@ -849,6 +849,41 @@ test("no-mech saves have no controls; mobile damage targets, expansion and stick
   );
 });
 
+test("In Mech keeps a fired mount across Play modes and Apply/reload", async ({
+  page,
+}) => {
+  test.setTimeout(150_000);
+  await setupManual(page, "play-turn");
+  await configureFiringWeapons(page);
+  const action = (name: string) =>
+    page.getByRole("button", { name, exact: true });
+  const second = action("Fire weapon 2: (IS) Heavy Gauss Rifle");
+  await action("Enter Play").click();
+  const table = page.getByRole("table");
+  expect(
+    await table.evaluate(
+      (el) => el.scrollWidth <= el.parentElement!.clientWidth + 1,
+    ),
+  ).toBe(true);
+  await second.click();
+  await action("On Foot").click();
+  await expect(second).toHaveCount(0);
+  await expect(action("Reset all damage")).toHaveCount(0);
+  await action("In Mech").click();
+  await expect(second).toHaveText("Fired");
+  await expect(action("Fire weapon 1: (IS) Heavy Gauss Rifle")).toBeEnabled();
+  await action("Apply damage").click();
+  await expect(action("Apply damage")).toHaveCount(0);
+  await reloadMech(page);
+  await expectFiringState(page, 2, [2]);
+  await action("Enter Play").click();
+  await action("Cool heat").click();
+  await action("Open full Mech tab").click();
+  await expectFiringState(page, 0, []);
+  await action("Discard damage changes").click();
+  await expectFiringState(page, 2, [2]);
+});
+
 test("weapon firing persists Apply/Discard, tabs, cooling, zero heat, Sheet saves and Reset all", async ({
   page,
 }, testInfo) => {

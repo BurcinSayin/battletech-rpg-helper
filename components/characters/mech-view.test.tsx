@@ -85,6 +85,36 @@ describe("MechView without a mech", () => {
   });
 });
 
+describe("MechView in Play", () => {
+  it("keeps setup on the full tab and reports hits before opening a location", () => {
+    render(
+      <MechView
+        layout="play"
+        mech={mech()}
+        onDamageChange={vi.fn()}
+        damage={{
+          ...emptyMechDamage(),
+          structure: [{ index: 0, max: 6, lost: 1 }],
+          criticals: [{ section: 0, slot: 2 }],
+        }}
+      />,
+    );
+    expect(screen.queryByText("Engine")).toBeNull();
+    expect(
+      screen.queryByRole("button", { name: "Configure structure" }),
+    ).toBeNull();
+    expect(btn("Damage structure Left Arm")).toBeTruthy();
+    const section = within(screen.getByLabelText("Left Arm critical slots"));
+    const toggle = section.getByRole("button", { name: /Left Arm.*1 hit/ });
+    expect(toggle.getAttribute("aria-expanded")).toBe("false");
+    fireEvent.click(toggle);
+    expect(toggle.getAttribute("aria-expanded")).toBe("true");
+    expect(
+      btn("Critical hit Left Arm slot 3").getAttribute("aria-pressed"),
+    ).toBe("true");
+  });
+});
+
 describe("MechView read-only", () => {
   it("renders damage state without any controls when no handler is given", () => {
     render(

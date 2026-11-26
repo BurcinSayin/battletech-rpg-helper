@@ -17,7 +17,7 @@ export type MechDamageBarProps = {
   canReset: boolean;
   onApply: () => void;
   onDiscard: () => void;
-  onReset: () => void;
+  onReset?: () => void;
 };
 
 const barButton = "min-h-11 px-4";
@@ -55,7 +55,8 @@ export function MechDamageBar({
   }
 
   return (
-    <div
+    <section
+      aria-label="Mech damage"
       className={cn(
         "rounded-lg border p-3 transition-colors",
         active
@@ -64,6 +65,7 @@ export function MechDamageBar({
         stale && "border-hud-red/50",
       )}
     >
+      <h3 className="mb-1 font-semibold">Mech damage</h3>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p
           id={statusId}
@@ -89,10 +91,10 @@ export function MechDamageBar({
         <div
           className={cn(
             "grid gap-2 sm:flex sm:shrink-0",
-            stale ? "grid-cols-2" : "grid-cols-3",
+            stale || !onReset ? "grid-cols-2" : "grid-cols-3",
           )}
         >
-          {!stale && (
+          {onReset && !stale && (
             <HudButton
               type="button"
               variant="danger"
@@ -132,7 +134,7 @@ export function MechDamageBar({
           {error}
         </p>
       )}
-    </div>
+    </section>
   );
 }
 

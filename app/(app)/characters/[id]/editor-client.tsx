@@ -111,6 +111,8 @@ export function CharacterEditor({
   const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
   const [inPlay, setInPlay] = useState(false);
+  const [playMode, setPlayMode] = useState<"on-foot" | "in-mech" | null>(null);
+  const focusMechTab = useRef(false);
   const previousInPlay = useRef(false);
   const playHeadingRef = useRef<HTMLHeadingElement>(null);
   const enterPlayRef = useRef<HTMLButtonElement>(null);
@@ -220,10 +222,13 @@ export function CharacterEditor({
     previousInPlay.current = inPlay;
     if (inPlay) {
       playHeadingRef.current?.focus();
+    } else if (focusMechTab.current) {
+      focusMechTab.current = false;
+      document.getElementById(tabIds(baseId, "mech").tab)?.focus();
     } else {
       enterPlayRef.current?.focus();
     }
-  }, [inPlay]);
+  }, [inPlay, baseId]);
 
   useLayoutEffect(() => {
     if (version > latestSnapshotRef.current.version) {
@@ -415,6 +420,34 @@ export function CharacterEditor({
     }
   }
 
+  if (playMode === "in-mech" && !viewMech) setPlayMode("on-foot");
+
+  const fullMech = !inPlay && tab === "mech";
+  const damageBar = viewMech && (fullMech || blockForDamage) && (
+    <MechDamageBar
+      pending={damagePending}
+      applying={isApplying}
+      stale={damageStale}
+      error={damageError}
+      canReset={!sameMechDamage(resetMechDamage(viewDamage), viewDamage)}
+      onApply={applyDamage}
+      onDiscard={discardDamage}
+      onReset={
+        fullMech ? () => changeDamage(resetMechDamage(viewDamage)) : undefined
+      }
+    />
+  );
+  const mechView = (
+    <MechView
+      layout={inPlay ? "play" : "full"}
+      mech={viewMech}
+      pilot={snapshot.draft}
+      damage={viewDamage}
+      onDamageChange={viewMech === null ? undefined : changeDamage}
+      controlsDisabled={damageControlsDisabled}
+    />
+  );
+
   if (!isEditing && inPlay) {
     return (
       <div className="flex flex-col gap-4">
@@ -430,12 +463,58 @@ export function CharacterEditor({
             Back to character
           </HudButton>
         </header>
-        <section aria-labelledby={`${baseId}-on-foot`} className="space-y-3">
-          <h2 id={`${baseId}-on-foot`} className="text-lg font-semibold">
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-label="Play mode"
+        >
+          <HudButton
+            type="button"
+            variant={playMode === "on-foot" ? "primary" : "ghost"}
+            aria-pressed={playMode === "on-foot"}
+            onClick={() => setPlayMode("on-foot")}
+          >
             On Foot
-          </h2>
-          <CombatLoadout value={snapshot.draft} pilot={snapshot.draft} />
-        </section>
+          </HudButton>
+          <HudButton
+            type="button"
+            disabled={!viewMech}
+            aria-describedby={!viewMech ? `${baseId}-no-mech` : undefined}
+            variant={playMode === "in-mech" ? "primary" : "ghost"}
+            aria-pressed={playMode === "in-mech"}
+            onClick={() => setPlayMode("in-mech")}
+          >
+            In Mech
+          </HudButton>
+        </div>
+        {!viewMech && (
+          <p id={`${baseId}-no-mech`} className="text-sm text-hud-muted">
+            Assign a mech to use In Mech.
+          </p>
+        )}
+        {playMode === "in-mech" ? (
+          <section aria-label="In Mech" className="space-y-3">
+            {mechView}
+            <HudButton
+              type="button"
+              onClick={() => {
+                focusMechTab.current = true;
+                setTab("mech");
+                setInPlay(false);
+              }}
+            >
+              Open full Mech tab
+            </HudButton>
+          </section>
+        ) : (
+          <section aria-labelledby={`${baseId}-on-foot`} className="space-y-3">
+            <h2 id={`${baseId}-on-foot`} className="text-lg font-semibold">
+              On Foot
+            </h2>
+            <CombatLoadout value={snapshot.draft} pilot={snapshot.draft} />
+          </section>
+        )}
+        {damageBar}
       </div>
     );
   }
@@ -472,10 +551,9 @@ export function CharacterEditor({
             <HudButton
               ref={enterPlayRef}
               type="button"
-              disabled={blockForDamage}
-              aria-describedby={blockForDamage ? damageHintId : undefined}
               onClick={() => {
-                if (!blockForDamage) setInPlay(true);
+                setPlayMode(playMode ?? (viewMech ? "in-mech" : "on-foot"));
+                setInPlay(true);
               }}
             >
               Enter Play
@@ -513,28 +591,10 @@ export function CharacterEditor({
           aria-labelledby={tabIds(baseId, "mech").tab}
           hidden={tab !== "mech"}
         >
-          <MechView
-            mech={viewMech}
-            pilot={snapshot.draft}
-            damage={viewDamage}
-            onDamageChange={viewMech === null ? undefined : changeDamage}
-            controlsDisabled={damageControlsDisabled}
-          />
-          {viewMech !== null && (
-            <MechDamageBar
-              pending={damagePending}
-              applying={isApplying}
-              stale={damageStale}
-              error={damageError}
-              canReset={
-                !sameMechDamage(resetMechDamage(viewDamage), viewDamage)
-              }
-              onApply={applyDamage}
-              onDiscard={discardDamage}
-              onReset={() => changeDamage(resetMechDamage(viewDamage))}
-            />
-          )}
+          {mechView}
+          {fullMech && damageBar}
         </div>
+        {!fullMech && damageBar}
       </div>
     );
   }

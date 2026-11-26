@@ -318,25 +318,27 @@ function CriticalSection({
   isHit,
   onToggle,
   disabled,
+  play,
 }: {
   label: string;
   slots: string[];
   isHit: (slot: number) => boolean;
   onToggle: (slot: number) => void;
   disabled: boolean;
+  play: boolean;
 }) {
   const baseId = useId();
   const hits = slots.filter((_, i) => isHit(i)).length;
-  // Mobile: collapsed unless already hit, so a full mech stays scrollable.
-  // Desktop (lg): always expanded.
-  const [open, setOpen] = useState(hits > 0);
+  // Play starts collapsed at every width. Full Mech expands hit locations on
+  // phones and shows all slots on desktop.
+  const [open, setOpen] = useState(!play && hits > 0);
   const used = slots.filter((s) => !isEmptySlot(s)).length;
   const listId = `${baseId}-slots`;
 
   const meta = (
     <span className="flex items-center gap-2 font-mono text-xs text-hud-muted">
-      {hits > 0 && (
-        <span className="text-hud-red">
+      {(play || hits > 0) && (
+        <span className={hits > 0 ? "text-hud-red" : undefined}>
           {hits} {hits === 1 ? "hit" : "hits"}
         </span>
       )}
@@ -359,7 +361,10 @@ function CriticalSection({
         aria-expanded={open}
         aria-controls={listId}
         onClick={() => setOpen((o) => !o)}
-        className="flex min-h-11 w-full items-center justify-between gap-2 px-3 text-left lg:hidden"
+        className={cn(
+          "flex min-h-11 w-full items-center justify-between gap-2 px-3 text-left",
+          !play && "lg:hidden",
+        )}
       >
         <span className="font-mono text-[11px] uppercase tracking-widest text-hud-amber">
           {label}
@@ -377,16 +382,19 @@ function CriticalSection({
           </span>
         </span>
       </button>
-      <div className="hidden items-center justify-between gap-2 px-3 pt-3 lg:flex">
-        <h4 className="font-mono text-[10px] uppercase tracking-widest text-hud-amber">
-          {label}
-        </h4>
-        {meta}
-      </div>
+      {!play && (
+        <div className="hidden items-center justify-between gap-2 px-3 pt-3 lg:flex">
+          <h4 className="font-mono text-[10px] uppercase tracking-widest text-hud-amber">
+            {label}
+          </h4>
+          {meta}
+        </div>
+      )}
       <ol
         id={listId}
         className={cn(
-          "space-y-1 border-t border-hud-line p-2 lg:block lg:border-t-0",
+          "space-y-1 border-t border-hud-line p-2",
+          !play && "lg:block lg:border-t-0",
           open ? "block" : "hidden",
         )}
       >
@@ -446,7 +454,174 @@ function CriticalSection({
 
 // ---------------------------------------------------------------------------
 
+function WeaponStat({
+  label,
+  play,
+  children,
+}: {
+  label: string;
+  play: boolean;
+  children: ReactNode;
+}) {
+  return (
+    <td
+      className={cn(
+        "py-1.5 pr-3 tabular-nums text-hud-text",
+        !play && "whitespace-nowrap",
+      )}
+    >
+      {play && (
+        <span
+          aria-hidden="true"
+          className="block text-xs text-hud-muted md:hidden"
+        >
+          {label}
+        </span>
+      )}
+      {children}
+    </td>
+  );
+}
+
+function WeaponsPanel({
+  mech,
+  damage: d,
+  onDamageChange,
+  disabled: off,
+  play,
+}: {
+  mech: MechData;
+  damage: MechDamage;
+  onDamageChange?: (next: MechDamage) => void;
+  disabled: boolean;
+  play: boolean;
+}) {
+  return (
+    <Panel title="WEAPONS" count={mech.weapons.length}>
+      {mech.weapons.length === 0 ? (
+        <p className="text-sm text-hud-muted">No weapons recorded.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table
+            className={cn("w-full text-left text-sm", play && "max-md:block")}
+          >
+            <caption
+              className={cn(
+                "pb-3 text-left text-xs text-hud-muted",
+                play && "max-md:block",
+              )}
+            >
+              S/M/L = short/medium/long; Min = minimum. Base catalog values;
+              ammunition, firing modes, cluster hits, and special effects are
+              not calculated.
+            </caption>
+            <thead className={play ? "max-md:sr-only" : undefined}>
+              <tr className="font-mono text-[10px] uppercase tracking-widest text-hud-muted">
+                <th scope="col" className="py-1 pr-3 font-normal">
+                  Weapon
+                </th>
+                <th scope="col" className="py-1 pr-3 font-normal">
+                  Location
+                </th>
+                <th scope="col" className="py-1 pr-3 font-normal">
+                  Heat
+                </th>
+                <th
+                  scope="col"
+                  className="whitespace-nowrap py-1 pr-3 font-normal"
+                >
+                  Damage (S/M/L)
+                </th>
+                <th
+                  scope="col"
+                  className="whitespace-nowrap py-1 pr-3 font-normal"
+                >
+                  Range (Min/S/M/L)
+                </th>
+                <th scope="col" className="py-1 font-normal">
+                  Fire
+                </th>
+              </tr>
+            </thead>
+            <tbody className={play ? "max-md:block" : undefined}>
+              {mech.weapons.map((w, i) => {
+                const result = resolveMechWeaponReference(
+                  w.name,
+                  mech.techBase,
+                );
+                const reference =
+                  result.status === "matched" ? result.reference : null;
+                const fired = d.firedWeapons.includes(i);
+                return (
+                  <tr
+                    key={i}
+                    className={cn(
+                      "border-t border-hud-line",
+                      play &&
+                        "max-md:grid max-md:grid-cols-2 max-md:items-center max-md:break-words",
+                    )}
+                  >
+                    <td className="py-1.5 pr-3 text-hud-text">
+                      {w.name}
+                      {result.status !== "matched" && (
+                        <span className="mt-1 block text-xs text-hud-muted">
+                          {result.status === "ambiguous"
+                            ? "Ambiguous catalog match"
+                            : "No catalog match"}
+                        </span>
+                      )}
+                    </td>
+                    <td className="py-1.5 pr-3 text-hud-muted">{w.location}</td>
+                    <WeaponStat label="Heat" play={play}>
+                      {reference ? reference.heat : "—"}
+                    </WeaponStat>
+                    <WeaponStat label="Damage (S/M/L)" play={play}>
+                      {reference ? reference.damage.join(" / ") : "—"}
+                      {reference?.isCluster && (
+                        <span className="mt-1 block whitespace-normal text-xs text-hud-muted">
+                          Cluster weapon; not calculated salvo damage.
+                        </span>
+                      )}
+                    </WeaponStat>
+                    <WeaponStat label="Range (Min/S/M/L)" play={play}>
+                      {reference ? reference.ranges.join(" / ") : "—"}
+                    </WeaponStat>
+                    <td className="py-1.5 font-mono text-xs text-hud-muted">
+                      {onDamageChange ? (
+                        <HudButton
+                          type="button"
+                          className="min-h-11"
+                          aria-label={`Fire weapon ${i + 1}: ${w.name}`}
+                          aria-pressed={fired}
+                          disabled={off || fired || reference === null}
+                          onClick={() => {
+                            if (off || fired || reference === null) return;
+                            onDamageChange(
+                              fireWeapon(d, mech, i, reference.heat),
+                            );
+                          }}
+                        >
+                          {fired ? "Fired" : "Fire"}
+                        </HudButton>
+                      ) : fired ? (
+                        "Fired"
+                      ) : (
+                        "—"
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </Panel>
+  );
+}
+
 export type MechViewProps = {
+  layout?: "full" | "play";
   mech: MechData | null;
   pilot?: Pick<BtccDraft, "skills" | "traits">;
   /** Damage to display against `mech`. Defaults to none. */
@@ -459,6 +634,7 @@ export type MechViewProps = {
 
 /** Mech display for view mode, with optional damage tracking controls. */
 export function MechView({
+  layout = "full",
   mech,
   pilot,
   damage = NO_DAMAGE,
@@ -474,13 +650,14 @@ export function MechView({
     );
   }
 
+  const play = layout === "play";
   const name = [mech.chassis, mech.model].filter(Boolean).join(" ");
   const sinkCount = parseHeatSinkCount(mech.heatSinks);
   const d = normalizeMechDamage(damage, mech);
   const interactive = onDamageChange !== undefined;
   const hasStructure = d.structure.length > 0;
   const configuringStructure =
-    interactive && mech.criticalSlots.length > 0 && structureSetupOpen;
+    !play && interactive && mech.criticalSlots.length > 0 && structureSetupOpen;
   const off = controlsDisabled;
   const change = (next: MechDamage) => onDamageChange?.(next);
 
@@ -504,114 +681,90 @@ export function MechView({
     return rows?.length ? rows : "N/A";
   };
 
-  return (
-    <div className="space-y-4">
-      <Panel
-        title="MECH"
-        count={mech.mass ? `${mech.mass} t` : undefined}
-        action={
-          mech.config ? (
-            <span className="font-mono text-xs text-hud-amber">
-              {mech.config}
-            </span>
-          ) : undefined
-        }
-      >
-        <h3 className="text-xl font-semibold text-hud-text">
-          {name || "Unnamed mech"}
-        </h3>
-        <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-          <Stat label="Tech base" value={mech.techBase} />
-          <Stat label="Era" value={mech.era} />
-          <Stat label="Rules level" value={mech.rulesLevel} />
-          <Stat label="MUL ID" value={mech.mulId} />
-          <Stat label="Source" value={mech.source} />
-        </dl>
-        {mech.catalogFile && (
-          <p className="mt-3 font-mono text-xs text-hud-muted">
-            Loaded from {mech.catalogFile}
-          </p>
-        )}
-      </Panel>
-
-      <Panel title="STATS">
-        <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
-          <Stat label="Mass" value={mech.mass} />
-          <Stat label="Walk MP" value={mech.walkMP} />
-          <Stat label="Jump MP" value={mech.jumpMP} />
-          <Stat label="Engine" value={mech.engine} />
-          <Stat label="Structure" value={mech.structure} />
-          <Stat label="Myomer" value={mech.myomer} />
-          <Stat label="Heat sinks" value={mech.heatSinks} />
-        </dl>
-      </Panel>
-
-      <Panel title="HEAT & PILOT">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
-          <div className="grid w-full grid-cols-2 gap-2 sm:max-w-md">
-            <Counter
-              label="Heat"
-              value={d.heat}
-              hint={mech.heatSinks ? `Sinks: ${mech.heatSinks}` : undefined}
-              controls={
-                interactive && (
-                  <StepButtons
-                    minusLabel="Decrease heat"
-                    plusLabel="Increase heat"
-                    minusDisabled={off || d.heat <= 0}
-                    plusDisabled={off || d.heat >= COUNTER_MAX}
-                    onMinus={() => change(setHeat(d, d.heat - 1))}
-                    onPlus={() => change(setHeat(d, d.heat + 1))}
-                  />
-                )
-              }
-            />
-            <Counter
-              label="Pilot hits"
-              value={d.pilotHits}
-              controls={
-                interactive && (
-                  <StepButtons
-                    minusLabel="Remove pilot hit"
-                    plusLabel="Add pilot hit"
-                    minusDisabled={off || d.pilotHits <= 0}
-                    plusDisabled={off || d.pilotHits >= COUNTER_MAX}
-                    onMinus={() => change(setPilotHits(d, d.pilotHits - 1))}
-                    onPlus={() => change(setPilotHits(d, d.pilotHits + 1))}
-                  />
-                )
-              }
-            />
-          </div>
-          {interactive && (
-            <HudButton
-              type="button"
-              className="h-11 w-full shrink-0 sm:w-auto"
-              disabled={
+  const movement = (
+    <>
+      <Stat label="Walk MP" value={mech.walkMP} />
+      <Stat label="Jump MP" value={mech.jumpMP} />
+    </>
+  );
+  const weapons = (
+    <WeaponsPanel
+      mech={mech}
+      damage={d}
+      onDamageChange={onDamageChange}
+      disabled={off}
+      play={play}
+    />
+  );
+  const heatAndPilot = (
+    <Panel title="HEAT & PILOT">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+        <div className="grid w-full grid-cols-2 gap-2 sm:max-w-md">
+          <Counter
+            label="Heat"
+            value={d.heat}
+            hint={mech.heatSinks ? `Sinks: ${mech.heatSinks}` : undefined}
+            controls={
+              interactive && (
+                <StepButtons
+                  minusLabel="Decrease heat"
+                  plusLabel="Increase heat"
+                  minusDisabled={off || d.heat <= 0}
+                  plusDisabled={off || d.heat >= COUNTER_MAX}
+                  onMinus={() => change(setHeat(d, d.heat - 1))}
+                  onPlus={() => change(setHeat(d, d.heat + 1))}
+                />
+              )
+            }
+          />
+          <Counter
+            label="Pilot hits"
+            value={d.pilotHits}
+            controls={
+              interactive && (
+                <StepButtons
+                  minusLabel="Remove pilot hit"
+                  plusLabel="Add pilot hit"
+                  minusDisabled={off || d.pilotHits <= 0}
+                  plusDisabled={off || d.pilotHits >= COUNTER_MAX}
+                  onMinus={() => change(setPilotHits(d, d.pilotHits - 1))}
+                  onPlus={() => change(setPilotHits(d, d.pilotHits + 1))}
+                />
+              )
+            }
+          />
+        </div>
+        {interactive && (
+          <HudButton
+            type="button"
+            className="h-11 w-full shrink-0 sm:w-auto"
+            disabled={
+              off ||
+              sinkCount === null ||
+              (d.heat <= 0 && d.firedWeapons.length === 0)
+            }
+            onClick={() => {
+              if (
                 off ||
                 sinkCount === null ||
                 (d.heat <= 0 && d.firedWeapons.length === 0)
-              }
-              onClick={() => {
-                if (
-                  off ||
-                  sinkCount === null ||
-                  (d.heat <= 0 && d.firedWeapons.length === 0)
-                )
-                  return;
-                change(coolMechHeat(d, sinkCount));
-              }}
-            >
-              Cool heat
-            </HudButton>
-          )}
-        </div>
-        <dl className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <Stat label="Mech piloting" value={pilotSkill("Piloting/'Mech")} />
-          <Stat label="Mech gunnery" value={pilotSkill("Gunnery/'Mech")} />
-        </dl>
-      </Panel>
-
+              )
+                return;
+              change(coolMechHeat(d, sinkCount));
+            }}
+          >
+            Cool heat
+          </HudButton>
+        )}
+      </div>
+      <dl className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <Stat label="Mech piloting" value={pilotSkill("Piloting/'Mech")} />
+        <Stat label="Mech gunnery" value={pilotSkill("Gunnery/'Mech")} />
+      </dl>
+    </Panel>
+  );
+  const defenses = (
+    <>
       <Panel title="ARMOR" count={mech.armorType || undefined}>
         {mech.armor.length === 0 ? (
           <p className="text-sm text-hud-muted">No armor recorded.</p>
@@ -668,8 +821,7 @@ export function MechView({
           </ul>
         )}
       </Panel>
-
-      {interactive && mech.criticalSlots.length > 0 && (
+      {!play && interactive && mech.criticalSlots.length > 0 && (
         <HudButton
           type="button"
           className="h-11"
@@ -684,7 +836,6 @@ export function MechView({
               : "Track structure"}
         </HudButton>
       )}
-
       {(hasStructure || configuringStructure) && (
         <Panel title="STRUCTURE">
           {configuringStructure && (
@@ -780,194 +931,149 @@ export function MechView({
           </ul>
         </Panel>
       )}
-
-      <Panel title="WEAPONS" count={mech.weapons.length}>
-        {mech.weapons.length === 0 ? (
-          <p className="text-sm text-hud-muted">No weapons recorded.</p>
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <caption className="pb-3 text-left text-xs text-hud-muted">
-                S/M/L = short/medium/long; Min = minimum. Base catalog values;
-                ammunition, firing modes, cluster hits, and special effects are
-                not calculated.
-              </caption>
-              <thead>
-                <tr className="font-mono text-[10px] uppercase tracking-widest text-hud-muted">
-                  <th scope="col" className="py-1 pr-3 font-normal">
-                    Weapon
-                  </th>
-                  <th scope="col" className="py-1 pr-3 font-normal">
-                    Location
-                  </th>
-                  <th scope="col" className="py-1 pr-3 font-normal">
-                    Heat
-                  </th>
-                  <th
-                    scope="col"
-                    className="whitespace-nowrap py-1 pr-3 font-normal"
-                  >
-                    Damage (S/M/L)
-                  </th>
-                  <th
-                    scope="col"
-                    className="whitespace-nowrap py-1 pr-3 font-normal"
-                  >
-                    Range (Min/S/M/L)
-                  </th>
-                  <th scope="col" className="py-1 font-normal">
-                    Fire
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {mech.weapons.map((w, i) => {
-                  const result = resolveMechWeaponReference(
-                    w.name,
-                    mech.techBase,
-                  );
-                  const reference =
-                    result.status === "matched" ? result.reference : null;
-                  const fired = d.firedWeapons.includes(i);
+    </>
+  );
+  const criticals = (
+    <Panel
+      title="CRITICAL SLOTS"
+      count={
+        totalHits > 0 ? (
+          <span className="text-hud-red">
+            {totalHits} {totalHits === 1 ? "hit" : "hits"}
+          </span>
+        ) : undefined
+      }
+    >
+      {mech.criticalSlots.length === 0 ? (
+        <p className="text-sm text-hud-muted">No critical slots recorded.</p>
+      ) : interactive || play ? (
+        <>
+          {interactive && (
+            <p className="mb-3 text-xs text-hud-muted">
+              Tap a slot to mark or clear a critical hit.
+            </p>
+          )}
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3">
+            {mech.criticalSlots.map((section, si) => (
+              <CriticalSection
+                play={play}
+                key={`${section.location}-${si}`}
+                label={sectionLabels[si]}
+                slots={section.slots}
+                isHit={(slot) => isCriticalHit(d, si, slot)}
+                onToggle={(slot) => change(toggleCritical(d, mech, si, slot))}
+                disabled={!interactive || off}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {mech.criticalSlots.map((section, si) => (
+            <section
+              key={`${section.location}-${si}`}
+              aria-label={`${sectionLabels[si]} critical slots`}
+              className="rounded-md border border-hud-line bg-hud-raised p-3"
+            >
+              <h4 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-hud-amber">
+                {sectionLabels[si]}
+              </h4>
+              <ol className="space-y-0.5 font-mono text-xs">
+                {section.slots.map((slot, i) => {
+                  const hit = isCriticalHit(d, si, i);
                   return (
-                    <tr key={i} className="border-t border-hud-line">
-                      <td className="py-1.5 pr-3 text-hud-text">
-                        {w.name}
-                        {result.status !== "matched" && (
-                          <span className="mt-1 block text-xs text-hud-muted">
-                            {result.status === "ambiguous"
-                              ? "Ambiguous catalog match"
-                              : "No catalog match"}
-                          </span>
+                    <li
+                      key={i}
+                      className={cn(
+                        "flex gap-2",
+                        hit
+                          ? "text-hud-red"
+                          : isEmptySlot(slot)
+                            ? "text-hud-muted/50"
+                            : "text-hud-text",
+                      )}
+                    >
+                      <span className="w-5 shrink-0 text-right text-hud-muted">
+                        {i + 1}
+                      </span>
+                      <span
+                        className={cn(
+                          "min-w-0 break-words",
+                          hit && "line-through decoration-2",
                         )}
-                      </td>
-                      <td className="py-1.5 pr-3 text-hud-muted">
-                        {w.location}
-                      </td>
-                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
-                        {reference ? reference.heat : "—"}
-                      </td>
-                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
-                        {reference ? reference.damage.join(" / ") : "—"}
-                        {reference?.isCluster && (
-                          <span className="mt-1 block whitespace-normal text-xs text-hud-muted">
-                            Cluster weapon; not calculated salvo damage.
-                          </span>
-                        )}
-                      </td>
-                      <td className="whitespace-nowrap py-1.5 pr-3 tabular-nums text-hud-text">
-                        {reference ? reference.ranges.join(" / ") : "—"}
-                      </td>
-                      <td className="py-1.5 font-mono text-xs text-hud-muted">
-                        {interactive ? (
-                          <HudButton
-                            type="button"
-                            className="min-h-11"
-                            aria-label={`Fire weapon ${i + 1}: ${w.name}`}
-                            aria-pressed={fired}
-                            disabled={off || fired || reference === null}
-                            onClick={() => {
-                              if (off || fired || reference === null) return;
-                              change(fireWeapon(d, mech, i, reference.heat));
-                            }}
-                          >
-                            {fired ? "Fired" : "Fire"}
-                          </HudButton>
-                        ) : fired ? (
-                          "Fired"
-                        ) : (
-                          "—"
-                        )}
-                      </td>
-                    </tr>
+                      >
+                        {slot}
+                      </span>
+                      {hit && <span className="sr-only"> (critical hit)</span>}
+                    </li>
                   );
                 })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </Panel>
-
+              </ol>
+            </section>
+          ))}
+        </div>
+      )}
+    </Panel>
+  );
+  if (play) {
+    return (
+      <div className="space-y-4">
+        <Panel title="MECH">
+          <h3 className="text-xl font-semibold text-hud-text">
+            {name || "Unnamed mech"}
+          </h3>
+          <dl className="mt-3 grid grid-cols-2 gap-2">{movement}</dl>
+        </Panel>
+        {heatAndPilot}
+        {weapons}
+        {defenses}
+        {criticals}
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-4">
       <Panel
-        title="CRITICAL SLOTS"
-        count={
-          totalHits > 0 ? (
-            <span className="text-hud-red">
-              {totalHits} {totalHits === 1 ? "hit" : "hits"}
+        title="MECH"
+        count={mech.mass ? `${mech.mass} t` : undefined}
+        action={
+          mech.config ? (
+            <span className="font-mono text-xs text-hud-amber">
+              {mech.config}
             </span>
           ) : undefined
         }
       >
-        {mech.criticalSlots.length === 0 ? (
-          <p className="text-sm text-hud-muted">No critical slots recorded.</p>
-        ) : interactive ? (
-          <>
-            <p className="mb-3 text-xs text-hud-muted">
-              Tap a slot to mark or clear a critical hit.
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4 lg:gap-3">
-              {mech.criticalSlots.map((section, si) => (
-                <CriticalSection
-                  key={`${section.location}-${si}`}
-                  label={sectionLabels[si]}
-                  slots={section.slots}
-                  isHit={(slot) => isCriticalHit(d, si, slot)}
-                  onToggle={(slot) => change(toggleCritical(d, mech, si, slot))}
-                  disabled={off}
-                />
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {mech.criticalSlots.map((section, si) => (
-              <section
-                key={`${section.location}-${si}`}
-                aria-label={`${sectionLabels[si]} critical slots`}
-                className="rounded-md border border-hud-line bg-hud-raised p-3"
-              >
-                <h4 className="mb-2 font-mono text-[10px] uppercase tracking-widest text-hud-amber">
-                  {sectionLabels[si]}
-                </h4>
-                <ol className="space-y-0.5 font-mono text-xs">
-                  {section.slots.map((slot, i) => {
-                    const hit = isCriticalHit(d, si, i);
-                    return (
-                      <li
-                        key={i}
-                        className={cn(
-                          "flex gap-2",
-                          hit
-                            ? "text-hud-red"
-                            : isEmptySlot(slot)
-                              ? "text-hud-muted/50"
-                              : "text-hud-text",
-                        )}
-                      >
-                        <span className="w-5 shrink-0 text-right text-hud-muted">
-                          {i + 1}
-                        </span>
-                        <span
-                          className={cn(
-                            "min-w-0 break-words",
-                            hit && "line-through decoration-2",
-                          )}
-                        >
-                          {slot}
-                        </span>
-                        {hit && (
-                          <span className="sr-only"> (critical hit)</span>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              </section>
-            ))}
-          </div>
+        <h3 className="text-xl font-semibold text-hud-text">
+          {name || "Unnamed mech"}
+        </h3>
+        <dl className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+          <Stat label="Tech base" value={mech.techBase} />
+          <Stat label="Era" value={mech.era} />
+          <Stat label="Rules level" value={mech.rulesLevel} />
+          <Stat label="MUL ID" value={mech.mulId} />
+          <Stat label="Source" value={mech.source} />
+        </dl>
+        {mech.catalogFile && (
+          <p className="mt-3 font-mono text-xs text-hud-muted">
+            Loaded from {mech.catalogFile}
+          </p>
         )}
       </Panel>
-
+      <Panel title="STATS">
+        <dl className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-7">
+          <Stat label="Mass" value={mech.mass} />
+          {movement}
+          <Stat label="Engine" value={mech.engine} />
+          <Stat label="Structure" value={mech.structure} />
+          <Stat label="Myomer" value={mech.myomer} />
+          <Stat label="Heat sinks" value={mech.heatSinks} />
+        </dl>
+      </Panel>
+      {heatAndPilot}
+      {defenses}
+      {weapons}
+      {criticals}
       {mech.unsupported.length > 0 && (
         <Panel title="OTHER SOURCE LINES" count={mech.unsupported.length}>
           <ul className="space-y-0.5 font-mono text-xs text-hud-muted">
