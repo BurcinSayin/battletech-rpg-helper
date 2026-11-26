@@ -503,6 +503,7 @@ describe("CharacterSheet", () => {
     variants.setAttribute("open", "");
     expect(within(variants).getByText("3B/4")).toBeTruthy();
     expect(within(variants).getByText("6B/4")).toBeTruthy();
+    expect(panel.queryByText("Skill")).toBeNull();
     expect(panel.queryByRole("button")).toBeNull();
     expect(serializeBtcc(draft)).toBe(before);
   });

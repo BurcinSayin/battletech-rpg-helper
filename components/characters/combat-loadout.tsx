@@ -1,17 +1,84 @@
 "use client";
 
 import type { EquipmentRow, WeaponRow } from "@/lib/btcc/inventory";
+import type { BtccDraft } from "@/lib/btcc/types";
 import {
   armorPlacementWarning,
   readyAllocationWarning,
   resolveInventoryName,
   type Inventory,
 } from "@/lib/characters/inventory";
+import { skillLevel } from "@/lib/characters/skill-level";
+import { resolveSkillName } from "@/lib/rules/load";
+import {
+  skillComplexity,
+  skillTargetNumber,
+} from "@/lib/rules/skill-complexity";
 import { HudButton, Panel } from "./ui";
 
 const text = (value: string) => (value.trim() ? value : "Unknown");
 
-function CombatStats({ row }: { row: EquipmentRow | WeaponRow }) {
+type Pilot = Pick<BtccDraft, "skills" | "traits">;
+
+function WeaponSkill({ skill, pilot }: { skill: string; pilot: Pilot }) {
+  const hasSkill = skill.trim() !== "";
+  const requirement = (
+    <div className="whitespace-pre-wrap">
+      <span className="text-xs text-hud-muted">Needs:</span>{" "}
+      {hasSkill ? skill : "Unknown"}
+    </div>
+  );
+  if (!hasSkill) return <dd>{requirement}</dd>;
+
+  const canonical = resolveSkillName(skill);
+  // A saved parent requirement stays generic even if it resolves to a default subskill.
+  let familyPrefix = "";
+  if (canonical && !skill.includes("/")) {
+    const slash = canonical.indexOf("/");
+    familyPrefix = slash === -1 ? `${canonical}/` : canonical.slice(0, slash + 1);
+  }
+  const matches = pilot.skills.filter(({ name }) => {
+    if (name === skill) return true;
+    if (!canonical) return false;
+    const sheetSkill = resolveSkillName(name);
+    return (
+      sheetSkill === canonical ||
+      (familyPrefix !== "" &&
+        sheetSkill.length > familyPrefix.length &&
+        sheetSkill.startsWith(familyPrefix))
+    );
+  });
+  return (
+    <dd>
+      {requirement}
+      {matches.length ? (
+        <ul>
+          {matches.map(({ name, xp }, index) => {
+            const level = skillLevel(xp, pilot.traits);
+            const complexity = skillComplexity(name, level);
+            const targetNumber = skillTargetNumber(name, level);
+            return (
+              <li key={index} className="whitespace-pre-wrap">
+                {name}: Lvl {level} · {complexity ?? "unknown"}/
+                {targetNumber ?? "N/A"}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p className="text-hud-muted">Not on sheet</p>
+      )}
+    </dd>
+  );
+}
+
+function CombatStats({
+  row,
+  pilot,
+}: {
+  row: EquipmentRow | WeaponRow;
+  pilot?: Pilot;
+}) {
   return "skill" in row ? (
     <dl className="grid gap-1 sm:grid-cols-3">
       <div>
@@ -26,6 +93,12 @@ function CombatStats({ row }: { row: EquipmentRow | WeaponRow }) {
         <dt className="text-hud-muted">Shots / power</dt>
         <dd>{text(row.shots)}</dd>
       </div>
+      {pilot && (
+        <div className="sm:col-span-3">
+          <dt className="text-hud-muted">Skill</dt>
+          <WeaponSkill skill={row.skill} pilot={pilot} />
+        </div>
+      )}
     </dl>
   ) : (
     <p>BAR (M/B/E/X): {text(row.bar)}</p>
@@ -36,10 +109,12 @@ function Reference({
   value,
   kind,
   name,
+  pilot,
 }: {
   value: Inventory;
   kind: "equipment" | "weapon";
   name: string;
+  pilot?: Pilot;
 }) {
   const matches = resolveInventoryName(value, kind, name);
   if (!matches.length)
@@ -68,7 +143,7 @@ function Reference({
                 <p className="text-hud-muted">
                   Inventory row {entry.index + 1}
                 </p>
-                {entry.row && <CombatStats row={entry.row} />}
+                {entry.row && <CombatStats row={entry.row} pilot={pilot} />}
                 {entry.row && (
                   <p className="text-hud-muted">
                     Quantity: {text(entry.row.countText)} · Stack value:{" "}
@@ -85,15 +160,17 @@ function Reference({
         </details>
       </div>
     );
-  return <CombatStats row={matches[0].row!} />;
+  return <CombatStats row={matches[0].row!} pilot={pilot} />;
 }
 
 /** A name-based, lossless view of active references, never an inventory editor. */
 export function CombatLoadout({
   value,
+  pilot,
   onOpenEquipment,
 }: {
   value: Inventory;
+  pilot?: Pilot;
   onOpenEquipment?: () => void;
 }): React.JSX.Element {
   const garments = new Map<string, string[]>();
@@ -132,7 +209,12 @@ export function CombatLoadout({
                     <h4 className="mb-1 font-medium">
                       {index + 1}. {text(name)}
                     </h4>
-                    <Reference value={value} kind="weapon" name={name} />
+                    <Reference
+                      value={value}
+                      kind="weapon"
+                      name={name}
+                      pilot={pilot}
+                    />
                     {warning && (
                       <p className="mt-1 text-hud-amber">{warning}</p>
                     )}

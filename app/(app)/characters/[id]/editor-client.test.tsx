@@ -1674,3 +1674,98 @@ describe("CharacterEditor — inventory draft lifecycle", () => {
     expect((weaponControls().getByRole("textbox", { name: "Quantity" }) as HTMLInputElement).value).toBe("5");
   });
 });
+
+describe("CharacterEditor — On Foot Play", () => {
+  it("shows saved combat gear without a mech and returns to the same tab without saving", () => {
+    const draft = namedDraft("Gear Pilot");
+    draft.skills = [{ name: "Small Arms", xp: 30 }];
+    draft.weapons = [
+      "Small Arms;Ready pistol;3B/4;5/20/45/105;100;1;10;0;0;notes;1",
+    ];
+    draft.chrWeapons = ["Ready pistol"];
+    draft.equip = [
+      "Worn jacket;100;3.5;TA;1/5/1/3;notes;1",
+      "Worn helmet;50;1;H;2/3/1/2;notes;1",
+    ];
+    draft.equipLoc = {
+      Torso: "Worn jacket",
+      Arms: "Worn jacket",
+      Head: "Worn helmet",
+    };
+    const editor = renderSnapshot({ draft });
+    openTab("Equipment");
+    fireEvent.click(screen.getByRole("button", { name: "Enter Play" }));
+
+    expect(document.activeElement).toBe(
+      screen.getByRole("heading", { name: "Play" }),
+    );
+    expect(screen.queryByRole("tablist")).toBeNull();
+    const onFoot = within(screen.getByRole("region", { name: "On Foot" }));
+    const pistol = within(
+      onFoot.getByRole("heading", { name: "1. Ready pistol" }).closest("li")!,
+    );
+    expect(pistol.getByText("3B/4")).toBeTruthy();
+    expect(pistol.getByText("5/20/45/105")).toBeTruthy();
+    expect(pistol.getByText("10")).toBeTruthy();
+    expect(pistol.getByText("Small Arms: Lvl 1 · SB/7")).toBeTruthy();
+    const jacket = within(
+      onFoot.getByRole("heading", { name: "Worn jacket" }).closest("li")!,
+    );
+    expect(jacket.getByText("Locations: Torso, Arms")).toBeTruthy();
+    expect(jacket.getByText("BAR (M/B/E/X): 1/5/1/3")).toBeTruthy();
+    const helmet = within(
+      onFoot.getByRole("heading", { name: "Worn helmet" }).closest("li")!,
+    );
+    expect(helmet.getByText("Locations: Head")).toBeTruthy();
+    expect(helmet.getByText("BAR (M/B/E/X): 2/3/1/2")).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "View equipment" })).toBeNull();
+
+    const back = screen.getByRole("button", { name: "Back to character" });
+    back.focus();
+    editor.receive(2, "Gear Pilot", {
+      draft: { ...draft, skills: [{ name: "Small Arms", xp: 50 }] },
+    });
+    expect(onFoot.getByText("Small Arms: Lvl 2 · SB/7")).toBeTruthy();
+    expect(document.activeElement).toBe(back);
+    fireEvent.click(back);
+
+    expect(
+      screen.getByRole("tab", { name: "Equipment", selected: true }),
+    ).toBeTruthy();
+    expect(document.activeElement).toBe(
+      screen.getByRole("button", { name: "Enter Play" }),
+    );
+    expect(saveCharacter).not.toHaveBeenCalled();
+    expect(applyMechDamage).not.toHaveBeenCalled();
+    expect(refresh).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Edit" }));
+    expect(screen.getByRole("button", { name: "Save" })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Enter Play" })).toBeNull();
+  });
+
+  it("blocks Play until pending mech damage is discarded", () => {
+    const editor = renderSnapshot({ mech: MECH_A });
+    openTab("Mech");
+    fireEvent.click(screen.getByRole("button", { name: "Increase heat" }));
+    const enterPlay = screen.getByRole<HTMLButtonElement>("button", {
+      name: "Enter Play",
+      description: "Apply or discard damage first",
+    });
+    expect(enterPlay.disabled).toBe(true);
+
+    editor.receive(2, "Stored Pilot");
+    expect(screen.getByRole("status").textContent).toBe("Damage draft is stale");
+    expect(enterPlay.disabled).toBe(true);
+    fireEvent.click(enterPlay);
+    expect(screen.queryByRole("heading", { name: "Play" })).toBeNull();
+    expect(screen.getByText("Heat: 1; pilot hits: 0")).toBeTruthy();
+    expect(applyMechDamage).not.toHaveBeenCalled();
+
+    fireEvent.click(screen.getByRole("button", { name: "Discard damage changes" }));
+    expect(screen.getByText("Heat: 0; pilot hits: 0")).toBeTruthy();
+    expect(enterPlay.disabled).toBe(false);
+    fireEvent.click(enterPlay);
+    expect(screen.getByRole("heading", { name: "Play" })).toBeTruthy();
+  });
+});

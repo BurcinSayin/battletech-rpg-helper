@@ -106,6 +106,8 @@ Ready up to three weapon copies, subject to known owned quantity. Armor placemen
 
 The Sheet's read-only **Combat loadout** shows only readied weapons and worn armor, including in local-file import previews. Duplicate-name references display variants instead of guessed stats; armor BAR stays per garment, never summed across layers. Quantity changes preserve unrelated stored fields and notes. Unsupported rows can be inspected and explicitly removed but cannot have their quantities recalculated.
 
+Choose **Enter Play** from any character tab to see a read-only **On Foot** loadout, even without an assigned mech. **Needs:** shows the weapon's saved skill; matching sheet skills appear below with their level, complexity, and target number (for example, `Lvl 2 · SB/7`). A weapon that names only a parent skill also lists its sheet specializations, even if the parent has a default specialization. An explicit specialization does not match its siblings. Play does not select a skill for a roll. **Back to character** returns to the previous tab without saving. Apply or discard staged mech damage before entering Play.
+
 ---
 
 ## 🚀 Getting Started

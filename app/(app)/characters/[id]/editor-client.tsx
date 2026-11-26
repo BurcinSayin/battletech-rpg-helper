@@ -110,6 +110,10 @@ export function CharacterEditor({
   });
   const latestSnapshotRef = useRef(snapshot);
   const [isEditing, setIsEditing] = useState(false);
+  const [inPlay, setInPlay] = useState(false);
+  const previousInPlay = useRef(false);
+  const playHeadingRef = useRef<HTMLHeadingElement>(null);
+  const enterPlayRef = useRef<HTMLButtonElement>(null);
   const [tab, setTab] = useState<TabId>("sheet");
   // The unsaved mech draft. Lives outside RHF because MechTab is a controlled
   // component; it is re-seeded from the snapshot on every beginEdit.
@@ -132,6 +136,7 @@ export function CharacterEditor({
   // Acknowledged versions suppress own-save echoes, but never rebase an edit.
   const [knownVersion, setKnownVersion] = useState(version);
   const damagePending = damageDraft !== null && pendingDamage(damageDraft);
+  const blockForDamage = damagePending || isApplying;
   const damageStale =
     damagePending &&
     !isApplying &&
@@ -209,6 +214,16 @@ export function CharacterEditor({
 
   const skills = useFieldArray({ control, name: "skills" });
   const traits = useFieldArray({ control, name: "traits" });
+
+  useLayoutEffect(() => {
+    if (previousInPlay.current === inPlay) return;
+    previousInPlay.current = inPlay;
+    if (inPlay) {
+      playHeadingRef.current?.focus();
+    } else {
+      enterPlayRef.current?.focus();
+    }
+  }, [inPlay]);
 
   useLayoutEffect(() => {
     if (version > latestSnapshotRef.current.version) {
@@ -314,13 +329,7 @@ export function CharacterEditor({
   }
 
   function beginEdit(): void {
-    if (
-      isPending ||
-      knownVersion > snapshot.version ||
-      damagePending ||
-      isApplying
-    )
-      return;
+    if (isPending || knownVersion > snapshot.version || blockForDamage) return;
     reset(draftToForm(snapshot.draft));
     setSelectedCampaign(snapshot.campaignId);
     setMechDraft(snapshot.mech);
@@ -406,15 +415,41 @@ export function CharacterEditor({
     }
   }
 
+  if (!isEditing && inPlay) {
+    return (
+      <div className="flex flex-col gap-4">
+        <header className="flex flex-wrap items-center justify-between gap-2">
+          <h1
+            ref={playHeadingRef}
+            tabIndex={-1}
+            className="text-2xl font-semibold"
+          >
+            Play
+          </h1>
+          <HudButton type="button" onClick={() => setInPlay(false)}>
+            Back to character
+          </HudButton>
+        </header>
+        <section aria-labelledby={`${baseId}-on-foot`} className="space-y-3">
+          <h2 id={`${baseId}-on-foot`} className="text-lg font-semibold">
+            On Foot
+          </h2>
+          <CombatLoadout value={snapshot.draft} pilot={snapshot.draft} />
+        </section>
+      </div>
+    );
+  }
+
   if (!isEditing) {
+    const damageHintId = `${baseId}-damage-edit-hint`;
     return (
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
           <TabList baseId={baseId} value={tab} onChange={setTab} />
-          <div className="flex items-center gap-2">
-            {(damagePending || isApplying) && (
+          <div className="flex flex-wrap items-center gap-2">
+            {blockForDamage && (
               <span
-                id={`${baseId}-damage-edit-hint`}
+                id={damageHintId}
                 className="font-mono text-xs text-hud-amber"
               >
                 Apply or discard damage first
@@ -428,16 +463,23 @@ export function CharacterEditor({
               <HudButton
                 variant="primary"
                 onClick={beginEdit}
-                disabled={damagePending || isApplying}
-                aria-describedby={
-                  damagePending || isApplying
-                    ? `${baseId}-damage-edit-hint`
-                    : undefined
-                }
+                disabled={blockForDamage}
+                aria-describedby={blockForDamage ? damageHintId : undefined}
               >
                 Edit
               </HudButton>
             )}
+            <HudButton
+              ref={enterPlayRef}
+              type="button"
+              disabled={blockForDamage}
+              aria-describedby={blockForDamage ? damageHintId : undefined}
+              onClick={() => {
+                if (!blockForDamage) setInPlay(true);
+              }}
+            >
+              Enter Play
+            </HudButton>
           </div>
         </div>
         {/* Wrappers carry no display class so the `hidden` attribute applies. */}
